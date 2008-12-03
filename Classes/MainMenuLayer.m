@@ -1,0 +1,105 @@
+//
+//  MainMenuLayer.m
+//  Gorillas
+//
+//  Created by Maarten Billemont on 26/10/08.
+//  Copyright 2008 Lin.k. All rights reserved.
+//
+
+#import "MainMenuLayer.h"
+#import "GorillasConfig.h"
+#import "GorillasAppDelegate.h"
+
+
+@implementation MainMenuLayer
+
+
+-(id) init {
+
+    if(!(self = [super init]))
+        return self;
+    
+    newSingle = [[MenuItemFont itemFromString:@"Single Player" target:self selector:@selector(newGameSingle:)] retain];
+    newMulti = [[MenuItemFont itemFromString:@"Multiplayer" target:self selector:@selector(newGameMulti:)] retain];
+
+    continueGame = [[MenuItemFont itemFromString:@"Continue Game" target:self selector:@selector(continueGame:)] retain];
+    stopGame = [[MenuItemFont itemFromString:@"End Game" target:self selector:@selector(stopGame:)] retain];
+    
+    config = [[MenuItemFont itemFromString:@"Configuration" target:self selector:@selector(options:)] retain];
+    stats = [[MenuItemFont itemFromString:@"Statistics" target:self selector:@selector(statistics:)] retain];
+    
+    return self;
+}
+
+
+-(void) reveal {
+    
+    [super reveal];
+    
+    if(menu) {
+        [self remove:menu];
+        [menu release];
+        menu = nil;
+    }
+    
+    if([[[GorillasAppDelegate get] gameLayer] running])
+        menu = [[Menu menuWithItems:continueGame, stopGame, config/*, stats*/, nil] retain];
+    else
+        menu = [[Menu menuWithItems:newSingle, newMulti, config/*, stats*/, nil] retain];
+    
+    [menu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    [self add:menu];
+}
+
+
+-(void) newGameSingle: (id)sender {
+    
+    [[[GorillasAppDelegate get] gameLayer] startSinglePlayer];
+}
+
+
+-(void) newGameMulti: (id)sender {
+
+    [[[GorillasAppDelegate get] gameLayer] startMultiplayer];
+}
+
+
+-(void) continueGame: (id)sender {
+    
+    [[[GorillasAppDelegate get] gameLayer] unpause];
+}
+
+
+-(void) stopGame: (id)sender {
+    
+    [[[GorillasAppDelegate get] gameLayer] stopGame];
+}
+
+
+-(void) statistics: (id)sender {
+    
+    [[GorillasAppDelegate get] showStatistics];
+}
+
+
+-(void) options: (id)sender {
+    
+    [[GorillasAppDelegate get] showConfiguration];
+}
+
+
+-(void) dealloc {
+    
+    [menu release];
+    [newSingle release];
+    [newMulti release];
+    [continueGame release];
+    [stopGame release];
+    [config release];
+    [stats release];
+    
+    [super dealloc];
+}
+
+
+@end
