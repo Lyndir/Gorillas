@@ -71,7 +71,7 @@
     NSLog(@"cur lvl: %@", curLevelName);
     
     for(curLevelInd = 0; curLevelInd < [[GorillasConfig get] levelNameCount]; ++curLevelInd) {
-        if([[GorillasConfig get] levelNames][curLevelInd] == curLevelName)
+        if([[[GorillasConfig get] levelNames] objectAtIndex:curLevelInd] == curLevelName)
             break;
     }
 

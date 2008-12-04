@@ -1,0 +1,75 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.7	//
+_GORILLACONFIG	GorillasConfig.h	/^#define _GORILLACONFIG$/;"	d
+alive	GorillaLayer.h	/^@property (readwrite, assign) BOOL alive;$/;"	v
+audioFileID	AudioQueueObject.h	/^@property (readwrite)			AudioFileID					audioFileID;$/;"	v
+audioFileURL	AudioQueueObject.h	/^@property (readwrite)			CFURLRef					audioFileURL;$/;"	v
+audioFormat	AudioQueueObject.h	/^@property (readwrite)			AudioStreamBasicDescription	audioFormat;$/;"	v
+audioLevels	AudioQueueObject.h	/^@property (readwrite)			AudioQueueLevelMeterState	*audioLevels;$/;"	v
+audioPlayer	AudioController.h	/^@property (nonatomic, retain)	AudioPlayer					*audioPlayer;$/;"	v
+audioPlayerShouldStopImmediately	AudioPlayer.h	/^@property (readwrite) BOOL							audioPlayerShouldStopImmediately;$/;"	v
+bufferByteSize	AudioPlayer.h	/^@property (readwrite) UInt32						bufferByteSize;$/;"	v
+buildingAmount	GorillasConfig.h	/^@property (readwrite) int                   buildingAmount;$/;"	v
+buildingColors	GorillasConfig.h	/^@property (readwrite, assign) NSArray       *buildingColors;$/;"	v
+buildingMax	GorillasConfig.h	/^@property (readwrite) float                 buildingMax;$/;"	v
+buildingSpeed	GorillasConfig.h	/^@property (readwrite) int                   buildingSpeed;$/;"	v
+buildingWidth	GorillasConfig.h	/^@property (readonly) float                  buildingWidth;$/;"	v
+buildings	GameLayer.h	/^@property (readonly) BuildingsLayer *buildings;$/;"	v
+clearedGorilla	BananaLayer.h	/^@property (readwrite) BOOL clearedGorilla;$/;"	v
+configLayer	GorillasAppDelegate.h	/^@property (readonly) ConfigurationLayer *configLayer;$/;"	v
+donePlayingFile	AudioPlayer.h	/^@property (readwrite) BOOL							donePlayingFile;$/;"	v
+fixedFloors	GorillasConfig.h	/^@property (readwrite) int                   fixedFloors;$/;"	v
+fontName	GorillasConfig.h	/^@property (readwrite, assign) NSString      *fontName;$/;"	v
+fontSize	GorillasConfig.h	/^@property (readwrite) int                   fontSize;$/;"	v
+gain	AudioPlayer.h	/^@property (readwrite) Float32						gain;			\/\/ the gain (relative audio level) for the playback audio queue$/;"	v
+gameLayer	GorillasAppDelegate.h	/^@property (readonly) GameLayer *gameLayer;$/;"	v
+get	ExplosionAnimationLayer.h	/^+(ExplosionAnimationLayer *) get;$/;"	v
+get	GorillasAppDelegate.h	/^+(GorillasAppDelegate *) get;$/;"	v
+get	GorillasConfig.h	/^+(GorillasConfig *)                         get;$/;"	v
+gravity	GorillasConfig.h	/^@property (readwrite) int                   gravity;$/;"	v
+height	BananaLayer.h	/^@property (readonly) float height;$/;"	v
+height	BuildingLayer.h	/^@property (readonly) float height;$/;"	v
+height	ExplosionLayer.h	/^@property (readonly) float height;$/;"	v
+height	GorillaLayer.h	/^@property (readonly) float height;$/;"	v
+hudLayer	GorillasAppDelegate.h	/^@property (readonly) HUDLayer *hudLayer;$/;"	v
+human	GorillaLayer.h	/^@property (readwrite, assign) BOOL human;$/;"	v
+interruptedOnPlayback	AudioController.h	/^@property (readwrite)			BOOL						interruptedOnPlayback;$/;"	v
+kNumberAudioDataBuffers	AudioQueueObject.h	/^#define kNumberAudioDataBuffers	/;"	d
+kSecondsPerBuffer	AudioPlayer.h	/^#define kSecondsPerBuffer	/;"	d
+level	GorillasConfig.h	/^@property (readwrite) float                 level;$/;"	v
+levelName	GorillasConfig.h	/^@property (readonly) NSString               *levelName;$/;"	v
+levelNameCount	GorillasConfig.h	/^@property (readonly) int                    levelNameCount;$/;"	v
+levelNames	GorillasConfig.h	/^@property (readwrite, assign) NSArray       *levelNames;$/;"	v
+mainMenuLayer	GorillasAppDelegate.h	/^@property (readonly) MainMenuLayer *mainMenuLayer;$/;"	v
+name	GorillaLayer.h	/^@property (readwrite, retain) NSString *name;$/;"	v
+notificationDelegate	AudioQueueObject.h	/^@property (nonatomic, retain)	id							notificationDelegate;$/;"	v
+numPacketsToRead	AudioPlayer.h	/^@property (readwrite) UInt32						numPacketsToRead;$/;"	v
+packetDescriptions	AudioPlayer.h	/^@property (readwrite) AudioStreamPacketDescription	*packetDescriptions;$/;"	v
+paused	GameLayer.h	/^@property (readonly) BOOL paused;$/;"	v
+queueObject	AudioQueueObject.h	/^@property (readwrite)			AudioQueueRef				queueObject;$/;"	v
+repeat	AudioPlayer.h	/^@property (readwrite) BOOL							repeat;$/;"	v
+running	GameLayer.h	/^@property (readonly) BOOL running;$/;"	v
+shadeColor	GorillasConfig.h	/^@property (readwrite) long                  shadeColor;$/;"	v
+showing	ShadeLayer.h	/^@property (readonly) BOOL showing;$/;"	v
+singlePlayer	GameLayer.h	/^@property (readonly) BOOL singlePlayer;$/;"	v
+soundFileURL	AudioController.h	/^@property (nonatomic, retain)	NSURL						*soundFileURL;$/;"	v
+starAmount	GorillasConfig.h	/^@property (readwrite) int                   starAmount;$/;"	v
+starColor	GorillasConfig.h	/^@property (readwrite) long                  starColor;$/;"	v
+starSpeed	GorillasConfig.h	/^@property (readwrite) int                   starSpeed;$/;"	v
+startingPacketNumber	AudioQueueObject.h	/^@property (readwrite)			SInt64						startingPacketNumber;$/;"	v
+statsLayer	GorillasAppDelegate.h	/^@property (readonly) StatisticsLayer *statsLayer;$/;"	v
+transitionDuration	GorillasConfig.h	/^@property (readwrite) ccTime                transitionDuration;$/;"	v
+width	BananaLayer.h	/^@property (readonly) float width;$/;"	v
+width	BuildingLayer.h	/^@property (readonly) float width;$/;"	v
+width	ExplosionLayer.h	/^@property (readonly) float width;$/;"	v
+width	GorillaLayer.h	/^@property (readonly) float width;$/;"	v
+windowAmount	GorillasConfig.h	/^@property (readwrite) int                   windowAmount;$/;"	v
+windowColorOff	GorillasConfig.h	/^@property (readwrite) long                  windowColorOff;$/;"	v
+windowColorOn	GorillasConfig.h	/^@property (readwrite) long                  windowColorOn;$/;"	v
+windowHeight	GorillasConfig.h	/^@property (readonly) float                  windowHeight;$/;"	v
+windowPadding	GorillasConfig.h	/^@property (readonly) float                  windowPadding;$/;"	v
+windowWidth	GorillasConfig.h	/^@property (readonly) float                  windowWidth;$/;"	v

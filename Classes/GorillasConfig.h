@@ -13,44 +13,20 @@
 
 
 @interface GorillasConfig : NSObject {
-    
-    int         fontSize;
-    NSString    *fontName;
 
-    int         fixedFloors;
-    float       buildingMax;
-    int         buildingAmount;
-    int         buildingSpeed;
-    int         buildingColorCount;
-    long        *buildingColors;
-
-    int         windowAmount;
-    long        windowColorOn;
-    long        windowColorOff;
-
-    long        starColor;
-    int         starSpeed;
-    int         starAmount;
-
-    int         gravity;
-    long        shadeColor;
-    ccTime      transitionDuration;
-
-    float       level;
-    int         levelNameCount;
-    NSString    **levelNames;
+    NSUserDefaults *defaults;
 }
 
 
 @property (readwrite) int                   fontSize;
-@property (readwrite, retain) NSString      *fontName;
+@property (readwrite, assign) NSString      *fontName;
 
 @property (readwrite) int                   fixedFloors;
 @property (readwrite) float                 buildingMax;
 @property (readonly) float                  buildingWidth;
 @property (readwrite) int                   buildingAmount;
 @property (readwrite) int                   buildingSpeed;
-@property (readwrite) long                  *buildingColors;
+@property (readwrite, assign) NSArray       *buildingColors;
 
 @property (readonly) float                  windowWidth;
 @property (readonly) float                  windowHeight;
@@ -69,7 +45,7 @@
 
 @property (readwrite) float                 level;
 @property (readonly) NSString               *levelName;
-@property (readwrite, assign) NSString      **levelNames;
+@property (readwrite, assign) NSArray       *levelNames;
 @property (readonly) int                    levelNameCount;
 
 -(long) buildingColor;
