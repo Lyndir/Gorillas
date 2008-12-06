@@ -12,22 +12,20 @@
 #import "GorillasConfig.h"
 
 
-@interface BuildingLayer : ResettableLayer {
+@interface BuildingLayer : ResettableLayer <CocosNodeSize> {
     
     @private
     long buildingColor;
 
-    float width;
-    float height;
+    CGSize contentSize;
     
     GLfloat **windows;
     GLubyte **colors;
     int windowCount;
 }
 
--(void) reset;
+@property (readonly) CGSize contentSize;
 
-@property (readonly) float width;
-@property (readonly) float height;
+-(void) reset;
 
 @end

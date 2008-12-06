@@ -17,9 +17,9 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
     // Start the background music.
-    audioController = [[[AudioController alloc] initWithFile:@"veritech.wav"] retain];
+    /*audioController = [[[AudioController alloc] initWithFile:@"veritech.wav"] retain];
     [audioController playOrStop];
-    [[audioController audioPlayer] setRepeat:true];
+    [[audioController audioPlayer] setRepeat:true];*/
 
     // Random seed with timestamp.
     srandom(time(nil));
@@ -30,7 +30,7 @@
 
 	// Director and OpenGL Setup.
     [Director setPixelFormat:RGBA8];
-	[[Director sharedDirector] setDisplayFPS:true];
+	//[[Director sharedDirector] setDisplayFPS:true];
 	[[Director sharedDirector] setDepthTest:false];
 	[[Director sharedDirector] setLandscape:true];
 	//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);

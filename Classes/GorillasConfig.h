@@ -21,6 +21,8 @@
 @property (readwrite) int                   fontSize;
 @property (readwrite, assign) NSString      *fontName;
 
+@property (readwrite, assign) NSString      *cityTheme;
+
 @property (readwrite) int                   fixedFloors;
 @property (readwrite) float                 buildingMax;
 @property (readonly) float                  buildingWidth;
@@ -48,7 +50,7 @@
 @property (readwrite, assign) NSArray       *levelNames;
 @property (readonly) int                    levelNameCount;
 
--(long) buildingColor;
+-(long)                                     buildingColor;
 
 -(void)                                     levelUp;
 -(void)                                     levelDown;

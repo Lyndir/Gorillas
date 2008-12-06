@@ -11,7 +11,6 @@
 
 @implementation BananaLayer
 
-
 @synthesize clearedGorilla;
 
 

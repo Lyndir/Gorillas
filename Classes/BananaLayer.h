@@ -10,16 +10,11 @@
 #import "cocos2d.h"
 
 
-@interface BananaLayer : Sprite /* Layer */ {
+@interface BananaLayer : Sprite {
 
     BOOL clearedGorilla;
-    
-    /*GLfloat *vertices;
-    GLubyte *colors;*/
 }
 
 @property (readwrite) BOOL clearedGorilla;
-@property (readonly) float width;
-@property (readonly) float height;
 
 @end

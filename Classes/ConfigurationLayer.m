@@ -8,6 +8,7 @@
 
 #import "ConfigurationLayer.h"
 #import "GorillasAppDelegate.h"
+#import "CityTheme.h"
 
 
 @implementation ConfigurationLayer
@@ -35,6 +36,10 @@
         readd = true;
     }
     
+    MenuItem *theme     = [MenuItemFont itemFromString:
+                           [NSString stringWithFormat:@"%@ : %@", @"City Theme", [[GorillasConfig get] cityTheme]]
+                                                target: self
+                                              selector: @selector(cityTheme:)];
     MenuItem *level     = [MenuItemFont itemFromString:
                            [NSString stringWithFormat:@"%@ : %@", @"Level", [[GorillasConfig get] levelName]]
                                                 target: self
@@ -47,7 +52,7 @@
                                                 target: self
                                               selector: @selector(mainMenu:)];
     
-    menu = [[Menu menuWithItems:level, gravity, back, nil] retain];
+    menu = [[Menu menuWithItems:theme, level, gravity, back, nil] retain];
     
     if(readd)
         [self add:menu];
@@ -68,21 +73,11 @@
     NSString *curLevelName = [[GorillasConfig get] levelName];
     int curLevelInd;
     
-    NSLog(@"cur lvl: %@", curLevelName);
-    
     for(curLevelInd = 0; curLevelInd < [[GorillasConfig get] levelNameCount]; ++curLevelInd) {
         if([[[GorillasConfig get] levelNames] objectAtIndex:curLevelInd] == curLevelName)
             break;
     }
 
-    NSLog(@"cur lvl ind: %d", curLevelInd);
-
-    NSLog(@"max lvl ind: %d", [[GorillasConfig get] levelNameCount]);
-
-    NSLog(@"next lvl ind: %d", (curLevelInd + 1) % [[GorillasConfig get] levelNameCount]);
-    
-    NSLog(@"set lvl: %f", (float) ((curLevelInd + 1) % [[GorillasConfig get] levelNameCount]) / [[GorillasConfig get] levelNameCount]);
-    
     [[GorillasConfig get] setLevel:(float) ((curLevelInd + 1) % [[GorillasConfig get] levelNameCount]) / [[GorillasConfig get] levelNameCount]];
     
     [self reset];
@@ -93,6 +88,29 @@
     
     [[GorillasConfig get] setGravity:([[GorillasConfig get] gravity] + 10) % 100];
         
+    [self reset];
+}
+
+
+-(void) cityTheme: (id) sender {
+    
+    NSArray *themes = [[CityTheme getThemes] allKeys];
+    NSString *newTheme = [themes objectAtIndex:0];
+    
+    BOOL found = false;
+    for(NSString *theme in themes) {
+        if(found) {
+            newTheme = theme;
+            break;
+        }
+        
+        if([[[GorillasConfig get] cityTheme] isEqualTo:theme])
+            found = true;
+    }
+    
+    [[[CityTheme getThemes] objectForKey:newTheme] apply];
+    [[GorillasConfig get] setCityTheme:newTheme];
+    
     [self reset];
 }
 

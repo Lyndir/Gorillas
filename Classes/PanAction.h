@@ -14,14 +14,13 @@
 @interface PanAction : MoveBy {
 
     @private
-    CocosNode *node;
     NSMutableArray *subNodes;
-    float nodeWidth;
-    bool cancelled;
+    int padding;
+    BOOL cancelled;
 }
 
-+(PanAction *) actionWithNode: (CocosNode *)node subNodes: (NSMutableArray *)subNodes nodeWidth: (float)width duration: (ccTime)seconds;
--(PanAction *) initWithNode: (CocosNode *)node subNodes: (NSMutableArray *)subNodes nodeWidth: (float)width duration: (ccTime)seconds;
++(PanAction *) actionWithSubNodes: (NSMutableArray *)nSubNodes duration: (ccTime)nDuration padding: (int) nPadding;
+-(PanAction *) initWithSubNodes: (NSMutableArray *)nSubNodes duration: (ccTime)nDuration padding: (int)nPadding;
 -(void) cancel;
 
 

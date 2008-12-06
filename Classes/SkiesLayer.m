@@ -32,7 +32,7 @@
         [self add: sky z:1];
     }
     
-    [self do: [PanAction actionWithNode: self subNodes: skies nodeWidth: w duration: [[GorillasConfig get] starSpeed]]];
+    [self do: [PanAction actionWithSubNodes:skies duration: [[GorillasConfig get] starSpeed] padding:0]];
     [skies release];
     
     return self;

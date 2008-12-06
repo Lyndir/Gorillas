@@ -11,12 +11,15 @@
 #import "GorillasConfig.h"
 
 
-@interface SkyLayer : ResettableLayer {
+@interface SkyLayer : ResettableLayer <CocosNodeSize> {
 
-    @private
+    CGSize contentSize;
+    
     GLfloat *stars;
     NSUInteger starCount;
 }
+
+@property (readonly) CGSize contentSize;
 
 
 @end

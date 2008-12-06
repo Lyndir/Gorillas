@@ -7,7 +7,10 @@
 //
 
 #import "GorillasConfig.h"
+#import "CityTheme.h"
 #import "cocos2d.h"
+
+#define dCityTheme          @"cityTheme"
 
 #define dFontSize           @"fontSize"
 #define dFontName           @"fontName"
@@ -38,13 +41,6 @@
 
 @implementation GorillasConfig
 
-@dynamic fontSize, fontName;
-@dynamic fixedFloors, buildingMax, buildingAmount, buildingSpeed, buildingColors;
-@dynamic windowAmount, windowColorOn, windowColorOff;
-@dynamic starColor, starSpeed, starAmount;
-@dynamic gravity, shadeColor, transitionDuration;
-@dynamic level, levelNames, levelNameCount;
-
 
 -(id) init {
 
@@ -52,12 +48,7 @@
         return self;
 
     defaults = [[NSUserDefaults standardUserDefaults] retain];
-    
-    NSArray *buildingColors = [NSArray arrayWithObjects:
-                               [NSNumber numberWithLong:0xb70000ff],
-                               [NSNumber numberWithLong:0x00b7b7ff],
-                               [NSNumber numberWithLong:0xb7b7b7ff],
-                               nil];
+
     NSArray *levelNames     = [NSArray arrayWithObjects:
                                @"Toddler",
                                @"Playground",
@@ -69,40 +60,50 @@
                                @"Impossible",
                                nil];
 
+    CityTheme *theme = [[CityTheme getThemes] objectForKey:[CityTheme defaultThemeName]];
+    
     [defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-     [NSNumber numberWithInteger:    30],           dFontSize,
-     @"Arial Rounded MT Bold",                      dFontName,
+     [CityTheme defaultThemeName],                          dCityTheme,
+     [NSNumber numberWithInteger:    30],                   dFontSize,
+     @"Arial Rounded MT Bold",                              dFontName,
      
-     [NSNumber numberWithInteger:    4],            dFixedFloors,
-     [NSNumber numberWithFloat:      0.7f],         dBuildingMax,
-     [NSNumber numberWithInteger:    10],           dBuildingAmount,
-     [NSNumber numberWithInteger:    1],            dBuildingSpeed,
-     [NSNumber numberWithInteger:    3],            dBuildingColorCount,
-     [buildingColors retain],                       dBuildingColors,
+     [NSNumber numberWithInteger: [theme fixedFloors]],     dFixedFloors,
+     [NSNumber numberWithFloat: [theme buildingMax]],       dBuildingMax,
+     [NSNumber numberWithInteger: [theme buildingAmount]],  dBuildingAmount,
+     [NSNumber numberWithInteger:    1],                    dBuildingSpeed,
+     [theme buildingColors],                                dBuildingColors,
      
-     [NSNumber numberWithInteger:    6],            dWindowAmount,
-     [NSNumber numberWithLong:       0xffffb7ff],   dWindowColorOn,
-     [NSNumber numberWithLong:       0x676767ff],   dWindowColorOff,
+     [NSNumber numberWithInteger: [theme windowAmount]],    dWindowAmount,
+     [NSNumber numberWithLong: [theme windowColorOn]],      dWindowColorOn,
+     [NSNumber numberWithLong: [theme windowColorOff]],     dWindowColorOff,
      
-     [NSNumber numberWithLong:       0xb7b700ff],   dStarColor,
-     [NSNumber numberWithInteger:    30],           dStarSpeed,
-     [NSNumber numberWithInteger:    100],          dStarAmount,
+     [NSNumber numberWithLong: [theme starColor]],          dStarColor,
+     [NSNumber numberWithInteger:    30],                   dStarSpeed,
+     [NSNumber numberWithInteger: [theme starAmount]],      dStarAmount,
      
-     [NSNumber numberWithInteger:    100],          dGravity,
-     [NSNumber numberWithLong:       0x000000cc],   dShadeColor,
-     [NSNumber numberWithFloat:      0.5f],         dTransitionDuration,
+     [NSNumber numberWithInteger: [theme gravity]],         dGravity,
+     [NSNumber numberWithLong:       0x000000cc],           dShadeColor,
+     [NSNumber numberWithFloat:      0.5f],                 dTransitionDuration,
      
-     [NSNumber numberWithFloat:      0.1f],         dLevel,
-     [NSNumber numberWithInteger:    8],            dLevelNameCount,
-     [levelNames retain],                           dLevelNames,
+     [NSNumber numberWithFloat:      0.1f],                 dLevel,
+     [NSNumber numberWithInteger:    8],                    dLevelNameCount,
+     [levelNames retain],                                   dLevelNames,
      nil]];
 
     return self;
 }
 
 
+-(NSString *) cityTheme {
+    
+    return [defaults stringForKey: dCityTheme];
+}
+-(void) setCityTheme: (NSString *)cityTheme {
+    
+    [defaults setObject:cityTheme forKey: dCityTheme];
+}
 -(int) fontSize {
-
+    
     return [defaults integerForKey: dFontSize];
 }
 -(void) setFontSize: (int)fontSize {
@@ -162,7 +163,7 @@
 }
 -(NSArray *) buildingColors {
 
-    return [[NSUserDefaults standardUserDefaults] arrayForKey: dBuildingColors];
+    return [defaults arrayForKey: dBuildingColors];
 }
 -(void) setBuildingColors: (NSArray *)buildingColors {
 

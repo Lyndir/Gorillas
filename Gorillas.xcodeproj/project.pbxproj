@@ -93,6 +93,7 @@
 		DAC4EA230EDB0A610093BA40 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4EA220EDB0A610093BA40 /* banana.png */; };
 		DACA4E6E0EB3AEA40096F970 /* BuildingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */; };
 		DACA4E8D0EB3B0E10096F970 /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
+		DACFEC210EE96AA300A0D08E /* CityTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = DACFEC200EE96AA300A0D08E /* CityTheme.m */; };
 		DAFEF9730ED847D40019F7E5 /* Throw.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* Throw.m */; };
 /* End PBXBuildFile section */
 
@@ -253,6 +254,8 @@
 		DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingLayer.m; sourceTree = "<group>"; };
 		DACA4E8B0EB3B0E10096F970 /* GorillasConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillasConfig.h; sourceTree = "<group>"; };
 		DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillasConfig.m; sourceTree = "<group>"; };
+		DACFEC1F0EE96AA300A0D08E /* CityTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityTheme.h; sourceTree = "<group>"; };
+		DACFEC200EE96AA300A0D08E /* CityTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityTheme.m; sourceTree = "<group>"; };
 		DAFEF9710ED847D40019F7E5 /* Throw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Throw.h; sourceTree = "<group>"; };
 		DAFEF9720ED847D40019F7E5 /* Throw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Throw.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -395,10 +398,12 @@
 		DA2282270EE1A38A00BA53D2 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
-				DACA4E8B0EB3B0E10096F970 /* GorillasConfig.h */,
-				DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */,
 				1D3623240D0F684500981E51 /* GorillasAppDelegate.h */,
 				1D3623250D0F684500981E51 /* GorillasAppDelegate.m */,
+				DACA4E8B0EB3B0E10096F970 /* GorillasConfig.h */,
+				DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */,
+				DACFEC1F0EE96AA300A0D08E /* CityTheme.h */,
+				DACFEC200EE96AA300A0D08E /* CityTheme.m */,
 			);
 			name = Backend;
 			sourceTree = "<group>";
@@ -729,6 +734,7 @@
 				DAB608B60EDC812B00FC200F /* AtlasNode.m in Sources */,
 				DA126C8F0EDDF19100EADDE2 /* Utility.m in Sources */,
 				DA2283000EE204AF00BA53D2 /* ExplosionAnimationLayer.m in Sources */,
+				DACFEC210EE96AA300A0D08E /* CityTheme.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

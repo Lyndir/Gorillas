@@ -315,8 +315,8 @@
     for(BuildingLayer *building in buildings)
         if( pos.x >= [building position].x &&
             pos.y >= [building position].y &&
-            pos.x <= [building position].x + [building width] &&
-            pos.y <= [building position].y + [building height]) {
+            pos.x <= [building position].x + [building contentSize].width &&
+            pos.y <= [building position].y + [building contentSize].height) {
 
             // A building was hit, but if it's in an explosion crater we
             // need to let the banana continue flying.
@@ -361,17 +361,15 @@
     int indexB = indexA + [[GorillasConfig get] buildingAmount] - 3;
     
     BuildingLayer *buildingA = (BuildingLayer *) [buildings objectAtIndex:indexA];
-    [gorillaA setPosition: cpv([buildingA position].x + [buildingA width] / 2, [buildingA height] + [gorillaA height] / 2)];
+    [gorillaA setPosition: cpv([buildingA position].x + [buildingA contentSize].width / 2, [buildingA contentSize].height + [gorillaA contentSize].height / 2)];
     
     BuildingLayer *buildingB = (BuildingLayer *) [buildings objectAtIndex:indexB];
-    [gorillaB setPosition: cpv([buildingB position].x + [buildingB width] / 2, [buildingB height] + [gorillaB height] / 2)];
+    [gorillaB setPosition: cpv([buildingB position].x + [buildingB contentSize].width / 2, [buildingB contentSize].height + [gorillaB contentSize].height / 2)];
     
     [self add:gorillaA z:3];
     [self add:gorillaB z:3];
     
     [self stopPanning];
-    gorillaA.opacity = 0;
-    gorillaB.opacity = 0;
     [gorillaA do:[FadeIn actionWithDuration:1]];
     [gorillaB do:[FadeIn actionWithDuration:1]];
     /*[self do:[Sequence actions:[DelayTime actionWithDuration:1],
@@ -414,6 +412,9 @@
 
 -(void) stopGameCallback: (id) sender {
     
+    if(![[[GorillasAppDelegate get] gameLayer] running])
+        return;
+    
     for(GorillaLayer *gorilla in gorillas)
         [self removeGorilla:gorilla];
     
@@ -438,7 +439,7 @@
         // If already panning, stop first.
         [self stopPanning];
     
-    panAction = [[PanAction actionWithNode: self subNodes: buildings nodeWidth: ([[GorillasConfig get] buildingWidth] + 1) duration: [[GorillasConfig get] buildingSpeed]] retain];
+    panAction = [PanAction initWithSubNodes:buildings duration:[[GorillasConfig get] buildingSpeed] padding:1];
     [self do: panAction];
 }
 

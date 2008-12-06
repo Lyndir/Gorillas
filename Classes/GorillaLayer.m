@@ -12,7 +12,6 @@
 
 @implementation GorillaLayer
 
-
 @synthesize human, alive, name;
 
 
@@ -27,10 +26,10 @@
 
 -(BOOL) hitsGorilla: (cpVect)pos {
     
-    return  pos.x >= position.x - [self width]  / 2 &&
-            pos.y >= position.y - [self height] / 2 &&
-            pos.x <= position.x + [self width]  / 2 &&
-            pos.y <= position.y + [self height] / 2;
+    return  pos.x >= position.x - [self contentSize].width  / 2 &&
+            pos.y >= position.y - [self contentSize].height / 2 &&
+            pos.x <= position.x + [self contentSize].width  / 2 &&
+            pos.y <= position.y + [self contentSize].height / 2;
 }
 
 

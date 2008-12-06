@@ -12,14 +12,14 @@
 
 @implementation BuildingLayer
 
-@synthesize width, height;
+@synthesize contentSize;
 
 
 - (id) init {
     
 	if (!(self = [super init]))
         return self;
-    
+
     windows = nil;
     colors = nil;
         
@@ -44,12 +44,12 @@
                             - [[GorillasConfig get] windowPadding])
                                 / floorHeight;
 
-    width = [[GorillasConfig get] buildingWidth];
-    height = (fixedFloors + (random() % varFloors)) * floorHeight + [[GorillasConfig get] windowPadding];
+    contentSize = CGSizeMake([[GorillasConfig get] buildingWidth],
+                             (fixedFloors + (random() % varFloors)) * floorHeight + [[GorillasConfig get] windowPadding]);
     
     // Add windows.
-    windowCount = (1 + (height - [[GorillasConfig get] windowHeight] - [[GorillasConfig get] windowPadding])  / ([[GorillasConfig get] windowPadding] + [[GorillasConfig get] windowHeight]))
-                * (1 + (width - [[GorillasConfig get] windowWidth] - [[GorillasConfig get] windowPadding])   / ([[GorillasConfig get] windowPadding] + [[GorillasConfig get] windowWidth]));
+    windowCount = (1 + (int) (contentSize.height - [[GorillasConfig get] windowHeight] - (int)[[GorillasConfig get] windowPadding])  / (int) ([[GorillasConfig get] windowPadding] + [[GorillasConfig get] windowHeight]))
+                * (1 + (int) (contentSize.width - [[GorillasConfig get] windowWidth] - (int)[[GorillasConfig get] windowPadding])   / (int) ([[GorillasConfig get] windowPadding] + [[GorillasConfig get] windowWidth]));
     
     if(windows != nil)
         free(windows);
@@ -70,11 +70,11 @@
     
     int w = 0;
     for (int y = [[GorillasConfig get] windowPadding];
-         y < height - [[GorillasConfig get] windowHeight];
+         y < contentSize.height - [[GorillasConfig get] windowHeight];
          y += [[GorillasConfig get] windowPadding] + [[GorillasConfig get] windowHeight]) {
         
         for (int x = [[GorillasConfig get] windowPadding];
-             x < width - [[GorillasConfig get] windowWidth];
+             x < contentSize.width - [[GorillasConfig get] windowWidth];
              x += [[GorillasConfig get] windowPadding] + [[GorillasConfig get] windowWidth]) {
             
             GLubyte r, g, b, a;
@@ -83,7 +83,6 @@
             } else {
                 r = r1; g = g1; b = b1; a = a1;
             }
-                
             
             colors[w] = malloc(sizeof(GLubyte) * 4 * 4);
             colors[w][0] = r;
@@ -116,9 +115,6 @@
             w++;
         }
     }
-    
-    // Replace our initial guess by the real count because appearanly my math sucks.
-    windowCount = w;
 }
 
 
@@ -126,7 +122,7 @@
     
     // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
     glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
-    [Utility drawBoxFrom:cpv(0, 0) size:cpv(width, height) color:buildingColor];
+    [Utility drawBoxFrom:cpv(0, 0) size:cpv(contentSize.width, contentSize.height) color:buildingColor];
 
     // Tell OpenGL about our data.
     glEnableClientState(GL_VERTEX_ARRAY);

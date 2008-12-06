@@ -10,10 +10,8 @@
 #import "cocos2d.h"
 
 
-@interface GorillaLayer : Sprite /*Layer <CocosNodeOpacity>*/ {
+@interface GorillaLayer : Sprite {
 
-    /*GLfloat *vertices;
-    GLubyte *colors;*/
     NSString *name;
     
     BOOL human;
@@ -22,8 +20,6 @@
 
 -(BOOL) hitsGorilla: (cpVect)pos;
 
-@property (readonly) float width;
-@property (readonly) float height;
 @property (readwrite, retain) NSString *name;
 
 @property (readwrite, assign) BOOL human;
