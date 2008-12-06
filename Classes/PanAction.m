@@ -21,7 +21,8 @@
 
 -(PanAction *) initWithSubNodes: (NSMutableArray *)nSubNodes duration: (ccTime)nDuration padding: (int)nPadding {
 
-    if(!(self = [super initWithDuration:nDuration position:cpv(-[(id<CocosNodeSize>)[subNodes objectAtIndex:0] contentSize].width - nPadding, 0)]))
+    CocosNode<CocosNodeSize> *firstNode = [nSubNodes objectAtIndex:0];
+    if(!(self = [super initWithDuration:nDuration position:cpv(-[firstNode contentSize].width - nPadding, 0)]))
         return self;
     
     subNodes = [nSubNodes retain];
@@ -38,16 +39,19 @@
     
     if ([self isDone]) {
         ResettableLayer *firstNode = [subNodes objectAtIndex:0];
+        CocosNode<CocosNodeSize> *lastNode = [subNodes lastObject];
+        
+        float x = [lastNode position].x + [lastNode contentSize].width + padding;
+
         [firstNode reset];
-    
-        float x = [(CocosNode *)[subNodes lastObject] position].x + [(id<CocosNodeSize>)[subNodes lastObject] contentSize].width + padding;
         [firstNode setPosition:cpv(x, 0)];
     
         [subNodes removeObject:firstNode];
         [subNodes addObject:firstNode];
     
         if(!cancelled) {
-            delta = cpv(-[(id<CocosNodeSize>)[subNodes objectAtIndex:0] contentSize].width - padding, 0);
+            CocosNode<CocosNodeSize> *newFirstNode = [subNodes objectAtIndex:0];
+            delta = cpv(-[newFirstNode contentSize].width - padding, 0);
             [self start];
         }
     }

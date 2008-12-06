@@ -33,11 +33,11 @@
 +(void) drawPointAt:(GLfloat)x :(GLfloat)y color:(long) color {
     
     const GLfloat point[1 * 2] = { x, y };
-    const GLubyte *colorBytes = [Utility colorToBytes:color];
+    const GLubyte *colorBytes = (GLubyte *)&color;
     
     glVertexPointer(2, GL_FLOAT, 0, point);
     glEnableClientState(GL_VERTEX_ARRAY);
-    glColor4f(colorBytes[0], colorBytes[1], colorBytes[2], colorBytes[3]);
+    glColor4f(colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0]);
     
     glDrawArrays(GL_POINTS, 0, 1);
     
@@ -99,10 +99,10 @@
         x0, y0,
         x1, y1,
     };
-    const GLubyte *colorBytes = [Utility colorToBytes:color];
+    const GLubyte *colorBytes = (GLubyte *)&color;
     const GLubyte colors[4 * 4] = {
-        colorBytes[0], colorBytes[1], colorBytes[2], colorBytes[3],
-        colorBytes[0], colorBytes[1], colorBytes[2], colorBytes[3],
+        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
+        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
     };
     
     // Tell OpenGL about our data.
@@ -159,12 +159,12 @@
         x0, y1,
         x1, y1,
     };
-    const GLubyte *colorBytes = [Utility colorToBytes:color];
+    const GLubyte *colorBytes = (GLubyte *)&color;
     const GLubyte colors[4 * 4] = {
-        colorBytes[0], colorBytes[1], colorBytes[2], colorBytes[3],
-        colorBytes[0], colorBytes[1], colorBytes[2], colorBytes[3],
-        colorBytes[0], colorBytes[1], colorBytes[2], colorBytes[3],
-        colorBytes[0], colorBytes[1], colorBytes[2], colorBytes[3],
+        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
+        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
+        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
+        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
     };
     
     // Tell OpenGL about our data.
@@ -178,18 +178,6 @@
     // Reset data source.
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
-}
-
-
-+(const GLubyte *) colorToBytes: (long)color {
-    
-    GLubyte *bytes = malloc(sizeof(GLubyte) * 4);
-    bytes[0] = color >> 24 & 0xff;
-    bytes[1] = color >> 16 & 0xff;
-    bytes[2] = color >> 8  & 0xff;
-    bytes[3] = color >> 0  & 0xff;
-    
-    return bytes;
 }
 
 

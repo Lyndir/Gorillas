@@ -33,49 +33,56 @@
 -(void) reset {
     
     buildingColor  = [[GorillasConfig get] buildingColor];
+    float wPad = [[GorillasConfig get] windowPadding];
+    float wWidth = [[GorillasConfig get] windowWidth];
+    float wHeight = [[GorillasConfig get] windowHeight];
+    long wColor0 = [[GorillasConfig get] windowColorOff];
+    long wColor1 = [[GorillasConfig get] windowColorOn];
 
     // Calculate a random size for this building.
     const CGSize size = [[Director sharedDirector] winSize].size;
     
-    const float floorHeight = [[GorillasConfig get] windowHeight] + [[GorillasConfig get] windowPadding];
-    const long fixedFloors = [[GorillasConfig get] fixedFloors];
-    const long varFloors = (size.height * [[GorillasConfig get] buildingMax]
-                            - (fixedFloors * floorHeight)
-                            - [[GorillasConfig get] windowPadding])
-                                / floorHeight;
+    const float floorHeight = wHeight + wPad;
+    const long fixedFloors  = [[GorillasConfig get] fixedFloors];
+    const long varFloors    = (size.height * [[GorillasConfig get] buildingMax]
+                               - (fixedFloors * floorHeight) - wPad) / floorHeight;
 
     contentSize = CGSizeMake([[GorillasConfig get] buildingWidth],
-                             (fixedFloors + (random() % varFloors)) * floorHeight + [[GorillasConfig get] windowPadding]);
+                             (fixedFloors + (random() % varFloors)) * floorHeight + wPad);
     
     // Add windows.
-    windowCount = (1 + (int) (contentSize.height - [[GorillasConfig get] windowHeight] - (int)[[GorillasConfig get] windowPadding])  / (int) ([[GorillasConfig get] windowPadding] + [[GorillasConfig get] windowHeight]))
-                * (1 + (int) (contentSize.width - [[GorillasConfig get] windowWidth] - (int)[[GorillasConfig get] windowPadding])   / (int) ([[GorillasConfig get] windowPadding] + [[GorillasConfig get] windowWidth]));
-    
-    if(windows != nil)
+    if(windows != nil || colors != nil) {
+        for(int w = 0; w < windowCount; ++w) {
+            free(windows[w]);
+            free(colors[w]);
+        }
         free(windows);
-    windows = malloc(sizeof(GLfloat *) * windowCount);
-    if(colors != nil)
         free(colors);
-    colors = malloc(sizeof(GLubyte *) * windowCount);
+    }
+    windowCount = (1 + (int) (contentSize.height - wHeight - (int)wPad) / (int) (wPad + wHeight))
+                * (1 + (int) (contentSize.width  - wWidth  - (int)wPad) / (int) (wPad + wWidth));
+    
+    windows = malloc(sizeof(GLfloat *) * windowCount);
+    colors  = malloc(sizeof(GLubyte *) * windowCount);
     
 	GLubyte r0, g0, b0, a0, r1, g1, b1, a1;
-	r0 = ([[GorillasConfig get] windowColorOff]>>24) & 0xff;
-	g0 = ([[GorillasConfig get] windowColorOff]>>16) & 0xff;
-	b0 = ([[GorillasConfig get] windowColorOff]>>8 ) & 0xff;
-	a0 = ([[GorillasConfig get] windowColorOff]>>0 ) & 0xff;
-	r1 = ([[GorillasConfig get] windowColorOn]>>24 ) & 0xff;
-	g1 = ([[GorillasConfig get] windowColorOn]>>16 ) & 0xff;
-	b1 = ([[GorillasConfig get] windowColorOn]>>8  ) & 0xff;
-	a1 = ([[GorillasConfig get] windowColorOn]>>0  ) & 0xff;
+	r0 = (wColor0>>24) & 0xff;
+	g0 = (wColor0>>16) & 0xff;
+	b0 = (wColor0>>8 ) & 0xff;
+	a0 = (wColor0>>0 ) & 0xff;
+	r1 = (wColor1>>24) & 0xff;
+	g1 = (wColor1>>16) & 0xff;
+	b1 = (wColor1>>8 ) & 0xff;
+	a1 = (wColor1>>0 ) & 0xff;
     
     int w = 0;
-    for (int y = [[GorillasConfig get] windowPadding];
-         y < contentSize.height - [[GorillasConfig get] windowHeight];
-         y += [[GorillasConfig get] windowPadding] + [[GorillasConfig get] windowHeight]) {
+    for (int y = wPad;
+         y < contentSize.height - wHeight;
+         y += wPad + wHeight) {
         
-        for (int x = [[GorillasConfig get] windowPadding];
-             x < contentSize.width - [[GorillasConfig get] windowWidth];
-             x += [[GorillasConfig get] windowPadding] + [[GorillasConfig get] windowWidth]) {
+        for (int x = wPad;
+             x < contentSize.width - wWidth;
+             x += wPad + wWidth) {
             
             GLubyte r, g, b, a;
             if(random() % 100 > 80) {
@@ -105,12 +112,12 @@
             windows[w] = malloc(sizeof(GLfloat) * 4 * 2);
             windows[w][0] = x;
             windows[w][1] = y;
-            windows[w][2] = x + [[GorillasConfig get] windowWidth];
+            windows[w][2] = x + wWidth;
             windows[w][3] = y;
             windows[w][4] = x;
-            windows[w][5] = y + [[GorillasConfig get] windowHeight];
-            windows[w][6] = x + [[GorillasConfig get] windowWidth];
-            windows[w][7] = y + [[GorillasConfig get] windowHeight];
+            windows[w][5] = y + wHeight;
+            windows[w][6] = x + wWidth;
+            windows[w][7] = y + wHeight;
             
             w++;
         }
@@ -139,6 +146,21 @@
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
+}
+
+
+-(void) dealloc {
+ 
+    [super dealloc];
+    
+    if(windows != nil || colors != nil) {
+        for(int w = 0; w < windowCount; ++w) {
+            free(windows[w]);
+            free(colors[w]);
+        }
+        free(windows);
+        free(colors);
+    }
 }
 
 

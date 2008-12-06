@@ -439,7 +439,7 @@
         // If already panning, stop first.
         [self stopPanning];
     
-    panAction = [PanAction initWithSubNodes:buildings duration:[[GorillasConfig get] buildingSpeed] padding:1];
+    panAction = [[PanAction alloc] initWithSubNodes:buildings duration:[[GorillasConfig get] buildingSpeed] padding:1];
     [self do: panAction];
 }
 

@@ -36,6 +36,4 @@
 +(void) drawBoxFrom:(cpVect)from size:(cpVect)to color:(long)color;
 +(void) drawBoxFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1 color:(long)color;
 
-+(const GLubyte *) colorToBytes: (long)color;
-
 @end

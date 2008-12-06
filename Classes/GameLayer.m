@@ -39,8 +39,6 @@
 
 
 -(void) pause {
-
-    NSLog(@"pause: r(%@), p(%@)", running? @"true": @"false", paused? @"true": @"false");
     
     if(!running)
         // Only allow toggling pause state while game is running.
@@ -56,8 +54,6 @@
 
 
 -(void) unpause {
-    
-    NSLog(@"unpause: r(%@), p(%@)", running? @"true": @"false", paused? @"true": @"false");
     
     if(!running)
         // Only allow toggling pause state while game is running.
@@ -174,7 +170,6 @@
     running = false;
     singlePlayer = false;
     
-    NSLog(@"showing main");
     [[GorillasAppDelegate get] showMainMenu];
 }
 

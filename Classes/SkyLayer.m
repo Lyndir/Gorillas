@@ -48,8 +48,9 @@
 -(void) draw {
     
     // Stars.
-    const GLubyte *c = [Utility colorToBytes:[[GorillasConfig get] starColor]];
-    glColor4f(c[0], c[1], c[2], c[3]);
+    const long color = [[GorillasConfig get] starColor];
+    const GLubyte *colorBytes = (GLubyte *)&color;
+    glColor4f(colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0]);
     
     glVertexPointer(2, GL_FLOAT, 0, stars);
     glEnableClientState(GL_VERTEX_ARRAY);
