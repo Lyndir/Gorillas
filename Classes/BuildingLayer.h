@@ -19,8 +19,8 @@
 
     CGSize contentSize;
     
-    GLfloat **windows;
-    GLubyte **colors;
+    GLfloat *windows;
+    GLubyte *colors;
     int windowCount;
 }
 

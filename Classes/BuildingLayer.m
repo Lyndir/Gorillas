@@ -38,6 +38,8 @@
     float wHeight = [[GorillasConfig get] windowHeight];
     long wColor0 = [[GorillasConfig get] windowColorOff];
     long wColor1 = [[GorillasConfig get] windowColorOn];
+    GLubyte *wColors0 = (GLubyte *)&wColor0;
+    GLubyte *wColors1 = (GLubyte *)&wColor1;
 
     // Calculate a random size for this building.
     const CGSize size = [[Director sharedDirector] winSize].size;
@@ -49,31 +51,17 @@
 
     contentSize = CGSizeMake([[GorillasConfig get] buildingWidth],
                              (fixedFloors + (random() % varFloors)) * floorHeight + wPad);
-    
-    // Add windows.
-    if(windows != nil || colors != nil) {
-        for(int w = 0; w < windowCount; ++w) {
-            free(windows[w]);
-            free(colors[w]);
-        }
-        free(windows);
-        free(colors);
-    }
     windowCount = (1 + (int) (contentSize.height - wHeight - (int)wPad) / (int) (wPad + wHeight))
                 * (1 + (int) (contentSize.width  - wWidth  - (int)wPad) / (int) (wPad + wWidth));
     
-    windows = malloc(sizeof(GLfloat *) * windowCount);
-    colors  = malloc(sizeof(GLubyte *) * windowCount);
+    // Add windows.
+    if(windows != nil)
+        free(windows);
+    if(colors != nil)
+        free(colors);
     
-	GLubyte r0, g0, b0, a0, r1, g1, b1, a1;
-	r0 = (wColor0>>24) & 0xff;
-	g0 = (wColor0>>16) & 0xff;
-	b0 = (wColor0>>8 ) & 0xff;
-	a0 = (wColor0>>0 ) & 0xff;
-	r1 = (wColor1>>24) & 0xff;
-	g1 = (wColor1>>16) & 0xff;
-	b1 = (wColor1>>8 ) & 0xff;
-	a1 = (wColor1>>0 ) & 0xff;
+    windows = malloc(sizeof(GLfloat *) * windowCount * 6 * 2);
+    colors  = malloc(sizeof(GLubyte *) * windowCount * 6 * 4);
     
     int w = 0;
     for (int y = wPad;
@@ -86,38 +74,28 @@
             
             GLubyte r, g, b, a;
             if(random() % 100 > 80) {
-                r = r0; g = g0; b = b0; a = a0;
+                r = wColors0[3]; g = wColors0[2]; b = wColors0[1]; a = wColors0[0];
             } else {
-                r = r1; g = g1; b = b1; a = a1;
+                r = wColors1[3]; g = wColors1[2]; b = wColors1[1]; a = wColors1[0];
             }
             
-            colors[w] = malloc(sizeof(GLubyte) * 4 * 4);
-            colors[w][0] = r;
-            colors[w][1] = g;
-            colors[w][2] = b;
-            colors[w][3] = a;
-            colors[w][4] = r;
-            colors[w][5] = g;
-            colors[w][6] = b;
-            colors[w][7] = a;
-            colors[w][8] = r;
-            colors[w][9] = g;
-            colors[w][10] = b;
-            colors[w][11] = a;
-            colors[w][12] = r;
-            colors[w][13] = g;
-            colors[w][14] = b;
-            colors[w][15] = a;
+            colors[w * 24 + 0] = colors[w * 24 + 4] = colors[w * 24 + 8]  = colors[w * 24 + 12] = colors[w * 24 + 16] = colors[w * 24 + 20] = r;
+            colors[w * 24 + 1] = colors[w * 24 + 5] = colors[w * 24 + 9]  = colors[w * 24 + 13] = colors[w * 24 + 17] = colors[w * 24 + 21] = g;
+            colors[w * 24 + 2] = colors[w * 24 + 6] = colors[w * 24 + 10] = colors[w * 24 + 14] = colors[w * 24 + 18] = colors[w * 24 + 22] = b;
+            colors[w * 24 + 3] = colors[w * 24 + 7] = colors[w * 24 + 11] = colors[w * 24 + 15] = colors[w * 24 + 19] = colors[w * 24 + 23] = a;
             
-            windows[w] = malloc(sizeof(GLfloat) * 4 * 2);
-            windows[w][0] = x;
-            windows[w][1] = y;
-            windows[w][2] = x + wWidth;
-            windows[w][3] = y;
-            windows[w][4] = x;
-            windows[w][5] = y + wHeight;
-            windows[w][6] = x + wWidth;
-            windows[w][7] = y + wHeight;
+            windows[w * 12 + 0] = x;
+            windows[w * 12 + 1] = y;
+            windows[w * 12 + 2] = x + wWidth;
+            windows[w * 12 + 3] = y;
+            windows[w * 12 + 4] = x;
+            windows[w * 12 + 5] = y + wHeight;
+            windows[w * 12 + 6] = x;
+            windows[w * 12 + 7] = y + wHeight;
+            windows[w * 12 + 8] = x + wWidth;
+            windows[w * 12 + 9] = y + wHeight;
+            windows[w * 12 + 10] = x + wWidth;
+            windows[w * 12 + 11] = y;
             
             w++;
         }
@@ -134,13 +112,11 @@
     // Tell OpenGL about our data.
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
-    for(int w = 0; w < windowCount; ++w) {
-        glVertexPointer(2, GL_FLOAT, 0, windows[w]);
-        glColorPointer(4, GL_UNSIGNED_BYTE, 0, colors[w]);
+    glVertexPointer(2, GL_FLOAT, 0, windows);
+    glColorPointer(4, GL_UNSIGNED_BYTE, 0, colors);
 	
-        // Draw our windows.
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    }
+    // Draw our windows.
+    glDrawArrays(GL_TRIANGLES, 0, 6 * windowCount);
     
     // Reset blend & data source.
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -154,10 +130,6 @@
     [super dealloc];
     
     if(windows != nil || colors != nil) {
-        for(int w = 0; w < windowCount; ++w) {
-            free(windows[w]);
-            free(colors[w]);
-        }
         free(windows);
         free(colors);
     }

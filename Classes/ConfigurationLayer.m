@@ -104,7 +104,7 @@
             break;
         }
         
-        if([[[GorillasConfig get] cityTheme] isEqualTo:theme])
+        if([[[GorillasConfig get] cityTheme] isEqualToString:theme])
             found = true;
     }
     
