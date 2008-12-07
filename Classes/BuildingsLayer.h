@@ -11,9 +11,10 @@
 #import "PanAction.h"
 #import "GorillaLayer.h"
 #import "BananaLayer.h"
+#import "Resettable.h"
 //#define _DEBUG_
 
-@interface BuildingsLayer : Layer {
+@interface BuildingsLayer : Layer <Resettable> {
 
     @private
     PanAction *panAction;

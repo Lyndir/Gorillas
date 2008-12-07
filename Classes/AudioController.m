@@ -67,9 +67,7 @@ void interruptionListenerCallback (
 	
 	if (interruptionState == kAudioSessionBeginInterruption) {
 
-		NSLog (@"Interrupted. Stopping playback or recording.");
-		
-        if (controller.audioPlayer) {
+		if (controller.audioPlayer) {
 			// if currently playing, pause
 			[controller pausePlayback];
 			controller.interruptedOnPlayback = YES;
@@ -96,8 +94,7 @@ void interruptionListenerCallback (
     // create the file URL that identifies the file that contains our audio data.
     CFBundleRef bundle = CFBundleGetMainBundle();
     CFURLRef fileURL = CFBundleCopyResourceURL(bundle, (CFStringRef) audioFile, NULL, NULL);
-    NSLog (@"Audio file path: %@", fileURL);
-		
+   	
     // save the sound file URL as an object attribute (as an NSURL object)
     if (fileURL) {
         self.soundFileURL = (NSURL *) fileURL;

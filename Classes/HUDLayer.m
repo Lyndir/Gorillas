@@ -21,7 +21,7 @@
         return self;
 
     width = [[Director sharedDirector] winSize].size.width;
-    height = ([[GorillasConfig get] fixedFloors] - 1) * ([[GorillasConfig get] windowHeight] + [[GorillasConfig get] windowPadding]) + [[GorillasConfig get] windowPadding];
+    height =[[GorillasConfig get] fontSize] + 5;
     position = cpv(0, -height);
 
     menuButton = [MenuItemFont itemFromString:@"                              " target:self selector:@selector(menuButton:)];
@@ -45,7 +45,7 @@
         return;
     
     revealed = true;
-    [self do:[MoveBy actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, height)]];
+    [self do:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, 0)]];
     [self add:menuMenu];
 }
 
@@ -57,7 +57,7 @@
     
     revealed = false;
     [self do:[Sequence actions:
-                  [MoveBy actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, -height)],
+                  [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, -height)],
                   [CallFunc actionWithTarget:self selector:@selector(gone)],
                   nil]];
 }

@@ -26,6 +26,7 @@
 #define dWindowColorOn      @"windowColorOn"
 #define dWindowColorOff     @"windowColorOff"
 
+#define dSkyColor           @"skyColor"
 #define dStarColor          @"starColor"
 #define dStarSpeed          @"starSpeed"
 #define dStarAmount         @"starAmount"
@@ -60,7 +61,9 @@
                                @"Impossible",
                                nil];
 
-    CityTheme *theme = [[CityTheme getThemes] objectForKey:[CityTheme defaultThemeName]];
+    NSDictionary *themes = [CityTheme getThemes];
+    NSString *defaultThemeName = [CityTheme defaultThemeName];
+    CityTheme *theme = [themes objectForKey:defaultThemeName];
     
     [defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
      [CityTheme defaultThemeName],                          dCityTheme,
@@ -77,6 +80,7 @@
      [NSNumber numberWithLong: [theme windowColorOn]],      dWindowColorOn,
      [NSNumber numberWithLong: [theme windowColorOff]],     dWindowColorOff,
      
+     [NSNumber numberWithLong: [theme skyColor]],           dSkyColor,
      [NSNumber numberWithLong: [theme starColor]],          dStarColor,
      [NSNumber numberWithInteger:    30],                   dStarSpeed,
      [NSNumber numberWithInteger: [theme starAmount]],      dStarAmount,
@@ -194,29 +198,37 @@
 }
 -(long) windowColorOn {
 
-    return [defaults integerForKey: dWindowColorOn];
+    return [(NSNumber *)[defaults objectForKey:dWindowColorOn] longValue];
 }
 -(void) setWindowColorOn: (long)windowColorOn {
 
-    [defaults setInteger:windowColorOn forKey: dWindowColorOn];
+    [defaults setObject:[NSNumber numberWithLong:windowColorOn] forKey: dWindowColorOn];
 }
 -(long) windowColorOff {
 
-    return [defaults integerForKey: dWindowColorOff];
+    return [(NSNumber *)[defaults objectForKey:dWindowColorOff] longValue];
 }
 -(void) setWindowColorOff: (long)windowColorOff {
 
-    [defaults setInteger:windowColorOff forKey: dWindowColorOff];
+    [defaults setObject:[NSNumber numberWithLong:windowColorOff] forKey: dWindowColorOff];
 }
 
 
+-(long) skyColor {
+
+    return [(NSNumber *)[defaults objectForKey:dSkyColor] longValue];
+}
+-(void) setSkyColor: (long)skyColor {
+    
+    [defaults setObject:[NSNumber numberWithLong:skyColor] forKey: dSkyColor];
+}
 -(long) starColor {
 
-    return [defaults integerForKey: dStarColor];
+    return [(NSNumber *)[defaults objectForKey:dStarColor] longValue];
 }
 -(void) setStarColor: (long)starColor {
 
-    [defaults setInteger:starColor forKey: dStarColor];
+    [defaults setObject:[NSNumber numberWithLong:starColor] forKey: dStarColor];
 }
 -(int) starSpeed {
 
@@ -246,11 +258,11 @@
 }
 -(long) shadeColor {
 
-    return [defaults integerForKey: dShadeColor];
+    return [(NSNumber *)[defaults objectForKey:dShadeColor] longValue];
 }
 -(void) setShadeColor: (long)shadeColor {
 
-    [defaults setInteger:shadeColor forKey: dShadeColor];
+    [defaults setObject:[NSNumber numberWithLong:shadeColor] forKey: dShadeColor];
 }
 -(ccTime) transitionDuration {
 
@@ -299,16 +311,16 @@
 
 -(void) levelUp {
     
-    if([self level] < 1)
-        [self setLevel:[self level] + 0.1];
-    if([self level] > 1)
+    if([self level] < 1.0f)
+        [self setLevel:[self level] + 0.1f];
+    if([self level] > 1.0f)
         [self setLevel:1.0f];
 }
 -(void) levelDown {
     
-    if([self level] > 0)
-        [self setLevel:[self level] - 0.1];
-    if([self level] < 0)
+    if([self level] > 0.0f)
+        [self setLevel:[self level] - 0.1f];
+    if([self level] < 0.0f)
         [self setLevel:0.0f];
 }
 

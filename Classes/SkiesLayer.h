@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
+#import "Resettable.h"
 
 
-@interface SkiesLayer : Layer {
+@interface SkiesLayer : Layer <Resettable> {
 
+    NSMutableArray *skies;
 }
 
 @end

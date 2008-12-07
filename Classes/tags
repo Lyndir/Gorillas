@@ -13,15 +13,23 @@ audioLevels	AudioQueueObject.h	/^@property (readwrite)			AudioQueueLevelMeterSta
 audioPlayer	AudioController.h	/^@property (nonatomic, retain)	AudioPlayer					*audioPlayer;$/;"	v
 audioPlayerShouldStopImmediately	AudioPlayer.h	/^@property (readwrite) BOOL							audioPlayerShouldStopImmediately;$/;"	v
 bufferByteSize	AudioPlayer.h	/^@property (readwrite) UInt32						bufferByteSize;$/;"	v
+buildingAmount	CityTheme.h	/^@property (readonly) int                buildingAmount;$/;"	v
 buildingAmount	GorillasConfig.h	/^@property (readwrite) int                   buildingAmount;$/;"	v
+buildingColors	CityTheme.h	/^@property (readonly, assign) NSArray    *buildingColors;$/;"	v
 buildingColors	GorillasConfig.h	/^@property (readwrite, assign) NSArray       *buildingColors;$/;"	v
+buildingMax	CityTheme.h	/^@property (readonly) float              buildingMax;$/;"	v
 buildingMax	GorillasConfig.h	/^@property (readwrite) float                 buildingMax;$/;"	v
 buildingSpeed	GorillasConfig.h	/^@property (readwrite) int                   buildingSpeed;$/;"	v
 buildingWidth	GorillasConfig.h	/^@property (readonly) float                  buildingWidth;$/;"	v
 buildings	GameLayer.h	/^@property (readonly) BuildingsLayer *buildings;$/;"	v
+cityTheme	GorillasConfig.h	/^@property (readwrite, assign) NSString      *cityTheme;$/;"	v
 clearedGorilla	BananaLayer.h	/^@property (readwrite) BOOL clearedGorilla;$/;"	v
 configLayer	GorillasAppDelegate.h	/^@property (readonly) ConfigurationLayer *configLayer;$/;"	v
+contentSize	BuildingLayer.h	/^@property (readonly) CGSize contentSize;$/;"	v
+contentSize	SkyLayer.h	/^@property (readonly) CGSize contentSize;$/;"	v
+defaultThemeName	CityTheme.h	/^+(NSString *)                           defaultThemeName;$/;"	v
 donePlayingFile	AudioPlayer.h	/^@property (readwrite) BOOL							donePlayingFile;$/;"	v
+fixedFloors	CityTheme.h	/^@property (readonly) int                fixedFloors;$/;"	v
 fixedFloors	GorillasConfig.h	/^@property (readwrite) int                   fixedFloors;$/;"	v
 fontName	GorillasConfig.h	/^@property (readwrite, assign) NSString      *fontName;$/;"	v
 fontSize	GorillasConfig.h	/^@property (readwrite) int                   fontSize;$/;"	v
@@ -30,11 +38,10 @@ gameLayer	GorillasAppDelegate.h	/^@property (readonly) GameLayer *gameLayer;$/;"
 get	ExplosionAnimationLayer.h	/^+(ExplosionAnimationLayer *) get;$/;"	v
 get	GorillasAppDelegate.h	/^+(GorillasAppDelegate *) get;$/;"	v
 get	GorillasConfig.h	/^+(GorillasConfig *)                         get;$/;"	v
+getThemes	CityTheme.h	/^+(NSDictionary *)                       getThemes;$/;"	v
+gravity	CityTheme.h	/^@property (readonly) int                gravity;$/;"	v
 gravity	GorillasConfig.h	/^@property (readwrite) int                   gravity;$/;"	v
-height	BananaLayer.h	/^@property (readonly) float height;$/;"	v
-height	BuildingLayer.h	/^@property (readonly) float height;$/;"	v
 height	ExplosionLayer.h	/^@property (readonly) float height;$/;"	v
-height	GorillaLayer.h	/^@property (readonly) float height;$/;"	v
 hudLayer	GorillasAppDelegate.h	/^@property (readonly) HUDLayer *hudLayer;$/;"	v
 human	GorillaLayer.h	/^@property (readwrite, assign) BOOL human;$/;"	v
 interruptedOnPlayback	AudioController.h	/^@property (readwrite)			BOOL						interruptedOnPlayback;$/;"	v
@@ -56,19 +63,23 @@ running	GameLayer.h	/^@property (readonly) BOOL running;$/;"	v
 shadeColor	GorillasConfig.h	/^@property (readwrite) long                  shadeColor;$/;"	v
 showing	ShadeLayer.h	/^@property (readonly) BOOL showing;$/;"	v
 singlePlayer	GameLayer.h	/^@property (readonly) BOOL singlePlayer;$/;"	v
+skyColor	CityTheme.h	/^@property (readonly) long               skyColor;$/;"	v
+skyColor	GorillasConfig.h	/^@property (readwrite) long                  skyColor;$/;"	v
 soundFileURL	AudioController.h	/^@property (nonatomic, retain)	NSURL						*soundFileURL;$/;"	v
+starAmount	CityTheme.h	/^@property (readonly) int                starAmount;$/;"	v
 starAmount	GorillasConfig.h	/^@property (readwrite) int                   starAmount;$/;"	v
+starColor	CityTheme.h	/^@property (readonly) long               starColor;$/;"	v
 starColor	GorillasConfig.h	/^@property (readwrite) long                  starColor;$/;"	v
 starSpeed	GorillasConfig.h	/^@property (readwrite) int                   starSpeed;$/;"	v
 startingPacketNumber	AudioQueueObject.h	/^@property (readwrite)			SInt64						startingPacketNumber;$/;"	v
 statsLayer	GorillasAppDelegate.h	/^@property (readonly) StatisticsLayer *statsLayer;$/;"	v
 transitionDuration	GorillasConfig.h	/^@property (readwrite) ccTime                transitionDuration;$/;"	v
-width	BananaLayer.h	/^@property (readonly) float width;$/;"	v
-width	BuildingLayer.h	/^@property (readonly) float width;$/;"	v
 width	ExplosionLayer.h	/^@property (readonly) float width;$/;"	v
-width	GorillaLayer.h	/^@property (readonly) float width;$/;"	v
+windowAmount	CityTheme.h	/^@property (readonly) int                windowAmount;$/;"	v
 windowAmount	GorillasConfig.h	/^@property (readwrite) int                   windowAmount;$/;"	v
+windowColorOff	CityTheme.h	/^@property (readonly) long               windowColorOff;$/;"	v
 windowColorOff	GorillasConfig.h	/^@property (readwrite) long                  windowColorOff;$/;"	v
+windowColorOn	CityTheme.h	/^@property (readonly) long               windowColorOn;$/;"	v
 windowColorOn	GorillasConfig.h	/^@property (readwrite) long                  windowColorOn;$/;"	v
 windowHeight	GorillasConfig.h	/^@property (readonly) float                  windowHeight;$/;"	v
 windowPadding	GorillasConfig.h	/^@property (readonly) float                  windowPadding;$/;"	v

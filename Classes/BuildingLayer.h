@@ -8,11 +8,11 @@
 
 
 #import <UIKit/UIKit.h>
-#import "ResettableLayer.h"
+#import "Resettable.h"
 #import "GorillasConfig.h"
 
 
-@interface BuildingLayer : ResettableLayer <CocosNodeSize> {
+@interface BuildingLayer : Layer <CocosNodeSize, Resettable> {
     
     @private
     long buildingColor;

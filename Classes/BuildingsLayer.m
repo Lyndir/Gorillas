@@ -43,6 +43,26 @@
     [banana setVisible:false];
     [self add:banana z:2];
     
+    [self reset];
+
+    [self startPanning];
+    
+    return self;
+}
+
+
+-(void) reset {
+    
+    BOOL wasPanning = panAction != nil;
+    [self stopAction:panAction];
+    [panAction release];
+    panAction = nil;
+    
+    for (BuildingLayer *building in buildings)
+        [self remove:building];
+    [buildings removeAllObjects];
+    
+    [self setPosition:cpv(0, 0)];
     for (int i = 0; i < [[GorillasConfig get] buildingAmount] + 2; ++i) {
         float x = i * ([[GorillasConfig get] buildingWidth] + 1) - [[GorillasConfig get] buildingWidth];
         
@@ -52,10 +72,9 @@
         [building setPosition: cpv(x, 0)];
         [self add: building z:1];
     }
-
-    [self startPanning];
     
-    return self;
+    if(wasPanning)
+        [self startPanning];
 }
 
 
@@ -403,8 +422,6 @@
                         nil]];
     }
     
-    [gorillas removeAllObjects];
-    
     [banana stopAllActions];
     [banana setVisible:false];
 }
@@ -416,7 +433,12 @@
         return;
     
     for(GorillaLayer *gorilla in gorillas)
-        [self removeGorilla:gorilla];
+        [self remove:gorilla];
+    for(ExplosionLayer *explosion in explosions)
+        [self remove:explosion];
+    
+    [gorillas removeAllObjects];
+    [explosions removeAllObjects];
     
     [self startPanning];
     
@@ -456,12 +478,9 @@
     
     ExplosionLayer *explosion = [ExplosionLayer node];
     [explosions addObject:explosion];
-    
+
     [explosion setPosition:point];
-    [explosion setOpacity:0x00];
-    
     [self add:explosion];
-    [explosion do:[FadeIn actionWithDuration:0.3f]];
 }
 
 

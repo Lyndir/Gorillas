@@ -8,7 +8,6 @@
 
 
 #import "GameLayer.h"
-#import "SkiesLayer.h"
 #import "MainMenuLayer.h"
 #import "GorillasAppDelegate.h"
 
@@ -28,13 +27,20 @@
     running = false;
     paused = true;
     
-    SkiesLayer *skies = [SkiesLayer node];
+    skies = [SkiesLayer node];
     [self add:skies];
     
     buildings = [BuildingsLayer node];
     [self add:buildings];
     
 	return self;
+}
+
+
+-(void) reset {
+
+    [skies reset];
+    [buildings reset];
 }
 
 
@@ -143,9 +149,8 @@
 -(void) started {
     
     running = true;
-    singlePlayer = false;
-    
     paused = false;
+    
     [self unpause];
 }
 

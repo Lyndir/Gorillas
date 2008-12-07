@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ResettableLayer.h"
+#import "Resettable.h"
 #import "GorillasConfig.h"
 
 
-@interface SkyLayer : ResettableLayer <CocosNodeSize> {
+@interface SkyLayer : Layer <CocosNodeSize, Resettable> {
 
     CGSize contentSize;
     

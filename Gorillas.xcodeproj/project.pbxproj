@@ -20,7 +20,6 @@
 		DA34FD100EB4851E00B68C06 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
 		DA34FD7D0EB49F4000B68C06 /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */; };
 		DA34FD800EB49FFB00B68C06 /* SkyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* SkyLayer.m */; };
-		DA34FDFF0EB4ABE900B68C06 /* ResettableLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FDFE0EB4ABE900B68C06 /* ResettableLayer.m */; };
 		DA34FE1C0EB4AE5400B68C06 /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
 		DA34FF6C0EB4E48E00B68C06 /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
 		DA34FFAA0EB4EEF300B68C06 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
@@ -109,6 +108,7 @@
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA126C8D0EDDF19100EADDE2 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		DA126C8E0EDDF19100EADDE2 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
+		DA16C3250EEBDE7900E46246 /* Resettable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resettable.h; sourceTree = "<group>"; };
 		DA2282FE0EE204AF00BA53D2 /* ExplosionAnimationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplosionAnimationLayer.h; sourceTree = "<group>"; };
 		DA2282FF0EE204AF00BA53D2 /* ExplosionAnimationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExplosionAnimationLayer.m; sourceTree = "<group>"; };
 		DA2283090EE2CAC600BA53D2 /* hole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hole.png; sourceTree = "<group>"; };
@@ -122,8 +122,6 @@
 		DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingsLayer.m; sourceTree = "<group>"; };
 		DA34FD7E0EB49FFB00B68C06 /* SkyLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkyLayer.h; sourceTree = "<group>"; };
 		DA34FD7F0EB49FFB00B68C06 /* SkyLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkyLayer.m; sourceTree = "<group>"; };
-		DA34FDFD0EB4ABE900B68C06 /* ResettableLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResettableLayer.h; sourceTree = "<group>"; };
-		DA34FDFE0EB4ABE900B68C06 /* ResettableLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResettableLayer.m; sourceTree = "<group>"; };
 		DA34FE1A0EB4AE5400B68C06 /* SkiesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkiesLayer.h; sourceTree = "<group>"; };
 		DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkiesLayer.m; sourceTree = "<group>"; };
 		DA34FF6A0EB4E48E00B68C06 /* ShadeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadeLayer.h; sourceTree = "<group>"; };
@@ -586,12 +584,11 @@
 				DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */,
 				DA34FFA80EB4EEF300B68C06 /* MainMenuLayer.h */,
 				DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */,
+				DA16C3250EEBDE7900E46246 /* Resettable.h */,
 				DA34006B0EB516D800B68C06 /* StatisticsLayer.h */,
 				DA34006C0EB516D800B68C06 /* StatisticsLayer.m */,
 				DA34006E0EB516F400B68C06 /* ConfigurationLayer.h */,
 				DA34006F0EB516F400B68C06 /* ConfigurationLayer.m */,
-				DA34FDFD0EB4ABE900B68C06 /* ResettableLayer.h */,
-				DA34FDFE0EB4ABE900B68C06 /* ResettableLayer.m */,
 				DAB46AA70EC85E7400F17B3F /* HUDLayer.h */,
 				DAB46AA80EC85E7400F17B3F /* HUDLayer.m */,
 			);
@@ -676,7 +673,6 @@
 				DA34FD100EB4851E00B68C06 /* PanAction.m in Sources */,
 				DA34FD7D0EB49F4000B68C06 /* BuildingsLayer.m in Sources */,
 				DA34FD800EB49FFB00B68C06 /* SkyLayer.m in Sources */,
-				DA34FDFF0EB4ABE900B68C06 /* ResettableLayer.m in Sources */,
 				DA34FE1C0EB4AE5400B68C06 /* SkiesLayer.m in Sources */,
 				DA34FF6C0EB4E48E00B68C06 /* ShadeLayer.m in Sources */,
 				DA34FFAA0EB4EEF300B68C06 /* MainMenuLayer.m in Sources */,

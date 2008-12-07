@@ -10,15 +10,18 @@
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
 #import "GorillasConfig.h"
+#import "SkiesLayer.h"
 #import "BuildingsLayer.h"
 
 
-@interface GameLayer : Layer {
+@interface GameLayer : Layer <Resettable> {
 
     @private
     BOOL paused;
     BOOL running;
     BOOL singlePlayer;
+
+    SkiesLayer *skies;
     BuildingsLayer *buildings;
     Label *msgLabel;
 }

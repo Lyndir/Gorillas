@@ -30,10 +30,10 @@
     BOOL readd = false;
     
     if(menu) {
+        readd = [menu parent] != nil;
         [self remove:menu];
         [menu release];
         menu = nil;
-        readd = true;
     }
     
     MenuItem *theme     = [MenuItemFont itemFromString:
@@ -52,6 +52,9 @@
                                                 target: self
                                               selector: @selector(mainMenu:)];
     
+    if([[[GorillasAppDelegate get] gameLayer] running])
+        [theme setIsEnabled:false];
+    
     menu = [[Menu menuWithItems:theme, level, gravity, back, nil] retain];
     
     if(readd)
@@ -62,6 +65,8 @@
 -(void) reveal {
     
     [super reveal];
+    
+    [self reset];
     
     [menu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
     [self add:menu];
@@ -111,6 +116,7 @@
     [[[CityTheme getThemes] objectForKey:newTheme] apply];
     [[GorillasConfig get] setCityTheme:newTheme];
     
+    [[[GorillasAppDelegate get] gameLayer] reset];
     [self reset];
 }
 

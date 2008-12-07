@@ -20,6 +20,7 @@
     long    windowColorOn;
     long    windowColorOff;
     
+    long    skyColor;
     long    starColor;
     int     starAmount;
     
@@ -35,6 +36,7 @@
 @property (readonly) long               windowColorOn;
 @property (readonly) long               windowColorOff;
 
+@property (readonly) long               skyColor;
 @property (readonly) long               starColor;
 @property (readonly) int                starAmount;
 

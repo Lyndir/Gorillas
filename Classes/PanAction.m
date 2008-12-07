@@ -38,7 +38,7 @@
     [super update: dt];
     
     if ([self isDone]) {
-        ResettableLayer *firstNode = [subNodes objectAtIndex:0];
+        CocosNode<Resettable> *firstNode = [subNodes objectAtIndex:0];
         CocosNode<CocosNodeSize> *lastNode = [subNodes lastObject];
         
         float x = [lastNode position].x + [lastNode contentSize].width + padding;

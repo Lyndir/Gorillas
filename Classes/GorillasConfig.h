@@ -37,6 +37,7 @@
 @property (readwrite) long                  windowColorOn;
 @property (readwrite) long                  windowColorOff;
 
+@property (readwrite) long                  skyColor;
 @property (readwrite) long                  starColor;
 @property (readwrite) int                   starSpeed;
 @property (readwrite) int                   starAmount;
