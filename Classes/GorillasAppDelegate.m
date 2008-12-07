@@ -48,7 +48,7 @@
     [self showMainMenu];
     
     // Load the HUD.
-    hudLayer = [[HUDLayer node] retain];
+    hudLayer = [[HUDLayer alloc] init];
     [gameLayer add:hudLayer];
 }
 
@@ -84,7 +84,7 @@
 -(void) showMainMenu {
     
     if(!mainMenuLayer) {
-        mainMenuLayer = [MainMenuLayer node];
+        mainMenuLayer = [[MainMenuLayer alloc] init];
         [gameLayer add:mainMenuLayer];
     }    
     
@@ -96,7 +96,7 @@
 -(void) showStatistics {
 
     if(!statsLayer) {
-        statsLayer = [StatisticsLayer node];
+        statsLayer = [[StatisticsLayer alloc] init];
         [gameLayer add:statsLayer];
     }    
     
@@ -107,7 +107,7 @@
 -(void) showConfiguration {
     
     if(!configLayer) {
-        configLayer = [ConfigurationLayer node];
+        configLayer = [[ConfigurationLayer alloc] init];
         [gameLayer add:configLayer];
     }
     
@@ -131,21 +131,22 @@
     
 	[[TextureMgr sharedTextureMgr] removeAllTextures];
     
-    if(currentLayer != mainMenuLayer) {
-        [gameLayer remove:mainMenuLayer];
-        [mainMenuLayer release];
-        mainMenuLayer = nil;
-    }
-    if(currentLayer != statsLayer) {
-        [gameLayer remove:statsLayer];
-        [statsLayer release];
-        statsLayer = nil;
-    }
-    if(currentLayer != configLayer) {
-        [gameLayer remove:configLayer];
-        [configLayer release];
-        configLayer = nil;
-    }
+    if(![currentLayer showing])
+        if(currentLayer == mainMenuLayer) {
+            [gameLayer remove:mainMenuLayer];
+            [mainMenuLayer release];
+            mainMenuLayer = nil;
+        }
+        else if(currentLayer == statsLayer) {
+            [gameLayer remove:statsLayer];
+            [statsLayer release];
+            statsLayer = nil;
+        }
+        else if(currentLayer == configLayer) {
+            [gameLayer remove:configLayer];
+            [configLayer release];
+            configLayer = nil;
+        }
     
     if([audioController audioPlayer])
         [audioController playOrStop];

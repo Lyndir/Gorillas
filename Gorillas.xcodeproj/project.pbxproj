@@ -13,6 +13,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		DA126C8F0EDDF19100EADDE2 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = DA126C8E0EDDF19100EADDE2 /* Utility.m */; };
+		DA16C3560EEC3D2200E46246 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA16C3550EEC3D2200E46246 /* icon.png */; };
 		DA2283000EE204AF00BA53D2 /* ExplosionAnimationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2282FF0EE204AF00BA53D2 /* ExplosionAnimationLayer.m */; };
 		DA22830A0EE2CAC600BA53D2 /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2283090EE2CAC600BA53D2 /* hole.png */; };
 		DA34006D0EB516D800B68C06 /* StatisticsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006C0EB516D800B68C06 /* StatisticsLayer.m */; };
@@ -109,6 +110,7 @@
 		DA126C8D0EDDF19100EADDE2 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		DA126C8E0EDDF19100EADDE2 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		DA16C3250EEBDE7900E46246 /* Resettable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resettable.h; sourceTree = "<group>"; };
+		DA16C3550EEC3D2200E46246 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		DA2282FE0EE204AF00BA53D2 /* ExplosionAnimationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplosionAnimationLayer.h; sourceTree = "<group>"; };
 		DA2282FF0EE204AF00BA53D2 /* ExplosionAnimationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExplosionAnimationLayer.m; sourceTree = "<group>"; };
 		DA2283090EE2CAC600BA53D2 /* hole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hole.png; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DA16C3550EEC3D2200E46246 /* icon.png */,
 				DA5F1BD30EE74CE80041691E /* Images */,
 				DA2283090EE2CAC600BA53D2 /* hole.png */,
 				DAB609A10EDCBA4600FC200F /* explosion0.png */,
@@ -655,6 +658,7 @@
 				DAB609AB0EDCBA4600FC200F /* explosion4.png in Resources */,
 				DA22830A0EE2CAC600BA53D2 /* hole.png in Resources */,
 				DA5F1BD60EE74CE80041691E /* fps_images.png in Resources */,
+				DA16C3560EEC3D2200E46246 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -244,7 +244,7 @@
         ccTime t = 4;
 
         // Level-based error.
-        if(l != 1) {
+        if((int) ((1 - l) * t * 10) > 0) {
             rt = cpv(rt.x + random() % (int) ((1 - l) * 200), rt.y + random() % (int) (200 * (1 - l)));
             t -= (float)   (random() % (int) ((1 - l) * t * 10)) / 10.0f;
         }
