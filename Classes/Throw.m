@@ -34,6 +34,7 @@
     return self;
 }
 
+
 -(void) start {
     
     running = true;
@@ -73,10 +74,16 @@
     
     // If it reached the floor, went off screen, or hit something; stop the banana.
     if([self isDone] || offScreen || hitBuilding) {
+
+        // Update score on miss.
+        if([target visible] && (hitBuilding || offScreen))
+            [[[[GorillasAppDelegate get] gameLayer] buildings] miss];
+        
+        // Hide banana.
         [target stopAction:self];
         [target setVisible:false];
         [self stop];
-
+                
         // Next Gorilla's turn.
         [buildingsLayer nextGorilla];
     }

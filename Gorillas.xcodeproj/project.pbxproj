@@ -14,6 +14,7 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		DA126C8F0EDDF19100EADDE2 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = DA126C8E0EDDF19100EADDE2 /* Utility.m */; };
 		DA16C3560EEC3D2200E46246 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA16C3550EEC3D2200E46246 /* icon.png */; };
+		DA16C5190EEC856200E46246 /* ShadeTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DA16C5180EEC856200E46246 /* ShadeTo.m */; };
 		DA2283000EE204AF00BA53D2 /* ExplosionAnimationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2282FF0EE204AF00BA53D2 /* ExplosionAnimationLayer.m */; };
 		DA22830A0EE2CAC600BA53D2 /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2283090EE2CAC600BA53D2 /* hole.png */; };
 		DA34006D0EB516D800B68C06 /* StatisticsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006C0EB516D800B68C06 /* StatisticsLayer.m */; };
@@ -111,6 +112,8 @@
 		DA126C8E0EDDF19100EADDE2 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		DA16C3250EEBDE7900E46246 /* Resettable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resettable.h; sourceTree = "<group>"; };
 		DA16C3550EEC3D2200E46246 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		DA16C5170EEC855900E46246 /* ShadeTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadeTo.h; sourceTree = "<group>"; };
+		DA16C5180EEC856200E46246 /* ShadeTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadeTo.m; sourceTree = "<group>"; };
 		DA2282FE0EE204AF00BA53D2 /* ExplosionAnimationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplosionAnimationLayer.h; sourceTree = "<group>"; };
 		DA2282FF0EE204AF00BA53D2 /* ExplosionAnimationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExplosionAnimationLayer.m; sourceTree = "<group>"; };
 		DA2283090EE2CAC600BA53D2 /* hole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hole.png; sourceTree = "<group>"; };
@@ -379,6 +382,8 @@
 			children = (
 				DA34FD0E0EB4851D00B68C06 /* PanAction.h */,
 				DA34FD0F0EB4851D00B68C06 /* PanAction.m */,
+				DA16C5170EEC855900E46246 /* ShadeTo.h */,
+				DA16C5180EEC856200E46246 /* ShadeTo.m */,
 				DAFEF9710ED847D40019F7E5 /* Throw.h */,
 				DAFEF9720ED847D40019F7E5 /* Throw.m */,
 			);
@@ -735,6 +740,7 @@
 				DA126C8F0EDDF19100EADDE2 /* Utility.m in Sources */,
 				DA2283000EE204AF00BA53D2 /* ExplosionAnimationLayer.m in Sources */,
 				DACFEC210EE96AA300A0D08E /* CityTheme.m in Sources */,
+				DA16C5190EEC856200E46246 /* ShadeTo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -804,6 +810,36 @@
 			};
 			name = Release;
 		};
+		DA16C3750EEC575C00E46246 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos2.1;
+				VALID_ARCHS = armv6;
+			};
+			name = Distribution;
+		};
+		DA16C3760EEC575C00E46246 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../cocos2d-iphone-0.5.1/build/Debug-iphonesimulator\"",
+				);
+				PRODUCT_NAME = Gorillas;
+			};
+			name = Distribution;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -812,6 +848,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				DA16C3760EEC575C00E46246 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -821,6 +858,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				DA16C3750EEC575C00E46246 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

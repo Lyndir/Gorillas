@@ -51,6 +51,11 @@
 @property (readwrite, assign) NSArray       *levelNames;
 @property (readonly) int                    levelNameCount;
 
+@property (readwrite) int                   score;
+@property (readwrite) int                   missScore;
+@property (readwrite) int                   killScore;
+@property (readwrite) int                   deathScore;
+
 -(long)                                     buildingColor;
 
 -(void)                                     levelUp;

@@ -39,6 +39,11 @@
 #define dLevelNameCount     @"levelNameCount"
 #define dLevelNames         @"levelNames"
 
+#define dScore              @"score"
+#define dMissScore          @"missScore"
+#define dKillScore          @"killScore"
+#define dDeathScore         @"deathScore"
+
 
 @implementation GorillasConfig
 
@@ -66,33 +71,39 @@
     CityTheme *theme = [themes objectForKey:defaultThemeName];
     
     [defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-     [CityTheme defaultThemeName],                          dCityTheme,
-     [NSNumber numberWithInteger:    30],                   dFontSize,
-     @"Arial Rounded MT Bold",                              dFontName,
+                                [CityTheme defaultThemeName],                               dCityTheme,
+                                [NSNumber numberWithInteger:    30],                        dFontSize,
+                                @"Georgia",                                   dFontName,
      
-     [NSNumber numberWithInteger: [theme fixedFloors]],     dFixedFloors,
-     [NSNumber numberWithFloat: [theme buildingMax]],       dBuildingMax,
-     [NSNumber numberWithInteger: [theme buildingAmount]],  dBuildingAmount,
-     [NSNumber numberWithInteger:    1],                    dBuildingSpeed,
-     [theme buildingColors],                                dBuildingColors,
+                                [NSNumber numberWithInteger:    [theme fixedFloors]],       dFixedFloors,
+                                [NSNumber numberWithFloat:      [theme buildingMax]],       dBuildingMax,
+                                [NSNumber numberWithInteger:    [theme buildingAmount]],    dBuildingAmount,
+                                [NSNumber numberWithInteger:    1],                         dBuildingSpeed,
+                                [theme buildingColors],                                     dBuildingColors,
      
-     [NSNumber numberWithInteger: [theme windowAmount]],    dWindowAmount,
-     [NSNumber numberWithLong: [theme windowColorOn]],      dWindowColorOn,
-     [NSNumber numberWithLong: [theme windowColorOff]],     dWindowColorOff,
+                                [NSNumber numberWithInteger:    [theme windowAmount]],      dWindowAmount,
+                                [NSNumber numberWithLong:       [theme windowColorOn]],     dWindowColorOn,
+                                [NSNumber numberWithLong:       [theme windowColorOff]],    dWindowColorOff,
      
-     [NSNumber numberWithLong: [theme skyColor]],           dSkyColor,
-     [NSNumber numberWithLong: [theme starColor]],          dStarColor,
-     [NSNumber numberWithInteger:    30],                   dStarSpeed,
-     [NSNumber numberWithInteger: [theme starAmount]],      dStarAmount,
+                                [NSNumber numberWithLong:       [theme skyColor]],          dSkyColor,
+                                [NSNumber numberWithLong:       [theme starColor]],         dStarColor,
+                                [NSNumber numberWithInteger:    30],                        dStarSpeed,
+                                [NSNumber numberWithInteger:    [theme starAmount]],        dStarAmount,
+                                
+                                [NSNumber numberWithInteger:    [theme gravity]],           dGravity,
+                                [NSNumber numberWithLong:       0x000000cc],                dShadeColor,
+                                [NSNumber numberWithFloat:      0.5f],                      dTransitionDuration,
      
-     [NSNumber numberWithInteger: [theme gravity]],         dGravity,
-     [NSNumber numberWithLong:       0x000000cc],           dShadeColor,
-     [NSNumber numberWithFloat:      0.5f],                 dTransitionDuration,
-     
-     [NSNumber numberWithFloat:      0.1f],                 dLevel,
-     [NSNumber numberWithInteger:    8],                    dLevelNameCount,
-     [levelNames retain],                                   dLevelNames,
-     nil]];
+                                [NSNumber numberWithFloat:      0.1f],                      dLevel,
+                                [NSNumber numberWithInteger:    8],                         dLevelNameCount,
+                                [levelNames retain],                                        dLevelNames,
+                                
+                                [NSNumber numberWithInteger:    0],                         dScore,
+                                [NSNumber numberWithInteger:    -5],                        dMissScore,
+                                [NSNumber numberWithInteger:    50],                        dKillScore,
+                                [NSNumber numberWithInteger:    -20],                       dDeathScore,
+                                
+                                nil]];
 
     return self;
 }
@@ -280,6 +291,11 @@
 }
 -(void) setLevel: (float)level {
 
+    if(level < 0.0f)
+        level = 0.0f;
+    if(level > 1.0f)
+        level = 1.0f;
+    
     [defaults setFloat:level forKey: dLevel];
 }
 -(NSString *) levelName {
@@ -309,19 +325,50 @@
 }
 
 
+-(int) score {
+    
+    return [defaults integerForKey: dScore];
+}
+-(void) setScore: (int)nScore {
+    
+    if(nScore < 0)
+        nScore = 0;
+    
+    [defaults setInteger:nScore forKey: dScore];
+}
+-(int) missScore {
+    
+    return [defaults integerForKey: dMissScore];
+}
+-(void) setMissScore: (int)nMissScore {
+    
+    [defaults setInteger:nMissScore forKey: dMissScore];
+}
+-(int) killScore {
+    
+    return [defaults integerForKey: dKillScore];
+}
+-(void) setKillScore: (int)nKillScore {
+    
+    [defaults setInteger:nKillScore forKey: dKillScore];
+}
+-(int) deathScore {
+    
+    return [defaults integerForKey: dDeathScore];
+}
+-(void) setDeathScore: (int)nDeathScore {
+    
+    [defaults setInteger:nDeathScore forKey: dDeathScore];
+}
+
+
 -(void) levelUp {
     
-    if([self level] < 1.0f)
-        [self setLevel:[self level] + 0.1f];
-    if([self level] > 1.0f)
-        [self setLevel:1.0f];
+    [self setLevel:[self level] + 0.1f];
 }
 -(void) levelDown {
     
-    if([self level] > 0.0f)
-        [self setLevel:[self level] - 0.1f];
-    if([self level] < 0.0f)
-        [self setLevel:0.0f];
+    [self setLevel:[self level] - 0.1f];
 }
 
 

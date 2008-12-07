@@ -15,6 +15,8 @@
     @private
     MenuItemFont *menuButton;
     Menu *menuMenu;
+    Label *scoreLabel;
+    
     BOOL revealed;
 
     float width;
@@ -25,6 +27,7 @@
 -(void) dismiss;
 
 -(void) setMenuTitle: (NSString *)title;
+-(void) updateScore;
 
 -(BOOL) hitsHud: (cpVect)pos;
 

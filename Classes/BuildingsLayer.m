@@ -62,6 +62,7 @@
         [self remove:building];
     [buildings removeAllObjects];
     
+    [self stopAllActions];
     [self setPosition:cpv(0, 0)];
     for (int i = 0; i < [[GorillasConfig get] buildingAmount] + 2; ++i) {
         float x = i * ([[GorillasConfig get] buildingWidth] + 1) - [[GorillasConfig get] buildingWidth];
@@ -75,6 +76,41 @@
     
     if(wasPanning)
         [self startPanning];
+}
+
+
+-(void) message: (NSString *)msg for: (CocosNode<CocosNodeSize> *)node {
+    
+    if(msgLabel) {
+        [msgLabel stopAllActions];
+        [self endMessage:self];
+    }
+    
+    msgLabel = [[Label labelWithString:msg dimensions:CGSizeMake(1000, [[GorillasConfig get] fontSize] + 5) alignment:UITextAlignmentCenter fontName:@"Marker Felt" fontSize: [[GorillasConfig get] fontSize]] retain];
+    [msgLabel setPosition:cpv([node position].x,
+                              [node position].y + [node contentSize].height)];
+    if([msg hasPrefix:@"+"])
+        [msgLabel setRGB:0x66 :0xCC :0x66];
+    else if([msg hasPrefix:@"-"])
+        [msgLabel setRGB:0xCC :0x66 :0x66];
+    else
+        [msgLabel setRGB:0xFF :0xFF :0xFF];
+    [msgLabel do:[Sequence actions:
+                  [DelayTime actionWithDuration:1],
+                  [MoveBy actionWithDuration:2 position:cpv(0, 50)],
+                  [CallFunc actionWithTarget:self selector:@selector(endMessage:)],
+                  nil]];
+    [msgLabel do:[FadeOut actionWithDuration:3]];
+    
+    [self add:msgLabel z:1];
+}
+
+
+-(void) endMessage: (id) sender {
+    
+    [self remove:msgLabel];
+    [msgLabel release];
+    msgLabel = nil;
 }
 
 
@@ -264,6 +300,21 @@
 }
 
 
+-(void) miss {
+    
+    if(!([[[GorillasAppDelegate get] gameLayer] singlePlayer] && [activeGorilla human]))
+        return;
+    
+    int score = [[GorillasConfig get] level] * [[GorillasConfig get] missScore];
+    
+    [[GorillasConfig get] setScore:[[GorillasConfig get] score] + score];
+    [[[GorillasAppDelegate get] hudLayer] updateScore];
+
+    if(score)
+        [self message:[NSString stringWithFormat:@"%+d", score] for:banana];
+}
+
+
 -(BOOL) hitsBuilding: (cpVect)pos {
 
 #ifdef _DEBUG_
@@ -302,11 +353,31 @@
                         
                         NSString *oldLevel = [[GorillasConfig get] levelName];
                         if([liveGorilla human]) {
+                            
+                            // Increase difficulty level & update score.
+                            int score = [[GorillasConfig get] level] * [[GorillasConfig get] killScore];
+                            
+                            [[GorillasConfig get] setScore:[[GorillasConfig get] score] + score];
+                            [[[GorillasAppDelegate get] hudLayer] updateScore];
+                            if(score)
+                                [self message:[NSString stringWithFormat:@"%+d", score] for:hitGorilla];
                             [[GorillasConfig get] levelUp];
+
+                            // Message in case we level up.
                             if(oldLevel != [[GorillasConfig get] levelName])
                                 [[[GorillasAppDelegate get] gameLayer] message:@"Level Up!"];
                         } else {
+
+                            // Decrease difficulty level & update score.
+                            int score = [[GorillasConfig get] level] * [[GorillasConfig get] deathScore];
+                            
+                            [[GorillasConfig get] setScore:[[GorillasConfig get] score] + score];
+                            [[[GorillasAppDelegate get] hudLayer] updateScore];
+                            if(score)
+                                [self message:[NSString stringWithFormat:@"%+d", score] for:hitGorilla];
                             [[GorillasConfig get] levelDown];
+                            
+                            // Message in case we level down.
                             if(oldLevel != [[GorillasConfig get] levelName])
                                 [[[GorillasAppDelegate get] gameLayer] message:@"Level Down."];
                         }
@@ -364,6 +435,8 @@
 -(void) startGameWithGorilla: (GorillaLayer *)gorillaA andGorilla: (GorillaLayer *)gorillaB {
     
     [[[GorillasAppDelegate get] hudLayer] setMenuTitle: @"Menu"];
+    [self stopPanning];
+    [self reset];
 
     [gorillas addObject:[gorillaA retain]];
     [gorillas addObject:[gorillaB retain]];
@@ -388,7 +461,6 @@
     [self add:gorillaA z:3];
     [self add:gorillaB z:3];
     
-    [self stopPanning];
     [gorillaA do:[FadeIn actionWithDuration:1]];
     [gorillaB do:[FadeIn actionWithDuration:1]];
     /*[self do:[Sequence actions:[DelayTime actionWithDuration:1],

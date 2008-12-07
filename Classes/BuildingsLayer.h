@@ -16,8 +16,8 @@
 
 @interface BuildingsLayer : Layer <Resettable> {
 
-    @private
     PanAction *panAction;
+    Label *msgLabel;
     
     NSMutableArray *gorillas;
     NSMutableArray *buildings;
@@ -54,10 +54,14 @@
 -(BOOL) mayThrow;
 -(void) throwFrom: (cpVect) r0 withVelocity: (cpVect) v;
 
+-(void) miss;
 -(BOOL) hitsBuilding: (cpVect)pos;
 -(void) explodeAt: (cpVect)point;
 
 -(void) nextGorilla;
 -(void) removeGorilla: (GorillaLayer *)gorilla;
+
+-(void) message: (NSString *)msg for: (CocosNode<CocosNodeSize> *)node;
+-(void) endMessage: (id) sender;
 
 @end

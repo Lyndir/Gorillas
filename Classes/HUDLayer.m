@@ -10,6 +10,7 @@
 #import "GorillasAppDelegate.h"
 #import "GorillasConfig.h"
 #import "Utility.h"
+#import "ShadeTo.h"
 
 
 @implementation HUDLayer
@@ -29,7 +30,22 @@
     menuMenu = [[Menu menuWithItems:menuButton, nil] retain];
     [menuMenu setPosition:cpv([menuMenu position].x, 0)];
     
+    // Score.
+    scoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%05d", [[GorillasConfig get] score]] dimensions:CGSizeMake(100, [[GorillasConfig get] fontSize] + 5) alignment:UITextAlignmentRight fontName:[[GorillasConfig get] fontName] fontSize:[[GorillasConfig get] fontSize]];
+    [self add:scoreLabel];
+    
+    CGSize winSize = [[Director sharedDirector] winSize].size;
+    [scoreLabel setPosition:cpv(winSize.width - [scoreLabel contentSize].width / 2, [scoreLabel contentSize].height / 2)];
+    
     return self;
+}
+
+
+-(void) updateScore {
+    
+    [scoreLabel setString:[NSString stringWithFormat:@"%05d", [[GorillasConfig get] score]]];
+    [scoreLabel do:[ShadeTo actionWithColor:0xFF0000FF duration:1]];
+    //[scoreLabel do:[Sequence actions:[ShadeTo actionWithColor:0xFF0000FF duration:1], nil]];
 }
 
 

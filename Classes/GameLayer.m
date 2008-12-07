@@ -27,13 +27,14 @@
     running = false;
     paused = true;
     
-    skies = [SkiesLayer node];
+    // Sky and buildings.
+    skies = [[SkiesLayer alloc] init];
     [self add:skies];
     
-    buildings = [BuildingsLayer node];
+    buildings = [[BuildingsLayer alloc] init];
     [self add:buildings];
     
-	return self;
+    return self;
 }
 
 
