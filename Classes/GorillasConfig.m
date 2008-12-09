@@ -1,3 +1,21 @@
+/*
+ * This file is part of Gorillas.
+ *
+ *  Gorillas is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Gorillas is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Gorillas in the file named 'COPYING'.
+ *  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 //
 //  GorillasConfig.m
 //  Gorillas
@@ -42,7 +60,7 @@
 #define dScore              @"score"
 #define dMissScore          @"missScore"
 #define dKillScore          @"killScore"
-#define dDeathScore         @"deathScore"
+#define dDeathScoreRatio    @"deathScoreRatio"
 
 
 @implementation GorillasConfig
@@ -101,7 +119,7 @@
                                 [NSNumber numberWithInteger:    0],                         dScore,
                                 [NSNumber numberWithInteger:    -5],                        dMissScore,
                                 [NSNumber numberWithInteger:    50],                        dKillScore,
-                                [NSNumber numberWithInteger:    -20],                       dDeathScore,
+                                [NSNumber numberWithInteger:    4],                         dDeathScoreRatio,
                                 
                                 nil]];
 
@@ -352,13 +370,23 @@
     
     [defaults setInteger:nKillScore forKey: dKillScore];
 }
+-(int) deathScoreRatio {
+    
+    return [defaults integerForKey: dDeathScoreRatio];
+}
+-(void) setDeathScoreRatio: (int)nDeathScoreRatio {
+    
+    [defaults setInteger:nDeathScoreRatio forKey: dDeathScoreRatio];
+}
 -(int) deathScore {
     
-    return [defaults integerForKey: dDeathScore];
-}
--(void) setDeathScore: (int)nDeathScore {
+    // Some info on Death Score Ratios:
+    // Death score balances with kill score when player makes [deathScoreRatio] amount of misses.
+    // More misses -> score goes down faster.
+    // Less misses -> score goes down slower.
+    // As a result, when player A dies equally often as player B but misses less, his score will be higher.
     
-    [defaults setInteger:nDeathScore forKey: dDeathScore];
+    return -1 * ([self killScore] + [self deathScoreRatio] * [self missScore]);
 }
 
 
