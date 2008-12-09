@@ -21,7 +21,7 @@
 //  Gorillas
 //
 //  Created by Maarten Billemont on 19/10/08.
-//  Copyright Lin.k 2008. All rights reserved.
+//  Copyright, lhunath (Maarten Billemont) 2008. All rights reserved.
 //
 
 
