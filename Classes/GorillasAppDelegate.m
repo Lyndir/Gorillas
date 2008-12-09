@@ -48,7 +48,7 @@
 
 	// Director and OpenGL Setup.
     [Director setPixelFormat:RGBA8];
-	[[Director sharedDirector] setDisplayFPS:true];
+	//[[Director sharedDirector] setDisplayFPS:true];
 	[[Director sharedDirector] setDepthTest:false];
 	[[Director sharedDirector] setLandscape:true];
 	//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);

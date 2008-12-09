@@ -50,6 +50,8 @@
 #define dStarAmount         @"starAmount"
 
 #define dGravity            @"gravity"
+#define dMinGravity         @"minGravity"
+#define dMaxGravity         @"maxGravity"
 #define dShadeColor         @"shadeColor"
 #define dTransitionDuration @"transitionDuration"
 
@@ -109,6 +111,8 @@
                                 [NSNumber numberWithInteger:    [theme starAmount]],        dStarAmount,
                                 
                                 [NSNumber numberWithInteger:    [theme gravity]],           dGravity,
+                                [NSNumber numberWithInteger:    30],                        dMinGravity,
+                                [NSNumber numberWithInteger:    150],                       dMaxGravity,
                                 [NSNumber numberWithLong:       0x000000cc],                dShadeColor,
                                 [NSNumber numberWithFloat:      0.5f],                      dTransitionDuration,
      
@@ -278,12 +282,33 @@
 
 
 -(int) gravity {
-
+    
     return [defaults integerForKey: dGravity];
 }
 -(void) setGravity: (int)gravity {
 
+    if(gravity > [self maxGravity])
+        gravity = [self maxGravity];
+    if(gravity < [self minGravity])
+        gravity = [self minGravity];
+    
     [defaults setInteger:gravity forKey: dGravity];
+}
+-(int) minGravity {
+    
+    return [defaults integerForKey: dMinGravity];
+}
+-(void) setMinGravity: (int)minGravity {
+    
+    [defaults setInteger:minGravity forKey: dMinGravity];
+}
+-(int) maxGravity {
+    
+    return [defaults integerForKey: dMaxGravity];
+}
+-(void) setMaxGravity: (int)maxGravity {
+    
+    [defaults setInteger:maxGravity forKey: dMaxGravity];
 }
 -(long) shadeColor {
 
@@ -309,10 +334,10 @@
 }
 -(void) setLevel: (float)level {
 
-    if(level < 0.0f)
-        level = 0.0f;
-    if(level > 1.0f)
-        level = 1.0f;
+    if(level < 0.1f)
+        level = 0.1f;
+    if(level > 0.9f)
+        level = 0.9f;
     
     [defaults setFloat:level forKey: dLevel];
 }
@@ -320,8 +345,6 @@
 
     int levelNameCount = [[self levelNames] count];
     int levelIndex = (int) ([self level] * levelNameCount);
-    if(levelIndex == levelNameCount)
-        levelIndex = levelNameCount - 1;
     
     return [[self levelNames] objectAtIndex:levelIndex];
 }

@@ -61,6 +61,8 @@
 @property (readwrite) int                   starAmount;
 
 @property (readwrite) int                   gravity;
+@property (readwrite) int                   minGravity;
+@property (readwrite) int                   maxGravity;
 @property (readwrite) long                  shadeColor;
 @property (readwrite) ccTime                transitionDuration;
 
@@ -72,7 +74,8 @@
 @property (readwrite) int                   score;
 @property (readwrite) int                   missScore;
 @property (readwrite) int                   killScore;
-@property (readwrite) int                   deathScore;
+@property (readwrite) int                   deathScoreRatio;
+@property (readonly) int                    deathScore;
 
 -(long)                                     buildingColor;
 

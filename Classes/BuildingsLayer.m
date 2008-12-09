@@ -298,10 +298,8 @@
         ccTime t = 4;
 
         // Level-based error.
-        if((int) ((1 - l) * t * 10) > 0) {
-            rt = cpv(rt.x + random() % (int) ((1 - l) * 200), rt.y + random() % (int) (200 * (1 - l)));
-            t -= (float)   (random() % (int) ((1 - l) * t * 10)) / 10.0f;
-        }
+        rt = cpv(rt.x + random() % (int) ((1 - l) * 200), rt.y + random() % (int) (200 * (1 - l)));
+        t -= (float)   (random() % (int) ((1 - l) * t * 10)) / 10.0f;
         
         // Velocity vector to hit rt in t seconds.
         cpVect v = cpv((rt.x - r0.x) / t,

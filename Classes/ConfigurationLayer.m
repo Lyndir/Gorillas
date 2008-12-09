@@ -109,7 +109,7 @@
 
 -(void) gravity: (id) sender {
     
-    [[GorillasConfig get] setGravity:([[GorillasConfig get] gravity] + 10) % 100];
+    [[GorillasConfig get] setGravity:([[GorillasConfig get] gravity] + 10) % ([[GorillasConfig get] maxGravity] + 1)];
         
     [self reset];
 }
