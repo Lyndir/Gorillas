@@ -33,6 +33,8 @@
 
 @implementation HUDLayer
 
+@synthesize progress;
+
 
 -(id) init {
     
@@ -59,12 +61,22 @@
 }
 
 
--(void) updateScore {
+-(void) updateScore: (int)nScore {
     
+    long scoreColor = 0xFFFFFFff;
+    
+    if(nScore > 0)
+        scoreColor = 0x66CC66ff;
+    else if(nScore < 0)
+        scoreColor = 0xCC6666ff;
+
     [scoreLabel setString:[NSString stringWithFormat:@"%05d", [[GorillasConfig get] score]]];
-    [scoreLabel do:[ShadeTo actionWithColor:0xFF0000FF duration:1]];
-    //[scoreLabel do:[Sequence actions:[ShadeTo actionWithColor:0xFF0000FF duration:1], nil]];
+    [scoreLabel do:[Sequence actions:
+                    [ShadeTo actionWithColor:scoreColor duration:0.5f],
+                    [ShadeTo actionWithColor:0xFFFFFFFF duration:0.5f],
+                    nil]];
 }
+
 
 
 -(void) setMenuTitle: (NSString *)title {
@@ -121,6 +133,10 @@
 -(void) draw {
     
     [Utility drawBoxFrom:cpv(0, 0) size:cpv(width, height) color:[[GorillasConfig get] shadeColor]];
+    [Utility drawLineFrom:cpv(0, 2)
+                       by:cpv(width * progress, 0)
+                    color:[[GorillasConfig get] windowColorOn]
+                    width:2];
 }
 
 

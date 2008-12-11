@@ -30,10 +30,10 @@
 
 @interface HUDLayer : Layer {
 
-    @private
     MenuItemFont *menuButton;
     Menu *menuMenu;
     Label *scoreLabel;
+    ccTime progress;
     
     BOOL revealed;
 
@@ -45,8 +45,10 @@
 -(void) dismiss;
 
 -(void) setMenuTitle: (NSString *)title;
--(void) updateScore;
+-(void) updateScore: (int)nScore;
 
 -(BOOL) hitsHud: (cpVect)pos;
+
+@property (readwrite) ccTime progress;
 
 @end

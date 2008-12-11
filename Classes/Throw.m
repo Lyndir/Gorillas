@@ -69,6 +69,9 @@
         // We were stopped.
         return;
     
+    // Update HUD progress indicator.
+    [[[GorillasAppDelegate get] hudLayer] setProgress: dt];
+    
     // Calculate banana position.
     float g = [[GorillasConfig get] gravity];
     ccTime t = dt * duration;
@@ -93,6 +96,9 @@
     // If it reached the floor, went off screen, or hit something; stop the banana.
     if([self isDone] || offScreen || hitBuilding) {
 
+        // Reset HUD progress.
+        [[[GorillasAppDelegate get] hudLayer] setProgress: 0];
+        
         // Update score on miss.
         if([target visible] && (hitBuilding || offScreen))
             [[[[GorillasAppDelegate get] gameLayer] buildings] miss];

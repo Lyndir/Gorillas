@@ -104,18 +104,34 @@
         [self endMessage:self];
     }
     
+    // Create a label for our message and position it above our node.
     msgLabel = [[Label labelWithString:msg dimensions:CGSizeMake(1000, [[GorillasConfig get] fontSize] + 5) alignment:UITextAlignmentCenter fontName:@"Marker Felt" fontSize: [[GorillasConfig get] fontSize]] retain];
     [msgLabel setPosition:cpv([node position].x,
                               [node position].y + [node contentSize].height)];
+    
+    // Make sure label remains on screen.
+    CGSize winSize = [[Director sharedDirector] winSize].size;
+    if([msgLabel position].x < kItemSize / 2)
+        [msgLabel setPosition:cpv(kItemSize / 2, [msgLabel position].y)];
+    if([msgLabel position].x > winSize.width - kItemSize / 2)
+        [msgLabel setPosition:cpv(winSize.width - kItemSize / 2, [msgLabel position].y)];
+    if([msgLabel position].y < kItemSize / 2)
+        [msgLabel setPosition:cpv([msgLabel position].x, kItemSize / 2)];
+    if([msgLabel position].y > winSize.width - kItemSize * 2)
+        [msgLabel setPosition:cpv([msgLabel position].x, winSize.height - kItemSize * 2)];
+    
+    // Color depending on whether message starts with -, + or neither.
     if([msg hasPrefix:@"+"])
         [msgLabel setRGB:0x66 :0xCC :0x66];
     else if([msg hasPrefix:@"-"])
         [msgLabel setRGB:0xCC :0x66 :0x66];
     else
         [msgLabel setRGB:0xFF :0xFF :0xFF];
+    
+    // Animate the label to fade out.
     [msgLabel do:[Sequence actions:
                   [DelayTime actionWithDuration:1],
-                  [MoveBy actionWithDuration:2 position:cpv(0, 50)],
+                  [MoveBy actionWithDuration:2 position:cpv(0, kItemSize * 2)],
                   [CallFunc actionWithTarget:self selector:@selector(endMessage:)],
                   nil]];
     [msgLabel do:[FadeOut actionWithDuration:3]];
@@ -295,7 +311,7 @@
         float g = [[GorillasConfig get] gravity];
         cpVect r0 = [activeGorilla position];
         cpVect rt = [target position];
-        ccTime t = 4;
+        ccTime t = 4 * 100 / g;
 
         // Level-based error.
         rt = cpv(rt.x + random() % (int) ((1 - l) * 200), rt.y + random() % (int) (200 * (1 - l)));
@@ -321,13 +337,13 @@
     if(!([[[GorillasAppDelegate get] gameLayer] singlePlayer] && [activeGorilla human]))
         return;
     
-    int score = [[GorillasConfig get] level] * [[GorillasConfig get] missScore];
+    int nScore = [[GorillasConfig get] level] * [[GorillasConfig get] missScore];
     
-    [[GorillasConfig get] setScore:[[GorillasConfig get] score] + score];
-    [[[GorillasAppDelegate get] hudLayer] updateScore];
+    [[GorillasConfig get] setScore:[[GorillasConfig get] score] + nScore];
+    [[[GorillasAppDelegate get] hudLayer] updateScore: nScore];
 
-    if(score)
-        [self message:[NSString stringWithFormat:@"%+d", score] for:banana];
+    if(nScore)
+        [self message:[NSString stringWithFormat:@"%+d", nScore] for:banana];
 }
 
 
@@ -371,12 +387,12 @@
                         if([liveGorilla human]) {
                             
                             // Increase difficulty level & update score.
-                            int score = [[GorillasConfig get] level] * [[GorillasConfig get] killScore];
+                            int nScore = [[GorillasConfig get] level] * [[GorillasConfig get] killScore];
                             
-                            [[GorillasConfig get] setScore:[[GorillasConfig get] score] + score];
-                            [[[GorillasAppDelegate get] hudLayer] updateScore];
-                            if(score)
-                                [self message:[NSString stringWithFormat:@"%+d", score] for:hitGorilla];
+                            [[GorillasConfig get] setScore:[[GorillasConfig get] score] + nScore];
+                            [[[GorillasAppDelegate get] hudLayer] updateScore: nScore];
+                            if(nScore)
+                                [self message:[NSString stringWithFormat:@"%+d", nScore] for:hitGorilla];
                             [[GorillasConfig get] levelUp];
 
                             // Message in case we level up.
@@ -385,12 +401,12 @@
                         } else {
 
                             // Decrease difficulty level & update score.
-                            int score = [[GorillasConfig get] level] * [[GorillasConfig get] deathScore];
+                            int nScore = [[GorillasConfig get] level] * [[GorillasConfig get] deathScore];
                             
-                            [[GorillasConfig get] setScore:[[GorillasConfig get] score] + score];
-                            [[[GorillasAppDelegate get] hudLayer] updateScore];
-                            if(score)
-                                [self message:[NSString stringWithFormat:@"%+d", score] for:hitGorilla];
+                            [[GorillasConfig get] setScore:[[GorillasConfig get] score] + nScore];
+                            [[[GorillasAppDelegate get] hudLayer] updateScore: nScore];
+                            if(nScore)
+                                [self message:[NSString stringWithFormat:@"%+d", nScore] for:hitGorilla];
                             [[GorillasConfig get] levelDown];
                             
                             // Message in case we level down.
