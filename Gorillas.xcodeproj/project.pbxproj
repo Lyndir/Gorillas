@@ -89,6 +89,7 @@
 		DAB609A90EDCBA4600FC200F /* explosion2.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A30EDCBA4600FC200F /* explosion2.png */; };
 		DAB609AA0EDCBA4600FC200F /* explosion3.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A40EDCBA4600FC200F /* explosion3.png */; };
 		DAB609AB0EDCBA4600FC200F /* explosion4.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A50EDCBA4600FC200F /* explosion4.png */; };
+		DAB8C42E0EF1D582003D22DA /* ContinueMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */; };
 		DAC4E93F0EDAF37B0093BA40 /* gorilla.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4E93E0EDAF37B0093BA40 /* gorilla.png */; };
 		DAC4E9C70EDAF86F0093BA40 /* gorilla.gif in Resources */ = {isa = PBXBuildFile; fileRef = DAC4E9C60EDAF86F0093BA40 /* gorilla.gif */; };
 		DAC4EA230EDB0A610093BA40 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4EA220EDB0A610093BA40 /* banana.png */; };
@@ -250,6 +251,8 @@
 		DAB609A30EDCBA4600FC200F /* explosion2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion2.png; sourceTree = "<group>"; };
 		DAB609A40EDCBA4600FC200F /* explosion3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion3.png; sourceTree = "<group>"; };
 		DAB609A50EDCBA4600FC200F /* explosion4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion4.png; sourceTree = "<group>"; };
+		DAB8C42C0EF1D582003D22DA /* ContinueMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinueMenuLayer.h; sourceTree = "<group>"; };
+		DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinueMenuLayer.m; sourceTree = "<group>"; };
 		DAC4E93E0EDAF37B0093BA40 /* gorilla.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gorilla.png; sourceTree = "<group>"; };
 		DAC4E9C60EDAF86F0093BA40 /* gorilla.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gorilla.gif; sourceTree = "<group>"; };
 		DAC4EA220EDB0A610093BA40 /* banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana.png; sourceTree = "<group>"; };
@@ -592,6 +595,8 @@
 				DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */,
 				DA34FFA80EB4EEF300B68C06 /* MainMenuLayer.h */,
 				DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */,
+				DAB8C42C0EF1D582003D22DA /* ContinueMenuLayer.h */,
+				DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */,
 				DA16C3250EEBDE7900E46246 /* Resettable.h */,
 				DA34006B0EB516D800B68C06 /* StatisticsLayer.h */,
 				DA34006C0EB516D800B68C06 /* StatisticsLayer.m */,
@@ -741,6 +746,7 @@
 				DA2283000EE204AF00BA53D2 /* ExplosionAnimationLayer.m in Sources */,
 				DACFEC210EE96AA300A0D08E /* CityTheme.m in Sources */,
 				DA16C5190EEC856200E46246 /* ShadeTo.m in Sources */,
+				DAB8C42E0EF1D582003D22DA /* ContinueMenuLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

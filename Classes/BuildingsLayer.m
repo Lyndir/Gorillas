@@ -495,21 +495,20 @@
     
     [gorillaA do:[FadeIn actionWithDuration:1]];
     [gorillaB do:[FadeIn actionWithDuration:1]];
-    /*[self do:[Sequence actions:[DelayTime actionWithDuration:1],
+    [self do:[Sequence actions:
+              /*[DelayTime actionWithDuration:1],*/
               [CallFunc actionWithTarget:self selector:@selector(startedCallback:)],
-              nil]];*/
+              nil]];
     
     activeGorilla = nil;
     [self nextGorilla];
-    
-    [[[GorillasAppDelegate get] gameLayer] started];
 }
 
 
-/*-(void) startedCallback: (id) sender {
-    
-    [[[GorillasAppDelegate get] gameLayer] unpause];
-}*/
+-(void) startedCallback: (id) sender {
+ 
+    [[[GorillasAppDelegate get] gameLayer] started];
+}
 
 
 -(void) stopGame {
@@ -520,7 +519,7 @@
     for(GorillaLayer *gorilla in gorillas) {
         [gorilla setAlive:false];
         [[gorilla retain] do:[Sequence actions:
-                        [DelayTime actionWithDuration:2],
+                        /*[DelayTime actionWithDuration:2],*/
                         [FadeOut actionWithDuration:1],
                         [CallFunc actionWithTarget:self selector:@selector(stopGameCallback:)],
                         nil]];

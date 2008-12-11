@@ -27,6 +27,7 @@
 #import <UIKit/UIKit.h>
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
+#import "ContinueMenuLayer.h"
 #import "StatisticsLayer.h"
 #import "ConfigurationLayer.h"
 #import "HUDLayer.h"
@@ -37,6 +38,7 @@
     @private
     GameLayer *gameLayer;
     ShadeLayer *currentLayer;
+    ContinueMenuLayer *continueMenuLayer;
     MainMenuLayer *mainMenuLayer;
     StatisticsLayer *statsLayer;
     ConfigurationLayer *configLayer;
@@ -53,6 +55,7 @@
 -(void) dismissLayer;
 
 -(void) showMainMenu;
+-(void) showContinueMenu;
 -(void) showStatistics;
 -(void) showConfiguration;
 -(void) revealHud;

@@ -106,8 +106,18 @@
         [gameLayer add:mainMenuLayer];
     }    
     
-    
     [self showLayer:mainMenuLayer];
+}
+
+
+-(void) showContinueMenu {
+    
+    if(!continueMenuLayer) {
+        continueMenuLayer = [[ContinueMenuLayer alloc] init];
+        [gameLayer add:continueMenuLayer];
+    }    
+    
+    [self showLayer:continueMenuLayer];
 }
 
 

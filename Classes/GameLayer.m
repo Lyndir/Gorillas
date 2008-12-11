@@ -141,9 +141,6 @@
     [gorillaB setHuman:false];
     
     [buildings startGameWithGorilla:gorillaA andGorilla:gorillaB];
-
-    paused = false;
-    [self unpause];
 }
 
 
@@ -151,6 +148,9 @@
     
     if(running)
         return;
+    
+    running = true;
+    singlePlayer = false;
     
     GorillaLayer *gorillaA = [GorillaLayer node];
     GorillaLayer *gorillaB = [GorillaLayer node];    
@@ -192,9 +192,11 @@
     [self pause];
     
     running = false;
-    singlePlayer = false;
     
-    [[GorillasAppDelegate get] showMainMenu];
+    if(singlePlayer)
+        [[GorillasAppDelegate get] showContinueMenu];
+    else
+        [[GorillasAppDelegate get] showMainMenu];
 }
 
 
