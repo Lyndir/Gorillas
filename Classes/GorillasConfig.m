@@ -28,41 +28,41 @@
 #import "CityTheme.h"
 #import "cocos2d.h"
 
-#define dCityTheme          @"cityTheme"
+#define dCityTheme          @"v1.cityTheme"
 
-#define dFontSize           @"fontSize"
-#define dFontName           @"fontName"
+#define dFontSize           @"v1.fontSize"
+#define dFontName           @"v1.fontName"
 
-#define dFixedFloors        @"fixedFloors"
-#define dBuildingMax        @"buildingMax"
-#define dBuildingAmount     @"buildingAmount"
-#define dBuildingSpeed      @"buildingSpeed"
-#define dBuildingColorCount @"buildingColorCount"
-#define dBuildingColors     @"buildingColors"
+#define dFixedFloors        @"v1.fixedFloors"
+#define dBuildingMax        @"v1.buildingMax"
+#define dBuildingAmount     @"v1.buildingAmount"
+#define dBuildingSpeed      @"v1.buildingSpeed"
+#define dBuildingColorCount @"v1.buildingColorCount"
+#define dBuildingColors     @"v1.buildingColors"
 
-#define dWindowAmount       @"windowAmount"
-#define dWindowColorOn      @"windowColorOn"
-#define dWindowColorOff     @"windowColorOff"
+#define dWindowAmount       @"v1.windowAmount"
+#define dWindowColorOn      @"v1.windowColorOn"
+#define dWindowColorOff     @"v1.windowColorOff"
 
-#define dSkyColor           @"skyColor"
-#define dStarColor          @"starColor"
-#define dStarSpeed          @"starSpeed"
-#define dStarAmount         @"starAmount"
+#define dSkyColor           @"v1.skyColor"
+#define dStarColor          @"v1.starColor"
+#define dStarSpeed          @"v1.starSpeed"
+#define dStarAmount         @"v1.starAmount"
 
-#define dGravity            @"gravity"
-#define dMinGravity         @"minGravity"
-#define dMaxGravity         @"maxGravity"
-#define dShadeColor         @"shadeColor"
-#define dTransitionDuration @"transitionDuration"
+#define dGravity            @"v1.gravity"
+#define dMinGravity         @"v1.minGravity"
+#define dMaxGravity         @"v1.maxGravity"
+#define dShadeColor         @"v1.shadeColor"
+#define dTransitionDuration @"v1.transitionDuration"
 
-#define dLevel              @"level"
-#define dLevelNameCount     @"levelNameCount"
-#define dLevelNames         @"levelNames"
+#define dLevel              @"v1.level"
+#define dLevelNameCount     @"v1.levelNameCount"
+#define dLevelNames         @"v1.levelNames"
 
-#define dScore              @"score"
-#define dMissScore          @"missScore"
-#define dKillScore          @"killScore"
-#define dDeathScoreRatio    @"deathScoreRatio"
+#define dScore              @"v1.score"
+#define dMissScore          @"v1.missScore"
+#define dKillScore          @"v1.killScore"
+#define dDeathScoreRatio    @"v1.deathScoreRatio"
 
 
 @implementation GorillasConfig
@@ -93,7 +93,7 @@
     [defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
                                 [CityTheme defaultThemeName],                               dCityTheme,
                                 [NSNumber numberWithInteger:    30],                        dFontSize,
-                                @"Georgia",                                   dFontName,
+                                @"Marker Felt",                                                 dFontName,
      
                                 [NSNumber numberWithInteger:    [theme fixedFloors]],       dFixedFloors,
                                 [NSNumber numberWithFloat:      [theme buildingMax]],       dBuildingMax,
@@ -120,7 +120,7 @@
                                 [NSNumber numberWithInteger:    8],                         dLevelNameCount,
                                 [levelNames retain],                                        dLevelNames,
                                 
-                                [NSNumber numberWithInteger:    0],                         dScore,
+                                [NSMutableDictionary dictionary],                           dScore,
                                 [NSNumber numberWithInteger:    -5],                        dMissScore,
                                 [NSNumber numberWithInteger:    50],                        dKillScore,
                                 [NSNumber numberWithInteger:    4],                         dDeathScoreRatio,
@@ -366,16 +366,35 @@
 }
 
 
+-(NSDate *) today {
+    
+    long now = [[NSDate date] timeIntervalSince1970];
+    return [NSDate dateWithTimeIntervalSince1970:(now / (3600 * 24)) * (3600 * 24)];
+}
 -(int) score {
     
-    return [defaults integerForKey: dScore];
+    NSDictionary *scores = [defaults dictionaryForKey: dScore];
+    
+    NSNumber *score = [scores objectForKey:[[self today] description]];
+    if(score == nil) {
+        NSDate *lastScoreDate = [[scores keysSortedByValueUsingSelector:@selector(compare:)] lastObject];
+        if(lastScoreDate == nil)
+            return 0;
+        
+        score = [scores objectForKey:lastScoreDate];
+    }
+    
+    return [score intValue];
 }
 -(void) setScore: (int)nScore {
     
     if(nScore < 0)
         nScore = 0;
-    
-    [defaults setInteger:nScore forKey: dScore];
+
+    NSMutableDictionary *scores = [[defaults dictionaryForKey:dScore] mutableCopy];
+    [scores setObject:[NSNumber numberWithInt:nScore] forKey:[[self today] description]];
+    [defaults setObject:scores forKey:dScore];
+    [scores release];
 }
 -(int) missScore {
     

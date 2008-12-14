@@ -28,8 +28,10 @@
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
 #import "ContinueMenuLayer.h"
-#import "StatisticsLayer.h"
 #import "ConfigurationLayer.h"
+#import "InformationLayer.h"
+#import "GuideLayer.h"
+#import "StatisticsLayer.h"
 #import "HUDLayer.h"
 #import "AudioController.h"
 
@@ -40,24 +42,25 @@
     ShadeLayer *currentLayer;
     ContinueMenuLayer *continueMenuLayer;
     MainMenuLayer *mainMenuLayer;
-    StatisticsLayer *statsLayer;
     ConfigurationLayer *configLayer;
+    InformationLayer *infoLayer;
+    GuideLayer *guideLayer;
+    StatisticsLayer *statsLayer;
     HUDLayer *hudLayer;
     AudioController *audioController;
 }
 
 @property (readonly) GameLayer *gameLayer;
-@property (readonly) MainMenuLayer *mainMenuLayer;
-@property (readonly) StatisticsLayer *statsLayer;
-@property (readonly) ConfigurationLayer *configLayer;
 @property (readonly) HUDLayer *hudLayer;
 
 -(void) dismissLayer;
 
 -(void) showMainMenu;
 -(void) showContinueMenu;
--(void) showStatistics;
 -(void) showConfiguration;
+-(void) showInformation;
+-(void) showGuide;
+-(void) showStatistics;
 -(void) revealHud;
 -(void) hideHud;
 

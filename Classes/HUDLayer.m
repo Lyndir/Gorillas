@@ -48,7 +48,8 @@
     menuButton = [MenuItemFont itemFromString:@"                              " target:self selector:@selector(menuButton:)];
     
     menuMenu = [[Menu menuWithItems:menuButton, nil] retain];
-    [menuMenu setPosition:cpv([menuMenu position].x, 0)];
+    [menuMenu setPosition:cpv([menuMenu position].x, [[GorillasConfig get] fontSize] / 2)];
+    [menuMenu alignItemsHorizontally];
     
     // Score.
     scoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%05d", [[GorillasConfig get] score]] dimensions:CGSizeMake(100, [[GorillasConfig get] fontSize] + 5) alignment:UITextAlignmentRight fontName:[[GorillasConfig get] fontName] fontSize:[[GorillasConfig get] fontSize]];

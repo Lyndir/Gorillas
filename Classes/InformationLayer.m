@@ -17,32 +17,38 @@
  */
 
 //
-//  StatisticsLayer.m
+//  InformationLayer.m
 //  Gorillas
 //
 //  Created by Maarten Billemont on 26/10/08.
 //  Copyright 2008, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "StatisticsLayer.h"
+#import "InformationLayer.h"
+#import "GorillasConfig.h"
 #import "GorillasAppDelegate.h"
 
 
-@implementation StatisticsLayer
+@implementation InformationLayer
 
 
 -(id) init {
-    
+
     if(!(self = [super init]))
         return self;
     
+    MenuItem *guide = [MenuItemFont itemFromString:@"Game Guide"
+                                            target:self
+                                          selector:@selector(guide:)];
+    MenuItem *stats = [MenuItemFont itemFromString:@"Statistics"
+                                            target:self
+                                          selector:@selector(stats:)];
     MenuItem *back  = [MenuItemFont itemFromString:@"Back"
                                             target:self
-                                          selector:@selector(back:)];
+                                          selector:@selector(mainMenu:)];
     
-    menu = [[Menu menuWithItems:back, nil] retain];
-    [menu setPosition:cpv([menu position].x, [[GorillasConfig get] fontSize] / 2)];
-    [menu alignItemsHorizontally];
+    menu = [[Menu menuWithItems:guide, stats, back, nil] retain];
+    [menu alignItemsVertically];
 
     return self;
 }
@@ -57,9 +63,29 @@
 }
 
 
--(void) back: (id) sender {
+-(void) guide: (id) sender {
     
-    [[GorillasAppDelegate get] showInformation];
+    [[GorillasAppDelegate get] showGuide];
+}
+
+
+-(void) stats: (id) sender {
+    
+    [[GorillasAppDelegate get] showStatistics];
+}
+
+
+-(void) mainMenu: (id) sender {
+    
+    [[GorillasAppDelegate get] showMainMenu];
+}
+
+
+-(void) dealloc {
+    
+    [menu release];
+    
+    [super dealloc];
 }
 
 

@@ -17,19 +17,24 @@
  */
 
 //
-//  StatisticsLayer.h
+//  InformationLayer.h
 //  Gorillas
 //
 //  Created by Maarten Billemont on 26/10/08.
 //  Copyright 2008, lhunath (Maarten Billemont). All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "ShadeLayer.h"
 
+@interface InformationLayer : ShadeLayer {
 
-@interface StatisticsLayer : ShadeLayer {
-    
     Menu *menu;
 }
+
+-(void) guide: (id)sender;
+-(void) stats: (id)sender;
+-(void) mainMenu: (id)sender;
+
 
 @end

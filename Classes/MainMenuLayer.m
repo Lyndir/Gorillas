@@ -44,7 +44,7 @@
     stopGame = [[MenuItemFont itemFromString:@"End Game" target:self selector:@selector(stopGame:)] retain];
     
     config = [[MenuItemFont itemFromString:@"Configuration" target:self selector:@selector(options:)] retain];
-    stats = [[MenuItemFont itemFromString:@"Statistics" target:self selector:@selector(statistics:)] retain];
+    info = [[MenuItemFont itemFromString:@"Information" target:self selector:@selector(information:)] retain];
     
     return self;
 }
@@ -61,10 +61,11 @@
     }
     
     if([[[GorillasAppDelegate get] gameLayer] running])
-        menu = [[Menu menuWithItems:continueGame, stopGame, config/*, stats*/, nil] retain];
+        menu = [[Menu menuWithItems:continueGame, stopGame, config, info, nil] retain];
     else
-        menu = [[Menu menuWithItems:newSingle, newMulti, config/*, stats*/, nil] retain];
-    
+        menu = [[Menu menuWithItems:newSingle, newMulti, config, info, nil] retain];
+
+    [menu alignItemsVertically];
     [menu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
     [self add:menu];
 }
@@ -94,9 +95,9 @@
 }
 
 
--(void) statistics: (id)sender {
+-(void) information: (id)sender {
     
-    [[GorillasAppDelegate get] showStatistics];
+    [[GorillasAppDelegate get] showInformation];
 }
 
 
@@ -114,7 +115,7 @@
     [continueGame release];
     [stopGame release];
     [config release];
-    [stats release];
+    [info release];
     
     [super dealloc];
 }

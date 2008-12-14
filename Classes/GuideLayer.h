@@ -17,19 +17,29 @@
  */
 
 //
-//  StatisticsLayer.h
+//  GuideLayer.h
 //  Gorillas
 //
 //  Created by Maarten Billemont on 26/10/08.
 //  Copyright 2008, lhunath (Maarten Billemont). All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "ShadeLayer.h"
 
+@interface GuideLayer : ShadeLayer {
 
-@interface StatisticsLayer : ShadeLayer {
-    
     Menu *menu;
+    MenuItemFont *pageItem;
+    
+    Label *pageLabel;
+    NSArray *guidePages;
+    int page;
 }
+
+-(void) flipPage;
+-(void) next: (id)sender;
+-(void) back: (id)sender;
+
 
 @end

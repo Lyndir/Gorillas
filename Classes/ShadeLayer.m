@@ -96,9 +96,9 @@
     
     [self gone];
     
-    for(CocosNode *child in children)
-        [self remove:child];
-    
+    [self removeAll];
+    /*for(CocosNode *child in children)
+        [self remove:child];*/
 }
 
 

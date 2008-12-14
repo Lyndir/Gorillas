@@ -29,7 +29,7 @@
 
 @implementation GorillasAppDelegate
 
-@synthesize gameLayer, mainMenuLayer, statsLayer, configLayer, hudLayer;
+@synthesize gameLayer, hudLayer;
 
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
@@ -48,7 +48,7 @@
 
 	// Director and OpenGL Setup.
     [Director setPixelFormat:RGBA8];
-	//[[Director sharedDirector] setDisplayFPS:true];
+	[[Director sharedDirector] setDisplayFPS:true];
 	[[Director sharedDirector] setDepthTest:false];
 	[[Director sharedDirector] setLandscape:true];
 	//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
@@ -121,17 +121,6 @@
 }
 
 
--(void) showStatistics {
-
-    if(!statsLayer) {
-        statsLayer = [[StatisticsLayer alloc] init];
-        [gameLayer add:statsLayer];
-    }    
-    
-    [self showLayer:statsLayer];
-}
-
-
 -(void) showConfiguration {
     
     if(!configLayer) {
@@ -140,6 +129,39 @@
     }
     
     [self showLayer:configLayer];
+}
+
+
+-(void) showInformation {
+    
+    if(!infoLayer) {
+        infoLayer = [[InformationLayer alloc] init];
+        [gameLayer add:infoLayer];
+    }    
+    
+    [self showLayer:infoLayer];
+}
+
+
+-(void) showGuide {
+    
+    if(!guideLayer) {
+        guideLayer = [[GuideLayer alloc] init];
+        [gameLayer add:guideLayer];
+    }    
+    
+    [self showLayer:guideLayer];
+}
+
+
+-(void) showStatistics {
+
+    if(!statsLayer) {
+        statsLayer = [[StatisticsLayer alloc] init];
+        [gameLayer add:statsLayer];
+    }    
+    
+    [self showLayer:statsLayer];
 }
 
 

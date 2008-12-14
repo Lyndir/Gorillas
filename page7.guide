@@ -1,0 +1,5 @@
+Gorillas - Technical
+
+    Your aim represents the vector of your throw's initial velocity.
+    The current wind velocity will affect your banana's direction every step of the way.
+    The computer will throw more accurately as your difficulity level increases.  He will also begin preferring vertical shots over more horizontal ones.

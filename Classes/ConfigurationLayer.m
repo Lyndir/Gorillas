@@ -74,7 +74,8 @@
         [theme setIsEnabled:false];
     
     menu = [[Menu menuWithItems:theme, level, gravity, back, nil] retain];
-    
+    [menu alignItemsVertically];
+
     if(readd)
         [self add:menu];
 }

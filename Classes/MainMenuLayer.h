@@ -39,14 +39,14 @@
     MenuItem *stopGame;
     
     MenuItem *config;
-    MenuItem *stats;
+    MenuItem *info;
 }
 
 -(void) newGameSingle: (id)sender;
 -(void) newGameMulti: (id)sender;
 -(void) continueGame: (id)sender;
 -(void) stopGame: (id)sender;
--(void) statistics: (id)sender;
+-(void) information: (id)sender;
 -(void) options: (id)sender;
 
 

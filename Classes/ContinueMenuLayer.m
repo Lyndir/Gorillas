@@ -41,7 +41,8 @@
     stopGame = [[MenuItemFont itemFromString:@"Main Menu" target:self selector:@selector(stopGame:)] retain];
     
     menu = [[Menu menuWithItems:continueGame, stopGame, nil] retain];
-    
+    [menu alignItemsVertically];
+
     return self;
 }
 

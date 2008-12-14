@@ -188,46 +188,46 @@
         [Utility drawLineFrom:[activeGorilla position] to:aim color:0xFF0000FF width:4];
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+-(BOOL) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
-    [self touchesMoved:touches withEvent:event];
+    return [self ccTouchesMoved:touches withEvent:event];
 }
 
--(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+-(BOOL) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     
-	UITouch *touch = [touches anyObject];
+    UITouch *touch = [touches anyObject];
 	CGPoint location = [touch locationInView: [touch view]];
 
     if(![self mayThrow])
         // State doesn't allow throwing right now.
-        return;
+        return kEventIgnored;
     
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:cpv(location.y, location.x)])
         // Ignore when moving/clicking over/on HUD.
-        return;
+        return kEventIgnored;
         
     aim = cpv(location.y - position.x, location.x);
+    
+    return kEventHandled;
 }
 
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+-(BOOL) ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     
     aim = cpv(-1.0f, -1.0f);
+    return kEventHandled;
 }
 
 
--(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+-(BOOL) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 
 	UITouch *touch = [touches anyObject];
 	CGPoint location = [touch locationInView: [touch view]];
     
-    // Cancel when: released over HUD, no aim vector, state doesn't allow throwing.
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:cpv(location.y, location.x)]
         || aim.x <= 0
-        || ![self mayThrow]) {
-        
-        [self touchesCancelled:touches withEvent:event];
-        return;
-    }
+        || ![self mayThrow])
+        // Cancel when: released over HUD, no aim vector, state doesn't allow throwing.
+        return [self ccTouchesCancelled:touches withEvent:event];
     
     cpVect r0 = [activeGorilla position];
     cpVect v = cpv(aim.x - r0.x, aim.y - r0.y);
@@ -235,6 +235,8 @@
     [self throwFrom:r0 withVelocity: v];
     
     aim = cpv(-1.0f, -1.0f);
+    
+    return kEventHandled;
 }
     
 
