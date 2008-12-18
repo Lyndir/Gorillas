@@ -25,6 +25,7 @@
 //
 
 #import "GorillasAppDelegate.h"
+#import "TestLayer.h"
 
 
 @implementation GorillasAppDelegate
@@ -63,6 +64,8 @@
     
     // Start the scene and bring up the menu.
 	[[Director sharedDirector] runScene: scene];
+    //[gameLayer add:[TestLayer node]];
+    //return
     [self showMainMenu];
     
     // Load the HUD.

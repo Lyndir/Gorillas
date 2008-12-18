@@ -71,6 +71,8 @@
 		DA4F4BA00EF3E90D0062E0E8 /* Texture2D.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B9A0EF3E90D0062E0E8 /* Texture2D.m */; };
 		DA4F4BA10EF3E90D0062E0E8 /* TGAlib.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B9C0EF3E90D0062E0E8 /* TGAlib.c */; };
 		DA5F1BD60EE74CE80041691E /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5F1BD40EE74CE80041691E /* fps_images.png */; };
+		DA6314C20EFAEA06007D203B /* TestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C10EFAEA06007D203B /* TestLayer.m */; };
+		DA6314C50EFAEAD0007D203B /* FancyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C40EFAEAD0007D203B /* FancyLayer.m */; };
 		DA6C17CE0EC0F698006D43BD /* ExplosionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C17CD0EC0F698006D43BD /* ExplosionLayer.m */; };
 		DA7547F80EAB66D40083EC7C /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
 		DA75482C0EAB77450083EC7C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75482B0EAB77450083EC7C /* OpenGLES.framework */; };
@@ -233,6 +235,10 @@
 		DA4F4B9C0EF3E90D0062E0E8 /* TGAlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TGAlib.c; path = "../cocos2d-iphone-0.6.1/cocos2d/Support/TGAlib.c"; sourceTree = SOURCE_ROOT; };
 		DA4F4B9D0EF3E90D0062E0E8 /* TGAlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGAlib.h; path = "../cocos2d-iphone-0.6.1/cocos2d/Support/TGAlib.h"; sourceTree = SOURCE_ROOT; };
 		DA5F1BD40EE74CE80041691E /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
+		DA6314C00EFAEA06007D203B /* TestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestLayer.h; path = Classes/TestLayer.h; sourceTree = "<group>"; };
+		DA6314C10EFAEA06007D203B /* TestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestLayer.m; path = Classes/TestLayer.m; sourceTree = "<group>"; };
+		DA6314C30EFAEAD0007D203B /* FancyLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FancyLayer.h; sourceTree = "<group>"; };
+		DA6314C40EFAEAD0007D203B /* FancyLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FancyLayer.m; sourceTree = "<group>"; };
 		DA6C17CC0EC0F698006D43BD /* ExplosionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplosionLayer.h; sourceTree = "<group>"; };
 		DA6C17CD0EC0F698006D43BD /* ExplosionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExplosionLayer.m; sourceTree = "<group>"; };
 		DA7547F40EAB66D40083EC7C /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
@@ -419,6 +425,8 @@
 			children = (
 				DA126C8D0EDDF19100EADDE2 /* Utility.h */,
 				DA126C8E0EDDF19100EADDE2 /* Utility.m */,
+				DA6314C30EFAEAD0007D203B /* FancyLayer.h */,
+				DA6314C40EFAEAD0007D203B /* FancyLayer.m */,
 				DA2282240EE1A2B000BA53D2 /* Sprites */,
 				DACA4E220EB3A8E90096F970 /* Views */,
 			);
@@ -588,6 +596,8 @@
 		DABF1FF40EB2703B002C32BF /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				DA6314C00EFAEA06007D203B /* TestLayer.h */,
+				DA6314C10EFAEA06007D203B /* TestLayer.m */,
 				DA4F4AF40EF3E8F60062E0E8 /* cocos2d */,
 				DA4F4B4D0EF3E9030062E0E8 /* Chipmunk */,
 				DA4F4B9B0EF3E90D0062E0E8 /* ImageSupport */,
@@ -767,6 +777,8 @@
 				DA4F4B9F0EF3E90D0062E0E8 /* glu.c in Sources */,
 				DA4F4BA00EF3E90D0062E0E8 /* Texture2D.m in Sources */,
 				DA4F4BA10EF3E90D0062E0E8 /* TGAlib.c in Sources */,
+				DA6314C20EFAEA06007D203B /* TestLayer.m in Sources */,
+				DA6314C50EFAEAD0007D203B /* FancyLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

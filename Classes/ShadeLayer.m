@@ -36,9 +36,10 @@
 
 -(id) init {
 
-    if(!(self = [super initWithColor: [[GorillasConfig get] shadeColor]]))
+    if(!(self = [super init]))
         return self;
     
+    [self setColor:[[GorillasConfig get] shadeColor]];
     [self setOpacity:0];
     
     return self;

@@ -27,9 +27,10 @@
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
 #import "GorillasConfig.h"
+#import "FancyLayer.h"
 
 
-@interface ShadeLayer : ColorLayer {
+@interface ShadeLayer : FancyLayer {
 
     @private
     BOOL showing;

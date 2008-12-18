@@ -113,12 +113,12 @@
 
 +(void) drawLineFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1 color:(long)color width:(float)width {
     
-    const GLfloat vertices[4 * 2] = {
+    const GLfloat vertices[2 * 2] = {
         x0, y0,
         x1, y1,
     };
     const GLubyte *colorBytes = (GLubyte *)&color;
-    const GLubyte colors[4 * 4] = {
+    const GLubyte colors[2 * 4] = {
         colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
         colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
     };
@@ -171,7 +171,7 @@
 
 +(void) drawBoxFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1 color:(long)color {
     
-    const GLfloat vertices[4 * 4] = {
+    const GLfloat vertices[4 * 2] = {
         x0, y0,
         x1, y0,
         x0, y1,
@@ -231,7 +231,7 @@
 
 +(void) drawBorderFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1 color:(long)color width:(float)width {
     
-    const GLfloat vertices[4 * 4] = {
+    const GLfloat vertices[4 * 2] = {
         x0, y0,
         x1, y0,
         x1, y1,

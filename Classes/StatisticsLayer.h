@@ -31,8 +31,7 @@
     
     Menu *menu;
     
-    int topScore;
-    NSDictionary *history;
+    NSMutableArray *stats;
 }
 
 @end
