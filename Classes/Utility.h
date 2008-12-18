@@ -54,4 +54,12 @@
 +(void) drawBoxFrom:(cpVect)from size:(cpVect)to color:(long)color;
 +(void) drawBoxFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1 color:(long)color;
 
++(void) drawBorderFrom:(cpVect)from to:(cpVect)to;
++(void) drawBorderFrom:(cpVect)from size:(cpVect)size;
++(void) drawBorderFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1;
++(void) drawBorderFrom:(cpVect)from size:(cpVect)size color:(long)color width:(float)width;
++(void) drawBorderFrom:(cpVect)from to:(cpVect)to color:(long)color width:(float)width;
++(void) drawBorderFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1 color:(long)color width:(float)width;
+    
+    
 @end

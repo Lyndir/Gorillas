@@ -72,6 +72,7 @@
 @property (readonly) int                    levelNameCount;
 
 @property (readwrite) int                   score;
+@property (readwrite, assign) NSDictionary  *topScoreHistory;
 @property (readwrite) int                   missScore;
 @property (readwrite) int                   killScore;
 @property (readwrite) int                   deathScoreRatio;

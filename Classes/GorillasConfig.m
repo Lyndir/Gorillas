@@ -60,6 +60,7 @@
 #define dLevelNames         @"v1.levelNames"
 
 #define dScore              @"v1.score"
+#define dTopScoreHistory    @"v1.topScoreHistory"
 #define dMissScore          @"v1.missScore"
 #define dKillScore          @"v1.killScore"
 #define dDeathScoreRatio    @"v1.deathScoreRatio"
@@ -120,7 +121,12 @@
                                 [NSNumber numberWithInteger:    8],                         dLevelNameCount,
                                 [levelNames retain],                                        dLevelNames,
                                 
-                                [NSMutableDictionary dictionary],                           dScore,
+                                [NSNumber numberWithInteger:    0],                         dScore,
+                                [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithInteger:100], [[NSDate dateWithTimeIntervalSinceNow:-(3600 * 24) * 1] description],
+                                 [NSNumber numberWithInteger:150], [[NSDate dateWithTimeIntervalSinceNow:-(3600 * 24) * 3] description],
+                                 [NSNumber numberWithInteger:30], [[NSDate dateWithTimeIntervalSinceNow:-(3600 * 24) * 7] description],
+                                 nil],                           dTopScoreHistory,
                                 [NSNumber numberWithInteger:    -5],                        dMissScore,
                                 [NSNumber numberWithInteger:    50],                        dKillScore,
                                 [NSNumber numberWithInteger:    4],                         dDeathScoreRatio,
@@ -373,28 +379,35 @@
 }
 -(int) score {
     
-    NSDictionary *scores = [defaults dictionaryForKey: dScore];
-    
-    NSNumber *score = [scores objectForKey:[[self today] description]];
-    if(score == nil) {
-        NSDate *lastScoreDate = [[scores keysSortedByValueUsingSelector:@selector(compare:)] lastObject];
-        if(lastScoreDate == nil)
-            return 0;
-        
-        score = [scores objectForKey:lastScoreDate];
-    }
-    
-    return [score intValue];
+    return [defaults integerForKey: dScore];
 }
 -(void) setScore: (int)nScore {
-    
-    if(nScore < 0)
-        nScore = 0;
 
-    NSMutableDictionary *scores = [[defaults dictionaryForKey:dScore] mutableCopy];
-    [scores setObject:[NSNumber numberWithInt:nScore] forKey:[[self today] description]];
-    [defaults setObject:scores forKey:dScore];
-    [scores release];
+    if(nScore < 0)
+        nScore = 0;    
+
+    // Is this a new top score for today?
+    NSDictionary *topScores = [self topScoreHistory];
+    NSString *today = [[self today] description];
+    NSNumber *topScoreToday = [topScores objectForKey:today];
+    
+    if(topScoreToday == nil || [topScoreToday intValue] < nScore) {
+        // Record top score.
+        NSMutableDictionary *newTopScores = [topScores mutableCopy];
+        [newTopScores setObject:[NSNumber numberWithInt:nScore] forKey:today];
+        [self setTopScoreHistory:newTopScores];
+        [newTopScores release];
+    }
+    
+    [defaults setInteger:nScore forKey: dScore];
+}
+-(NSDictionary *) topScoreHistory {
+    
+    return [defaults dictionaryForKey: dTopScoreHistory];
+}
+-(void) setTopScoreHistory: (NSDictionary *)nTopScoreHistory {
+    
+    [defaults setObject:nTopScoreHistory forKey: dTopScoreHistory];
 }
 -(int) missScore {
     

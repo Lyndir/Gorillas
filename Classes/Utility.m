@@ -199,4 +199,66 @@
 }
 
 
++(void) drawBorderFrom:(cpVect)from to:(cpVect)to {
+    
+    [self drawBorderFrom:from.x :from.y to:to.x :to.y];
+}
+
+
++(void) drawBorderFrom:(cpVect)from size:(cpVect)size {
+    
+    [self drawBorderFrom:from to:cpv(from.x + size.x, from.y + size.y)];
+}
+
+
++(void) drawBorderFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1 {
+    
+    [self drawBorderFrom:x0 :y0 to:x1 :y1 color:0xffffffff width:1.0f];
+}
+
+
++(void) drawBorderFrom:(cpVect)from size:(cpVect)size color:(long)color width:(float)width {
+    
+    [self drawBorderFrom:from to:cpv(from.x + size.x, from.y + size.y) color:color width:width];
+}
+
+
++(void) drawBorderFrom:(cpVect)from to:(cpVect)to color:(long)color width:(float)width {
+    
+    [self drawBorderFrom:from.x :from.y to:to.x :to.y color:color width:width];
+}
+
+
++(void) drawBorderFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1 color:(long)color width:(float)width {
+    
+    const GLfloat vertices[4 * 4] = {
+        x0, y0,
+        x1, y0,
+        x1, y1,
+        x0, y1,
+    };
+    const GLubyte *colorBytes = (GLubyte *)&color;
+    const GLubyte colors[4 * 4] = {
+        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
+        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
+        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
+        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
+    };
+    
+    // Tell OpenGL about our data.
+	glVertexPointer(2, GL_FLOAT, 0, vertices);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glColorPointer(4, GL_UNSIGNED_BYTE, 0, colors);
+	glEnableClientState(GL_COLOR_ARRAY);
+	
+    glLineWidth(width);
+	glDrawArrays(GL_LINE_LOOP, 0, 4);
+    glLineWidth(1.0f);
+    
+    // Reset data source.
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
+}
+
+
 @end

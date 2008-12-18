@@ -30,6 +30,9 @@
 @interface StatisticsLayer : ShadeLayer {
     
     Menu *menu;
+    
+    int topScore;
+    NSDictionary *history;
 }
 
 @end
