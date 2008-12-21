@@ -27,7 +27,8 @@
 #import "StatisticsLayer.h"
 #import "GorillasAppDelegate.h"
 #import "Utility.h"
-#define gBarSize 10
+#import "BuildingLayer.h"
+#define gBarSize 25
 
 
 @implementation StatisticsLayer
@@ -43,7 +44,7 @@
                                           selector:@selector(back:)];
     
     menu = [[Menu menuWithItems:back, nil] retain];
-    [menu setPosition:cpv([menu position].x, [[GorillasConfig get] fontSize] / 2)];
+    [menu setPosition:cpv([menu position].x, padding - [[GorillasConfig get] fontSize])];
     [menu alignItemsHorizontally];
 
     return self;
@@ -53,7 +54,6 @@
 -(void) reveal {
     
     [super reveal];
-    return;
     
     [menu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
     [self add:menu];
@@ -63,45 +63,78 @@
     NSMutableArray *dates = [NSMutableArray arrayWithCapacity:[topScores count]];
     NSMutableArray *scores = [NSMutableArray arrayWithCapacity:[topScores count]];
 
-    NSString *tDates[[topScores count]];
-    NSNumber *tScores[[topScores count]];
+    NSString **tDates = malloc(sizeof(NSString *) * [topScores count]);
+    NSNumber **tScores = malloc(sizeof(NSNumber *) * [topScores count]);
     [topScores getObjects:tScores andKeys:tDates];
 
     // Convert their keys from NSStrings into NSDates for sorting.
     int topScore = 0;
+    NSDateFormatter *defaultDateFormatter = [[NSDateFormatter alloc] init];
+    [defaultDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
     for(int i = 0; i < [topScores count]; ++i) {
-        [dates addObject:[NSDate date/*WithString:tDates[i] FIXME: Only available in 2.2*/]];
+        [dates addObject:[defaultDateFormatter dateFromString:tDates[i]]];
         [scores addObject:tScores[i]];
         if(topScore < [tScores[i] intValue])
             topScore = [tScores[i] intValue];
     }
+    [defaultDateFormatter release];
+    free(tDates);
+    free(tScores);
     NSDictionary *history = [[NSDictionary alloc] initWithObjects:scores forKeys:dates];
     
     // Iterate over sorted data and add them as Labels.
     CGSize winSize = [[Director sharedDirector] winSize].size;
     int pad = [[GorillasConfig get] fontSize] * 1.5;
-    int y = winSize.height - pad;
+    int x = pad;
+    
+    // Formatter for our score dates.
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"d"];
     
     stats = [[NSMutableArray alloc] initWithCapacity:[topScores count]];
-    for(NSDate *date in [[history allKeys] sortedArrayUsingSelector:@selector(compare:)]) {
+    NSEnumerator *datesEnumerator = [[[history allKeys] sortedArrayUsingSelector:@selector(compare:)] reverseObjectEnumerator];
+    for(NSDate *date in [datesEnumerator allObjects]) {
         int score = [(NSNumber *) [history objectForKey:date] floatValue];
         float scoreRatio = (float) score / topScore;
         
-        Label *stat = [[Label alloc] initWithString:[NSString stringWithFormat:@"%d", score]
-                                         dimensions:CGSizeMake((winSize.width - pad * 2) * scoreRatio, gBarSize)
-                                          alignment:UITextAlignmentCenter
-                                           fontName:[[GorillasConfig get] fontName] fontSize:gBarSize];
-        NSLog(@"%f, %f", [stat contentSize].width, [stat contentSize].height);
-        [stat setPosition:cpv(pad, y)];
-        [stat setRGB:(int) (0xcc * scoreRatio) :(int) (0xcc * (1 - scoreRatio)) :0x00];
-        [stat do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+        BuildingLayer *scoreTower = [[BuildingLayer alloc] initWithWidth:gBarSize heightRatio:scoreRatio];
+        Label *scoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%d", score]
+                                               dimensions:CGSizeMake(gBarSize * 2, [[GorillasConfig get] smallFontSize] / 2)
+                                                alignment:UITextAlignmentCenter
+                                                 fontName:[[GorillasConfig get] fixedFontName]
+                                                 fontSize:[[GorillasConfig get] smallFontSize] / 2];
+        NSString *dateString = [dateFormatter stringFromDate:date];
+        Label *dateLabel = [[Label alloc] initWithString:[Utility appendOrdinalPrefixFor:[dateString intValue] to:dateString]
+                                               dimensions:CGSizeMake(gBarSize * 2, [[GorillasConfig get] smallFontSize] / 2)
+                                                alignment:UITextAlignmentCenter
+                                                 fontName:[[GorillasConfig get] fixedFontName]
+                                                 fontSize:[[GorillasConfig get] smallFontSize] / 2];
+        [scoreTower setPosition:cpv(x, pad + [dateLabel contentSize].height)];
+        [scoreLabel setPosition:cpv([scoreTower position].x + [scoreTower contentSize].width / 2,
+                                    [scoreTower position].y + [scoreTower contentSize].height + [scoreLabel contentSize].height)];
+        [dateLabel setPosition:cpv([scoreTower position].x + [scoreTower contentSize].width / 2,
+                                   [scoreTower position].y - [dateLabel contentSize].height)];
+        //[stat setRGB:(int) (0xcc * scoreRatio) :(int) (0xcc * (1 - scoreRatio)) :0x00];
+        [scoreTower do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+        [scoreLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+        [dateLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
 
-        [stats addObject:stat];
-        [self add:stat];
-        [stat release];
+        [stats addObject:scoreTower];
+        [self add:scoreTower];
+        [self add:scoreLabel];
+        [self add:dateLabel];
         
-        y -= gBarSize * 1.5;
+        x += [scoreTower contentSize].width + 1;
+        [scoreTower release];
+        [scoreLabel release];
+        [dateLabel release];
+        
+        if(x >= winSize.width - pad)
+            break;
     }
+    
+    [dateFormatter release];
+    dateFormatter = nil;
 }
 
 

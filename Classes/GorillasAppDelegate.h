@@ -34,24 +34,27 @@
 #import "StatisticsLayer.h"
 #import "HUDLayer.h"
 #import "AudioController.h"
+#import "AudioControllerDelegate.h"
 
-@interface GorillasAppDelegate : NSObject <UIApplicationDelegate> {
+@interface GorillasAppDelegate : NSObject <UIApplicationDelegate, AudioControllerDelegate> {
     
-    @private
-    GameLayer *gameLayer;
-    ShadeLayer *currentLayer;
-    ContinueMenuLayer *continueMenuLayer;
-    MainMenuLayer *mainMenuLayer;
-    ConfigurationLayer *configLayer;
-    InformationLayer *infoLayer;
-    GuideLayer *guideLayer;
-    StatisticsLayer *statsLayer;
-    HUDLayer *hudLayer;
-    AudioController *audioController;
+    GameLayer               *gameLayer;
+    ShadeLayer              *currentLayer;
+    ContinueMenuLayer       *continueMenuLayer;
+    MainMenuLayer           *mainMenuLayer;
+    ConfigurationLayer      *configLayer;
+    InformationLayer        *infoLayer;
+    GuideLayer              *guideLayer;
+    StatisticsLayer         *statsLayer;
+    HUDLayer                *hudLayer;
+    AudioController         *audioController;
+    NSString                *nextTrack;
 }
 
-@property (readonly) GameLayer *gameLayer;
-@property (readonly) HUDLayer *hudLayer;
+@property (readonly) GameLayer          *gameLayer;
+@property (readonly) ConfigurationLayer *configLayer;
+@property (readonly) HUDLayer           *hudLayer;
+@property (readonly) AudioController    *audioController;
 
 -(void) dismissLayer;
 
@@ -63,6 +66,9 @@
 -(void) showStatistics;
 -(void) revealHud;
 -(void) hideHud;
+
+-(void) playTrack:(NSString *)track;
+-(void) startNextTrack;
 
 +(GorillasAppDelegate *) get;
 

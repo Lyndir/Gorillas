@@ -50,22 +50,29 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 #import <UIKit/UIKit.h>
 #import "AudioQueueObject.h"
 #import "AudioPlayer.h"
+#import "AudioControllerDelegate.h"
 
 @interface AudioController : NSObject {
 
 	AudioPlayer					*audioPlayer;
+	NSString                    *soundFile;
 	NSURL						*soundFileURL;
 	BOOL						interruptedOnPlayback;
+    
+    id<AudioControllerDelegate> delegate;
 }
 
 @property (nonatomic, retain)	AudioPlayer					*audioPlayer;
+@property (nonatomic, retain)	NSString					*soundFile;
 @property (nonatomic, retain)	NSURL						*soundFileURL;
 @property (readwrite)			BOOL						interruptedOnPlayback;
+@property (readwrite, assign)   id<AudioControllerDelegate> delegate;
 
 - (id) initWithFile: (NSString *) audioFile;
 - (void) updateUserInterfaceOnAudioQueueStateChange: (AudioQueueObject *) inQueue;
-- (void) playOrStop;
-- (void) pausePlayback;
-- (void) resumePlayback;
+- (void) play;
+- (void) stop;
+- (void) pause;
+- (void) resume;
 
 @end

@@ -27,7 +27,6 @@
 #import "GuideLayer.h"
 #import "GorillasConfig.h"
 #import "GorillasAppDelegate.h"
-#define gPadding 50
 
 
 @implementation GuideLayer
@@ -47,6 +46,8 @@
                    [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page5" ofType:@"guide"]],
                    [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page6" ofType:@"guide"]],
                    [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page7" ofType:@"guide"]],
+                   [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page8" ofType:@"guide"]],
+                   [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page9" ofType:@"guide"]],
                    nil] retain];
     
     // Controls.
@@ -61,13 +62,17 @@
                                           selector:@selector(back:)];
     
     menu = [[Menu menuWithItems:back, pageItem, next, nil] retain];
-    [menu setPosition:cpv([menu position].x, [[GorillasConfig get] fontSize] / 2)];
+    [menu setPosition:cpv([menu position].x, padding - [[GorillasConfig get] fontSize])];
     [menu alignItemsHorizontally];
 
     CGSize winSize = [[Director sharedDirector] winSize].size;
-    cpVect s = cpv(winSize.width - gPadding, winSize.height - [[GorillasConfig get] fontSize] - gPadding);
+    cpVect s = cpv(winSize.width - padding, winSize.height - [[GorillasConfig get] fontSize] - padding);
     
-    pageLabel = [[Label labelWithString:@"" dimensions:CGSizeMake(s.x, s.y) alignment:UITextAlignmentLeft fontName:[[GorillasConfig get] fontName] fontSize:[[GorillasConfig get] fontSize] * 2 / 3] retain];
+    pageLabel = [[Label labelWithString:@""
+                             dimensions:CGSizeMake(s.x, s.y)
+                              alignment:UITextAlignmentLeft
+                               fontName:[[GorillasConfig get] fixedFontName]
+                               fontSize:[[GorillasConfig get] smallFontSize]] retain];
     [pageLabel setPosition:cpv(winSize.width / 2, winSize.height / 2)];
     
     return self;

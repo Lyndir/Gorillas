@@ -104,6 +104,10 @@
 		DAF6AB2F0EF58BC300035664 /* page5.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2C0EF58BC300035664 /* page5.guide */; };
 		DAF6AB300EF58BC300035664 /* page6.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2D0EF58BC300035664 /* page6.guide */; };
 		DAF6AB310EF58BC300035664 /* page7.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2E0EF58BC300035664 /* page7.guide */; };
+		DAF9059D0EFD12D100797E7A /* blockdropper3.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059B0EFD12D100797E7A /* blockdropper3.wav */; };
+		DAF9059E0EFD12D100797E7A /* fighting_gorillas.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */; };
+		DAFEB9C10EFDCA540074333B /* page8.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9BF0EFDCA540074333B /* page8.guide */; };
+		DAFEB9C20EFDCA540074333B /* page9.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9C00EFDCA540074333B /* page9.guide */; };
 		DAFEF9730ED847D40019F7E5 /* Throw.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* Throw.m */; };
 /* End PBXBuildFile section */
 
@@ -282,6 +286,11 @@
 		DAF6AB2C0EF58BC300035664 /* page5.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page5.guide; sourceTree = "<group>"; };
 		DAF6AB2D0EF58BC300035664 /* page6.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page6.guide; sourceTree = "<group>"; };
 		DAF6AB2E0EF58BC300035664 /* page7.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page7.guide; sourceTree = "<group>"; };
+		DAF9059B0EFD12D100797E7A /* blockdropper3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blockdropper3.wav; sourceTree = "<group>"; };
+		DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fighting_gorillas.wav; sourceTree = "<group>"; };
+		DAF905A10EFD17BF00797E7A /* AudioControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioControllerDelegate.h; sourceTree = "<group>"; };
+		DAFEB9BF0EFDCA540074333B /* page8.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page8.guide; sourceTree = "<group>"; };
+		DAFEB9C00EFDCA540074333B /* page9.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page9.guide; sourceTree = "<group>"; };
 		DAFEF9710ED847D40019F7E5 /* Throw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Throw.h; sourceTree = "<group>"; };
 		DAFEF9720ED847D40019F7E5 /* Throw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Throw.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -354,6 +363,8 @@
 				DAF6AB2C0EF58BC300035664 /* page5.guide */,
 				DAF6AB2D0EF58BC300035664 /* page6.guide */,
 				DAF6AB2E0EF58BC300035664 /* page7.guide */,
+				DAFEB9BF0EFDCA540074333B /* page8.guide */,
+				DAFEB9C00EFDCA540074333B /* page9.guide */,
 				DA16C3550EEC3D2200E46246 /* icon.png */,
 				DA5F1BD30EE74CE80041691E /* Images */,
 				DA2283090EE2CAC600BA53D2 /* hole.png */,
@@ -581,6 +592,7 @@
 				DA859EC80EC5B2630036B7C0 /* AudioQueueObject.m */,
 				DA859EC20EC5B2510036B7C0 /* AudioPlayer.h */,
 				DA859EC30EC5B2510036B7C0 /* AudioPlayer.m */,
+				DAF905A10EFD17BF00797E7A /* AudioControllerDelegate.h */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -588,6 +600,8 @@
 		DA859ECB0EC5B7030036B7C0 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				DAF9059B0EFD12D100797E7A /* blockdropper3.wav */,
+				DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */,
 				DAAC33230EC5E26800816338 /* veritech.wav */,
 			);
 			name = Audio;
@@ -697,6 +711,10 @@
 				DAF6AB2F0EF58BC300035664 /* page5.guide in Resources */,
 				DAF6AB300EF58BC300035664 /* page6.guide in Resources */,
 				DAF6AB310EF58BC300035664 /* page7.guide in Resources */,
+				DAF9059D0EFD12D100797E7A /* blockdropper3.wav in Resources */,
+				DAF9059E0EFD12D100797E7A /* fighting_gorillas.wav in Resources */,
+				DAFEB9C10EFDCA540074333B /* page8.guide in Resources */,
+				DAFEB9C20EFDCA540074333B /* page9.guide in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

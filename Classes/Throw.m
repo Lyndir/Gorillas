@@ -69,9 +69,6 @@
         // We were stopped.
         return;
     
-    // Update HUD progress indicator.
-    [[[GorillasAppDelegate get] hudLayer] setProgress: dt];
-    
     // Calculate banana position.
     float g = [[GorillasConfig get] gravity];
     ccTime t = dt * duration;
@@ -79,6 +76,11 @@
                    v.y * t - t * t * g / 2.0 + r0.y);
     
     [target setPosition:r];
+    
+    // Update HUD progress indicator.
+    float min = [[[[GorillasAppDelegate get] gameLayer] buildings] left];
+    float max = [[[[GorillasAppDelegate get] gameLayer] buildings] right];
+    [[[GorillasAppDelegate get] hudLayer] setProgress:(r.x - min) / max];
     
     // Figure out whether banana went off screen or hit something.
     BuildingsLayer *buildingsLayer = [[[GorillasAppDelegate get] gameLayer] buildings];

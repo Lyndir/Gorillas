@@ -27,10 +27,13 @@
 #import "GorillasConfig.h"
 #import "CityTheme.h"
 #import "cocos2d.h"
+#import "GorillasAppDelegate.h"
 
 #define dCityTheme          @"v1.cityTheme"
 
 #define dFontSize           @"v1.fontSize"
+#define dSmallFontSize      @"v1.smallFontSize"
+#define dFixedFontName      @"v1.fixedFontName"
 #define dFontName           @"v1.fontName"
 
 #define dFixedFloors        @"v1.fixedFloors"
@@ -65,6 +68,9 @@
 #define dKillScore          @"v1.killScore"
 #define dDeathScoreRatio    @"v1.deathScoreRatio"
 
+#define dTracks             @"v1.tracks"
+#define dCurrentTrack       @"v1.currentTrack"
+
 
 @implementation GorillasConfig
 
@@ -77,13 +83,13 @@
     defaults = [[NSUserDefaults standardUserDefaults] retain];
 
     NSArray *levelNames     = [NSArray arrayWithObjects:
-                               @"Toddler",
-                               @"Playground",
-                               @"Training",
-                               @"Graduate",
-                               @"Tough",
+                               @"Junior",
+                               @"Trainee",
+                               @"Adept",
+                               @"Skilled",
+                               @"Masterful",
                                @"Sniper",
-                               @"Are You Kidding?",
+                               @"Deadly",
                                @"Impossible",
                                nil];
 
@@ -94,7 +100,9 @@
     [defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
                                 [CityTheme defaultThemeName],                               dCityTheme,
                                 [NSNumber numberWithInteger:    30],                        dFontSize,
-                                @"Marker Felt",                                                 dFontName,
+                                [NSNumber numberWithInteger:    18],                        dSmallFontSize,
+                                @"Marker Felt",                                             dFontName,
+                                @"American Typewriter",                                     dFixedFontName,
      
                                 [NSNumber numberWithInteger:    [theme fixedFloors]],       dFixedFloors,
                                 [NSNumber numberWithFloat:      [theme buildingMax]],       dBuildingMax,
@@ -114,7 +122,7 @@
                                 [NSNumber numberWithInteger:    [theme gravity]],           dGravity,
                                 [NSNumber numberWithInteger:    30],                        dMinGravity,
                                 [NSNumber numberWithInteger:    150],                       dMaxGravity,
-                                [NSNumber numberWithLong:       0x000000cc],                dShadeColor,
+                                [NSNumber numberWithLong:       0x000000ee],                dShadeColor,
                                 [NSNumber numberWithFloat:      0.5f],                      dTransitionDuration,
      
                                 [NSNumber numberWithFloat:      0.1f],                      dLevel,
@@ -122,14 +130,18 @@
                                 [levelNames retain],                                        dLevelNames,
                                 
                                 [NSNumber numberWithInteger:    0],                         dScore,
-                                [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                 [NSNumber numberWithInteger:100], [[NSDate dateWithTimeIntervalSinceNow:-(3600 * 24) * 1] description],
-                                 [NSNumber numberWithInteger:150], [[NSDate dateWithTimeIntervalSinceNow:-(3600 * 24) * 3] description],
-                                 [NSNumber numberWithInteger:30], [[NSDate dateWithTimeIntervalSinceNow:-(3600 * 24) * 7] description],
-                                 nil],                           dTopScoreHistory,
+                                [NSMutableDictionary dictionary],                           dTopScoreHistory,
                                 [NSNumber numberWithInteger:    -5],                        dMissScore,
                                 [NSNumber numberWithInteger:    50],                        dKillScore,
                                 [NSNumber numberWithInteger:    4],                         dDeathScoreRatio,
+                                
+                                [NSDictionary dictionaryWithObjectsAndKeys:
+                                 @"Sky High",           @"blockdropper3.wav",
+                                 @"Veritech",           @"veritech.wav",
+                                 @"Fighting Gorillas",  @"fighting_gorillas.wav",
+                                 @"Off",                @"",
+                                 nil],                                                      dTracks,
+                                @"blockdropper3.wav",                                       dCurrentTrack,
                                 
                                 nil]];
 
@@ -144,6 +156,15 @@
 -(void) setCityTheme: (NSString *)cityTheme {
     
     [defaults setObject:cityTheme forKey: dCityTheme];
+    [[[GorillasAppDelegate get] configLayer] reset];
+}
+-(int) smallFontSize {
+    
+    return [defaults integerForKey: dSmallFontSize];
+}
+-(void) setSmallFontSize: (int)smallFontSize {
+    
+    [defaults setInteger:smallFontSize forKey: dSmallFontSize];
 }
 -(int) fontSize {
     
@@ -152,6 +173,7 @@
 -(void) setFontSize: (int)fontSize {
 
     [defaults setInteger:fontSize forKey: dFontSize];
+    [[[GorillasAppDelegate get] configLayer] reset];
 }
 -(NSString *) fontName {
 
@@ -160,6 +182,15 @@
 -(void) setFontName: (NSString *)fontName {
 
     [defaults setObject:fontName forKey: dFontName];
+    [[[GorillasAppDelegate get] configLayer] reset];
+}
+-(NSString *) fixedFontName {
+    
+    return [defaults stringForKey: dFixedFontName];
+}
+-(void) setFixedFontName: (NSString *)fixedFontName {
+    
+    [defaults setObject:fixedFontName forKey: dFixedFontName];
 }
 
 
@@ -299,6 +330,7 @@
         gravity = [self minGravity];
     
     [defaults setInteger:gravity forKey: dGravity];
+    [[[GorillasAppDelegate get] configLayer] reset];
 }
 -(int) minGravity {
     
@@ -346,6 +378,7 @@
         level = 0.9f;
     
     [defaults setFloat:level forKey: dLevel];
+    [[[GorillasAppDelegate get] configLayer] reset];
 }
 -(NSString *) levelName {
 
@@ -361,6 +394,7 @@
 -(void) setLevelNames: (NSArray *)levelNames {
 
     [defaults setObject:levelNames forKey: dLevelNames];
+    [[[GorillasAppDelegate get] configLayer] reset];
 }
 -(int) levelNameCount {
 
@@ -442,6 +476,37 @@
     // As a result, when player A dies equally often as player B but misses less, his score will be higher.
     
     return -1 * ([self killScore] + [self deathScoreRatio] * [self missScore]);
+}
+
+
+-(NSDictionary *) tracks {
+    
+    return [defaults dictionaryForKey: dTracks];
+}
+-(void) setTracks: (NSDictionary *)tracks {
+    
+    [defaults setObject:tracks forKey: dTracks];
+    [[[GorillasAppDelegate get] configLayer] reset];
+}
+-(NSString *) currentTrack {
+    
+    return [defaults stringForKey: dCurrentTrack];
+}
+-(void) setCurrentTrack: (NSString *)currentTrack {
+    
+    if(currentTrack == nil)
+        currentTrack = @"";
+    
+    [defaults setObject:currentTrack forKey: dCurrentTrack];
+    [[[GorillasAppDelegate get] configLayer] reset];
+}
+-(NSString *) currentTrackName {
+    
+    id currentTrack = [self currentTrack];
+    if(!currentTrack)
+        currentTrack = @"";
+    
+    return [[self tracks] objectForKey:currentTrack];
 }
 
 

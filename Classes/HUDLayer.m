@@ -52,11 +52,11 @@
     [menuMenu alignItemsHorizontally];
     
     // Score.
-    scoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%05d", [[GorillasConfig get] score]] dimensions:CGSizeMake(100, [[GorillasConfig get] fontSize] + 5) alignment:UITextAlignmentRight fontName:[[GorillasConfig get] fontName] fontSize:[[GorillasConfig get] fontSize]];
+    scoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%04d", [[GorillasConfig get] score]] dimensions:CGSizeMake(80, [[GorillasConfig get] smallFontSize]) alignment:UITextAlignmentRight fontName:[[GorillasConfig get] fixedFontName] fontSize:[[GorillasConfig get] smallFontSize]];
     [self add:scoreLabel];
     
     CGSize winSize = [[Director sharedDirector] winSize].size;
-    [scoreLabel setPosition:cpv(winSize.width - [scoreLabel contentSize].width / 2, [scoreLabel contentSize].height / 2)];
+    [scoreLabel setPosition:cpv(winSize.width - [scoreLabel contentSize].width * 2 / 3, height / 2)];
     
     return self;
 }
@@ -71,10 +71,14 @@
     else if(nScore < 0)
         scoreColor = 0xCC6666ff;
 
-    [scoreLabel setString:[NSString stringWithFormat:@"%05d", [[GorillasConfig get] score]]];
+    [scoreLabel setString:[NSString stringWithFormat:@"%04d", [[GorillasConfig get] score]]];
     [scoreLabel do:[Sequence actions:
                     [ShadeTo actionWithColor:scoreColor duration:0.5f],
                     [ShadeTo actionWithColor:0xFFFFFFFF duration:0.5f],
+                    nil]];
+    [scoreLabel do:[Sequence actions:
+                    [ScaleTo actionWithDuration:0.5f scale:1.2f],
+                    [ScaleTo actionWithDuration:0.5f scale:1],
                     nil]];
 }
 

@@ -74,7 +74,10 @@
 -(void) nextGorilla;
 -(void) removeGorilla: (GorillaLayer *)gorilla;
 
--(void) message: (NSString *)msg for: (CocosNode<CocosNodeSize> *)node;
+-(void) message: (NSString *)msg on: (CocosNode<CocosNodeSize> *)node;
 -(void) endMessage: (id) sender;
+
+-(float) left;
+-(float) right;
 
 @end

@@ -53,7 +53,7 @@
 -(void) unpause;
 
 -(void) message: (NSString *)msg;
--(void) endMessage: (id) sender;
+-(void) resetMessage: (id) sender;
 
 -(void) startSinglePlayer;
 -(void) startMultiplayer;

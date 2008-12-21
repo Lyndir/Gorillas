@@ -178,7 +178,6 @@ static void propertyListenerCallback(
 - (void) openPlaybackFile: (CFURLRef) soundFile {
 
 	AudioFileOpenURL(
-	
 		(CFURLRef) self.audioFileURL,
 		0x01, //fsRdPerm,						// read only
 		kAudioFileCAFType,
@@ -189,7 +188,6 @@ static void propertyListenerCallback(
 	
 	// get the AudioStreamBasicDescription format for the playback file
 	AudioFileGetProperty(
-	
 		[self audioFileID], 
 		kAudioFilePropertyDataFormat,
 		&sizeOfPlaybackFormatASBDStruct,

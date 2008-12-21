@@ -73,7 +73,7 @@
         [self message:@"Paused."];
     
     paused = true;
-    
+
     [[GorillasAppDelegate get] hideHud];
 }
 
@@ -96,28 +96,33 @@
 
 -(void) message: (NSString *)msg {
     
-    if(msgLabel) {
-        [msgLabel stopAllActions];
-        [self endMessage:self];
+    if(!msgLabel) {
+        msgLabel = [[Label alloc] initWithString:@"" dimensions:CGSizeMake(1000, [[GorillasConfig get] fontSize] + 5)
+                                       alignment:UITextAlignmentLeft
+                                        fontName:[[GorillasConfig get] fixedFontName]
+                                        fontSize: [[GorillasConfig get] fontSize]];
+        [self add:msgLabel z:1];
     }
     
-    CGSize winSize = [[Director sharedDirector] winSize].size;
-    msgLabel = [[Label labelWithString:msg dimensions:CGSizeMake(1000, [[GorillasConfig get] fontSize] + 5) alignment:UITextAlignmentCenter fontName:@"Marker Felt" fontSize: [[GorillasConfig get] fontSize]] retain];
-    [msgLabel setPosition:cpv(100, winSize.height)];
+    [self resetMessage:nil];
+    [msgLabel setVisible:true];
+    [msgLabel setString:msg];
     [msgLabel do:[Sequence actions:
                     [MoveBy actionWithDuration:1 position:cpv(0, -50)],
                     [FadeOut actionWithDuration:2],
-                    [CallFunc actionWithTarget:self selector:@selector(endMessage:)],
+                    [CallFunc actionWithTarget:self selector:@selector(resetMessage:)],
                     nil]];
-    [self add:msgLabel z:1];
 }
 
 
--(void) endMessage: (id) sender {
+-(void) resetMessage: (id) sender {
     
-    [self remove:msgLabel];
-    [msgLabel release];
-    msgLabel = nil;
+    [msgLabel stopAllActions];
+
+    CGSize winSize = [[Director sharedDirector] winSize].size;
+    [msgLabel setPosition:cpv([msgLabel contentSize].width / 2 + [[GorillasConfig get] fontSize], winSize.height)];
+    [msgLabel setOpacity:0xff];
+    [msgLabel setVisible:false];
 }
 
 

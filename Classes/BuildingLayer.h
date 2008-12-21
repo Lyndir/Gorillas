@@ -30,10 +30,12 @@
 #import "GorillasConfig.h"
 
 
-@interface BuildingLayer : Layer <CocosNodeSize, Resettable> {
+@interface BuildingLayer : Layer <CocosNodeOpacity, CocosNodeSize, Resettable> {
     
     @private
     long buildingColor;
+    float heightRatio;
+    float width;
 
     CGSize contentSize;
     
@@ -43,7 +45,9 @@
 }
 
 @property (readonly) CGSize contentSize;
+@property (readonly) GLubyte opacity;
 
+- (id) initWithWidth:(float)w heightRatio:(float)h;
 -(void) reset;
 
 @end

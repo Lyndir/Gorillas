@@ -34,12 +34,31 @@
 
 
 - (id) init {
+
+	if (!(self = [super init]))
+        return self;
+    
+    windows     = nil;
+    colors      = nil;
+    width       = 0;
+    heightRatio = 0;
+    
+    // Configure building properties.
+    [self reset];
+    
+	return self;
+}
+
+
+- (id) initWithWidth:(float)w heightRatio:(float)h {
     
 	if (!(self = [super init]))
         return self;
 
-    windows = nil;
-    colors = nil;
+    windows     = nil;
+    colors      = nil;
+    width       = w;
+    heightRatio = h;
         
     // Configure building properties.
     [self reset];
@@ -63,12 +82,13 @@
     const CGSize size = [[Director sharedDirector] winSize].size;
     
     const float floorHeight = wHeight + wPad;
-    const long fixedFloors  = [[GorillasConfig get] fixedFloors];
-    const long varFloors    = (size.height * [[GorillasConfig get] buildingMax]
+    const int fixedFloors   = [[GorillasConfig get] fixedFloors];
+    const int varFloors     = (size.height * [[GorillasConfig get] buildingMax]
                                - (fixedFloors * floorHeight) - wPad) / floorHeight;
+    const int addFloors     = heightRatio? varFloors * heightRatio: random() % varFloors;
 
-    contentSize = CGSizeMake([[GorillasConfig get] buildingWidth],
-                             (fixedFloors + (random() % varFloors)) * floorHeight + wPad);
+    contentSize = CGSizeMake(width? width: [[GorillasConfig get] buildingWidth],
+                             (fixedFloors + addFloors) * floorHeight + wPad);
     windowCount = (1 + (int) (contentSize.height - wHeight - (int)wPad) / (int) (wPad + wHeight))
                 * (1 + (int) (contentSize.width  - wWidth  - (int)wPad) / (int) (wPad + wWidth));
     
@@ -140,6 +160,19 @@
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
+}
+
+
+-(GLubyte) opacity {
+    
+    return colors[3];
+}
+
+
+-(void) setOpacity:(GLubyte)o {
+    
+    for(int i = 3; i < windowCount * 6 * 4; i+=4)
+        colors[i] = 0;
 }
 
 

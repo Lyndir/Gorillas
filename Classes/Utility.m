@@ -30,6 +30,42 @@
 @implementation Utility
 
 
++(NSString *) rpad:(NSString *)string to:(int)l {
+    
+    NSMutableString *newString = [NSMutableString stringWithCapacity:l];
+    [newString setString:string];
+    while ([newString length] < l)
+        [newString appendString:@" "];
+    
+    return newString;
+}
+
+
++(NSString *) lpad:(NSString *)string to:(int)l {
+    
+    NSMutableString *newString = [NSMutableString stringWithCapacity:l];
+    while ([newString length] + [string length] < l)
+        [newString appendString:@" "];
+    [newString appendString:string];
+    
+    return newString;
+}
+
+
++(NSString *) appendOrdinalPrefixFor:(int)number to:(NSString *)prefix {
+    
+    NSString *suffix = @"th";
+    if(number % 10 == 1 && number != 11)
+        suffix = @"st";
+    else if(number % 10 == 2 && number != 12)
+        suffix = @"nd";
+    else if(number % 10 == 3 && number != 13)
+        suffix = @"rd";
+    
+    return [NSString stringWithFormat:@"%@%@", prefix, suffix];
+}
+
+
 +(void) drawPointAt:(cpVect)point {
     
     [self drawPointAt:point.x :point.y];

@@ -37,7 +37,7 @@
     if(!(self = [super init]))
         return self;
     
-    continueGame = [[MenuItemFont itemFromString:@"Next Game" target:self selector:@selector(continueGame:)] retain];
+    continueGame = [[MenuItemFont itemFromString:@"Continue" target:self selector:@selector(continueGame:)] retain];
     stopGame = [[MenuItemFont itemFromString:@"Main Menu" target:self selector:@selector(stopGame:)] retain];
     
     menu = [[Menu menuWithItems:continueGame, stopGame, nil] retain];

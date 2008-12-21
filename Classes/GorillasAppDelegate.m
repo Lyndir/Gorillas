@@ -30,15 +30,15 @@
 
 @implementation GorillasAppDelegate
 
-@synthesize gameLayer, hudLayer;
+@synthesize gameLayer, configLayer, hudLayer, audioController;
 
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:true];
+    
     // Start the background music.
-    /*audioController = [[[AudioController alloc] initWithFile:@"veritech.wav"] retain];
-    [audioController playOrStop];
-    [[audioController audioPlayer] setRepeat:true];*/
+    [self playTrack:[[GorillasConfig get] currentTrack]];
 
     // Random seed with timestamp.
     srandom(time(nil));
@@ -49,7 +49,7 @@
 
 	// Director and OpenGL Setup.
     [Director setPixelFormat:RGBA8];
-	[[Director sharedDirector] setDisplayFPS:true];
+	//[[Director sharedDirector] setDisplayFPS:true];
 	[[Director sharedDirector] setDepthTest:false];
 	[[Director sharedDirector] setLandscape:true];
 	//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
@@ -76,12 +76,14 @@
 
 -(void) revealHud {
     
+    [[UIApplication sharedApplication] setStatusBarHidden:true animated:true];
     [hudLayer reveal];
 }
 
 
 -(void) hideHud {
     
+    [[UIApplication sharedApplication] setStatusBarHidden:false animated:true];
     [hudLayer dismiss];
 }
 
@@ -168,6 +170,49 @@
 }
 
 
+-(void) playTrack:(NSString *)track {
+
+    if(![track length])
+        track = nil;
+    nextTrack = track;
+
+    [self startNextTrack];
+}
+
+
+-(void) audioStarted:(AudioPlayer *)player {
+    
+    [[GorillasConfig get] setCurrentTrack:[audioController soundFile]];
+}
+
+
+-(void) audioStopped:(AudioPlayer *)player {
+    
+    [[GorillasConfig get] setCurrentTrack:nil];
+    [audioController release];
+    audioController = nil;
+    
+    [self startNextTrack];
+}
+
+
+-(void) startNextTrack {
+    
+    if(audioController) {
+        if([[audioController audioPlayer] isRunning])
+            [audioController stop];
+        else
+            [self audioStopped:[audioController audioPlayer]];
+    }
+
+    else if(nextTrack) {
+        audioController = [[[AudioController alloc] initWithFile:nextTrack] retain];
+        [audioController play];
+        [audioController setDelegate:self];
+    }
+}
+
+
 -(void) applicationWillResignActive:(UIApplication *)application {
     
     [[Director sharedDirector] pause];
@@ -201,10 +246,7 @@
             configLayer = nil;
         }
     
-    if([audioController audioPlayer])
-        [audioController playOrStop];
-    [audioController release];
-    audioController = nil;
+    [self playTrack:nil];
 }
 
 

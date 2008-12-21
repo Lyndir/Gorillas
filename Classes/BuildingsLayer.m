@@ -97,7 +97,7 @@
 }
 
 
--(void) message: (NSString *)msg for: (CocosNode<CocosNodeSize> *)node {
+-(void) message:(NSString *)msg on:(CocosNode<CocosNodeSize> *)node {
     
     if(msgLabel) {
         [msgLabel stopAllActions];
@@ -105,7 +105,11 @@
     }
     
     // Create a label for our message and position it above our node.
-    msgLabel = [[Label labelWithString:msg dimensions:CGSizeMake(1000, [[GorillasConfig get] fontSize] + 5) alignment:UITextAlignmentCenter fontName:@"Marker Felt" fontSize: [[GorillasConfig get] fontSize]] retain];
+    msgLabel = [[Label labelWithString:msg
+                            dimensions:CGSizeMake(1000, [[GorillasConfig get] fontSize] + 5)
+                             alignment:UITextAlignmentCenter
+                              fontName:[[GorillasConfig get] fixedFontName]
+                              fontSize:[[GorillasConfig get] fontSize]] retain];
     [msgLabel setPosition:cpv([node position].x,
                               [node position].y + [node contentSize].height)];
     
@@ -345,7 +349,7 @@
     [[[GorillasAppDelegate get] hudLayer] updateScore: nScore];
 
     if(nScore)
-        [self message:[NSString stringWithFormat:@"%+d", nScore] for:banana];
+        [self message:[NSString stringWithFormat:@"%+d", nScore] on:banana];
 }
 
 
@@ -394,7 +398,7 @@
                             [[GorillasConfig get] setScore:[[GorillasConfig get] score] + nScore];
                             [[[GorillasAppDelegate get] hudLayer] updateScore: nScore];
                             if(nScore)
-                                [self message:[NSString stringWithFormat:@"%+d", nScore] for:hitGorilla];
+                                [self message:[NSString stringWithFormat:@"%+d", nScore] on:hitGorilla];
                             [[GorillasConfig get] levelUp];
 
                             // Message in case we level up.
@@ -408,12 +412,12 @@
                             [[GorillasConfig get] setScore:[[GorillasConfig get] score] + nScore];
                             [[[GorillasAppDelegate get] hudLayer] updateScore: nScore];
                             if(nScore)
-                                [self message:[NSString stringWithFormat:@"%+d", nScore] for:hitGorilla];
+                                [self message:[NSString stringWithFormat:@"%+d", nScore] on:hitGorilla];
                             [[GorillasConfig get] levelDown];
                             
                             // Message in case we level down.
                             if(oldLevel != [[GorillasConfig get] levelName])
-                                [[[GorillasAppDelegate get] gameLayer] message:@"Level Down."];
+                                [[[GorillasAppDelegate get] gameLayer] message:@"Level Down"];
                         }
                     }
                 } else
@@ -586,6 +590,18 @@
 
     [explosion setPosition:point];
     [self add:explosion];
+}
+
+
+-(float) left {
+    
+    return -position.x;
+}
+
+
+-(float) right {
+    
+    return [self left] + [[Director sharedDirector] winSize].size.width;
 }
 
 

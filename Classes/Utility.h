@@ -32,6 +32,10 @@
 
 }
 
++(NSString *) rpad:(NSString *)string to:(int)l;
++(NSString *) lpad:(NSString *)string to:(int)l;
++(NSString *) appendOrdinalPrefixFor:(int)number to:(NSString *)prefix;
+
 +(void) drawPointAt:(cpVect)point;
 +(void) drawPointAt:(GLfloat)x :(GLfloat)y;
 +(void) drawPointAt:(cpVect)point color:(long)color;

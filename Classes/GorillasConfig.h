@@ -37,7 +37,9 @@
 
 
 @property (readwrite) int                   fontSize;
+@property (readwrite) int                   smallFontSize;
 @property (readwrite, assign) NSString      *fontName;
+@property (readwrite, assign) NSString      *fixedFontName;
 
 @property (readwrite, assign) NSString      *cityTheme;
 
@@ -77,6 +79,10 @@
 @property (readwrite) int                   killScore;
 @property (readwrite) int                   deathScoreRatio;
 @property (readonly) int                    deathScore;
+
+@property (readwrite, assign) NSDictionary  *tracks;
+@property (readwrite, assign) NSString      *currentTrack;
+@property (readonly, assign) NSString       *currentTrackName;
 
 -(long)                                     buildingColor;
 

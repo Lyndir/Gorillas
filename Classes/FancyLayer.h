@@ -14,13 +14,20 @@
 
     GLubyte opacity;
     CGSize  contentSize;
+    int     outerPadding;
     int     padding;
     float   innerRatio;
     long    color;
+    
+    GLfloat *vertices;
+    GLubyte *colors;
 }
+
+-(void) update;
 
 @property (readwrite) GLubyte   opacity;
 @property (readwrite) CGSize    contentSize;
+@property (readwrite) int       outerPadding;
 @property (readwrite) int       padding;
 @property (readwrite) float     innerRatio;
 @property (readwrite) long      color;

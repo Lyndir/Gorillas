@@ -51,11 +51,6 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 #import <QuartzCore/QuartzCore.h>
 #import "AudioController.h"
 
-#define kLevelMeterWidth	238
-#define kLevelMeterHeight	45
-#define kLevelOverload		0.9
-#define kLevelHot			0.7
-#define kLevelMinimum		0.01
 
 void interruptionListenerCallback (
     void	*inUserData,
@@ -69,13 +64,13 @@ void interruptionListenerCallback (
 
 		if (controller.audioPlayer) {
 			// if currently playing, pause
-			[controller pausePlayback];
+			[controller pause];
 			controller.interruptedOnPlayback = YES;
 		}
 
 	} else if ((interruptionState == kAudioSessionEndInterruption) && controller.interruptedOnPlayback) {
 		// if the interruption was removed, and the app had been playing, resume playback
-		[controller resumePlayback];
+		[controller resume];
 		controller.interruptedOnPlayback = NO;
 	}
 }
@@ -83,8 +78,9 @@ void interruptionListenerCallback (
 @implementation AudioController
 
 @synthesize audioPlayer;			// the playback audio queue object
-@synthesize soundFileURL;			// the sound file to record to and to play back
+@synthesize soundFile, soundFileURL;			// the sound file to record to and to play back
 @synthesize interruptedOnPlayback;	// this allows playback to resume when an interruption ends. this app does not resume a recording for the user.
+@synthesize delegate;
 
 - (id) initWithFile: (NSString *) audioFile {
 
@@ -92,14 +88,18 @@ void interruptionListenerCallback (
         return nil;
 
     // create the file URL that identifies the file that contains our audio data.
+    self.soundFile = audioFile;
     CFBundleRef bundle = CFBundleGetMainBundle();
-    CFURLRef fileURL = CFBundleCopyResourceURL(bundle, (CFStringRef) audioFile, NULL, NULL);
+    CFURLRef fileURL = CFBundleCopyResourceURL(bundle, (CFStringRef) soundFile, NULL, NULL);
    	
     // save the sound file URL as an object attribute (as an NSURL object)
     if (fileURL) {
         self.soundFileURL = (NSURL *) fileURL;
         CFRelease(fileURL);
-    }
+    } else
+        @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                       reason:[NSString stringWithFormat:@"Couldn't resolve file for: %@", audioFile]
+                                     userInfo:nil];
 		
     // initialize the audio session object for this application,
     //		registering the callback that Audio Session Services will invoke 
@@ -119,16 +119,18 @@ void interruptionListenerCallback (
 // audio queue object starts or stops. 
 - (void) updateUserInterfaceOnAudioQueueStateChange: (AudioQueueObject *) inQueue {
 
-    /*AudioPlayer *player = (AudioPlayer *)inQueue;
-    if([player donePlayingFile]) {
-        [player openPlaybackFile:[player audioFileURL]];
-        [player play];
-    }*/
+    if(delegate) {
+        AudioPlayer *player = (AudioPlayer *)inQueue;
+        if([player donePlayingFile])
+            [delegate audioStopped:player];
+        else
+            [delegate audioStarted:player];
+    }
 }
 
 
 // respond to a tap on the Play button. If stopped, start playing. If playing, stop.
-- (void) playOrStop {
+- (void) play {
 	
 	// if not playing, start playing
 	if (self.audioPlayer == nil) {
@@ -154,22 +156,27 @@ void interruptionListenerCallback (
 			AudioSessionSetActive(true);
 			[self.audioPlayer play];
 		}
-		
-	// else if playing, stop playing
-	} else if (self.audioPlayer) {
-	
-			[self.audioPlayer setAudioPlayerShouldStopImmediately: YES];
-			[self.audioPlayer stop];
+	}
+}
 
-			// now that playback has stopped, deactivate the audio session
-			AudioSessionSetActive(false);
+
+- (void) stop {
+    
+    if (self.audioPlayer) {
+        
+        [self.audioPlayer setAudioPlayerShouldStopImmediately: YES];
+        [self.audioPlayer setDonePlayingFile: YES];
+        [self.audioPlayer stop];
+        
+        // now that playback has stopped, deactivate the audio session
+        AudioSessionSetActive(false);
 	}
 }
 
 // pausing is only ever invoked by the interruption listener callback function, which
 //	is why this isn't an IBAction method(that is, 
 //	there's no explicit UI for invoking this method)
-- (void) pausePlayback {
+- (void) pause {
 
 	if (self.audioPlayer)
 		[self.audioPlayer pause];
@@ -178,7 +185,7 @@ void interruptionListenerCallback (
 // resuming playback is only every invoked if the user rejects an incoming call
 //	or other interruption, which is why this isn't an IBAction method (that is, 
 //	there's no explicit UI for invoking this method)
-- (void) resumePlayback {
+- (void) resume {
 
 	// before resuming playback, set the audio session
 	// category and activate it

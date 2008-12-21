@@ -65,8 +65,8 @@
 
 -(void) draw {
     
-    long color = [[GorillasConfig get] skyColor];
-    GLubyte *colorBytes = (GLubyte *)&color;
+    const long color = [[GorillasConfig get] skyColor];
+    const GLubyte *colorBytes = (GLubyte *)&color;
     
     glClearColor(colorBytes[3] / (float)0xff, colorBytes[2] / (float)0xff, colorBytes[1] / (float)0xff, colorBytes[0] / (float)0xff);
     glClear(GL_COLOR_BUFFER_BIT);

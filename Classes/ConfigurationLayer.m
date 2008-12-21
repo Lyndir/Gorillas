@@ -37,8 +37,6 @@
     if(!(self = [super init]))
         return self;
     
-    [self reset];
-    
     return self;
 }
 
@@ -54,6 +52,10 @@
         menu = nil;
     }
     
+    MenuItem *audio     = [MenuItemFont itemFromString:
+                           [NSString stringWithFormat:@"%@ : %@", @"Audio Track", [[GorillasConfig get] currentTrackName]]
+                                                target: self
+                                              selector: @selector(audioTrack:)];
     MenuItem *theme     = [MenuItemFont itemFromString:
                            [NSString stringWithFormat:@"%@ : %@", @"City Theme", [[GorillasConfig get] cityTheme]]
                                                 target: self
@@ -73,7 +75,7 @@
     if([[[GorillasAppDelegate get] gameLayer] running])
         [theme setIsEnabled:false];
     
-    menu = [[Menu menuWithItems:theme, level, gravity, back, nil] retain];
+    menu = [[Menu menuWithItems:audio, theme, level, gravity, back, nil] retain];
     [menu alignItemsVertically];
 
     if(readd)
@@ -103,16 +105,12 @@
     }
 
     [[GorillasConfig get] setLevel:(float) ((curLevelInd + 1) % [[GorillasConfig get] levelNameCount]) / [[GorillasConfig get] levelNameCount]];
-    
-    [self reset];
 }
 
 
 -(void) gravity: (id) sender {
     
     [[GorillasConfig get] setGravity:([[GorillasConfig get] gravity] + 10) % ([[GorillasConfig get] maxGravity] + 1)];
-        
-    [self reset];
 }
 
 
@@ -136,7 +134,29 @@
     [[GorillasConfig get] setCityTheme:newTheme];
     
     [[[GorillasAppDelegate get] gameLayer] reset];
-    [self reset];
+}
+
+
+-(void) audioTrack: (id) sender {
+    
+    NSArray *tracks = [[[GorillasConfig get] tracks] allKeys];
+    NSString *newTrack = [tracks objectAtIndex:0];
+    
+    BOOL found = false;
+    for(NSString *track in tracks) {
+        if(found) {
+            newTrack = track;
+            break;
+        }
+        
+        if([[[GorillasConfig get] currentTrack] isEqualToString:track])
+            found = true;
+    }
+
+    if(![newTrack length])
+        newTrack = nil;
+    
+    [[GorillasAppDelegate get] playTrack:newTrack];
 }
 
 
