@@ -108,7 +108,7 @@
     [msgLabel setVisible:true];
     [msgLabel setString:msg];
     [msgLabel do:[Sequence actions:
-                    [MoveBy actionWithDuration:1 position:cpv(0, -50)],
+                    [MoveBy actionWithDuration:1 position:cpv(0, -([[GorillasConfig get] fontSize] * 2))],
                     [FadeOut actionWithDuration:2],
                     [CallFunc actionWithTarget:self selector:@selector(resetMessage:)],
                     nil]];
@@ -120,7 +120,7 @@
     [msgLabel stopAllActions];
 
     CGSize winSize = [[Director sharedDirector] winSize].size;
-    [msgLabel setPosition:cpv([msgLabel contentSize].width / 2 + [[GorillasConfig get] fontSize], winSize.height)];
+    [msgLabel setPosition:cpv([msgLabel contentSize].width / 2 + [[GorillasConfig get] fontSize], winSize.height + [[GorillasConfig get] fontSize])];
     [msgLabel setOpacity:0xff];
     [msgLabel setVisible:false];
 }

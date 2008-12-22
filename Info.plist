@@ -21,7 +21,11 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>90</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0-rc1</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>© 2008, Maarten Billemont</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 </dict>

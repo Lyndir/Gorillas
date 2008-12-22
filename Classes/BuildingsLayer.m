@@ -496,11 +496,11 @@
     BuildingLayer *buildingB = (BuildingLayer *) [buildings objectAtIndex:indexB];
     [gorillaB setPosition: cpv([buildingB position].x + [buildingB contentSize].width / 2, [buildingB contentSize].height + [gorillaB contentSize].height / 2)];
     
+    [gorillaA do:[FadeIn actionWithDuration:1]];
+    [gorillaB do:[FadeIn actionWithDuration:1]];
     [self add:gorillaA z:3];
     [self add:gorillaB z:3];
     
-    [gorillaA do:[FadeIn actionWithDuration:1]];
-    [gorillaB do:[FadeIn actionWithDuration:1]];
     [self do:[Sequence actions:
               /*[DelayTime actionWithDuration:1],*/
               [CallFunc actionWithTarget:self selector:@selector(startedCallback:)],

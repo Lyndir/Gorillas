@@ -13,7 +13,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		DA126C8F0EDDF19100EADDE2 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = DA126C8E0EDDF19100EADDE2 /* Utility.m */; };
-		DA16C3560EEC3D2200E46246 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA16C3550EEC3D2200E46246 /* icon.png */; };
 		DA16C5190EEC856200E46246 /* ShadeTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DA16C5180EEC856200E46246 /* ShadeTo.m */; };
 		DA2283000EE204AF00BA53D2 /* ExplosionAnimationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2282FF0EE204AF00BA53D2 /* ExplosionAnimationLayer.m */; };
 		DA22830A0EE2CAC600BA53D2 /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2283090EE2CAC600BA53D2 /* hole.png */; };
@@ -77,6 +76,8 @@
 		DA7547F80EAB66D40083EC7C /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
 		DA75482C0EAB77450083EC7C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75482B0EAB77450083EC7C /* OpenGLES.framework */; };
 		DA75496D0EAB77970083EC7C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75496C0EAB77970083EC7C /* QuartzCore.framework */; };
+		DA83EBE40EFEE58800305C9F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA83EBE30EFEE58800305C9F /* icon.png */; };
+		DA83EC1A0EFEE93100305C9F /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
 		DA859C500EC4F3950036B7C0 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DA859E700EC598E10036B7C0 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
 		DA859EC40EC5B2510036B7C0 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC30EC5B2510036B7C0 /* AudioPlayer.m */; };
@@ -124,12 +125,11 @@
 		DA126C8D0EDDF19100EADDE2 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		DA126C8E0EDDF19100EADDE2 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		DA16C3250EEBDE7900E46246 /* Resettable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resettable.h; sourceTree = "<group>"; };
-		DA16C3550EEC3D2200E46246 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		DA16C5170EEC855900E46246 /* ShadeTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadeTo.h; sourceTree = "<group>"; };
 		DA16C5180EEC856200E46246 /* ShadeTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadeTo.m; sourceTree = "<group>"; };
 		DA2282FE0EE204AF00BA53D2 /* ExplosionAnimationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplosionAnimationLayer.h; sourceTree = "<group>"; };
 		DA2282FF0EE204AF00BA53D2 /* ExplosionAnimationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExplosionAnimationLayer.m; sourceTree = "<group>"; };
-		DA2283090EE2CAC600BA53D2 /* hole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hole.png; sourceTree = "<group>"; };
+		DA2283090EE2CAC600BA53D2 /* hole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hole.png; path = ../hole.png; sourceTree = "<group>"; };
 		DA34006B0EB516D800B68C06 /* StatisticsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsLayer.h; sourceTree = "<group>"; };
 		DA34006C0EB516D800B68C06 /* StatisticsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsLayer.m; sourceTree = "<group>"; };
 		DA34006E0EB516F400B68C06 /* ConfigurationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationLayer.h; sourceTree = "<group>"; };
@@ -249,6 +249,8 @@
 		DA7547F50EAB66D40083EC7C /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		DA75482B0EAB77450083EC7C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		DA75496C0EAB77970083EC7C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DA83EBE30EFEE58800305C9F /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
+		DA83EC190EFEE93100305C9F /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		DA859C4E0EC4F3950036B7C0 /* GorillaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillaLayer.h; sourceTree = "<group>"; };
 		DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillaLayer.m; sourceTree = "<group>"; };
 		DA859E6E0EC598E10036B7C0 /* BananaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaLayer.h; sourceTree = "<group>"; };
@@ -263,16 +265,16 @@
 		DAAC33230EC5E26800816338 /* veritech.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = veritech.wav; sourceTree = "<group>"; };
 		DAB46AA70EC85E7400F17B3F /* HUDLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDLayer.h; sourceTree = "<group>"; };
 		DAB46AA80EC85E7400F17B3F /* HUDLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDLayer.m; sourceTree = "<group>"; };
-		DAB609A10EDCBA4600FC200F /* explosion0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion0.png; sourceTree = "<group>"; };
-		DAB609A20EDCBA4600FC200F /* explosion1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion1.png; sourceTree = "<group>"; };
-		DAB609A30EDCBA4600FC200F /* explosion2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion2.png; sourceTree = "<group>"; };
-		DAB609A40EDCBA4600FC200F /* explosion3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion3.png; sourceTree = "<group>"; };
-		DAB609A50EDCBA4600FC200F /* explosion4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion4.png; sourceTree = "<group>"; };
+		DAB609A10EDCBA4600FC200F /* explosion0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explosion0.png; path = ../explosion0.png; sourceTree = "<group>"; };
+		DAB609A20EDCBA4600FC200F /* explosion1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explosion1.png; path = ../explosion1.png; sourceTree = "<group>"; };
+		DAB609A30EDCBA4600FC200F /* explosion2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explosion2.png; path = ../explosion2.png; sourceTree = "<group>"; };
+		DAB609A40EDCBA4600FC200F /* explosion3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explosion3.png; path = ../explosion3.png; sourceTree = "<group>"; };
+		DAB609A50EDCBA4600FC200F /* explosion4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explosion4.png; path = ../explosion4.png; sourceTree = "<group>"; };
 		DAB8C42C0EF1D582003D22DA /* ContinueMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinueMenuLayer.h; sourceTree = "<group>"; };
 		DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinueMenuLayer.m; sourceTree = "<group>"; };
-		DAC4E93E0EDAF37B0093BA40 /* gorilla.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gorilla.png; sourceTree = "<group>"; };
-		DAC4E9C60EDAF86F0093BA40 /* gorilla.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gorilla.gif; sourceTree = "<group>"; };
-		DAC4EA220EDB0A610093BA40 /* banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana.png; sourceTree = "<group>"; };
+		DAC4E93E0EDAF37B0093BA40 /* gorilla.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gorilla.png; path = ../gorilla.png; sourceTree = "<group>"; };
+		DAC4E9C60EDAF86F0093BA40 /* gorilla.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = gorilla.gif; path = ../gorilla.gif; sourceTree = "<group>"; };
+		DAC4EA220EDB0A610093BA40 /* banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = banana.png; path = ../banana.png; sourceTree = "<group>"; };
 		DACA4E6C0EB3AEA40096F970 /* BuildingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingLayer.h; sourceTree = "<group>"; };
 		DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingLayer.m; sourceTree = "<group>"; };
 		DACA4E8B0EB3B0E10096F970 /* GorillasConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillasConfig.h; sourceTree = "<group>"; };
@@ -356,28 +358,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DAF6AAEC0EF57EA500035664 /* page1.guide */,
-				DAF6AAED0EF57EA500035664 /* page2.guide */,
-				DAF6AAEE0EF57EA500035664 /* page3.guide */,
-				DAF6AAEF0EF57EA500035664 /* page4.guide */,
-				DAF6AB2C0EF58BC300035664 /* page5.guide */,
-				DAF6AB2D0EF58BC300035664 /* page6.guide */,
-				DAF6AB2E0EF58BC300035664 /* page7.guide */,
-				DAFEB9BF0EFDCA540074333B /* page8.guide */,
-				DAFEB9C00EFDCA540074333B /* page9.guide */,
-				DA16C3550EEC3D2200E46246 /* icon.png */,
 				DA5F1BD30EE74CE80041691E /* Images */,
-				DA2283090EE2CAC600BA53D2 /* hole.png */,
-				DAB609A10EDCBA4600FC200F /* explosion0.png */,
-				DAB609A20EDCBA4600FC200F /* explosion1.png */,
-				DAB609A30EDCBA4600FC200F /* explosion2.png */,
-				DAB609A40EDCBA4600FC200F /* explosion3.png */,
-				DAB609A50EDCBA4600FC200F /* explosion4.png */,
-				DAC4EA220EDB0A610093BA40 /* banana.png */,
-				DAC4E9C60EDAF86F0093BA40 /* gorilla.gif */,
-				DAC4E93E0EDAF37B0093BA40 /* gorilla.png */,
+				DA83EBE90EFEE5E300305C9F /* Guide */,
 				DA859ECB0EC5B7030036B7C0 /* Audio */,
 				8D1107310486CEB800E47090 /* Info.plist */,
+				DA83EC190EFEE93100305C9F /* Entitlements.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -578,9 +563,35 @@
 		DA5F1BD30EE74CE80041691E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DA83EBE30EFEE58800305C9F /* icon.png */,
 				DA5F1BD40EE74CE80041691E /* fps_images.png */,
+				DA2283090EE2CAC600BA53D2 /* hole.png */,
+				DAB609A10EDCBA4600FC200F /* explosion0.png */,
+				DAB609A20EDCBA4600FC200F /* explosion1.png */,
+				DAB609A30EDCBA4600FC200F /* explosion2.png */,
+				DAB609A40EDCBA4600FC200F /* explosion3.png */,
+				DAB609A50EDCBA4600FC200F /* explosion4.png */,
+				DAC4EA220EDB0A610093BA40 /* banana.png */,
+				DAC4E9C60EDAF86F0093BA40 /* gorilla.gif */,
+				DAC4E93E0EDAF37B0093BA40 /* gorilla.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		DA83EBE90EFEE5E300305C9F /* Guide */ = {
+			isa = PBXGroup;
+			children = (
+				DAF6AAEC0EF57EA500035664 /* page1.guide */,
+				DAF6AAED0EF57EA500035664 /* page2.guide */,
+				DAF6AAEE0EF57EA500035664 /* page3.guide */,
+				DAF6AAEF0EF57EA500035664 /* page4.guide */,
+				DAF6AB2C0EF58BC300035664 /* page5.guide */,
+				DAF6AB2D0EF58BC300035664 /* page6.guide */,
+				DAF6AB2E0EF58BC300035664 /* page7.guide */,
+				DAFEB9BF0EFDCA540074333B /* page8.guide */,
+				DAFEB9C00EFDCA540074333B /* page9.guide */,
+			);
+			name = Guide;
 			sourceTree = "<group>";
 		};
 		DA859EB70EC5B2420036B7C0 /* Audio */ = {
@@ -702,7 +713,6 @@
 				DAB609AB0EDCBA4600FC200F /* explosion4.png in Resources */,
 				DA22830A0EE2CAC600BA53D2 /* hole.png in Resources */,
 				DA5F1BD60EE74CE80041691E /* fps_images.png in Resources */,
-				DA16C3560EEC3D2200E46246 /* icon.png in Resources */,
 				DA4F4B860EF3E9030062E0E8 /* CMakeLists.txt in Resources */,
 				DAF6AAF00EF57EA500035664 /* page1.guide in Resources */,
 				DAF6AAF10EF57EA500035664 /* page2.guide in Resources */,
@@ -715,6 +725,8 @@
 				DAF9059E0EFD12D100797E7A /* fighting_gorillas.wav in Resources */,
 				DAFEB9C10EFDCA540074333B /* page8.guide in Resources */,
 				DAFEB9C20EFDCA540074333B /* page9.guide in Resources */,
+				DA83EBE40EFEE58800305C9F /* icon.png in Resources */,
+				DA83EC1A0EFEE93100305C9F /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -828,6 +840,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
@@ -838,6 +851,7 @@
 					"\"$(SRCROOT)/../cocos2d-iphone-0.5.1/build/Debug-iphonesimulator\"",
 				);
 				PRODUCT_NAME = Gorillas;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
 			};
 			name = Release;
 		};
@@ -886,6 +900,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
@@ -896,6 +912,7 @@
 					"\"$(SRCROOT)/../cocos2d-iphone-0.5.1/build/Debug-iphonesimulator\"",
 				);
 				PRODUCT_NAME = Gorillas;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "579474B9-2650-4A95-9363-179004E32BAA";
 			};
 			name = Distribution;
 		};
