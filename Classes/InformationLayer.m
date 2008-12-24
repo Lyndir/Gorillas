@@ -37,6 +37,9 @@
     if(!(self = [super init]))
         return self;
     
+    MenuItem *ver   = [MenuItemFont itemFromString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
+                                                  ];
+    [ver setIsEnabled:false];
     MenuItem *guide = [MenuItemFont itemFromString:@"Game Guide"
                                             target:self
                                           selector:@selector(guide:)];
@@ -47,7 +50,7 @@
                                             target:self
                                           selector:@selector(mainMenu:)];
     
-    menu = [[Menu menuWithItems:guide, stats, back, nil] retain];
+    menu = [[Menu menuWithItems:ver, guide, stats, back, nil] retain];
     [menu alignItemsVertically];
 
     return self;

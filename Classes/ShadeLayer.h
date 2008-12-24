@@ -32,7 +32,6 @@
 
 @interface ShadeLayer : FancyLayer {
 
-    @private
     BOOL showing;
 }
 

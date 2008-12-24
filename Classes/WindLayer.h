@@ -17,22 +17,26 @@
  */
 
 //
-//  ConfigurationLayer.h
+//  WindLayer.h
 //  Gorillas
 //
-//  Created by Maarten Billemont on 26/10/08.
+//  Created by Maarten Billemont on 25/10/08.
 //  Copyright 2008, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "ShadeLayer.h"
+#import <Foundation/Foundation.h>
+#import "cocos2d.h"
+#import "Resettable.h"
 
 
-@interface ConfigurationLayer : ShadeLayer {
-    
-    Menu *menu;
+@interface WindLayer : Layer <CocosNodeOpacity, Resettable> {
+
+    float       wind;
+    long        color;
 }
 
-
--(void) reset;
+@property (readonly) float wind;
+@property (readwrite) long color;
+@property (readwrite) GLubyte opacity;
 
 @end

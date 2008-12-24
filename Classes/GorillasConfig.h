@@ -62,6 +62,7 @@
 @property (readwrite) int                   starSpeed;
 @property (readwrite) int                   starAmount;
 
+@property (readwrite) float                 windModifier;
 @property (readwrite) int                   gravity;
 @property (readwrite) int                   minGravity;
 @property (readwrite) int                   maxGravity;

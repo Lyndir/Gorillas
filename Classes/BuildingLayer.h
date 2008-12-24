@@ -32,7 +32,6 @@
 
 @interface BuildingLayer : Layer <CocosNodeOpacity, CocosNodeSize, Resettable> {
     
-    @private
     long buildingColor;
     float heightRatio;
     float width;

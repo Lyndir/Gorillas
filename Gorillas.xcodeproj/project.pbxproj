@@ -78,6 +78,7 @@
 		DA75496D0EAB77970083EC7C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75496C0EAB77970083EC7C /* QuartzCore.framework */; };
 		DA83EBE40EFEE58800305C9F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA83EBE30EFEE58800305C9F /* icon.png */; };
 		DA83EC1A0EFEE93100305C9F /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
+		DA83F0BB0F00527B00305C9F /* WindLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83F0BA0F00527B00305C9F /* WindLayer.m */; };
 		DA859C500EC4F3950036B7C0 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DA859E700EC598E10036B7C0 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
 		DA859EC40EC5B2510036B7C0 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC30EC5B2510036B7C0 /* AudioPlayer.m */; };
@@ -251,6 +252,8 @@
 		DA75496C0EAB77970083EC7C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DA83EBE30EFEE58800305C9F /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
 		DA83EC190EFEE93100305C9F /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		DA83F0B90F00527B00305C9F /* WindLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindLayer.h; sourceTree = "<group>"; };
+		DA83F0BA0F00527B00305C9F /* WindLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindLayer.m; sourceTree = "<group>"; };
 		DA859C4E0EC4F3950036B7C0 /* GorillaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillaLayer.h; sourceTree = "<group>"; };
 		DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillaLayer.m; sourceTree = "<group>"; };
 		DA859E6E0EC598E10036B7C0 /* BananaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaLayer.h; sourceTree = "<group>"; };
@@ -399,6 +402,8 @@
 				DA6C17CD0EC0F698006D43BD /* ExplosionLayer.m */,
 				DA2282FE0EE204AF00BA53D2 /* ExplosionAnimationLayer.h */,
 				DA2282FF0EE204AF00BA53D2 /* ExplosionAnimationLayer.m */,
+				DA83F0B90F00527B00305C9F /* WindLayer.h */,
+				DA83F0BA0F00527B00305C9F /* WindLayer.m */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -809,6 +814,7 @@
 				DA4F4BA10EF3E90D0062E0E8 /* TGAlib.c in Sources */,
 				DA6314C20EFAEA06007D203B /* TestLayer.m in Sources */,
 				DA6314C50EFAEAD0007D203B /* FancyLayer.m in Sources */,
+				DA83F0BB0F00527B00305C9F /* WindLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -840,6 +846,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -851,7 +858,7 @@
 					"\"$(SRCROOT)/../cocos2d-iphone-0.5.1/build/Debug-iphonesimulator\"",
 				);
 				PRODUCT_NAME = Gorillas;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
 			};
 			name = Release;
 		};
@@ -886,11 +893,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
 				SDKROOT = iphoneos2.1;
 				VALID_ARCHS = armv6;
 			};

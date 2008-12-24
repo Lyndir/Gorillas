@@ -33,7 +33,7 @@
 @implementation GameLayer
 
 
-@synthesize buildings, singlePlayer, running, paused;
+@synthesize buildings, wind, singlePlayer, running, paused;
 
 
 -(id) init {
@@ -51,6 +51,11 @@
     
     buildings = [[BuildingsLayer alloc] init];
     [self add:buildings];
+    
+    // Wind.
+    wind = [[WindLayer alloc] init];
+    [wind setColor:0xffffff00];
+    [self add:wind];
     
     return self;
 }
@@ -70,11 +75,13 @@
         return;
     
     if(!paused)
-        [self message:@"Paused."];
+        [self message:@"Paused"];
     
     paused = true;
-
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:false animated:true];
     [[GorillasAppDelegate get] hideHud];
+    [wind do:[FadeOut actionWithDuration:[[GorillasConfig get] transitionDuration]]];
 }
 
 
@@ -89,8 +96,10 @@
 
     paused = false;
     
+    [[UIApplication sharedApplication] setStatusBarHidden:true animated:true];
     [[GorillasAppDelegate get] dismissLayer];
     [[GorillasAppDelegate get] revealHud];
+    [wind do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
 }
 
 
@@ -145,6 +154,7 @@
     [gorillaB setName:@"Phone"];
     [gorillaB setHuman:false];
     
+    [wind reset];
     [buildings startGameWithGorilla:gorillaA andGorilla:gorillaB];
 }
 
@@ -166,6 +176,7 @@
     [gorillaB setName:@"Gorilla Two"];
     [gorillaB setHuman:true];
     
+    [wind reset];
     [buildings startGameWithGorilla:gorillaA andGorilla:gorillaB];
 }
 

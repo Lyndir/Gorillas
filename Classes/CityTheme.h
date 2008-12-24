@@ -42,6 +42,7 @@
     long    starColor;
     int     starAmount;
     
+    float   windModifier;
     int     gravity;
 }
 
@@ -58,6 +59,7 @@
 @property (readonly) long               starColor;
 @property (readonly) int                starAmount;
 
+@property (readonly) float              windModifier;
 @property (readonly) int                gravity;
 
 -(void) apply;

@@ -29,7 +29,6 @@
 
 @interface ContinueMenuLayer : ShadeLayer {
 
-    @private
     Menu *menu;
     
     MenuItem *continueGame;

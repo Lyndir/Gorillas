@@ -315,6 +315,7 @@
 
         float l = [[GorillasConfig get] level];
         float g = [[GorillasConfig get] gravity];
+        float w = [[[[GorillasAppDelegate get] gameLayer] wind] wind];
         cpVect r0 = [activeGorilla position];
         cpVect rt = [target position];
         ccTime t = 4 * 100 / g;
@@ -326,6 +327,9 @@
         // Velocity vector to hit rt in t seconds.
         cpVect v = cpv((rt.x - r0.x) / t,
                        (g * t * t - 2 * r0.y + 2 * rt.y) / (2 * t));
+        
+        // Wind-based modifier.
+        v.x -= w * t * [[GorillasConfig get] windModifier];
 
         [self throwFrom: r0 withVelocity:v];
         

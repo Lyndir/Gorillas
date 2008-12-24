@@ -52,6 +52,7 @@
 #define dStarSpeed          @"v1.starSpeed"
 #define dStarAmount         @"v1.starAmount"
 
+#define dWindModifier       @"v1.windModifier"
 #define dGravity            @"v1.gravity"
 #define dMinGravity         @"v1.minGravity"
 #define dMaxGravity         @"v1.maxGravity"
@@ -119,6 +120,7 @@
                                 [NSNumber numberWithInteger:    30],                        dStarSpeed,
                                 [NSNumber numberWithInteger:    [theme starAmount]],        dStarAmount,
                                 
+                                [NSNumber numberWithFloat:      [theme windModifier]],      dWindModifier,
                                 [NSNumber numberWithInteger:    [theme gravity]],           dGravity,
                                 [NSNumber numberWithInteger:    30],                        dMinGravity,
                                 [NSNumber numberWithInteger:    150],                       dMaxGravity,
@@ -318,6 +320,14 @@
 }
 
 
+-(float) windModifier {
+    
+    return [defaults floatForKey: dWindModifier];
+}
+-(void) setWindModifier:(float)windModifier {
+    
+    [defaults setFloat:windModifier forKey:dWindModifier];
+}
 -(int) gravity {
     
     return [defaults integerForKey: dGravity];

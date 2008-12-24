@@ -76,14 +76,12 @@
 
 -(void) revealHud {
     
-    [[UIApplication sharedApplication] setStatusBarHidden:true animated:true];
     [hudLayer reveal];
 }
 
 
 -(void) hideHud {
     
-    [[UIApplication sharedApplication] setStatusBarHidden:false animated:true];
     [hudLayer dismiss];
 }
 

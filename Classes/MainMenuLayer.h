@@ -29,7 +29,6 @@
 
 @interface MainMenuLayer : ShadeLayer {
 
-    @private
     Menu *menu;
     
     MenuItem *newSingle;

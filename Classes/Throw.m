@@ -69,10 +69,13 @@
         // We were stopped.
         return;
     
+    // Wind influence.
+    float w = [[[[GorillasAppDelegate get] gameLayer] wind] wind];
+    
     // Calculate banana position.
     float g = [[GorillasConfig get] gravity];
     ccTime t = dt * duration;
-    cpVect r = cpv(v.x * t + r0.x,
+    cpVect r = cpv((v.x + w * t * [[GorillasConfig get] windModifier]) * t + r0.x,
                    v.y * t - t * t * g / 2.0 + r0.y);
     
     [target setPosition:r];

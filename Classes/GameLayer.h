@@ -30,21 +30,23 @@
 #import "GorillasConfig.h"
 #import "SkiesLayer.h"
 #import "BuildingsLayer.h"
+#import "WindLayer.h"
 
 
 @interface GameLayer : Layer <Resettable> {
 
-    @private
     BOOL paused;
     BOOL running;
     BOOL singlePlayer;
 
     SkiesLayer *skies;
     BuildingsLayer *buildings;
+    WindLayer *wind;
     Label *msgLabel;
 }
 
 @property (readonly) BuildingsLayer *buildings;
+@property (readonly) WindLayer *wind;
 @property (readonly) BOOL singlePlayer;
 @property (readonly) BOOL running;
 @property (readonly) BOOL paused;
