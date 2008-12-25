@@ -44,7 +44,7 @@
     r0 = startPos;
     float g = [[GorillasConfig get] gravity];
     
-    ccTime t = (v.y + sqrt(v.y * v.y + 2.0 * g * r0.y)) / g;
+    ccTime t = (v.y + (float) sqrt(v.y * v.y + 2.0f * g * r0.y)) / g;
 
     if(!(self = [super initWithDuration:t]))
         return self;
@@ -76,7 +76,7 @@
     float g = [[GorillasConfig get] gravity];
     ccTime t = dt * duration;
     cpVect r = cpv((v.x + w * t * [[GorillasConfig get] windModifier]) * t + r0.x,
-                   v.y * t - t * t * g / 2.0 + r0.y);
+                   v.y * t - t * t * g / 2.0f + r0.y);
     
     [target setPosition:r];
     

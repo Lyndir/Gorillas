@@ -62,6 +62,7 @@
 #define dLevel              @"v1.level"
 #define dLevelNameCount     @"v1.levelNameCount"
 #define dLevelNames         @"v1.levelNames"
+#define dLevelProgress      @"v1.levelProgress"
 
 #define dScore              @"v1.score"
 #define dTopScoreHistory    @"v1.topScoreHistory"
@@ -130,12 +131,13 @@
                                 [NSNumber numberWithFloat:      0.1f],                      dLevel,
                                 [NSNumber numberWithInteger:    8],                         dLevelNameCount,
                                 [levelNames retain],                                        dLevelNames,
+                                [NSNumber numberWithFloat:      0.03f],                     dLevelProgress,
                                 
                                 [NSNumber numberWithInteger:    0],                         dScore,
                                 [NSMutableDictionary dictionary],                           dTopScoreHistory,
                                 [NSNumber numberWithInteger:    -5],                        dMissScore,
                                 [NSNumber numberWithInteger:    50],                        dKillScore,
-                                [NSNumber numberWithInteger:    4],                         dDeathScoreRatio,
+                                [NSNumber numberWithInteger:    5],                         dDeathScoreRatio,
                                 
                                 [NSDictionary dictionaryWithObjectsAndKeys:
                                  @"Sky High",           @"blockdropper3.wav",
@@ -310,11 +312,11 @@
 
     [defaults setInteger:starSpeed forKey: dStarSpeed];
 }
--(int) starAmount {
+-(NSUInteger) starAmount {
 
     return [defaults integerForKey: dStarAmount];
 }
--(void) setStarAmount: (int)starAmount {
+-(void) setStarAmount: (NSUInteger)starAmount {
 
     [defaults setInteger:starAmount forKey: dStarAmount];
 }
@@ -414,11 +416,19 @@
 
     [defaults setInteger:levelNameCount forKey: dLevelNameCount];
 }
+-(float) levelProgress {
+    
+    return [defaults floatForKey: dLevelProgress];
+}
+-(void) setLevelProgress: (float)levelProgress {
+    
+    [defaults setFloat:levelProgress forKey: dLevelProgress];
+}
 
 
 -(NSDate *) today {
     
-    long now = [[NSDate date] timeIntervalSince1970];
+    NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
     return [NSDate dateWithTimeIntervalSince1970:(now / (3600 * 24)) * (3600 * 24)];
 }
 -(int) score {
@@ -522,11 +532,11 @@
 
 -(void) levelUp {
     
-    [self setLevel:[self level] + 0.1f];
+    [self setLevel:[self level] + [self levelProgress]];
 }
 -(void) levelDown {
     
-    [self setLevel:[self level] - 0.1f];
+    [self setLevel:[self level] - [self levelProgress]];
 }
 
 

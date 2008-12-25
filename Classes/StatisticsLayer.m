@@ -71,7 +71,7 @@
     int topScore = 0;
     NSDateFormatter *defaultDateFormatter = [[NSDateFormatter alloc] init];
     [defaultDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
-    for(int i = 0; i < [topScores count]; ++i) {
+    for(NSUInteger i = 0; i < [topScores count]; ++i) {
         [dates addObject:[defaultDateFormatter dateFromString:tDates[i]]];
         [scores addObject:tScores[i]];
         if(topScore < [tScores[i] intValue])
@@ -84,7 +84,7 @@
     
     // Iterate over sorted data and add them as Labels.
     CGSize winSize = [[Director sharedDirector] winSize].size;
-    int pad = [[GorillasConfig get] fontSize] * 1.5;
+    int pad = [[GorillasConfig get] fontSize] * 1.5f;
     int x = pad;
     
     // Formatter for our score dates.

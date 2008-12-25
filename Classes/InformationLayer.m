@@ -37,8 +37,8 @@
     if(!(self = [super init]))
         return self;
     
-    MenuItem *ver   = [MenuItemFont itemFromString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
-                                                  ];
+    MenuItem *ver   = [MenuItemFont itemFromString:[[NSBundle mainBundle]
+                                                    objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
     [ver setIsEnabled:false];
     MenuItem *guide = [MenuItemFont itemFromString:@"Game Guide"
                                             target:self

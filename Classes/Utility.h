@@ -32,14 +32,14 @@
 
 }
 
-+(NSString *) rpad:(NSString *)string to:(int)l;
-+(NSString *) lpad:(NSString *)string to:(int)l;
++(NSString *) rpad:(NSString *)string to:(NSUInteger)l;
++(NSString *) lpad:(NSString *)string to:(NSUInteger)l;
 +(NSString *) appendOrdinalPrefixFor:(int)number to:(NSString *)prefix;
 
 +(void) drawPointAt:(cpVect)point;
-+(void) drawPointAt:(GLfloat)x :(GLfloat)y;
++(void) drawPointAtAll:(const cpVect *)point count:(int)count;
 +(void) drawPointAt:(cpVect)point color:(long)color;
-+(void) drawPointAt:(GLfloat)x :(GLfloat)y color:(long) color;
++(void) drawPointAtAll:(const cpVect *)point count:(int)count color:(long)color;
 
 
 +(void) drawLineFrom:(cpVect)from by:(cpVect)by;
@@ -58,17 +58,13 @@
 
 +(void) drawBoxFrom:(cpVect)from to:(cpVect)to;
 +(void) drawBoxFrom:(cpVect)from size:(cpVect)to;
-+(void) drawBoxFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1;
 +(void) drawBoxFrom:(cpVect)from to:(cpVect)to color:(long)color;
 +(void) drawBoxFrom:(cpVect)from size:(cpVect)to color:(long)color;
-+(void) drawBoxFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1 color:(long)color;
 
 +(void) drawBorderFrom:(cpVect)from to:(cpVect)to;
 +(void) drawBorderFrom:(cpVect)from size:(cpVect)size;
-+(void) drawBorderFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1;
 +(void) drawBorderFrom:(cpVect)from size:(cpVect)size color:(long)color width:(float)width;
 +(void) drawBorderFrom:(cpVect)from to:(cpVect)to color:(long)color width:(float)width;
-+(void) drawBorderFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1 color:(long)color width:(float)width;
     
     
 @end

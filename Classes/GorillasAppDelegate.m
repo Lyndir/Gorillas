@@ -227,7 +227,7 @@
     
 	[[TextureMgr sharedTextureMgr] removeAllTextures];
     
-    if(![currentLayer showing])
+    if(![currentLayer showing]) {
         if(currentLayer == mainMenuLayer) {
             [gameLayer remove:mainMenuLayer];
             [mainMenuLayer release];
@@ -243,6 +243,7 @@
             [configLayer release];
             configLayer = nil;
         }
+    }
     
     [self playTrack:nil];
 }

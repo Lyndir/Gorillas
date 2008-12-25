@@ -30,7 +30,7 @@
 @implementation Utility
 
 
-+(NSString *) rpad:(NSString *)string to:(int)l {
++(NSString *) rpad:(NSString *)string to:(NSUInteger)l {
     
     NSMutableString *newString = [NSMutableString stringWithCapacity:l];
     [newString setString:string];
@@ -41,7 +41,7 @@
 }
 
 
-+(NSString *) lpad:(NSString *)string to:(int)l {
++(NSString *) lpad:(NSString *)string to:(NSUInteger)l {
     
     NSMutableString *newString = [NSMutableString stringWithCapacity:l];
     while ([newString length] + [string length] < l)
@@ -68,34 +68,52 @@
 
 +(void) drawPointAt:(cpVect)point {
     
-    [self drawPointAt:point.x :point.y];
+    const cpVect points[] = { point };
+    [self drawPointAtAll:points count:1];
 }
 
 
-+(void) drawPointAt:(GLfloat)x :(GLfloat)y {
++(void) drawPointAtAll:(cpVect *)points count:(int)count {
     
-    [self drawPointAt:x :y color:0xffffffff];
+    [self drawPointAtAll:points count:count color:0xffffffff];
 }
 
 
 +(void) drawPointAt:(cpVect)point color:(long) color {
 
-    [self drawPointAt:point.x :point.y color:color];
+    const cpVect points[] = { point };
+    [self drawPointAtAll:points count:1 color:color];
 }
 
 
-+(void) drawPointAt:(GLfloat)x :(GLfloat)y color:(long) color {
++(void) drawPointAtAll:(cpVect *)points count:(int)n color:(long) color {
     
-    const GLfloat point[1 * 2] = { x, y };
+    GLfloat *vertices = malloc(sizeof(GLfloat) * 2 * (n + 1));
+    for(int i = 0; i < n; ++i) {
+        vertices[(i + 1) * 2 + 0] = points[i].x;
+        vertices[(i + 1) * 2 + 1] = points[i].y;
+    }
+    
     const GLubyte *colorBytes = (GLubyte *)&color;
+    GLubyte *colors = malloc(sizeof(GLubyte) * 4 * (n + 1));
+    for(int i = 0; i < n + 1; ++i) {
+        colors[i * 4 + 0] = colorBytes[3];
+        colors[i * 4 + 1] = colorBytes[2];
+        colors[i * 4 + 2] = colorBytes[1];
+        colors[i * 4 + 3] = colorBytes[0];
+    }
     
-    glVertexPointer(2, GL_FLOAT, 0, point);
+    glVertexPointer(2, GL_FLOAT, 0, points);
     glEnableClientState(GL_VERTEX_ARRAY);
-    glColor4f(colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0]);
+	glColorPointer(4, GL_UNSIGNED_BYTE, 0, colors);
+	glEnableClientState(GL_COLOR_ARRAY);
     
-    glDrawArrays(GL_POINTS, 0, 1);
+    glDrawArrays(GL_POINTS, 0, n);
     
     glDisableClientState(GL_VERTEX_ARRAY);
+    
+    free(vertices);
+    free(colors);
 }
 
 
@@ -170,6 +188,7 @@
     }
     
     [Utility drawLineFrom:from toAll:to count:n color:color width:width];
+    free(to);
 }
 
 
@@ -212,24 +231,21 @@
     // Reset data source.
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
+    
+    free(vertices);
+    free(colors);
 }
 
 
 +(void) drawBoxFrom:(cpVect)from to:(cpVect)to {
     
-    [self drawBoxFrom:from.x :from.y to:to.x :to.y];
+    [self drawBoxFrom:from to:to color:0xffffffff];
 }
 
 
 +(void) drawBoxFrom:(cpVect)from size:(cpVect)size {
     
-    [self drawBoxFrom:from to:cpv(from.x + size.x, from.y + size.y)];
-}
-
-
-+(void) drawBoxFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1 {
-    
-    [self drawBoxFrom:x0 :y0 to:x1 :y1 color:0xffffffff];
+    [self drawBoxFrom:from size:size color:0xffffffff];
 }
 
 
@@ -240,18 +256,12 @@
 
 
 +(void) drawBoxFrom:(cpVect)from to:(cpVect)to color:(long)color {
-    
-    [self drawBoxFrom:from.x :from.y to:to.x :to.y color:color];
-}
 
-
-+(void) drawBoxFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1 color:(long)color {
-    
     const GLfloat vertices[4 * 2] = {
-        x0, y0,
-        x1, y0,
-        x0, y1,
-        x1, y1,
+        from.x, from.y,
+        to.x,   from.y,
+        from.x, to.y,
+        to.x,   to.y,
     };
     const GLubyte *colorBytes = (GLubyte *)&color;
     const GLubyte colors[4 * 4] = {
@@ -277,19 +287,13 @@
 
 +(void) drawBorderFrom:(cpVect)from to:(cpVect)to {
     
-    [self drawBorderFrom:from.x :from.y to:to.x :to.y];
+    [self drawBorderFrom:from to:to color:0xffffffff width:1.0f];
 }
 
 
 +(void) drawBorderFrom:(cpVect)from size:(cpVect)size {
     
     [self drawBorderFrom:from to:cpv(from.x + size.x, from.y + size.y)];
-}
-
-
-+(void) drawBorderFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1 {
-    
-    [self drawBorderFrom:x0 :y0 to:x1 :y1 color:0xffffffff width:1.0f];
 }
 
 
@@ -300,18 +304,12 @@
 
 
 +(void) drawBorderFrom:(cpVect)from to:(cpVect)to color:(long)color width:(float)width {
-    
-    [self drawBorderFrom:from.x :from.y to:to.x :to.y color:color width:width];
-}
 
-
-+(void) drawBorderFrom:(GLfloat)x0 :(GLfloat)y0 to:(GLfloat)x1 :(GLfloat)y1 color:(long)color width:(float)width {
-    
     const GLfloat vertices[4 * 2] = {
-        x0, y0,
-        x1, y0,
-        x1, y1,
-        x0, y1,
+        from.x, from.y,
+        to.x,   from.y,
+        to.x,   to.y,
+        from.x, to.y,
     };
     const GLubyte *colorBytes = (GLubyte *)&color;
     const GLubyte colors[4 * 4] = {

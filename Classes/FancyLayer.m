@@ -20,11 +20,12 @@
         return self;
     
     int barHeight   = 0;
-    if(![[UIApplication sharedApplication] isStatusBarHidden])
+    if(![[UIApplication sharedApplication] isStatusBarHidden]) {
         if([[Director sharedDirector] landscape])
             barHeight   = [[UIApplication sharedApplication] statusBarFrame].size.width;
         else
             barHeight   = [[UIApplication sharedApplication] statusBarFrame].size.height;
+    }
     
     CGSize winSize  = [[Director sharedDirector] winSize].size;
     contentSize     = CGSizeMake(winSize.width, winSize.height - barHeight);

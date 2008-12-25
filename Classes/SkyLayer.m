@@ -56,7 +56,7 @@
     free(stars);
     stars = malloc(sizeof(GLfloat) * 2 * starCount);
     
-    for (int s = 0; s < starCount; ++s) {
+    for (NSUInteger s = 0; s < starCount; ++s) {
         stars[s * 2 + 0] = random() % (long) contentSize.width;
         stars[s * 2 + 1] = random() % (long) contentSize.height;
     }

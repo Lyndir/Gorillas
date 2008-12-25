@@ -60,7 +60,7 @@
 @property (readwrite) long                  skyColor;
 @property (readwrite) long                  starColor;
 @property (readwrite) int                   starSpeed;
-@property (readwrite) int                   starAmount;
+@property (readwrite) NSUInteger            starAmount;
 
 @property (readwrite) float                 windModifier;
 @property (readwrite) int                   gravity;
@@ -73,6 +73,7 @@
 @property (readonly) NSString               *levelName;
 @property (readwrite, assign) NSArray       *levelNames;
 @property (readonly) int                    levelNameCount;
+@property (readwrite) float                 levelProgress;
 
 @property (readwrite) int                   score;
 @property (readwrite, assign) NSDictionary  *topScoreHistory;

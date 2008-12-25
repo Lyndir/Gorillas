@@ -209,7 +209,7 @@ static void propertyListenerCallback(
 	);
 	
 	// set the volume of the playback audio queue
-	[self setGain: 1.0];
+	[self setGain: 1.0f];
 	
 	AudioQueueSetParameter(
 		queueObject,
@@ -312,12 +312,12 @@ static void propertyListenerCallback(
 		&maxPacketSize
 	);
 
-	static const int maxBufferSize = 0x10000;	// limit maximum size to 64K
-	static const int minBufferSize = 0x4000;	// limit minimum size to 16K
+	static const NSUInteger maxBufferSize = 0x10000;	// limit maximum size to 64K
+	static const NSUInteger minBufferSize = 0x4000;	// limit minimum size to 16K
 
 	if (audioFormat.mFramesPerPacket) {
 		Float64 numPacketsForTime = audioFormat.mSampleRate / audioFormat.mFramesPerPacket * seconds;
-		[self setBufferByteSize: numPacketsForTime * maxPacketSize];
+		[self setBufferByteSize: (float) numPacketsForTime * maxPacketSize];
 	} else {
 		// if frames per packet is zero, then the codec doesn't know the relationship between 
 		// packets and time -- so we return a default buffer size
