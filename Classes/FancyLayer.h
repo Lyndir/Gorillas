@@ -14,8 +14,8 @@
 
     GLubyte opacity;
     CGSize  contentSize;
-    int     outerPadding;
-    int     padding;
+    float   outerPadding;
+    float   padding;
     float   innerRatio;
     long    color;
     
@@ -27,8 +27,8 @@
 
 @property (readwrite) GLubyte   opacity;
 @property (readwrite) CGSize    contentSize;
-@property (readwrite) int       outerPadding;
-@property (readwrite) int       padding;
+@property (readwrite) float     outerPadding;
+@property (readwrite) float     padding;
 @property (readwrite) float     innerRatio;
 @property (readwrite) long      color;
 

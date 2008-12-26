@@ -81,46 +81,64 @@
     [defaultDateFormatter release];
     free(tDates);
     free(tScores);
-    NSDictionary *history = [[NSDictionary alloc] initWithObjects:scores forKeys:dates];
+    
+    // Top score label.
+    Label *topScoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"Top Score: %04d", topScore]
+                                              dimensions:CGSizeMake(200, [[GorillasConfig get] fontSize])
+                                               alignment:UITextAlignmentCenter
+                                                fontName:[[GorillasConfig get] fixedFontName]
+                                                fontSize:[[GorillasConfig get] smallFontSize]];
+    [topScoreLabel setPosition:cpv(contentSize.width / 2, contentSize.height - padding + [[GorillasConfig get] smallFontSize])];
+    [self add:topScoreLabel];
+    [topScoreLabel release];
     
     // Iterate over sorted data and add them as Labels.
-    CGSize winSize = [[Director sharedDirector] winSize].size;
-    int pad = [[GorillasConfig get] fontSize] * 1.5f;
-    int x = pad;
+    int x = padding;
     
     // Formatter for our score dates.
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"d"];
     
-    stats = [[NSMutableArray alloc] initWithCapacity:[topScores count]];
+    NSDictionary *history = [[NSDictionary alloc] initWithObjects:scores forKeys:dates];
     NSEnumerator *datesEnumerator = [[[history allKeys] sortedArrayUsingSelector:@selector(compare:)] reverseObjectEnumerator];
     for(NSDate *date in [datesEnumerator allObjects]) {
-        int score = [(NSNumber *) [history objectForKey:date] floatValue];
-        float scoreRatio = (float) score / topScore;
         
+        // Height ratio of score tower.
+        //  - Adjust ratio for top and bottom tower padding.
+        //  - Adjust ratio to undo theme's max building height.
+        int score = [(NSNumber *) [history objectForKey:date] floatValue];
+        float scoreRatio = ((float) score / topScore);
+        scoreRatio *= ((contentSize.height - padding * 2) / contentSize.height);
+        scoreRatio /= [[GorillasConfig get] buildingMax];
+
+        // Score tower.
         BuildingLayer *scoreTower = [[BuildingLayer alloc] initWithWidth:gBarSize heightRatio:scoreRatio];
+        [scoreTower setPosition:cpv(x, padding)];
+        [scoreTower reset];
+
+        // Score label.
         Label *scoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%d", score]
                                                dimensions:CGSizeMake(gBarSize * 2, [[GorillasConfig get] smallFontSize] / 2)
                                                 alignment:UITextAlignmentCenter
                                                  fontName:[[GorillasConfig get] fixedFontName]
                                                  fontSize:[[GorillasConfig get] smallFontSize] / 2];
-        NSString *dateString = [dateFormatter stringFromDate:date];
-        Label *dateLabel = [[Label alloc] initWithString:[Utility appendOrdinalPrefixFor:[dateString intValue] to:dateString]
-                                               dimensions:CGSizeMake(gBarSize * 2, [[GorillasConfig get] smallFontSize] / 2)
-                                                alignment:UITextAlignmentCenter
-                                                 fontName:[[GorillasConfig get] fixedFontName]
-                                                 fontSize:[[GorillasConfig get] smallFontSize] / 2];
-        [scoreTower setPosition:cpv(x, pad + [dateLabel contentSize].height)];
         [scoreLabel setPosition:cpv([scoreTower position].x + [scoreTower contentSize].width / 2,
                                     [scoreTower position].y + [scoreTower contentSize].height + [scoreLabel contentSize].height)];
+        
+        // Score's date label.
+        NSString *dateString = [dateFormatter stringFromDate:date];
+        Label *dateLabel = [[Label alloc] initWithString:[Utility appendOrdinalPrefixFor:[dateString intValue] to:dateString]
+                                              dimensions:CGSizeMake(gBarSize * 2, [[GorillasConfig get] smallFontSize] / 2)
+                                               alignment:UITextAlignmentCenter
+                                                fontName:[[GorillasConfig get] fixedFontName]
+                                                fontSize:[[GorillasConfig get] smallFontSize] / 2];
         [dateLabel setPosition:cpv([scoreTower position].x + [scoreTower contentSize].width / 2,
                                    [scoreTower position].y - [dateLabel contentSize].height)];
-        //[stat setRGB:(int) (0xcc * scoreRatio) :(int) (0xcc * (1 - scoreRatio)) :0x00];
+        
         [scoreTower do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
         [scoreLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
         [dateLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
 
-        [stats addObject:scoreTower];
         [self add:scoreTower];
         [self add:scoreLabel];
         [self add:dateLabel];
@@ -130,7 +148,7 @@
         [scoreLabel release];
         [dateLabel release];
         
-        if(x >= winSize.width - pad)
+        if(x >= contentSize.width - padding)
             break;
     }
     
@@ -141,9 +159,6 @@
 
 -(void) gone {
     
-    [stats removeAllObjects];
-    [stats release];
-    stats = nil;
 }
 
 
@@ -154,8 +169,6 @@
 
 
 -(void) dealloc {
-    
-    [self gone];
     
     [super dealloc];
 }

@@ -30,8 +30,6 @@
 @interface StatisticsLayer : ShadeLayer {
     
     Menu *menu;
-    
-    NSMutableArray *stats;
 }
 
 @end

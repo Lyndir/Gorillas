@@ -29,11 +29,11 @@
     
     CGSize winSize  = [[Director sharedDirector] winSize].size;
     contentSize     = CGSizeMake(winSize.width, winSize.height - barHeight);
-    outerPadding    = 5;
-    padding         = 50;
+    outerPadding    = 5.0f;
+    padding         = 50.0f;
     color           = 0x000000dd;
     opacity         = color & 0x000000ff;
-    innerRatio      = 1.0f / 50;
+    innerRatio      = 1.0f / padding;
     
     [self update];
     

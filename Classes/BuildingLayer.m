@@ -83,7 +83,7 @@
     
     const float floorHeight = wHeight + wPad;
     const int fixedFloors   = [[GorillasConfig get] fixedFloors];
-    const int varFloors     = (size.height * [[GorillasConfig get] buildingMax]
+    const int varFloors     = ((size.height - position.y) * [[GorillasConfig get] buildingMax]
                                - (fixedFloors * floorHeight) - wPad) / floorHeight;
     const int addFloors     = heightRatio? varFloors * heightRatio: random() % varFloors;
 
