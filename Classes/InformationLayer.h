@@ -29,7 +29,7 @@
 
 @interface InformationLayer : ShadeLayer {
 
-    Menu *menu;
+    Menu *menu, *backMenu;
 }
 
 -(void) guide: (id)sender;

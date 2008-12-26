@@ -39,14 +39,15 @@
     if(!(self = [super init]))
         return self;
     
-    MenuItem *back  = [MenuItemFont itemFromString:@"Back"
-                                            target:self
-                                          selector:@selector(back:)];
+    // Back.
+    MenuItem *back     = [MenuItemFont itemFromString:@"<"
+                                               target: self
+                                             selector: @selector(back:)];
     
     menu = [[Menu menuWithItems:back, nil] retain];
-    [menu setPosition:cpv([menu position].x, padding - [[GorillasConfig get] fontSize])];
+    [menu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [menu alignItemsHorizontally];
-
+    
     return self;
 }
 

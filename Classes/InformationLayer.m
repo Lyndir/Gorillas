@@ -36,23 +36,37 @@
 
     if(!(self = [super init]))
         return self;
-    
+
+    // Version string.
+    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *ver   = [MenuItemFont itemFromString:[[NSBundle mainBundle]
                                                     objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
     [ver setIsEnabled:false];
+    
+    // Information menus.
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *guide = [MenuItemFont itemFromString:@"Game Guide"
                                             target:self
                                           selector:@selector(guide:)];
     MenuItem *stats = [MenuItemFont itemFromString:@"Statistics"
                                             target:self
                                           selector:@selector(stats:)];
-    MenuItem *back  = [MenuItemFont itemFromString:@"Back"
-                                            target:self
-                                          selector:@selector(mainMenu:)];
     
-    menu = [[Menu menuWithItems:ver, guide, stats, back, nil] retain];
+    menu = [[Menu menuWithItems:ver, guide, stats, nil] retain];
     [menu alignItemsVertically];
 
+    
+    // Back.
+    MenuItem *back     = [MenuItemFont itemFromString:@"<"
+                                               target: self
+                                             selector: @selector(mainMenu:)];
+    
+    backMenu = [[Menu menuWithItems:back, nil] retain];
+    [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
+    [backMenu alignItemsHorizontally];
+    
     return self;
 }
 
@@ -63,6 +77,8 @@
     
     [menu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
     [self add:menu];
+    [backMenu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    [self add:backMenu];
 }
 
 

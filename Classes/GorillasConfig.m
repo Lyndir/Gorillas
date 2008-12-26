@@ -101,7 +101,7 @@
     
     [defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
                                 [CityTheme defaultThemeName],                               dCityTheme,
-                                [NSNumber numberWithInteger:    30],                        dFontSize,
+                                [NSNumber numberWithInteger:    34],                        dFontSize,
                                 [NSNumber numberWithInteger:    18],                        dSmallFontSize,
                                 @"Marker Felt",                                             dFontName,
                                 @"American Typewriter",                                     dFixedFontName,
@@ -140,10 +140,12 @@
                                 [NSNumber numberWithInteger:    5],                         dDeathScoreRatio,
                                 
                                 [NSDictionary dictionaryWithObjectsAndKeys:
-                                 @"Sky High",           @"blockdropper3.wav",
-                                 @"Veritech",           @"veritech.wav",
-                                 @"Fighting Gorillas",  @"fighting_gorillas.wav",
-                                 @"Off",                @"",
+                                 @"Sky High",               @"blockdropper3.wav",
+                                 @"Veritech",               @"veritech.wav",
+                                 @"Fighting Gorillas",      @"fighting_gorillas.wav",
+                                 @"Pride of the Pacific",   @"prideofthepacific.wav",
+                                 @"Fork Bomb",              @"forkbomb.wav",
+                                 @"Off",                    @"",
                                  nil],                                                      dTracks,
                                 @"blockdropper3.wav",                                       dCurrentTrack,
                                 

@@ -29,7 +29,7 @@
 
 @interface ConfigurationLayer : ShadeLayer {
     
-    Menu *menu;
+    Menu *menu, *backMenu;
 }
 
 

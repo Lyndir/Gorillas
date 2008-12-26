@@ -42,13 +42,16 @@
         return self;
 
     width = [[Director sharedDirector] winSize].size.width;
-    height =[[GorillasConfig get] fontSize] + 5;
+    height =[[GorillasConfig get] smallFontSize] + 10;
     position = cpv(0, -height);
-
-    menuButton = [MenuItemFont itemFromString:@"                              " target:self selector:@selector(menuButton:)];
     
+    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
+    menuButton = [MenuItemFont itemFromString:@"                              " target:self selector:@selector(menuButton:)];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [menuButton setTag:5];
+
     menuMenu = [[Menu menuWithItems:menuButton, nil] retain];
-    [menuMenu setPosition:cpv([menuMenu position].x, [[GorillasConfig get] fontSize] / 2)];
+    [menuMenu setPosition:cpv([menuMenu position].x, (height - 5) / 2)];
     [menuMenu alignItemsHorizontally];
     
     // Score.

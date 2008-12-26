@@ -73,6 +73,8 @@
 		DA6314C20EFAEA06007D203B /* TestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C10EFAEA06007D203B /* TestLayer.m */; };
 		DA6314C50EFAEAD0007D203B /* FancyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C40EFAEAD0007D203B /* FancyLayer.m */; };
 		DA6C17CE0EC0F698006D43BD /* ExplosionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C17CD0EC0F698006D43BD /* ExplosionLayer.m */; };
+		DA6DC94F0F0409A000E94E84 /* forkbomb.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94D0F0409A000E94E84 /* forkbomb.wav */; };
+		DA6DC9500F0409A000E94E84 /* prideofthepacific.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94E0F0409A000E94E84 /* prideofthepacific.wav */; };
 		DA7547F80EAB66D40083EC7C /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
 		DA75482C0EAB77450083EC7C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75482B0EAB77450083EC7C /* OpenGLES.framework */; };
 		DA75496D0EAB77970083EC7C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75496C0EAB77970083EC7C /* QuartzCore.framework */; };
@@ -246,6 +248,8 @@
 		DA6314C40EFAEAD0007D203B /* FancyLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FancyLayer.m; sourceTree = "<group>"; };
 		DA6C17CC0EC0F698006D43BD /* ExplosionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplosionLayer.h; sourceTree = "<group>"; };
 		DA6C17CD0EC0F698006D43BD /* ExplosionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExplosionLayer.m; sourceTree = "<group>"; };
+		DA6DC94D0F0409A000E94E84 /* forkbomb.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = forkbomb.wav; sourceTree = "<group>"; };
+		DA6DC94E0F0409A000E94E84 /* prideofthepacific.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = prideofthepacific.wav; sourceTree = "<group>"; };
 		DA7547F40EAB66D40083EC7C /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
 		DA7547F50EAB66D40083EC7C /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		DA75482B0EAB77450083EC7C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -616,6 +620,8 @@
 		DA859ECB0EC5B7030036B7C0 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				DA6DC94D0F0409A000E94E84 /* forkbomb.wav */,
+				DA6DC94E0F0409A000E94E84 /* prideofthepacific.wav */,
 				DAF9059B0EFD12D100797E7A /* blockdropper3.wav */,
 				DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */,
 				DAAC33230EC5E26800816338 /* veritech.wav */,
@@ -732,6 +738,8 @@
 				DAFEB9C20EFDCA540074333B /* page9.guide in Resources */,
 				DA83EBE40EFEE58800305C9F /* icon.png in Resources */,
 				DA83EC1A0EFEE93100305C9F /* Entitlements.plist in Resources */,
+				DA6DC94F0F0409A000E94E84 /* forkbomb.wav in Resources */,
+				DA6DC9500F0409A000E94E84 /* prideofthepacific.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

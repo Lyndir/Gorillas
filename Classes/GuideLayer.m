@@ -38,7 +38,7 @@
         return self;
 
     // Guide Content.
-    guidePages = [[NSArray arrayWithObjects:
+    guidePages = [[NSArray alloc] initWithObjects:
                    [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page1" ofType:@"guide"]],
                    [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page2" ofType:@"guide"]],
                    [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page3" ofType:@"guide"]],
@@ -48,32 +48,40 @@
                    [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page7" ofType:@"guide"]],
                    [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page8" ofType:@"guide"]],
                    [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page9" ofType:@"guide"]],
-                   nil] retain];
+                   nil];
+    
     
     // Controls.
-    MenuItem *next  = [MenuItemFont itemFromString:@"Next"
+    MenuItem *next  = [MenuItemFont itemFromString:@">"
                                             target:self
                                           selector:@selector(next:)];
-    pageItem        = [[MenuItemFont itemFromString:[NSString stringWithFormat:@"%d / %d", [guidePages count], [guidePages count]]
-                                            target:self
-                                          selector:@selector(next:)] retain];
-    MenuItem *back  = [MenuItemFont itemFromString:@"Back"
-                                            target:self
-                                          selector:@selector(back:)];
+    MenuItem *back  = [MenuItemFont itemFromString:@"<"
+                                               target: self
+                                             selector: @selector(back:)];
     
-    menu = [[Menu menuWithItems:back, pageItem, next, nil] retain];
-    [menu setPosition:cpv([menu position].x, padding - [[GorillasConfig get] fontSize])];
-    [menu alignItemsHorizontally];
-
     CGSize winSize = [[Director sharedDirector] winSize].size;
+    nextMenu = [[Menu menuWithItems:next, nil] retain];
+    [nextMenu setPosition:cpv(winSize.width - [[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
+    [nextMenu alignItemsHorizontally];
+    backMenu = [[Menu menuWithItems:back, nil] retain];
+    [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
+    [backMenu alignItemsHorizontally];
+
     cpVect s = cpv(winSize.width - padding, winSize.height - [[GorillasConfig get] fontSize] - padding);
     
-    pageLabel = [[Label labelWithString:@""
+    pageLabel = [[Label alloc] initWithString:@""
                              dimensions:CGSizeMake(s.x, s.y)
                               alignment:UITextAlignmentLeft
                                fontName:[[GorillasConfig get] fixedFontName]
-                               fontSize:[[GorillasConfig get] smallFontSize]] retain];
+                               fontSize:[[GorillasConfig get] smallFontSize]];
     [pageLabel setPosition:cpv(winSize.width / 2, winSize.height / 2)];
+    
+    pageNumberLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%d / %d", [guidePages count], [guidePages count]]
+                                         dimensions:CGSizeMake(100, [[GorillasConfig get] fontSize])
+                                          alignment:UITextAlignmentCenter
+                                           fontName:[[GorillasConfig get] fontName]
+                                           fontSize:[[GorillasConfig get] fontSize]];
+    [pageNumberLabel setPosition:cpv(winSize.width / 2, padding - [[GorillasConfig get] fontSize] / 2)];
     
     return self;
 }
@@ -86,14 +94,18 @@
     page = 0;
     [self flipPage];
     
-    [menu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-    [self add:menu];
+    [pageNumberLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    [self add:pageNumberLabel];
+    [backMenu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    [self add:backMenu];
+    [nextMenu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    [self add:nextMenu];
 }
 
 
 -(void) flipPage {
     
-    [[pageItem label] setString:[NSString stringWithFormat:@"%d / %d", page + 1, [guidePages count]]];
+    [pageNumberLabel setString:[NSString stringWithFormat:@"%d / %d", page + 1, [guidePages count]]];
     
     if([pageLabel parent] == nil) {
         [pageLabel setString:[guidePages objectAtIndex:page]];
@@ -130,7 +142,8 @@
 
 -(void) dealloc {
     
-    [menu release];
+    [backMenu release];
+    [nextMenu release];
     
     [super dealloc];
 }
