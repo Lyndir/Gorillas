@@ -56,17 +56,17 @@
     float windRange = (5 * [[GorillasConfig get] windModifier]);
     CGSize winSize = [[Director sharedDirector] winSize].size;
     
-    const cpVect byAll[] = {
+    const cpVect by[] = {
         cpv(windRange * wind,           0     ),
         cpv((wind < 0? 1: -1) * 3,      +3    ),
         cpv(0,                          -3 * 2),
         cpv((wind < 0? -1: 1) * 3,      +3    ),
     };
-    [Utility drawLineFrom:cpv(winSize.width / 2, winSize.height - [[GorillasConfig get] smallFontSize])
-                    byAll:byAll
-                    count:4
-                    color:color
-                    width:1];
+    [Utility drawLinesFrom:cpv(winSize.width / 2, winSize.height - [[GorillasConfig get] smallFontSize])
+                        by:by
+                     count:4
+                     color:color
+                     width:1];
 }
 
 

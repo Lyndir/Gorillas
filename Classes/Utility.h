@@ -37,23 +37,24 @@
 +(NSString *) appendOrdinalPrefixFor:(int)number to:(NSString *)prefix;
 
 +(void) drawPointAt:(cpVect)point;
-+(void) drawPointAtAll:(const cpVect *)point count:(int)count;
++(void) drawPointsAt:(const cpVect *)points count:(int)count;
 +(void) drawPointAt:(cpVect)point color:(long)color;
-+(void) drawPointAtAll:(const cpVect *)point count:(int)count color:(long)color;
++(void) drawPointsAt:(const cpVect *)points count:(int)count color:(long)color;
 
 
 +(void) drawLineFrom:(cpVect)from by:(cpVect)by;
-+(void) drawLineFrom:(cpVect)from byAll:(const cpVect *)byAll count:(int)count;
++(void) drawLinesFrom:(cpVect)from by:(const cpVect *)by count:(int)count;
 +(void) drawLineFrom:(cpVect)from to:(cpVect)to;
-+(void) drawLineFrom:(cpVect)from toAll:(const cpVect *)toAll count:(int)count;
++(void) drawLinesFrom:(cpVect)from to:(const cpVect *)to count:(int)count;
 +(void) drawLineFrom:(cpVect)from by:(cpVect)by color:(long)color;
-+(void) drawLineFrom:(cpVect)from byAll:(const cpVect *)byAll count:(int)count color:(long)color;
++(void) drawLinesFrom:(cpVect)from by:(const cpVect *)by count:(int)count color:(long)color;
 +(void) drawLineFrom:(cpVect)from to:(cpVect)to color:(long)color;
-+(void) drawLineFrom:(cpVect)from toAll:(const cpVect *)toAll count:(int)count color:(long)color;
++(void) drawLinesFrom:(cpVect)from to:(const cpVect *)to count:(int)count color:(long)color;
 +(void) drawLineFrom:(cpVect)from by:(cpVect)by color:(long)color width:(float)width;
-+(void) drawLineFrom:(cpVect)from byAll:(const cpVect *)byAll count:(int)count color:(long)color width:(float)width;
++(void) drawLinesFrom:(cpVect)from by:(const cpVect *)by count:(int)count color:(long)color width:(float)width;
 +(void) drawLineFrom:(cpVect)from to:(cpVect)to color:(long)color width:(float)width;
-+(void) drawLineFrom:(cpVect)from toAll:(const cpVect *)toAll count:(int)count color:(long)color width:(float)width;
++(void) drawLinesFrom:(cpVect)from to:(const cpVect *)to count:(int)count color:(long)color width:(float)width;
++(void) drawLines:(const cpVect *)points colors:(const long *)colors count:(int)n width:(float)width;
 
 
 +(void) drawBoxFrom:(cpVect)from to:(cpVect)to;

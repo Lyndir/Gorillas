@@ -69,24 +69,24 @@
 +(void) drawPointAt:(cpVect)point {
     
     const cpVect points[] = { point };
-    [self drawPointAtAll:points count:1];
+    [self drawPointsAt:points count:1];
 }
 
 
-+(void) drawPointAtAll:(cpVect *)points count:(int)count {
++(void) drawPointsAt:(cpVect *)points count:(int)count {
     
-    [self drawPointAtAll:points count:count color:0xffffffff];
+    [self drawPointsAt:points count:count color:0xffffffff];
 }
 
 
 +(void) drawPointAt:(cpVect)point color:(long) color {
 
     const cpVect points[] = { point };
-    [self drawPointAtAll:points count:1 color:color];
+    [self drawPointsAt:points count:1 color:color];
 }
 
 
-+(void) drawPointAtAll:(cpVect *)points count:(int)n color:(long) color {
++(void) drawPointsAt:(cpVect *)points count:(int)n color:(long) color {
     
     GLfloat *vertices = malloc(sizeof(GLfloat) * 2 * (n + 1));
     for(int i = 0; i < n; ++i) {
@@ -119,99 +119,115 @@
 
 +(void) drawLineFrom:(cpVect)from by:(cpVect)by {
     
-    const cpVect byAll[] = { by };
-    [Utility drawLineFrom:from byAll:byAll count:1];
+    const cpVect _by[] = { by };
+    [Utility drawLinesFrom:from by:_by count:1];
 }
 
 
-+(void) drawLineFrom:(cpVect)from byAll:(const cpVect *)byAll count:(int)count {
++(void) drawLinesFrom:(cpVect)from by:(const cpVect *)by count:(int)count {
 
-    [Utility drawLineFrom:from byAll:byAll count:count color:0xffffffff];
+    [Utility drawLinesFrom:from by:by count:count color:0xffffffff];
 }
 
 
 +(void) drawLineFrom:(cpVect)from to:(cpVect)to {
     
-    const cpVect toAll[] = { to };
-    [Utility drawLineFrom:from toAll:toAll count:1];
+    const cpVect _to[] = { to };
+    [Utility drawLinesFrom:from to:_to count:1];
 }
 
 
-+(void) drawLineFrom:(cpVect)from toAll:(const cpVect *)toAll count:(int)count {
++(void) drawLinesFrom:(cpVect)from to:(const cpVect *)to count:(int)count {
     
-    [Utility drawLineFrom:from toAll:toAll count:count color:0xffffffff];
+    [Utility drawLinesFrom:from to:to count:count color:0xffffffff];
 }
 
 
 +(void) drawLineFrom:(cpVect)from by:(cpVect)by color:(long)color {
     
-    const cpVect byAll[] = { by };
-    [Utility drawLineFrom:from byAll:byAll count:1 color:color];
+    const cpVect _by[] = { by };
+    [Utility drawLinesFrom:from by:_by count:1 color:color];
 }
 
 
-+(void) drawLineFrom:(cpVect)from byAll:(const cpVect *)byAll count:(int)count color:(long)color {
++(void) drawLinesFrom:(cpVect)from by:(const cpVect *)by count:(int)count color:(long)color {
     
-    [Utility drawLineFrom:from byAll:byAll count:count color:color width:1];
+    [Utility drawLinesFrom:from by:by count:count color:color width:1];
 }
 
 
 +(void) drawLineFrom:(cpVect)from to:(cpVect)to color:(long)color {
 
-    const cpVect toAll[] = { to };
-    [Utility drawLineFrom:from toAll:toAll count:1 color:color];
+    const cpVect _to[] = { to };
+    [Utility drawLinesFrom:from to:_to count:1 color:color];
 }
 
 
-+(void) drawLineFrom:(cpVect)from toAll:(const cpVect *)toAll count:(int)count color:(long)color {
++(void) drawLinesFrom:(cpVect)from to:(const cpVect *)to count:(int)count color:(long)color {
     
-    [Utility drawLineFrom:from toAll:toAll count:count color:color width:1];
+    [Utility drawLinesFrom:from to:to count:count color:color width:1];
 }
 
 
 +(void) drawLineFrom:(cpVect)from by:(cpVect)by color:(long)color width:(float)width {
 
-    const cpVect byAll[] = { by };
-    [Utility drawLineFrom:from byAll:byAll count:1 color:color width:width];
+    const cpVect _by[] = { by };
+    [Utility drawLinesFrom:from by:_by count:1 color:color width:width];
 }
 
 
-+(void) drawLineFrom:(cpVect)from byAll:(const cpVect *)byAll count:(int)n color:(long)color width:(float)width {
++(void) drawLinesFrom:(cpVect)from by:(const cpVect *)by count:(int)n color:(long)color width:(float)width {
 
     cpVect *to = malloc(sizeof(cpVect) * n);
     cpFloat fx = from.x, fy = from.y;
     for(int i = 0; i < n; ++i) {
-        fx += byAll[i].x;
-        fy += byAll[i].y;
+        fx += by[i].x;
+        fy += by[i].y;
         
         to[i] = cpv(fx, fy);
     }
     
-    [Utility drawLineFrom:from toAll:to count:n color:color width:width];
+    [Utility drawLinesFrom:from to:to count:n color:color width:width];
     free(to);
 }
 
 
 +(void) drawLineFrom:(cpVect)from to:(cpVect)to color:(long)color width:(float)width {
 
-    const cpVect toAll[] = { to };
-    [Utility drawLineFrom:from toAll:toAll count:1 color:color width:width];
+    const cpVect _to[] = { to };
+    [Utility drawLinesFrom:from to:_to count:1 color:color width:width];
 }
 
 
-+(void) drawLineFrom:(cpVect)from toAll:(const cpVect *)toAll count:(int)n color:(long)color width:(float)width {
++(void) drawLinesFrom:(cpVect)from to:(const cpVect *)to count:(int)n color:(long)color width:(float)width {
     
-    GLfloat *vertices = malloc(sizeof(GLfloat) * 2 * (n + 1));
-    vertices[0] = from.x;
-    vertices[1] = from.y;
-    for(int i = 0; i < n; ++i) {
-        vertices[(i + 1) * 2 + 0] = toAll[i].x;
-        vertices[(i + 1) * 2 + 1] = toAll[i].y;
+    cpVect *points = malloc(sizeof(cpVect) * (n + 1));
+    long *colors = malloc(sizeof(long) * (n + 1));
+    points[0] = from;
+    colors[0] = color;
+    for(int i = 1; i < n + 1; ++i) {
+        points[i] = to[i - 1];
+        colors[i] = color;
     }
     
-    const GLubyte *colorBytes = (GLubyte *)&color;
-    GLubyte *colors = malloc(sizeof(GLubyte) * 4 * (n + 1));
-    for(int i = 0; i < n + 1; ++i) {
+    [Utility drawLines:points colors:colors count:n + 1 width:width];
+
+    free(points);
+    free(colors);
+}
+
+
++(void) drawLines:(const cpVect *)points colors:(const long *)longColors count:(int)n width:(float)width {
+    
+    GLfloat *vertices = malloc(sizeof(GLfloat) * 2 * n);
+    for(int i = 0; i < n; ++i) {
+        vertices[i * 2 + 0] = points[i].x;
+        vertices[i * 2 + 1] = points[i].y;
+    }
+
+    GLubyte *colors = malloc(sizeof(GLubyte) * 4 * n);
+    for(int i = 0; i < n; ++i) {
+        const GLubyte *colorBytes = (GLubyte *)&longColors[i];
         colors[i * 4 + 0] = colorBytes[3];
         colors[i * 4 + 1] = colorBytes[2];
         colors[i * 4 + 2] = colorBytes[1];
@@ -225,14 +241,13 @@
 	glEnableClientState(GL_COLOR_ARRAY);
 	
     glLineWidth(width);
-	glDrawArrays(GL_LINE_STRIP, 0, n + 1);
+	glDrawArrays(GL_LINE_STRIP, 0, n);
     glLineWidth(1.0f);
     
     // Reset data source.
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
     
-    free(vertices);
     free(colors);
 }
 

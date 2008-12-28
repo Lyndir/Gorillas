@@ -125,7 +125,7 @@
                                 [NSNumber numberWithInteger:    [theme gravity]],           dGravity,
                                 [NSNumber numberWithInteger:    30],                        dMinGravity,
                                 [NSNumber numberWithInteger:    150],                       dMaxGravity,
-                                [NSNumber numberWithLong:       0x000000ee],                dShadeColor,
+                                [NSNumber numberWithLong:       0x000000dd],                dShadeColor,
                                 [NSNumber numberWithFloat:      0.5f],                      dTransitionDuration,
      
                                 [NSNumber numberWithFloat:      0.1f],                      dLevel,
@@ -134,7 +134,28 @@
                                 [NSNumber numberWithFloat:      0.03f],                     dLevelProgress,
                                 
                                 [NSNumber numberWithInteger:    0],                         dScore,
-                                [NSMutableDictionary dictionary],                           dTopScoreHistory,
+                                [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*1)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*2)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*3)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*4)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*5)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*6)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*7)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*8)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*9)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*10)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*11)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*12)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*13)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*14)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*15)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*16)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*17)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*18)] description],
+                                 [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*19)] description],
+                                 nil
+                                ],                           dTopScoreHistory,
                                 [NSNumber numberWithInteger:    -5],                        dMissScore,
                                 [NSNumber numberWithInteger:    50],                        dKillScore,
                                 [NSNumber numberWithInteger:    5],                         dDeathScoreRatio,
@@ -430,7 +451,7 @@
 
 -(NSDate *) today {
     
-    NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
+    long now = (long) [[NSDate date] timeIntervalSince1970];
     return [NSDate dateWithTimeIntervalSince1970:(now / (3600 * 24)) * (3600 * 24)];
 }
 -(int) score {

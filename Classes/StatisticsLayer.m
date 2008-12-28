@@ -99,6 +99,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"d"];
     
+    int i = 0;
     NSDictionary *history = [[NSDictionary alloc] initWithObjects:scores forKeys:dates];
     NSEnumerator *datesEnumerator = [[[history allKeys] sortedArrayUsingSelector:@selector(compare:)] reverseObjectEnumerator];
     for(NSDate *date in [datesEnumerator allObjects]) {
@@ -113,8 +114,6 @@
 
         // Score tower.
         BuildingLayer *scoreTower = [[BuildingLayer alloc] initWithWidth:gBarSize heightRatio:scoreRatio];
-        [scoreTower setPosition:cpv(x, padding)];
-        [scoreTower reset];
 
         // Score label.
         Label *scoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%d", score]
@@ -122,8 +121,8 @@
                                                 alignment:UITextAlignmentCenter
                                                  fontName:[[GorillasConfig get] fixedFontName]
                                                  fontSize:[[GorillasConfig get] smallFontSize] / 2];
-        [scoreLabel setPosition:cpv([scoreTower position].x + [scoreTower contentSize].width / 2,
-                                    [scoreTower position].y + [scoreTower contentSize].height + [scoreLabel contentSize].height)];
+        [scoreLabel setPosition:cpv([scoreTower contentSize].width / 2,
+                                    [scoreTower contentSize].height + [scoreLabel contentSize].height)];
         
         // Score's date label.
         NSString *dateString = [dateFormatter stringFromDate:date];
@@ -132,17 +131,28 @@
                                                alignment:UITextAlignmentCenter
                                                 fontName:[[GorillasConfig get] fixedFontName]
                                                 fontSize:[[GorillasConfig get] smallFontSize] / 2];
-        [dateLabel setPosition:cpv([scoreTower position].x + [scoreTower contentSize].width / 2,
-                                   [scoreTower position].y - [dateLabel contentSize].height)];
+        [dateLabel setPosition:cpv([scoreTower contentSize].width / 2,
+                                   -[dateLabel contentSize].height)];
         
-        [scoreTower do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-        [scoreLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-        [dateLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+        [scoreTower do:[Sequence actions:
+                        [Sequence actionWithDuration:0.1f * i],
+                        [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(x, padding)],
+                        nil]];
+        [scoreLabel do:[Sequence actions:
+                        [Sequence actionWithDuration:0.1f * i],
+                        [FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]],
+                        nil]];
+        [dateLabel do:[Sequence actions:
+                       [Sequence actionWithDuration:0.1f * i],
+                       [FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]],
+                       nil]];
 
+        [scoreTower setPosition:cpv(x, -[scoreTower contentSize].height - [scoreLabel contentSize].height)];
+        [scoreTower add:scoreLabel];
+        [scoreTower add:dateLabel];
         [self add:scoreTower];
-        [self add:scoreLabel];
-        [self add:dateLabel];
         
+        ++i;
         x += [scoreTower contentSize].width + 1;
         [scoreTower release];
         [scoreLabel release];

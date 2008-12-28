@@ -187,9 +187,19 @@
     }
 #endif
 
-    if(activeGorilla && aim.x > 0)
+    if(activeGorilla && aim.x > 0) {
         // Only draw aim when aiming and gorillas are set.
-        [Utility drawLineFrom:[activeGorilla position] to:aim color:0xFF0000FF width:4];
+
+        const cpVect points[] = {
+            [activeGorilla position],
+            aim,
+        };
+        const long colors[] = {
+            [[GorillasConfig get] skyColor],
+            [[GorillasConfig get] windowColorOn],
+        };
+        [Utility drawLines:points colors:colors count:2 width:3];
+    }
 }
 
 -(BOOL) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -318,7 +328,7 @@
         float w = [[[[GorillasAppDelegate get] gameLayer] wind] wind];
         cpVect r0 = [activeGorilla position];
         cpVect rt = [target position];
-        ccTime t = 4 * 100 / g;
+        ccTime t = 3 * 100 / g;
 
         // Level-based error.
         rt = cpv(rt.x + random() % (int) ((1 - l) * 200), rt.y + random() % (int) (200 * (1 - l)));
@@ -476,6 +486,12 @@
 
 -(void) startGameWithGorilla: (GorillaLayer *)gorillaA andGorilla: (GorillaLayer *)gorillaB {
     
+    if([explosions count]) {
+        for(ExplosionLayer *explosion in explosions)
+            [self remove:explosion];
+        [explosions removeAllObjects];
+    }
+    
     [[[GorillasAppDelegate get] hudLayer] setMenuTitle: @"Menu"];
     [self stopPanning];
     [self reset];
@@ -547,11 +563,7 @@
     
     for(GorillaLayer *gorilla in gorillas)
         [self remove:gorilla];
-    for(ExplosionLayer *explosion in explosions)
-        [self remove:explosion];
-    
     [gorillas removeAllObjects];
-    [explosions removeAllObjects];
     
     [self startPanning];
     

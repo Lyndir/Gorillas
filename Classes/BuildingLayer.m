@@ -83,7 +83,7 @@
     
     const float floorHeight = wHeight + wPad;
     const int fixedFloors   = [[GorillasConfig get] fixedFloors];
-    const int varFloors     = ((size.height - position.y) * [[GorillasConfig get] buildingMax]
+    const int varFloors     = (size.height * [[GorillasConfig get] buildingMax]
                                - (fixedFloors * floorHeight) - wPad) / floorHeight;
     const int addFloors     = heightRatio? varFloors * heightRatio: random() % varFloors;
 
@@ -143,10 +143,12 @@
 
 -(void) draw {
     
+    // == DRAW BUILDING ==
     // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
     glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
     [Utility drawBoxFrom:cpv(0, 0) size:cpv(contentSize.width, contentSize.height) color:buildingColor];
 
+    // == DRAW FRONT WINDOWS ==
     // Tell OpenGL about our data.
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
@@ -160,30 +162,51 @@
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
-}
-
-
--(GLubyte) opacity {
     
-    return colors[3];
-}
-
-
--(void) setOpacity:(GLubyte)o {
+    // == DRAW REAR WINDOWS ==
+    // Set opacity of DST to 1 where there are windows -> building back won't draw over it.
+    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    for(int i = 3; i < windowCount * 6 * 4; i+=4)
-        colors[i] = 0;
+    // Tell OpenGL about our data.
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glVertexPointer(2, GL_FLOAT, 0, windows);
+    glColorPointer(4, GL_UNSIGNED_BYTE, 0, colors);
+	
+    // Draw our windows.
+    glDrawArrays(GL_TRIANGLES, 0, 6 * windowCount);
+    
+    // Reset blend & data source.
+    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_COLOR_ARRAY);
+    
+    // == DRAW BUILDING BACK ==
+    // Draw back of building where DST opacity is < 1.
+    glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA);
+    GLubyte *bColor = (GLubyte *)&buildingColor;
+    [Utility drawBoxFrom:cpv(0, 0)
+                    size:cpv(contentSize.width, contentSize.height)
+                   color:((int)(bColor[3] * 0.2f)   << 24) |
+                         ((int)(bColor[2] * 0.2f)   << 16) |
+                         ((int)(bColor[1] * 0.2f)   << 8) |
+                         ((int)(bColor[0])          << 0)];
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 
 -(void) dealloc {
- 
-    [super dealloc];
     
     if(windows != nil || colors != nil) {
         free(windows);
         free(colors);
+        windows = nil;
+        colors = nil;
     }
+    
+    [super dealloc];
 }
 
 
