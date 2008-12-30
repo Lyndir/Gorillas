@@ -248,6 +248,7 @@
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
     
+    free(vertices);
     free(colors);
 }
 

@@ -76,6 +76,9 @@
     [panAction release];
     panAction = nil;
     
+    for(ExplosionLayer *explosion in explosions)
+        [self remove:explosion];
+    [explosions removeAllObjects];
     for (BuildingLayer *building in buildings)
         [self remove:building];
     [buildings removeAllObjects];
@@ -367,7 +370,7 @@
 }
 
 
--(BOOL) hitsBuilding: (cpVect)pos {
+-(BOOL) hitsGorilla: (cpVect)pos {
 
 #ifdef _DEBUG_
     dbgPath[dbgPathCurInd] = pos;
@@ -445,6 +448,7 @@
                                 [FadeOut actionWithDuration:1],
                                 [CallFunc actionWithTarget:self selector:@selector(hitGorillaCallback:)],
                                 nil]];
+
             return true;
         }
         
@@ -452,6 +456,12 @@
             // Active gorilla was not hit -> banana cleared him.
             [banana setClearedGorilla:true];
     
+    // No hit.
+    return false;
+}
+
+
+-(BOOL) hitsBuilding:(cpVect)pos {
     
     // Figure out if a building was hit.
     for(BuildingLayer *building in buildings)
@@ -473,7 +483,7 @@
                 return true;
         }
     
-    // Nothing hit.
+    // No hit.
     return false;
 }
 
@@ -485,12 +495,6 @@
 
 
 -(void) startGameWithGorilla: (GorillaLayer *)gorillaA andGorilla: (GorillaLayer *)gorillaB {
-    
-    if([explosions count]) {
-        for(ExplosionLayer *explosion in explosions)
-            [self remove:explosion];
-        [explosions removeAllObjects];
-    }
     
     [[[GorillasAppDelegate get] hudLayer] setMenuTitle: @"Menu"];
     [self stopPanning];
@@ -599,13 +603,14 @@
 }
 
 
--(void) explodeAt: (cpVect)point {
+-(void) explodeAt: (cpVect)point isGorilla:(BOOL)isGorilla {
     
-    ExplosionLayer *explosion = [ExplosionLayer node];
+    ExplosionLayer *explosion = [[ExplosionLayer alloc] initHitsGorilla:isGorilla];
     [explosions addObject:explosion];
 
     [explosion setPosition:point];
     [self add:explosion];
+    [explosion release];
 }
 
 

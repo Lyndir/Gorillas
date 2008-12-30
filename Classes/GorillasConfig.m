@@ -134,7 +134,7 @@
                                 [NSNumber numberWithFloat:      0.03f],                     dLevelProgress,
                                 
                                 [NSNumber numberWithInteger:    0],                         dScore,
-                                [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                [NSMutableDictionary dictionary/*WithObjectsAndKeys:
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*1)] description],
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*2)] description],
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*3)] description],
@@ -154,7 +154,7 @@
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*17)] description],
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*18)] description],
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*19)] description],
-                                 nil
+                                 nil//*/
                                 ],                           dTopScoreHistory,
                                 [NSNumber numberWithInteger:    -5],                        dMissScore,
                                 [NSNumber numberWithInteger:    50],                        dKillScore,

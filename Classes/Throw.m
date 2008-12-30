@@ -60,6 +60,19 @@
     
     [target do:[Repeat actionWithAction:[RotateBy actionWithDuration:1 angle:360] times:(int)duration + 1]];
     [target setVisible:true];
+    
+    [smoke release];
+    smoke = [[ParticleMeteor alloc] initWithTotalParticles:100];
+    [smoke setPosition:[target position]];
+    [smoke setGravity:cpv(0,0)];
+    [smoke setSize:15.0f];
+    //[smoke setSpeed:50];
+    [smoke setAngleVar:0];
+    [smoke setLife:0.1f];
+    ccColorF sCol = [smoke startColor];
+    sCol.a = 0.05f;
+    [smoke setStartColor:sCol];
+    [[target parent] add:smoke];
 }
 
 
@@ -78,6 +91,14 @@
     cpVect r = cpv((v.x + w * t * [[GorillasConfig get] windModifier]) * t + r0.x,
                    v.y * t - t * t * g / 2.0f + r0.y);
     
+    [smoke setGravity:cpv(([smoke position].x - r.x) * 50,
+                          ([smoke position].y - r.y) * 50)];
+    /*float m = 1.0f;
+    if([smoke position].y > r.y)
+        m = -1.0f;
+    [smoke setAngle:(asinf(m * [smoke gravity].x / (sqrtf(powf([smoke gravity].x, 2) + powf([smoke gravity].y, 2)))) / (float) M_PI * 180.0f)];
+    [smoke setGravity:cpv(0, 0)];*/
+    [smoke setPosition:[target position]];
     [target setPosition:r];
     
     // Update HUD progress indicator.
@@ -92,27 +113,27 @@
     cpVect onScreen = cpv(r.x + parent.x, r.y - parent.y);
 
     BOOL offScreen = onScreen.x < 0 || onScreen.x > screen.width;
-    BOOL hitBuilding = [buildingsLayer hitsBuilding:r];
+    BOOL hitGorilla = [buildingsLayer hitsGorilla:r], hitBuilding = [buildingsLayer hitsBuilding:r];
     
     // Hitting something causes an explosion.
-    if(hitBuilding)
-        [buildingsLayer explodeAt:r];
+    if(hitBuilding || hitGorilla)
+        [buildingsLayer explodeAt:r isGorilla:hitGorilla];
     
     // If it reached the floor, went off screen, or hit something; stop the banana.
-    if([self isDone] || offScreen || hitBuilding) {
+    if([self isDone] || offScreen || hitBuilding || hitGorilla) {
 
         // Reset HUD progress.
         [[[GorillasAppDelegate get] hudLayer] setProgress: 0];
         
         // Update score on miss.
-        if([target visible] && (hitBuilding || offScreen))
+        if(hitBuilding || offScreen)
             [[[[GorillasAppDelegate get] gameLayer] buildings] miss];
         
         // Hide banana.
         [target stopAction:self];
         [target setVisible:false];
         [self stop];
-                
+        
         // Next Gorilla's turn.
         [buildingsLayer nextGorilla];
     }
@@ -123,6 +144,9 @@
     
     duration = 0;
     running = false;
+    [[smoke parent] remove:smoke];
+    [smoke release];
+    smoke = nil;
 }
 
 

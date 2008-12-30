@@ -30,8 +30,12 @@
 
 @interface ExplosionLayer : Sprite {
     
+    ParticleSystem *explosion;
+    ParticleSystem *flames;
+    BOOL hitsGorilla;
 }
 
+-(id) initHitsGorilla: (BOOL)hitsGorilla;
 -(BOOL) hitsExplosion: (cpVect)pos;
 
 @property (readonly) float width;

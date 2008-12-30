@@ -30,10 +30,10 @@
 
 @interface Throw : IntervalAction {
 
-    @private
     BOOL running;
     cpVect v;
     cpVect r0;
+    ParticleSystem *smoke;
 }
 
 +(Throw *) actionWithVelocity: (cpVect)velocity startPos: (cpVect)startPos;

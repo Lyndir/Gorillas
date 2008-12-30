@@ -64,9 +64,9 @@
     };
     [Utility drawLinesFrom:cpv(winSize.width / 2, winSize.height - [[GorillasConfig get] smallFontSize])
                         by:by
-                     count:4
-                     color:color
-                     width:1];
+                        count:4
+                        color:color
+                        width:1.5f];
 }
 
 

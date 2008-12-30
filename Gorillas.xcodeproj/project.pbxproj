@@ -24,6 +24,327 @@
 		DA34FE1C0EB4AE5400B68C06 /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
 		DA34FF6C0EB4E48E00B68C06 /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
 		DA34FFAA0EB4EEF300B68C06 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
+		DA379EC00F09650800541EF4 /* veritech.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAAC33230EC5E26800816338 /* veritech.wav */; };
+		DA379EC10F09650800541EF4 /* gorilla.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4E93E0EDAF37B0093BA40 /* gorilla.png */; };
+		DA379EC20F09650800541EF4 /* gorilla.gif in Resources */ = {isa = PBXBuildFile; fileRef = DAC4E9C60EDAF86F0093BA40 /* gorilla.gif */; };
+		DA379EC30F09650800541EF4 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4EA220EDB0A610093BA40 /* banana.png */; };
+		DA379EC40F09650800541EF4 /* explosion0.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A10EDCBA4600FC200F /* explosion0.png */; };
+		DA379EC50F09650800541EF4 /* explosion1.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A20EDCBA4600FC200F /* explosion1.png */; };
+		DA379EC60F09650800541EF4 /* explosion2.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A30EDCBA4600FC200F /* explosion2.png */; };
+		DA379EC70F09650800541EF4 /* explosion3.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A40EDCBA4600FC200F /* explosion3.png */; };
+		DA379EC80F09650800541EF4 /* explosion4.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A50EDCBA4600FC200F /* explosion4.png */; };
+		DA379EC90F09650800541EF4 /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2283090EE2CAC600BA53D2 /* hole.png */; };
+		DA379ECA0F09650800541EF4 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5F1BD40EE74CE80041691E /* fps_images.png */; };
+		DA379ECB0F09650800541EF4 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA4F4B5F0EF3E9030062E0E8 /* CMakeLists.txt */; };
+		DA379ECC0F09650800541EF4 /* page1.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEC0EF57EA500035664 /* page1.guide */; };
+		DA379ECD0F09650800541EF4 /* page2.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAED0EF57EA500035664 /* page2.guide */; };
+		DA379ECE0F09650800541EF4 /* page3.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEE0EF57EA500035664 /* page3.guide */; };
+		DA379ECF0F09650800541EF4 /* page4.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEF0EF57EA500035664 /* page4.guide */; };
+		DA379ED00F09650800541EF4 /* page5.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2C0EF58BC300035664 /* page5.guide */; };
+		DA379ED10F09650800541EF4 /* page6.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2D0EF58BC300035664 /* page6.guide */; };
+		DA379ED20F09650800541EF4 /* page7.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2E0EF58BC300035664 /* page7.guide */; };
+		DA379ED30F09650800541EF4 /* blockdropper3.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059B0EFD12D100797E7A /* blockdropper3.wav */; };
+		DA379ED40F09650800541EF4 /* fighting_gorillas.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */; };
+		DA379ED50F09650800541EF4 /* page8.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9BF0EFDCA540074333B /* page8.guide */; };
+		DA379ED60F09650800541EF4 /* page9.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9C00EFDCA540074333B /* page9.guide */; };
+		DA379ED70F09650800541EF4 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA83EBE30EFEE58800305C9F /* icon.png */; };
+		DA379ED80F09650800541EF4 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
+		DA379ED90F09650800541EF4 /* forkbomb.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94D0F0409A000E94E84 /* forkbomb.wav */; };
+		DA379EDA0F09650800541EF4 /* prideofthepacific.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94E0F0409A000E94E84 /* prideofthepacific.wav */; };
+		DA379EDB0F09650800541EF4 /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9420AA0F08C2CA00E105BD /* fire.png */; };
+		DA379EDD0F09650800541EF4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		DA379EDE0F09650800541EF4 /* GorillasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* GorillasAppDelegate.m */; };
+		DA379EDF0F09650800541EF4 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
+		DA379EE00F09650800541EF4 /* BuildingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */; };
+		DA379EE10F09650800541EF4 /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
+		DA379EE20F09650800541EF4 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
+		DA379EE30F09650800541EF4 /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */; };
+		DA379EE40F09650800541EF4 /* SkyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* SkyLayer.m */; };
+		DA379EE50F09650800541EF4 /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
+		DA379EE60F09650800541EF4 /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
+		DA379EE70F09650800541EF4 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
+		DA379EE80F09650800541EF4 /* StatisticsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006C0EB516D800B68C06 /* StatisticsLayer.m */; };
+		DA379EE90F09650800541EF4 /* ConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006F0EB516F400B68C06 /* ConfigurationLayer.m */; };
+		DA379EEA0F09650800541EF4 /* ExplosionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C17CD0EC0F698006D43BD /* ExplosionLayer.m */; };
+		DA379EEB0F09650800541EF4 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
+		DA379EEC0F09650800541EF4 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
+		DA379EED0F09650800541EF4 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC30EC5B2510036B7C0 /* AudioPlayer.m */; };
+		DA379EEE0F09650800541EF4 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC60EC5B2630036B7C0 /* AudioController.m */; };
+		DA379EEF0F09650800541EF4 /* AudioQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC80EC5B2630036B7C0 /* AudioQueueObject.m */; };
+		DA379EF00F09650800541EF4 /* HUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB46AA80EC85E7400F17B3F /* HUDLayer.m */; };
+		DA379EF10F09650800541EF4 /* Throw.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* Throw.m */; };
+		DA379EF20F09650800541EF4 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = DA126C8E0EDDF19100EADDE2 /* Utility.m */; };
+		DA379EF30F09650800541EF4 /* ExplosionAnimationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2282FF0EE204AF00BA53D2 /* ExplosionAnimationLayer.m */; };
+		DA379EF40F09650800541EF4 /* CityTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = DACFEC200EE96AA300A0D08E /* CityTheme.m */; };
+		DA379EF50F09650800541EF4 /* ShadeTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DA16C5180EEC856200E46246 /* ShadeTo.m */; };
+		DA379EF60F09650800541EF4 /* ContinueMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */; };
+		DA379EF70F09650800541EF4 /* InformationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F49F80EF3243C0062E0E8 /* InformationLayer.m */; };
+		DA379EF80F09650800541EF4 /* GuideLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4A250EF327A30062E0E8 /* GuideLayer.m */; };
+		DA379EF90F09650800541EF4 /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AF60EF3E8F60062E0E8 /* cocos2d.m */; };
+		DA379EFA0F09650800541EF4 /* Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AF80EF3E8F60062E0E8 /* Scheduler.m */; };
+		DA379EFB0F09650800541EF4 /* TextureNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AFA0EF3E8F60062E0E8 /* TextureNode.m */; };
+		DA379EFC0F09650800541EF4 /* ParticleSystems.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AFC0EF3E8F60062E0E8 /* ParticleSystems.m */; };
+		DA379EFD0F09650800541EF4 /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AFE0EF3E8F60062E0E8 /* Particle.m */; };
+		DA379EFE0F09650800541EF4 /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B000EF3E8F60062E0E8 /* Primitives.m */; };
+		DA379EFF0F09650800541EF4 /* Transition.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B020EF3E8F60062E0E8 /* Transition.m */; };
+		DA379F000F09650800541EF4 /* CameraAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B040EF3E8F60062E0E8 /* CameraAction.m */; };
+		DA379F010F09650800541EF4 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B060EF3E8F60062E0E8 /* Camera.m */; };
+		DA379F020F09650800541EF4 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B080EF3E8F60062E0E8 /* MenuItem.m */; };
+		DA379F030F09650800541EF4 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B0A0EF3E8F60062E0E8 /* Menu.m */; };
+		DA379F040F09650800541EF4 /* CocosNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B0C0EF3E8F60062E0E8 /* CocosNode.m */; };
+		DA379F050F09650800541EF4 /* Director.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B0E0EF3E8F60062E0E8 /* Director.m */; };
+		DA379F060F09650800541EF4 /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B100EF3E8F60062E0E8 /* Action.m */; };
+		DA379F070F09650800541EF4 /* InstantAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B120EF3E8F60062E0E8 /* InstantAction.m */; };
+		DA379F080F09650800541EF4 /* IntervalAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B140EF3E8F60062E0E8 /* IntervalAction.m */; };
+		DA379F090F09650800541EF4 /* Label.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B160EF3E8F60062E0E8 /* Label.m */; };
+		DA379F0A0F09650800541EF4 /* Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B180EF3E8F60062E0E8 /* Layer.m */; };
+		DA379F0B0F09650800541EF4 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B1A0EF3E8F60062E0E8 /* Scene.m */; };
+		DA379F0C0F09650800541EF4 /* Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B1C0EF3E8F60062E0E8 /* Sprite.m */; };
+		DA379F0D0F09650800541EF4 /* TextureMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B1E0EF3E8F60062E0E8 /* TextureMgr.m */; };
+		DA379F0E0F09650800541EF4 /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B210EF3E8F60062E0E8 /* TextureAtlas.m */; };
+		DA379F0F0F09650800541EF4 /* LabelAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B230EF3E8F60062E0E8 /* LabelAtlas.m */; };
+		DA379F100F09650800541EF4 /* TileMapAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B250EF3E8F60062E0E8 /* TileMapAtlas.m */; };
+		DA379F110F09650800541EF4 /* AtlasNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B270EF3E8F60062E0E8 /* AtlasNode.m */; };
+		DA379F120F09650800541EF4 /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B5D0EF3E9030062E0E8 /* chipmunk.c */; };
+		DA379F130F09650800541EF4 /* cpArbiter.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B600EF3E9030062E0E8 /* cpArbiter.c */; };
+		DA379F140F09650800541EF4 /* cpArray.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B620EF3E9030062E0E8 /* cpArray.c */; };
+		DA379F150F09650800541EF4 /* cpBB.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B640EF3E9030062E0E8 /* cpBB.c */; };
+		DA379F160F09650800541EF4 /* cpBody.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B660EF3E9030062E0E8 /* cpBody.c */; };
+		DA379F170F09650800541EF4 /* cpCollision.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B680EF3E9030062E0E8 /* cpCollision.c */; };
+		DA379F180F09650800541EF4 /* cpHashSet.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B6A0EF3E9030062E0E8 /* cpHashSet.c */; };
+		DA379F190F09650800541EF4 /* cpJoint.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B6C0EF3E9030062E0E8 /* cpJoint.c */; };
+		DA379F1A0F09650800541EF4 /* cpPolyShape.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B6E0EF3E9030062E0E8 /* cpPolyShape.c */; };
+		DA379F1B0F09650800541EF4 /* cpShape.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B700EF3E9030062E0E8 /* cpShape.c */; };
+		DA379F1C0F09650800541EF4 /* cpSpace.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B720EF3E9030062E0E8 /* cpSpace.c */; };
+		DA379F1D0F09650800541EF4 /* cpSpaceHash.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B740EF3E9030062E0E8 /* cpSpaceHash.c */; };
+		DA379F1E0F09650800541EF4 /* cpVect.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B760EF3E9030062E0E8 /* cpVect.c */; };
+		DA379F1F0F09650800541EF4 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B950EF3E90D0062E0E8 /* EAGLView.m */; };
+		DA379F200F09650800541EF4 /* glu.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B960EF3E90D0062E0E8 /* glu.c */; };
+		DA379F210F09650800541EF4 /* Texture2D.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B9A0EF3E90D0062E0E8 /* Texture2D.m */; };
+		DA379F220F09650800541EF4 /* TGAlib.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B9C0EF3E90D0062E0E8 /* TGAlib.c */; };
+		DA379F230F09650800541EF4 /* TestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C10EFAEA06007D203B /* TestLayer.m */; };
+		DA379F240F09650800541EF4 /* FancyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C40EFAEAD0007D203B /* FancyLayer.m */; };
+		DA379F250F09650800541EF4 /* WindLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83F0BA0F00527B00305C9F /* WindLayer.m */; };
+		DA379F270F09650800541EF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		DA379F280F09650800541EF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		DA379F290F09650800541EF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		DA379F2A0F09650800541EF4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75482B0EAB77450083EC7C /* OpenGLES.framework */; };
+		DA379F2B0F09650800541EF4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75496C0EAB77970083EC7C /* QuartzCore.framework */; };
+		DA379F2C0F09650800541EF4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */; };
+		DA379F350F09654A00541EF4 /* veritech.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAAC33230EC5E26800816338 /* veritech.wav */; };
+		DA379F360F09654A00541EF4 /* gorilla.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4E93E0EDAF37B0093BA40 /* gorilla.png */; };
+		DA379F370F09654A00541EF4 /* gorilla.gif in Resources */ = {isa = PBXBuildFile; fileRef = DAC4E9C60EDAF86F0093BA40 /* gorilla.gif */; };
+		DA379F380F09654A00541EF4 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4EA220EDB0A610093BA40 /* banana.png */; };
+		DA379F390F09654A00541EF4 /* explosion0.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A10EDCBA4600FC200F /* explosion0.png */; };
+		DA379F3A0F09654A00541EF4 /* explosion1.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A20EDCBA4600FC200F /* explosion1.png */; };
+		DA379F3B0F09654A00541EF4 /* explosion2.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A30EDCBA4600FC200F /* explosion2.png */; };
+		DA379F3C0F09654A00541EF4 /* explosion3.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A40EDCBA4600FC200F /* explosion3.png */; };
+		DA379F3D0F09654A00541EF4 /* explosion4.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A50EDCBA4600FC200F /* explosion4.png */; };
+		DA379F3E0F09654A00541EF4 /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2283090EE2CAC600BA53D2 /* hole.png */; };
+		DA379F3F0F09654A00541EF4 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5F1BD40EE74CE80041691E /* fps_images.png */; };
+		DA379F400F09654A00541EF4 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA4F4B5F0EF3E9030062E0E8 /* CMakeLists.txt */; };
+		DA379F410F09654A00541EF4 /* page1.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEC0EF57EA500035664 /* page1.guide */; };
+		DA379F420F09654A00541EF4 /* page2.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAED0EF57EA500035664 /* page2.guide */; };
+		DA379F430F09654A00541EF4 /* page3.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEE0EF57EA500035664 /* page3.guide */; };
+		DA379F440F09654A00541EF4 /* page4.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEF0EF57EA500035664 /* page4.guide */; };
+		DA379F450F09654A00541EF4 /* page5.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2C0EF58BC300035664 /* page5.guide */; };
+		DA379F460F09654A00541EF4 /* page6.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2D0EF58BC300035664 /* page6.guide */; };
+		DA379F470F09654A00541EF4 /* page7.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2E0EF58BC300035664 /* page7.guide */; };
+		DA379F480F09654A00541EF4 /* blockdropper3.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059B0EFD12D100797E7A /* blockdropper3.wav */; };
+		DA379F490F09654A00541EF4 /* fighting_gorillas.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */; };
+		DA379F4A0F09654A00541EF4 /* page8.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9BF0EFDCA540074333B /* page8.guide */; };
+		DA379F4B0F09654A00541EF4 /* page9.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9C00EFDCA540074333B /* page9.guide */; };
+		DA379F4C0F09654A00541EF4 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA83EBE30EFEE58800305C9F /* icon.png */; };
+		DA379F4D0F09654A00541EF4 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
+		DA379F4E0F09654A00541EF4 /* forkbomb.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94D0F0409A000E94E84 /* forkbomb.wav */; };
+		DA379F4F0F09654A00541EF4 /* prideofthepacific.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94E0F0409A000E94E84 /* prideofthepacific.wav */; };
+		DA379F500F09654A00541EF4 /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9420AA0F08C2CA00E105BD /* fire.png */; };
+		DA379F520F09654A00541EF4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		DA379F530F09654A00541EF4 /* GorillasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* GorillasAppDelegate.m */; };
+		DA379F540F09654A00541EF4 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
+		DA379F550F09654A00541EF4 /* BuildingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */; };
+		DA379F560F09654A00541EF4 /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
+		DA379F570F09654A00541EF4 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
+		DA379F580F09654A00541EF4 /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */; };
+		DA379F590F09654A00541EF4 /* SkyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* SkyLayer.m */; };
+		DA379F5A0F09654A00541EF4 /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
+		DA379F5B0F09654A00541EF4 /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
+		DA379F5C0F09654A00541EF4 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
+		DA379F5D0F09654A00541EF4 /* StatisticsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006C0EB516D800B68C06 /* StatisticsLayer.m */; };
+		DA379F5E0F09654A00541EF4 /* ConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006F0EB516F400B68C06 /* ConfigurationLayer.m */; };
+		DA379F5F0F09654A00541EF4 /* ExplosionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C17CD0EC0F698006D43BD /* ExplosionLayer.m */; };
+		DA379F600F09654A00541EF4 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
+		DA379F610F09654A00541EF4 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
+		DA379F620F09654A00541EF4 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC30EC5B2510036B7C0 /* AudioPlayer.m */; };
+		DA379F630F09654A00541EF4 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC60EC5B2630036B7C0 /* AudioController.m */; };
+		DA379F640F09654A00541EF4 /* AudioQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC80EC5B2630036B7C0 /* AudioQueueObject.m */; };
+		DA379F650F09654A00541EF4 /* HUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB46AA80EC85E7400F17B3F /* HUDLayer.m */; };
+		DA379F660F09654A00541EF4 /* Throw.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* Throw.m */; };
+		DA379F670F09654A00541EF4 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = DA126C8E0EDDF19100EADDE2 /* Utility.m */; };
+		DA379F680F09654A00541EF4 /* ExplosionAnimationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2282FF0EE204AF00BA53D2 /* ExplosionAnimationLayer.m */; };
+		DA379F690F09654A00541EF4 /* CityTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = DACFEC200EE96AA300A0D08E /* CityTheme.m */; };
+		DA379F6A0F09654A00541EF4 /* ShadeTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DA16C5180EEC856200E46246 /* ShadeTo.m */; };
+		DA379F6B0F09654A00541EF4 /* ContinueMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */; };
+		DA379F6C0F09654A00541EF4 /* InformationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F49F80EF3243C0062E0E8 /* InformationLayer.m */; };
+		DA379F6D0F09654A00541EF4 /* GuideLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4A250EF327A30062E0E8 /* GuideLayer.m */; };
+		DA379F6E0F09654A00541EF4 /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AF60EF3E8F60062E0E8 /* cocos2d.m */; };
+		DA379F6F0F09654A00541EF4 /* Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AF80EF3E8F60062E0E8 /* Scheduler.m */; };
+		DA379F700F09654A00541EF4 /* TextureNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AFA0EF3E8F60062E0E8 /* TextureNode.m */; };
+		DA379F710F09654A00541EF4 /* ParticleSystems.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AFC0EF3E8F60062E0E8 /* ParticleSystems.m */; };
+		DA379F720F09654A00541EF4 /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AFE0EF3E8F60062E0E8 /* Particle.m */; };
+		DA379F730F09654A00541EF4 /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B000EF3E8F60062E0E8 /* Primitives.m */; };
+		DA379F740F09654A00541EF4 /* Transition.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B020EF3E8F60062E0E8 /* Transition.m */; };
+		DA379F750F09654A00541EF4 /* CameraAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B040EF3E8F60062E0E8 /* CameraAction.m */; };
+		DA379F760F09654A00541EF4 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B060EF3E8F60062E0E8 /* Camera.m */; };
+		DA379F770F09654A00541EF4 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B080EF3E8F60062E0E8 /* MenuItem.m */; };
+		DA379F780F09654A00541EF4 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B0A0EF3E8F60062E0E8 /* Menu.m */; };
+		DA379F790F09654A00541EF4 /* CocosNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B0C0EF3E8F60062E0E8 /* CocosNode.m */; };
+		DA379F7A0F09654A00541EF4 /* Director.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B0E0EF3E8F60062E0E8 /* Director.m */; };
+		DA379F7B0F09654A00541EF4 /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B100EF3E8F60062E0E8 /* Action.m */; };
+		DA379F7C0F09654A00541EF4 /* InstantAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B120EF3E8F60062E0E8 /* InstantAction.m */; };
+		DA379F7D0F09654A00541EF4 /* IntervalAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B140EF3E8F60062E0E8 /* IntervalAction.m */; };
+		DA379F7E0F09654A00541EF4 /* Label.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B160EF3E8F60062E0E8 /* Label.m */; };
+		DA379F7F0F09654A00541EF4 /* Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B180EF3E8F60062E0E8 /* Layer.m */; };
+		DA379F800F09654A00541EF4 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B1A0EF3E8F60062E0E8 /* Scene.m */; };
+		DA379F810F09654A00541EF4 /* Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B1C0EF3E8F60062E0E8 /* Sprite.m */; };
+		DA379F820F09654A00541EF4 /* TextureMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B1E0EF3E8F60062E0E8 /* TextureMgr.m */; };
+		DA379F830F09654A00541EF4 /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B210EF3E8F60062E0E8 /* TextureAtlas.m */; };
+		DA379F840F09654A00541EF4 /* LabelAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B230EF3E8F60062E0E8 /* LabelAtlas.m */; };
+		DA379F850F09654A00541EF4 /* TileMapAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B250EF3E8F60062E0E8 /* TileMapAtlas.m */; };
+		DA379F860F09654A00541EF4 /* AtlasNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B270EF3E8F60062E0E8 /* AtlasNode.m */; };
+		DA379F870F09654A00541EF4 /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B5D0EF3E9030062E0E8 /* chipmunk.c */; };
+		DA379F880F09654A00541EF4 /* cpArbiter.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B600EF3E9030062E0E8 /* cpArbiter.c */; };
+		DA379F890F09654A00541EF4 /* cpArray.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B620EF3E9030062E0E8 /* cpArray.c */; };
+		DA379F8A0F09654A00541EF4 /* cpBB.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B640EF3E9030062E0E8 /* cpBB.c */; };
+		DA379F8B0F09654A00541EF4 /* cpBody.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B660EF3E9030062E0E8 /* cpBody.c */; };
+		DA379F8C0F09654A00541EF4 /* cpCollision.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B680EF3E9030062E0E8 /* cpCollision.c */; };
+		DA379F8D0F09654A00541EF4 /* cpHashSet.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B6A0EF3E9030062E0E8 /* cpHashSet.c */; };
+		DA379F8E0F09654A00541EF4 /* cpJoint.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B6C0EF3E9030062E0E8 /* cpJoint.c */; };
+		DA379F8F0F09654A00541EF4 /* cpPolyShape.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B6E0EF3E9030062E0E8 /* cpPolyShape.c */; };
+		DA379F900F09654A00541EF4 /* cpShape.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B700EF3E9030062E0E8 /* cpShape.c */; };
+		DA379F910F09654A00541EF4 /* cpSpace.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B720EF3E9030062E0E8 /* cpSpace.c */; };
+		DA379F920F09654A00541EF4 /* cpSpaceHash.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B740EF3E9030062E0E8 /* cpSpaceHash.c */; };
+		DA379F930F09654A00541EF4 /* cpVect.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B760EF3E9030062E0E8 /* cpVect.c */; };
+		DA379F940F09654A00541EF4 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B950EF3E90D0062E0E8 /* EAGLView.m */; };
+		DA379F950F09654A00541EF4 /* glu.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B960EF3E90D0062E0E8 /* glu.c */; };
+		DA379F960F09654A00541EF4 /* Texture2D.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B9A0EF3E90D0062E0E8 /* Texture2D.m */; };
+		DA379F970F09654A00541EF4 /* TGAlib.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B9C0EF3E90D0062E0E8 /* TGAlib.c */; };
+		DA379F980F09654A00541EF4 /* TestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C10EFAEA06007D203B /* TestLayer.m */; };
+		DA379F990F09654A00541EF4 /* FancyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C40EFAEAD0007D203B /* FancyLayer.m */; };
+		DA379F9A0F09654A00541EF4 /* WindLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83F0BA0F00527B00305C9F /* WindLayer.m */; };
+		DA379F9C0F09654A00541EF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		DA379F9D0F09654A00541EF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		DA379F9E0F09654A00541EF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		DA379F9F0F09654A00541EF4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75482B0EAB77450083EC7C /* OpenGLES.framework */; };
+		DA379FA00F09654A00541EF4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75496C0EAB77970083EC7C /* QuartzCore.framework */; };
+		DA379FA10F09654A00541EF4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */; };
+		DA379FAA0F0965A600541EF4 /* veritech.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAAC33230EC5E26800816338 /* veritech.wav */; };
+		DA379FAB0F0965A600541EF4 /* gorilla.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4E93E0EDAF37B0093BA40 /* gorilla.png */; };
+		DA379FAC0F0965A600541EF4 /* gorilla.gif in Resources */ = {isa = PBXBuildFile; fileRef = DAC4E9C60EDAF86F0093BA40 /* gorilla.gif */; };
+		DA379FAD0F0965A600541EF4 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4EA220EDB0A610093BA40 /* banana.png */; };
+		DA379FAE0F0965A600541EF4 /* explosion0.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A10EDCBA4600FC200F /* explosion0.png */; };
+		DA379FAF0F0965A600541EF4 /* explosion1.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A20EDCBA4600FC200F /* explosion1.png */; };
+		DA379FB00F0965A600541EF4 /* explosion2.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A30EDCBA4600FC200F /* explosion2.png */; };
+		DA379FB10F0965A600541EF4 /* explosion3.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A40EDCBA4600FC200F /* explosion3.png */; };
+		DA379FB20F0965A600541EF4 /* explosion4.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A50EDCBA4600FC200F /* explosion4.png */; };
+		DA379FB30F0965A600541EF4 /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2283090EE2CAC600BA53D2 /* hole.png */; };
+		DA379FB40F0965A600541EF4 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5F1BD40EE74CE80041691E /* fps_images.png */; };
+		DA379FB50F0965A600541EF4 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA4F4B5F0EF3E9030062E0E8 /* CMakeLists.txt */; };
+		DA379FB60F0965A600541EF4 /* page1.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEC0EF57EA500035664 /* page1.guide */; };
+		DA379FB70F0965A600541EF4 /* page2.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAED0EF57EA500035664 /* page2.guide */; };
+		DA379FB80F0965A600541EF4 /* page3.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEE0EF57EA500035664 /* page3.guide */; };
+		DA379FB90F0965A600541EF4 /* page4.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEF0EF57EA500035664 /* page4.guide */; };
+		DA379FBA0F0965A600541EF4 /* page5.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2C0EF58BC300035664 /* page5.guide */; };
+		DA379FBB0F0965A600541EF4 /* page6.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2D0EF58BC300035664 /* page6.guide */; };
+		DA379FBC0F0965A600541EF4 /* page7.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2E0EF58BC300035664 /* page7.guide */; };
+		DA379FBD0F0965A600541EF4 /* blockdropper3.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059B0EFD12D100797E7A /* blockdropper3.wav */; };
+		DA379FBE0F0965A600541EF4 /* fighting_gorillas.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */; };
+		DA379FBF0F0965A600541EF4 /* page8.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9BF0EFDCA540074333B /* page8.guide */; };
+		DA379FC00F0965A600541EF4 /* page9.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9C00EFDCA540074333B /* page9.guide */; };
+		DA379FC10F0965A600541EF4 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA83EBE30EFEE58800305C9F /* icon.png */; };
+		DA379FC20F0965A600541EF4 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
+		DA379FC30F0965A600541EF4 /* forkbomb.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94D0F0409A000E94E84 /* forkbomb.wav */; };
+		DA379FC40F0965A600541EF4 /* prideofthepacific.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94E0F0409A000E94E84 /* prideofthepacific.wav */; };
+		DA379FC50F0965A600541EF4 /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9420AA0F08C2CA00E105BD /* fire.png */; };
+		DA379FC70F0965A600541EF4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		DA379FC80F0965A600541EF4 /* GorillasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* GorillasAppDelegate.m */; };
+		DA379FC90F0965A600541EF4 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
+		DA379FCA0F0965A600541EF4 /* BuildingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */; };
+		DA379FCB0F0965A600541EF4 /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
+		DA379FCC0F0965A600541EF4 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
+		DA379FCD0F0965A600541EF4 /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */; };
+		DA379FCE0F0965A600541EF4 /* SkyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* SkyLayer.m */; };
+		DA379FCF0F0965A600541EF4 /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
+		DA379FD00F0965A600541EF4 /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
+		DA379FD10F0965A600541EF4 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
+		DA379FD20F0965A600541EF4 /* StatisticsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006C0EB516D800B68C06 /* StatisticsLayer.m */; };
+		DA379FD30F0965A600541EF4 /* ConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006F0EB516F400B68C06 /* ConfigurationLayer.m */; };
+		DA379FD40F0965A600541EF4 /* ExplosionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C17CD0EC0F698006D43BD /* ExplosionLayer.m */; };
+		DA379FD50F0965A600541EF4 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
+		DA379FD60F0965A600541EF4 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
+		DA379FD70F0965A600541EF4 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC30EC5B2510036B7C0 /* AudioPlayer.m */; };
+		DA379FD80F0965A600541EF4 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC60EC5B2630036B7C0 /* AudioController.m */; };
+		DA379FD90F0965A600541EF4 /* AudioQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC80EC5B2630036B7C0 /* AudioQueueObject.m */; };
+		DA379FDA0F0965A600541EF4 /* HUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB46AA80EC85E7400F17B3F /* HUDLayer.m */; };
+		DA379FDB0F0965A600541EF4 /* Throw.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* Throw.m */; };
+		DA379FDC0F0965A600541EF4 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = DA126C8E0EDDF19100EADDE2 /* Utility.m */; };
+		DA379FDD0F0965A600541EF4 /* ExplosionAnimationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2282FF0EE204AF00BA53D2 /* ExplosionAnimationLayer.m */; };
+		DA379FDE0F0965A600541EF4 /* CityTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = DACFEC200EE96AA300A0D08E /* CityTheme.m */; };
+		DA379FDF0F0965A600541EF4 /* ShadeTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DA16C5180EEC856200E46246 /* ShadeTo.m */; };
+		DA379FE00F0965A600541EF4 /* ContinueMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */; };
+		DA379FE10F0965A600541EF4 /* InformationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F49F80EF3243C0062E0E8 /* InformationLayer.m */; };
+		DA379FE20F0965A600541EF4 /* GuideLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4A250EF327A30062E0E8 /* GuideLayer.m */; };
+		DA379FE30F0965A600541EF4 /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AF60EF3E8F60062E0E8 /* cocos2d.m */; };
+		DA379FE40F0965A600541EF4 /* Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AF80EF3E8F60062E0E8 /* Scheduler.m */; };
+		DA379FE50F0965A600541EF4 /* TextureNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AFA0EF3E8F60062E0E8 /* TextureNode.m */; };
+		DA379FE60F0965A600541EF4 /* ParticleSystems.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AFC0EF3E8F60062E0E8 /* ParticleSystems.m */; };
+		DA379FE70F0965A600541EF4 /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AFE0EF3E8F60062E0E8 /* Particle.m */; };
+		DA379FE80F0965A600541EF4 /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B000EF3E8F60062E0E8 /* Primitives.m */; };
+		DA379FE90F0965A600541EF4 /* Transition.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B020EF3E8F60062E0E8 /* Transition.m */; };
+		DA379FEA0F0965A600541EF4 /* CameraAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B040EF3E8F60062E0E8 /* CameraAction.m */; };
+		DA379FEB0F0965A600541EF4 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B060EF3E8F60062E0E8 /* Camera.m */; };
+		DA379FEC0F0965A600541EF4 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B080EF3E8F60062E0E8 /* MenuItem.m */; };
+		DA379FED0F0965A600541EF4 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B0A0EF3E8F60062E0E8 /* Menu.m */; };
+		DA379FEE0F0965A600541EF4 /* CocosNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B0C0EF3E8F60062E0E8 /* CocosNode.m */; };
+		DA379FEF0F0965A600541EF4 /* Director.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B0E0EF3E8F60062E0E8 /* Director.m */; };
+		DA379FF00F0965A600541EF4 /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B100EF3E8F60062E0E8 /* Action.m */; };
+		DA379FF10F0965A600541EF4 /* InstantAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B120EF3E8F60062E0E8 /* InstantAction.m */; };
+		DA379FF20F0965A600541EF4 /* IntervalAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B140EF3E8F60062E0E8 /* IntervalAction.m */; };
+		DA379FF30F0965A600541EF4 /* Label.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B160EF3E8F60062E0E8 /* Label.m */; };
+		DA379FF40F0965A600541EF4 /* Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B180EF3E8F60062E0E8 /* Layer.m */; };
+		DA379FF50F0965A600541EF4 /* Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B1A0EF3E8F60062E0E8 /* Scene.m */; };
+		DA379FF60F0965A600541EF4 /* Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B1C0EF3E8F60062E0E8 /* Sprite.m */; };
+		DA379FF70F0965A600541EF4 /* TextureMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B1E0EF3E8F60062E0E8 /* TextureMgr.m */; };
+		DA379FF80F0965A600541EF4 /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B210EF3E8F60062E0E8 /* TextureAtlas.m */; };
+		DA379FF90F0965A600541EF4 /* LabelAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B230EF3E8F60062E0E8 /* LabelAtlas.m */; };
+		DA379FFA0F0965A600541EF4 /* TileMapAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B250EF3E8F60062E0E8 /* TileMapAtlas.m */; };
+		DA379FFB0F0965A600541EF4 /* AtlasNode.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B270EF3E8F60062E0E8 /* AtlasNode.m */; };
+		DA379FFC0F0965A600541EF4 /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B5D0EF3E9030062E0E8 /* chipmunk.c */; };
+		DA379FFD0F0965A600541EF4 /* cpArbiter.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B600EF3E9030062E0E8 /* cpArbiter.c */; };
+		DA379FFE0F0965A600541EF4 /* cpArray.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B620EF3E9030062E0E8 /* cpArray.c */; };
+		DA379FFF0F0965A600541EF4 /* cpBB.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B640EF3E9030062E0E8 /* cpBB.c */; };
+		DA37A0000F0965A600541EF4 /* cpBody.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B660EF3E9030062E0E8 /* cpBody.c */; };
+		DA37A0010F0965A600541EF4 /* cpCollision.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B680EF3E9030062E0E8 /* cpCollision.c */; };
+		DA37A0020F0965A600541EF4 /* cpHashSet.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B6A0EF3E9030062E0E8 /* cpHashSet.c */; };
+		DA37A0030F0965A600541EF4 /* cpJoint.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B6C0EF3E9030062E0E8 /* cpJoint.c */; };
+		DA37A0040F0965A600541EF4 /* cpPolyShape.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B6E0EF3E9030062E0E8 /* cpPolyShape.c */; };
+		DA37A0050F0965A600541EF4 /* cpShape.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B700EF3E9030062E0E8 /* cpShape.c */; };
+		DA37A0060F0965A600541EF4 /* cpSpace.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B720EF3E9030062E0E8 /* cpSpace.c */; };
+		DA37A0070F0965A600541EF4 /* cpSpaceHash.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B740EF3E9030062E0E8 /* cpSpaceHash.c */; };
+		DA37A0080F0965A600541EF4 /* cpVect.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B760EF3E9030062E0E8 /* cpVect.c */; };
+		DA37A0090F0965A600541EF4 /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B950EF3E90D0062E0E8 /* EAGLView.m */; };
+		DA37A00A0F0965A600541EF4 /* glu.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B960EF3E90D0062E0E8 /* glu.c */; };
+		DA37A00B0F0965A600541EF4 /* Texture2D.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B9A0EF3E90D0062E0E8 /* Texture2D.m */; };
+		DA37A00C0F0965A600541EF4 /* TGAlib.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B9C0EF3E90D0062E0E8 /* TGAlib.c */; };
+		DA37A00D0F0965A600541EF4 /* TestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C10EFAEA06007D203B /* TestLayer.m */; };
+		DA37A00E0F0965A600541EF4 /* FancyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C40EFAEAD0007D203B /* FancyLayer.m */; };
+		DA37A00F0F0965A600541EF4 /* WindLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83F0BA0F00527B00305C9F /* WindLayer.m */; };
+		DA37A0110F0965A600541EF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		DA37A0120F0965A600541EF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		DA37A0130F0965A600541EF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		DA37A0140F0965A600541EF4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75482B0EAB77450083EC7C /* OpenGLES.framework */; };
+		DA37A0150F0965A600541EF4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75496C0EAB77970083EC7C /* QuartzCore.framework */; };
+		DA37A0160F0965A600541EF4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */; };
 		DA4F49F90EF3243C0062E0E8 /* InformationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F49F80EF3243C0062E0E8 /* InformationLayer.m */; };
 		DA4F4A260EF327A30062E0E8 /* GuideLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4A250EF327A30062E0E8 /* GuideLayer.m */; };
 		DA4F4B280EF3E8F60062E0E8 /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4AF60EF3E8F60062E0E8 /* cocos2d.m */; };
@@ -87,6 +408,7 @@
 		DA859EC90EC5B2630036B7C0 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC60EC5B2630036B7C0 /* AudioController.m */; };
 		DA859ECA0EC5B2630036B7C0 /* AudioQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC80EC5B2630036B7C0 /* AudioQueueObject.m */; };
 		DA859F210EC5BB0E0036B7C0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */; };
+		DA9420AB0F08C2CA00E105BD /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9420AA0F08C2CA00E105BD /* fire.png */; };
 		DAAC33240EC5E26800816338 /* veritech.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAAC33230EC5E26800816338 /* veritech.wav */; };
 		DAB46AA90EC85E7400F17B3F /* HUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB46AA80EC85E7400F17B3F /* HUDLayer.m */; };
 		DAB609A70EDCBA4600FC200F /* explosion0.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A10EDCBA4600FC200F /* explosion0.png */; };
@@ -95,6 +417,10 @@
 		DAB609AA0EDCBA4600FC200F /* explosion3.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A40EDCBA4600FC200F /* explosion3.png */; };
 		DAB609AB0EDCBA4600FC200F /* explosion4.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB609A50EDCBA4600FC200F /* explosion4.png */; };
 		DAB8C42E0EF1D582003D22DA /* ContinueMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */; };
+		DAC318220F0980720043C885 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC318210F0980720043C885 /* Default.png */; };
+		DAC318230F0980720043C885 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC318210F0980720043C885 /* Default.png */; };
+		DAC318240F0980720043C885 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC318210F0980720043C885 /* Default.png */; };
+		DAC318250F0980720043C885 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC318210F0980720043C885 /* Default.png */; };
 		DAC4E93F0EDAF37B0093BA40 /* gorilla.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4E93E0EDAF37B0093BA40 /* gorilla.png */; };
 		DAC4E9C70EDAF86F0093BA40 /* gorilla.gif in Resources */ = {isa = PBXBuildFile; fileRef = DAC4E9C60EDAF86F0093BA40 /* gorilla.gif */; };
 		DAC4EA230EDB0A610093BA40 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4EA220EDB0A610093BA40 /* banana.png */; };
@@ -119,7 +445,6 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* GorillasAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillasAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* GorillasAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillasAppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* Gorillas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gorillas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -149,6 +474,10 @@
 		DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadeLayer.m; sourceTree = "<group>"; };
 		DA34FFA80EB4EEF300B68C06 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
 		DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
+		DA379EBC0F0964BA00541EF4 /* Gorillas-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA379F310F09650800541EF4 /* Gorillas-AdHoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas-AdHoc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA379FA60F09654A00541EF4 /* Gorillas-Dieter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas-Dieter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA37A01B0F0965A600541EF4 /* Gorillas-Mario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas-Mario.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA4F49F70EF3243C0062E0E8 /* InformationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationLayer.h; sourceTree = "<group>"; };
 		DA4F49F80EF3243C0062E0E8 /* InformationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationLayer.m; sourceTree = "<group>"; };
 		DA4F4A240EF327A30062E0E8 /* GuideLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideLayer.h; sourceTree = "<group>"; };
@@ -269,6 +598,7 @@
 		DA859EC70EC5B2630036B7C0 /* AudioQueueObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioQueueObject.h; sourceTree = "<group>"; };
 		DA859EC80EC5B2630036B7C0 /* AudioQueueObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioQueueObject.m; sourceTree = "<group>"; };
 		DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		DA9420AA0F08C2CA00E105BD /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
 		DAAC33230EC5E26800816338 /* veritech.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = veritech.wav; sourceTree = "<group>"; };
 		DAB46AA70EC85E7400F17B3F /* HUDLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDLayer.h; sourceTree = "<group>"; };
 		DAB46AA80EC85E7400F17B3F /* HUDLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDLayer.m; sourceTree = "<group>"; };
@@ -279,6 +609,7 @@
 		DAB609A50EDCBA4600FC200F /* explosion4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explosion4.png; path = ../explosion4.png; sourceTree = "<group>"; };
 		DAB8C42C0EF1D582003D22DA /* ContinueMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinueMenuLayer.h; sourceTree = "<group>"; };
 		DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinueMenuLayer.m; sourceTree = "<group>"; };
+		DAC318210F0980720043C885 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		DAC4E93E0EDAF37B0093BA40 /* gorilla.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gorilla.png; path = ../gorilla.png; sourceTree = "<group>"; };
 		DAC4E9C60EDAF86F0093BA40 /* gorilla.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = gorilla.gif; path = ../gorilla.gif; sourceTree = "<group>"; };
 		DAC4EA220EDB0A610093BA40 /* banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = banana.png; path = ../banana.png; sourceTree = "<group>"; };
@@ -318,6 +649,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DA379F260F09650800541EF4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA379F270F09650800541EF4 /* Foundation.framework in Frameworks */,
+				DA379F280F09650800541EF4 /* UIKit.framework in Frameworks */,
+				DA379F290F09650800541EF4 /* CoreGraphics.framework in Frameworks */,
+				DA379F2A0F09650800541EF4 /* OpenGLES.framework in Frameworks */,
+				DA379F2B0F09650800541EF4 /* QuartzCore.framework in Frameworks */,
+				DA379F2C0F09650800541EF4 /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA379F9B0F09654A00541EF4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA379F9C0F09654A00541EF4 /* Foundation.framework in Frameworks */,
+				DA379F9D0F09654A00541EF4 /* UIKit.framework in Frameworks */,
+				DA379F9E0F09654A00541EF4 /* CoreGraphics.framework in Frameworks */,
+				DA379F9F0F09654A00541EF4 /* OpenGLES.framework in Frameworks */,
+				DA379FA00F09654A00541EF4 /* QuartzCore.framework in Frameworks */,
+				DA379FA10F09654A00541EF4 /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA37A0100F0965A600541EF4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA37A0110F0965A600541EF4 /* Foundation.framework in Frameworks */,
+				DA37A0120F0965A600541EF4 /* UIKit.framework in Frameworks */,
+				DA37A0130F0965A600541EF4 /* CoreGraphics.framework in Frameworks */,
+				DA37A0140F0965A600541EF4 /* OpenGLES.framework in Frameworks */,
+				DA37A0150F0965A600541EF4 /* QuartzCore.framework in Frameworks */,
+				DA37A0160F0965A600541EF4 /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -335,7 +705,10 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* Gorillas.app */,
+				DA379EBC0F0964BA00541EF4 /* Gorillas-Dev.app */,
+				DA379F310F09650800541EF4 /* Gorillas-AdHoc.app */,
+				DA379FA60F09654A00541EF4 /* Gorillas-Dieter.app */,
+				DA37A01B0F0965A600541EF4 /* Gorillas-Mario.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -370,6 +743,7 @@
 				DA859ECB0EC5B7030036B7C0 /* Audio */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				DA83EC190EFEE93100305C9F /* Entitlements.plist */,
+				DAC318210F0980720043C885 /* Default.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -415,8 +789,8 @@
 		DA2282250EE1A2F100BA53D2 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				DA34FD0E0EB4851D00B68C06 /* PanAction.h */,
 				DA34FD0F0EB4851D00B68C06 /* PanAction.m */,
+				DA34FD0E0EB4851D00B68C06 /* PanAction.h */,
 				DA16C5170EEC855900E46246 /* ShadeTo.h */,
 				DA16C5180EEC856200E46246 /* ShadeTo.m */,
 				DAFEF9710ED847D40019F7E5 /* Throw.h */,
@@ -572,6 +946,7 @@
 		DA5F1BD30EE74CE80041691E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DA9420AA0F08C2CA00E105BD /* fire.png */,
 				DA83EBE30EFEE58800305C9F /* icon.png */,
 				DA5F1BD40EE74CE80041691E /* fps_images.png */,
 				DA2283090EE2CAC600BA53D2 /* hole.png */,
@@ -671,9 +1046,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* Gorillas */ = {
+		1D6058900D05DD3D006BFB54 /* Gorillas - Lhunath Development */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Gorillas" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Gorillas - Lhunath Development" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -683,9 +1058,60 @@
 			);
 			dependencies = (
 			);
-			name = Gorillas;
+			name = "Gorillas - Lhunath Development";
 			productName = Gorillas;
-			productReference = 1D6058910D05DD3D006BFB54 /* Gorillas.app */;
+			productReference = DA379EBC0F0964BA00541EF4 /* Gorillas-Dev.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DA379EBE0F09650800541EF4 /* Gorillas - Distribution Testing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA379F2D0F09650800541EF4 /* Build configuration list for PBXNativeTarget "Gorillas - Distribution Testing" */;
+			buildPhases = (
+				DA379EBF0F09650800541EF4 /* Resources */,
+				DA379EDC0F09650800541EF4 /* Sources */,
+				DA379F260F09650800541EF4 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Gorillas - Distribution Testing";
+			productName = Gorillas;
+			productReference = DA379F310F09650800541EF4 /* Gorillas-AdHoc.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DA379F330F09654A00541EF4 /* Gorillas - Tester Dieter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA379FA20F09654A00541EF4 /* Build configuration list for PBXNativeTarget "Gorillas - Tester Dieter" */;
+			buildPhases = (
+				DA379F340F09654A00541EF4 /* Resources */,
+				DA379F510F09654A00541EF4 /* Sources */,
+				DA379F9B0F09654A00541EF4 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Gorillas - Tester Dieter";
+			productName = Gorillas;
+			productReference = DA379FA60F09654A00541EF4 /* Gorillas-Dieter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DA379FA80F0965A600541EF4 /* Gorillas - Tester Mario */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA37A0170F0965A600541EF4 /* Build configuration list for PBXNativeTarget "Gorillas - Tester Mario" */;
+			buildPhases = (
+				DA379FA90F0965A600541EF4 /* Resources */,
+				DA379FC60F0965A600541EF4 /* Sources */,
+				DA37A0100F0965A600541EF4 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Gorillas - Tester Mario";
+			productName = Gorillas;
+			productReference = DA37A01B0F0965A600541EF4 /* Gorillas-Mario.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -703,7 +1129,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* Gorillas */,
+				1D6058900D05DD3D006BFB54 /* Gorillas - Lhunath Development */,
+				DA379EBE0F09650800541EF4 /* Gorillas - Distribution Testing */,
+				DA379F330F09654A00541EF4 /* Gorillas - Tester Dieter */,
+				DA379FA80F0965A600541EF4 /* Gorillas - Tester Mario */,
 			);
 		};
 /* End PBXProject section */
@@ -740,6 +1169,116 @@
 				DA83EC1A0EFEE93100305C9F /* Entitlements.plist in Resources */,
 				DA6DC94F0F0409A000E94E84 /* forkbomb.wav in Resources */,
 				DA6DC9500F0409A000E94E84 /* prideofthepacific.wav in Resources */,
+				DA9420AB0F08C2CA00E105BD /* fire.png in Resources */,
+				DAC318220F0980720043C885 /* Default.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA379EBF0F09650800541EF4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA379EC00F09650800541EF4 /* veritech.wav in Resources */,
+				DA379EC10F09650800541EF4 /* gorilla.png in Resources */,
+				DA379EC20F09650800541EF4 /* gorilla.gif in Resources */,
+				DA379EC30F09650800541EF4 /* banana.png in Resources */,
+				DA379EC40F09650800541EF4 /* explosion0.png in Resources */,
+				DA379EC50F09650800541EF4 /* explosion1.png in Resources */,
+				DA379EC60F09650800541EF4 /* explosion2.png in Resources */,
+				DA379EC70F09650800541EF4 /* explosion3.png in Resources */,
+				DA379EC80F09650800541EF4 /* explosion4.png in Resources */,
+				DA379EC90F09650800541EF4 /* hole.png in Resources */,
+				DA379ECA0F09650800541EF4 /* fps_images.png in Resources */,
+				DA379ECB0F09650800541EF4 /* CMakeLists.txt in Resources */,
+				DA379ECC0F09650800541EF4 /* page1.guide in Resources */,
+				DA379ECD0F09650800541EF4 /* page2.guide in Resources */,
+				DA379ECE0F09650800541EF4 /* page3.guide in Resources */,
+				DA379ECF0F09650800541EF4 /* page4.guide in Resources */,
+				DA379ED00F09650800541EF4 /* page5.guide in Resources */,
+				DA379ED10F09650800541EF4 /* page6.guide in Resources */,
+				DA379ED20F09650800541EF4 /* page7.guide in Resources */,
+				DA379ED30F09650800541EF4 /* blockdropper3.wav in Resources */,
+				DA379ED40F09650800541EF4 /* fighting_gorillas.wav in Resources */,
+				DA379ED50F09650800541EF4 /* page8.guide in Resources */,
+				DA379ED60F09650800541EF4 /* page9.guide in Resources */,
+				DA379ED70F09650800541EF4 /* icon.png in Resources */,
+				DA379ED80F09650800541EF4 /* Entitlements.plist in Resources */,
+				DA379ED90F09650800541EF4 /* forkbomb.wav in Resources */,
+				DA379EDA0F09650800541EF4 /* prideofthepacific.wav in Resources */,
+				DA379EDB0F09650800541EF4 /* fire.png in Resources */,
+				DAC318230F0980720043C885 /* Default.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA379F340F09654A00541EF4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA379F350F09654A00541EF4 /* veritech.wav in Resources */,
+				DA379F360F09654A00541EF4 /* gorilla.png in Resources */,
+				DA379F370F09654A00541EF4 /* gorilla.gif in Resources */,
+				DA379F380F09654A00541EF4 /* banana.png in Resources */,
+				DA379F390F09654A00541EF4 /* explosion0.png in Resources */,
+				DA379F3A0F09654A00541EF4 /* explosion1.png in Resources */,
+				DA379F3B0F09654A00541EF4 /* explosion2.png in Resources */,
+				DA379F3C0F09654A00541EF4 /* explosion3.png in Resources */,
+				DA379F3D0F09654A00541EF4 /* explosion4.png in Resources */,
+				DA379F3E0F09654A00541EF4 /* hole.png in Resources */,
+				DA379F3F0F09654A00541EF4 /* fps_images.png in Resources */,
+				DA379F400F09654A00541EF4 /* CMakeLists.txt in Resources */,
+				DA379F410F09654A00541EF4 /* page1.guide in Resources */,
+				DA379F420F09654A00541EF4 /* page2.guide in Resources */,
+				DA379F430F09654A00541EF4 /* page3.guide in Resources */,
+				DA379F440F09654A00541EF4 /* page4.guide in Resources */,
+				DA379F450F09654A00541EF4 /* page5.guide in Resources */,
+				DA379F460F09654A00541EF4 /* page6.guide in Resources */,
+				DA379F470F09654A00541EF4 /* page7.guide in Resources */,
+				DA379F480F09654A00541EF4 /* blockdropper3.wav in Resources */,
+				DA379F490F09654A00541EF4 /* fighting_gorillas.wav in Resources */,
+				DA379F4A0F09654A00541EF4 /* page8.guide in Resources */,
+				DA379F4B0F09654A00541EF4 /* page9.guide in Resources */,
+				DA379F4C0F09654A00541EF4 /* icon.png in Resources */,
+				DA379F4D0F09654A00541EF4 /* Entitlements.plist in Resources */,
+				DA379F4E0F09654A00541EF4 /* forkbomb.wav in Resources */,
+				DA379F4F0F09654A00541EF4 /* prideofthepacific.wav in Resources */,
+				DA379F500F09654A00541EF4 /* fire.png in Resources */,
+				DAC318240F0980720043C885 /* Default.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA379FA90F0965A600541EF4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA379FAA0F0965A600541EF4 /* veritech.wav in Resources */,
+				DA379FAB0F0965A600541EF4 /* gorilla.png in Resources */,
+				DA379FAC0F0965A600541EF4 /* gorilla.gif in Resources */,
+				DA379FAD0F0965A600541EF4 /* banana.png in Resources */,
+				DA379FAE0F0965A600541EF4 /* explosion0.png in Resources */,
+				DA379FAF0F0965A600541EF4 /* explosion1.png in Resources */,
+				DA379FB00F0965A600541EF4 /* explosion2.png in Resources */,
+				DA379FB10F0965A600541EF4 /* explosion3.png in Resources */,
+				DA379FB20F0965A600541EF4 /* explosion4.png in Resources */,
+				DA379FB30F0965A600541EF4 /* hole.png in Resources */,
+				DA379FB40F0965A600541EF4 /* fps_images.png in Resources */,
+				DA379FB50F0965A600541EF4 /* CMakeLists.txt in Resources */,
+				DA379FB60F0965A600541EF4 /* page1.guide in Resources */,
+				DA379FB70F0965A600541EF4 /* page2.guide in Resources */,
+				DA379FB80F0965A600541EF4 /* page3.guide in Resources */,
+				DA379FB90F0965A600541EF4 /* page4.guide in Resources */,
+				DA379FBA0F0965A600541EF4 /* page5.guide in Resources */,
+				DA379FBB0F0965A600541EF4 /* page6.guide in Resources */,
+				DA379FBC0F0965A600541EF4 /* page7.guide in Resources */,
+				DA379FBD0F0965A600541EF4 /* blockdropper3.wav in Resources */,
+				DA379FBE0F0965A600541EF4 /* fighting_gorillas.wav in Resources */,
+				DA379FBF0F0965A600541EF4 /* page8.guide in Resources */,
+				DA379FC00F0965A600541EF4 /* page9.guide in Resources */,
+				DA379FC10F0965A600541EF4 /* icon.png in Resources */,
+				DA379FC20F0965A600541EF4 /* Entitlements.plist in Resources */,
+				DA379FC30F0965A600541EF4 /* forkbomb.wav in Resources */,
+				DA379FC40F0965A600541EF4 /* prideofthepacific.wav in Resources */,
+				DA379FC50F0965A600541EF4 /* fire.png in Resources */,
+				DAC318250F0980720043C885 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,56 +1365,256 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DA379EDC0F09650800541EF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA379EDD0F09650800541EF4 /* main.m in Sources */,
+				DA379EDE0F09650800541EF4 /* GorillasAppDelegate.m in Sources */,
+				DA379EDF0F09650800541EF4 /* GameLayer.m in Sources */,
+				DA379EE00F09650800541EF4 /* BuildingLayer.m in Sources */,
+				DA379EE10F09650800541EF4 /* GorillasConfig.m in Sources */,
+				DA379EE20F09650800541EF4 /* PanAction.m in Sources */,
+				DA379EE30F09650800541EF4 /* BuildingsLayer.m in Sources */,
+				DA379EE40F09650800541EF4 /* SkyLayer.m in Sources */,
+				DA379EE50F09650800541EF4 /* SkiesLayer.m in Sources */,
+				DA379EE60F09650800541EF4 /* ShadeLayer.m in Sources */,
+				DA379EE70F09650800541EF4 /* MainMenuLayer.m in Sources */,
+				DA379EE80F09650800541EF4 /* StatisticsLayer.m in Sources */,
+				DA379EE90F09650800541EF4 /* ConfigurationLayer.m in Sources */,
+				DA379EEA0F09650800541EF4 /* ExplosionLayer.m in Sources */,
+				DA379EEB0F09650800541EF4 /* GorillaLayer.m in Sources */,
+				DA379EEC0F09650800541EF4 /* BananaLayer.m in Sources */,
+				DA379EED0F09650800541EF4 /* AudioPlayer.m in Sources */,
+				DA379EEE0F09650800541EF4 /* AudioController.m in Sources */,
+				DA379EEF0F09650800541EF4 /* AudioQueueObject.m in Sources */,
+				DA379EF00F09650800541EF4 /* HUDLayer.m in Sources */,
+				DA379EF10F09650800541EF4 /* Throw.m in Sources */,
+				DA379EF20F09650800541EF4 /* Utility.m in Sources */,
+				DA379EF30F09650800541EF4 /* ExplosionAnimationLayer.m in Sources */,
+				DA379EF40F09650800541EF4 /* CityTheme.m in Sources */,
+				DA379EF50F09650800541EF4 /* ShadeTo.m in Sources */,
+				DA379EF60F09650800541EF4 /* ContinueMenuLayer.m in Sources */,
+				DA379EF70F09650800541EF4 /* InformationLayer.m in Sources */,
+				DA379EF80F09650800541EF4 /* GuideLayer.m in Sources */,
+				DA379EF90F09650800541EF4 /* cocos2d.m in Sources */,
+				DA379EFA0F09650800541EF4 /* Scheduler.m in Sources */,
+				DA379EFB0F09650800541EF4 /* TextureNode.m in Sources */,
+				DA379EFC0F09650800541EF4 /* ParticleSystems.m in Sources */,
+				DA379EFD0F09650800541EF4 /* Particle.m in Sources */,
+				DA379EFE0F09650800541EF4 /* Primitives.m in Sources */,
+				DA379EFF0F09650800541EF4 /* Transition.m in Sources */,
+				DA379F000F09650800541EF4 /* CameraAction.m in Sources */,
+				DA379F010F09650800541EF4 /* Camera.m in Sources */,
+				DA379F020F09650800541EF4 /* MenuItem.m in Sources */,
+				DA379F030F09650800541EF4 /* Menu.m in Sources */,
+				DA379F040F09650800541EF4 /* CocosNode.m in Sources */,
+				DA379F050F09650800541EF4 /* Director.m in Sources */,
+				DA379F060F09650800541EF4 /* Action.m in Sources */,
+				DA379F070F09650800541EF4 /* InstantAction.m in Sources */,
+				DA379F080F09650800541EF4 /* IntervalAction.m in Sources */,
+				DA379F090F09650800541EF4 /* Label.m in Sources */,
+				DA379F0A0F09650800541EF4 /* Layer.m in Sources */,
+				DA379F0B0F09650800541EF4 /* Scene.m in Sources */,
+				DA379F0C0F09650800541EF4 /* Sprite.m in Sources */,
+				DA379F0D0F09650800541EF4 /* TextureMgr.m in Sources */,
+				DA379F0E0F09650800541EF4 /* TextureAtlas.m in Sources */,
+				DA379F0F0F09650800541EF4 /* LabelAtlas.m in Sources */,
+				DA379F100F09650800541EF4 /* TileMapAtlas.m in Sources */,
+				DA379F110F09650800541EF4 /* AtlasNode.m in Sources */,
+				DA379F120F09650800541EF4 /* chipmunk.c in Sources */,
+				DA379F130F09650800541EF4 /* cpArbiter.c in Sources */,
+				DA379F140F09650800541EF4 /* cpArray.c in Sources */,
+				DA379F150F09650800541EF4 /* cpBB.c in Sources */,
+				DA379F160F09650800541EF4 /* cpBody.c in Sources */,
+				DA379F170F09650800541EF4 /* cpCollision.c in Sources */,
+				DA379F180F09650800541EF4 /* cpHashSet.c in Sources */,
+				DA379F190F09650800541EF4 /* cpJoint.c in Sources */,
+				DA379F1A0F09650800541EF4 /* cpPolyShape.c in Sources */,
+				DA379F1B0F09650800541EF4 /* cpShape.c in Sources */,
+				DA379F1C0F09650800541EF4 /* cpSpace.c in Sources */,
+				DA379F1D0F09650800541EF4 /* cpSpaceHash.c in Sources */,
+				DA379F1E0F09650800541EF4 /* cpVect.c in Sources */,
+				DA379F1F0F09650800541EF4 /* EAGLView.m in Sources */,
+				DA379F200F09650800541EF4 /* glu.c in Sources */,
+				DA379F210F09650800541EF4 /* Texture2D.m in Sources */,
+				DA379F220F09650800541EF4 /* TGAlib.c in Sources */,
+				DA379F230F09650800541EF4 /* TestLayer.m in Sources */,
+				DA379F240F09650800541EF4 /* FancyLayer.m in Sources */,
+				DA379F250F09650800541EF4 /* WindLayer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA379F510F09654A00541EF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA379F520F09654A00541EF4 /* main.m in Sources */,
+				DA379F530F09654A00541EF4 /* GorillasAppDelegate.m in Sources */,
+				DA379F540F09654A00541EF4 /* GameLayer.m in Sources */,
+				DA379F550F09654A00541EF4 /* BuildingLayer.m in Sources */,
+				DA379F560F09654A00541EF4 /* GorillasConfig.m in Sources */,
+				DA379F570F09654A00541EF4 /* PanAction.m in Sources */,
+				DA379F580F09654A00541EF4 /* BuildingsLayer.m in Sources */,
+				DA379F590F09654A00541EF4 /* SkyLayer.m in Sources */,
+				DA379F5A0F09654A00541EF4 /* SkiesLayer.m in Sources */,
+				DA379F5B0F09654A00541EF4 /* ShadeLayer.m in Sources */,
+				DA379F5C0F09654A00541EF4 /* MainMenuLayer.m in Sources */,
+				DA379F5D0F09654A00541EF4 /* StatisticsLayer.m in Sources */,
+				DA379F5E0F09654A00541EF4 /* ConfigurationLayer.m in Sources */,
+				DA379F5F0F09654A00541EF4 /* ExplosionLayer.m in Sources */,
+				DA379F600F09654A00541EF4 /* GorillaLayer.m in Sources */,
+				DA379F610F09654A00541EF4 /* BananaLayer.m in Sources */,
+				DA379F620F09654A00541EF4 /* AudioPlayer.m in Sources */,
+				DA379F630F09654A00541EF4 /* AudioController.m in Sources */,
+				DA379F640F09654A00541EF4 /* AudioQueueObject.m in Sources */,
+				DA379F650F09654A00541EF4 /* HUDLayer.m in Sources */,
+				DA379F660F09654A00541EF4 /* Throw.m in Sources */,
+				DA379F670F09654A00541EF4 /* Utility.m in Sources */,
+				DA379F680F09654A00541EF4 /* ExplosionAnimationLayer.m in Sources */,
+				DA379F690F09654A00541EF4 /* CityTheme.m in Sources */,
+				DA379F6A0F09654A00541EF4 /* ShadeTo.m in Sources */,
+				DA379F6B0F09654A00541EF4 /* ContinueMenuLayer.m in Sources */,
+				DA379F6C0F09654A00541EF4 /* InformationLayer.m in Sources */,
+				DA379F6D0F09654A00541EF4 /* GuideLayer.m in Sources */,
+				DA379F6E0F09654A00541EF4 /* cocos2d.m in Sources */,
+				DA379F6F0F09654A00541EF4 /* Scheduler.m in Sources */,
+				DA379F700F09654A00541EF4 /* TextureNode.m in Sources */,
+				DA379F710F09654A00541EF4 /* ParticleSystems.m in Sources */,
+				DA379F720F09654A00541EF4 /* Particle.m in Sources */,
+				DA379F730F09654A00541EF4 /* Primitives.m in Sources */,
+				DA379F740F09654A00541EF4 /* Transition.m in Sources */,
+				DA379F750F09654A00541EF4 /* CameraAction.m in Sources */,
+				DA379F760F09654A00541EF4 /* Camera.m in Sources */,
+				DA379F770F09654A00541EF4 /* MenuItem.m in Sources */,
+				DA379F780F09654A00541EF4 /* Menu.m in Sources */,
+				DA379F790F09654A00541EF4 /* CocosNode.m in Sources */,
+				DA379F7A0F09654A00541EF4 /* Director.m in Sources */,
+				DA379F7B0F09654A00541EF4 /* Action.m in Sources */,
+				DA379F7C0F09654A00541EF4 /* InstantAction.m in Sources */,
+				DA379F7D0F09654A00541EF4 /* IntervalAction.m in Sources */,
+				DA379F7E0F09654A00541EF4 /* Label.m in Sources */,
+				DA379F7F0F09654A00541EF4 /* Layer.m in Sources */,
+				DA379F800F09654A00541EF4 /* Scene.m in Sources */,
+				DA379F810F09654A00541EF4 /* Sprite.m in Sources */,
+				DA379F820F09654A00541EF4 /* TextureMgr.m in Sources */,
+				DA379F830F09654A00541EF4 /* TextureAtlas.m in Sources */,
+				DA379F840F09654A00541EF4 /* LabelAtlas.m in Sources */,
+				DA379F850F09654A00541EF4 /* TileMapAtlas.m in Sources */,
+				DA379F860F09654A00541EF4 /* AtlasNode.m in Sources */,
+				DA379F870F09654A00541EF4 /* chipmunk.c in Sources */,
+				DA379F880F09654A00541EF4 /* cpArbiter.c in Sources */,
+				DA379F890F09654A00541EF4 /* cpArray.c in Sources */,
+				DA379F8A0F09654A00541EF4 /* cpBB.c in Sources */,
+				DA379F8B0F09654A00541EF4 /* cpBody.c in Sources */,
+				DA379F8C0F09654A00541EF4 /* cpCollision.c in Sources */,
+				DA379F8D0F09654A00541EF4 /* cpHashSet.c in Sources */,
+				DA379F8E0F09654A00541EF4 /* cpJoint.c in Sources */,
+				DA379F8F0F09654A00541EF4 /* cpPolyShape.c in Sources */,
+				DA379F900F09654A00541EF4 /* cpShape.c in Sources */,
+				DA379F910F09654A00541EF4 /* cpSpace.c in Sources */,
+				DA379F920F09654A00541EF4 /* cpSpaceHash.c in Sources */,
+				DA379F930F09654A00541EF4 /* cpVect.c in Sources */,
+				DA379F940F09654A00541EF4 /* EAGLView.m in Sources */,
+				DA379F950F09654A00541EF4 /* glu.c in Sources */,
+				DA379F960F09654A00541EF4 /* Texture2D.m in Sources */,
+				DA379F970F09654A00541EF4 /* TGAlib.c in Sources */,
+				DA379F980F09654A00541EF4 /* TestLayer.m in Sources */,
+				DA379F990F09654A00541EF4 /* FancyLayer.m in Sources */,
+				DA379F9A0F09654A00541EF4 /* WindLayer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DA379FC60F0965A600541EF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA379FC70F0965A600541EF4 /* main.m in Sources */,
+				DA379FC80F0965A600541EF4 /* GorillasAppDelegate.m in Sources */,
+				DA379FC90F0965A600541EF4 /* GameLayer.m in Sources */,
+				DA379FCA0F0965A600541EF4 /* BuildingLayer.m in Sources */,
+				DA379FCB0F0965A600541EF4 /* GorillasConfig.m in Sources */,
+				DA379FCC0F0965A600541EF4 /* PanAction.m in Sources */,
+				DA379FCD0F0965A600541EF4 /* BuildingsLayer.m in Sources */,
+				DA379FCE0F0965A600541EF4 /* SkyLayer.m in Sources */,
+				DA379FCF0F0965A600541EF4 /* SkiesLayer.m in Sources */,
+				DA379FD00F0965A600541EF4 /* ShadeLayer.m in Sources */,
+				DA379FD10F0965A600541EF4 /* MainMenuLayer.m in Sources */,
+				DA379FD20F0965A600541EF4 /* StatisticsLayer.m in Sources */,
+				DA379FD30F0965A600541EF4 /* ConfigurationLayer.m in Sources */,
+				DA379FD40F0965A600541EF4 /* ExplosionLayer.m in Sources */,
+				DA379FD50F0965A600541EF4 /* GorillaLayer.m in Sources */,
+				DA379FD60F0965A600541EF4 /* BananaLayer.m in Sources */,
+				DA379FD70F0965A600541EF4 /* AudioPlayer.m in Sources */,
+				DA379FD80F0965A600541EF4 /* AudioController.m in Sources */,
+				DA379FD90F0965A600541EF4 /* AudioQueueObject.m in Sources */,
+				DA379FDA0F0965A600541EF4 /* HUDLayer.m in Sources */,
+				DA379FDB0F0965A600541EF4 /* Throw.m in Sources */,
+				DA379FDC0F0965A600541EF4 /* Utility.m in Sources */,
+				DA379FDD0F0965A600541EF4 /* ExplosionAnimationLayer.m in Sources */,
+				DA379FDE0F0965A600541EF4 /* CityTheme.m in Sources */,
+				DA379FDF0F0965A600541EF4 /* ShadeTo.m in Sources */,
+				DA379FE00F0965A600541EF4 /* ContinueMenuLayer.m in Sources */,
+				DA379FE10F0965A600541EF4 /* InformationLayer.m in Sources */,
+				DA379FE20F0965A600541EF4 /* GuideLayer.m in Sources */,
+				DA379FE30F0965A600541EF4 /* cocos2d.m in Sources */,
+				DA379FE40F0965A600541EF4 /* Scheduler.m in Sources */,
+				DA379FE50F0965A600541EF4 /* TextureNode.m in Sources */,
+				DA379FE60F0965A600541EF4 /* ParticleSystems.m in Sources */,
+				DA379FE70F0965A600541EF4 /* Particle.m in Sources */,
+				DA379FE80F0965A600541EF4 /* Primitives.m in Sources */,
+				DA379FE90F0965A600541EF4 /* Transition.m in Sources */,
+				DA379FEA0F0965A600541EF4 /* CameraAction.m in Sources */,
+				DA379FEB0F0965A600541EF4 /* Camera.m in Sources */,
+				DA379FEC0F0965A600541EF4 /* MenuItem.m in Sources */,
+				DA379FED0F0965A600541EF4 /* Menu.m in Sources */,
+				DA379FEE0F0965A600541EF4 /* CocosNode.m in Sources */,
+				DA379FEF0F0965A600541EF4 /* Director.m in Sources */,
+				DA379FF00F0965A600541EF4 /* Action.m in Sources */,
+				DA379FF10F0965A600541EF4 /* InstantAction.m in Sources */,
+				DA379FF20F0965A600541EF4 /* IntervalAction.m in Sources */,
+				DA379FF30F0965A600541EF4 /* Label.m in Sources */,
+				DA379FF40F0965A600541EF4 /* Layer.m in Sources */,
+				DA379FF50F0965A600541EF4 /* Scene.m in Sources */,
+				DA379FF60F0965A600541EF4 /* Sprite.m in Sources */,
+				DA379FF70F0965A600541EF4 /* TextureMgr.m in Sources */,
+				DA379FF80F0965A600541EF4 /* TextureAtlas.m in Sources */,
+				DA379FF90F0965A600541EF4 /* LabelAtlas.m in Sources */,
+				DA379FFA0F0965A600541EF4 /* TileMapAtlas.m in Sources */,
+				DA379FFB0F0965A600541EF4 /* AtlasNode.m in Sources */,
+				DA379FFC0F0965A600541EF4 /* chipmunk.c in Sources */,
+				DA379FFD0F0965A600541EF4 /* cpArbiter.c in Sources */,
+				DA379FFE0F0965A600541EF4 /* cpArray.c in Sources */,
+				DA379FFF0F0965A600541EF4 /* cpBB.c in Sources */,
+				DA37A0000F0965A600541EF4 /* cpBody.c in Sources */,
+				DA37A0010F0965A600541EF4 /* cpCollision.c in Sources */,
+				DA37A0020F0965A600541EF4 /* cpHashSet.c in Sources */,
+				DA37A0030F0965A600541EF4 /* cpJoint.c in Sources */,
+				DA37A0040F0965A600541EF4 /* cpPolyShape.c in Sources */,
+				DA37A0050F0965A600541EF4 /* cpShape.c in Sources */,
+				DA37A0060F0965A600541EF4 /* cpSpace.c in Sources */,
+				DA37A0070F0965A600541EF4 /* cpSpaceHash.c in Sources */,
+				DA37A0080F0965A600541EF4 /* cpVect.c in Sources */,
+				DA37A0090F0965A600541EF4 /* EAGLView.m in Sources */,
+				DA37A00A0F0965A600541EF4 /* glu.c in Sources */,
+				DA37A00B0F0965A600541EF4 /* Texture2D.m in Sources */,
+				DA37A00C0F0965A600541EF4 /* TGAlib.c in Sources */,
+				DA37A00D0F0965A600541EF4 /* TestLayer.m in Sources */,
+				DA37A00E0F0965A600541EF4 /* FancyLayer.m in Sources */,
+				DA37A00F0F0965A600541EF4 /* WindLayer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Maarten Billemont";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
-				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
-				GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS = NO;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
-				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
-				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
-				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
-				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
-				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
-				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
-				GCC_WARN_MISSING_PARENTHESES = YES;
-				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
-				GCC_WARN_PEDANTIC = NO;
-				GCC_WARN_PROTOTYPE_CONVERSION = NO;
-				GCC_WARN_SHADOW = NO;
-				GCC_WARN_SIGN_COMPARE = YES;
-				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = YES;
-				GCC_WARN_UNUSED_FUNCTION = NO;
-				GCC_WARN_UNUSED_LABEL = YES;
-				GCC_WARN_UNUSED_PARAMETER = NO;
-				GCC_WARN_UNUSED_VALUE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../cocos2d-iphone-0.5.1/build/Debug-iphonesimulator\"",
-				);
-				PRODUCT_NAME = Gorillas;
+				PRODUCT_NAME = "Gorillas-Dev";
+				PROVISIONING_PROFILE = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
 			};
 			name = Debug;
@@ -883,50 +1622,9 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				COPY_PHASE_STRIP = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
-				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
-				GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS = NO;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
-				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
-				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
-				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
-				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
-				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
-				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
-				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
-				GCC_WARN_MISSING_PARENTHESES = YES;
-				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
-				GCC_WARN_PEDANTIC = NO;
-				GCC_WARN_PROTOTYPE_CONVERSION = NO;
-				GCC_WARN_SHADOW = NO;
-				GCC_WARN_SIGN_COMPARE = YES;
-				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
-				GCC_WARN_UNKNOWN_PRAGMAS = YES;
-				GCC_WARN_UNUSED_FUNCTION = NO;
-				GCC_WARN_UNUSED_LABEL = YES;
-				GCC_WARN_UNUSED_PARAMETER = NO;
-				GCC_WARN_UNUSED_VALUE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../cocos2d-iphone-0.5.1/build/Debug-iphonesimulator\"",
-				);
-				PRODUCT_NAME = Gorillas;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
 			};
 			name = Release;
 		};
@@ -934,13 +1632,38 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PKGINFO_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
-				PREBINDING = NO;
-				SDKROOT = iphoneos2.1;
+				PRODUCT_NAME = Gorillas;
+				SDKROOT = iphoneos2.2;
+				VERSION_INFO_BUILDER = lhunath;
+				VERSION_INFO_FILE = Gorillas_vers.c;
 			};
 			name = Debug;
 		};
@@ -948,12 +1671,36 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos2.1;
+				PRODUCT_NAME = Gorillas;
+				SDKROOT = iphoneos2.2;
+				VERSION_INFO_BUILDER = lhunath;
+				VERSION_INFO_FILE = Gorillas_vers.c;
 			};
 			name = Release;
 		};
@@ -964,32 +1711,14 @@
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
-				SDKROOT = iphoneos2.1;
-				VALID_ARCHS = armv6;
-			};
-			name = Distribution;
-		};
-		DA16C3760EEC575C00E46246 /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
-				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
-				GCC_TREAT_NONCONFORMANT_CODE_ERRORS_AS_WARNINGS = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
@@ -997,36 +1726,133 @@
 				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
 				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
-				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_MISSING_PARENTHESES = YES;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
-				GCC_WARN_PEDANTIC = NO;
-				GCC_WARN_PROTOTYPE_CONVERSION = NO;
-				GCC_WARN_SHADOW = NO;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
-				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
-				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Info.plist;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../cocos2d-iphone-0.5.1/build/Debug-iphonesimulator\"",
-				);
+				PREBINDING = NO;
 				PRODUCT_NAME = Gorillas;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
+				SDKROOT = iphoneos2.2;
+				VERSION_INFO_BUILDER = lhunath;
+				VERSION_INFO_FILE = Gorillas_vers.c;
+			};
+			name = Distribution;
+		};
+		DA16C3760EEC575C00E46246 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
+			};
+			name = Distribution;
+		};
+		DA379F2E0F09650800541EF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Maarten Billemont";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-AdHoc";
+				PROVISIONING_PROFILE = "579474B9-2650-4A95-9363-179004E32BAA";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "579474B9-2650-4A95-9363-179004E32BAA";
+				SDKROOT = iphoneos2.2;
+			};
+			name = Debug;
+		};
+		DA379F2F0F09650800541EF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "579474B9-2650-4A95-9363-179004E32BAA";
+				SDKROOT = iphoneos2.2;
+			};
+			name = Release;
+		};
+		DA379F300F09650800541EF4 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "579474B9-2650-4A95-9363-179004E32BAA";
+				SDKROOT = iphoneos2.2;
+			};
+			name = Distribution;
+		};
+		DA379FA30F09654A00541EF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Maarten Billemont";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-Dieter";
+				PROVISIONING_PROFILE = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
+				SDKROOT = iphoneos2.2;
+			};
+			name = Debug;
+		};
+		DA379FA40F09654A00541EF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
+				SDKROOT = iphoneos2.2;
+			};
+			name = Release;
+		};
+		DA379FA50F09654A00541EF4 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
+				SDKROOT = iphoneos2.2;
+			};
+			name = Distribution;
+		};
+		DA37A0180F0965A600541EF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Maarten Billemont";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-Mario";
+				PROVISIONING_PROFILE = "7E1BA51F-F37E-4B2D-A766-F9100F74B11B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E1BA51F-F37E-4B2D-A766-F9100F74B11B";
+				SDKROOT = iphoneos2.2;
+			};
+			name = Debug;
+		};
+		DA37A0190F0965A600541EF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E1BA51F-F37E-4B2D-A766-F9100F74B11B";
+				SDKROOT = iphoneos2.2;
+			};
+			name = Release;
+		};
+		DA37A01A0F0965A600541EF4 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E1BA51F-F37E-4B2D-A766-F9100F74B11B";
+				SDKROOT = iphoneos2.2;
 			};
 			name = Distribution;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Gorillas" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Gorillas - Lhunath Development" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -1042,6 +1868,36 @@
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
 				DA16C3750EEC575C00E46246 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA379F2D0F09650800541EF4 /* Build configuration list for PBXNativeTarget "Gorillas - Distribution Testing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA379F2E0F09650800541EF4 /* Debug */,
+				DA379F2F0F09650800541EF4 /* Release */,
+				DA379F300F09650800541EF4 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA379FA20F09654A00541EF4 /* Build configuration list for PBXNativeTarget "Gorillas - Tester Dieter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA379FA30F09654A00541EF4 /* Debug */,
+				DA379FA40F09654A00541EF4 /* Release */,
+				DA379FA50F09654A00541EF4 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA37A0170F0965A600541EF4 /* Build configuration list for PBXNativeTarget "Gorillas - Tester Mario" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA37A0180F0965A600541EF4 /* Debug */,
+				DA37A0190F0965A600541EF4 /* Release */,
+				DA37A01A0F0965A600541EF4 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

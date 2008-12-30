@@ -68,8 +68,9 @@
 -(void) throwFrom: (cpVect) r0 withVelocity: (cpVect) v;
 
 -(void) miss;
+-(BOOL) hitsGorilla: (cpVect)pos;
 -(BOOL) hitsBuilding: (cpVect)pos;
--(void) explodeAt: (cpVect)point;
+-(void) explodeAt: (cpVect)point isGorilla:(BOOL)isGorilla;
 
 -(void) nextGorilla;
 -(void) removeGorilla: (GorillaLayer *)gorilla;
