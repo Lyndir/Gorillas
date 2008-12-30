@@ -1611,10 +1611,8 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Maarten Billemont";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
 				PRODUCT_NAME = "Gorillas-Dev";
-				PROVISIONING_PROFILE = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
 			};
 			name = Debug;
@@ -1622,8 +1620,8 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-Dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
 			};
 			name = Release;
@@ -1631,10 +1629,17 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
+				GCC_STRICT_ALIASING = YES;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1657,23 +1662,28 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_FILE = Info.plist;
+				LINKER_DISPLAYS_MANGLED_NAMES = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = Gorillas;
-				SDKROOT = iphoneos2.2;
+				PREBINDING = NO;
+				SDKROOT = iphonesimulator2.2;
 				VERSION_INFO_BUILDER = lhunath;
-				VERSION_INFO_FILE = Gorillas_vers.c;
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
+				GCC_STRICT_ALIASING = YES;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1696,23 +1706,26 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
-				PRODUCT_NAME = Gorillas;
-				SDKROOT = iphoneos2.2;
+				SDKROOT = iphonesimulator2.2;
 				VERSION_INFO_BUILDER = lhunath;
-				VERSION_INFO_FILE = Gorillas_vers.c;
 			};
 			name = Release;
 		};
 		DA16C3750EEC575C00E46246 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
+				GCC_STRICT_ALIASING = YES;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1735,20 +1748,18 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
-				PRODUCT_NAME = Gorillas;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
-				SDKROOT = iphoneos2.2;
+				SDKROOT = iphonesimulator2.2;
 				VERSION_INFO_BUILDER = lhunath;
-				VERSION_INFO_FILE = Gorillas_vers.c;
 			};
 			name = Distribution;
 		};
 		DA16C3760EEC575C00E46246 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-Dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
 			};
 			name = Distribution;
@@ -1756,10 +1767,8 @@
 		DA379F2E0F09650800541EF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Maarten Billemont";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
 				PRODUCT_NAME = "Gorillas-AdHoc";
-				PROVISIONING_PROFILE = "579474B9-2650-4A95-9363-179004E32BAA";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "579474B9-2650-4A95-9363-179004E32BAA";
 				SDKROOT = iphoneos2.2;
 			};
@@ -1768,8 +1777,8 @@
 		DA379F2F0F09650800541EF4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-AdHoc";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "579474B9-2650-4A95-9363-179004E32BAA";
 				SDKROOT = iphoneos2.2;
 			};
@@ -1778,8 +1787,8 @@
 		DA379F300F09650800541EF4 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-AdHoc";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "579474B9-2650-4A95-9363-179004E32BAA";
 				SDKROOT = iphoneos2.2;
 			};
@@ -1788,10 +1797,8 @@
 		DA379FA30F09654A00541EF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Maarten Billemont";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
 				PRODUCT_NAME = "Gorillas-Dieter";
-				PROVISIONING_PROFILE = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
 				SDKROOT = iphoneos2.2;
 			};
@@ -1800,8 +1807,8 @@
 		DA379FA40F09654A00541EF4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-Dieter";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
 				SDKROOT = iphoneos2.2;
 			};
@@ -1810,8 +1817,8 @@
 		DA379FA50F09654A00541EF4 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-Dieter";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
 				SDKROOT = iphoneos2.2;
 			};
@@ -1820,10 +1827,8 @@
 		DA37A0180F0965A600541EF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Maarten Billemont";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
 				PRODUCT_NAME = "Gorillas-Mario";
-				PROVISIONING_PROFILE = "7E1BA51F-F37E-4B2D-A766-F9100F74B11B";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E1BA51F-F37E-4B2D-A766-F9100F74B11B";
 				SDKROOT = iphoneos2.2;
 			};
@@ -1832,8 +1837,8 @@
 		DA37A0190F0965A600541EF4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-Mario";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E1BA51F-F37E-4B2D-A766-F9100F74B11B";
 				SDKROOT = iphoneos2.2;
 			};
@@ -1842,8 +1847,8 @@
 		DA37A01A0F0965A600541EF4 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-Mario";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E1BA51F-F37E-4B2D-A766-F9100F74B11B";
 				SDKROOT = iphoneos2.2;
 			};
