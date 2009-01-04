@@ -44,6 +44,7 @@
 @property (readwrite, assign) NSString      *cityTheme;
 
 @property (readwrite) int                   fixedFloors;
+@property (readonly) float                  cityScale;
 @property (readwrite) float                 buildingMax;
 @property (readonly) float                  buildingWidth;
 @property (readwrite) int                   buildingAmount;

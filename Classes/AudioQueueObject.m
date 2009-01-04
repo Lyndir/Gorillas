@@ -127,10 +127,15 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 }
 
 - (void) dealloc {
-	
-	[super dealloc];
+    
+	AudioQueueDispose( self.queueObject, YES );
     
     [notificationDelegate release];
+    notificationDelegate = nil;
+    
+    free(audioLevels);
+	
+	[super dealloc];
 }
 
 @end

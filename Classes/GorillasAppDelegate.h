@@ -28,7 +28,9 @@
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
 #import "ContinueMenuLayer.h"
-#import "ConfigurationLayer.h"
+#import "ConfigurationSectionLayer.h"
+#import "GameConfigurationLayer.h"
+#import "AVConfigurationLayer.h"
 #import "InformationLayer.h"
 #import "GuideLayer.h"
 #import "StatisticsLayer.h"
@@ -36,31 +38,37 @@
 #import "AudioController.h"
 #import "AudioControllerDelegate.h"
 
+
 @interface GorillasAppDelegate : NSObject <UIApplicationDelegate, AudioControllerDelegate> {
     
-    GameLayer               *gameLayer;
-    ShadeLayer              *currentLayer;
-    ContinueMenuLayer       *continueMenuLayer;
-    MainMenuLayer           *mainMenuLayer;
-    ConfigurationLayer      *configLayer;
-    InformationLayer        *infoLayer;
-    GuideLayer              *guideLayer;
-    StatisticsLayer         *statsLayer;
-    HUDLayer                *hudLayer;
-    AudioController         *audioController;
-    NSString                *nextTrack;
+    GameLayer                   *gameLayer;
+    ShadeLayer                  *currentLayer;
+    ContinueMenuLayer           *continueMenuLayer;
+    MainMenuLayer               *mainMenuLayer;
+    ConfigurationSectionLayer   *configLayer;
+    GameConfigurationLayer      *gameConfigLayer;
+    AVConfigurationLayer        *avConfigLayer;
+    InformationLayer            *infoLayer;
+    GuideLayer                  *guideLayer;
+    StatisticsLayer             *statsLayer;
+    HUDLayer                    *hudLayer;
+    AudioController             *audioController;
+    NSString                    *nextTrack;
 }
 
-@property (readonly) GameLayer          *gameLayer;
-@property (readonly) ConfigurationLayer *configLayer;
-@property (readonly) HUDLayer           *hudLayer;
-@property (readonly) AudioController    *audioController;
+@property (readonly) GameLayer                  *gameLayer;
+@property (readonly) HUDLayer                   *hudLayer;
 
+-(void) updateConfig;
 -(void) dismissLayer;
+-(void) exit;
+-(void) cleanup;
 
 -(void) showMainMenu;
 -(void) showContinueMenu;
 -(void) showConfiguration;
+-(void) showGameConfiguration;
+-(void) showAVConfiguration;
 -(void) showInformation;
 -(void) showGuide;
 -(void) showStatistics;

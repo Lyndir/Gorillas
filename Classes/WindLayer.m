@@ -27,6 +27,7 @@
 #import "WindLayer.h"
 #import "Utility.h"
 #import "GorillasConfig.h"
+#import "GorillasAppDelegate.h"
 
 
 @implementation WindLayer
@@ -39,6 +40,9 @@
 	if (!(self = [super init]))
         return self;
     
+    systems = [[NSMutableArray alloc] init];
+    affectAngles = [[NSMutableArray alloc] init];
+    
     [self reset];
     
 	return self;
@@ -48,6 +52,38 @@
 -(void) reset {
 
     wind = (random() % 100) / 100.0f - 0.5f;
+
+    for(uint i = 0; i < [systems count]; ++i) {
+        ParticleSystem *system = [systems objectAtIndex:i];
+        
+        if([[affectAngles objectAtIndex:i] boolValue])
+            [system setAngle:270 + 45 * wind];
+        
+        [system setGravity:cpv(wind * 100 / [system life], [system gravity].y)];
+    }
+}
+
+
+-(void) registerSystem:(ParticleSystem *)system affectAngle:(BOOL)affectAngle {
+    
+    if(!system)
+        return;
+    
+    [systems addObject:system];
+    [affectAngles addObject:[NSNumber numberWithBool:affectAngle]];
+    
+    if(affectAngle)
+        [system setAngle:270 + 45 * wind];
+    [system setGravity:cpv(wind * 100 / [system life], [system gravity].y)];
+}
+
+
+-(void) unregisterSystem:(ParticleSystem *)system {
+    
+    if(!system)
+        return;
+    
+    [systems removeObject:system];
 }
 
 
@@ -64,9 +100,9 @@
     };
     [Utility drawLinesFrom:cpv(winSize.width / 2, winSize.height - [[GorillasConfig get] smallFontSize])
                         by:by
-                        count:4
-                        color:color
-                        width:1.5f];
+                     count:4
+                     color:color
+                     width:1.5f];
 }
 
 
@@ -80,6 +116,18 @@
 -(void) setOpacity:(GLubyte)opacity {
     
     color = (color & 0xffffff00) | opacity;
+}
+
+
+-(void) dealloc {
+    
+    [systems release];
+    systems = nil;
+    
+    [affectAngles release];
+    affectAngles = nil;
+    
+    [super dealloc];
 }
 
 

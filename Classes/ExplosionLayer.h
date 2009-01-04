@@ -26,19 +26,21 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
+#import "HoleLayer.h"
 
 
-@interface ExplosionLayer : Sprite {
+@interface ExplosionLayer : Layer <CocosNodeSize> {
     
+    HoleLayer *hole;
     ParticleSystem *explosion;
     ParticleSystem *flames;
-    BOOL hitsGorilla;
+    
+    BOOL heavy, hitsGorilla;
 }
 
 -(id) initHitsGorilla: (BOOL)hitsGorilla;
 -(BOOL) hitsExplosion: (cpVect)pos;
 
-@property (readonly) float width;
-@property (readonly) float height;
+@property (readonly) HoleLayer *hole;
 
 @end

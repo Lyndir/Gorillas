@@ -37,10 +37,10 @@
     if(!(self = [super init]))
         return self;
     
-    continueGame = [[MenuItemFont itemFromString:@"Continue" target:self selector:@selector(continueGame:)] retain];
-    stopGame = [[MenuItemFont itemFromString:@"Main Menu" target:self selector:@selector(stopGame:)] retain];
+    continueGame    = [[MenuItemFont itemFromString:@"Continue"     target:self selector:@selector(continueGame:)] retain];
+    stopGame        = [[MenuItemFont itemFromString:@"Main Menu"    target:self selector:@selector(stopGame:)] retain];
     
-    menu = [[Menu menuWithItems:continueGame, stopGame, nil] retain];
+    menu            = [[Menu menuWithItems:continueGame, stopGame, nil] retain];
     [menu alignItemsVertically];
 
     return self;
@@ -71,8 +71,13 @@
 -(void) dealloc {
     
     [menu release];
+    menu = nil;
+    
     [continueGame release];
+    continueGame = nil;
+    
     [stopGame release];
+    stopGame = nil;
     
     [super dealloc];
 }

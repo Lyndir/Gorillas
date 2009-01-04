@@ -126,15 +126,14 @@ static void propertyListenerCallback(
 
 - (id) initWithURL: (CFURLRef) soundFile {
 
-	self = [super init];
+	if(!(self = [super init]))
+        return self;
 
-	if (self != nil) {
-		[self setAudioFileURL: soundFile];
-		[self openPlaybackFile: [self audioFileURL]];
-		[self setupPlaybackAudioQueueObject];
-		[self setDonePlayingFile: NO];
-		[self setAudioPlayerShouldStopImmediately: NO];
-	}
+    [self setAudioFileURL:soundFile];
+    [self openPlaybackFile:[self audioFileURL]];
+    [self setupPlaybackAudioQueueObject];
+    [self setDonePlayingFile:NO];
+    [self setAudioPlayerShouldStopImmediately:NO];
 
 	return self;
 } 
@@ -275,11 +274,10 @@ static void propertyListenerCallback(
 
 	AudioFileClose(self.audioFileID);
 
-	AudioQueueStop(
+	/*AudioQueueStop(
 		self.queueObject,
 		self.audioPlayerShouldStopImmediately
-	);
-	
+	);*/
 }
 
 
@@ -339,11 +337,6 @@ static void propertyListenerCallback(
 
 
 - (void) dealloc {
-
-	AudioQueueDispose (
-		queueObject, 
-		YES
-	);
 	
 	[super dealloc];
 }

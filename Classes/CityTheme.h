@@ -64,6 +64,37 @@
 
 -(void) apply;
 
++(CityTheme *) themeWithFixedFloors: (int) nFixedFloors
+                        buildingMax: (float) nBuildingMax
+                     buildingAmount: (int) nBuildingAmount
+                     buildingColors: (NSArray *) nBuildingColors
+
+                       windowAmount: (int) nWindowAmount
+                      windowColorOn: (long) nWindowColorOn
+                     windowColorOff: (long) nWindowColorOff
+
+                           skyColor: (long) nSkyColor
+                          starColor: (long) nStarColor
+                         starAmount: (int) nStarAmount
+
+                       windModifier: (float) nWindModifier
+                            gravity: (int) nGravity;
+-(id) initWithFixedFloors: (int) nFixedFloors
+              buildingMax: (float) nBuildingMax
+           buildingAmount: (int) nBuildingAmount
+           buildingColors: (NSArray *) nBuildingColors
+
+             windowAmount: (int) nWindowAmount
+            windowColorOn: (long) nWindowColorOn
+           windowColorOff: (long) nWindowColorOff
+
+                 skyColor: (long) nSkyColor
+                starColor: (long) nStarColor
+               starAmount: (int) nStarAmount
+
+             windModifier: (float) nWindModifier
+                  gravity: (int) nGravity;
+
 +(NSDictionary *)                       getThemes;
 +(NSString *)                           defaultThemeName;
 

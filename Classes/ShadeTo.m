@@ -51,12 +51,17 @@
 
 -(void) start {
     
-    [super start];
-    
+    if(![target respondsToSelector:@selector(setRGB:::)])
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"ShadeTo action target does not respond to setRGB:::" userInfo:nil];
+    if(![target conformsToProtocol:@protocol(CocosNodeOpacity)])
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"ShadeTo action target does not conform to CocosNodeOpacity" userInfo:nil];
+        
     startCol    = [(TextureNode *)target r] << 24
                 | [(TextureNode *)target g] << 16
                 | [(TextureNode *)target b] << 8
                 | [(TextureNode *)target opacity];
+    
+    [super start];
 }
 
 
@@ -64,10 +69,16 @@
     
     const GLubyte *s = (GLubyte *)&startCol, *e = (GLubyte *)&endCol;
     
-    [(TextureNode *)target setRGB: (int) (s[3] * (1 - dt)) + (int) (e[3] * dt)
-                                 : (int) (s[2] * (1 - dt)) + (int) (e[2] * dt)
-                                 : (int) (s[1] * (1 - dt)) + (int) (e[1] * dt)];
-    [(TextureNode *)target setOpacity: (int) (s[0] * (1 - dt)) + (int) (e[0] * dt)];
+    [(id)target setRGB: (int) (s[3] * (1 - dt)) + (int) (e[3] * dt)
+                      : (int) (s[2] * (1 - dt)) + (int) (e[2] * dt)
+                      : (int) (s[1] * (1 - dt)) + (int) (e[1] * dt)];
+    [(id<CocosNodeOpacity>)target setOpacity: (int) (s[0] * (1 - dt)) + (int) (e[0] * dt)];
+}
+
+
+-(void) dealloc {
+    
+    [super dealloc];
 }
 
 

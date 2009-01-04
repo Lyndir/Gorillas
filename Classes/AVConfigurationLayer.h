@@ -17,23 +17,22 @@
  */
 
 //
-//  ExplosionAnimationLayer.h
+//  ConfigurationLayer.h
 //  Gorillas
 //
-//  Created by Maarten Billemont on 30/11/08.
+//  Created by Maarten Billemont on 26/10/08.
 //  Copyright 2008, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "cocos2d.h"
+#import "ShadeLayer.h"
 
 
-@interface ExplosionAnimationLayer : Sprite {
-
-    Animation *explosion;
+@interface AVConfigurationLayer : ShadeLayer {
+    
+    Menu *menu, *backMenu;
 }
 
-+(ExplosionAnimationLayer *) get;
 
+-(void) reset;
 
 @end

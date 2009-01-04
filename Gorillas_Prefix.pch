@@ -20,3 +20,4 @@
     #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>
 #endif
+#define DEBUG 0

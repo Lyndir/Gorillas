@@ -27,7 +27,6 @@
 #import "BuildingsLayer.h"
 #import "BuildingLayer.h"
 #import "ExplosionLayer.h"
-#import "Throw.h"
 #import "GorillasAppDelegate.h"
 #import "Utility.h"
 
@@ -57,15 +56,25 @@
     buildings       = [[NSMutableArray alloc] init];
     explosions      = [[NSMutableArray alloc] init];
     
-    banana          = [[BananaLayer node] retain];
-    [banana setVisible:false];
-    [self add:banana z:2];
-    
     [self reset];
-
-    [self startPanning];
     
     return self;
+}
+
+
+-(void) onEnter {
+    
+    [super onEnter];
+    
+    [self startPanning];
+}
+
+
+-(void) onExit {
+    
+    [super onExit];
+    
+    [self stopPanning];
 }
 
 
@@ -76,23 +85,28 @@
     [panAction release];
     panAction = nil;
     
-    for(ExplosionLayer *explosion in explosions)
-        [self remove:explosion];
+    for(ExplosionLayer *explosion in explosions) {
+        [self removeAndStop:explosion];
+        [self removeAndStop:[explosion hole]];
+    }
     [explosions removeAllObjects];
     for (BuildingLayer *building in buildings)
-        [self remove:building];
+        [self removeAndStop:building];
     [buildings removeAllObjects];
     
     [self stopAllActions];
-    [self setPosition:cpv(0, 0)];
+    [self setPosition:cpvzero];
+    
     for (int i = 0; i < [[GorillasConfig get] buildingAmount] + 2; ++i) {
         float x = i * ([[GorillasConfig get] buildingWidth] + 1) - [[GorillasConfig get] buildingWidth];
         
-        BuildingLayer *building = [BuildingLayer node];
+        BuildingLayer *building = [[BuildingLayer alloc] init];
         [buildings addObject: building];
         
         [building setPosition: cpv(x, 0)];
-        [self add: building z:1];
+        [self add:building z:1];
+
+        [building release];
     }
     
     if(wasPanning)
@@ -102,30 +116,33 @@
 
 -(void) message:(NSString *)msg on:(CocosNode<CocosNodeSize> *)node {
     
-    if(msgLabel) {
+    if(msgLabel)
         [msgLabel stopAllActions];
-        [self endMessage:self];
+
+    else {
+        msgLabel = [[Label alloc] initWithString:@""
+                                      dimensions:CGSizeMake(1000, [[GorillasConfig get] fontSize] + 5)
+                                       alignment:UITextAlignmentCenter
+                                        fontName:[[GorillasConfig get] fixedFontName]
+                                        fontSize:[[GorillasConfig get] fontSize]];
+    
+        [self add:msgLabel z:9];
     }
     
-    // Create a label for our message and position it above our node.
-    msgLabel = [[Label labelWithString:msg
-                            dimensions:CGSizeMake(1000, [[GorillasConfig get] fontSize] + 5)
-                             alignment:UITextAlignmentCenter
-                              fontName:[[GorillasConfig get] fixedFontName]
-                              fontSize:[[GorillasConfig get] fontSize]] retain];
+    [msgLabel setString:msg];
     [msgLabel setPosition:cpv([node position].x,
                               [node position].y + [node contentSize].height)];
     
     // Make sure label remains on screen.
     CGSize winSize = [[Director sharedDirector] winSize].size;
-    if([msgLabel position].x < kItemSize / 2)
-        [msgLabel setPosition:cpv(kItemSize / 2, [msgLabel position].y)];
-    if([msgLabel position].x > winSize.width - kItemSize / 2)
-        [msgLabel setPosition:cpv(winSize.width - kItemSize / 2, [msgLabel position].y)];
-    if([msgLabel position].y < kItemSize / 2)
-        [msgLabel setPosition:cpv([msgLabel position].x, kItemSize / 2)];
-    if([msgLabel position].y > winSize.width - kItemSize * 2)
-        [msgLabel setPosition:cpv([msgLabel position].x, winSize.height - kItemSize * 2)];
+    if([msgLabel position].x < [[GorillasConfig get] fontSize] / 2)                 // Left edge
+        [msgLabel setPosition:cpv([[GorillasConfig get] fontSize] / 2, [msgLabel position].y)];
+    if([msgLabel position].x > winSize.width - [[GorillasConfig get] fontSize] / 2) // Right edge
+        [msgLabel setPosition:cpv(winSize.width - [[GorillasConfig get] fontSize] / 2, [msgLabel position].y)];
+    if([msgLabel position].y < [[GorillasConfig get] fontSize] / 2)                 // Bottom edge
+        [msgLabel setPosition:cpv([msgLabel position].x, [[GorillasConfig get] fontSize] / 2)];
+    if([msgLabel position].y > winSize.width - [[GorillasConfig get] fontSize] * 2) // Top edge
+        [msgLabel setPosition:cpv([msgLabel position].x, winSize.height - [[GorillasConfig get] fontSize] * 2)];
     
     // Color depending on whether message starts with -, + or neither.
     if([msg hasPrefix:@"+"])
@@ -136,32 +153,26 @@
         [msgLabel setRGB:0xFF :0xFF :0xFF];
     
     // Animate the label to fade out.
-    [msgLabel do:[Sequence actions:
-                  [DelayTime actionWithDuration:1],
-                  [MoveBy actionWithDuration:2 position:cpv(0, kItemSize * 2)],
-                  [CallFunc actionWithTarget:self selector:@selector(endMessage:)],
+    [msgLabel do:[Spawn actions:
+                  [FadeOut actionWithDuration:3],
+                  [Sequence actions:
+                   [DelayTime actionWithDuration:1],
+                   [MoveBy actionWithDuration:2 position:cpv(0, [[GorillasConfig get] fontSize] * 2)],
+                   nil],
                   nil]];
-    [msgLabel do:[FadeOut actionWithDuration:3]];
-    
-    [self add:msgLabel z:1];
-}
-
-
--(void) endMessage: (id) sender {
-    
-    [self remove:msgLabel];
-    [msgLabel release];
-    msgLabel = nil;
 }
 
 
 -(void) draw {
     
-    [super draw];
-    
 #ifdef _DEBUG_
     BuildingLayer *fb = [buildings objectAtIndex:0], *lb = [buildings lastObject];
-    for(float x = [fb position].x; x < [lb position].x; x += dbgTraceStep) {
+    int pCount = (([lb position].x - [fb position].x) / dbgTraceStep + 1);
+    cpVect *hgp = malloc(sizeof(cpVect) * pCount)
+    cpVect *hep = malloc(sizeof(cpVect) * pCount)
+    int hgc = 0, hec = 0;
+    
+    for(float x = [fb position].x; x < [lb position].x; x += dbgTraceStep)
         for(float y = 0; y < [[Director sharedDirector] winSize].size.height; y += dbgTraceStep) {
             cpVect pos = cpv(x, y);
 
@@ -175,19 +186,19 @@
                     break;
             
             if(hg)
-                [Utility drawPointAt:pos color:0x00FF00FF];
+                hgp[hgc++] = pos;
             else if(he)
-                [Utility drawPointAt:pos color:0xFF0000FF];
+                hep[hec++] = pos;
         }
-    }
     
-    for(int i = 0; i < dbgPathMaxInd; ++i) {
-        [Utility drawPointAt:dbgPath[i] color:0xFFFF00FF];
-    }
+    [Utility drawPointsAt:hgp count:hgc color:0x00FF00FF];
+    [Utility drawPointsAt:hep count:hec color:0xFF0000FF];
+    [Utility drawPointsAt:dbgPath count:dbgPathMaxInd color:0xFFFF00FF];
+    free(hgp);
+    free(hep);
     
-    for(int i = 0; i < dbgAIMaxInd; ++i) {
+    for(int i = 0; i < dbgAIMaxInd; ++i)
         [Utility drawLineFrom:dbgAI[i].position by:dbgAIVect[i] color:0xFF00FFFF];
-    }
 #endif
 
     if(activeGorilla && aim.x > 0) {
@@ -198,17 +209,20 @@
             aim,
         };
         const long colors[] = {
-            [[GorillasConfig get] skyColor],
-            [[GorillasConfig get] windowColorOn],
+            [[GorillasConfig get] windowColorOff]   & 0xffffff00,
+            [[GorillasConfig get] windowColorOn]    | 0x000000ff,
         };
+        
         [Utility drawLines:points colors:colors count:2 width:3];
     }
 }
+
 
 -(BOOL) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     return [self ccTouchesMoved:touches withEvent:event];
 }
+
 
 -(BOOL) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     
@@ -227,6 +241,7 @@
     
     return kEventHandled;
 }
+
 
 -(BOOL) ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     
@@ -247,9 +262,9 @@
         return [self ccTouchesCancelled:touches withEvent:event];
     
     cpVect r0 = [activeGorilla position];
-    cpVect v = cpv(aim.x - r0.x, aim.y - r0.y);
+    cpVect v = cpvsub(aim, r0);
         
-    [self throwFrom:r0 withVelocity: v];
+    [bananaLayer throwFrom:r0 withVelocity: v];
     
     aim = cpv(-1.0f, -1.0f);
     
@@ -259,17 +274,8 @@
 
 -(BOOL) mayThrow {
 
-    return ![banana visible] && [activeGorilla alive] && [activeGorilla human]
+    return ![bananaLayer throwing] && [activeGorilla alive] && [activeGorilla human]
             && ![[[GorillasAppDelegate get] gameLayer] paused];
-}
-
-
--(void) throwFrom: (cpVect)r0 withVelocity: (cpVect)v {
-    
-    [banana setPosition:[activeGorilla position]];
-    
-    [banana setClearedGorilla:false];
-    [banana do:[Throw actionWithVelocity:v startPos:r0]];
 }
 
 
@@ -279,7 +285,7 @@
     GorillaLayer *nextGorilla = nil;
     
     // Look for the next live gorilla; first try the next gorilla AFTER the current.
-    // If none there is alive, try the first one from the beginning
+    // If none there is alive, try the first one from the beginning UNTIL the current.
     for(BOOL startFromAfterCurrent = true; nextGorilla == nil; startFromAfterCurrent = false) {
         BOOL reachedCurrent = false;
         
@@ -328,7 +334,7 @@
 
         float l = [[GorillasConfig get] level];
         float g = [[GorillasConfig get] gravity];
-        float w = [[[[GorillasAppDelegate get] gameLayer] wind] wind];
+        float w = [[[[GorillasAppDelegate get] gameLayer] windLayer] wind];
         cpVect r0 = [activeGorilla position];
         cpVect rt = [target position];
         ccTime t = 3 * 100 / g;
@@ -344,29 +350,30 @@
         // Wind-based modifier.
         v.x -= w * t * [[GorillasConfig get] windModifier];
 
-        [self throwFrom: r0 withVelocity:v];
+        [bananaLayer throwFrom:r0 withVelocity:v];
         
 #ifdef _DEBUG_
         dbgAI[dbgAICurInd] = activeGorilla;
         dbgAIVect[dbgAICurInd] = v;
         dbgAICurInd = (dbgAICurInd + 1) % dbgAIMaxInd;
 #endif
-        }
+    }
 }
 
 
 -(void) miss {
     
     if(!([[[GorillasAppDelegate get] gameLayer] singlePlayer] && [activeGorilla human]))
+        // Only deduct points when single player game & throw was by human.
         return;
     
     int nScore = [[GorillasConfig get] level] * [[GorillasConfig get] missScore];
     
     [[GorillasConfig get] setScore:[[GorillasConfig get] score] + nScore];
-    [[[GorillasAppDelegate get] hudLayer] updateScore: nScore];
+    [[[GorillasAppDelegate get] hudLayer] updateScore:nScore];
 
     if(nScore)
-        [self message:[NSString stringWithFormat:@"%+d", nScore] on:banana];
+        [self message:[NSString stringWithFormat:@"%+d", nScore] on:bananaLayer];
 }
 
 
@@ -381,12 +388,12 @@
     for(GorillaLayer *gorilla in gorillas)
         if([gorilla hitsGorilla:pos]) {
 
-            if(gorilla == activeGorilla && [banana clearedGorilla] == false)
+            if(gorilla == activeGorilla && ![bananaLayer clearedGorilla])
                 // Disregard this hit on active gorilla because the banana didn't clear him yet.
                 continue;
             
             // A gorilla was hit.
-            hitGorilla = gorilla;
+            hitGorilla = [gorilla retain];
             [hitGorilla setAlive:false];
             
             // Check whether any gorillas are left.
@@ -421,8 +428,9 @@
                             // Message in case we level up.
                             if(oldLevel != [[GorillasConfig get] levelName])
                                 [[[GorillasAppDelegate get] gameLayer] message:@"Level Up!"];
-                        } else {
-
+                        }
+                        
+                        else {
                             // Decrease difficulty level & update score.
                             int nScore = [[GorillasConfig get] level] * [[GorillasConfig get] deathScore];
                             
@@ -445,16 +453,16 @@
             
             // Fade out the killed gorilla.
             [hitGorilla do:[Sequence actions:
-                                [FadeOut actionWithDuration:1],
-                                [CallFunc actionWithTarget:self selector:@selector(hitGorillaCallback:)],
-                                nil]];
+                            [FadeOut actionWithDuration:1],
+                            [CallFunc actionWithTarget:self selector:@selector(hitGorillaCallback:)],
+                            nil]];
 
             return true;
         }
         
         else if(gorilla == activeGorilla)
             // Active gorilla was not hit -> banana cleared him.
-            [banana setClearedGorilla:true];
+            [bananaLayer setClearedGorilla:true];
     
     // No hit.
     return false;
@@ -499,9 +507,9 @@
     [[[GorillasAppDelegate get] hudLayer] setMenuTitle: @"Menu"];
     [self stopPanning];
     [self reset];
-
-    [gorillas addObject:[gorillaA retain]];
-    [gorillas addObject:[gorillaB retain]];
+    
+    [gorillas addObject:gorillaA];
+    [gorillas addObject:gorillaB];
     
     [gorillaA setAlive:true];
     [gorillaB setAlive:true];
@@ -515,22 +523,28 @@
     int indexB = indexA + [[GorillasConfig get] buildingAmount] - 3;
     
     BuildingLayer *buildingA = (BuildingLayer *) [buildings objectAtIndex:indexA];
-    [gorillaA setPosition: cpv([buildingA position].x + [buildingA contentSize].width / 2, [buildingA contentSize].height + [gorillaA contentSize].height / 2)];
+    [gorillaA setPosition:cpv([buildingA position].x + [buildingA contentSize].width / 2, [buildingA contentSize].height + [gorillaA contentSize].height / 2)];
     
     BuildingLayer *buildingB = (BuildingLayer *) [buildings objectAtIndex:indexB];
-    [gorillaB setPosition: cpv([buildingB position].x + [buildingB contentSize].width / 2, [buildingB contentSize].height + [gorillaB contentSize].height / 2)];
+    [gorillaB setPosition:cpv([buildingB position].x + [buildingB contentSize].width / 2, [buildingB contentSize].height + [gorillaB contentSize].height / 2)];
     
     [gorillaA do:[FadeIn actionWithDuration:1]];
     [gorillaB do:[FadeIn actionWithDuration:1]];
     [self add:gorillaA z:3];
     [self add:gorillaB z:3];
     
+    bananaLayer = [[BananaLayer alloc] init];
+    [[bananaLayer banana] setPosition:gorillaA.position];
+    [self add:bananaLayer z:2];
+    
     [self do:[Sequence actions:
               /*[DelayTime actionWithDuration:1],*/
               [CallFunc actionWithTarget:self selector:@selector(startedCallback:)],
               nil]];
     
+    [activeGorilla release];
     activeGorilla = nil;
+    
     [self nextGorilla];
 }
 
@@ -543,30 +557,33 @@
 
 -(void) stopGame {
     
+    [hitGorilla release];
+    hitGorilla = nil;
     [activeGorilla release];
     activeGorilla = nil;
     
     for(GorillaLayer *gorilla in gorillas) {
         [gorilla setAlive:false];
-        [[gorilla retain] do:[Sequence actions:
-                        /*[DelayTime actionWithDuration:2],*/
-                        [FadeOut actionWithDuration:1],
-                        [CallFunc actionWithTarget:self selector:@selector(stopGameCallback:)],
-                        nil]];
+        [gorilla do:[FadeOut actionWithDuration:1]];
     }
     
-    [banana stopAllActions];
-    [banana setVisible:false];
+    [self removeAndStop:bananaLayer];
+    [bananaLayer release];
+    bananaLayer = nil;
+    
+    [self do:[Sequence actions:
+              [DelayTime actionWithDuration:1],
+              [CallFunc actionWithTarget:self selector:@selector(stopGameCallback:)],
+              nil]];
 }
 
-
--(void) stopGameCallback: (id) sender {
+-(void) stopGameCallback:(id)sender {
     
     if(![[[GorillasAppDelegate get] gameLayer] running])
         return;
     
     for(GorillaLayer *gorilla in gorillas)
-        [self remove:gorilla];
+        [self removeAndStop:gorilla];
     [gorillas removeAllObjects];
     
     [self startPanning];
@@ -577,29 +594,27 @@
 
 -(void) removeGorilla: (GorillaLayer *)gorilla {
 
-    [gorilla stopAllActions];
-
-    [self remove:gorilla];
+    [self removeAndStop:gorilla];
     [gorillas removeObject:gorilla];
 }
  
 
 -(void) startPanning {
     
-    if(panAction)
+    /*if(panAction)
         // If already panning, stop first.
         [self stopPanning];
     
     panAction = [[PanAction alloc] initWithSubNodes:buildings duration:[[GorillasConfig get] buildingSpeed] padding:1];
-    [self do: panAction];
+    [self do: panAction];*/
 }
 
 
 -(void) stopPanning {
     
-    [panAction cancel];
+    /*[panAction cancel];
     [panAction release];
-    panAction = nil;
+    panAction = nil;*/
 }
 
 
@@ -609,7 +624,8 @@
     [explosions addObject:explosion];
 
     [explosion setPosition:point];
-    [self add:explosion];
+    [self add:explosion z:3];
+    [self add:[explosion hole] z:-1];
     [explosion release];
 }
 
@@ -628,12 +644,36 @@
 
 -(void) dealloc {
     
-    [self stopGame];
-    [banana release];
-    [gorillas release];
-    [activeGorilla release];
-    [buildings release];
     [panAction release];
+    panAction = nil;
+    
+    [msgLabel release];
+    msgLabel = nil;
+    
+    [gorillas release];
+    gorillas = nil;
+    
+    [buildings release];
+    buildings = nil;
+    
+    [explosions release];
+    explosions = nil;
+    
+    [bananaLayer release];
+    bananaLayer = nil;
+    
+    [activeGorilla release];
+    activeGorilla = nil;
+    
+    [hitGorilla release];
+    hitGorilla = nil;
+    
+#ifdef _DEBUG_
+    free(dbgPath);
+    free(dbgAI);
+    free(dbgAIVect);
+#endif
+    
     [super dealloc];
 }
 

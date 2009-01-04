@@ -27,7 +27,7 @@
 #import "ShadeLayer.h"
 
 
-@interface ConfigurationLayer : ShadeLayer {
+@interface GameConfigurationLayer : ShadeLayer {
     
     Menu *menu, *backMenu;
 }

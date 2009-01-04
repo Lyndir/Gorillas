@@ -28,11 +28,17 @@
 #import "cocos2d.h"
 
 
-@interface BananaLayer : Sprite {
+@interface BananaLayer : Layer <CocosNodeSize> {
 
     BOOL clearedGorilla;
+
+    Sprite *banana;
 }
 
+-(void) throwFrom: (cpVect)r0 withVelocity: (cpVect)v;
+-(BOOL) throwing;
+
 @property (readwrite) BOOL clearedGorilla;
+@property (readonly) Sprite *banana;
 
 @end

@@ -42,7 +42,7 @@
     NSMutableArray *explosions;
 
     cpVect aim;
-    BananaLayer *banana;
+    BananaLayer *bananaLayer;
     GorillaLayer *activeGorilla;
     GorillaLayer *hitGorilla;
     
@@ -65,7 +65,6 @@
 -(void) stopPanning;
 
 -(BOOL) mayThrow;
--(void) throwFrom: (cpVect) r0 withVelocity: (cpVect) v;
 
 -(void) miss;
 -(BOOL) hitsGorilla: (cpVect)pos;
@@ -76,7 +75,6 @@
 -(void) removeGorilla: (GorillaLayer *)gorilla;
 
 -(void) message: (NSString *)msg on: (CocosNode<CocosNodeSize> *)node;
--(void) endMessage: (id) sender;
 
 -(float) left;
 -(float) right;

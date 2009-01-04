@@ -27,6 +27,7 @@
 #import "SkiesLayer.h"
 #import "SkyLayer.h"
 #import "PanAction.h"
+#import "Utility.h"
 
 
 @implementation SkiesLayer
@@ -67,9 +68,25 @@
     
     const long color = [[GorillasConfig get] skyColor];
     const GLubyte *colorBytes = (GLubyte *)&color;
+    const long toColor = ((int) (colorBytes[3] * 0.3f) << 24) |
+                         ((int) (colorBytes[2] * 0.3f) << 16) |
+                         ((int) (colorBytes[1] * 0.3f) << 8) |
+                         colorBytes[0];
     
-    glClearColor(colorBytes[3] / (float)0xff, colorBytes[2] / (float)0xff, colorBytes[1] / (float)0xff, colorBytes[0] / (float)0xff);
-    glClear(GL_COLOR_BUFFER_BIT);
+    CGSize winSize = [[Director sharedDirector] winSize].size;
+    [Utility drawBoxFrom:cpv(-position.x, -position.y) to:cpv(winSize.width - position.x, winSize.height - position.y)
+               colorFrom:color to:toColor];
+    /*glClearColor(colorBytes[3] / (float)0xff, colorBytes[2] / (float)0xff, colorBytes[1] / (float)0xff, colorBytes[0] / (float)0xff);
+    glClear(GL_COLOR_BUFFER_BIT);*/
+}
+
+
+-(void) dealloc {
+    
+    [skies release];
+    skies = nil;
+    
+    [super dealloc];
 }
 
 

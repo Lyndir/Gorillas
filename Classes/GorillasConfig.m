@@ -183,7 +183,7 @@
 -(void) setCityTheme: (NSString *)cityTheme {
     
     [defaults setObject:cityTheme forKey: dCityTheme];
-    [[[GorillasAppDelegate get] configLayer] reset];
+    [[GorillasAppDelegate get] updateConfig];
 }
 -(int) smallFontSize {
     
@@ -192,6 +192,7 @@
 -(void) setSmallFontSize: (int)smallFontSize {
     
     [defaults setInteger:smallFontSize forKey: dSmallFontSize];
+    [[GorillasAppDelegate get] updateConfig];
 }
 -(int) fontSize {
     
@@ -200,7 +201,7 @@
 -(void) setFontSize: (int)fontSize {
 
     [defaults setInteger:fontSize forKey: dFontSize];
-    [[[GorillasAppDelegate get] configLayer] reset];
+    [[GorillasAppDelegate get] updateConfig];
 }
 -(NSString *) fontName {
 
@@ -209,7 +210,7 @@
 -(void) setFontName: (NSString *)fontName {
 
     [defaults setObject:fontName forKey: dFontName];
-    [[[GorillasAppDelegate get] configLayer] reset];
+    [[GorillasAppDelegate get] updateConfig];
 }
 -(NSString *) fixedFontName {
     
@@ -218,6 +219,7 @@
 -(void) setFixedFontName: (NSString *)fixedFontName {
     
     [defaults setObject:fixedFontName forKey: dFixedFontName];
+    [[GorillasAppDelegate get] updateConfig];
 }
 
 
@@ -228,6 +230,10 @@
 -(void) setFixedFloors: (int)fixedFloors {
 
     [defaults setInteger:fixedFloors forKey: dFixedFloors];
+}
+-(float) cityScale {
+    
+    return [self buildingWidth] / 50;
 }
 -(float) buildingMax {
 
@@ -365,7 +371,7 @@
         gravity = [self minGravity];
     
     [defaults setInteger:gravity forKey: dGravity];
-    [[[GorillasAppDelegate get] configLayer] reset];
+    [[GorillasAppDelegate get] updateConfig];
 }
 -(int) minGravity {
     
@@ -413,7 +419,7 @@
         level = 0.9f;
     
     [defaults setFloat:level forKey: dLevel];
-    [[[GorillasAppDelegate get] configLayer] reset];
+    [[GorillasAppDelegate get] updateConfig];
 }
 -(NSString *) levelName {
 
@@ -429,7 +435,7 @@
 -(void) setLevelNames: (NSArray *)levelNames {
 
     [defaults setObject:levelNames forKey: dLevelNames];
-    [[[GorillasAppDelegate get] configLayer] reset];
+    [[GorillasAppDelegate get] updateConfig];
 }
 -(int) levelNameCount {
 
@@ -529,7 +535,7 @@
 -(void) setTracks: (NSDictionary *)tracks {
     
     [defaults setObject:tracks forKey: dTracks];
-    [[[GorillasAppDelegate get] configLayer] reset];
+    [[GorillasAppDelegate get] updateConfig];
 }
 -(NSString *) currentTrack {
     
@@ -541,7 +547,7 @@
         currentTrack = @"";
     
     [defaults setObject:currentTrack forKey: dCurrentTrack];
-    [[[GorillasAppDelegate get] configLayer] reset];
+    [[GorillasAppDelegate get] updateConfig];
 }
 -(NSString *) currentTrackName {
     
@@ -565,9 +571,11 @@
 
 -(void) dealloc {
     
-    [super dealloc];
-    
+    [[CityTheme getThemes] release];
     [defaults release];
+    defaults = nil;
+    
+    [super dealloc];
 }
 
 

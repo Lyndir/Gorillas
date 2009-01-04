@@ -26,6 +26,7 @@
 
 #import "GorillaLayer.h"
 #import "Utility.h"
+#import "GorillasConfig.h"
 
 
 @implementation GorillaLayer
@@ -37,6 +38,8 @@
     
     if(!(self = [super initWithFile:@"gorilla.png"]))
         return self;
+    
+    [self setScale:[[GorillasConfig get] cityScale]];
     
     return self;
 }
@@ -51,23 +54,18 @@
 }
 
 
--(float) width {
+-(CGSize) contentSize {
     
-    return [self contentSize].width;
-}
-
-
--(float) height {
-    
-    return [self contentSize].height;
+    return CGSizeMake([super contentSize].width * [self scale], [super contentSize].height * [self scale]);
 }
 
 
 -(void) dealloc {
     
-    [super dealloc];
-    
     [name release];
+    name = nil;
+    
+    [super dealloc];
 }
 
 

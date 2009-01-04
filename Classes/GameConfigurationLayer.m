@@ -24,12 +24,12 @@
 //  Copyright 2008, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "ConfigurationLayer.h"
+#import "GameConfigurationLayer.h"
 #import "GorillasAppDelegate.h"
 #import "CityTheme.h"
 
 
-@implementation ConfigurationLayer
+@implementation GameConfigurationLayer
 
 
 -(id) init {
@@ -43,85 +43,63 @@
 
 -(void) reset {
     
-    BOOL readd = false;
+    BOOL readd = [menu parent] != nil;
     
     if(menu) {
-        readd = [menu parent] != nil;
-        
-        [self remove:menu];
+        [self removeAndStop:menu];
         [menu release];
         menu = nil;
         
-        [self remove:backMenu];
+        [self removeAndStop:backMenu];
         [backMenu release];
         backMenu = nil;
     }
     
     
-    // Audio Track.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *audioT    = [MenuItemFont itemFromString:@"Audio Track"
-                                                target: self
-                                              selector: @selector(audioTrack:)];
-    [audioT setIsEnabled:false];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *audioI    = [MenuItemFont itemFromString:[[GorillasConfig get] currentTrackName]
-                                                target: self
-                                              selector: @selector(audioTrack:)];
-
-    
     // City Theme.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *themeT    = [MenuItemFont itemFromString:@"City Theme"
-                                                target: self
-                                              selector: @selector(cityTheme:)];
+    MenuItem *themeT    = [MenuItemFont itemFromString:@"City Theme"];
     [themeT setIsEnabled:false];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *themeI    = [MenuItemFont itemFromString:[[GorillasConfig get] cityTheme]
-                                                target: self
-                                              selector: @selector(cityTheme:)];
+                                                target:self
+                                              selector:@selector(cityTheme:)];
     [themeI setIsEnabled:![[[GorillasAppDelegate get] gameLayer] running]];
     
     
     // Difficulity Level.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *levelT    = [MenuItemFont itemFromString:@"Level"
-                                                target: self
-                                              selector: @selector(level:)];
+    MenuItem *levelT    = [MenuItemFont itemFromString:@"Level"];
     [levelT setIsEnabled:false];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *levelI    = [MenuItemFont itemFromString:[[GorillasConfig get] levelName]
-                                                target: self
-                                              selector: @selector(level:)];
+                                                target:self
+                                              selector:@selector(level:)];
     
     
     // Gravity.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *gravityT  = [MenuItemFont itemFromString:@"Gravity"
-                                                target: self
-                                              selector: @selector(gravity:)];
+    MenuItem *gravityT  = [MenuItemFont itemFromString:@"Gravity"];
     [gravityT setIsEnabled:false];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *gravityI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%d", [[GorillasConfig get] gravity]]
-                                                target: self
-                                              selector: @selector(gravity:)];
+                                                target:self
+                                              selector:@selector(gravity:)];
     
-    menu = [[Menu menuWithItems:audioT, audioI, themeT, themeI, levelT, levelI, gravityT, gravityI, nil] retain];
+    menu = [[Menu menuWithItems:themeT, themeI, levelT, levelI, gravityT, gravityI, nil] retain];
     [menu alignItemsVertically];
     
     
     // Back.
     MenuItem *back     = [MenuItemFont itemFromString:@"<"
-                                                target: self
-                                              selector: @selector(mainMenu:)];
+                                                target:self
+                                              selector:@selector(back:)];
     
     backMenu = [[Menu menuWithItems:back, nil] retain];
     [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
@@ -190,38 +168,20 @@
 }
 
 
--(void) audioTrack: (id) sender {
+-(void) back: (id) sender {
     
-    NSArray *tracks = [[[GorillasConfig get] tracks] allKeys];
-    NSString *newTrack = [tracks objectAtIndex:0];
-    
-    BOOL found = false;
-    for(NSString *track in tracks) {
-        if(found) {
-            newTrack = track;
-            break;
-        }
-        
-        if([[[GorillasConfig get] currentTrack] isEqualToString:track])
-            found = true;
-    }
-
-    if(![newTrack length])
-        newTrack = nil;
-    
-    [[GorillasAppDelegate get] playTrack:newTrack];
-}
-
-
--(void) mainMenu: (id) sender {
-    
-    [[GorillasAppDelegate get] showMainMenu];
+    [[GorillasAppDelegate get] showConfiguration];
 }
 
 
 -(void) dealloc {
     
     [menu release];
+    menu = nil;
+    
+    [backMenu release];
+    backMenu = nil;
+    
     [super dealloc];
 }
 

@@ -49,29 +49,49 @@
     if(!(self = [super initWithDuration:t]))
         return self;
     
+    smoke = [[ParticleMeteor alloc] init];
+    [smoke setGravity:cpvzero];
+    [smoke setPosition:cpvzero];
+    [smoke setSpeed:5];
+    [smoke setAngle:-90];
+    [smoke setAngleVar:10];
+    [smoke setLife:3];
+    [smoke setEmissionRate:0];
+    ccColorF startColor;
+	startColor.r = 0.1f;
+	startColor.g = 0.2f;
+	startColor.b = 0.3f;
+    startColor.a = 0.5f;
+    [smoke setStartColor:startColor];
+    ccColorF endColor;
+	endColor.r = 0.0f;
+	endColor.g = 0.0f;
+	endColor.b = 0.0f;
+    endColor.a = 0.3f;
+    [smoke setEndColor:endColor];
+    
     return self;
 }
 
 
 -(void) start {
     
+    if(running)
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Already started." userInfo:nil];
+    
     running = true;
     [super start];
     
-    [target do:[Repeat actionWithAction:[RotateBy actionWithDuration:1 angle:360] times:(int)duration + 1]];
+    [target do:[Repeat actionWithAction:[RotateBy actionWithDuration:1
+                                                               angle:360]
+                                  times:(int)duration + 1]];
     [target setVisible:true];
     
-    [smoke release];
-    smoke = [[ParticleMeteor alloc] initWithTotalParticles:100];
-    [smoke setPosition:[target position]];
-    [smoke setGravity:cpv(0,0)];
-    [smoke setSize:15.0f];
-    //[smoke setSpeed:50];
-    [smoke setAngleVar:0];
-    [smoke setLife:0.1f];
-    ccColorF sCol = [smoke startColor];
-    sCol.a = 0.05f;
-    [smoke setStartColor:sCol];
+    
+    [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:smoke affectAngle:false];
+    [smoke setEmissionRate:30];
+    [smoke setSize:10.0f * [target scale]];
+    [smoke setSizeVar:5.0f * [target scale]];
     [[target parent] add:smoke];
 }
 
@@ -83,34 +103,29 @@
         return;
     
     // Wind influence.
-    float w = [[[[GorillasAppDelegate get] gameLayer] wind] wind];
+    float w = [[[[GorillasAppDelegate get] gameLayer] windLayer] wind];
     
     // Calculate banana position.
     float g = [[GorillasConfig get] gravity];
     ccTime t = dt * duration;
     cpVect r = cpv((v.x + w * t * [[GorillasConfig get] windModifier]) * t + r0.x,
                    v.y * t - t * t * g / 2.0f + r0.y);
-    
-    [smoke setGravity:cpv(([smoke position].x - r.x) * 50,
-                          ([smoke position].y - r.y) * 50)];
-    /*float m = 1.0f;
-    if([smoke position].y > r.y)
-        m = -1.0f;
-    [smoke setAngle:(asinf(m * [smoke gravity].x / (sqrtf(powf([smoke gravity].x, 2) + powf([smoke gravity].y, 2)))) / (float) M_PI * 180.0f)];
-    [smoke setGravity:cpv(0, 0)];*/
-    [smoke setPosition:[target position]];
     [target setPosition:r];
+    [smoke setAngle:atan2f([smoke source].y - r.y,
+                           [smoke source].x - r.x)
+                            / (float)M_PI * 180.0f];
+    [smoke setSource:r];
     
     // Update HUD progress indicator.
-    float min = [[[[GorillasAppDelegate get] gameLayer] buildings] left];
-    float max = [[[[GorillasAppDelegate get] gameLayer] buildings] right];
+    float min = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] left];
+    float max = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] right];
     [[[GorillasAppDelegate get] hudLayer] setProgress:(r.x - min) / max];
     
     // Figure out whether banana went off screen or hit something.
-    BuildingsLayer *buildingsLayer = [[[GorillasAppDelegate get] gameLayer] buildings];
-    cpVect parent = [buildingsLayer position];
+    BuildingsLayer *buildingsLayer = [[[GorillasAppDelegate get] gameLayer] buildingsLayer];
+    cpVect parentPos = [buildingsLayer position];
     CGSize screen = [[Director sharedDirector] winSize].size;
-    cpVect onScreen = cpv(r.x + parent.x, r.y - parent.y);
+    cpVect onScreen = cpvadd(r, parentPos);
 
     BOOL offScreen = onScreen.x < 0 || onScreen.x > screen.width;
     BOOL hitGorilla = [buildingsLayer hitsGorilla:r], hitBuilding = [buildingsLayer hitsBuilding:r];
@@ -127,12 +142,13 @@
         
         // Update score on miss.
         if(hitBuilding || offScreen)
-            [[[[GorillasAppDelegate get] gameLayer] buildings] miss];
+            [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] miss];
         
         // Hide banana.
-        [target stopAction:self];
+        [[[[GorillasAppDelegate get] gameLayer] windLayer] unregisterSystem:smoke];
+        [smoke setEmissionRate:0];
         [target setVisible:false];
-        [self stop];
+        running = false;
         
         // Next Gorilla's turn.
         [buildingsLayer nextGorilla];
@@ -144,15 +160,21 @@
     
     duration = 0;
     running = false;
-    [[smoke parent] remove:smoke];
-    [smoke release];
-    smoke = nil;
 }
 
 
 -(BOOL) isDone {
     
     return [super isDone] || !running;
+}
+
+
+-(void) dealloc {
+    
+    [smoke release];
+    smoke = nil;
+    
+    [super dealloc];
 }
 
 

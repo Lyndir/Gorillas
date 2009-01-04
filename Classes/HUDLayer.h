@@ -35,7 +35,7 @@
     Label *scoreLabel;
     ccTime progress;
     
-    BOOL revealed;
+    BOOL showing;
 
     float width;
     float height;
@@ -50,5 +50,6 @@
 -(BOOL) hitsHud: (cpVect)pos;
 
 @property (readwrite) ccTime progress;
+@property (readonly) BOOL showing;
 
 @end

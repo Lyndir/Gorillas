@@ -33,7 +33,7 @@
 
 @implementation HUDLayer
 
-@synthesize progress;
+@synthesize progress, showing;
 
 
 -(id) init {
@@ -46,7 +46,9 @@
     position = cpv(0, -height);
     
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    menuButton = [MenuItemFont itemFromString:@"                              " target:self selector:@selector(menuButton:)];
+    menuButton = [[MenuItemFont itemFromString:@"                              "
+                                        target:self
+                                      selector:@selector(menuButton:)] retain];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [menuButton setTag:5];
 
@@ -55,7 +57,11 @@
     [menuMenu alignItemsHorizontally];
     
     // Score.
-    scoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%04d", [[GorillasConfig get] score]] dimensions:CGSizeMake(80, [[GorillasConfig get] smallFontSize]) alignment:UITextAlignmentRight fontName:[[GorillasConfig get] fixedFontName] fontSize:[[GorillasConfig get] smallFontSize]];
+    scoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%04d", [[GorillasConfig get] score]]
+                                    dimensions:CGSizeMake(80, [[GorillasConfig get] smallFontSize])
+                                     alignment:UITextAlignmentRight
+                                      fontName:[[GorillasConfig get] fixedFontName]
+                                      fontSize:[[GorillasConfig get] smallFontSize]];
     [self add:scoreLabel];
     
     CGSize winSize = [[Director sharedDirector] winSize].size;
@@ -75,13 +81,15 @@
         scoreColor = 0xCC6666ff;
 
     [scoreLabel setString:[NSString stringWithFormat:@"%04d", [[GorillasConfig get] score]]];
-    [scoreLabel do:[Sequence actions:
-                    [ShadeTo actionWithColor:scoreColor duration:0.5f],
-                    [ShadeTo actionWithColor:0xFFFFFFFF duration:0.5f],
-                    nil]];
-    [scoreLabel do:[Sequence actions:
-                    [ScaleTo actionWithDuration:0.5f scale:1.2f],
-                    [ScaleTo actionWithDuration:0.5f scale:1],
+    [scoreLabel do:[Spawn actions:
+                    [Sequence actions:
+                     [ShadeTo actionWithColor:scoreColor duration:0.5f],
+                     [ShadeTo actionWithColor:0xFFFFFFFF duration:0.5f],
+                     nil],
+                    [Sequence actions:
+                     [ScaleTo actionWithDuration:0.5f scale:1.2f],
+                     [ScaleTo actionWithDuration:0.5f scale:1],
+                     nil],
                     nil]];
 }
 
@@ -95,10 +103,11 @@
 
 -(void) reveal {
 
-    if(revealed)
+    if(showing)
         return;
     
-    revealed = true;
+    showing = true;
+    [self stopAllActions];
     [self do:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, 0)]];
     [self add:menuMenu];
 }
@@ -106,20 +115,21 @@
 
 -(void) dismiss {
     
-    if(!revealed)
+    if(!showing)
         return;
     
-    revealed = false;
+    showing = false;
+    [self stopAllActions];
     [self do:[Sequence actions:
-                  [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, -height)],
-                  [CallFunc actionWithTarget:self selector:@selector(gone)],
-                  nil]];
+              [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, -height)],
+              [CallFunc actionWithTarget:self selector:@selector(gone)],
+              nil]];
 }
 
 
 -(void) gone {
     
-    [self remove:menuMenu];
+    [self removeAndStop:menuMenu];
 }
 
 
@@ -140,7 +150,9 @@
 
 -(void) draw {
     
-    [Utility drawBoxFrom:cpv(0, 0) size:cpv(width, height) color:[[GorillasConfig get] shadeColor]];
+    [Utility drawBoxFrom:cpv(0, 0)
+                    size:cpv(width, height)
+                   color:[[GorillasConfig get] shadeColor]];
     [Utility drawLineFrom:cpv(0, 2)
                        by:cpv(width * progress, 0)
                     color:[[GorillasConfig get] windowColorOn]
@@ -150,10 +162,16 @@
 
 -(void) dealloc {
     
-    [super dealloc];
-    
     [menuButton release];
+    menuButton = nil;
+    
     [menuMenu release];
+    menuMenu = nil;
+    
+    [scoreLabel release];
+    scoreLabel = nil;
+    
+    [super dealloc];
 }
 
 

@@ -82,6 +82,7 @@
 -(void) dealloc {
     
     free(stars);
+    stars = nil;
     
     [super dealloc];
 }

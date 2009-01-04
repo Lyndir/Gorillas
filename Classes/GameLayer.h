@@ -39,14 +39,16 @@
     BOOL running;
     BOOL singlePlayer;
 
-    SkiesLayer *skies;
-    BuildingsLayer *buildings;
-    WindLayer *wind;
+    SkiesLayer *skiesLayer;
+    BuildingsLayer *buildingsLayer;
+    ParticleSystem *weather;
+    WindLayer *windLayer;
     Label *msgLabel;
 }
 
-@property (readonly) BuildingsLayer *buildings;
-@property (readonly) WindLayer *wind;
+@property (readonly) BuildingsLayer *buildingsLayer;
+@property (readonly) ParticleSystem *weather;
+@property (readonly) WindLayer *windLayer;
 @property (readonly) BOOL singlePlayer;
 @property (readonly) BOOL running;
 @property (readonly) BOOL paused;

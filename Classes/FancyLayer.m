@@ -139,4 +139,15 @@
 }
 
 
+-(void) dealloc {
+    
+    free(vertices);
+    free(colors);
+    vertices = nil;
+    colors = nil;
+    
+    [super dealloc];
+}
+
+
 @end

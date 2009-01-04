@@ -17,63 +17,83 @@
  */
 
 //
-//  InformationLayer.m
+//  ConfigurationLayer.m
 //  Gorillas
 //
 //  Created by Maarten Billemont on 26/10/08.
 //  Copyright 2008, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "InformationLayer.h"
-#import "GorillasConfig.h"
+#import "GameConfigurationLayer.h"
 #import "GorillasAppDelegate.h"
+#import "CityTheme.h"
 
 
-@implementation InformationLayer
+@implementation AVConfigurationLayer
 
 
 -(id) init {
-
+    
     if(!(self = [super init]))
         return self;
+    
+    return self;
+}
 
-    // Version string.
+
+-(void) reset {
+    
+    BOOL readd = false;
+    
+    if(menu) {
+        readd = [menu parent] != nil;
+        
+        [self removeAndStop:menu];
+        [menu release];
+        menu = nil;
+        
+        [self removeAndStop:backMenu];
+        [backMenu release];
+        backMenu = nil;
+    }
+    
+    
+    // Audio Track.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *ver   = [MenuItemFont itemFromString:[[NSBundle mainBundle]
-                                                    objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
-    [ver setIsEnabled:false];
-    
-    // Information menus.
+    MenuItem *audioT    = [MenuItemFont itemFromString:@"Audio Track"];
+    [audioT setIsEnabled:false];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *guide = [MenuItemFont itemFromString:@"Game Guide"
-                                            target:self
-                                          selector:@selector(guide:)];
-    MenuItem *stats = [MenuItemFont itemFromString:@"Statistics"
-                                            target:self
-                                          selector:@selector(stats:)];
+    MenuItem *audioI    = [MenuItemFont itemFromString:[[GorillasConfig get] currentTrackName]
+                                                target:self
+                                              selector:@selector(audioTrack:)];
     
-    menu = [[Menu menuWithItems:ver, guide, stats, nil] retain];
+    menu = [[Menu menuWithItems:audioT, audioI, nil] retain];
     [menu alignItemsVertically];
 
     
     // Back.
     MenuItem *back     = [MenuItemFont itemFromString:@"<"
-                                               target: self
-                                             selector: @selector(mainMenu:)];
+                                                target: self
+                                              selector: @selector(back:)];
     
     backMenu = [[Menu menuWithItems:back, nil] retain];
     [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
-    
-    return self;
+
+    if(readd) {
+        [self add:menu];
+        [self add:backMenu];
+    }
 }
 
 
 -(void) reveal {
     
     [super reveal];
+    
+    [self reset];
     
     [menu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
     [self add:menu];
@@ -82,21 +102,32 @@
 }
 
 
--(void) guide: (id) sender {
+-(void) audioTrack: (id) sender {
     
-    [[GorillasAppDelegate get] showGuide];
+    NSArray *tracks = [[[GorillasConfig get] tracks] allKeys];
+    NSString *newTrack = [tracks objectAtIndex:0];
+    
+    BOOL found = false;
+    for(NSString *track in tracks) {
+        if(found) {
+            newTrack = track;
+            break;
+        }
+        
+        if([[[GorillasConfig get] currentTrack] isEqualToString:track])
+            found = true;
+    }
+
+    if(![newTrack length])
+        newTrack = nil;
+    
+    [[GorillasAppDelegate get] playTrack:newTrack];
 }
 
 
--(void) stats: (id) sender {
+-(void) back: (id) sender {
     
-    [[GorillasAppDelegate get] showStatistics];
-}
-
-
--(void) mainMenu: (id) sender {
-    
-    [[GorillasAppDelegate get] showMainMenu];
+    [[GorillasAppDelegate get] showConfiguration];
 }
 
 

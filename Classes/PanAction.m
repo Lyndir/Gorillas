@@ -84,9 +84,10 @@
 
 -(void) dealloc {
     
-    [super dealloc];
-    
     [subNodes release];
+    subNodes = nil;
+    
+    [super dealloc];
 }
 
 

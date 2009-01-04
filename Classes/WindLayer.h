@@ -33,7 +33,12 @@
 
     float       wind;
     long        color;
+    
+    NSMutableArray *systems, *affectAngles;
 }
+
+-(void) registerSystem:(ParticleSystem *)system affectAngle:(BOOL)affectAngle;
+-(void) unregisterSystem:(ParticleSystem *)system;
 
 @property (readonly) float wind;
 @property (readwrite) long color;

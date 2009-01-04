@@ -54,19 +54,19 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 @interface AudioController : NSObject {
 
-	AudioPlayer					*audioPlayer;
-	NSString                    *soundFile;
-	NSURL						*soundFileURL;
-	BOOL						interruptedOnPlayback;
+	AudioPlayer                             *audioPlayer;
+	NSString                                *soundFile;
+	NSURL                                   *soundFileURL;
+	BOOL                                    interruptedOnPlayback;
     
-    id<AudioControllerDelegate> delegate;
+    id<NSObject, AudioControllerDelegate>   delegate;
 }
 
-@property (nonatomic, retain)	AudioPlayer					*audioPlayer;
-@property (nonatomic, retain)	NSString					*soundFile;
-@property (nonatomic, retain)	NSURL						*soundFileURL;
-@property (readwrite)			BOOL						interruptedOnPlayback;
-@property (readwrite, assign)   id<AudioControllerDelegate> delegate;
+@property (nonatomic, retain)	AudioPlayer                             *audioPlayer;
+@property (nonatomic, retain)	NSString                                *soundFile;
+@property (nonatomic, retain)	NSURL                                   *soundFileURL;
+@property (readwrite)			BOOL                                    interruptedOnPlayback;
+@property (readwrite, retain)   id<NSObject, AudioControllerDelegate>   delegate;
 
 - (id) initWithFile: (NSString *) audioFile;
 - (void) updateUserInterfaceOnAudioQueueStateChange: (AudioQueueObject *) inQueue;

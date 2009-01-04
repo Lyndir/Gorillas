@@ -33,6 +33,7 @@
     BOOL running;
     cpVect v;
     cpVect r0;
+    
     ParticleSystem *smoke;
 }
 

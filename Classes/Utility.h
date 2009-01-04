@@ -61,6 +61,7 @@
 +(void) drawBoxFrom:(cpVect)from size:(cpVect)to;
 +(void) drawBoxFrom:(cpVect)from to:(cpVect)to color:(long)color;
 +(void) drawBoxFrom:(cpVect)from size:(cpVect)to color:(long)color;
++(void) drawBoxFrom:(cpVect)from to:(cpVect)to colorFrom:(long)fromColor to:(long)toColor;
 
 +(void) drawBorderFrom:(cpVect)from to:(cpVect)to;
 +(void) drawBorderFrom:(cpVect)from size:(cpVect)size;

@@ -30,12 +30,12 @@
 
 @implementation GorillasAppDelegate
 
-@synthesize gameLayer, configLayer, hudLayer, audioController;
+@synthesize gameLayer;
 
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:true];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:false];
     
     // Start the background music.
     [self playTrack:[[GorillasConfig get] currentTrack]];
@@ -58,25 +58,36 @@
     //glEnable(GL_LINE_SMOOTH);
 	
     // Build the scene.
-	gameLayer = [GameLayer node];
-	Scene *scene = [Scene node];
+	gameLayer = [[GameLayer alloc] init];
+	Scene *scene = [[Scene alloc] init];
 	[scene add: gameLayer];
     
     // Start the scene and bring up the menu.
 	[[Director sharedDirector] runScene: scene];
-    //[gameLayer add:[TestLayer node]];
-    //return
+    [scene release];
+
     [self showMainMenu];
+}
+
+
+-(void) exit {
     
-    // Load the HUD.
-    hudLayer = [[HUDLayer alloc] init];
-    [gameLayer add:hudLayer];
+    [gameLayer removeAndStopAll];
+    [gameLayer release];
+    gameLayer = nil;
+    
+    [self cleanup];
+    [[GorillasConfig get] release];
+    
+    [[Director sharedDirector] stopScene];
+    /*[[Director sharedDirector] popScene];
+    [[Director sharedDirector] release];*/
 }
 
 
 -(void) revealHud {
     
-    [hudLayer reveal];
+    [[self hudLayer] reveal];
 }
 
 
@@ -86,18 +97,38 @@
 }
 
 
+-(HUDLayer *) hudLayer {
+    
+    if(!hudLayer) {
+        hudLayer = [[HUDLayer alloc] init];
+        [gameLayer add:hudLayer];
+    }
+    
+    return hudLayer;
+}
+
+
+-(void) updateConfig {
+
+    [gameConfigLayer reset];
+    [avConfigLayer reset];
+}
+
+
 -(void) dismissLayer {
     
     [currentLayer dismiss];
+    [currentLayer release];
+    currentLayer = nil;
 }
 
 
 -(void) showLayer: (ShadeLayer *)layer {
     
     if([currentLayer showing])
-        [currentLayer dismiss];
+        [self dismissLayer];
     
-    currentLayer = layer;
+    currentLayer = [layer retain];
     [currentLayer reveal];
 }
 
@@ -127,11 +158,33 @@
 -(void) showConfiguration {
     
     if(!configLayer) {
-        configLayer = [[ConfigurationLayer alloc] init];
+        configLayer = [[ConfigurationSectionLayer alloc] init];
         [gameLayer add:configLayer];
     }
     
     [self showLayer:configLayer];
+}
+
+
+-(void) showGameConfiguration {
+    
+    if(!gameConfigLayer) {
+        gameConfigLayer = [[GameConfigurationLayer alloc] init];
+        [gameLayer add:gameConfigLayer];
+    }
+    
+    [self showLayer:gameConfigLayer];
+}
+
+
+-(void) showAVConfiguration {
+    
+    if(!avConfigLayer) {
+        avConfigLayer = [[AVConfigurationLayer alloc] init];
+        [gameLayer add:avConfigLayer];
+    }
+    
+    [self showLayer:avConfigLayer];
 }
 
 
@@ -204,7 +257,7 @@
     }
 
     else if(nextTrack) {
-        audioController = [[[AudioController alloc] initWithFile:nextTrack] retain];
+        audioController = [[AudioController alloc] initWithFile:nextTrack];
         [audioController play];
         [audioController setDelegate:self];
     }
@@ -223,26 +276,64 @@
 }
 
 
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
+-(void) applicationDidReceiveMemoryWarning:(UIApplication *)application {
     
 	[[TextureMgr sharedTextureMgr] removeAllTextures];
     
-    if(![currentLayer showing]) {
-        if(currentLayer == mainMenuLayer) {
-            [gameLayer remove:mainMenuLayer];
-            [mainMenuLayer release];
-            mainMenuLayer = nil;
-        }
-        else if(currentLayer == statsLayer) {
-            [gameLayer remove:statsLayer];
-            [statsLayer release];
-            statsLayer = nil;
-        }
-        else if(currentLayer == configLayer) {
-            [gameLayer remove:configLayer];
-            [configLayer release];
-            configLayer = nil;
-        }
+    [self cleanup];
+}
+
+
+-(void) cleanup {
+    
+    if(hudLayer && ![hudLayer showing]) {
+        [hudLayer removeAndStopAll];
+        [hudLayer release];
+        hudLayer = nil;
+    }
+    if(mainMenuLayer && ![mainMenuLayer showing]) {
+        [gameLayer removeAndStop:mainMenuLayer];
+        [mainMenuLayer release];
+        mainMenuLayer = nil;
+    }
+    if(continueMenuLayer && ![continueMenuLayer showing]) {
+        [gameLayer removeAndStop:continueMenuLayer];
+        [continueMenuLayer release];
+        continueMenuLayer = nil;
+    }
+    if(configLayer && ![configLayer showing]) {
+        [gameLayer removeAndStop:configLayer];
+        [configLayer release];
+        configLayer = nil;
+    }
+    if(gameConfigLayer && ![gameConfigLayer showing]) {
+        [gameLayer removeAndStop:gameConfigLayer];
+        [gameConfigLayer release];
+        gameConfigLayer = nil;
+    }
+    if(avConfigLayer && ![avConfigLayer showing]) {
+        [gameLayer removeAndStop:avConfigLayer];
+        [avConfigLayer release];
+        avConfigLayer = nil;
+    }
+    if(infoLayer && ![infoLayer showing]) {
+        [gameLayer removeAndStop:infoLayer];
+        [infoLayer release];
+        infoLayer = nil;
+    }
+    if(guideLayer && ![guideLayer showing]) {
+        [gameLayer removeAndStop:guideLayer];
+        [guideLayer release];
+        guideLayer = nil;
+    }
+    if(statsLayer && ![statsLayer showing]) {
+        [gameLayer removeAndStop:statsLayer];
+        [statsLayer release];
+        statsLayer = nil;
+    }
+    if(currentLayer && ![currentLayer showing]) {
+        [currentLayer release];
+        currentLayer = nil;
     }
     
     [self playTrack:nil];
@@ -257,11 +348,38 @@
 
 - (void)dealloc {
     
+    [gameLayer release];
+    gameLayer = nil;
+    
+    [currentLayer release];
+    currentLayer = nil;
+    
     [mainMenuLayer release];
+    mainMenuLayer = nil;
+    
+    [continueMenuLayer release];
+    continueMenuLayer = nil;
+
+    [gameConfigLayer release];
+    gameConfigLayer = nil;
+    
+    [infoLayer release];
+    infoLayer = nil;
+    
+    [guideLayer release];
+    guideLayer = nil;
+    
     [statsLayer release];
-    [configLayer release];
-    [audioController release];
+    statsLayer = nil;
+    
     [hudLayer release];
+    hudLayer = nil;
+    
+    [audioController release];
+    audioController = nil;
+    
+    [nextTrack release];
+    nextTrack = nil;
     
     [super dealloc];
 }

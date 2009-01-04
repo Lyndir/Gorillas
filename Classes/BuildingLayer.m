@@ -80,12 +80,11 @@
 
     // Calculate a random size for this building.
     const CGSize size = [[Director sharedDirector] winSize].size;
-    
     const float floorHeight = wHeight + wPad;
     const int fixedFloors   = [[GorillasConfig get] fixedFloors];
     const int varFloors     = (size.height * [[GorillasConfig get] buildingMax]
                                - (fixedFloors * floorHeight) - wPad) / floorHeight;
-    const int addFloors     = heightRatio? varFloors * heightRatio: random() % varFloors;
+    const int addFloors     = (heightRatio || !varFloors)? varFloors * heightRatio: random() % varFloors;
 
     contentSize = CGSizeMake(width? width: [[GorillasConfig get] buildingWidth],
                              (fixedFloors + addFloors) * floorHeight + wPad);
@@ -93,11 +92,8 @@
                 * (1 + (int) (contentSize.width  - wWidth  - (int)wPad) / (int) (wPad + wWidth));
     
     // Add windows.
-    if(windows != nil)
-        free(windows);
-    if(colors != nil)
-        free(colors);
-    
+    free(windows);
+    free(colors);
     windows = malloc(sizeof(GLfloat *) * windowCount * 6 * 2);
     colors  = malloc(sizeof(GLubyte *) * windowCount * 6 * 4);
     
@@ -199,12 +195,10 @@
 
 -(void) dealloc {
     
-    if(windows != nil || colors != nil) {
-        free(windows);
-        free(colors);
-        windows = nil;
-        colors = nil;
-    }
+    free(windows);
+    free(colors);
+    windows = nil;
+    colors = nil;
     
     [super dealloc];
 }

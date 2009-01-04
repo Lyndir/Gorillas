@@ -25,31 +25,72 @@
 //
 
 #import "BananaLayer.h"
+#import "GorillasConfig.h"
+#import "GorillasAppDelegate.h"
+#import "Throw.h"
 
 
 @implementation BananaLayer
 
-@synthesize clearedGorilla;
+@synthesize clearedGorilla, banana;
 
 
 -(id) init {
     
-    if(!(self = [super initWithFile:@"banana.png"]))
+    if(!(self = [super init]))
         return self;
     
+    banana = [[Sprite alloc] initWithFile:@"banana.png"];
+    [banana setScale:[[GorillasConfig get] cityScale]];
+    [banana setVisible:false];
+
     return self;
 }
 
 
--(float) width {
+-(void) throwFrom: (cpVect)r0 withVelocity: (cpVect)v {
     
-    return [self contentSize].width;
+    [self setClearedGorilla:false];
+
+    [banana setPosition:r0];
+    [banana do:[Throw actionWithVelocity:v startPos:r0]];
 }
 
 
--(float) height {
+-(void) onEnter {
     
-    return [self contentSize].height;
+    [super onEnter];
+    
+    [self add:banana];
+}
+
+
+-(void) onExit {
+    
+    [super onExit];
+    
+    [self removeAndStop:banana];
+}
+
+-(CGSize) contentSize {
+    
+    return CGSizeMake([banana contentSize].width * [self scale],
+                      [banana contentSize].height * [self scale]);
+}
+
+
+-(BOOL) throwing {
+    
+    return [banana visible];
+}
+
+
+-(void) dealloc {
+    
+    [banana release];
+    banana = nil;
+    
+    [super dealloc];
 }
 
 

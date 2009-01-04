@@ -33,7 +33,7 @@
 @implementation GameLayer
 
 
-@synthesize buildings, wind, singlePlayer, running, paused;
+@synthesize buildingsLayer, windLayer, weather, singlePlayer, running, paused;
 
 
 -(id) init {
@@ -45,26 +45,107 @@
     running = false;
     paused = true;
     
-    // Sky and buildings.
-    skies = [[SkiesLayer alloc] init];
-    [self add:skies];
+    // Sky, buildings and wind.
+    skiesLayer = [[SkiesLayer alloc] init];
+    [self add:skiesLayer z:-5];
     
-    buildings = [[BuildingsLayer alloc] init];
-    [self add:buildings];
+    buildingsLayer = [[BuildingsLayer alloc] init];
+    [self add:buildingsLayer z:0];
     
-    // Wind.
-    wind = [[WindLayer alloc] init];
-    [wind setColor:0xffffff00];
-    [self add:wind];
-    
+    windLayer = [[WindLayer alloc] init];
+    [windLayer setColor:0xffffff00];
+    [self add:windLayer z:5];
+
     return self;
+}
+
+
+-(void) onEnter {
+    
+    [super onEnter];
+    
+    [self schedule:@selector(updateWeather:) interval:1];
+}
+
+
+-(void) onExit {
+
+    [super onExit];
+    
+    [self unschedule:@selector(updateWeather:)];
+}
+
+
+-(void) updateWeather:(ccTime)dt {
+    
+    if(![weather emissionRate]) {
+        // If not emitting ..
+        
+        if([weather active])
+            // Stop active system.
+            [weather stopSystem];
+        
+        if([weather particleCount] == 0) {
+            // If system has no particles left alive ..
+            
+            // Remove & release it.
+            [[[[GorillasAppDelegate get] gameLayer] windLayer] unregisterSystem:weather];
+            if([weather parent])
+                [[weather parent] removeAndStop:weather];
+            [weather release];
+            weather = nil;
+            
+            if(random() % 100 == 0) {
+                // 1% chance to start snow/rain.
+            
+                switch (random() % 2) {
+                    case 0:
+                        weather = [[ParticleRain alloc] init];
+                        [weather setPosVar:cpv([weather posVar].x * 1.5f,
+                                               [weather posVar].y)];
+                        [weather setEmissionRate:40];
+                        [weather setSize:3];
+                        [weather setSizeVar:1.5f];
+                        [self add:weather z:-3];
+                        break;
+                    
+                    case 1:
+                        weather = [[ParticleSnow alloc] init];
+                        [weather setPosVar:cpv([weather posVar].x * 1.5f,
+                                               [weather posVar].y)];
+                        [weather setEmissionRate:1];
+                        [weather setSize:4];
+                        [weather setSizeVar:3];
+                        [self add:weather z:-3];
+                        break;
+                }
+                
+                [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:weather affectAngle:true];
+            }
+        }
+    }
+    
+    else {
+        // System is alive, let the emission rate evolve.
+        float rate = [weather emissionRate] + (random() % 40 - 15) / 10.0f;
+        if(rate < 0)
+            rate = 0;
+        if(rate > [weather isKindOfClass:[ParticleRain class]]? 100: 40)
+            rate = 40;
+        if(random() % 100 == 0)
+            // 1% chance for a full stop.
+            rate = 0;
+    
+        [weather setEmissionRate:rate];
+    }
 }
 
 
 -(void) reset {
 
-    [skies reset];
-    [buildings reset];
+    [skiesLayer reset];
+    [buildingsLayer reset];
+    [windLayer reset];
 }
 
 
@@ -81,7 +162,7 @@
     
     [[UIApplication sharedApplication] setStatusBarHidden:false animated:true];
     [[GorillasAppDelegate get] hideHud];
-    [wind do:[FadeOut actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    [windLayer do:[FadeOut actionWithDuration:[[GorillasConfig get] transitionDuration]]];
 }
 
 
@@ -99,7 +180,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:true animated:true];
     [[GorillasAppDelegate get] dismissLayer];
     [[GorillasAppDelegate get] revealHud];
-    [wind do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    [windLayer do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
 }
 
 
@@ -145,8 +226,8 @@
     
     [self message:[[GorillasConfig get] levelName]];
     
-    GorillaLayer *gorillaA = [GorillaLayer node];
-    GorillaLayer *gorillaB = [GorillaLayer node];    
+    GorillaLayer *gorillaA = [[GorillaLayer alloc] init];
+    GorillaLayer *gorillaB = [[GorillaLayer alloc] init];
     
     [gorillaA setName:@"Player"];
     [gorillaA setHuman:true];
@@ -154,8 +235,11 @@
     [gorillaB setName:@"Phone"];
     [gorillaB setHuman:false];
     
-    [wind reset];
-    [buildings startGameWithGorilla:gorillaA andGorilla:gorillaB];
+    [windLayer reset];
+    [buildingsLayer startGameWithGorilla:gorillaA andGorilla:gorillaB];
+    
+    [gorillaA release];
+    [gorillaB release];
 }
 
 
@@ -167,8 +251,8 @@
     running = true;
     singlePlayer = false;
     
-    GorillaLayer *gorillaA = [GorillaLayer node];
-    GorillaLayer *gorillaB = [GorillaLayer node];    
+    GorillaLayer *gorillaA = [[GorillaLayer alloc] init];
+    GorillaLayer *gorillaB = [[GorillaLayer alloc] init];
     
     [gorillaA setName:@"Gorilla One"];
     [gorillaA setHuman:true];
@@ -176,8 +260,11 @@
     [gorillaB setName:@"Gorilla Two"];
     [gorillaB setHuman:true];
     
-    [wind reset];
-    [buildings startGameWithGorilla:gorillaA andGorilla:gorillaB];
+    [windLayer reset];
+    [buildingsLayer startGameWithGorilla:gorillaA andGorilla:gorillaB];
+    
+    [gorillaA release];
+    [gorillaB release];
 }
 
 
@@ -198,7 +285,7 @@
     paused = false;
     [self unpause];
     
-    [buildings stopGame];
+    [buildingsLayer stopGame];
 }
 
 
@@ -218,9 +305,22 @@
 
 -(void) dealloc {
     
-    [super dealloc];
+    [skiesLayer release];
+    skiesLayer = nil;
+    
+    [buildingsLayer release];
+    buildingsLayer = nil;
+    
+    [weather release];
+    weather = nil;
+    
+    [windLayer release];
+    windLayer = nil;
     
     [msgLabel release];
+    msgLabel = nil;
+    
+    [super dealloc];
 }
 
 

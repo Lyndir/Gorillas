@@ -273,18 +273,25 @@
 
 +(void) drawBoxFrom:(cpVect)from to:(cpVect)to color:(long)color {
 
+    [self drawBoxFrom:from to:to colorFrom:color to:color];
+}
+
+
++(void) drawBoxFrom:(cpVect)from to:(cpVect)to colorFrom:(long)fromColor to:(long)toColor {
+
     const GLfloat vertices[4 * 2] = {
         from.x, from.y,
         to.x,   from.y,
         from.x, to.y,
         to.x,   to.y,
     };
-    const GLubyte *colorBytes = (GLubyte *)&color;
+    const GLubyte *fromColorBytes = (GLubyte *)&fromColor;
+    const GLubyte *toColorBytes = (GLubyte *)&toColor;
     const GLubyte colors[4 * 4] = {
-        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
-        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
-        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
-        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
+        fromColorBytes[3], fromColorBytes[2], fromColorBytes[1], fromColorBytes[0],
+        fromColorBytes[3], fromColorBytes[2], fromColorBytes[1], fromColorBytes[0],
+        toColorBytes[3], toColorBytes[2], toColorBytes[1], toColorBytes[0],
+        toColorBytes[3], toColorBytes[2], toColorBytes[1], toColorBytes[0],
     };
     
     // Tell OpenGL about our data.

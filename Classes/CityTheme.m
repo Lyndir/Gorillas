@@ -36,6 +36,36 @@
 @synthesize windModifier, gravity;
 
 
++(CityTheme *) themeWithFixedFloors: (int) nFixedFloors
+                        buildingMax: (float) nBuildingMax
+                     buildingAmount: (int) nBuildingAmount
+                     buildingColors: (NSArray *) nBuildingColors
+
+                       windowAmount: (int) nWindowAmount
+                      windowColorOn: (long) nWindowColorOn
+                     windowColorOff: (long) nWindowColorOff
+
+                           skyColor: (long) nSkyColor
+                          starColor: (long) nStarColor
+                         starAmount: (int) nStarAmount
+
+                       windModifier: (float) nWindModifier
+                            gravity: (int) nGravity {
+    
+    return [[[CityTheme alloc] initWithFixedFloors:nFixedFloors
+                                       buildingMax:nBuildingMax
+                                    buildingAmount:nBuildingAmount
+                                    buildingColors:nBuildingColors
+                                      windowAmount:nWindowAmount
+                                     windowColorOn:nWindowColorOn
+                                    windowColorOff:nWindowColorOff
+                                          skyColor:nSkyColor
+                                         starColor:nStarColor
+                                        starAmount:nStarAmount
+                                      windModifier:nWindModifier
+                                           gravity:nGravity] autorelease];
+}
+
 -(id) initWithFixedFloors: (int) nFixedFloors
               buildingMax: (float) nBuildingMax
            buildingAmount: (int) nBuildingAmount
@@ -58,7 +88,7 @@
     fixedFloors     = nFixedFloors;
     buildingMax     = nBuildingMax;
     buildingAmount  = nBuildingAmount;
-    buildingColors  = nBuildingColors;
+    buildingColors  = [nBuildingColors retain];
     
     windowAmount    = nWindowAmount;
     windowColorOn   = nWindowColorOn;
@@ -101,96 +131,125 @@
     
     static NSDictionary *themes = nil;
     if(!themes) {
-        themes = [[NSDictionary dictionaryWithObjectsAndKeys:
-                   [[CityTheme alloc] initWithFixedFloors:4
-                                              buildingMax:0.7f
-                                           buildingAmount:10
-                                           buildingColors:[[NSArray arrayWithObjects:
-                                                           [NSNumber numberWithLong:0xb70000ff],
-                                                           [NSNumber numberWithLong:0x00b7b7ff],
-                                                           [NSNumber numberWithLong:0xb7b7b7ff],
-                                                           nil] retain]
+        themes = [[NSDictionary alloc] initWithObjectsAndKeys:
+                   [CityTheme themeWithFixedFloors:4
+                                       buildingMax:0.7f
+                                    buildingAmount:10
+                                    buildingColors:[NSArray arrayWithObjects:
+                                                    [NSNumber numberWithLong:0xb70000ff],
+                                                    [NSNumber numberWithLong:0x00b7b7ff],
+                                                    [NSNumber numberWithLong:0xb7b7b7ff],
+                                                    nil]
                     
-                                             windowAmount:6
-                                            windowColorOn:0xffffb7ff
-                                           windowColorOff:0x676767ff
+                                      windowAmount:6
+                                     windowColorOn:0xffffb7ff
+                                    windowColorOff:0x676767ff
                     
-                                                 skyColor:0x0000b7ff
-                                                starColor:0xb7b700ff
-                                               starAmount:30
+                                          skyColor:0x0000b7ff
+                                         starColor:0xb7b700ff
+                                        starAmount:30
                     
-                                             windModifier:20
-                                                  gravity:100
+                                      windModifier:20
+                                           gravity:100
                    ], @"Classic",
 
-                   [[CityTheme alloc] initWithFixedFloors:4
-                                              buildingMax:0.5f
-                                           buildingAmount:12
-                                           buildingColors:[[NSArray arrayWithObjects:
-                                                            [NSNumber numberWithLong:0x6EA665ff],
-                                                            [NSNumber numberWithLong:0xD9961Aff],
-                                                            [NSNumber numberWithLong:0x1DB6F2ff],
-                                                            nil] retain]
+                   [CityTheme themeWithFixedFloors:4
+                                       buildingMax:0.5f
+                                    buildingAmount:12
+                                    buildingColors:[NSArray arrayWithObjects:
+                                                    [NSNumber numberWithLong:0x6EA665ff],
+                                                    [NSNumber numberWithLong:0xD9961Aff],
+                                                    [NSNumber numberWithLong:0x1DB6F2ff],
+                                                    nil]
                     
-                                             windowAmount:6
-                                            windowColorOn:0xF2D129ff
-                                           windowColorOff:0xD98723ff
+                                      windowAmount:6
+                                     windowColorOn:0xF2D129ff
+                                    windowColorOff:0xD98723ff
                     
-                                                 skyColor:0x1E3615ff
-                                                starColor:0xF2D129ff
-                                               starAmount:100
+                                          skyColor:0x1E3615ff
+                                         starColor:0xF2D129ff
+                                        starAmount:100
                     
-                                             windModifier:30
-                                                  gravity:60
+                                      windModifier:30
+                                           gravity:60
                     ], @"Alien Retro",
                    
-                   [[CityTheme alloc] initWithFixedFloors:6
-                                              buildingMax:0.8f
-                                           buildingAmount:14
-                                           buildingColors:[[NSArray arrayWithObjects:
-                                                            [NSNumber numberWithLong:0x1B1F1Eff],
-                                                            [NSNumber numberWithLong:0xCFB370ff],
-                                                            [NSNumber numberWithLong:0xC4C7BCff],
-                                                            nil] retain]
+                   [CityTheme themeWithFixedFloors:6
+                                       buildingMax:0.8f
+                                    buildingAmount:14
+                                    buildingColors:[NSArray arrayWithObjects:
+                                                    [NSNumber numberWithLong:0x1B1F1Eff],
+                                                    [NSNumber numberWithLong:0xCFB370ff],
+                                                    [NSNumber numberWithLong:0xC4C7BCff],
+                                                    nil]
                     
-                                             windowAmount:6
-                                            windowColorOn:0xFFF1BFff
-                                           windowColorOff:0x39464Aff
+                                      windowAmount:6
+                                     windowColorOn:0xFFF1BFff
+                                    windowColorOff:0x39464Aff
                     
-                                                 skyColor:0x0B0F0Eff
-                                                starColor:0xFFF1BFff
-                                               starAmount:200
+                                          skyColor:0x0B0F0Eff
+                                         starColor:0xFFF1BFff
+                                        starAmount:200
                     
-                                             windModifier:10
-                                                  gravity:40
+                                      windModifier:10
+                                           gravity:40
                     ], @"Alien Skies",
+                  
+                  [CityTheme themeWithFixedFloors:7
+                                      buildingMax:0.4f
+                                   buildingAmount:20
+                                   buildingColors:[NSArray arrayWithObjects:
+                                                   [NSNumber numberWithLong:0xb70000ff],
+                                                   [NSNumber numberWithLong:0x00b7b7ff],
+                                                   [NSNumber numberWithLong:0xb7b7b7ff],
+                                                   nil]
                    
-                   [[CityTheme alloc] initWithFixedFloors:3
-                                              buildingMax:0.6f
-                                           buildingAmount:10
-                                           buildingColors:[[NSArray arrayWithObjects:
-                                                            [NSNumber numberWithLong:0x465902ff],
-                                                            [NSNumber numberWithLong:0xA9BF04ff],
-                                                            [NSNumber numberWithLong:0xF29F05ff],
-                                                            nil] retain]
-                    
-                                             windowAmount:6
-                                            windowColorOn:0xF2E3B3ff
-                                           windowColorOff:0xBF4904ff
-                    
-                                                 skyColor:0x021343ff
-                                                starColor:0xF2E3B3ff
-                                               starAmount:50
-                    
-                                             windModifier:15
-                                                  gravity:80
-                    ], @"Summer",
+                                     windowAmount:6
+                                    windowColorOn:0xffffb7ff
+                                   windowColorOff:0x676767ff
                    
-                   nil
-                   ] retain];
+                                         skyColor:0x0000b7ff
+                                        starColor:0xb7b700ff
+                                       starAmount:60
+                   
+                                     windModifier:40
+                                          gravity:140
+                   ], @"Metropolis",
+                  
+                  [CityTheme themeWithFixedFloors:3
+                                      buildingMax:0.6f
+                                   buildingAmount:10
+                                   buildingColors:[NSArray arrayWithObjects:
+                                                   [NSNumber numberWithLong:0x465902ff],
+                                                   [NSNumber numberWithLong:0xA9BF04ff],
+                                                   [NSNumber numberWithLong:0xF29F05ff],
+                                                   nil]
+                   
+                                     windowAmount:6
+                                    windowColorOn:0xF2E3B3ff
+                                   windowColorOff:0xBF4904ff
+                   
+                                         skyColor:0x021343ff
+                                        starColor:0xF2E3B3ff
+                                       starAmount:50
+                   
+                                     windModifier:15
+                                          gravity:80
+                   ], @"Summer",
+                   
+                   nil];
     }
     
     return themes;
+}
+
+
+-(void) dealloc {
+    
+    [buildingColors release];
+    buildingColors = nil;
+    
+    [super dealloc];
 }
 
 

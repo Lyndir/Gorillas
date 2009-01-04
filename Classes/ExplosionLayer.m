@@ -25,20 +25,24 @@
 //
 
 #import "ExplosionLayer.h"
-#import "ExplosionAnimationLayer.h"
 #import "GorillasAppDelegate.h"
 
 
 @implementation ExplosionLayer
 
+@synthesize hole;
+
 
 -(id) initHitsGorilla:(BOOL)gorillaHit {
     
-    if(!(self = [super initWithFile:@"hole.png"]))
+    if(!(self = [super init]))
         return self;
     
     hitsGorilla = gorillaHit;
-    //[self add:[ExplosionAnimationLayer get] z:-9];
+    heavy = hitsGorilla || (random() % 100 > 90);
+
+    hole = [[HoleLayer alloc] init];
+    [hole setScale:[[GorillasConfig get] cityScale]];
     
     return self;
 }
@@ -46,21 +50,42 @@
 
 -(void) onEnter {
     
-    [explosion release];
-    explosion = [[ParticleSun alloc] initWithTotalParticles:random() % 100 + hitsGorilla? 900: 400];
+    [super onEnter];
     
-    [explosion setPosition:[self position]];
-    [explosion setSize:15];
-    [explosion setSizeVar:5];
+    int explosionParticles = random() % 100 + 400;
+    if(heavy)
+        explosionParticles += 500;
+    
+    [explosion release];
+    explosion = [[ParticleSun alloc] initWithTotalParticles:explosionParticles];
+    
+    [explosion setPosition:cpvzero];
+    //[explosion setPosition:[self position]];
+    [explosion setSize:(heavy? 20: 15) * [self scale]];
+    [explosion setSizeVar:5 * [self scale]];
     [explosion setSpeed:10];
     [explosion setPosVar:cpv([self contentSize].width * 0.2f,
                              [self contentSize].height * 0.2f)];
     [explosion do:[Sequence actions:
-                   [DelayTime actionWithDuration:hitsGorilla? 1: 0.2f],
+                   [DelayTime actionWithDuration:heavy? 0.6f: 0.2f],
                    [CallFunc actionWithTarget:self selector:@selector(stop:)],
                    nil]];
 
-    [[self parent] add:explosion z:9];
+    [self add:explosion z:1];
+}
+
+
+-(void) onExit {
+    
+    [super onExit];
+    
+    [[[[GorillasAppDelegate get] gameLayer] windLayer] unregisterSystem:explosion];
+    [explosion release];
+    explosion = nil;
+    
+    [[[[GorillasAppDelegate get] gameLayer] windLayer] unregisterSystem:flames];
+    [flames release];
+    flames = nil;
 }
 
 
@@ -69,23 +94,25 @@
     [explosion stopSystem];
     
     if(!hitsGorilla) {
-        [flames release];
-        flames = [[ParticleFire alloc] initWithTotalParticles:random() % 40];
+        int flameParticles = random() % 30 + 5;
+        if(heavy)
+            flameParticles = 100;
         
-        [flames setPosition:[self position]];
+        flames = [[ParticleFire alloc] initWithTotalParticles:flameParticles];
+        
+        [flames setPosition:cpvzero];
         //[flames setAngleVar:90];
-        [flames setSize:5];
+        [flames setSize:heavy? 10: 3];
         [flames setSizeVar:5];
         [flames setPosVar:cpv([self contentSize].width / 4, [self contentSize].height / 4)];
-        [flames setSpeed:5];
+        [flames setSpeed:8];
         [flames setSpeedVar:10];
-        [flames setLife:2.0f];
-        [flames setGravity:cpv([[[[GorillasAppDelegate get] gameLayer] wind] wind] * [[GorillasConfig get] windModifier], 0)];
+        [flames setLife:heavy? 2: 1];
         ccColorF startColor;
         startColor.r = 0.9f;
         startColor.g = 0.6f;
         startColor.b = 0.0f;
-        startColor.a = 0.8f;
+        startColor.a = 0.9f;
         [flames setStartColor:startColor];
         ccColorF startColorVar;
         startColorVar.r = 0.1f;
@@ -93,7 +120,9 @@
         startColorVar.b = 0.0f;
         startColorVar.a = 0.1f;
         [flames setStartColorVar:startColorVar];
-        [[self parent] add:flames z:99999999];
+        
+        [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:flames affectAngle:false];
+        [self add:flames z:1];
     }
 }
 
@@ -101,43 +130,31 @@
 -(BOOL) hitsExplosion: (cpVect)pos {
     
     return ((position.x - pos.x) * (position.x - pos.x) +
-            (position.y - pos.y) * (position.y - pos.y) ) < ([self width] * [self width]) / 9;
+            (position.y - pos.y) * (position.y - pos.y) ) < powf([self contentSize].width, 2) / 9;
 }
 
 
--(void) draw {
+-(void) setPosition:(cpVect)pos {
     
-    // Blend our transarent white with DST.  If SRC, make DST transparent, hide original DST.
-    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
-    glBlendFunc(GL_ZERO, GL_SRC_ALPHA);
-    
-    [super draw];
-    
-    // Reset blend & data source.
-    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    [super setPosition:pos];
+    [hole setPosition:position];
 }
 
 
--(float) width {
+-(CGSize) contentSize {
     
-    return [self contentSize].width;
-}
-
-
--(float) height {
-    
-    return [self contentSize].height;
+    return CGSizeMake([hole contentSize].width * [self scale], [hole contentSize].height * [self scale]);
 }
 
 
 -(void) dealloc {
     
-    [[explosion parent] remove:explosion];
+    [hole release];
+    hole = nil;
+    
     [explosion release];
     explosion = nil;
     
-    [[flames parent] remove:flames];
     [flames release];
     flames = nil;
     

@@ -84,8 +84,8 @@ void interruptionListenerCallback (
 
 - (id) initWithFile: (NSString *) audioFile {
 
-	if(![super init])
-        return nil;
+	if(!(self = [super init]))
+        return self;
 
     // create the file URL that identifies the file that contains our audio data.
     self.soundFile = audioFile;
@@ -203,10 +203,19 @@ void interruptionListenerCallback (
 
 -(void) dealloc {
     
-    [super dealloc];
+	[audioPlayer release];
+    audioPlayer = nil;
     
-    [audioPlayer release];
-    [soundFileURL release];
+	[soundFile release];
+    soundFile = nil;
+    
+	[soundFileURL release];
+    soundFileURL = nil;
+    
+    [delegate release];
+    delegate = nil;
+    
+    [super dealloc];
 }
 
 

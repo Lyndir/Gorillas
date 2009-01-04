@@ -143,8 +143,20 @@
 -(void) dealloc {
     
     [backMenu release];
-    [nextMenu release];
+    backMenu = nil;
     
+    [nextMenu release];
+    nextMenu = nil;
+    
+    [pageLabel release];
+    pageLabel = nil;
+    
+    [pageNumberLabel release];
+    pageNumberLabel = nil;
+    
+    [guidePages release];
+    guidePages = nil;
+
     [super dealloc];
 }
 

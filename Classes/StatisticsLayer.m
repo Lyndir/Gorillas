@@ -61,8 +61,8 @@
     
     // Get the top scores.
     NSDictionary *topScores = [[GorillasConfig get] topScoreHistory];
-    NSMutableArray *dates = [NSMutableArray arrayWithCapacity:[topScores count]];
-    NSMutableArray *scores = [NSMutableArray arrayWithCapacity:[topScores count]];
+    NSMutableArray *dates = [[NSMutableArray alloc] initWithCapacity:[topScores count]];
+    NSMutableArray *scores = [[NSMutableArray alloc] initWithCapacity:[topScores count]];
 
     NSString **tDates = malloc(sizeof(NSString *) * [topScores count]);
     NSNumber **tScores = malloc(sizeof(NSNumber *) * [topScores count]);
@@ -101,6 +101,11 @@
     
     int i = 0;
     NSDictionary *history = [[NSDictionary alloc] initWithObjects:scores forKeys:dates];
+    [dates release];
+    [scores release];
+    dates = nil;
+    scores = nil;
+
     NSEnumerator *datesEnumerator = [[[history allKeys] sortedArrayUsingSelector:@selector(compare:)] reverseObjectEnumerator];
     for(NSDate *date in [datesEnumerator allObjects]) {
         
@@ -113,7 +118,8 @@
         scoreRatio /= [[GorillasConfig get] buildingMax];
 
         // Score tower.
-        BuildingLayer *scoreTower = [[BuildingLayer alloc] initWithWidth:gBarSize heightRatio:scoreRatio];
+        BuildingLayer *scoreTower = [[BuildingLayer alloc] initWithWidth:gBarSize
+                                                             heightRatio:scoreRatio];
 
         // Score label.
         Label *scoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%d", score]
@@ -164,6 +170,8 @@
     
     [dateFormatter release];
     dateFormatter = nil;
+    [history release];
+    history = nil;
 }
 
 
@@ -179,6 +187,9 @@
 
 
 -(void) dealloc {
+    
+    [menu release];
+    menu = nil;
     
     [super dealloc];
 }

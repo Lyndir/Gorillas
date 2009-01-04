@@ -53,8 +53,10 @@
     [self stopAllActions];
     
     [self do:[Sequence actions:
-              [FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration] opacity:[[GorillasConfig get] shadeColor] & 0xff],
-              [CallFunc actionWithTarget:self selector:@selector(revealCallback:)],
+              [FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                 opacity:[[GorillasConfig get] shadeColor] & 0xff],
+              [CallFunc actionWithTarget:self
+                                selector:@selector(revealCallback:)],
               nil]];
 
     showing = true;
@@ -77,6 +79,7 @@
 
     [self stopAllActions];
     
+    // TODO: Do the same in reveal method?
     for(CocosNode *child in children) {
         if([child conformsToProtocol:@protocol(CocosNodeOpacity)])
             [child do:[FadeOut actionWithDuration:[[GorillasConfig get] transitionDuration]]];
@@ -93,13 +96,19 @@
 }
 
 
+-(void) onExit {
+    
+    [super onExit];
+    
+    showing = false;
+}
+
+
 -(void) dismissCallback: (id) sender {
     
     [self gone];
     
-    [self removeAll];
-    /*for(CocosNode *child in children)
-        [self remove:child];*/
+    [self removeAndStopAll];
 }
 
 

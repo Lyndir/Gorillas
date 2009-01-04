@@ -37,14 +37,14 @@
     if(!(self = [super init]))
         return self;
     
-    newSingle = [[MenuItemFont itemFromString:@"Single Player" target:self selector:@selector(newGameSingle:)] retain];
-    newMulti = [[MenuItemFont itemFromString:@"Multiplayer" target:self selector:@selector(newGameMulti:)] retain];
+    newSingle       = [[MenuItemFont itemFromString:@"Single Player"    target:self selector:@selector(newGameSingle:)] retain];
+    newMulti        = [[MenuItemFont itemFromString:@"Multiplayer"      target:self selector:@selector(newGameMulti:)] retain];
 
-    continueGame = [[MenuItemFont itemFromString:@"Continue Game" target:self selector:@selector(continueGame:)] retain];
-    stopGame = [[MenuItemFont itemFromString:@"End Game" target:self selector:@selector(stopGame:)] retain];
+    continueGame    = [[MenuItemFont itemFromString:@"Continue Game"    target:self selector:@selector(continueGame:)] retain];
+    stopGame        = [[MenuItemFont itemFromString:@"End Game"         target:self selector:@selector(stopGame:)] retain];
     
-    config = [[MenuItemFont itemFromString:@"Configuration" target:self selector:@selector(options:)] retain];
-    info = [[MenuItemFont itemFromString:@"Information" target:self selector:@selector(information:)] retain];
+    config          = [[MenuItemFont itemFromString:@"Configuration"    target:self selector:@selector(options:)] retain];
+    info            = [[MenuItemFont itemFromString:@"Information"      target:self selector:@selector(information:)] retain];
     
     return self;
 }
@@ -55,19 +55,26 @@
     [super reveal];
     
     if(menu) {
-        [self remove:menu];
+        [self removeAndStop:menu];
         [menu release];
         menu = nil;
     }
     
+    MenuItemFont *exit = [MenuItemFont itemFromString:@"Exit Game" target:self selector:@selector(exit:)];
     if([[[GorillasAppDelegate get] gameLayer] running])
         menu = [[Menu menuWithItems:continueGame, stopGame, config, info, nil] retain];
     else
-        menu = [[Menu menuWithItems:newSingle, newMulti, config, info, nil] retain];
+        menu = [[Menu menuWithItems:newSingle, newMulti, config, info, exit, nil] retain];
 
     [menu alignItemsVertically];
     [menu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
     [self add:menu];
+}
+
+
+-(void) exit: (id)sender {
+
+    [[GorillasAppDelegate get] exit];
 }
 
 
@@ -110,12 +117,25 @@
 -(void) dealloc {
     
     [menu release];
+    menu = nil;
+    
     [newSingle release];
+    newSingle = nil;
+    
     [newMulti release];
+    newMulti = nil;
+    
     [continueGame release];
+    continueGame = nil;
+    
     [stopGame release];
+    stopGame = nil;
+    
     [config release];
+    config = nil;
+    
     [info release];
+    info = nil;
     
     [super dealloc];
 }
