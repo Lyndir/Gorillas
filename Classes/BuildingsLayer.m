@@ -373,7 +373,7 @@
     [[[GorillasAppDelegate get] hudLayer] updateScore:nScore];
 
     if(nScore)
-        [self message:[NSString stringWithFormat:@"%+d", nScore] on:bananaLayer];
+        [self message:[NSString stringWithFormat:@"%+d", nScore] on:[bananaLayer banana]];
 }
 
 
@@ -601,20 +601,20 @@
 
 -(void) startPanning {
     
-    /*if(panAction)
+    if(panAction)
         // If already panning, stop first.
         [self stopPanning];
     
     panAction = [[PanAction alloc] initWithSubNodes:buildings duration:[[GorillasConfig get] buildingSpeed] padding:1];
-    [self do: panAction];*/
+    [self do: panAction];
 }
 
 
 -(void) stopPanning {
     
-    /*[panAction cancel];
+    [panAction cancel];
     [panAction release];
-    panAction = nil;*/
+    panAction = nil;
 }
 
 

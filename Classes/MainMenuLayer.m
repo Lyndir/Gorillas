@@ -60,7 +60,7 @@
         menu = nil;
     }
     
-    MenuItemFont *exit = [MenuItemFont itemFromString:@"Exit Game" target:self selector:@selector(exit:)];
+    MenuItemFont *exit = nil; // [MenuItemFont itemFromString:@"Exit Game" target:self selector:@selector(exit:)];
     if([[[GorillasAppDelegate get] gameLayer] running])
         menu = [[Menu menuWithItems:continueGame, stopGame, config, info, nil] retain];
     else

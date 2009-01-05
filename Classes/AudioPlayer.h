@@ -3,7 +3,7 @@ File: AudioPlayer.h
 Abstract: The playback class for SpeakHere, which in turn employs 
 a playback audio queue object from Audio Queue Services.
 
-Version: 1.0
+Version: 1.2
 
 Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple Inc.
 ("Apple") in consideration of your agreement to the following terms, and your
@@ -57,19 +57,14 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 	UInt32							bufferByteSize;						// the number of bytes to use in each audio queue buffer
 	UInt32							numPacketsToRead;					// the number of audio data packets to read into each audio queue buffer
 
-	AudioStreamPacketDescription	*packetDescriptions;
-
 	Float32							gain;								// the gain (relative audio level) for the playback audio queue
 
 
-    BOOL                            repeat;
 	BOOL							donePlayingFile;
 	BOOL							audioPlayerShouldStopImmediately;
 }
 
 @property (readwrite) UInt32						numPacketsToRead;
-@property (readwrite) AudioStreamPacketDescription	*packetDescriptions;
-@property (readwrite) BOOL							repeat;
 @property (readwrite) BOOL							donePlayingFile;
 @property (readwrite) BOOL							audioPlayerShouldStopImmediately;
 @property (readwrite) UInt32						bufferByteSize;

@@ -3,7 +3,7 @@ File: AudioPlayer.m
 Abstract: The playback class for SpeakHere, which in turn employs 
 a playback audio queue object from Audio Queue Services.
 
-Version: 1.0
+Version: 1.2
 
 Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple Inc.
 ("Apple") in consideration of your agreement to the following terms, and your
@@ -52,6 +52,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 #import "AudioController.h"
 
 
+// See "AudioQueueOutputCallback"
 static void playbackCallback(
 	void					*inUserData,
 	AudioQueueRef			inAudioQueue,
@@ -71,7 +72,7 @@ static void playbackCallback(
 		[player audioFileID],
 		NO,
 		&numBytes,
-		[player packetDescriptions],
+		bufferReference->mPacketDescriptions,
 		[player startingPacketNumber],
 		&numPackets, 
 		bufferReference->mAudioData
@@ -79,23 +80,24 @@ static void playbackCallback(
 		
 	if (numPackets > 0) {
 
-		bufferReference->mAudioDataByteSize = numBytes;		
+		bufferReference->mAudioDataByteSize         = numBytes;
+        bufferReference->mPacketDescriptionCount    = numPackets;
 
 		AudioQueueEnqueueBuffer(
 			inAudioQueue,
 			bufferReference,
-			([player packetDescriptions] ? numPackets : 0),
-			[player packetDescriptions]
+			0,
+			NULL
 		);
 		
 		[player incrementStartingPacketNumberBy: (UInt32) numPackets];
 		
 	} else {
 	
-		[player setDonePlayingFile: YES];		// 'donePlayingFile' used by playbackCallback and setupAudioQueueBuffers
+		[player setDonePlayingFile: YES];		// 'donePlayingFile' used by this callback and by setupAudioQueueBuffers
 
-		// if playback is stopping because file is finished, then call AudioQueueStop here
-		// if user clicked Stop, then the AudioViewController calls AudioQueueStop
+		// if playback is stopping because file is finished, call AudioQueueStop here;
+        // if user tapped Stop, then the AudioViewController calls AudioQueueStop
 		if (player.audioPlayerShouldStopImmediately == NO)
 			[player stop];
 	}
@@ -109,17 +111,29 @@ static void propertyListenerCallback(
 ) {
 	// This callback, being outside the implementation block, needs a reference to the AudioPlayer object
 	AudioPlayer *player = (AudioPlayer *) inUserData;
-	[player.notificationDelegate updateUserInterfaceOnAudioQueueStateChange: player];
+
+    if (player.audioPlayerShouldStopImmediately == YES)
+        // If the user tapped Stop, update the UI now. After the AudioPlayer object
+        //  and the underlying audio queue object have competely stopped, the 
+        //  AudioViewController will release them.
+        [player.notificationDelegate updateUserInterfaceOnAudioQueueStateChange: player];
+    
+    else
+        // if the file reached the end, update the UI after the run loop has finished. 
+        //  This delay is required to ensure that the AudioPlayer class, and the  
+        //  underlying audio queue object, are not destroyed while they are still 
+        //  doing work.
+        [player.notificationDelegate performSelector:@selector (updateUserInterfaceOnAudioQueueStateChange:)
+                                          withObject:player
+                                          afterDelay:0];
 }
 
 
 @implementation AudioPlayer
 
-@synthesize packetDescriptions;
 @synthesize bufferByteSize;
 @synthesize gain;
 @synthesize numPacketsToRead;
-@synthesize repeat;
 @synthesize donePlayingFile;
 @synthesize audioPlayerShouldStopImmediately;
 
@@ -240,12 +254,20 @@ static void propertyListenerCallback(
 	// prime the queue with some data before starting
 	// allocate and enqueue buffers				
 	int bufferIndex;
+    BOOL isFormatVBR = (audioFormat.mBytesPerPacket == 0 || audioFormat.mFramesPerPacket == 0);
 	
 	for (bufferIndex = 0; bufferIndex < kNumberAudioDataBuffers; ++bufferIndex) {
-	
-		AudioQueueAllocateBuffer(
+        
+        // if you intend to support *only* constant bit-rate formats, you can instead
+        //  use AudioQueueAllocateBuffers. In this case, the playback callback function
+        //  needs to change; you need to change the arguments to the 
+        //  AudioQueueEnqueueBuffer function. See its reference documentation.
+        //  The AudioQueueAllocateBufferWithPacketDescriptions function is available
+        //  only in iPhone OS and not in Mac OS X.
+        AudioQueueAllocateBufferWithPacketDescriptions (
 			[self queueObject],
 			[self bufferByteSize],
+            (isFormatVBR ? self.numPacketsToRead : 0),
 			&buffers[bufferIndex]
 		);
 
@@ -272,12 +294,12 @@ static void propertyListenerCallback(
 
 - (void) stop {
 
-	AudioFileClose(self.audioFileID);
-
-	/*AudioQueueStop(
+	AudioQueueStop(
 		self.queueObject,
 		self.audioPlayerShouldStopImmediately
-	);*/
+	);
+    
+	AudioFileClose(self.audioFileID);
 }
 
 
@@ -337,7 +359,12 @@ static void propertyListenerCallback(
 
 
 - (void) dealloc {
-	
+    
+	AudioQueueDispose(
+        queueObject,
+        YES
+    );	
+    
 	[super dealloc];
 }
 

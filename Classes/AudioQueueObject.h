@@ -2,7 +2,7 @@
 File: AudioQueueObject.h
 Abstract: The superclass for the recording and playback classes.
 
-Version: 1.0
+Version: 1.2
 
 Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple Inc.
 ("Apple") in consideration of your agreement to the following terms, and your
@@ -55,6 +55,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 	AudioQueueRef					queueObject;					// the audio queue object being used for playback
 	AudioFileID						audioFileID;					// the identifier for the audio file to play
 	CFURLRef						audioFileURL;
+    Float64                         hardwareSampleRate;
 	AudioStreamBasicDescription		audioFormat;
 	AudioQueueLevelMeterState		*audioLevels;
 	SInt64							startingPacketNumber;			// the current packet number in the playback file
@@ -64,6 +65,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 @property (readwrite)			AudioQueueRef				queueObject;
 @property (readwrite)			AudioFileID					audioFileID;
 @property (readwrite)			CFURLRef					audioFileURL;
+@property (readwrite)           Float64                     hardwareSampleRate;
 @property (readwrite)			AudioStreamBasicDescription	audioFormat;
 @property (readwrite)			AudioQueueLevelMeterState	*audioLevels;
 @property (readwrite)			SInt64						startingPacketNumber;

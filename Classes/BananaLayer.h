@@ -28,7 +28,7 @@
 #import "cocos2d.h"
 
 
-@interface BananaLayer : Layer <CocosNodeSize> {
+@interface BananaLayer : Layer {
 
     BOOL clearedGorilla;
 

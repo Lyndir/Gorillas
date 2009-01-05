@@ -3,7 +3,7 @@ File: AudioViewController.m
 Abstract: View controller class for SpeakHere. Sets up user interface, responds 
 to and manages user interaction.
 
-Version: 1.0
+Version: 1.2
 
 Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple Inc.
 ("Apple") in consideration of your agreement to the following terms, and your
@@ -57,7 +57,8 @@ void interruptionListenerCallback (
 	UInt32	interruptionState
 ) {
 	// This callback, being outside the implementation block, needs a reference 
-	//	to the AudioViewController object
+	//	to the AudioViewController object. You provide this reference when
+    //  initializing the audio session (see the call to AudioSessionInitialize).
 	AudioController *controller = (AudioController *) inUserData;
 	
 	if (interruptionState == kAudioSessionBeginInterruption) {
@@ -119,12 +120,19 @@ void interruptionListenerCallback (
 // audio queue object starts or stops. 
 - (void) updateUserInterfaceOnAudioQueueStateChange: (AudioQueueObject *) inQueue {
 
-    if(delegate) {
-        AudioPlayer *player = (AudioPlayer *)inQueue;
-        if([player donePlayingFile])
-            [delegate audioStopped:player];
-        else
-            [delegate audioStarted:player];
+    AudioPlayer *player = (AudioPlayer *)inQueue;
+    if([player isRunning])
+        [delegate audioStarted:player];
+    else {
+        // release the audioPlayer object if it stopped because the sound
+        //  file finished playing. In this case, this class's playOrStop
+        //  method, which otherwise releases the audioPlayer, doesn't get called.
+        if (![self.audioPlayer audioPlayerShouldStopImmediately]) {
+            [self.audioPlayer release];
+            audioPlayer = nil;
+        }
+        
+        [delegate audioStopped:player];
     }
 }
 
@@ -148,10 +156,10 @@ void interruptionListenerCallback (
 		
 		if (thePlayer) {
 			self.audioPlayer = thePlayer;
-			[thePlayer release];
+			[thePlayer release];                                // decrements the retain count for the thePlayer object
 			
 			[self.audioPlayer setNotificationDelegate: self];	// sets up the playback object to receive property change notifications from the playback audio queue object
-
+            
 			// activate the audio session immmediately before playback starts
 			AudioSessionSetActive(true);
 			[self.audioPlayer play];
@@ -164,18 +172,25 @@ void interruptionListenerCallback (
     
     if (self.audioPlayer) {
         
+        [self retain];
         [self.audioPlayer setAudioPlayerShouldStopImmediately: YES];
-        [self.audioPlayer setDonePlayingFile: YES];
         [self.audioPlayer stop];
+        
+        // the previous statement returns after the audioPlayer object is completely
+        // stopped, which also ensures that the underlying audio queue object is 
+        // stopped, so now it's safe to release the audioPlayer object.
+        [audioPlayer release];
+        audioPlayer = nil;
         
         // now that playback has stopped, deactivate the audio session
         AudioSessionSetActive(false);
+        [self release];
 	}
 }
 
 // pausing is only ever invoked by the interruption listener callback function, which
-//	is why this isn't an IBAction method(that is, 
-//	there's no explicit UI for invoking this method)
+// is why this isn't an IBAction method(that is, 
+// there's no explicit UI for invoking this method)
 - (void) pause {
 
 	if (self.audioPlayer)
@@ -203,8 +218,8 @@ void interruptionListenerCallback (
 
 -(void) dealloc {
     
-	[audioPlayer release];
-    audioPlayer = nil;
+	//[audioPlayer release]; // Released by [self stop], invoked by callback.
+    //audioPlayer = nil;
     
 	[soundFile release];
     soundFile = nil;

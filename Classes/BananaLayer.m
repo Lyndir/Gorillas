@@ -72,12 +72,6 @@
     [self removeAndStop:banana];
 }
 
--(CGSize) contentSize {
-    
-    return CGSizeMake([banana contentSize].width * [self scale],
-                      [banana contentSize].height * [self scale]);
-}
-
 
 -(BOOL) throwing {
     

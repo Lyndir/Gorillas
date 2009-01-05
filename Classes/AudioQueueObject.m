@@ -2,7 +2,7 @@
 File: AudioQueueObject.m
 Abstract: The superclass for the recording and playback classes.
 
-Version: 1.0
+Version: 1.2
 
 Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple Inc.
 ("Apple") in consideration of your agreement to the following terms, and your
@@ -54,6 +54,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 @synthesize queueObject;
 @synthesize audioFileID;
 @synthesize audioFileURL;
+@synthesize hardwareSampleRate;
 @synthesize audioFormat;
 @synthesize audioLevels;
 @synthesize startingPacketNumber;
@@ -63,7 +64,6 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 	startingPacketNumber += inNumPackets;
 }
-
 
 - (void) setNotificationDelegate: (id) inDelegate {
 
@@ -128,13 +128,6 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 - (void) dealloc {
     
-	AudioQueueDispose( self.queueObject, YES );
-    
-    [notificationDelegate release];
-    notificationDelegate = nil;
-    
-    free(audioLevels);
-	
 	[super dealloc];
 }
 

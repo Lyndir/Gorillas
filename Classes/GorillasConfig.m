@@ -176,6 +176,16 @@
 }
 
 
++(GorillasConfig *) get {
+    
+    static GorillasConfig *instance;
+    if(!instance)
+        instance = [[GorillasConfig alloc] init];
+    
+    return instance;
+}
+
+
 -(NSString *) cityTheme {
     
     return [defaults stringForKey: dCityTheme];
@@ -576,16 +586,6 @@
     defaults = nil;
     
     [super dealloc];
-}
-
-
-+(GorillasConfig *) get {
-    
-    static GorillasConfig *instance;
-    if(!instance)
-        instance = [[GorillasConfig alloc] init];
-    
-    return instance;
 }
 
 
