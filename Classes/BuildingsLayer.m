@@ -213,7 +213,7 @@
             [[GorillasConfig get] windowColorOn]    | 0x000000ff,
         };
         
-        [Utility drawLines:points colors:colors count:2 width:3];
+        drawLines(points, colors, 2, 3);
     }
 }
 

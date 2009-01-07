@@ -74,8 +74,7 @@
                          colorBytes[0];
     
     CGSize winSize = [[Director sharedDirector] winSize].size;
-    [Utility drawBoxFrom:cpv(-position.x, -position.y) to:cpv(winSize.width - position.x, winSize.height - position.y)
-               colorFrom:color to:toColor];
+    drawBoxFrom(cpv(-position.x, -position.y), cpv(winSize.width - position.x, winSize.height - position.y), color, toColor);
     /*glClearColor(colorBytes[3] / (float)0xff, colorBytes[2] / (float)0xff, colorBytes[1] / (float)0xff, colorBytes[0] / (float)0xff);
     glClear(GL_COLOR_BUFFER_BIT);*/
 }

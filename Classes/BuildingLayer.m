@@ -178,26 +178,25 @@
 
 -(void) draw {
 
+    glEnableClientState(GL_VERTEX_ARRAY);
+
     // == DRAW BUILDING ==
     // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
     glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
-    [Utility drawBoxFrom:cpvzero size:cpv(contentSize.width, contentSize.height) color:buildingColor];
+    drawBoxFrom(cpvzero, cpv(contentSize.width, contentSize.height), buildingColor, buildingColor);
 
     // == DRAW WINDOWS ==
-    glEnableClientState(GL_VERTEX_ARRAY);
     for(BOOL isOn = false; isOn < 2; ++isOn) {
         
-        // Tell OpenGL about our data.
+        // Bind our VBOs & colors.
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, windowsIndicesBuffer[isOn]);
         glBindBuffer(GL_ARRAY_BUFFER, windowsVertexBuffer[isOn]);
         glVertexPointer(2, GL_FLOAT, 0, 0);
-
         glColor4ub(wColors[isOn * 4 + 3],
                    wColors[isOn * 4 + 2],
                    wColors[isOn * 4 + 1],
                    wColors[isOn * 4 + 0]);
         
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, windowsIndicesBuffer[isOn]);
-	
         // == DRAW FRONT REAR WINDOWS ==
         // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
         glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
@@ -206,25 +205,23 @@
         // == DRAW REAR WINDOWS ==
         // Set opacity of DST to 1 where there are windows -> building back won't draw over it.
         glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glBlendFunc(GL_ONE, GL_ZERO);
         glDrawElements(GL_TRIANGLES, (isOn? windowOnCount: windowOffCount) * 6, GL_UNSIGNED_SHORT, 0);
-    
+
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
     }
     
-    // Reset blend & data source.
+    // Turn off VBOs.
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glDisableClientState(GL_VERTEX_ARRAY);
     
     // == DRAW BUILDING BACK ==
     // Draw back of building where DST opacity is < 1.
     glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA);
-    [Utility drawBoxFrom:cpvzero
-                    size:cpv(contentSize.width, contentSize.height)
-                   color:backBuildingColor];
+    drawBoxFrom(cpvzero, cpv(contentSize.width, contentSize.height), backBuildingColor, backBuildingColor);
+
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glDisableClientState(GL_VERTEX_ARRAY);
 }
 
 

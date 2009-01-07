@@ -150,13 +150,10 @@
 
 -(void) draw {
     
-    [Utility drawBoxFrom:cpv(0, 0)
-                    size:cpv(width, height)
-                   color:[[GorillasConfig get] shadeColor]];
-    [Utility drawLineFrom:cpv(0, 2)
-                       by:cpv(width * progress, 0)
-                    color:[[GorillasConfig get] windowColorOn]
-                    width:2];
+    drawBoxFrom(cpvzero, cpv(width, height), [[GorillasConfig get] shadeColor], [[GorillasConfig get] shadeColor]);
+    
+    const cpVect progressEnd = cpv(width * progress, 2);
+    drawLinesTo(cpv(0, 2), &progressEnd, 1, [[GorillasConfig get] windowColorOn], 2);
 }
 
 

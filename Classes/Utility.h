@@ -27,46 +27,16 @@
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
 
+NSString* rpad(NSString* string, NSUInteger l);
+NSString* lpad(NSString* string, NSUInteger l);
+NSString* appendOrdinalPrefix(int number, NSString* prefix);
 
-@interface Utility : NSObject {
+void drawPointAt(cpVect point, long color);
+void drawPointsAt(const cpVect* points, int count, long color);
 
-}
+void drawLinesTo(cpVect from, const cpVect* to, int count, long color, float width);
+void drawLines(const cpVect* points, const long* colors, int n, float width);
 
-+(NSString *) rpad:(NSString *)string to:(NSUInteger)l;
-+(NSString *) lpad:(NSString *)string to:(NSUInteger)l;
-+(NSString *) appendOrdinalPrefixFor:(int)number to:(NSString *)prefix;
+void drawBoxFrom(cpVect from, cpVect to, long fromColor, long toColor);
 
-+(void) drawPointAt:(cpVect)point;
-+(void) drawPointsAt:(const cpVect *)points count:(int)count;
-+(void) drawPointAt:(cpVect)point color:(long)color;
-+(void) drawPointsAt:(const cpVect *)points count:(int)count color:(long)color;
-
-
-+(void) drawLineFrom:(cpVect)from by:(cpVect)by;
-+(void) drawLinesFrom:(cpVect)from by:(const cpVect *)by count:(int)count;
-+(void) drawLineFrom:(cpVect)from to:(cpVect)to;
-+(void) drawLinesFrom:(cpVect)from to:(const cpVect *)to count:(int)count;
-+(void) drawLineFrom:(cpVect)from by:(cpVect)by color:(long)color;
-+(void) drawLinesFrom:(cpVect)from by:(const cpVect *)by count:(int)count color:(long)color;
-+(void) drawLineFrom:(cpVect)from to:(cpVect)to color:(long)color;
-+(void) drawLinesFrom:(cpVect)from to:(const cpVect *)to count:(int)count color:(long)color;
-+(void) drawLineFrom:(cpVect)from by:(cpVect)by color:(long)color width:(float)width;
-+(void) drawLinesFrom:(cpVect)from by:(const cpVect *)by count:(int)count color:(long)color width:(float)width;
-+(void) drawLineFrom:(cpVect)from to:(cpVect)to color:(long)color width:(float)width;
-+(void) drawLinesFrom:(cpVect)from to:(const cpVect *)to count:(int)count color:(long)color width:(float)width;
-+(void) drawLines:(const cpVect *)points colors:(const long *)colors count:(int)n width:(float)width;
-
-
-+(void) drawBoxFrom:(cpVect)from to:(cpVect)to;
-+(void) drawBoxFrom:(cpVect)from size:(cpVect)to;
-+(void) drawBoxFrom:(cpVect)from to:(cpVect)to color:(long)color;
-+(void) drawBoxFrom:(cpVect)from size:(cpVect)to color:(long)color;
-+(void) drawBoxFrom:(cpVect)from to:(cpVect)to colorFrom:(long)fromColor to:(long)toColor;
-
-+(void) drawBorderFrom:(cpVect)from to:(cpVect)to;
-+(void) drawBorderFrom:(cpVect)from size:(cpVect)size;
-+(void) drawBorderFrom:(cpVect)from size:(cpVect)size color:(long)color width:(float)width;
-+(void) drawBorderFrom:(cpVect)from to:(cpVect)to color:(long)color width:(float)width;
-    
-    
-@end
+void drawBorderFrom(cpVect from, cpVect to, long color, float width);
