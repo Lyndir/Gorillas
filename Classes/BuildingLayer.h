@@ -33,14 +33,16 @@
 @interface BuildingLayer : Layer <CocosNodeSize, Resettable> {
     
     long buildingColor;
+    long backBuildingColor;
     float heightRatio;
     float width;
 
     CGSize contentSize;
     
-    GLfloat *windows;
-    GLubyte *colors;
-    int windowCount;
+    int windowCount, windowOnCount, windowOffCount;
+    GLuint *windowsVertexBuffer;
+    GLuint *windowsIndicesBuffer;
+    GLubyte *wColors;
 }
 
 @property (readonly) CGSize contentSize;

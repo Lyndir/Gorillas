@@ -35,6 +35,9 @@
     opacity         = color & 0x000000ff;
     innerRatio      = 1.0f / padding;
     
+    vertexBuffer    = 0;
+    colorBuffer     = 0;
+    
     [self update];
     
     return self;
@@ -46,31 +49,28 @@
     int inner = contentSize.height * innerRatio;
     
     /*
-     pos.x + pad                                pos.x + width - pad - inner
-     |                                             |
-     v                                             v
-     .   2+10--------------------------------------9         <- pos.y + pad
-     /                                           \
-     /                                             \
-     /                                               \
-     3                                                 8     <- pos.y + pad + inner
-     |                                                 |
-     |                        1                        |
-     |                                                 |
-     4                                                 7     <- pos.y + height - pad - inner
-     \                                               /
-     \                                             /
-     \                                           /
-     5-----------------------------------------6         <- pos.y + height - pad
-     ^                                             ^
-     |                                             |
-     pos.x + pad + inner                           pos.x + width - pad
+           pos.x + pad                                pos.x + width - pad - inner
+           |                                             |
+           v                                             v
+           2+10--------------------------------------9         <- pos.y + pad
+          /                                           \
+         /                                             \
+        /                                               \
+       3                                                 8     <- pos.y + pad + inner
+       |                                                 |
+       |                        1                        |
+       |                                                 |
+       4                                                 7     <- pos.y + height - pad - inner
+        \                                               /
+         \                                             /
+          \                                           /
+           5-----------------------------------------6         <- pos.y + height - pad
+           ^                                             ^
+           |                                             |
+           pos.x + pad + inner                           pos.x + width - pad
      */
-    if(vertices)
-        free(vertices);
-    if(colors)
-        free(colors);
-    vertices        = malloc(sizeof(GLfloat) * 10 * 2);
+    
+    GLfloat *vertices = malloc(sizeof(GLfloat) * 10 * 2);
     vertices[0]     = contentSize.width / 2;                                    // 1
     vertices[1]     = contentSize.height / 2;
     vertices[2]     = position.x + outerPadding + inner;                        // 2
@@ -93,24 +93,45 @@
     vertices[19]    = position.y + outerPadding;
 
     const GLubyte *colorBytes = (GLubyte *)&color;
-    colors = malloc(sizeof(GLubyte) * 10 * 4);
+    GLubyte *colors = malloc(sizeof(GLubyte) * 10 * 4);
     for(int i = 0; i < 10; ++i) {
         colors[i * 4 + 0] = colorBytes[3];
         colors[i * 4 + 1] = colorBytes[2];
         colors[i * 4 + 2] = colorBytes[1];
         colors[i * 4 + 3] = colorBytes[0];
     }
+    
+    // Push our window data into VBOs.
+    glDeleteBuffers(1, &vertexBuffer);
+    glDeleteBuffers(1, &colorBuffer);
+    glGenBuffers(1, &vertexBuffer);
+    glGenBuffers(1, &colorBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat *) * 10 * 2, vertices, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLubyte *) * 10 * 4, colors, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    
+    // Free the clientside window data.
+    free(vertices);
+    free(colors);
 }
 
 
 - (void)draw {
     
     // Tell OpenGL about our data.
-	glVertexPointer(2, GL_FLOAT, 0, vertices);
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glColorPointer(4, GL_UNSIGNED_BYTE, 0, colors);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+	glVertexPointer(2, GL_FLOAT, 0, 0);
+
 	glEnableClientState(GL_COLOR_ARRAY);
+    glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
+	glColorPointer(4, GL_UNSIGNED_BYTE, 0, 0);
 	
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    
+    // Draw our background.
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 10);
     
     // Reset data source.
@@ -140,11 +161,6 @@
 
 
 -(void) dealloc {
-    
-    free(vertices);
-    free(colors);
-    vertices = nil;
-    colors = nil;
     
     [super dealloc];
 }

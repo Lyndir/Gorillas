@@ -35,18 +35,7 @@
 
 - (id) init {
 
-	if (!(self = [super init]))
-        return self;
-    
-    windows     = nil;
-    colors      = nil;
-    width       = 0;
-    heightRatio = 0;
-    
-    // Configure building properties.
-    [self reset];
-    
-	return self;
+	return self = [self initWithWidth:0 heightRatio:0];
 }
 
 
@@ -55,10 +44,15 @@
 	if (!(self = [super init]))
         return self;
 
-    windows     = nil;
-    colors      = nil;
-    width       = w;
-    heightRatio = h;
+    windowsVertexBuffer     = malloc(sizeof(GLuint *) * 2);
+    windowsVertexBuffer[0]  = 0;
+    windowsVertexBuffer[1]  = 0;
+    windowsIndicesBuffer    = malloc(sizeof(GLuint *) * 2);
+    windowsIndicesBuffer[0] = 0;
+    windowsIndicesBuffer[1] = 0;
+    wColors                 = nil;
+    width                   = w;
+    heightRatio             = h;
         
     // Configure building properties.
     [self reset];
@@ -70,6 +64,12 @@
 -(void) reset {
     
     buildingColor  = [[GorillasConfig get] buildingColor];
+    GLubyte *bColor = (GLubyte *)&buildingColor;
+    backBuildingColor = ((int)(bColor[3] * 0.2f)   << 24) |
+                        ((int)(bColor[2] * 0.2f)   << 16) |
+                        ((int)(bColor[1] * 0.2f)   << 8) |
+                        ((int)(bColor[0])          << 0);
+    
     float wPad = [[GorillasConfig get] windowPadding];
     float wWidth = [[GorillasConfig get] windowWidth];
     float wHeight = [[GorillasConfig get] windowHeight];
@@ -77,6 +77,20 @@
     long wColor1 = [[GorillasConfig get] windowColorOn];
     GLubyte *wColors0 = (GLubyte *)&wColor0;
     GLubyte *wColors1 = (GLubyte *)&wColor1;
+
+    // Remember the window on and off colors in an array.
+    free(wColors);
+    wColors = malloc(sizeof(GLubyte) * 4 * 2);
+    wColors[0] = wColors0[0];
+    wColors[1] = wColors0[1];
+    wColors[2] = wColors0[2];
+    wColors[3] = wColors0[3];
+    wColors[4] = wColors1[0];
+    wColors[5] = wColors1[1];
+    wColors[6] = wColors1[2];
+    wColors[7] = wColors1[3];
+    /*memcpy(&wColors, (GLubyte *)&wColor0, sizeof(long));
+    memcpy(&wColors + sizeof(long), (GLubyte *)&wColor1, sizeof(long));*/
 
     // Calculate a random size for this building.
     const CGSize size = [[Director sharedDirector] winSize].size;
@@ -90,116 +104,140 @@
                              (fixedFloors + addFloors) * floorHeight + wPad);
     windowCount = (1 + (int) (contentSize.height - wHeight - (int)wPad) / (int) (wPad + wHeight))
                 * (1 + (int) (contentSize.width  - wWidth  - (int)wPad) / (int) (wPad + wWidth));
+    windowOffCount = 0;
+    windowOnCount = 0;
     
     // Add windows.
-    free(windows);
-    free(colors);
-    windows = malloc(sizeof(GLfloat *) * windowCount * 6 * 2);
-    colors  = malloc(sizeof(GLubyte *) * windowCount * 6 * 4);
+    GLfloat *windowVertices = malloc(sizeof(GLfloat *) * windowCount * 8 * 2);
+    GLushort *windowIndices = malloc(sizeof(GLushort *) * windowCount * 6 * 2);
     
     int w = 0;
     for (int y = wPad;
-         y < contentSize.height - wHeight;
+         w < windowCount;
          y += wPad + wHeight) {
         
         for (int x = wPad;
-             x < contentSize.width - wWidth;
+             x < contentSize.width - wWidth && w < windowCount;
              x += wPad + wWidth) {
+
+            BOOL isOff = random() % 100 < 20;
+            int wCurrentCount;
+            if(isOff)
+                wCurrentCount = windowOffCount++;
+            else
+                wCurrentCount = windowOnCount++;
             
-            GLubyte r, g, b, a;
-            if(random() % 100 > 80) {
-                r = wColors0[3]; g = wColors0[2]; b = wColors0[1]; a = wColors0[0];
-            } else {
-                r = wColors1[3]; g = wColors1[2]; b = wColors1[1]; a = wColors1[0];
-            }
+            int wvOffset = (isOff? 0: windowCount * 8) + wCurrentCount * 8;
+            windowVertices[wvOffset + 0] = x; // 0
+            windowVertices[wvOffset + 1] = y;
             
-            colors[w * 24 + 0] = colors[w * 24 + 4] = colors[w * 24 + 8]  = colors[w * 24 + 12] = colors[w * 24 + 16] = colors[w * 24 + 20] = r;
-            colors[w * 24 + 1] = colors[w * 24 + 5] = colors[w * 24 + 9]  = colors[w * 24 + 13] = colors[w * 24 + 17] = colors[w * 24 + 21] = g;
-            colors[w * 24 + 2] = colors[w * 24 + 6] = colors[w * 24 + 10] = colors[w * 24 + 14] = colors[w * 24 + 18] = colors[w * 24 + 22] = b;
-            colors[w * 24 + 3] = colors[w * 24 + 7] = colors[w * 24 + 11] = colors[w * 24 + 15] = colors[w * 24 + 19] = colors[w * 24 + 23] = a;
+            windowVertices[wvOffset + 2] = x + wWidth; // 1
+            windowVertices[wvOffset + 3] = y;
             
-            windows[w * 12 + 0] = x;
-            windows[w * 12 + 1] = y;
-            windows[w * 12 + 2] = x + wWidth;
-            windows[w * 12 + 3] = y;
-            windows[w * 12 + 4] = x;
-            windows[w * 12 + 5] = y + wHeight;
-            windows[w * 12 + 6] = x;
-            windows[w * 12 + 7] = y + wHeight;
-            windows[w * 12 + 8] = x + wWidth;
-            windows[w * 12 + 9] = y + wHeight;
-            windows[w * 12 + 10] = x + wWidth;
-            windows[w * 12 + 11] = y;
+            windowVertices[wvOffset + 4] = x; // 2
+            windowVertices[wvOffset + 5] = y + wHeight;
             
-            w++;
+            windowVertices[wvOffset + 6] = x + wWidth; // 3
+            windowVertices[wvOffset + 7] = y + wHeight;
+            
+            int wiOffset = (isOff? 0: windowCount * 6) + wCurrentCount * 6;
+            windowIndices[wiOffset + 0] = wCurrentCount * 4 + 0;
+            windowIndices[wiOffset + 1] = wCurrentCount * 4 + 1;
+            windowIndices[wiOffset + 2] = wCurrentCount * 4 + 2;
+            windowIndices[wiOffset + 3] = wCurrentCount * 4 + 2;
+            windowIndices[wiOffset + 4] = wCurrentCount * 4 + 3;
+            windowIndices[wiOffset + 5] = wCurrentCount * 4 + 1;
+            
+            ++w;
         }
     }
+    
+    // Push our window data into VBOs.
+    glDeleteBuffers(2, windowsVertexBuffer);
+    glDeleteBuffers(2, windowsIndicesBuffer);
+    glGenBuffers(2, windowsVertexBuffer);
+    glGenBuffers(2, windowsIndicesBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, windowsVertexBuffer[0]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat *) * windowOffCount * 8, windowVertices, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, windowsVertexBuffer[1]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat *) * windowOnCount * 8, windowVertices + (windowCount * 8), GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, windowsIndicesBuffer[0]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort *) * windowOffCount * 6, windowIndices, GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, windowsIndicesBuffer[1]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort *) * windowOnCount * 6, windowIndices + (windowCount * 6), GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    
+    // Free the clientside window data.
+    free(windowVertices);
+    free(windowIndices);
 }
 
 
 -(void) draw {
-    
+
     // == DRAW BUILDING ==
     // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
     glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
-    [Utility drawBoxFrom:cpv(0, 0) size:cpv(contentSize.width, contentSize.height) color:buildingColor];
+    [Utility drawBoxFrom:cpvzero size:cpv(contentSize.width, contentSize.height) color:buildingColor];
 
-    // == DRAW FRONT WINDOWS ==
-    // Tell OpenGL about our data.
+    // == DRAW WINDOWS ==
     glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-    glVertexPointer(2, GL_FLOAT, 0, windows);
-    glColorPointer(4, GL_UNSIGNED_BYTE, 0, colors);
+    for(BOOL isOn = false; isOn < 2; ++isOn) {
+        
+        // Tell OpenGL about our data.
+        glBindBuffer(GL_ARRAY_BUFFER, windowsVertexBuffer[isOn]);
+        glVertexPointer(2, GL_FLOAT, 0, 0);
+
+        glColor4ub(wColors[isOn * 4 + 3],
+                   wColors[isOn * 4 + 2],
+                   wColors[isOn * 4 + 1],
+                   wColors[isOn * 4 + 0]);
+        
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, windowsIndicesBuffer[isOn]);
 	
-    // Draw our windows.
-    glDrawArrays(GL_TRIANGLES, 0, 6 * windowCount);
+        // == DRAW FRONT REAR WINDOWS ==
+        // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
+        glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
+        glDrawElements(GL_TRIANGLES, (isOn? windowOnCount: windowOffCount) * 6, GL_UNSIGNED_SHORT, 0);
+        
+        // == DRAW REAR WINDOWS ==
+        // Set opacity of DST to 1 where there are windows -> building back won't draw over it.
+        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glDrawElements(GL_TRIANGLES, (isOn? windowOnCount: windowOffCount) * 6, GL_UNSIGNED_SHORT, 0);
+    
+        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+    }
     
     // Reset blend & data source.
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_COLOR_ARRAY);
-    
-    // == DRAW REAR WINDOWS ==
-    // Set opacity of DST to 1 where there are windows -> building back won't draw over it.
-    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
-    // Tell OpenGL about our data.
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-    glVertexPointer(2, GL_FLOAT, 0, windows);
-    glColorPointer(4, GL_UNSIGNED_BYTE, 0, colors);
-	
-    // Draw our windows.
-    glDrawArrays(GL_TRIANGLES, 0, 6 * windowCount);
-    
-    // Reset blend & data source.
-    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_COLOR_ARRAY);
     
     // == DRAW BUILDING BACK ==
     // Draw back of building where DST opacity is < 1.
     glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA);
-    GLubyte *bColor = (GLubyte *)&buildingColor;
-    [Utility drawBoxFrom:cpv(0, 0)
+    [Utility drawBoxFrom:cpvzero
                     size:cpv(contentSize.width, contentSize.height)
-                   color:((int)(bColor[3] * 0.2f)   << 24) |
-                         ((int)(bColor[2] * 0.2f)   << 16) |
-                         ((int)(bColor[1] * 0.2f)   << 8) |
-                         ((int)(bColor[0])          << 0)];
+                   color:backBuildingColor];
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 
 -(void) dealloc {
     
-    free(windows);
-    free(colors);
-    windows = nil;
-    colors = nil;
+    glDeleteBuffers(2, windowsVertexBuffer);
+    glDeleteBuffers(2, windowsIndicesBuffer);
+    windowsVertexBuffer = nil;
+    windowsIndicesBuffer = nil;
     
+    free(wColors);
+    wColors = nil;
+
     [super dealloc];
 }
 

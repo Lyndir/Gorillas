@@ -267,7 +267,7 @@
 
 +(void) drawBoxFrom:(cpVect)from size:(cpVect)size color:(long)color {
 
-    [self drawBoxFrom:from to:cpv(from.x + size.x, from.y + size.y) color:color];
+    [self drawBoxFrom:from to:cpvadd(from, size) color:color];
 }
 
 
@@ -316,13 +316,13 @@
 
 +(void) drawBorderFrom:(cpVect)from size:(cpVect)size {
     
-    [self drawBorderFrom:from to:cpv(from.x + size.x, from.y + size.y)];
+    [self drawBorderFrom:from to:cpvadd(from, size)];
 }
 
 
 +(void) drawBorderFrom:(cpVect)from size:(cpVect)size color:(long)color width:(float)width {
     
-    [self drawBorderFrom:from to:cpv(from.x + size.x, from.y + size.y) color:color width:width];
+    [self drawBorderFrom:from to:cpvadd(from, size) color:color width:width];
 }
 
 

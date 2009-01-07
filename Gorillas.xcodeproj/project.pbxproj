@@ -18,6 +18,15 @@
 		DA1816470F0E24D80064F470 /* AVConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816460F0E24D80064F470 /* AVConfigurationLayer.m */; };
 		DA22830A0EE2CAC600BA53D2 /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2283090EE2CAC600BA53D2 /* hole.png */; };
 		DA31251D0F10F74C00F1032D /* HoleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA31251C0F10F74C00F1032D /* HoleLayer.m */; };
+		DA31299F0F11F70100F1032D /* ConfigurationSectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816250F0E227C0064F470 /* ConfigurationSectionLayer.m */; };
+		DA3129A00F11F70100F1032D /* AVConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816460F0E24D80064F470 /* AVConfigurationLayer.m */; };
+		DA3129A10F11F70100F1032D /* HoleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA31251C0F10F74C00F1032D /* HoleLayer.m */; };
+		DA3129A20F11F72600F1032D /* ConfigurationSectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816250F0E227C0064F470 /* ConfigurationSectionLayer.m */; };
+		DA3129A30F11F72600F1032D /* AVConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816460F0E24D80064F470 /* AVConfigurationLayer.m */; };
+		DA3129A40F11F72600F1032D /* HoleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA31251C0F10F74C00F1032D /* HoleLayer.m */; };
+		DA3129A50F11F73300F1032D /* ConfigurationSectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816250F0E227C0064F470 /* ConfigurationSectionLayer.m */; };
+		DA3129A60F11F73300F1032D /* AVConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816460F0E24D80064F470 /* AVConfigurationLayer.m */; };
+		DA3129A70F11F73300F1032D /* HoleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA31251C0F10F74C00F1032D /* HoleLayer.m */; };
 		DA34006D0EB516D800B68C06 /* StatisticsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006C0EB516D800B68C06 /* StatisticsLayer.m */; };
 		DA3400700EB516F400B68C06 /* GameConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006F0EB516F400B68C06 /* GameConfigurationLayer.m */; };
 		DA34FD100EB4851E00B68C06 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
@@ -1424,6 +1433,9 @@
 				DA379F230F09650800541EF4 /* TestLayer.m in Sources */,
 				DA379F240F09650800541EF4 /* FancyLayer.m in Sources */,
 				DA379F250F09650800541EF4 /* WindLayer.m in Sources */,
+				DA3129A20F11F72600F1032D /* ConfigurationSectionLayer.m in Sources */,
+				DA3129A30F11F72600F1032D /* AVConfigurationLayer.m in Sources */,
+				DA3129A40F11F72600F1032D /* HoleLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1503,6 +1515,9 @@
 				DA379F980F09654A00541EF4 /* TestLayer.m in Sources */,
 				DA379F990F09654A00541EF4 /* FancyLayer.m in Sources */,
 				DA379F9A0F09654A00541EF4 /* WindLayer.m in Sources */,
+				DA31299F0F11F70100F1032D /* ConfigurationSectionLayer.m in Sources */,
+				DA3129A00F11F70100F1032D /* AVConfigurationLayer.m in Sources */,
+				DA3129A10F11F70100F1032D /* HoleLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1582,6 +1597,9 @@
 				DA37A00D0F0965A600541EF4 /* TestLayer.m in Sources */,
 				DA37A00E0F0965A600541EF4 /* FancyLayer.m in Sources */,
 				DA37A00F0F0965A600541EF4 /* WindLayer.m in Sources */,
+				DA3129A50F11F73300F1032D /* ConfigurationSectionLayer.m in Sources */,
+				DA3129A60F11F73300F1032D /* AVConfigurationLayer.m in Sources */,
+				DA3129A70F11F73300F1032D /* HoleLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1614,17 +1632,20 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DEBUGGING_SYMBOLS = full;
-				GCC_DYNAMIC_NO_PIC = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_FAST_MATH = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
 				GCC_STRICT_ALIASING = YES;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
@@ -1649,9 +1670,10 @@
 				LINKER_DISPLAYS_MANGLED_NAMES = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator2.2;
+				SDKROOT = iphoneos2.2;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VERSION_INFO_BUILDER = lhunath;
+				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
@@ -1663,12 +1685,15 @@
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_FAST_MATH = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
 				GCC_STRICT_ALIASING = YES;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
@@ -1691,8 +1716,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator2.2;
+				SDKROOT = iphoneos2.2;
 				VERSION_INFO_BUILDER = lhunath;
+				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -1705,12 +1731,15 @@
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_FAST_MATH = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
 				GCC_STRICT_ALIASING = YES;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
@@ -1733,8 +1762,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator2.2;
+				SDKROOT = iphoneos2.2;
 				VERSION_INFO_BUILDER = lhunath;
+				ZERO_LINK = NO;
 			};
 			name = Distribution;
 		};
@@ -1748,11 +1778,101 @@
 			};
 			name = Distribution;
 		};
-		DA379F2E0F09650800541EF4 /* Debug */ = {
+		DA312A3F0F12B91A00F1032D /* Release Debugging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				DEPLOYMENT_POSTPROCESSING = NO;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
+				GCC_STRICT_ALIASING = YES;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VALUE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				PREBINDING = NO;
+				SDKROOT = iphoneos2.2;
+				STRIP_INSTALLED_PRODUCT = NO;
+				VERSION_INFO_BUILDER = lhunath;
+				ZERO_LINK = NO;
+			};
+			name = "Release Debugging";
+		};
+		DA312A400F12B91A00F1032D /* Release Debugging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Maarten Billemont";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-Dev";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
+			};
+			name = "Release Debugging";
+		};
+		DA312A410F12B91A00F1032D /* Release Debugging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
 				PRODUCT_NAME = "Gorillas-AdHoc";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "579474B9-2650-4A95-9363-179004E32BAA";
+				SDKROOT = iphoneos2.2;
+			};
+			name = "Release Debugging";
+		};
+		DA312A420F12B91A00F1032D /* Release Debugging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-Dieter";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
+				SDKROOT = iphoneos2.2;
+			};
+			name = "Release Debugging";
+		};
+		DA312A430F12B91A00F1032D /* Release Debugging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-Mario";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E1BA51F-F37E-4B2D-A766-F9100F74B11B";
+				SDKROOT = iphoneos2.2;
+			};
+			name = "Release Debugging";
+		};
+		DA379F2E0F09650800541EF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Maarten Billemont";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
+				PRODUCT_NAME = "Gorillas-AdHoc";
+				PROVISIONING_PROFILE = "579474B9-2650-4A95-9363-179004E32BAA";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "579474B9-2650-4A95-9363-179004E32BAA";
 				SDKROOT = iphoneos2.2;
 			};
@@ -1781,8 +1901,10 @@
 		DA379FA30F09654A00541EF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Maarten Billemont";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
 				PRODUCT_NAME = "Gorillas-Dieter";
+				PROVISIONING_PROFILE = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
 				SDKROOT = iphoneos2.2;
 			};
@@ -1811,8 +1933,10 @@
 		DA37A0180F0965A600541EF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Maarten Billemont";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
 				PRODUCT_NAME = "Gorillas-Mario";
+				PROVISIONING_PROFILE = "7E1BA51F-F37E-4B2D-A766-F9100F74B11B";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E1BA51F-F37E-4B2D-A766-F9100F74B11B";
 				SDKROOT = iphoneos2.2;
 			};
@@ -1846,6 +1970,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				DA312A400F12B91A00F1032D /* Release Debugging */,
 				DA16C3760EEC575C00E46246 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1856,6 +1981,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				DA312A3F0F12B91A00F1032D /* Release Debugging */,
 				DA16C3750EEC575C00E46246 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1866,6 +1992,7 @@
 			buildConfigurations = (
 				DA379F2E0F09650800541EF4 /* Debug */,
 				DA379F2F0F09650800541EF4 /* Release */,
+				DA312A410F12B91A00F1032D /* Release Debugging */,
 				DA379F300F09650800541EF4 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1876,6 +2003,7 @@
 			buildConfigurations = (
 				DA379FA30F09654A00541EF4 /* Debug */,
 				DA379FA40F09654A00541EF4 /* Release */,
+				DA312A420F12B91A00F1032D /* Release Debugging */,
 				DA379FA50F09654A00541EF4 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1886,6 +2014,7 @@
 			buildConfigurations = (
 				DA37A0180F0965A600541EF4 /* Debug */,
 				DA37A0190F0965A600541EF4 /* Release */,
+				DA312A430F12B91A00F1032D /* Release Debugging */,
 				DA37A01A0F0965A600541EF4 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;

@@ -19,8 +19,8 @@
     float   innerRatio;
     long    color;
     
-    GLfloat *vertices;
-    GLubyte *colors;
+    GLuint vertexBuffer;
+    GLuint colorBuffer;
 }
 
 -(void) update;
