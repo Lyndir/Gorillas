@@ -43,8 +43,6 @@
 
 -(void) reset {
     
-    BOOL readd = [menu parent] != nil;
-    
     if(menu) {
         [self removeAndStop:menu];
         [menu release];
@@ -94,6 +92,7 @@
     
     menu = [[Menu menuWithItems:themeT, themeI, levelT, levelI, gravityT, gravityI, nil] retain];
     [menu alignItemsVertically];
+    [self add:menu];
     
     
     // Back.
@@ -104,24 +103,15 @@
     backMenu = [[Menu menuWithItems:back, nil] retain];
     [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
-
-    if(readd) {
-        [self add:menu];
-        [self add:backMenu];
-    }
+    [self add:backMenu];
 }
 
 
--(void) reveal {
-    
-    [super reveal];
+-(void) onEnter {
     
     [self reset];
     
-    [menu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-    [self add:menu];
-    [backMenu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-    [self add:backMenu];
+    [super onEnter];
 }
 
 

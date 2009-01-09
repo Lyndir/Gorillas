@@ -383,6 +383,8 @@
 		DA4F4B9F0EF3E90D0062E0E8 /* glu.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B960EF3E90D0062E0E8 /* glu.c */; };
 		DA4F4BA00EF3E90D0062E0E8 /* Texture2D.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B9A0EF3E90D0062E0E8 /* Texture2D.m */; };
 		DA4F4BA10EF3E90D0062E0E8 /* TGAlib.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B9C0EF3E90D0062E0E8 /* TGAlib.c */; };
+		DA5A256D0F16D63900975E5A /* Splash.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5A256C0F16D63900975E5A /* Splash.m */; };
+		DA5A28E00F17C64100975E5A /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A28DF0F17C64000975E5A /* splash.png */; };
 		DA5F1BD60EE74CE80041691E /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5F1BD40EE74CE80041691E /* fps_images.png */; };
 		DA6314C20EFAEA06007D203B /* TestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C10EFAEA06007D203B /* TestLayer.m */; };
 		DA6314C50EFAEAD0007D203B /* FancyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C40EFAEAD0007D203B /* FancyLayer.m */; };
@@ -562,6 +564,9 @@
 		DA4F4B9A0EF3E90D0062E0E8 /* Texture2D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Texture2D.m; path = "../cocos2d-iphone-0.6.1/cocos2d/Support/Texture2D.m"; sourceTree = SOURCE_ROOT; };
 		DA4F4B9C0EF3E90D0062E0E8 /* TGAlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TGAlib.c; path = "../cocos2d-iphone-0.6.1/cocos2d/Support/TGAlib.c"; sourceTree = SOURCE_ROOT; };
 		DA4F4B9D0EF3E90D0062E0E8 /* TGAlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TGAlib.h; path = "../cocos2d-iphone-0.6.1/cocos2d/Support/TGAlib.h"; sourceTree = SOURCE_ROOT; };
+		DA5A256B0F16D63900975E5A /* Splash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Splash.h; sourceTree = "<group>"; };
+		DA5A256C0F16D63900975E5A /* Splash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Splash.m; sourceTree = "<group>"; };
+		DA5A28DF0F17C64000975E5A /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		DA5F1BD40EE74CE80041691E /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
 		DA6314C00EFAEA06007D203B /* TestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestLayer.h; path = Classes/TestLayer.h; sourceTree = "<group>"; };
 		DA6314C10EFAEA06007D203B /* TestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestLayer.m; path = Classes/TestLayer.m; sourceTree = "<group>"; };
@@ -970,6 +975,7 @@
 		DA5F1BD30EE74CE80041691E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DA5A28DF0F17C64000975E5A /* splash.png */,
 				DA9420AA0F08C2CA00E105BD /* fire.png */,
 				DA83EBE30EFEE58800305C9F /* icon.png */,
 				DA5F1BD40EE74CE80041691E /* fps_images.png */,
@@ -1039,6 +1045,8 @@
 		DACA4E220EB3A8E90096F970 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DA5A256B0F16D63900975E5A /* Splash.h */,
+				DA5A256C0F16D63900975E5A /* Splash.m */,
 				DA7547F40EAB66D40083EC7C /* GameLayer.h */,
 				DA7547F50EAB66D40083EC7C /* GameLayer.m */,
 				DAB46AA70EC85E7400F17B3F /* HUDLayer.h */,
@@ -1176,6 +1184,7 @@
 				DA6DC9500F0409A000E94E84 /* prideofthepacific.wav in Resources */,
 				DA9420AB0F08C2CA00E105BD /* fire.png in Resources */,
 				DAC318220F0980720043C885 /* Default.png in Resources */,
+				DA5A28E00F17C64100975E5A /* splash.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1354,6 +1363,7 @@
 				DA1816260F0E227C0064F470 /* ConfigurationSectionLayer.m in Sources */,
 				DA1816470F0E24D80064F470 /* AVConfigurationLayer.m in Sources */,
 				DA31251D0F10F74C00F1032D /* HoleLayer.m in Sources */,
+				DA5A256D0F16D63900975E5A /* Splash.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1687,13 +1697,14 @@
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_FAST_MATH = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
 				GCC_STRICT_ALIASING = YES;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				GCC_UNROLL_LOOPS = YES;
+				GCC_UNROLL_LOOPS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
@@ -1733,6 +1744,7 @@
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_FAST_MATH = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
 				GCC_STRICT_ALIASING = YES;
@@ -1790,6 +1802,7 @@
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_FAST_MATH = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
 				GCC_STRICT_ALIASING = YES;

@@ -43,11 +43,7 @@
 
 -(void) reset {
     
-    BOOL readd = false;
-    
     if(menu) {
-        readd = [menu parent] != nil;
-        
         [self removeAndStop:menu];
         [menu release];
         menu = nil;
@@ -69,8 +65,33 @@
                                                 target:self
                                               selector:@selector(audioTrack:)];
     
-    menu = [[Menu menuWithItems:audioT, audioI, nil] retain];
+    
+    // Weather.
+    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    MenuItem *weatherT  = [MenuItemFont itemFromString:@"Weather"];
+    [weatherT setIsEnabled:false];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    MenuItem *weatherI  = [MenuItemFont itemFromString:[[GorillasConfig get] weather]? @"On": @"Off"
+                                                target:self
+                                              selector:@selector(weather:)];
+    
+    
+    // Effects.
+    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    MenuItem *effectsT  = [MenuItemFont itemFromString:@"Special Effects"];
+    [effectsT setIsEnabled:false];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    MenuItem *effectsI  = [MenuItemFont itemFromString:[[GorillasConfig get] effects]? @"On": @"Off"
+                                                target:self
+                                              selector:@selector(effects:)];
+    
+    menu = [[Menu menuWithItems:audioT, audioI, weatherT, weatherI, effectsT, effectsI, nil] retain];
     [menu alignItemsVertically];
+    [self add:menu];
 
     
     // Back.
@@ -81,24 +102,15 @@
     backMenu = [[Menu menuWithItems:back, nil] retain];
     [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
-
-    if(readd) {
-        [self add:menu];
-        [self add:backMenu];
-    }
+    [self add:backMenu];
 }
 
 
--(void) reveal {
-    
-    [super reveal];
+-(void) onEnter {
     
     [self reset];
     
-    [menu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-    [self add:menu];
-    [backMenu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-    [self add:backMenu];
+    [super onEnter];
 }
 
 
@@ -122,6 +134,18 @@
         newTrack = nil;
     
     [[GorillasAppDelegate get] playTrack:newTrack];
+}
+
+
+-(void) weather: (id) sender {
+    
+    [[GorillasConfig get] setWeather:![[GorillasConfig get] weather]];
+}
+
+
+-(void) effects: (id) sender {
+    
+    [[GorillasConfig get] setEffects:![[GorillasConfig get] effects]];
 }
 
 

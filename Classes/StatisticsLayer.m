@@ -39,6 +39,8 @@
     if(!(self = [super init]))
         return self;
     
+    scoreTowers = [[NSMutableArray alloc] initWithCapacity:20];
+    
     // Back.
     MenuItem *back     = [MenuItemFont itemFromString:@"<"
                                                target: self
@@ -47,18 +49,14 @@
     menu = [[Menu menuWithItems:back, nil] retain];
     [menu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [menu alignItemsHorizontally];
+    [self add:menu];
     
     return self;
 }
 
 
--(void) reveal {
-    
-    [super reveal];
-    
-    [menu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-    [self add:menu];
-    
+-(void) onEnter {
+
     // Get the top scores.
     NSDictionary *topScores = [[GorillasConfig get] topScoreHistory];
     NSMutableArray *dates = [[NSMutableArray alloc] initWithCapacity:[topScores count]];
@@ -142,7 +140,8 @@
         
         [scoreTower do:[Sequence actions:
                         [Sequence actionWithDuration:0.1f * i],
-                        [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(x, padding)],
+                        [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                          position:cpv(x, padding)],
                         nil]];
         [scoreLabel do:[Sequence actions:
                         [Sequence actionWithDuration:0.1f * i],
@@ -156,6 +155,7 @@
         [scoreTower setPosition:cpv(x, -[scoreTower contentSize].height - [scoreLabel contentSize].height)];
         [scoreTower add:scoreLabel];
         [scoreTower add:dateLabel];
+        [scoreTowers addObject:scoreTower];
         [self add:scoreTower];
         
         ++i;
@@ -172,11 +172,32 @@
     dateFormatter = nil;
     [history release];
     history = nil;
+
+    [super onEnter];
 }
 
 
--(void) gone {
+-(void) dismiss {
     
+    [super dismiss];
+    
+    int i = 0;
+    for(BuildingLayer *scoreTower in scoreTowers)
+        [scoreTower do:[Sequence actions:
+                        [Sequence actionWithDuration:(([[GorillasConfig get] transitionDuration] / 2) / [scoreTowers count]) * i++],
+                        [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] / 2
+                                          position:cpv([scoreTower position].x, -[scoreTower contentSize].height - [[GorillasConfig get] fontSize] * 2)],
+                        nil]];
+}
+
+
+-(void) onExit {
+    
+    [super onExit];
+    
+    for(BuildingLayer *scoreTower in scoreTowers)
+        [self removeAndStop:scoreTower];
+    [scoreTowers removeAllObjects];
 }
 
 
@@ -187,6 +208,9 @@
 
 
 -(void) dealloc {
+    
+    [scoreTowers release];
+    scoreTowers = nil;
     
     [menu release];
     menu = nil;

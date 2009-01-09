@@ -31,7 +31,6 @@ NSString* rpad(NSString* string, NSUInteger l);
 NSString* lpad(NSString* string, NSUInteger l);
 NSString* appendOrdinalPrefix(int number, NSString* prefix);
 
-void drawPointAt(cpVect point, long color);
 void drawPointsAt(const cpVect* points, int count, long color);
 
 void drawLinesTo(cpVect from, const cpVect* to, int count, long color, float width);

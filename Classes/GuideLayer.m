@@ -63,9 +63,12 @@
     nextMenu = [[Menu menuWithItems:next, nil] retain];
     [nextMenu setPosition:cpv(winSize.width - [[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [nextMenu alignItemsHorizontally];
+    [self add:nextMenu];
+
     backMenu = [[Menu menuWithItems:back, nil] retain];
     [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
+    [self add:backMenu];
 
     cpVect s = cpv(winSize.width - padding, winSize.height - [[GorillasConfig get] fontSize] - padding);
     
@@ -82,24 +85,19 @@
                                            fontName:[[GorillasConfig get] fontName]
                                            fontSize:[[GorillasConfig get] fontSize]];
     [pageNumberLabel setPosition:cpv(winSize.width / 2, padding - [[GorillasConfig get] fontSize] / 2)];
+    [self add:pageNumberLabel];
     
     return self;
 }
 
 
--(void) reveal {
+-(void) onEnter {
     
-    [super reveal];
+    [super onEnter];
     
     page = 0;
     [self flipPage];
     
-    [pageNumberLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-    [self add:pageNumberLabel];
-    [backMenu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-    [self add:backMenu];
-    [nextMenu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-    [self add:nextMenu];
 }
 
 

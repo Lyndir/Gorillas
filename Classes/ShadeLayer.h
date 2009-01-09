@@ -32,16 +32,12 @@
 
 @interface ShadeLayer : FancyLayer {
 
-    BOOL showing;
 }
 
--(void) reveal;
 -(void) dismiss;
 
 -(void) ready;
 -(void) gone;
-
-@property (readonly) BOOL showing;
 
 
 @end

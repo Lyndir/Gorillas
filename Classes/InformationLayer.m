@@ -56,6 +56,7 @@
     
     menu = [[Menu menuWithItems:ver, guide, stats, nil] retain];
     [menu alignItemsVertically];
+    [self add:menu];
 
     
     // Back.
@@ -66,19 +67,10 @@
     backMenu = [[Menu menuWithItems:back, nil] retain];
     [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
+    [self add:backMenu];
+
     
     return self;
-}
-
-
--(void) reveal {
-    
-    [super reveal];
-    
-    [menu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-    [self add:menu];
-    [backMenu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-    [self add:backMenu];
 }
 
 

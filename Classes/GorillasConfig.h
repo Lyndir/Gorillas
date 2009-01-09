@@ -87,6 +87,9 @@
 @property (readwrite, assign) NSString      *currentTrack;
 @property (readonly, assign) NSString       *currentTrackName;
 
+@property (readwrite) BOOL                  weather;
+@property (readwrite) BOOL                  effects;
+
 -(long)                                     buildingColor;
 
 -(void)                                     levelUp;

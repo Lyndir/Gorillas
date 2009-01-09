@@ -73,6 +73,9 @@
 #define dTracks             @"v1.tracks"
 #define dCurrentTrack       @"v1.currentTrack"
 
+#define dWeather            @"v1.weather"
+#define dEffects            @"v1.effects"
+
 
 @implementation GorillasConfig
 
@@ -169,6 +172,9 @@
                                  @"Off",                    @"",
                                  nil],                                                      dTracks,
                                 @"blockdropper3.wav",                                       dCurrentTrack,
+                                
+                                [NSNumber numberWithBool:    YES],                          dWeather,
+                                [NSNumber numberWithBool:    YES],                          dEffects,
                                 
                                 nil]];
 
@@ -566,6 +572,26 @@
         currentTrack = @"";
     
     return [[self tracks] objectForKey:currentTrack];
+}
+
+
+-(BOOL) weather {
+    
+    return [defaults boolForKey: dWeather];
+}
+-(void) setWeather: (BOOL)nWeather {
+    
+    [defaults setBool:nWeather forKey: dWeather];
+    [[GorillasAppDelegate get] updateConfig];
+}
+-(BOOL) effects {
+    
+    return [defaults boolForKey: dEffects];
+}
+-(void) setEffects: (BOOL)nEffects {
+    
+    [defaults setBool:nEffects forKey: dEffects];
+    [[GorillasAppDelegate get] updateConfig];
 }
 
 

@@ -168,8 +168,8 @@
 #ifdef _DEBUG_
     BuildingLayer *fb = [buildings objectAtIndex:0], *lb = [buildings lastObject];
     int pCount = (([lb position].x - [fb position].x) / dbgTraceStep + 1);
-    cpVect *hgp = malloc(sizeof(cpVect) * pCount)
-    cpVect *hep = malloc(sizeof(cpVect) * pCount)
+    cpVect *hgp = malloc(sizeof(cpVect) * pCount);
+    cpVect *hep = malloc(sizeof(cpVect) * pCount);
     int hgc = 0, hec = 0;
     
     for(float x = [fb position].x; x < [lb position].x; x += dbgTraceStep)
@@ -178,11 +178,11 @@
 
             BOOL hg = false, he = false;
             for(ExplosionLayer *explosion in explosions)
-                if(he = [explosion hitsExplosion:pos])
+                if((he = [explosion hitsExplosion:pos]))
                     break;
 
             for(GorillaLayer *gorilla in gorillas)
-                if(hg = [gorilla hitsGorilla:pos])
+                if((hg = [gorilla hitsGorilla:pos]))
                     break;
             
             if(hg)
@@ -191,14 +191,16 @@
                 hep[hec++] = pos;
         }
     
-    [Utility drawPointsAt:hgp count:hgc color:0x00FF00FF];
-    [Utility drawPointsAt:hep count:hec color:0xFF0000FF];
-    [Utility drawPointsAt:dbgPath count:dbgPathMaxInd color:0xFFFF00FF];
+    drawPointsAt(hgp, hgc, 0x00FF00FF);
+    drawPointsAt(hep, hec, 0xFF0000FF);
+    drawPointsAt(dbgPath, dbgPathMaxInd, 0xFFFF00FF);
     free(hgp);
     free(hep);
     
-    for(int i = 0; i < dbgAIMaxInd; ++i)
-        [Utility drawLineFrom:dbgAI[i].position by:dbgAIVect[i] color:0xFF00FFFF];
+    for(int i = 0; i < dbgAIMaxInd; ++i) {
+        cpVect to = cpvadd(dbgAI[i].position, dbgAIVect[i]);
+        drawLinesTo(dbgAI[i].position, &to, 1, 0xFF00FFFF, 1);
+    }
 #endif
 
     if(activeGorilla && aim.x > 0) {

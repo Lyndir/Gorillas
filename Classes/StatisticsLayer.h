@@ -30,6 +30,7 @@
 @interface StatisticsLayer : ShadeLayer {
     
     Menu *menu;
+    NSMutableArray *scoreTowers;
 }
 
 @end

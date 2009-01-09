@@ -27,6 +27,7 @@
 #import "Throw.h"
 #import "GorillasConfig.h"
 #import "GorillasAppDelegate.h"
+#define gMaxDiff 2
 
 
 @implementation Throw
@@ -89,10 +90,13 @@
     
     
     [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:smoke affectAngle:false];
-    [smoke setEmissionRate:30];
-    [smoke setSize:10.0f * [target scale]];
-    [smoke setSizeVar:5.0f * [target scale]];
-    [[target parent] add:smoke];
+    
+    if([[GorillasConfig get] effects]) {
+        [smoke setEmissionRate:30];
+        [smoke setSize:10.0f * [target scale]];
+        [smoke setSizeVar:5.0f * [target scale]];
+        [[target parent] add:smoke];
+    }
 }
 
 
@@ -110,45 +114,70 @@
     ccTime t = dt * duration;
     cpVect r = cpv((v.x + w * t * [[GorillasConfig get] windModifier]) * t + r0.x,
                    v.y * t - t * t * g / 2.0f + r0.y);
-    [target setPosition:r];
-    [smoke setAngle:atan2f([smoke source].y - r.y,
-                           [smoke source].x - r.x)
-                            / (float)M_PI * 180.0f];
-    [smoke setSource:r];
-    
-    // Update HUD progress indicator.
-    float min = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] left];
-    float max = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] right];
-    [[[GorillasAppDelegate get] hudLayer] setProgress:(r.x - min) / max];
-    
+
     // Figure out whether banana went off screen or hit something.
     BuildingsLayer *buildingsLayer = [[[GorillasAppDelegate get] gameLayer] buildingsLayer];
     cpVect parentPos = [buildingsLayer position];
     CGSize screen = [[Director sharedDirector] winSize].size;
-    cpVect onScreen = cpvadd(r, parentPos);
 
-    BOOL offScreen = onScreen.x < 0 || onScreen.x > screen.width;
-    BOOL hitGorilla = [buildingsLayer hitsGorilla:r], hitBuilding = [buildingsLayer hitsBuilding:r];
-    
-    // Hitting something causes an explosion.
-    if(hitBuilding || hitGorilla)
-        [buildingsLayer explodeAt:r isGorilla:hitGorilla];
-    
-    // If it reached the floor, went off screen, or hit something; stop the banana.
-    if([self isDone] || offScreen || hitBuilding || hitGorilla) {
+    // Calculate the step size.
+    cpVect rTest = [target position];
+    cpVect dr = cpvsub(r, rTest);
+    float drLen = cpvlength(dr);
+    int step = 0, stepCount = drLen <= gMaxDiff? 1: (int) (drLen / gMaxDiff) + 1;
+    cpVect rStep = stepCount == 1? dr: cpvmult(dr, 1.0f / stepCount);
 
-        // Reset HUD progress.
-        [[[GorillasAppDelegate get] hudLayer] setProgress: 0];
+    while(true) {
+        // Increment rTest toward r.
+        rTest = cpvadd(rTest, rStep);
+
+        cpVect onScreen = cpvadd(rTest, parentPos);
+
+        BOOL offScreen   = onScreen.x < 0 || onScreen.x > screen.width;
+        BOOL hitGorilla  = [buildingsLayer hitsGorilla:rTest];
+        BOOL hitBuilding = [buildingsLayer hitsBuilding:rTest];
         
-        // Update score on miss.
-        if(hitBuilding || offScreen)
-            [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] miss];
+        // Hitting something causes an explosion.
+        if(hitBuilding || hitGorilla)
+            [buildingsLayer explodeAt:rTest isGorilla:hitGorilla];
         
-        // Hide banana.
-        [[[[GorillasAppDelegate get] gameLayer] windLayer] unregisterSystem:smoke];
+        // If it reached the floor, went off screen, or hit something; stop the banana.
+        if([self isDone] || offScreen || hitBuilding || hitGorilla) {
+            
+            // Update score on miss.
+            if(hitBuilding || offScreen)
+                [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] miss];
+            
+            // Hide banana.
+            [[[[GorillasAppDelegate get] gameLayer] windLayer] unregisterSystem:smoke];
+            [smoke setEmissionRate:0];
+            [target setVisible:false];
+            running = false;
+
+            break;
+        }
+        
+        if(++step >= stepCount)
+            break;
+    }
+    
+    [target setPosition:r];
+    if([[GorillasConfig get] effects]) {
+        [smoke setAngle:atan2f([smoke source].y - r.y,
+                               [smoke source].x - r.x)
+                                / (float)M_PI * 180.0f];
+        [smoke setSource:r];
+    } else if([smoke emissionRate])
         [smoke setEmissionRate:0];
-        [target setVisible:false];
-        running = false;
+    
+    // Update HUD progress indicator.
+    if(running) {
+        float min = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] left];
+        float max = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] right];
+        [[[GorillasAppDelegate get] hudLayer] setProgress:(r.x - min) / max];
+    } else {
+        // Reset HUD progress.
+        [[[GorillasAppDelegate get] hudLayer] setProgress:0];
         
         // Next Gorilla's turn.
         [buildingsLayer nextGorilla];

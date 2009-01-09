@@ -31,9 +31,6 @@
 @implementation ShadeLayer
 
 
-@synthesize showing;
-
-
 -(id) init {
 
     if(!(self = [super init]))
@@ -46,11 +43,15 @@
 }
 
 
--(void) reveal {
+-(void) onEnter {
+    
+    [super onEnter];
     
     [[[GorillasAppDelegate get] gameLayer] pause];
     
-    [self stopAllActions];
+    for(CocosNode *child in children)
+        if([child conformsToProtocol:@protocol(CocosNodeOpacity)])
+            [child do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
     
     [self do:[Sequence actions:
               [FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
@@ -58,8 +59,6 @@
               [CallFunc actionWithTarget:self
                                 selector:@selector(revealCallback:)],
               nil]];
-
-    showing = true;
 }
 
 
@@ -79,36 +78,22 @@
 
     [self stopAllActions];
     
-    // TODO: Do the same in reveal method?
-    for(CocosNode *child in children) {
+    for(CocosNode *child in children)
         if([child conformsToProtocol:@protocol(CocosNodeOpacity)])
-            [child do:[FadeOut actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-        else
-            [child setVisible:false];
-    }
+            [child do:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration] opacity:0]];
     
     [self do:[Sequence actions:
               [FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration] opacity:0],
               [CallFunc actionWithTarget:self selector:@selector(dismissCallback:)],
               nil]];
-    
-    showing = false;
-}
-
-
--(void) onExit {
-    
-    [super onExit];
-    
-    showing = false;
 }
 
 
 -(void) dismissCallback: (id) sender {
+
+    [parent removeAndStop:self];
     
     [self gone];
-    
-    [self removeAndStopAll];
 }
 
 

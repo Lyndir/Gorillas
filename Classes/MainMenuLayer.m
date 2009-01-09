@@ -50,11 +50,10 @@
 }
 
 
--(void) reveal {
-    
-    [super reveal];
+-(void) onEnter {
     
     if(menu) {
+        [menu removeAndStopAll];
         [self removeAndStop:menu];
         [menu release];
         menu = nil;
@@ -67,8 +66,9 @@
         menu = [[Menu menuWithItems:newSingle, newMulti, config, info, exit, nil] retain];
 
     [menu alignItemsVertically];
-    [menu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
     [self add:menu];
+
+    [super onEnter];
 }
 
 

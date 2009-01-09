@@ -64,14 +64,6 @@ NSString* appendOrdinalPrefix(int number, NSString* prefix) {
 }
 
 
-
-void drawPointAt(cpVect point, long color) {
-    
-    const cpVect points[] = { point };
-    drawPointsAt(points, 1, color);
-}
-
-
 void drawPointsAt(const cpVect* points, int n, long color) {
     
     // Define vertices and pass to GL.
@@ -96,61 +88,48 @@ void drawPointsAt(const cpVect* points, int n, long color) {
 void drawLinesTo(cpVect from, const cpVect* to, int n, long color, float width) {
     
     cpVect *points = malloc(sizeof(cpVect) * (n + 1));
-    long *colors = malloc(sizeof(long) * (n + 1));
     points[0] = from;
-    colors[0] = color;
-    for(int i = 1; i < n + 1; ++i) {
+    for(int i = 1; i < n + 1; ++i)
         points[i] = to[i - 1];
-        colors[i] = color;
-    }
-    
-    drawLines(points, colors, n + 1, width);
 
+    GLubyte *colorBytes = (GLubyte *)&color;
+    glColor4ub(colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0]);
+    
+    drawLines(points, nil, n + 1, width);
     free(points);
-    free(colors);
 }
     
 
 void drawLines(const cpVect* points, const long* longColors, int n, float width) {
     
     // Define vertices and pass to GL.
-    /*GLfloat *vertices = malloc(sizeof(GLfloat) * 2 * n);
-    for(int i = 0; i < n; ++i) {
-        vertices[i * 2 + 0] = points[i].x;
-        vertices[i * 2 + 1] = points[i].y;
-    }*/
 	glVertexPointer(2, GL_FLOAT, 0, points);
 	BOOL vWasEnabled = glIsEnabled(GL_VERTEX_ARRAY);
     if(!vWasEnabled)
         glEnableClientState(GL_VERTEX_ARRAY);
     
     // Define colors and pass to GL.
-    GLubyte *colors = malloc(sizeof(GLubyte) * 4 * n);
-    for(int i = 0; i < n; ++i) {
-        const GLubyte *colorBytes = (GLubyte *)&longColors[i];
-        colors[i * 4 + 0] = colorBytes[3];
-        colors[i * 4 + 1] = colorBytes[2];
-        colors[i * 4 + 2] = colorBytes[1];
-        colors[i * 4 + 3] = colorBytes[0];
+    BOOL cWasEnabled = true; // true keeps us from disabling it at the end.
+    if(longColors != nil) {
+        glColorPointer(4, GL_UNSIGNED_BYTE, 0, longColors);
+        
+        cWasEnabled = glIsEnabled(GL_COLOR_ARRAY);
+        if(!cWasEnabled)
+            glEnableClientState(GL_COLOR_ARRAY);
     }
-	glColorPointer(4, GL_UNSIGNED_BYTE, 0, colors);
-    BOOL cWasEnabled = glIsEnabled(GL_COLOR_ARRAY);
-    if(!cWasEnabled)
-        glEnableClientState(GL_COLOR_ARRAY);
     
     // Draw.
-    glLineWidth(width);
+    if(width && width != 1)
+        glLineWidth(width);
 	glDrawArrays(GL_LINE_STRIP, 0, n);
-    glLineWidth(1.0f);
+    if(width && width != 1)
+        glLineWidth(1.0f);
     
     // Reset data source.
     if(!vWasEnabled)
         glDisableClientState(GL_VERTEX_ARRAY);
     if(!cWasEnabled)
         glDisableClientState(GL_COLOR_ARRAY);
-    
-    //free(vertices);
-    free(colors);
 }
 
 
@@ -214,26 +193,16 @@ void drawBorderFrom(cpVect from, cpVect to, long color, float width) {
     
     // Define colors and pass to GL.
     const GLubyte *colorBytes = (GLubyte *)&color;
-    const GLubyte colors[4 * 4] = {
-        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
-        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
-        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
-        colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0],
-    };
-	glColorPointer(4, GL_UNSIGNED_BYTE, 0, colors);
-	BOOL cWasEnabled = glIsEnabled(GL_COLOR_ARRAY);
-    if(!cWasEnabled)
-        glEnableClientState(GL_COLOR_ARRAY);
+    glColor4ub(colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0]);
     
 	// Draw.
-    glLineWidth(width);
+    if(width && width != 1)
+        glLineWidth(width);
 	glDrawArrays(GL_LINE_LOOP, 0, 4);
-    if(width != 1.0f)
+    if(width && width != 1)
         glLineWidth(1.0f);
     
     // Untoggle state.
     if(!vWasEnabled)
         glDisableClientState(GL_VERTEX_ARRAY);
-    if(!cWasEnabled)
-        glDisableClientState(GL_COLOR_ARRAY);
 }

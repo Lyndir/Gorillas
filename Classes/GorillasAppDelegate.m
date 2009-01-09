@@ -25,7 +25,7 @@
 //
 
 #import "GorillasAppDelegate.h"
-#import "TestLayer.h"
+#import "Splash.h"
 
 
 @implementation GorillasAppDelegate
@@ -49,24 +49,26 @@
 
 	// Director and OpenGL Setup.
     [Director setPixelFormat:RGBA8];
-	[[Director sharedDirector] setDisplayFPS:true];
+	[[Director sharedDirector] setDisplayFPS:false];
 	[[Director sharedDirector] setDepthTest:false];
 	[[Director sharedDirector] setLandscape:true];
 	//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     //glEnable(GL_LINE_SMOOTH);
-	
-    // Build the scene.
-	gameLayer = [[GameLayer alloc] init];
-	Scene *scene = [[Scene alloc] init];
-	[scene add: gameLayer];
-    
-    // Start the scene and bring up the menu.
-	[[Director sharedDirector] runScene: scene];
-    [scene release];
 
-    [self showMainMenu];
+	// Build the splash scene.
+    Scene *splashScene = [[Scene alloc] init];
+    Sprite *splash = [[Splash alloc] init];
+    [splashScene add:splash];
+
+    // Show the splash screen.
+	[[Director sharedDirector] runScene:splashScene];
+    [splashScene release];
+    [splash release];
+    
+    // Build the game scene.
+	gameLayer = [[GameLayer alloc] init];
 }
 
 
@@ -87,7 +89,10 @@
 
 -(void) revealHud {
     
-    [[self hudLayer] reveal];
+    if([hudLayer parent])
+        [gameLayer removeAndStop:hudLayer];
+    
+    [gameLayer add:[self hudLayer]];
 }
 
 
@@ -99,10 +104,8 @@
 
 -(HUDLayer *) hudLayer {
     
-    if(!hudLayer) {
+    if(!hudLayer)
         hudLayer = [[HUDLayer alloc] init];
-        [gameLayer add:hudLayer];
-    }
     
     return hudLayer;
 }
@@ -125,20 +128,18 @@
 
 -(void) showLayer: (ShadeLayer *)layer {
     
-    if([currentLayer showing])
+    if([currentLayer parent])
         [self dismissLayer];
     
     currentLayer = [layer retain];
-    [currentLayer reveal];
+    [gameLayer add:currentLayer];
 }
 
 
 -(void) showMainMenu {
     
-    if(!mainMenuLayer) {
+    if(!mainMenuLayer)
         mainMenuLayer = [[MainMenuLayer alloc] init];
-        [gameLayer add:mainMenuLayer];
-    }    
     
     [self showLayer:mainMenuLayer];
 }
@@ -146,10 +147,8 @@
 
 -(void) showContinueMenu {
     
-    if(!continueMenuLayer) {
+    if(!continueMenuLayer)
         continueMenuLayer = [[ContinueMenuLayer alloc] init];
-        [gameLayer add:continueMenuLayer];
-    }    
     
     [self showLayer:continueMenuLayer];
 }
@@ -157,10 +156,8 @@
 
 -(void) showConfiguration {
     
-    if(!configLayer) {
+    if(!configLayer)
         configLayer = [[ConfigurationSectionLayer alloc] init];
-        [gameLayer add:configLayer];
-    }
     
     [self showLayer:configLayer];
 }
@@ -168,10 +165,8 @@
 
 -(void) showGameConfiguration {
     
-    if(!gameConfigLayer) {
+    if(!gameConfigLayer)
         gameConfigLayer = [[GameConfigurationLayer alloc] init];
-        [gameLayer add:gameConfigLayer];
-    }
     
     [self showLayer:gameConfigLayer];
 }
@@ -179,10 +174,8 @@
 
 -(void) showAVConfiguration {
     
-    if(!avConfigLayer) {
+    if(!avConfigLayer)
         avConfigLayer = [[AVConfigurationLayer alloc] init];
-        [gameLayer add:avConfigLayer];
-    }
     
     [self showLayer:avConfigLayer];
 }
@@ -190,10 +183,8 @@
 
 -(void) showInformation {
     
-    if(!infoLayer) {
+    if(!infoLayer)
         infoLayer = [[InformationLayer alloc] init];
-        [gameLayer add:infoLayer];
-    }    
     
     [self showLayer:infoLayer];
 }
@@ -201,10 +192,8 @@
 
 -(void) showGuide {
     
-    if(!guideLayer) {
+    if(!guideLayer)
         guideLayer = [[GuideLayer alloc] init];
-        [gameLayer add:guideLayer];
-    }    
     
     [self showLayer:guideLayer];
 }
@@ -212,10 +201,8 @@
 
 -(void) showStatistics {
 
-    if(!statsLayer) {
+    if(!statsLayer)
         statsLayer = [[StatisticsLayer alloc] init];
-        [gameLayer add:statsLayer];
-    }    
     
     [self showLayer:statsLayer];
 }
@@ -239,7 +226,9 @@
 
 -(void) audioStopped:(AudioPlayer *)player {
     
-    [[GorillasConfig get] setCurrentTrack:nil];
+    if(nextTrack == nil)
+        [[GorillasConfig get] setCurrentTrack:nil];
+    
     [audioController release];
     audioController = nil;
     
@@ -286,52 +275,52 @@
 
 -(void) cleanup {
     
-    if(hudLayer && ![hudLayer showing]) {
-        [hudLayer removeAndStopAll];
+    if(hudLayer && ![hudLayer parent]) {
+        [hudLayer stopAllActions];
         [hudLayer release];
         hudLayer = nil;
     }
-    if(mainMenuLayer && ![mainMenuLayer showing]) {
-        [gameLayer removeAndStop:mainMenuLayer];
+    if(mainMenuLayer && ![mainMenuLayer parent]) {
+        [mainMenuLayer stopAllActions];
         [mainMenuLayer release];
         mainMenuLayer = nil;
     }
-    if(continueMenuLayer && ![continueMenuLayer showing]) {
-        [gameLayer removeAndStop:continueMenuLayer];
+    if(continueMenuLayer && ![continueMenuLayer parent]) {
+        [continueMenuLayer stopAllActions];
         [continueMenuLayer release];
         continueMenuLayer = nil;
     }
-    if(configLayer && ![configLayer showing]) {
-        [gameLayer removeAndStop:configLayer];
+    if(configLayer && ![configLayer parent]) {
+        [configLayer stopAllActions];
         [configLayer release];
         configLayer = nil;
     }
-    if(gameConfigLayer && ![gameConfigLayer showing]) {
-        [gameLayer removeAndStop:gameConfigLayer];
+    if(gameConfigLayer && ![gameConfigLayer parent]) {
+        [gameConfigLayer stopAllActions];
         [gameConfigLayer release];
         gameConfigLayer = nil;
     }
-    if(avConfigLayer && ![avConfigLayer showing]) {
-        [gameLayer removeAndStop:avConfigLayer];
+    if(avConfigLayer && ![avConfigLayer parent]) {
+        [avConfigLayer stopAllActions];
         [avConfigLayer release];
         avConfigLayer = nil;
     }
-    if(infoLayer && ![infoLayer showing]) {
-        [gameLayer removeAndStop:infoLayer];
+    if(infoLayer && ![infoLayer parent]) {
+        [infoLayer stopAllActions];
         [infoLayer release];
         infoLayer = nil;
     }
-    if(guideLayer && ![guideLayer showing]) {
-        [gameLayer removeAndStop:guideLayer];
+    if(guideLayer && ![guideLayer parent]) {
+        [guideLayer stopAllActions];
         [guideLayer release];
         guideLayer = nil;
     }
-    if(statsLayer && ![statsLayer showing]) {
-        [gameLayer removeAndStop:statsLayer];
+    if(statsLayer && ![statsLayer parent]) {
+        [statsLayer stopAllActions];
         [statsLayer release];
         statsLayer = nil;
     }
-    if(currentLayer && ![currentLayer showing]) {
+    if(currentLayer && ![currentLayer parent]) {
         [currentLayer release];
         currentLayer = nil;
     }

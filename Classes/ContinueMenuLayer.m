@@ -42,17 +42,9 @@
     
     menu            = [[Menu menuWithItems:continueGame, stopGame, nil] retain];
     [menu alignItemsVertically];
+    [self add:menu];
 
     return self;
-}
-
-
--(void) reveal {
-    
-    [super reveal];
-    
-    [menu do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-    [self add:menu];
 }
 
 

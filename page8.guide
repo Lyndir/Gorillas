@@ -1,4 +1,4 @@
-Gorillas - Technical
+Technical
 
     Your aim represents the vector of your throw's initial velocity.
     The current wind velocity will affect your banana's direction every step of the way.

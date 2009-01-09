@@ -64,7 +64,8 @@
     
     [super onEnter];
     
-    [self schedule:@selector(updateWeather:) interval:1];
+    if([[GorillasConfig get] weather])
+        [self schedule:@selector(updateWeather:) interval:1];
 }
 
 
@@ -77,6 +78,9 @@
 
 
 -(void) updateWeather:(ccTime)dt {
+    
+    if(![[GorillasConfig get] weather])
+        [self unschedule:@selector(updateWeather:)];
     
     if(![weather emissionRate]) {
         // If not emitting ..
@@ -103,7 +107,7 @@
                         weather = [[ParticleRain alloc] init];
                         [weather setPosVar:cpv([weather posVar].x * 1.5f,
                                                [weather posVar].y)];
-                        [weather setEmissionRate:40];
+                        [weather setEmissionRate:60];
                         [weather setSize:3];
                         [weather setSizeVar:1.5f];
                         [self add:weather z:-3];
@@ -128,10 +132,9 @@
     else {
         // System is alive, let the emission rate evolve.
         float rate = [weather emissionRate] + (random() % 40 - 15) / 10.0f;
-        if(rate < 0)
-            rate = 0;
-        if(rate > [weather isKindOfClass:[ParticleRain class]]? 100: 40)
-            rate = 40;
+        float max = [weather isKindOfClass:[ParticleRain class]]? 100: 50;
+        rate = fminf(fmaxf(0, rate), max);
+
         if(random() % 100 == 0)
             // 1% chance for a full stop.
             rate = 0;

@@ -33,7 +33,7 @@
 
 @implementation HUDLayer
 
-@synthesize progress, showing;
+@synthesize progress;
 
 
 -(id) init {
@@ -41,7 +41,9 @@
     if(!(self = [super init]))
         return self;
 
-    width = [[Director sharedDirector] winSize].size.width;
+    CGSize winSize = [[Director sharedDirector] winSize].size;
+
+    width = winSize.width;
     height =[[GorillasConfig get] smallFontSize] + 10;
     position = cpv(0, -height);
     
@@ -50,11 +52,11 @@
                                         target:self
                                       selector:@selector(menuButton:)] retain];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [menuButton setTag:5];
 
     menuMenu = [[Menu menuWithItems:menuButton, nil] retain];
     [menuMenu setPosition:cpv([menuMenu position].x, (height - 5) / 2)];
     [menuMenu alignItemsHorizontally];
+    [self add:menuMenu];
     
     // Score.
     scoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%04d", [[GorillasConfig get] score]]
@@ -62,10 +64,8 @@
                                      alignment:UITextAlignmentRight
                                       fontName:[[GorillasConfig get] fixedFontName]
                                       fontSize:[[GorillasConfig get] smallFontSize]];
-    [self add:scoreLabel];
-    
-    CGSize winSize = [[Director sharedDirector] winSize].size;
     [scoreLabel setPosition:cpv(winSize.width - [scoreLabel contentSize].width * 2 / 3, height / 2)];
+    [self add:scoreLabel];
     
     return self;
 }
@@ -101,24 +101,17 @@
 }
 
 
--(void) reveal {
+-(void) onEnter {
 
-    if(showing)
-        return;
+    [super onEnter];
     
-    showing = true;
     [self stopAllActions];
     [self do:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, 0)]];
-    [self add:menuMenu];
 }
 
 
 -(void) dismiss {
     
-    if(!showing)
-        return;
-    
-    showing = false;
     [self stopAllActions];
     [self do:[Sequence actions:
               [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, -height)],
@@ -129,7 +122,7 @@
 
 -(void) gone {
     
-    [self removeAndStop:menuMenu];
+    [parent removeAndStop:self];
 }
 
 
@@ -152,8 +145,8 @@
     
     drawBoxFrom(cpvzero, cpv(width, height), [[GorillasConfig get] shadeColor], [[GorillasConfig get] shadeColor]);
     
-    const cpVect progressEnd = cpv(width * progress, 2);
-    drawLinesTo(cpv(0, 2), &progressEnd, 1, [[GorillasConfig get] windowColorOn], 2);
+    const cpVect progressEnd = cpv(width * progress, 1);
+    drawLinesTo(cpv(0, 1), &progressEnd, 1, [[GorillasConfig get] windowColorOn], 1);
 }
 
 

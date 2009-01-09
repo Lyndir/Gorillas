@@ -52,9 +52,9 @@
     
     [super onEnter];
     
-    int explosionParticles = random() % 100 + 400;
+    int explosionParticles = random() % 50 + 300;
     if(heavy)
-        explosionParticles += 500;
+        explosionParticles += 400;
     
     [explosion release];
     explosion = [[ParticleSun alloc] initWithTotalParticles:explosionParticles];
@@ -93,16 +93,16 @@
     
     [explosion stopSystem];
     
-    if(!hitsGorilla) {
-        int flameParticles = random() % 30 + 5;
+    if(!hitsGorilla && [[GorillasConfig get] effects]) {
+        int flameParticles = random() % 20 + 5;
         if(heavy)
-            flameParticles = 100;
+            flameParticles = 80;
         
         flames = [[ParticleFire alloc] initWithTotalParticles:flameParticles];
         
         [flames setPosition:cpvzero];
         //[flames setAngleVar:90];
-        [flames setSize:heavy? 10: 3];
+        [flames setSize:heavy? 10: 4];
         [flames setSizeVar:5];
         [flames setPosVar:cpv([self contentSize].width / 4, [self contentSize].height / 4)];
         [flames setSpeed:8];
@@ -120,6 +120,7 @@
         startColorVar.b = 0.0f;
         startColorVar.a = 0.1f;
         [flames setStartColorVar:startColorVar];
+        [flames setEmissionRate:[flames emissionRate] * 1.5f];
         
         [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:flames affectAngle:false];
         [self add:flames z:1];

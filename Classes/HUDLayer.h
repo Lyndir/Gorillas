@@ -35,13 +35,10 @@
     Label *scoreLabel;
     ccTime progress;
     
-    BOOL showing;
-
     float width;
     float height;
 }
 
--(void) reveal;
 -(void) dismiss;
 
 -(void) setMenuTitle: (NSString *)title;
@@ -50,6 +47,5 @@
 -(BOOL) hitsHud: (cpVect)pos;
 
 @property (readwrite) ccTime progress;
-@property (readonly) BOOL showing;
 
 @end
