@@ -47,12 +47,12 @@
     GorillaLayer *hitGorilla;
     
 #ifdef _DEBUG_
-    int dbgTraceStep;
-    int dbgPathMaxInd;
-    int dbgPathCurInd;
+    NSUInteger dbgTraceStep;
+    NSUInteger dbgPathMaxInd;
+    NSUInteger dbgPathCurInd;
     cpVect *dbgPath;
-    int dbgAIMaxInd;
-    int dbgAICurInd;
+    NSUInteger dbgAIMaxInd;
+    NSUInteger dbgAICurInd;
     GorillaLayer **dbgAI;
     cpVect *dbgAIVect;
 #endif

@@ -144,7 +144,7 @@
 
 -(CGSize) contentSize {
     
-    return CGSizeMake([hole contentSize].width * [self scale], [hole contentSize].height * [self scale]);
+    return CGSizeMake([hole contentSize].width * [hole scale], [hole contentSize].height * [hole scale]);
 }
 
 

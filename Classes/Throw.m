@@ -27,7 +27,7 @@
 #import "Throw.h"
 #import "GorillasConfig.h"
 #import "GorillasAppDelegate.h"
-#define gMaxDiff 2
+#define gMaxDiff 4
 
 
 @implementation Throw

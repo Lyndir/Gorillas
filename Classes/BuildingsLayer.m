@@ -39,7 +39,7 @@
 		return self;
 
 #ifdef _DEBUG_
-    dbgTraceStep    = 5;
+    dbgTraceStep    = 2;
     dbgPathMaxInd   = 50;
     dbgPathCurInd   = 0;
     dbgPath         = malloc(sizeof(cpVect) * dbgPathMaxInd);
@@ -167,7 +167,8 @@
     
 #ifdef _DEBUG_
     BuildingLayer *fb = [buildings objectAtIndex:0], *lb = [buildings lastObject];
-    int pCount = (([lb position].x - [fb position].x) / dbgTraceStep + 1);
+    int pCount = (([lb position].x - [fb position].x) / dbgTraceStep + 1)
+                * ([[Director sharedDirector] winSize].size.height / dbgTraceStep + 1);
     cpVect *hgp = malloc(sizeof(cpVect) * pCount);
     cpVect *hep = malloc(sizeof(cpVect) * pCount);
     int hgc = 0, hec = 0;
@@ -197,10 +198,11 @@
     free(hgp);
     free(hep);
     
-    for(int i = 0; i < dbgAIMaxInd; ++i) {
-        cpVect to = cpvadd(dbgAI[i].position, dbgAIVect[i]);
-        drawLinesTo(dbgAI[i].position, &to, 1, 0xFF00FFFF, 1);
-    }
+    if([gorillas count] == dbgAIMaxInd)
+        for(NSUInteger i = 0; i < dbgAIMaxInd; ++i) {
+            cpVect to = cpvadd(dbgAI[i].position, dbgAIVect[i]);
+            drawLinesTo(dbgAI[i].position, &to, 1, 0xFF00FFFF, 1);
+        }
 #endif
 
     if(activeGorilla && aim.x > 0) {
