@@ -114,6 +114,8 @@
         float scoreRatio = ((float) score / topScore);
         scoreRatio *= ((contentSize.height - padding * 2) / contentSize.height);
         scoreRatio /= [[GorillasConfig get] buildingMax];
+        if(!score)
+            scoreRatio = 0.001f;
 
         // Score tower.
         BuildingLayer *scoreTower = [[BuildingLayer alloc] initWithWidth:gBarSize

@@ -385,6 +385,7 @@
 		DA4F4BA10EF3E90D0062E0E8 /* TGAlib.c in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4B9C0EF3E90D0062E0E8 /* TGAlib.c */; };
 		DA5A256D0F16D63900975E5A /* Splash.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5A256C0F16D63900975E5A /* Splash.m */; };
 		DA5A28E00F17C64100975E5A /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A28DF0F17C64000975E5A /* splash.png */; };
+		DA5A29580F180AC600975E5A /* page10.guide in Resources */ = {isa = PBXBuildFile; fileRef = DA5A29570F180AC600975E5A /* page10.guide */; };
 		DA5F1BD60EE74CE80041691E /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5F1BD40EE74CE80041691E /* fps_images.png */; };
 		DA6314C20EFAEA06007D203B /* TestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C10EFAEA06007D203B /* TestLayer.m */; };
 		DA6314C50EFAEAD0007D203B /* FancyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C40EFAEAD0007D203B /* FancyLayer.m */; };
@@ -567,6 +568,7 @@
 		DA5A256B0F16D63900975E5A /* Splash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Splash.h; sourceTree = "<group>"; };
 		DA5A256C0F16D63900975E5A /* Splash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Splash.m; sourceTree = "<group>"; };
 		DA5A28DF0F17C64000975E5A /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		DA5A29570F180AC600975E5A /* page10.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page10.guide; sourceTree = "<group>"; };
 		DA5F1BD40EE74CE80041691E /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
 		DA6314C00EFAEA06007D203B /* TestLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestLayer.h; path = Classes/TestLayer.h; sourceTree = "<group>"; };
 		DA6314C10EFAEA06007D203B /* TestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestLayer.m; path = Classes/TestLayer.m; sourceTree = "<group>"; };
@@ -999,6 +1001,7 @@
 				DAF6AB2E0EF58BC300035664 /* page7.guide */,
 				DAFEB9BF0EFDCA540074333B /* page8.guide */,
 				DAFEB9C00EFDCA540074333B /* page9.guide */,
+				DA5A29570F180AC600975E5A /* page10.guide */,
 			);
 			name = Guide;
 			sourceTree = "<group>";
@@ -1185,6 +1188,7 @@
 				DA9420AB0F08C2CA00E105BD /* fire.png in Resources */,
 				DAC318220F0980720043C885 /* Default.png in Resources */,
 				DA5A28E00F17C64100975E5A /* splash.png in Resources */,
+				DA5A29580F180AC600975E5A /* page10.guide in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

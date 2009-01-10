@@ -38,53 +38,67 @@
         return self;
 
     // Guide Content.
-    guidePages = [[NSArray alloc] initWithObjects:
-                   [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page1" ofType:@"guide"]],
-                   [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page2" ofType:@"guide"]],
-                   [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page3" ofType:@"guide"]],
-                   [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page4" ofType:@"guide"]],
-                   [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page5" ofType:@"guide"]],
-                   [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page6" ofType:@"guide"]],
-                   [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page7" ofType:@"guide"]],
-                   [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page8" ofType:@"guide"]],
-                   [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page9" ofType:@"guide"]],
-                   nil];
+    NSArray *pages = [[NSArray alloc] initWithObjects:
+                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page1" ofType:@"guide"]],
+                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page2" ofType:@"guide"]],
+                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page3" ofType:@"guide"]],
+                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page4" ofType:@"guide"]],
+                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page5" ofType:@"guide"]],
+                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page6" ofType:@"guide"]],
+                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page7" ofType:@"guide"]],
+                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page8" ofType:@"guide"]],
+                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page9" ofType:@"guide"]],
+                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page10" ofType:@"guide"]],
+                  nil];
+    guidePages = [[NSMutableArray alloc] initWithCapacity:[pages count]];
+    guideTitles = [[NSMutableArray alloc] initWithCapacity:[pages count]];
+    for(NSString *guidePage in pages) {
+        NSUInteger firstLineEnd = [guidePage rangeOfString:@"\n"].location;
+        
+        [guideTitles addObject:[guidePage substringToIndex:firstLineEnd]];
+        [guidePages addObject:[guidePage substringFromIndex:firstLineEnd + 1]];
+    }
+    [pages release];
     
     
     // Controls.
-    MenuItem *next  = [MenuItemFont itemFromString:@">"
-                                            target:self
-                                          selector:@selector(next:)];
     MenuItem *back  = [MenuItemFont itemFromString:@"<"
                                                target: self
                                              selector: @selector(back:)];
     
-    CGSize winSize = [[Director sharedDirector] winSize].size;
-    nextMenu = [[Menu menuWithItems:next, nil] retain];
-    [nextMenu setPosition:cpv(winSize.width - [[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
-    [nextMenu alignItemsHorizontally];
-    [self add:nextMenu];
-
     backMenu = [[Menu menuWithItems:back, nil] retain];
     [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self add:backMenu];
-
-    cpVect s = cpv(winSize.width - padding, winSize.height - [[GorillasConfig get] fontSize] - padding);
+    
+    [MenuItemFont setFontSize:15];
+    chapterNext = [[MenuItemFont itemFromString:@"       " target:self selector:@selector(next:)] retain];
+    chapterSkip = [[MenuItemFont itemFromString:@"       " target:self selector:@selector(skip:)] retain];
+    [MenuItemFont setFontSize:26];
+    chapterCurr = [[MenuItemFont itemFromString:@"       "] retain];
+    [chapterCurr setIsEnabled:NO];
+    chapterMenu = [[Menu menuWithItems:chapterCurr, chapterNext, chapterSkip, nil] retain];
+    [chapterMenu alignItemsHorizontally];
+    [chapterMenu setPosition:cpv([chapterMenu position].x, contentSize.height - padding + 10)];
+    [self add:chapterMenu];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    
+    cpVect s = cpv(contentSize.width - padding, contentSize.height - [[GorillasConfig get] fontSize] - padding);
     
     pageLabel = [[Label alloc] initWithString:@""
                              dimensions:CGSizeMake(s.x, s.y)
                               alignment:UITextAlignmentLeft
                                fontName:[[GorillasConfig get] fixedFontName]
                                fontSize:[[GorillasConfig get] smallFontSize]];
-    [pageLabel setPosition:cpv(winSize.width / 2, winSize.height / 2)];
+    [pageLabel setPosition:cpv(contentSize.width / 2, contentSize.height / 2)];
     
     pageNumberLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%d / %d", [guidePages count], [guidePages count]]
-                                         dimensions:CGSizeMake(100, [[GorillasConfig get] fontSize])
+                                         dimensions:CGSizeMake(150, [[GorillasConfig get] smallFontSize])
                                           alignment:UITextAlignmentCenter
                                            fontName:[[GorillasConfig get] fontName]
-                                           fontSize:[[GorillasConfig get] fontSize]];
-    [pageNumberLabel setPosition:cpv(winSize.width / 2, padding - [[GorillasConfig get] fontSize] / 2)];
+                                           fontSize:[[GorillasConfig get] smallFontSize]];
+    [pageNumberLabel setPosition:cpv(contentSize.width - [[GorillasConfig get] smallFontSize] * 3,
+                                     padding - [[GorillasConfig get] fontSize] / 2)];
     [self add:pageNumberLabel];
     
     return self;
@@ -116,6 +130,16 @@
         [pageLabel setString:[guidePages objectAtIndex:page]];
         [pageLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
     }
+    
+    [[chapterCurr label] setString:[guideTitles objectAtIndex:page - 0]];
+    [[chapterNext label] setString:[guideTitles objectAtIndex:(page + 1) % [guidePages count]]];
+    [[chapterSkip label] setString:[guideTitles objectAtIndex:(page + 2) % [guidePages count]]];
+}
+
+
+-(void) back: (id) sender {
+    
+    [[GorillasAppDelegate get] showInformation];
 }
 
 
@@ -126,15 +150,10 @@
 }
 
 
--(void) back: (id) sender {
+-(void) skip: (id) sender {
     
-    page--;
-    
-    if(page < 0)
-        [[GorillasAppDelegate get] showInformation];
-    
-    else
-        [self flipPage];
+    page = (page + 2) % [guidePages count];
+    [self flipPage];
 }
 
 
@@ -151,6 +170,9 @@
     
     [pageNumberLabel release];
     pageNumberLabel = nil;
+    
+    [guideTitles release];
+    guideTitles = nil;
     
     [guidePages release];
     guidePages = nil;

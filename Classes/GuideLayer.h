@@ -29,10 +29,11 @@
 
 @interface GuideLayer : ShadeLayer {
 
-    Menu *backMenu, *nextMenu;
+    Menu *chapterMenu, *backMenu, *nextMenu;
+    MenuItemFont *chapterCurr, *chapterNext, *chapterSkip;
     
     Label *pageLabel, *pageNumberLabel;
-    NSArray *guidePages;
+    NSMutableArray *guidePages, *guideTitles;
     int page;
 }
 
