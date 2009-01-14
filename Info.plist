@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string>icon.png</string>
+	<string>icon</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UIInterfaceOrientation</key>
@@ -25,11 +25,11 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>90</string>
+	<string>100</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0-rc1</string>
+	<string>1.0</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2008-2009, Maarten Billemont</string>
+	<string>© 2009, Maarten Billemont</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 </dict>
