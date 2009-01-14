@@ -128,6 +128,10 @@
 
 -(void) showLayer: (ShadeLayer *)layer {
     
+    if(layer == currentLayer)
+        // Layer is already showing, ignore.
+        return;
+    
     if([currentLayer parent])
         [self dismissLayer];
     

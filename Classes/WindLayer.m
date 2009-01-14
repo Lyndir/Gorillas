@@ -101,7 +101,7 @@
         prev = cpvadd(prev, cpv(0,                          -3 * 2)),
         prev = cpvadd(prev, cpv((wind < 0? -1: 1) * 3,      +3    )),
     };
-    drawLinesTo(from, by, 4, color, 1.5f);
+    drawLinesTo(from, by, 4, color, 2);
 }
 
 

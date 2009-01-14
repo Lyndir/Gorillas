@@ -36,16 +36,6 @@
     if(!(self = [super init]))
         return self;
     
-    int barHeight   = 0;
-    if(![[UIApplication sharedApplication] isStatusBarHidden]) {
-        if([[Director sharedDirector] landscape])
-            barHeight   = [[UIApplication sharedApplication] statusBarFrame].size.width;
-        else
-            barHeight   = [[UIApplication sharedApplication] statusBarFrame].size.height;
-    }
-    
-    CGSize winSize  = [[Director sharedDirector] winSize].size;
-    contentSize     = CGSizeMake(winSize.width, winSize.height - barHeight);
     outerPadding    = 5.0f;
     padding         = 50.0f;
     color           = 0x000000dd;
@@ -61,9 +51,27 @@
 }
 
 
+-(void) onEnter {
+    
+    [super onEnter];
+    
+    [self update];
+}
+
+
 -(void) update {
     
-    int inner = contentSize.height * innerRatio;
+    int barHeight       = 0;
+    if(![[UIApplication sharedApplication] isStatusBarHidden]) {
+        if([[Director sharedDirector] landscape])
+            barHeight   = [[UIApplication sharedApplication] statusBarFrame].size.width;
+        else
+            barHeight   = [[UIApplication sharedApplication] statusBarFrame].size.height;
+    }
+    
+    CGSize winSize      = [[Director sharedDirector] winSize].size;
+    contentSize         = CGSizeMake(winSize.width, winSize.height - barHeight);
+    int inner           = contentSize.height * innerRatio;
     
     /*
            pos.x + pad                                pos.x + width - pad - inner

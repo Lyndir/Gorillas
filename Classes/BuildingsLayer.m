@@ -571,9 +571,11 @@
         [gorilla do:[FadeOut actionWithDuration:1]];
     }
     
-    [self removeAndStop:bananaLayer];
-    [bananaLayer release];
-    bananaLayer = nil;
+    if(bananaLayer) {
+        [self removeAndStop:bananaLayer];
+        [bananaLayer release];
+        bananaLayer = nil;
+    }
     
     [self do:[Sequence actions:
               [DelayTime actionWithDuration:1],
