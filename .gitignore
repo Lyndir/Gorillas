@@ -3,3 +3,5 @@
 /*.xcodeproj/*
 !/*.xcodeproj/*.pbxproj
 /Web/trac
+/Web/cocos2d-iphone-0.6.1-gorillas.tbz2
+/promocodes
