@@ -35,8 +35,15 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
+	// Init the window.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:false];
+	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	[window setUserInteractionEnabled:YES];
+	[window setMultipleTouchEnabled:NO];
     
+	// must be called before any othe call to the director
+    //	[Director useFastDirector];
+	
     // Start the background music.
     [self playTrack:[[GorillasConfig get] currentTrack]];
 
@@ -48,8 +55,9 @@
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
 
 	// Director and OpenGL Setup.
-    [Director setPixelFormat:RGBA8];
-	[[Director sharedDirector] setDisplayFPS:false];
+    [[Director sharedDirector] setPixelFormat:RGBA8];
+	[[Director sharedDirector] attachInWindow:window];
+	[[Director sharedDirector] setDisplayFPS:YES];
 	[[Director sharedDirector] setDepthTest:false];
 	[[Director sharedDirector] setLandscape:true];
 	//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
@@ -63,27 +71,13 @@
     [splashScene add:splash];
 
     // Show the splash screen.
-	[[Director sharedDirector] runScene:splashScene];
+	[[Director sharedDirector] runWithScene:splashScene];
     [splashScene release];
     [splash release];
+    [window makeKeyAndVisible];
     
     // Build the game scene.
 	gameLayer = [[GameLayer alloc] init];
-}
-
-
--(void) exit {
-    
-    [gameLayer removeAndStopAll];
-    [gameLayer release];
-    gameLayer = nil;
-    
-    [self cleanup];
-    [[GorillasConfig get] release];
-    
-    [[Director sharedDirector] stopScene];
-    /*[[Director sharedDirector] popScene];
-    [[Director sharedDirector] release];*/
 }
 
 
@@ -123,6 +117,24 @@
     [currentLayer dismiss];
     [currentLayer release];
     currentLayer = nil;
+}
+
+
+-(void) clickEffect {
+    
+    static SystemSoundID clicky = 0;
+    
+    if([[GorillasConfig get] soundFx]) {
+        if(clicky == 0)
+            clicky = [AudioController loadEffectWithName:@"click.wav"];
+        
+        [AudioController playEffect:clicky];
+    }
+    
+    else {
+        [AudioController disposeEffect:clicky];
+        clicky = 0;
+    }
 }
 
 
@@ -373,6 +385,9 @@
     
     [nextTrack release];
     nextTrack = nil;
+    
+    [window release];
+    window = nil;
     
     [super dealloc];
 }

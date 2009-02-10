@@ -50,7 +50,7 @@
 #endif
     
     isTouchEnabled  = true;
-    
+
     aim             = cpv(-1, -1);
     gorillas        = [[NSMutableArray alloc] init];
     buildings       = [[NSMutableArray alloc] init];
@@ -134,7 +134,7 @@
                               [node position].y + [node contentSize].height)];
     
     // Make sure label remains on screen.
-    CGSize winSize = [[Director sharedDirector] winSize].size;
+    CGSize winSize = [[Director sharedDirector] winSize];
     if([msgLabel position].x < [[GorillasConfig get] fontSize] / 2)                 // Left edge
         [msgLabel setPosition:cpv([[GorillasConfig get] fontSize] / 2, [msgLabel position].y)];
     if([msgLabel position].x > winSize.width - [[GorillasConfig get] fontSize] / 2) // Right edge
@@ -644,7 +644,7 @@
 
 -(float) right {
     
-    return [self left] + [[Director sharedDirector] winSize].size.width;
+    return [self left] + [[Director sharedDirector] winSize].width;
 }
 
 

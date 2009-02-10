@@ -27,6 +27,7 @@
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
 #import "HoleLayer.h"
+#import "AudioController.h"
 
 
 @interface ExplosionLayer : Layer <CocosNodeSize> {
@@ -40,6 +41,8 @@
 
 -(id) initHitsGorilla: (BOOL)hitsGorilla;
 -(BOOL) hitsExplosion: (cpVect)pos;
+
++(SystemSoundID) explosionEffect: (BOOL)heavy;
 
 @property (readonly) HoleLayer *hole;
 

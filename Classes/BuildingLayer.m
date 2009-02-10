@@ -93,7 +93,7 @@
     memcpy(&wColors + sizeof(long), (GLubyte *)&wColor1, sizeof(long));*/
 
     // Calculate a random size for this building.
-    const CGSize size = [[Director sharedDirector] winSize].size;
+    const CGSize size = [[Director sharedDirector] winSize];
     const float floorHeight = wHeight + wPad;
     const int fixedFloors   = [[GorillasConfig get] fixedFloors];
     const int varFloors     = (size.height * [[GorillasConfig get] buildingMax]

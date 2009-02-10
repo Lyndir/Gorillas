@@ -216,6 +216,39 @@ void interruptionListenerCallback (
 }
 
 
++ (SystemSoundID)loadEffectWithName:(NSString *)bundleRef {
+
+    // Get the URL to the sound file to play
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    CFURLRef soundFileURLRef = CFBundleCopyResourceURL(mainBundle, (CFStringRef) bundleRef, NULL, NULL);
+
+    // Create a system sound object representing the sound file
+    SystemSoundID soundFileObject;
+    AudioServicesCreateSystemSoundID(soundFileURLRef, &soundFileObject);
+    //CFRelease(soundFileURLRef);
+    
+    return soundFileObject;
+}
+
+
++ (void)vibrate {
+    
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+}
+
+
++ (void)playEffect:(SystemSoundID)soundFileObject {
+    
+    AudioServicesPlaySystemSound(soundFileObject);
+}
+
+
++ (void)disposeEffect:(SystemSoundID)soundFileObject {
+    
+    AudioServicesDisposeSystemSoundID(soundFileObject);
+}
+
+
 -(void) dealloc {
     
 	//[audioPlayer release]; // Released by [self stop], invoked by callback.

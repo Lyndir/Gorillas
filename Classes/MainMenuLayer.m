@@ -59,11 +59,10 @@
         menu = nil;
     }
     
-    MenuItemFont *exit = nil; // [MenuItemFont itemFromString:@"Exit Game" target:self selector:@selector(exit:)];
     if([[[GorillasAppDelegate get] gameLayer] running])
         menu = [[Menu menuWithItems:continueGame, stopGame, config, info, nil] retain];
     else
-        menu = [[Menu menuWithItems:newSingle, newMulti, config, info, exit, nil] retain];
+        menu = [[Menu menuWithItems:newSingle, newMulti, config, info, nil] retain];
 
     [menu alignItemsVertically];
     [self add:menu];
@@ -72,44 +71,44 @@
 }
 
 
--(void) exit: (id)sender {
-
-    [[GorillasAppDelegate get] exit];
-}
-
-
 -(void) newGameSingle: (id)sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[[GorillasAppDelegate get] gameLayer] startSinglePlayer];
 }
 
 
 -(void) newGameMulti: (id)sender {
 
+    [[GorillasAppDelegate get] clickEffect];
     [[[GorillasAppDelegate get] gameLayer] startMultiplayer];
 }
 
 
 -(void) continueGame: (id)sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[[GorillasAppDelegate get] gameLayer] unpause];
 }
 
 
 -(void) stopGame: (id)sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[[GorillasAppDelegate get] gameLayer] stopGame];
 }
 
 
 -(void) information: (id)sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showInformation];
 }
 
 
 -(void) options: (id)sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showConfiguration];
 }
 

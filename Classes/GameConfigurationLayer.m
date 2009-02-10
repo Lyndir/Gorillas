@@ -117,6 +117,8 @@
 
 -(void) level: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
+
     NSString *curLevelName = [[GorillasConfig get] levelName];
     int curLevelInd;
     
@@ -131,12 +133,15 @@
 
 -(void) gravity: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasConfig get] setGravity:([[GorillasConfig get] gravity] + 10) % ([[GorillasConfig get] maxGravity] + 1)];
 }
 
 
 -(void) cityTheme: (id) sender {
-    
+
+    [[GorillasAppDelegate get] clickEffect];
+
     NSArray *themes = [[CityTheme getThemes] allKeys];
     NSString *newTheme = [themes objectAtIndex:0];
     
@@ -160,6 +165,7 @@
 
 -(void) back: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showConfiguration];
 }
 

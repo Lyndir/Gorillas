@@ -74,4 +74,10 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 - (void) pause;
 - (void) resume;
 
+
++ (SystemSoundID)loadEffectWithName:(NSString *)bundleRef;
++ (void)vibrate;
++ (void)playEffect:(SystemSoundID)soundFileObject;
++ (void)disposeEffect:(SystemSoundID)soundFileObject;
+
 @end

@@ -91,7 +91,7 @@
     
     [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:smoke affectAngle:false];
     
-    if([[GorillasConfig get] effects]) {
+    if([[GorillasConfig get] visualFx]) {
         [smoke setEmissionRate:30];
         [smoke setSize:10.0f * [target scale]];
         [smoke setSizeVar:5.0f * [target scale]];
@@ -118,7 +118,7 @@
     // Figure out whether banana went off screen or hit something.
     BuildingsLayer *buildingsLayer = [[[GorillasAppDelegate get] gameLayer] buildingsLayer];
     cpVect parentPos = [buildingsLayer position];
-    CGSize screen = [[Director sharedDirector] winSize].size;
+    CGSize screen = [[Director sharedDirector] winSize];
 
     // Calculate the step size.
     cpVect rTest = [target position];
@@ -162,7 +162,7 @@
     }
     
     [target setPosition:r];
-    if([[GorillasConfig get] effects]) {
+    if([[GorillasConfig get] visualFx]) {
         [smoke setAngle:atan2f([smoke source].y - r.y,
                                [smoke source].x - r.x)
                                 / (float)M_PI * 180.0f];

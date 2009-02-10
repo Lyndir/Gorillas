@@ -50,12 +50,14 @@
 
 -(void) continueGame: (id)sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[[GorillasAppDelegate get] gameLayer] startSinglePlayer];
 }
 
 
 -(void) stopGame: (id)sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showMainMenu];
 }
 

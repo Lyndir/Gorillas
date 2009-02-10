@@ -41,7 +41,7 @@
     if(!(self = [super init]))
         return self;
 
-    CGSize winSize = [[Director sharedDirector] winSize].size;
+    CGSize winSize = [[Director sharedDirector] winSize];
 
     width = winSize.width;
     height =[[GorillasConfig get] smallFontSize] + 10;
@@ -128,6 +128,7 @@
 
 -(void) menuButton: (id) caller {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showMainMenu];
 }
 

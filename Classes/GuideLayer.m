@@ -139,12 +139,14 @@
 
 -(void) back: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showInformation];
 }
 
 
 -(void) next: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     page = (page + 1) % [guidePages count];
     [self flipPage];
 }
@@ -152,6 +154,7 @@
 
 -(void) skip: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     page = (page + 2) % [guidePages count];
     [self flipPage];
 }

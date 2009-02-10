@@ -52,6 +52,12 @@
     
     [super onEnter];
     
+    
+    if([[GorillasConfig get] soundFx]) {
+        [AudioController playEffect:[ExplosionLayer explosionEffect:heavy]];
+        [AudioController vibrate];
+    }
+    
     int explosionParticles = random() % 50 + 300;
     if(heavy)
         explosionParticles += 400;
@@ -93,7 +99,7 @@
     
     [explosion stopSystem];
     
-    if(!hitsGorilla && [[GorillasConfig get] effects]) {
+    if(!hitsGorilla && [[GorillasConfig get] visualFx]) {
         int flameParticles = random() % 20 + 5;
         if(heavy)
             flameParticles = 80;
@@ -125,6 +131,41 @@
         [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:flames affectAngle:false];
         [self add:flames z:1];
     }
+}
+
+
++(SystemSoundID) explosionEffect: (BOOL)heavy {
+    
+    static NSUInteger lastEffect = -1;
+    static NSUInteger explosionEffects = 0;
+    static SystemSoundID* explosionEffect = nil;
+    
+    if(explosionEffect == nil) {
+        explosionEffects = 4;
+        explosionEffect = malloc(sizeof(SystemSoundID) * explosionEffects);
+        
+        for(NSUInteger i = 0; i < explosionEffects; ++i)
+            explosionEffect[i] = [AudioController loadEffectWithName:[NSString stringWithFormat:@"explosion%d.wav", i]];
+    }
+
+    // Pick a random effect.
+    NSUInteger chosenEffect;
+    if(heavy) {
+        // Effect 0 is reserved for heavy explosions.
+        chosenEffect = 0;
+        lastEffect = -1;
+    }
+    
+    else {
+        // Pick an effect that is not 0 (see above) and not the same as the last effect.
+        do {
+            chosenEffect = random() % explosionEffects;
+        } while(chosenEffect == lastEffect || chosenEffect == 0);
+        lastEffect = chosenEffect;
+    }
+    
+    NSLog(@"chosen: %d", chosenEffect);
+    return explosionEffect[chosenEffect];
 }
 
 

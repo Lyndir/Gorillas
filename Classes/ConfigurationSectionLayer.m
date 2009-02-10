@@ -68,18 +68,21 @@
 
 -(void) game: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showGameConfiguration];
 }
 
 
 -(void) av: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showAVConfiguration];
 }
 
 
 -(void) mainMenu: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showMainMenu];
 }
 

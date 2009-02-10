@@ -41,6 +41,8 @@
 
 @interface GorillasAppDelegate : NSObject <UIApplicationDelegate, AudioControllerDelegate> {
     
+    UIWindow                    *window;
+    
     GameLayer                   *gameLayer;
     ShadeLayer                  *currentLayer;
     ContinueMenuLayer           *continueMenuLayer;
@@ -60,8 +62,8 @@
 @property (readonly) HUDLayer                   *hudLayer;
 
 -(void) updateConfig;
+-(void) clickEffect;
 -(void) dismissLayer;
--(void) exit;
 -(void) cleanup;
 
 -(void) showMainMenu;

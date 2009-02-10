@@ -205,6 +205,7 @@
 
 -(void) back: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showInformation];
 }
 

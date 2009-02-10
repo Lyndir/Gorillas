@@ -66,6 +66,18 @@
                                               selector:@selector(audioTrack:)];
     
     
+    // Sound Effects.
+    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    MenuItem *soundFxT  = [MenuItemFont itemFromString:@"Sound Effects"];
+    [soundFxT setIsEnabled:false];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    MenuItem *soundFxI  = [MenuItemFont itemFromString:[[GorillasConfig get] soundFx]? @"On": @"Off"
+                                                target:self
+                                              selector:@selector(soundFx:)];
+    
+    
     // Weather.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
@@ -81,15 +93,15 @@
     // Effects.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *effectsT  = [MenuItemFont itemFromString:@"Special Effects"];
-    [effectsT setIsEnabled:false];
+    MenuItem *visualFxT  = [MenuItemFont itemFromString:@"Visual Effects"];
+    [visualFxT setIsEnabled:false];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *effectsI  = [MenuItemFont itemFromString:[[GorillasConfig get] effects]? @"On": @"Off"
+    MenuItem *visualFxI  = [MenuItemFont itemFromString:[[GorillasConfig get] visualFx]? @"On": @"Off"
                                                 target:self
-                                              selector:@selector(effects:)];
+                                              selector:@selector(visualFx:)];
     
-    menu = [[Menu menuWithItems:audioT, audioI, weatherT, weatherI, effectsT, effectsI, nil] retain];
+    menu = [[Menu menuWithItems:audioT, audioI, soundFxT, soundFxI, weatherT, weatherI, visualFxT, visualFxI, nil] retain];
     [menu alignItemsVertically];
     [self add:menu];
 
@@ -115,7 +127,9 @@
 
 
 -(void) audioTrack: (id) sender {
-    
+
+    [[GorillasAppDelegate get] clickEffect];
+
     NSArray *tracks = [[[GorillasConfig get] tracks] allKeys];
     NSString *newTrack = [tracks objectAtIndex:0];
     
@@ -137,20 +151,30 @@
 }
 
 
+-(void) soundFx: (id) sender {
+    
+    [[GorillasConfig get] setSoundFx:![[GorillasConfig get] soundFx]];
+    [[GorillasAppDelegate get] clickEffect];
+}
+
+
 -(void) weather: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasConfig get] setWeather:![[GorillasConfig get] weather]];
 }
 
 
--(void) effects: (id) sender {
+-(void) visualFx: (id) sender {
     
-    [[GorillasConfig get] setEffects:![[GorillasConfig get] effects]];
+    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasConfig get] setVisualFx:![[GorillasConfig get] visualFx]];
 }
 
 
 -(void) back: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showConfiguration];
 }
 

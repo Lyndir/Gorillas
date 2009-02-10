@@ -212,7 +212,7 @@
     
     [msgLabel stopAllActions];
 
-    CGSize winSize = [[Director sharedDirector] winSize].size;
+    CGSize winSize = [[Director sharedDirector] winSize];
     [msgLabel setPosition:cpv([msgLabel contentSize].width / 2 + [[GorillasConfig get] fontSize], winSize.height + [[GorillasConfig get] fontSize])];
     [msgLabel setOpacity:0xff];
     [msgLabel setVisible:false];

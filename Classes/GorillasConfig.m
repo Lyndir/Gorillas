@@ -74,7 +74,8 @@
 #define dCurrentTrack       @"v1.currentTrack"
 
 #define dWeather            @"v1.weather"
-#define dEffects            @"v1.effects"
+#define dSoundFx            @"v1.soundFx"
+#define dVisualFx           @"v1.visualFx"
 
 
 @implementation GorillasConfig
@@ -174,7 +175,8 @@
                                 @"blockdropper3.wav",                                       dCurrentTrack,
                                 
                                 [NSNumber numberWithBool:    YES],                          dWeather,
-                                [NSNumber numberWithBool:    YES],                          dEffects,
+                                [NSNumber numberWithBool:    YES],                          dSoundFx,
+                                [NSNumber numberWithBool:    YES],                          dVisualFx,
                                 
                                 nil]];
 
@@ -261,8 +263,8 @@
 }
 -(float) buildingWidth {
     
-	CGRect size = [[Director sharedDirector] winSize];
-    return (size.size.width / [self buildingAmount] - 1);
+	CGSize size = [[Director sharedDirector] winSize];
+    return (size.width / [self buildingAmount] - 1);
 }
 -(int) buildingAmount {
 
@@ -296,8 +298,8 @@
 
 -(float) windowWidth {
     
-	CGRect size = [[Director sharedDirector] winSize];
-    return size.size.width / [self buildingAmount] / ([self windowAmount] * 2 + 1);
+	CGSize size = [[Director sharedDirector] winSize];
+    return size.width / [self buildingAmount] / ([self windowAmount] * 2 + 1);
 }
 -(float) windowHeight {
     
@@ -584,13 +586,22 @@
     [defaults setBool:nWeather forKey: dWeather];
     [[GorillasAppDelegate get] updateConfig];
 }
--(BOOL) effects {
+-(BOOL) soundFx {
     
-    return [defaults boolForKey: dEffects];
+    return [defaults boolForKey: dSoundFx];
 }
--(void) setEffects: (BOOL)nEffects {
+-(void) setSoundFx: (BOOL)nSoundFx {
     
-    [defaults setBool:nEffects forKey: dEffects];
+    [defaults setBool:nSoundFx forKey: dSoundFx];
+    [[GorillasAppDelegate get] updateConfig];
+}
+-(BOOL) visualFx {
+    
+    return [defaults boolForKey: dVisualFx];
+}
+-(void) setVisualFx: (BOOL)nVisualFx {
+    
+    [defaults setBool:nVisualFx forKey: dVisualFx];
     [[GorillasAppDelegate get] updateConfig];
 }
 

@@ -50,7 +50,7 @@
     if (starCount == [[GorillasConfig get] starAmount])
         return;
     
-    contentSize = [[Director sharedDirector] winSize].size;
+    contentSize = [[Director sharedDirector] winSize];
     starCount = [[GorillasConfig get] starAmount];
     
     free(stars);

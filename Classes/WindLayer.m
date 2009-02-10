@@ -90,7 +90,7 @@
 -(void) draw {
 
     float windRange = (5 * [[GorillasConfig get] windModifier]);
-    CGSize winSize = [[Director sharedDirector] winSize].size;
+    CGSize winSize = [[Director sharedDirector] winSize];
     
     const cpVect from = cpv(winSize.width / 2, winSize.height - [[GorillasConfig get] smallFontSize]);
     cpVect prev = from;

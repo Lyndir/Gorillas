@@ -69,7 +69,7 @@
             barHeight   = [[UIApplication sharedApplication] statusBarFrame].size.height;
     }
     
-    CGSize winSize      = [[Director sharedDirector] winSize].size;
+    CGSize winSize      = [[Director sharedDirector] winSize];
     contentSize         = CGSizeMake(winSize.width, winSize.height - barHeight);
     int inner           = contentSize.height * innerRatio;
     

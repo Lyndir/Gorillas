@@ -76,18 +76,21 @@
 
 -(void) guide: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showGuide];
 }
 
 
 -(void) stats: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showStatistics];
 }
 
 
 -(void) mainMenu: (id) sender {
     
+    [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showMainMenu];
 }
 

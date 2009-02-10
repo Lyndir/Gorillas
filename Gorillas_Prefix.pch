@@ -20,5 +20,5 @@
     #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>
 #endif
-#define DEBUG 0
-//#define _DEBUG_
+//#define DEBUG 0
+//#undefine _DEBUG_
