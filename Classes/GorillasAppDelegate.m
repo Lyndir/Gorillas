@@ -40,21 +40,10 @@
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	[window setUserInteractionEnabled:YES];
 	[window setMultipleTouchEnabled:NO];
-    
-	// must be called before any othe call to the director
-    //	[Director useFastDirector];
-	
-    // Start the background music.
-    [self playTrack:[[GorillasConfig get] currentTrack]];
-
-    // Random seed with timestamp.
-    srandom(time(nil));
-    
-    // Menu items font.
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [window makeKeyAndVisible];
 
 	// Director and OpenGL Setup.
+    [Director useFastDirector];
     [[Director sharedDirector] setPixelFormat:RGBA8];
 	[[Director sharedDirector] attachInWindow:window];
 	[[Director sharedDirector] setDisplayFPS:YES];
@@ -64,20 +53,29 @@
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     //glEnable(GL_LINE_SMOOTH);
+    
+    // Random seed with timestamp.
+    srandom(time(nil));
+    
+    // Menu items font.
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
 
 	// Build the splash scene.
     Scene *splashScene = [[Scene alloc] init];
     Sprite *splash = [[Splash alloc] init];
     [splashScene add:splash];
+    
+    // Build the game scene.
+	gameLayer = [[GameLayer alloc] init];
 
     // Show the splash screen.
 	[[Director sharedDirector] runWithScene:splashScene];
     [splashScene release];
     [splash release];
-    [window makeKeyAndVisible];
-    
-    // Build the game scene.
-	gameLayer = [[GameLayer alloc] init];
+	
+    // Start the background music.
+    [self playTrack:[[GorillasConfig get] currentTrack]];
 }
 
 

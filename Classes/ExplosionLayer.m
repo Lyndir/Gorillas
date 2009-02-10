@@ -164,7 +164,6 @@
         lastEffect = chosenEffect;
     }
     
-    NSLog(@"chosen: %d", chosenEffect);
     return explosionEffect[chosenEffect];
 }
 
