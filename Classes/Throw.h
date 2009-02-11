@@ -34,10 +34,13 @@
     cpVect v;
     cpVect r0;
     
+    MoveTo *gameScrollAction;
     ParticleSystem *smoke;
 }
 
 +(Throw *) actionWithVelocity: (cpVect)velocity startPos: (cpVect)startPos;
 -(Throw *) initWithVelocity: (cpVect)velocity startPos: (cpVect)startPos;
+
+-(void) scrollToCenter:(cpVect)r;
 
 @end

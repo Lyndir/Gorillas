@@ -38,20 +38,24 @@
     if (!(self = [super init]))
 		return self;
     
-    const float w = [[Director sharedDirector] winSize].width;
+    float x = 0;
+    
+    skyColor = [[GorillasConfig get] skyColor];
+    fancySky = [[GorillasConfig get] visualFx];
     
     skies = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 3; ++i) {
-        const float x = i * w - w;
+    for (int i = 0; i < 2; ++i) {
         
         const SkyLayer *sky =  [SkyLayer node];
         [skies addObject: sky];
         
         [sky setPosition: cpv(x, 0)];
         [self add: sky z:1];
+
+        x += [sky contentSize].width;
     }
     
-    [self do: [PanAction actionWithSubNodes:skies duration: [[GorillasConfig get] starSpeed] padding:0]];
+    [self do:[PanAction actionWithSubNodes:skies duration:[[GorillasConfig get] starSpeed] padding:0]];
     
     return self;
 }
@@ -59,6 +63,9 @@
 
 -(void) reset {
 
+    skyColor = [[GorillasConfig get] skyColor];
+    fancySky = [[GorillasConfig get] visualFx];
+    
     for(SkyLayer *sky in skies)
         [sky reset];
 }
@@ -66,17 +73,18 @@
 
 -(void) draw {
     
-    const long color = [[GorillasConfig get] skyColor];
-    const GLubyte *colorBytes = (GLubyte *)&color;
-    const long toColor = ((int) (colorBytes[3] * 0.3f) << 24) |
-                         ((int) (colorBytes[2] * 0.3f) << 16) |
-                         ((int) (colorBytes[1] * 0.3f) << 8) |
-                         colorBytes[0];
-    
     CGSize winSize = [[Director sharedDirector] winSize];
-    drawBoxFrom(cpv(-position.x, -position.y), cpv(winSize.width - position.x, winSize.height - position.y), color, toColor);
-    /*glClearColor(colorBytes[3] / (float)0xff, colorBytes[2] / (float)0xff, colorBytes[1] / (float)0xff, colorBytes[0] / (float)0xff);
-    glClear(GL_COLOR_BUFFER_BIT);*/
+    cpVect size = cpv(winSize.width, winSize.height);
+    cpVect from = cpv(-position.x - winSize.width, 0);
+    
+    if(fancySky)
+        drawBoxFrom(from, cpv(from.x + size.x * 3, size.y * 1.5f), skyColor, 0x000000ff);
+    
+    else {
+        GLubyte *colorBytes = (GLubyte *) &skyColor;
+        glClearColor(colorBytes[3] / (float)0xff, colorBytes[2] / (float)0xff, colorBytes[1] / (float)0xff, colorBytes[0] / (float)0xff);
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
 }
 
 

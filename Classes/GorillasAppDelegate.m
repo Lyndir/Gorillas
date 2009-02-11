@@ -44,7 +44,6 @@
 
 	// Director and OpenGL Setup.
     [Director useFastDirector];
-    [[Director sharedDirector] setPixelFormat:RGBA8];
 	[[Director sharedDirector] attachInWindow:window];
 	[[Director sharedDirector] setDisplayFPS:YES];
 	[[Director sharedDirector] setDepthTest:false];

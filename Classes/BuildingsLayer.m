@@ -97,8 +97,9 @@
     [self stopAllActions];
     [self setPosition:cpvzero];
     
-    for (int i = 0; i < [[GorillasConfig get] buildingAmount] + 2; ++i) {
-        float x = i * ([[GorillasConfig get] buildingWidth] + 1) - [[GorillasConfig get] buildingWidth];
+    for (int i = 0; i < [[GorillasConfig get] buildingAmount] * 2; ++i) {
+        float x = i * ([[GorillasConfig get] buildingWidth] + 1)
+                - ([[GorillasConfig get] buildingWidth] + 1) * [[GorillasConfig get] buildingAmount] / 2;
         
         BuildingLayer *building = [[BuildingLayer alloc] init];
         [buildings addObject: building];
@@ -520,7 +521,7 @@
     
     int indexA = 0;
     for(BuildingLayer *building in buildings)
-        if(position.x + [building position].x > 0) {
+        if(position.x + [building position].x >= 0) {
             indexA = [buildings indexOfObject:building] + 1;
             break;
         }

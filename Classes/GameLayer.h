@@ -46,6 +46,7 @@
     Label *msgLabel;
 }
 
+@property (readonly) SkiesLayer *skiesLayer;
 @property (readonly) BuildingsLayer *buildingsLayer;
 @property (readonly) ParticleSystem *weather;
 @property (readonly) WindLayer *windLayer;

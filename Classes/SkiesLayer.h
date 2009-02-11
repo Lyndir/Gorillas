@@ -31,6 +31,9 @@
 
 @interface SkiesLayer : Layer <Resettable> {
 
+    long skyColor;
+    BOOL fancySky;
+    
     NSMutableArray *skies;
 }
 

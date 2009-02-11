@@ -69,6 +69,7 @@
 @property (readwrite) int                   maxGravity;
 @property (readwrite) long                  shadeColor;
 @property (readwrite) ccTime                transitionDuration;
+@property (readwrite) ccTime                gameScrollDuration;
 
 @property (readwrite) float                 level;
 @property (readonly) NSString               *levelName;

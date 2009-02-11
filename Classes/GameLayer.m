@@ -33,7 +33,7 @@
 @implementation GameLayer
 
 
-@synthesize buildingsLayer, windLayer, weather, singlePlayer, running, paused;
+@synthesize skiesLayer, buildingsLayer, windLayer, weather, singlePlayer, running, paused;
 
 
 -(id) init {
@@ -46,11 +46,12 @@
     paused = true;
     
     // Sky, buildings and wind.
-    skiesLayer = [[SkiesLayer alloc] init];
-    [self add:skiesLayer z:-5];
-    
     buildingsLayer = [[BuildingsLayer alloc] init];
     [self add:buildingsLayer z:0];
+
+    skiesLayer = [[SkiesLayer alloc] init];
+    [skiesLayer setTransformAnchor:cpvzero];
+    [buildingsLayer add:skiesLayer z:-5 parallaxRatio:cpv(0.3f, 0.8f)];
     
     windLayer = [[WindLayer alloc] init];
     [windLayer setColor:0xffffff00];
@@ -99,31 +100,30 @@
             [weather release];
             weather = nil;
             
-            if(random() % 100 == 0) {
-                // 1% chance to start snow/rain.
+            if(random() % 10 == 0) {
+                // 10% chance to start snow/rain.
             
                 switch (random() % 2) {
                     case 0:
                         weather = [[ParticleRain alloc] init];
-                        [weather setPosVar:cpv([weather posVar].x * 1.5f,
-                                               [weather posVar].y)];
                         [weather setEmissionRate:60];
                         [weather setSize:3];
                         [weather setSizeVar:1.5f];
-                        [self add:weather z:-3];
                         break;
                     
                     case 1:
                         weather = [[ParticleSnow alloc] init];
-                        [weather setPosVar:cpv([weather posVar].x * 1.5f,
-                                               [weather posVar].y)];
-                        [weather setEmissionRate:1];
+                        [weather setSpeed:10];
+                        [weather setEmissionRate:3];
                         [weather setSize:4];
                         [weather setSizeVar:3];
-                        [self add:weather z:-3];
                         break;
                 }
                 
+                [weather setPosVar:cpv([weather posVar].x * 2.5f, [weather posVar].y)];
+                [weather setPosition:cpv([weather position].x, [weather position].y * 2)]; // Space above screen.
+                [buildingsLayer add:weather z:-3 parallaxRatio:cpv(1.3f, 1.8f)];
+
                 [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:weather affectAngle:true];
             }
         }

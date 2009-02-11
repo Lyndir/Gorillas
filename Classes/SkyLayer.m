@@ -51,12 +51,13 @@
         return;
     
     contentSize = [[Director sharedDirector] winSize];
+    contentSize = CGSizeMake(contentSize.width * 2, contentSize.height * 2);
     starCount = [[GorillasConfig get] starAmount];
     
     free(stars);
-    stars = malloc(sizeof(GLfloat) * 2 * starCount);
+    stars = malloc(sizeof(GLfloat) * 2 * starCount * 4);
     
-    for (NSUInteger s = 0; s < starCount; ++s) {
+    for (NSUInteger s = 0; s < starCount * 4; ++s) {
         stars[s * 2 + 0] = random() % (long) contentSize.width;
         stars[s * 2 + 1] = random() % (long) contentSize.height;
     }
@@ -73,7 +74,7 @@
     glVertexPointer(2, GL_FLOAT, 0, stars);
     glEnableClientState(GL_VERTEX_ARRAY);
 
-    glDrawArrays(GL_POINTS, 0, starCount);
+    glDrawArrays(GL_POINTS, 0, starCount * 4);
     
     glDisableClientState(GL_VERTEX_ARRAY);
 }

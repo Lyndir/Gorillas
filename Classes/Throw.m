@@ -161,6 +161,8 @@
             break;
     }
     
+    [self scrollToCenter:r];
+    
     [target setPosition:r];
     if([[GorillasConfig get] visualFx]) {
         [smoke setAngle:atan2f([smoke source].y - r.y,
@@ -176,11 +178,43 @@
         float max = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] right];
         [[[GorillasAppDelegate get] hudLayer] setProgress:(r.x - min) / max];
     } else {
+        [self scrollToCenter:cpvzero];
+        
         // Reset HUD progress.
         [[[GorillasAppDelegate get] hudLayer] setProgress:0];
         
         // Next Gorilla's turn.
         [buildingsLayer nextGorilla];
+    }
+}
+
+
+-(void) scrollToCenter:(cpVect)r {
+    
+    BuildingsLayer *buildingsLayer = [[[GorillasAppDelegate get] gameLayer] buildingsLayer];
+    if(r.x == 0 && r.y == 0) {
+        [buildingsLayer do:[MoveTo actionWithDuration:[[GorillasConfig get] gameScrollDuration]
+                                        position:cpvzero]];
+        return;
+    }
+
+    // Scroll to current point should take initial duration minus what has already elapsed to scroll to approach previous points.
+    ccTime gameScrollElapsed = [gameScrollAction elapsed];
+
+    // Stop the current scroll.
+    if(gameScrollAction)
+        [buildingsLayer stopAction:gameScrollAction];
+    [gameScrollAction release];
+    
+    // Start a new scroll with an updated destination point.
+    CGSize winSize = [[Director sharedDirector] winSize];
+    cpVect g = cpv(winSize.width / 2 - r.x, winSize.height / 2 - r.y);
+    if(gameScrollElapsed < [[GorillasConfig get] gameScrollDuration])
+        [buildingsLayer do:(gameScrollAction = [[MoveTo alloc] initWithDuration:[[GorillasConfig get] gameScrollDuration] - gameScrollElapsed
+                                                                       position:g])];
+    else {
+        gameScrollAction = nil;
+        [buildingsLayer setPosition:g];
     }
 }
 

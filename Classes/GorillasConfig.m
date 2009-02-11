@@ -58,6 +58,7 @@
 #define dMaxGravity         @"v1.maxGravity"
 #define dShadeColor         @"v1.shadeColor"
 #define dTransitionDuration @"v1.transitionDuration"
+#define dGameScrollDuration @"v1.gameScrollDuration"
 
 #define dLevel              @"v1.level"
 #define dLevelNameCount     @"v1.levelNameCount"
@@ -131,6 +132,7 @@
                                 [NSNumber numberWithInteger:    150],                       dMaxGravity,
                                 [NSNumber numberWithLong:       0x000000dd],                dShadeColor,
                                 [NSNumber numberWithFloat:      0.5f],                      dTransitionDuration,
+                                [NSNumber numberWithFloat:      1],                         dGameScrollDuration,
      
                                 [NSNumber numberWithFloat:      0.1f],                      dLevel,
                                 [NSNumber numberWithInteger:    8],                         dLevelNameCount,
@@ -423,6 +425,14 @@
 
     [defaults setFloat:transitionDuration forKey: dTransitionDuration];
 }
+-(ccTime) gameScrollDuration {
+    
+    return [defaults floatForKey: dGameScrollDuration];
+}
+-(void) setGameScrollDuration: (ccTime)gameScrollDuration {
+    
+    [defaults setFloat:gameScrollDuration forKey: dGameScrollDuration];
+}
 
 
 -(float) level {
@@ -603,6 +613,7 @@
     
     [defaults setBool:nVisualFx forKey: dVisualFx];
     [[GorillasAppDelegate get] updateConfig];
+    [[[[GorillasAppDelegate get] gameLayer] skiesLayer] reset];
 }
 
 
