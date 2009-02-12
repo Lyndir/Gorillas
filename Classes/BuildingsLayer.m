@@ -287,11 +287,9 @@
 -(void) nextGorilla {
     
     // Activate the next gorilla.
-    GorillaLayer *nextGorilla = nil;
-    
     // Look for the next live gorilla; first try the next gorilla AFTER the current.
     // If none there is alive, try the first one from the beginning UNTIL the current.
-    for(BOOL startFromAfterCurrent = true; nextGorilla == nil; startFromAfterCurrent = false) {
+    for(BOOL startFromAfterCurrent = true; true; startFromAfterCurrent = false) {
         BOOL reachedCurrent = false;
         
         for(GorillaLayer *gorilla in gorillas) {
@@ -304,7 +302,9 @@
                     
                     // First run.
                     if(reachedCurrent && [gorilla alive]) {
-                        nextGorilla = gorilla;
+                        [activeGorilla release];
+                        activeGorilla = [gorilla retain];
+                        startFromAfterCurrent = false;
                         break;
                     }
                 } else {
@@ -315,7 +315,9 @@
                         break;
                     
                     else if([gorilla alive]) {
-                        nextGorilla = gorilla;
+                        [activeGorilla release];
+                        activeGorilla = [gorilla retain];
+                        startFromAfterCurrent = false;
                         break;
                     }
                 }
@@ -326,9 +328,6 @@
             break;
     }
         
-    [activeGorilla release];
-    activeGorilla = [nextGorilla retain];
-    
     // AI throw.
     if(![activeGorilla human] && [activeGorilla alive]) {
         NSMutableArray *enemies = [gorillas mutableCopy];

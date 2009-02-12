@@ -113,12 +113,11 @@
     float g = [[GorillasConfig get] gravity];
     ccTime t = dt * duration;
     cpVect r = cpv((v.x + w * t * [[GorillasConfig get] windModifier]) * t + r0.x,
-                   v.y * t - t * t * g / 2.0f + r0.y);
+                   v.y * t - t * t * g / 2 + r0.y);
 
     // Figure out whether banana went off screen or hit something.
     BuildingsLayer *buildingsLayer = [[[GorillasAppDelegate get] gameLayer] buildingsLayer];
-    cpVect parentPos = [buildingsLayer position];
-    CGSize screen = [[Director sharedDirector] winSize];
+    CGSize winSize = [[Director sharedDirector] winSize];
 
     // Calculate the step size.
     cpVect rTest = [target position];
@@ -131,9 +130,8 @@
         // Increment rTest toward r.
         rTest = cpvadd(rTest, rStep);
 
-        cpVect onScreen = cpvadd(rTest, parentPos);
-
-        BOOL offScreen   = onScreen.x < 0 || onScreen.x > screen.width;
+        BOOL offScreen   = rTest.x < winSize.width * -0.5f || rTest.x > winSize.width * 1.5f
+                        || rTest.y < 0 || rTest.y > winSize.height * 1.5f;
         BOOL hitGorilla  = [buildingsLayer hitsGorilla:rTest];
         BOOL hitBuilding = [buildingsLayer hitsBuilding:rTest];
         
@@ -191,30 +189,35 @@
 
 -(void) scrollToCenter:(cpVect)r {
     
-    BuildingsLayer *buildingsLayer = [[[GorillasAppDelegate get] gameLayer] buildingsLayer];
+    Layer *panningLayer = [[[GorillasAppDelegate get] gameLayer] panningLayer];
+    
+    // MoveTo cpvzero happens without the gameScrollElapsed logic.
     if(r.x == 0 && r.y == 0) {
-        [buildingsLayer do:[MoveTo actionWithDuration:[[GorillasConfig get] gameScrollDuration]
+        [panningLayer do:[MoveTo actionWithDuration:[[GorillasConfig get] gameScrollDuration]
                                         position:cpvzero]];
         return;
     }
-
+    
+    CGSize winSize = [[Director sharedDirector] winSize];
+    r = cpv(fmaxf(fminf(r.x, winSize.width), 0),
+            fmaxf(fminf(r.y, winSize.height), 0));
+    
     // Scroll to current point should take initial duration minus what has already elapsed to scroll to approach previous points.
     ccTime gameScrollElapsed = [gameScrollAction elapsed];
 
     // Stop the current scroll.
     if(gameScrollAction)
-        [buildingsLayer stopAction:gameScrollAction];
+        [panningLayer stopAction:gameScrollAction];
     [gameScrollAction release];
     
     // Start a new scroll with an updated destination point.
-    CGSize winSize = [[Director sharedDirector] winSize];
     cpVect g = cpv(winSize.width / 2 - r.x, winSize.height / 2 - r.y);
     if(gameScrollElapsed < [[GorillasConfig get] gameScrollDuration])
-        [buildingsLayer do:(gameScrollAction = [[MoveTo alloc] initWithDuration:[[GorillasConfig get] gameScrollDuration] - gameScrollElapsed
+        [panningLayer do:(gameScrollAction = [[MoveTo alloc] initWithDuration:[[GorillasConfig get] gameScrollDuration] - gameScrollElapsed
                                                                        position:g])];
     else {
         gameScrollAction = nil;
-        [buildingsLayer setPosition:g];
+        [panningLayer setPosition:g];
     }
 }
 

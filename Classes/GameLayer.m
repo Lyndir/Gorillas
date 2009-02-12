@@ -33,7 +33,7 @@
 @implementation GameLayer
 
 
-@synthesize skiesLayer, buildingsLayer, windLayer, weather, singlePlayer, running, paused;
+@synthesize panningLayer, skiesLayer, buildingsLayer, windLayer, weather, singlePlayer, running, paused;
 
 
 -(id) init {
@@ -47,11 +47,16 @@
     
     // Sky, buildings and wind.
     buildingsLayer = [[BuildingsLayer alloc] init];
-    [self add:buildingsLayer z:0];
+    [buildingsLayer setTransformAnchor:cpvzero];
 
     skiesLayer = [[SkiesLayer alloc] init];
     [skiesLayer setTransformAnchor:cpvzero];
-    [buildingsLayer add:skiesLayer z:-5 parallaxRatio:cpv(0.3f, 0.8f)];
+    
+    panningLayer = [[Layer alloc] init];
+    [panningLayer setTransformAnchor:cpvzero];
+    [panningLayer add:buildingsLayer z:0];
+    [panningLayer add:skiesLayer z:-5 parallaxRatio:cpv(0.3f, 0.8f)];
+    [self add:panningLayer];
     
     windLayer = [[WindLayer alloc] init];
     [windLayer setColor:0xffffff00];

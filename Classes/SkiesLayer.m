@@ -74,11 +74,10 @@
 -(void) draw {
     
     CGSize winSize = [[Director sharedDirector] winSize];
-    cpVect size = cpv(winSize.width, winSize.height);
     cpVect from = cpv(-position.x - winSize.width, 0);
     
     if(fancySky)
-        drawBoxFrom(from, cpv(from.x + size.x * 3, size.y * 1.5f), skyColor, 0x000000ff);
+        drawBoxFrom(from, cpv(from.x + winSize.width * 3, winSize.height * 1.5f), skyColor, 0x000000ff);
     
     else {
         GLubyte *colorBytes = (GLubyte *) &skyColor;

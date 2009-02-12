@@ -97,7 +97,7 @@
 
 -(void) setMenuTitle: (NSString *)title {
     
-    [[menuButton label] setString:title];
+    [menuButton setString:title];
 }
 
 

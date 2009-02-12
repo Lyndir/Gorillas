@@ -38,18 +38,16 @@
         return self;
 
     // Guide Content.
-    NSArray *pages = [[NSArray alloc] initWithObjects:
-                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page1" ofType:@"guide"]],
-                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page2" ofType:@"guide"]],
-                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page3" ofType:@"guide"]],
-                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page4" ofType:@"guide"]],
-                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page5" ofType:@"guide"]],
-                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page6" ofType:@"guide"]],
-                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page7" ofType:@"guide"]],
-                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page8" ofType:@"guide"]],
-                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page9" ofType:@"guide"]],
-                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"page10" ofType:@"guide"]],
-                  nil];
+    NSUInteger pageCount = 10;
+    NSString** pageData = malloc(sizeof(NSString *) * pageCount);
+    for(NSUInteger i = 0; i < pageCount; ++i)
+        pageData[i] = [NSString stringWithContentsOfFile:
+                       [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"page%d", i + 1]
+                                                       ofType:@"guide"]];
+    
+    NSArray *pages = [[NSArray alloc] initWithObjects:pageData count:pageCount];
+    free(pageData);
+    
     guidePages = [[NSMutableArray alloc] initWithCapacity:[pages count]];
     guideTitles = [[NSMutableArray alloc] initWithCapacity:[pages count]];
     for(NSString *guidePage in pages) {
@@ -72,10 +70,10 @@
     [self add:backMenu];
     
     [MenuItemFont setFontSize:15];
-    chapterNext = [[MenuItemFont itemFromString:@"       " target:self selector:@selector(next:)] retain];
-    chapterSkip = [[MenuItemFont itemFromString:@"       " target:self selector:@selector(skip:)] retain];
+    chapterNext = [[MenuItemFont itemFromString:@"                              " target:self selector:@selector(next:)] retain];
+    chapterSkip = [[MenuItemFont itemFromString:@"                              " target:self selector:@selector(skip:)] retain];
     [MenuItemFont setFontSize:26];
-    chapterCurr = [[MenuItemFont itemFromString:@"       "] retain];
+    chapterCurr = [[MenuItemFont itemFromString:@"                              "] retain];
     [chapterCurr setIsEnabled:NO];
     chapterMenu = [[Menu menuWithItems:chapterCurr, chapterNext, chapterSkip, nil] retain];
     [chapterMenu alignItemsHorizontally];
@@ -131,9 +129,9 @@
         [pageLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
     }
     
-    [[chapterCurr label] setString:[guideTitles objectAtIndex:page - 0]];
-    [[chapterNext label] setString:[guideTitles objectAtIndex:(page + 1) % [guidePages count]]];
-    [[chapterSkip label] setString:[guideTitles objectAtIndex:(page + 2) % [guidePages count]]];
+    [chapterCurr setString:[guideTitles objectAtIndex:page - 0]];
+    [chapterNext setString:[guideTitles objectAtIndex:(page + 1) % [guidePages count]]];
+    [chapterSkip setString:[guideTitles objectAtIndex:(page + 2) % [guidePages count]]];
 }
 
 

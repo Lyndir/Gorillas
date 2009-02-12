@@ -39,6 +39,7 @@
     BOOL running;
     BOOL singlePlayer;
 
+    Layer *panningLayer;
     SkiesLayer *skiesLayer;
     BuildingsLayer *buildingsLayer;
     ParticleSystem *weather;
@@ -46,6 +47,7 @@
     Label *msgLabel;
 }
 
+@property (readonly) Layer *panningLayer;
 @property (readonly) SkiesLayer *skiesLayer;
 @property (readonly) BuildingsLayer *buildingsLayer;
 @property (readonly) ParticleSystem *weather;

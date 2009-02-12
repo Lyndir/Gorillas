@@ -132,7 +132,7 @@
                                 [NSNumber numberWithInteger:    150],                       dMaxGravity,
                                 [NSNumber numberWithLong:       0x000000dd],                dShadeColor,
                                 [NSNumber numberWithFloat:      0.5f],                      dTransitionDuration,
-                                [NSNumber numberWithFloat:      1],                         dGameScrollDuration,
+                                [NSNumber numberWithFloat:      0.5f],                      dGameScrollDuration,
      
                                 [NSNumber numberWithFloat:      0.1f],                      dLevel,
                                 [NSNumber numberWithInteger:    8],                         dLevelNameCount,
