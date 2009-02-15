@@ -208,7 +208,7 @@
                 cpVect from = [(GorillaLayer *) [gorillas objectAtIndex:i] position];
                 cpVect to   = cpvadd(from, throwHistory[i]);
                 
-                drawLinesTo(from, &to, 1, [[GorillasConfig get] windowColorOff] & 0xffffff22, 2);
+                drawLinesTo(from, &to, 1, [[GorillasConfig get] windowColorOff] & 0xffffff22, 3);
             }
         }
     }
@@ -225,7 +225,7 @@
             [[GorillasConfig get] windowColorOn]    | 0x000000ff,
         };
         
-        drawLines(points, colors, 2, 2);
+        drawLines(points, colors, 2, 3);
     }
 }
 
