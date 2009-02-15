@@ -85,12 +85,38 @@
     
     cpVect s = cpv(contentSize.width - padding, contentSize.height - [[GorillasConfig get] fontSize] - padding);
     
-    pageLabel = [[Label alloc] initWithString:@""
+    CGSize winSize = [[Director sharedDirector] winSize];
+    prevPageLabel = [[Label alloc] initWithString:@""
                              dimensions:CGSizeMake(s.x, s.y)
                               alignment:UITextAlignmentLeft
                                fontName:[[GorillasConfig get] fixedFontName]
                                fontSize:[[GorillasConfig get] smallFontSize]];
-    [pageLabel setPosition:cpv(contentSize.width / 2, contentSize.height / 2)];
+    [prevPageLabel setPosition:cpv(contentSize.width / 2 - winSize.width, contentSize.height / 2)];
+    [prevPageLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    currPageLabel = [[Label alloc] initWithString:@""
+                                   dimensions:CGSizeMake(s.x, s.y)
+                                    alignment:UITextAlignmentLeft
+                                     fontName:[[GorillasConfig get] fixedFontName]
+                                     fontSize:[[GorillasConfig get] smallFontSize]];
+    [currPageLabel setPosition:cpv(contentSize.width / 2, contentSize.height / 2)];
+    [currPageLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    nextPageLabel = [[Label alloc] initWithString:@""
+                                   dimensions:CGSizeMake(s.x, s.y)
+                                    alignment:UITextAlignmentLeft
+                                     fontName:[[GorillasConfig get] fixedFontName]
+                                     fontSize:[[GorillasConfig get] smallFontSize]];
+    [nextPageLabel setPosition:cpv(contentSize.width / 2 + winSize.width, contentSize.height / 2)];
+    [nextPageLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    
+    swipeLayer = [[SwipeLayer alloc] initWithTarget:self selector:@selector(swiped:)];
+    [self add:swipeLayer];
+    [swipeLayer add:prevPageLabel];
+    [swipeLayer add:currPageLabel];
+    [swipeLayer add:nextPageLabel];
+    cpVect swipeAreaHalf = cpv([currPageLabel contentSize].width / 2,
+                               [currPageLabel contentSize].height / 2 - [[GorillasConfig get] fontSize] / 2);
+    [swipeLayer setSwipeAreaFrom:cpvsub([currPageLabel position], swipeAreaHalf)
+                              to:cpvadd([currPageLabel position], swipeAreaHalf)];
     
     pageNumberLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%d / %d", [guidePages count], [guidePages count]]
                                          dimensions:CGSizeMake(150, [[GorillasConfig get] smallFontSize])
@@ -115,25 +141,33 @@
 }
 
 
+-(void) swiped:(BOOL)forward {
+    
+    page = (page + [guidePages count] + (forward? 1: -1)) % [guidePages count];
+    
+    [self flipPage];
+}
+
+
 -(void) flipPage {
     
-    [pageNumberLabel setString:[NSString stringWithFormat:@"%d / %d", page + 1, [guidePages count]]];
+    NSUInteger count = [guidePages count];
+    NSString *prevPage = [guidePages objectAtIndex:(page + count - 1) % count],
+             *currPage = [guidePages objectAtIndex:page],
+             *nextPage = [guidePages objectAtIndex:(page + 1) % count],
+             *skipPage = [guidePages objectAtIndex:(page + 2) % count];
     
-    if([pageLabel parent] == nil) {
-        [pageLabel setString:[guidePages objectAtIndex:page]];
-        [pageLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-        [self add:pageLabel];
-    }
+    [swipeLayer setPosition:cpvzero];
     
-    else {
-        [pageLabel do:[FadeOut actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-        [pageLabel setString:[guidePages objectAtIndex:page]];
-        [pageLabel do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-    }
-    
-    [chapterCurr setString:[guideTitles objectAtIndex:page - 0]];
-    [chapterNext setString:[guideTitles objectAtIndex:(page + 1) % [guidePages count]]];
-    [chapterSkip setString:[guideTitles objectAtIndex:(page + 2) % [guidePages count]]];
+    [pageNumberLabel setString:[NSString stringWithFormat:@"%d / %d", page + 1, count]];
+
+    [prevPageLabel setString:prevPage];
+    [currPageLabel setString:currPage];
+    [nextPageLabel setString:nextPage];
+
+    [chapterCurr setString:currPage];
+    [chapterNext setString:nextPage];
+    [chapterSkip setString:skipPage];
 }
 
 
@@ -168,8 +202,8 @@
     [nextMenu release];
     nextMenu = nil;
     
-    [pageLabel release];
-    pageLabel = nil;
+    [currPageLabel release];
+    currPageLabel = nil;
     
     [pageNumberLabel release];
     pageNumberLabel = nil;

@@ -77,14 +77,14 @@
 
     cpFloat newDist = fabsf(pFrom.y - pTo.y);
     cpFloat newScale = initialScale * (newDist / initialDist);
-    cpFloat limitedScale = fmaxf(fminf(newScale, 1.3f), 0.7f);
+    cpFloat limitedScale = fmaxf(fminf(newScale, 1.1f), 0.8f);
     if(limitedScale != newScale) {
         newScale = limitedScale;
         initialDist = newDist;
         initialScale = newScale;
     }
 
-    cpFloat duration = [[GorillasConfig get] transitionDuration];
+    cpFloat duration = 0.1f;
     if(scaleAction != nil && ![scaleAction isDone]) {
         duration -= [scaleAction elapsed];
         [self stopAction:scaleAction];

@@ -17,32 +17,35 @@
  */
 
 //
-//  GuideLayer.h
+//  SwipeLayer.h
 //  Gorillas
 //
-//  Created by Maarten Billemont on 26/10/08.
+//  Created by Maarten Billemont on 15/02/09.
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "ShadeLayer.h"
-#import "SwipeLayer.h"
+#import "cocos2d.h"
 
-@interface GuideLayer : ShadeLayer {
 
-    Menu *chapterMenu, *backMenu, *nextMenu;
-    MenuItemFont *chapterCurr, *chapterNext, *chapterSkip;
+@interface SwipeLayer : Layer {
+
+    NSInvocation    *invocation;
     
-    SwipeLayer *swipeLayer;
-    
-    Label *prevPageLabel, *currPageLabel, *nextPageLabel, *pageNumberLabel;
-    NSMutableArray *guidePages, *guideTitles;
-    int page;
+    IntervalAction  *swipeAction;
+    cpVect          swipeFrom;
+    cpVect          swipeTo;
+    cpVect          swipeStart;
+    BOOL            swipeForward;
+    BOOL            swiped;
 }
 
--(void) flipPage;
--(void) next: (id)sender;
--(void) back: (id)sender;
++(id) nodeWithTarget:(id)t selector:(SEL)s;
 
+-(id) initWithTarget:(id)t selector:(SEL)s;
+
+-(void) setSwipeAreaFrom:(cpVect)f to:(cpVect)t;
+-(void) setTarget:(id)t selector:(SEL)s;
+-(void) swipeDone:(id)sender;
 
 @end

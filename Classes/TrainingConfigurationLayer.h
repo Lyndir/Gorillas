@@ -17,32 +17,22 @@
  */
 
 //
-//  GuideLayer.h
+//  TrainingConfiguration.h
 //  Gorillas
 //
-//  Created by Maarten Billemont on 26/10/08.
+//  Created by Maarten Billemont on 15/02/09.
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "ShadeLayer.h"
-#import "SwipeLayer.h"
 
-@interface GuideLayer : ShadeLayer {
 
-    Menu *chapterMenu, *backMenu, *nextMenu;
-    MenuItemFont *chapterCurr, *chapterNext, *chapterSkip;
+@interface TrainingConfigurationLayer : ShadeLayer {
     
-    SwipeLayer *swipeLayer;
-    
-    Label *prevPageLabel, *currPageLabel, *nextPageLabel, *pageNumberLabel;
-    NSMutableArray *guidePages, *guideTitles;
-    int page;
+    Menu *menu, *backMenu;
 }
 
--(void) flipPage;
--(void) next: (id)sender;
--(void) back: (id)sender;
 
+-(void) reset;
 
 @end

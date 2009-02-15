@@ -94,6 +94,10 @@
 @property (readwrite) BOOL                  vibration;
 @property (readwrite) BOOL                  visualFx;
 
+@property (readwrite) BOOL                  training;
+@property (readwrite) BOOL                  throwHint;
+@property (readwrite) BOOL                  throwHistory;
+
 -(long)                                     buildingColor;
 
 -(void)                                     levelUp;

@@ -49,6 +49,8 @@
     dbgAIVect       = malloc(sizeof(cpVect) * dbgAIMaxInd);
 #endif
     
+    throwHints      = [[NSMutableArray alloc] initWithCapacity:2];
+    
     isTouchEnabled  = true;
 
     aim             = cpv(-1, -1);
@@ -165,7 +167,7 @@
 
 
 -(void) draw {
-    
+
 #ifdef _DEBUG_
     BuildingLayer *fb = [buildings objectAtIndex:0], *lb = [buildings lastObject];
     int pCount = (([lb position].x - [fb position].x) / dbgTraceStep + 1)
@@ -198,14 +200,19 @@
     drawPointsAt(dbgPath, dbgPathMaxInd, 0xFFFF00FF);
     free(hgp);
     free(hep);
-    
-    if([gorillas count] == dbgAIMaxInd)
-        for(NSUInteger i = 0; i < dbgAIMaxInd; ++i) {
-            cpVect to = cpvadd(dbgAI[i].position, dbgAIVect[i]);
-            drawLinesTo(dbgAI[i].position, &to, 1, 0xFF00FFFF, 1);
-        }
 #endif
 
+    if([[GorillasConfig get] training]) {
+        for(NSUInteger i = 0; i < [gorillas count]; ++i) {
+            if([[GorillasConfig get] throwHistory]) {
+                cpVect from = [(GorillaLayer *) [gorillas objectAtIndex:i] position];
+                cpVect to   = cpvadd(from, throwHistory[i]);
+                
+                drawLinesTo(from, &to, 1, [[GorillasConfig get] windowColorOff] & 0xffffff22, 2);
+            }
+        }
+    }
+    
     if(activeGorilla && aim.x > 0) {
         // Only draw aim when aiming and gorillas are set.
 
@@ -218,7 +225,7 @@
             [[GorillasConfig get] windowColorOn]    | 0x000000ff,
         };
         
-        drawLines(points, colors, 2, 3);
+        drawLines(points, colors, 2, 2);
     }
 }
 
@@ -297,10 +304,9 @@
     
     cpVect r0 = [activeGorilla position];
     cpVect v = cpvsub(aim, r0);
-        
-    [bananaLayer throwFrom:r0 withVelocity: v];
     
     aim = cpv(-1.0f, -1.0f);
+    [self throwFrom:activeGorilla withVelocity:v];
     
     return kEventHandled;
 }
@@ -362,28 +368,16 @@
         NSMutableArray *enemies = [gorillas mutableCopy];
         [enemies removeObject:activeGorilla];
         
-        GorillaLayer *target = (GorillaLayer *) [enemies objectAtIndex:random() % [enemies count]];
+        GorillaLayer *target = [[enemies objectAtIndex:random() % [enemies count]] retain];
         [enemies release];
-
-        float l = [[GorillasConfig get] level];
-        float g = [[GorillasConfig get] gravity];
-        float w = [[[[GorillasAppDelegate get] gameLayer] windLayer] wind];
+        
         cpVect r0 = [activeGorilla position];
-        cpVect rt = [target position];
-        ccTime t = 3 * 100 / g;
+        cpVect v = [self calculateThrowFrom:r0
+                                         to:[target position]
+                                 errorLevel:[[GorillasConfig get] level]];
+        [target release];
 
-        // Level-based error.
-        rt = cpv(rt.x + random() % (int) ((1 - l) * 200), rt.y + random() % (int) (200 * (1 - l)));
-        t -= (float)   (random() % (int) ((1 - l) * t * 10)) / 10.0f;
-        
-        // Velocity vector to hit rt in t seconds.
-        cpVect v = cpv((rt.x - r0.x) / t,
-                       (g * t * t - 2 * r0.y + 2 * rt.y) / (2 * t));
-        
-        // Wind-based modifier.
-        v.x -= w * t * [[GorillasConfig get] windModifier];
-
-        [bananaLayer throwFrom:r0 withVelocity:v];
+        [self throwFrom:activeGorilla withVelocity:v];
         
 #ifdef _DEBUG_
         dbgAI[dbgAICurInd] = activeGorilla;
@@ -391,6 +385,65 @@
         dbgAICurInd = (dbgAICurInd + 1) % dbgAIMaxInd;
 #endif
     }
+    
+    // Throw hints.
+    for(NSUInteger i = 0; i < [gorillas count]; ++i) {
+        GorillaLayer *gorilla = [gorillas objectAtIndex:i];
+
+        BOOL hintGorilla = [[GorillasConfig get] training] && [[GorillasConfig get] throwHint]
+                        && [activeGorilla human] && gorilla != activeGorilla && [gorilla alive];
+        Sprite *hint = [throwHints objectAtIndex:i];
+        [hint setVisible:hintGorilla];
+        [hint stopAllActions];
+        
+        if(hintGorilla) {
+            cpVect v = [self calculateThrowFrom:[activeGorilla position] to:[gorilla position] errorLevel:0.9f];
+
+            [hint setOpacity:0];
+            [hint setPosition:cpvadd([activeGorilla position], v)];
+            [hint do:[RepeatForever actionWithAction:[Sequence actions:
+                                                      [DelayTime actionWithDuration:10],
+                                                      [FadeTo actionWithDuration:2 opacity:0x33],
+                                                      [FadeTo actionWithDuration:2 opacity:0x00],
+                                                      nil]]];
+        }
+    }
+}
+
+
+-(void) throwFrom:(GorillaLayer *)gorilla withVelocity:(cpVect)v {
+    
+    // Hide all hints.
+    for(Sprite *hint in throwHints)
+        if([hint visible]) {
+            [hint stopAllActions];
+            [hint do:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration] opacity:0x00]];
+        }
+    
+    // Record throw history & start the actual throw.
+    throwHistory[[gorillas indexOfObject:gorilla]] = v;
+    [bananaLayer throwFrom:[gorilla position] withVelocity:v];
+}
+
+
+-(cpVect) calculateThrowFrom:(cpVect)r0 to:(cpVect)rt errorLevel:(cpFloat)l {
+    
+    float g = [[GorillasConfig get] gravity];
+    float w = [[[[GorillasAppDelegate get] gameLayer] windLayer] wind];
+    ccTime t = 3 * 100 / g;
+    
+    // Level-based error.
+    rt = cpv(rt.x + random() % (int) ((1 - l) * 200), rt.y + random() % (int) (200 * (1 - l)));
+    t -= (float)   (random() % (int) ((1 - l) * t * 10)) / 10.0f;
+    
+    // Velocity vector to hit rt in t seconds.
+    cpVect v = cpv((rt.x - r0.x) / t,
+                   (g * t * t - 2 * r0.y + 2 * rt.y) / (2 * t));
+    
+    // Wind-based modifier.
+    v.x -= w * t * [[GorillasConfig get] windModifier];
+    
+    return v;
 }
 
 
@@ -443,7 +496,8 @@
                 if(liveGorillaCount == 1) {
                     [[[GorillasAppDelegate get] hudLayer] setMenuTitle:[NSString stringWithFormat:@"%@ wins!", [liveGorilla name]]];
                     
-                    if([[[GorillasAppDelegate get] gameLayer] singlePlayer]) {
+                    if([[[GorillasAppDelegate get] gameLayer] singlePlayer]
+                        && ! [[GorillasConfig get] training]) {
                         // One gorilla left in single player: modify the level depending on who survived.
                         
                         NSString *oldLevel = [[GorillasConfig get] levelName];
@@ -543,6 +597,26 @@
     
     [gorillas addObject:gorillaA];
     [gorillas addObject:gorillaB];
+    
+    // Create enough throw hint sprites / remove needless ones.
+    while([throwHints count] != [gorillas count]) {
+        if([throwHints count] < [gorillas count]) {
+            Sprite *hint = [Sprite spriteWithFile:@"fire.png"];
+            [throwHints addObject:hint];
+            [self add:hint];
+        }
+        
+        else
+            [throwHints removeLastObject];
+    }
+
+    // Reset throw history & throw hints.
+    free(throwHistory);
+    throwHistory = malloc(sizeof(cpVect) * [gorillas count]);
+    for(NSUInteger i = 0; i < [gorillas count]; ++i) {
+        throwHistory[i] = cpv(-1, -1);
+        [[throwHints objectAtIndex:i] setVisible:NO];
+    }
     
     [gorillaA setAlive:true];
     [gorillaB setAlive:true];
@@ -704,6 +778,12 @@
     
     [hitGorilla release];
     hitGorilla = nil;
+    
+    [throwHints release];
+    throwHints = nil;
+    
+    free(throwHistory);
+    throwHistory = nil;
     
 #ifdef _DEBUG_
     free(dbgPath);

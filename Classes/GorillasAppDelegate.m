@@ -104,6 +104,7 @@
 
     [gameConfigLayer reset];
     [avConfigLayer reset];
+    [trainingLayer reset];
 }
 
 
@@ -189,6 +190,15 @@
         avConfigLayer = [[AVConfigurationLayer alloc] init];
     
     [self showLayer:avConfigLayer];
+}
+
+
+-(void) showTraining {
+    
+    if(!trainingLayer)
+        trainingLayer = [[TrainingConfigurationLayer alloc] init];
+    
+    [self showLayer:trainingLayer];
 }
 
 
@@ -316,6 +326,11 @@
         [avConfigLayer release];
         avConfigLayer = nil;
     }
+    if(trainingLayer && ![trainingLayer parent]) {
+        [trainingLayer stopAllActions];
+        [trainingLayer release];
+        trainingLayer = nil;
+    }
     if(infoLayer && ![infoLayer parent]) {
         [infoLayer stopAllActions];
         [infoLayer release];
@@ -359,16 +374,25 @@
     
     [continueMenuLayer release];
     continueMenuLayer = nil;
+    
+    [configLayer release];
+    configLayer = nil;
 
     [gameConfigLayer release];
     gameConfigLayer = nil;
-    
+
+    [avConfigLayer release];
+    avConfigLayer = nil;
+
+    [trainingLayer release];
+    trainingLayer = nil;
+
     [infoLayer release];
     infoLayer = nil;
-    
+
     [guideLayer release];
     guideLayer = nil;
-    
+
     [statsLayer release];
     statsLayer = nil;
     

@@ -45,8 +45,11 @@
     MenuItem *av    = [MenuItemFont itemFromString:@"Audio / Video"
                                             target:self
                                           selector:@selector(av:)];
+    MenuItem *training = [MenuItemFont itemFromString:@"Training"
+                                               target:self
+                                             selector:@selector(training:)];
     
-    menu = [[Menu menuWithItems:game, av, nil] retain];
+    menu = [[Menu menuWithItems:game, av, training, nil] retain];
     [menu alignItemsVertically];
     [self add:menu];
     
@@ -79,6 +82,13 @@
     
     [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showAVConfiguration];
+}
+
+
+-(void) training: (id) sender {
+    
+    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAppDelegate get] showTraining];
 }
 
 

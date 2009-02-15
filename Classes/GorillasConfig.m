@@ -80,6 +80,10 @@
 #define dVibration          @"v1.vibration"
 #define dVisualFx           @"v1.visualFx"
 
+#define dTraining           @"v1.training"
+#define dThrowHint          @"v1.throwHint"
+#define dThrowHistory       @"v1.throwHistory"
+
 
 @implementation GorillasConfig
 
@@ -183,6 +187,10 @@
                                 [NSNumber numberWithBool:    YES],                          dSoundFx,
                                 [NSNumber numberWithBool:    YES],                          dVibration,
                                 [NSNumber numberWithBool:    YES],                          dVisualFx,
+                                
+                                [NSNumber numberWithBool:    NO],                           dTraining,
+                                [NSNumber numberWithBool:    NO],                           dThrowHint,
+                                [NSNumber numberWithBool:    YES],                          dThrowHistory,
                                 
                                 nil]];
 
@@ -636,6 +644,35 @@
     [defaults setBool:nVisualFx forKey: dVisualFx];
     [[GorillasAppDelegate get] updateConfig];
     [[[[GorillasAppDelegate get] gameLayer] skiesLayer] reset];
+}
+
+
+-(BOOL) training {
+    
+    return [defaults boolForKey: dTraining];
+}
+-(void) setTraining: (BOOL)nTraining {
+    
+    [defaults setBool:nTraining forKey: dTraining];
+    [[GorillasAppDelegate get] updateConfig];
+}
+-(BOOL) throwHint {
+    
+    return [defaults boolForKey: dThrowHint];
+}
+-(void) setThrowHint: (BOOL)nThrowHint {
+    
+    [defaults setBool:nThrowHint forKey: dThrowHint];
+    [[GorillasAppDelegate get] updateConfig];
+}
+-(BOOL) throwHistory {
+    
+    return [defaults boolForKey: dThrowHistory];
+}
+-(void) setThrowHistory: (BOOL)nThrowHistory {
+    
+    [defaults setBool:nThrowHistory forKey: dThrowHistory];
+    [[GorillasAppDelegate get] updateConfig];
 }
 
 

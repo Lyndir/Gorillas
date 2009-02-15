@@ -568,6 +568,11 @@
 		DA8B77920F46120600DD88BF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */; };
 		DA9420AB0F08C2CA00E105BD /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9420AA0F08C2CA00E105BD /* fire.png */; };
 		DAAC33240EC5E26800816338 /* veritech.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAAC33230EC5E26800816338 /* veritech.wav */; };
+		DAB308CE0F48B17600694C77 /* SwipeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB308CD0F48B17600694C77 /* SwipeLayer.m */; };
+		DAB308CF0F48B17600694C77 /* SwipeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB308CD0F48B17600694C77 /* SwipeLayer.m */; };
+		DAB308D00F48B17600694C77 /* SwipeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB308CD0F48B17600694C77 /* SwipeLayer.m */; };
+		DAB308D10F48B17600694C77 /* SwipeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB308CD0F48B17600694C77 /* SwipeLayer.m */; };
+		DAB308D20F48B17600694C77 /* SwipeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB308CD0F48B17600694C77 /* SwipeLayer.m */; };
 		DAB46AA90EC85E7400F17B3F /* HUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB46AA80EC85E7400F17B3F /* HUDLayer.m */; };
 		DAB896DD0F480411005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
 		DAB896DE0F480411005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
@@ -575,6 +580,11 @@
 		DAB896E00F480411005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
 		DAB898750F485418005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
 		DAB898830F4854B0005C1D06 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
+		DAB898CD0F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB898CC0F487567005C1D06 /* TrainingConfigurationLayer.m */; };
+		DAB898CE0F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB898CC0F487567005C1D06 /* TrainingConfigurationLayer.m */; };
+		DAB898CF0F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB898CC0F487567005C1D06 /* TrainingConfigurationLayer.m */; };
+		DAB898D00F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB898CC0F487567005C1D06 /* TrainingConfigurationLayer.m */; };
+		DAB898D10F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB898CC0F487567005C1D06 /* TrainingConfigurationLayer.m */; };
 		DAB8C42E0EF1D582003D22DA /* ContinueMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */; };
 		DABD678D0F18BAEC00EE213D /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A28DF0F17C64000975E5A /* splash.png */; };
 		DABD678E0F18BAEC00EE213D /* page10.guide in Resources */ = {isa = PBXBuildFile; fileRef = DA5A29570F180AC600975E5A /* page10.guide */; };
@@ -890,10 +900,14 @@
 		DA8B779B0F46120600DD88BF /* Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info copy.plist"; sourceTree = "<group>"; };
 		DA9420AA0F08C2CA00E105BD /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
 		DAAC33230EC5E26800816338 /* veritech.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = veritech.wav; sourceTree = "<group>"; };
+		DAB308CC0F48B17600694C77 /* SwipeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeLayer.h; sourceTree = "<group>"; };
+		DAB308CD0F48B17600694C77 /* SwipeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeLayer.m; sourceTree = "<group>"; };
 		DAB46AA70EC85E7400F17B3F /* HUDLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDLayer.h; sourceTree = "<group>"; };
 		DAB46AA80EC85E7400F17B3F /* HUDLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDLayer.m; sourceTree = "<group>"; };
 		DAB896DB0F480411005C1D06 /* PanningLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanningLayer.h; sourceTree = "<group>"; };
 		DAB896DC0F480411005C1D06 /* PanningLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanningLayer.m; sourceTree = "<group>"; };
+		DAB898CB0F487567005C1D06 /* TrainingConfigurationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingConfigurationLayer.h; sourceTree = "<group>"; };
+		DAB898CC0F487567005C1D06 /* TrainingConfigurationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingConfigurationLayer.m; sourceTree = "<group>"; };
 		DAB8C42C0EF1D582003D22DA /* ContinueMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinueMenuLayer.h; sourceTree = "<group>"; };
 		DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinueMenuLayer.m; sourceTree = "<group>"; };
 		DABD67A80F18BC1700EE213D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
@@ -1090,6 +1104,8 @@
 				DA34006F0EB516F400B68C06 /* GameConfigurationLayer.m */,
 				DA1816450F0E24D80064F470 /* AVConfigurationLayer.h */,
 				DA1816460F0E24D80064F470 /* AVConfigurationLayer.m */,
+				DAB898CB0F487567005C1D06 /* TrainingConfigurationLayer.h */,
+				DAB898CC0F487567005C1D06 /* TrainingConfigurationLayer.m */,
 			);
 			name = Configuration;
 			sourceTree = "<group>";
@@ -1482,6 +1498,8 @@
 				DA7547F50EAB66D40083EC7C /* GameLayer.m */,
 				DAB896DB0F480411005C1D06 /* PanningLayer.h */,
 				DAB896DC0F480411005C1D06 /* PanningLayer.m */,
+				DAB308CC0F48B17600694C77 /* SwipeLayer.h */,
+				DAB308CD0F48B17600694C77 /* SwipeLayer.m */,
 				DAB46AA70EC85E7400F17B3F /* HUDLayer.h */,
 				DAB46AA80EC85E7400F17B3F /* HUDLayer.m */,
 				DA16C3250EEBDE7900E46246 /* Resettable.h */,
@@ -1968,6 +1986,8 @@
 				DA3E5C610F3F286B00D83943 /* CJSONScanner.m in Sources */,
 				DA3E5C620F3F286B00D83943 /* CJSONSerializer.m in Sources */,
 				DAB896DF0F480411005C1D06 /* PanningLayer.m in Sources */,
+				DAB898CF0F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */,
+				DAB308D20F48B17600694C77 /* SwipeLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2071,6 +2091,8 @@
 				DA3E5C710F3F286B00D83943 /* CJSONScanner.m in Sources */,
 				DA3E5C720F3F286B00D83943 /* CJSONSerializer.m in Sources */,
 				DAB896DD0F480411005C1D06 /* PanningLayer.m in Sources */,
+				DAB898CD0F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */,
+				DAB308CE0F48B17600694C77 /* SwipeLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2174,6 +2196,8 @@
 				DA3E5C790F3F286B00D83943 /* CJSONScanner.m in Sources */,
 				DA3E5C7A0F3F286B00D83943 /* CJSONSerializer.m in Sources */,
 				DAB896E00F480411005C1D06 /* PanningLayer.m in Sources */,
+				DAB898D00F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */,
+				DAB308D00F48B17600694C77 /* SwipeLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2277,6 +2301,8 @@
 				DA8B77890F46120600DD88BF /* CJSONDeserializer.m in Sources */,
 				DA8B778A0F46120600DD88BF /* CJSONScanner.m in Sources */,
 				DA8B778B0F46120600DD88BF /* CJSONSerializer.m in Sources */,
+				DAB898D10F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */,
+				DAB308D10F48B17600694C77 /* SwipeLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2380,6 +2406,8 @@
 				DA3E5C810F3F286B00D83943 /* CJSONScanner.m in Sources */,
 				DA3E5C820F3F286B00D83943 /* CJSONSerializer.m in Sources */,
 				DAB896DE0F480411005C1D06 /* PanningLayer.m in Sources */,
+				DAB898CE0F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */,
+				DAB308CF0F48B17600694C77 /* SwipeLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
