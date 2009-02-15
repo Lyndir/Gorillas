@@ -225,39 +225,68 @@
 
 -(BOOL) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
-    return [self ccTouchesMoved:touches withEvent:event];
+    if([[event allTouches] count] != 1)
+        return [self ccTouchesCancelled:touches withEvent:event];
+    
+    if(![self mayThrow])
+        // State doesn't allow throwing right now.
+        return kEventIgnored;
+    
+    UITouch *touch = [[event allTouches] anyObject];
+	CGPoint location = [touch locationInView: [touch view]];
+    cpVect p = cpv(location.y, location.x);
+    for(CocosNode *n = self; n; n = [n parent])
+        p = cpvmult(p, 1 / [n scale]);
+    
+    if(aim.x != -1 || aim.y != -1)
+        // Has already began.
+        return kEventIgnored;
+        
+    aim = cpvsub(p, [self position]);
+    return kEventHandled;
 }
 
 
 -(BOOL) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     
-    UITouch *touch = [touches anyObject];
-	CGPoint location = [touch locationInView: [touch view]];
-
-    if(![self mayThrow])
-        // State doesn't allow throwing right now.
+    if([[event allTouches] count] != 1)
+        return [self ccTouchesCancelled:touches withEvent:event];
+    
+    if(aim.x == -1 && aim.y == -1)
+        // Hasn't yet began.
         return kEventIgnored;
     
-    if([[[GorillasAppDelegate get] hudLayer] hitsHud:cpv(location.y, location.x)])
+    UITouch *touch = [[event allTouches] anyObject];
+	CGPoint location = [touch locationInView: [touch view]];
+    cpVect p = cpv(location.y, location.x);
+    for(CocosNode *n = self; n; n = [n parent])
+        p = cpvmult(p, 1 / [n scale]);
+    
+    if([[[GorillasAppDelegate get] hudLayer] hitsHud:p])
         // Ignore when moving/clicking over/on HUD.
         return kEventIgnored;
         
-    aim = cpv(location.y - position.x, location.x);
-    
+    aim = cpvsub(p, [self position]);
     return kEventHandled;
 }
 
 
 -(BOOL) ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     
-    aim = cpv(-1.0f, -1.0f);
+    if(aim.x == -1 && aim.y == -1)
+        return kEventIgnored;
+    
+    aim = cpv(-1, -1);
     return kEventHandled;
 }
 
 
 -(BOOL) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 
-	UITouch *touch = [touches anyObject];
+    if([[event allTouches] count] != 1)
+        return [self ccTouchesCancelled:touches withEvent:event];
+    
+	UITouch *touch = [[event allTouches] anyObject];
 	CGPoint location = [touch locationInView: [touch view]];
     
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:cpv(location.y, location.x)]
@@ -636,15 +665,17 @@
 }
 
 
--(float) left {
+-(cpFloat) left {
     
-    return -position.x;
+    BuildingLayer *firstBuilding = [buildings objectAtIndex:1];
+    return [firstBuilding position].x;
 }
 
 
--(float) right {
+-(cpFloat) right {
     
-    return [self left] + [[Director sharedDirector] winSize].width;
+    BuildingLayer *lastBuilding = [buildings lastObject];
+    return [lastBuilding position].x + [lastBuilding contentSize].width;
 }
 
 

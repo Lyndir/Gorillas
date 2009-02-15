@@ -33,8 +33,6 @@
 
 @implementation HUDLayer
 
-@synthesize progress;
-
 
 -(id) init {
     
@@ -107,6 +105,7 @@
     
     [self stopAllActions];
     [self do:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, 0)]];
+    [scoreLabel setVisible:[[[GorillasAppDelegate get] gameLayer] singlePlayer]];
 }
 
 
@@ -145,9 +144,6 @@
 -(void) draw {
     
     drawBoxFrom(cpvzero, cpv(width, height), [[GorillasConfig get] shadeColor], [[GorillasConfig get] shadeColor]);
-    
-    const cpVect progressEnd = cpv(width * progress, 1);
-    drawLinesTo(cpv(0, 1), &progressEnd, 1, [[GorillasConfig get] windowColorOn], 1);
 }
 
 

@@ -569,6 +569,10 @@
 		DA9420AB0F08C2CA00E105BD /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9420AA0F08C2CA00E105BD /* fire.png */; };
 		DAAC33240EC5E26800816338 /* veritech.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAAC33230EC5E26800816338 /* veritech.wav */; };
 		DAB46AA90EC85E7400F17B3F /* HUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB46AA80EC85E7400F17B3F /* HUDLayer.m */; };
+		DAB896DD0F480411005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
+		DAB896DE0F480411005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
+		DAB896DF0F480411005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
+		DAB896E00F480411005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
 		DAB8C42E0EF1D582003D22DA /* ContinueMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */; };
 		DABD678D0F18BAEC00EE213D /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A28DF0F17C64000975E5A /* splash.png */; };
 		DABD678E0F18BAEC00EE213D /* page10.guide in Resources */ = {isa = PBXBuildFile; fileRef = DA5A29570F180AC600975E5A /* page10.guide */; };
@@ -886,6 +890,8 @@
 		DAAC33230EC5E26800816338 /* veritech.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = veritech.wav; sourceTree = "<group>"; };
 		DAB46AA70EC85E7400F17B3F /* HUDLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDLayer.h; sourceTree = "<group>"; };
 		DAB46AA80EC85E7400F17B3F /* HUDLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDLayer.m; sourceTree = "<group>"; };
+		DAB896DB0F480411005C1D06 /* PanningLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanningLayer.h; sourceTree = "<group>"; };
+		DAB896DC0F480411005C1D06 /* PanningLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanningLayer.m; sourceTree = "<group>"; };
 		DAB8C42C0EF1D582003D22DA /* ContinueMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinueMenuLayer.h; sourceTree = "<group>"; };
 		DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinueMenuLayer.m; sourceTree = "<group>"; };
 		DABD67A80F18BC1700EE213D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
@@ -1472,6 +1478,8 @@
 				DA5A256C0F16D63900975E5A /* Splash.m */,
 				DA7547F40EAB66D40083EC7C /* GameLayer.h */,
 				DA7547F50EAB66D40083EC7C /* GameLayer.m */,
+				DAB896DB0F480411005C1D06 /* PanningLayer.h */,
+				DAB896DC0F480411005C1D06 /* PanningLayer.m */,
 				DAB46AA70EC85E7400F17B3F /* HUDLayer.h */,
 				DAB46AA80EC85E7400F17B3F /* HUDLayer.m */,
 				DA16C3250EEBDE7900E46246 /* Resettable.h */,
@@ -1956,6 +1964,7 @@
 				DA3E5C600F3F286B00D83943 /* CJSONDeserializer.m in Sources */,
 				DA3E5C610F3F286B00D83943 /* CJSONScanner.m in Sources */,
 				DA3E5C620F3F286B00D83943 /* CJSONSerializer.m in Sources */,
+				DAB896DF0F480411005C1D06 /* PanningLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2058,6 +2067,7 @@
 				DA3E5C700F3F286B00D83943 /* CJSONDeserializer.m in Sources */,
 				DA3E5C710F3F286B00D83943 /* CJSONScanner.m in Sources */,
 				DA3E5C720F3F286B00D83943 /* CJSONSerializer.m in Sources */,
+				DAB896DD0F480411005C1D06 /* PanningLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2160,6 +2170,7 @@
 				DA3E5C780F3F286B00D83943 /* CJSONDeserializer.m in Sources */,
 				DA3E5C790F3F286B00D83943 /* CJSONScanner.m in Sources */,
 				DA3E5C7A0F3F286B00D83943 /* CJSONSerializer.m in Sources */,
+				DAB896E00F480411005C1D06 /* PanningLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2364,6 +2375,7 @@
 				DA3E5C800F3F286B00D83943 /* CJSONDeserializer.m in Sources */,
 				DA3E5C810F3F286B00D83943 /* CJSONScanner.m in Sources */,
 				DA3E5C820F3F286B00D83943 /* CJSONSerializer.m in Sources */,
+				DAB896DE0F480411005C1D06 /* PanningLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

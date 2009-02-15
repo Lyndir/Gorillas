@@ -52,7 +52,7 @@
     skiesLayer = [[SkiesLayer alloc] init];
     [skiesLayer setTransformAnchor:cpvzero];
     
-    panningLayer = [[Layer alloc] init];
+    panningLayer = [[PanningLayer alloc] init];
     [panningLayer setTransformAnchor:cpvzero];
     [panningLayer add:buildingsLayer z:0];
     [panningLayer add:skiesLayer z:-5 parallaxRatio:cpv(0.3f, 0.8f)];
@@ -321,6 +321,9 @@
     
     [weather release];
     weather = nil;
+    
+    [panningLayer release];
+    panningLayer = nil;
     
     [windLayer release];
     windLayer = nil;

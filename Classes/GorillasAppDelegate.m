@@ -39,7 +39,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:false];
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	[window setUserInteractionEnabled:YES];
-	[window setMultipleTouchEnabled:NO];
+	[window setMultipleTouchEnabled:YES];
     [window makeKeyAndVisible];
 
 	// Director and OpenGL Setup.
@@ -61,20 +61,18 @@
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
 
 	// Build the splash scene.
-    Scene *splashScene = [[Scene alloc] init];
-    Sprite *splash = [[Splash alloc] init];
+    Scene *splashScene = [Scene node];
+    Sprite *splash = [Splash node];
     [splashScene add:splash];
     
     // Build the game scene.
 	gameLayer = [[GameLayer alloc] init];
-
-    // Show the splash screen.
-	[[Director sharedDirector] runWithScene:splashScene];
-    [splashScene release];
-    [splash release];
 	
     // Start the background music.
     [self playTrack:[[GorillasConfig get] currentTrack]];
+
+    // Show the splash screen, this starts the main loop in the current thread.
+	[[Director sharedDirector] runWithScene:splashScene];
 }
 
 
@@ -225,8 +223,8 @@
 
     if(![track length])
         track = nil;
+    
     nextTrack = track;
-
     [self startNextTrack];
 }
 

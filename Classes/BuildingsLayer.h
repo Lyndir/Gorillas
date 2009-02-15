@@ -76,7 +76,7 @@
 
 -(void) message: (NSString *)msg on: (CocosNode<CocosNodeSize> *)node;
 
--(float) left;
--(float) right;
+-(cpFloat) left;
+-(cpFloat) right;
 
 @end

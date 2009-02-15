@@ -17,32 +17,21 @@
  */
 
 //
-//  HUDLayer.h
+//  PanningLayer.h
 //  Gorillas
 //
-//  Created by Maarten Billemont on 10/11/08.
-//  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
+//  Created by Maarten Billemont on 15/02/09.
+//  Copyright, lhunath (Maarten Billemont) 2008. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
 
+@interface PanningLayer : Layer {
 
-@interface HUDLayer : Layer {
-
-    MenuItemFont *menuButton;
-    Menu *menuMenu;
-    Label *scoreLabel;
-    
-    float width;
-    float height;
+    cpFloat initialScale;
+    cpFloat initialDist;
+    ScaleTo *scaleAction;
 }
-
--(void) dismiss;
-
--(void) setMenuTitle: (NSString *)title;
--(void) updateScore: (int)nScore;
-
--(BOOL) hitsHud: (cpVect)pos;
 
 @end

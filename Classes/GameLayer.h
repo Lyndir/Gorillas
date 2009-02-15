@@ -27,6 +27,7 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
+#import "PanningLayer.h"
 #import "GorillasConfig.h"
 #import "SkiesLayer.h"
 #import "BuildingsLayer.h"
@@ -39,7 +40,7 @@
     BOOL running;
     BOOL singlePlayer;
 
-    Layer *panningLayer;
+    PanningLayer *panningLayer;
     SkiesLayer *skiesLayer;
     BuildingsLayer *buildingsLayer;
     ParticleSystem *weather;
@@ -47,7 +48,7 @@
     Label *msgLabel;
 }
 
-@property (readonly) Layer *panningLayer;
+@property (readonly) PanningLayer *panningLayer;
 @property (readonly) SkiesLayer *skiesLayer;
 @property (readonly) BuildingsLayer *buildingsLayer;
 @property (readonly) ParticleSystem *weather;
