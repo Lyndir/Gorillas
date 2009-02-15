@@ -152,22 +152,22 @@
 -(void) flipPage {
     
     NSUInteger count = [guidePages count];
-    NSString *prevPage = [guidePages objectAtIndex:(page + count - 1) % count],
-             *currPage = [guidePages objectAtIndex:page],
-             *nextPage = [guidePages objectAtIndex:(page + 1) % count],
-             *skipPage = [guidePages objectAtIndex:(page + 2) % count];
+    NSUInteger prevPage = (page + count - 1) % count;
+    NSUInteger currPage = page;
+    NSUInteger nextPage = (page + 1) % count;
+    NSUInteger skipPage = (page + 2) % count;
     
     [swipeLayer setPosition:cpvzero];
     
     [pageNumberLabel setString:[NSString stringWithFormat:@"%d / %d", page + 1, count]];
 
-    [prevPageLabel setString:prevPage];
-    [currPageLabel setString:currPage];
-    [nextPageLabel setString:nextPage];
+    [prevPageLabel setString:[guidePages objectAtIndex:prevPage]];
+    [currPageLabel setString:[guidePages objectAtIndex:currPage]];
+    [nextPageLabel setString:[guidePages objectAtIndex:nextPage]];
 
-    [chapterCurr setString:currPage];
-    [chapterNext setString:nextPage];
-    [chapterSkip setString:skipPage];
+    [chapterCurr setString:[guideTitles objectAtIndex:currPage]];
+    [chapterNext setString:[guideTitles objectAtIndex:nextPage]];
+    [chapterSkip setString:[guideTitles objectAtIndex:skipPage]];
 }
 
 
