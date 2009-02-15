@@ -573,6 +573,8 @@
 		DAB896DE0F480411005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
 		DAB896DF0F480411005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
 		DAB896E00F480411005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
+		DAB898750F485418005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
+		DAB898830F4854B0005C1D06 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
 		DAB8C42E0EF1D582003D22DA /* ContinueMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */; };
 		DABD678D0F18BAEC00EE213D /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A28DF0F17C64000975E5A /* splash.png */; };
 		DABD678E0F18BAEC00EE213D /* page10.guide in Resources */ = {isa = PBXBuildFile; fileRef = DA5A29570F180AC600975E5A /* page10.guide */; };
@@ -1786,6 +1788,7 @@
 				DABD67F20F190D4D00EE213D /* fighting_gorillas.wav in Resources */,
 				DABD67F30F190D4D00EE213D /* page8.guide in Resources */,
 				DABD67F40F190D4D00EE213D /* page9.guide in Resources */,
+				DAB898830F4854B0005C1D06 /* Entitlements.plist in Resources */,
 				DABD67F60F190D4D00EE213D /* forkbomb.wav in Resources */,
 				DABD67F70F190D4D00EE213D /* prideofthepacific.wav in Resources */,
 				DABD67F80F190D4D00EE213D /* fire.png in Resources */,
@@ -2178,6 +2181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAB898750F485418005C1D06 /* PanningLayer.m in Sources */,
 				DA8B772D0F46120600DD88BF /* main.m in Sources */,
 				DA8B772E0F46120600DD88BF /* GorillasAppDelegate.m in Sources */,
 				DA8B772F0F46120600DD88BF /* GameLayer.m in Sources */,
