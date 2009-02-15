@@ -37,6 +37,7 @@
 
 
 @property (readwrite) int                   fontSize;
+@property (readwrite) int                   largeFontSize;
 @property (readwrite) int                   smallFontSize;
 @property (readwrite, assign) NSString      *fontName;
 @property (readwrite, assign) NSString      *fixedFontName;
@@ -90,6 +91,7 @@
 
 @property (readwrite) BOOL                  weather;
 @property (readwrite) BOOL                  soundFx;
+@property (readwrite) BOOL                  vibration;
 @property (readwrite) BOOL                  visualFx;
 
 -(long)                                     buildingColor;

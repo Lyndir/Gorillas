@@ -78,6 +78,29 @@
                                               selector:@selector(soundFx:)];
     
     
+    // Vibration.
+    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    MenuItem *vibrationT  = [MenuItemFont itemFromString:@"Vibration"];
+    [vibrationT setIsEnabled:false];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    MenuItem *vibrationI  = [MenuItemFont itemFromString:[[GorillasConfig get] vibration]? @"On": @"Off"
+                                                target:self
+                                              selector:@selector(vibration:)];
+    
+    
+    // Visual Effects.
+    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    MenuItem *visualFxT  = [MenuItemFont itemFromString:@"Visual Effects"];
+    [visualFxT setIsEnabled:false];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    MenuItem *visualFxI  = [MenuItemFont itemFromString:[[GorillasConfig get] visualFx]? @"On": @"Off"
+                                                 target:self
+
+                                               selector:@selector(visualFx:)];
     // Weather.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
@@ -90,26 +113,24 @@
                                               selector:@selector(weather:)];
     
     
-    // Effects.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *visualFxT  = [MenuItemFont itemFromString:@"Visual Effects"];
-    [visualFxT setIsEnabled:false];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *visualFxI  = [MenuItemFont itemFromString:[[GorillasConfig get] visualFx]? @"On": @"Off"
-                                                target:self
-                                              selector:@selector(visualFx:)];
-    
-    menu = [[Menu menuWithItems:audioT, audioI, soundFxT, soundFxI, weatherT, weatherI, visualFxT, visualFxI, nil] retain];
-    [menu alignItemsVertically];
+    menu = [[Menu menuWithItems:audioT, audioI, soundFxT, vibrationT, soundFxI, vibrationI, visualFxT, weatherT, visualFxI, weatherI, nil] retain];
+    [menu alignItemsInColumns:
+     [NSNumber numberWithUnsignedInteger:1],
+     [NSNumber numberWithUnsignedInteger:1],
+     [NSNumber numberWithUnsignedInteger:2],
+     [NSNumber numberWithUnsignedInteger:2],
+     [NSNumber numberWithUnsignedInteger:2],
+     [NSNumber numberWithUnsignedInteger:2],
+     nil];
     [self add:menu];
 
     
     // Back.
-    MenuItem *back     = [MenuItemFont itemFromString:@"<"
+    [MenuItemFont setFontSize:[[GorillasConfig get] largeFontSize]];
+    MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
                                                 target: self
                                               selector: @selector(back:)];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
     backMenu = [[Menu menuWithItems:back, nil] retain];
     [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
@@ -158,10 +179,10 @@
 }
 
 
--(void) weather: (id) sender {
+-(void) vibration: (id) sender {
     
+    [[GorillasConfig get] setVibration:![[GorillasConfig get] vibration]];
     [[GorillasAppDelegate get] clickEffect];
-    [[GorillasConfig get] setWeather:![[GorillasConfig get] weather]];
 }
 
 
@@ -169,6 +190,13 @@
     
     [[GorillasAppDelegate get] clickEffect];
     [[GorillasConfig get] setVisualFx:![[GorillasConfig get] visualFx]];
+}
+
+
+-(void) weather: (id) sender {
+    
+    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasConfig get] setWeather:![[GorillasConfig get] weather]];
 }
 
 

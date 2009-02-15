@@ -53,10 +53,10 @@
     [super onEnter];
     
     
-    if([[GorillasConfig get] soundFx]) {
+    if([[GorillasConfig get] soundFx])
         [AudioController playEffect:[ExplosionLayer explosionEffect:heavy]];
+    if([[GorillasConfig get] vibration])
         [AudioController vibrate];
-    }
     
     int explosionParticles = random() % 50 + 300;
     if(heavy)

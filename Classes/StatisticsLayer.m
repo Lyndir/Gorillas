@@ -42,9 +42,11 @@
     scoreTowers = [[NSMutableArray alloc] initWithCapacity:20];
     
     // Back.
-    MenuItem *back     = [MenuItemFont itemFromString:@"<"
+    [MenuItemFont setFontSize:[[GorillasConfig get] largeFontSize]];
+    MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
                                                target: self
                                              selector: @selector(back:)];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
     menu = [[Menu menuWithItems:back, nil] retain];
     [menu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];

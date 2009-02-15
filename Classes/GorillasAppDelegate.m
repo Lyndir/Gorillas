@@ -45,7 +45,7 @@
 	// Director and OpenGL Setup.
     [Director useFastDirector];
 	[[Director sharedDirector] attachInWindow:window];
-	[[Director sharedDirector] setDisplayFPS:YES];
+	[[Director sharedDirector] setDisplayFPS:NO];
 	[[Director sharedDirector] setDepthTest:false];
 	[[Director sharedDirector] setLandscape:true];
 	//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);

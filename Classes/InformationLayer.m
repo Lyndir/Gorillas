@@ -60,9 +60,11 @@
 
     
     // Back.
-    MenuItem *back     = [MenuItemFont itemFromString:@"<"
+    [MenuItemFont setFontSize:[[GorillasConfig get] largeFontSize]];
+    MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
                                                target: self
                                              selector: @selector(mainMenu:)];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
     backMenu = [[Menu menuWithItems:back, nil] retain];
     [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];

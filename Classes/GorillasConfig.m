@@ -32,6 +32,7 @@
 #define dCityTheme          @"v1.cityTheme"
 
 #define dFontSize           @"v1.fontSize"
+#define dLargeFontSize      @"v1.largeFontSize"
 #define dSmallFontSize      @"v1.smallFontSize"
 #define dFixedFontName      @"v1.fixedFontName"
 #define dFontName           @"v1.fontName"
@@ -76,6 +77,7 @@
 
 #define dWeather            @"v1.weather"
 #define dSoundFx            @"v1.soundFx"
+#define dVibration          @"v1.vibration"
 #define dVisualFx           @"v1.visualFx"
 
 
@@ -107,6 +109,7 @@
     [defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
                                 [CityTheme defaultThemeName],                               dCityTheme,
                                 [NSNumber numberWithInteger:    34],                        dFontSize,
+                                [NSNumber numberWithInteger:    48],                        dLargeFontSize,
                                 [NSNumber numberWithInteger:    18],                        dSmallFontSize,
                                 @"Marker Felt",                                             dFontName,
                                 @"American Typewriter",                                     dFixedFontName,
@@ -178,6 +181,7 @@
                                 
                                 [NSNumber numberWithBool:    YES],                          dWeather,
                                 [NSNumber numberWithBool:    YES],                          dSoundFx,
+                                [NSNumber numberWithBool:    YES],                          dVibration,
                                 [NSNumber numberWithBool:    YES],                          dVisualFx,
                                 
                                 nil]];
@@ -203,6 +207,15 @@
 -(void) setCityTheme: (NSString *)cityTheme {
     
     [defaults setObject:cityTheme forKey: dCityTheme];
+    [[GorillasAppDelegate get] updateConfig];
+}
+-(int) largeFontSize {
+    
+    return [defaults integerForKey: dLargeFontSize];
+}
+-(void) setLargeFontSize: (int)largeFontSize {
+    
+    [defaults setInteger:largeFontSize forKey: dLargeFontSize];
     [[GorillasAppDelegate get] updateConfig];
 }
 -(int) smallFontSize {
@@ -603,6 +616,15 @@
 -(void) setSoundFx: (BOOL)nSoundFx {
     
     [defaults setBool:nSoundFx forKey: dSoundFx];
+    [[GorillasAppDelegate get] updateConfig];
+}
+-(BOOL) vibration {
+    
+    return [defaults boolForKey: dVibration];
+}
+-(void) setVibration: (BOOL)nVibration {
+    
+    [defaults setBool:nVibration forKey: dVibration];
     [[GorillasAppDelegate get] updateConfig];
 }
 -(BOOL) visualFx {
