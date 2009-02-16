@@ -80,6 +80,9 @@
 #define dVibration          @"v1.vibration"
 #define dVisualFx           @"v1.visualFx"
 
+#define dFollowThrow        @"v1.followThrow"
+#define dMultiplayerFlip    @"v1.multiplayerFlip"
+
 #define dTraining           @"v1.training"
 #define dThrowHint          @"v1.throwHint"
 #define dThrowHistory       @"v1.throwHistory"
@@ -187,6 +190,9 @@
                                 [NSNumber numberWithBool:    YES],                          dSoundFx,
                                 [NSNumber numberWithBool:    YES],                          dVibration,
                                 [NSNumber numberWithBool:    YES],                          dVisualFx,
+                                
+                                [NSNumber numberWithBool:    YES],                          dFollowThrow,
+                                [NSNumber numberWithBool:    NO],                           dMultiplayerFlip,
                                 
                                 [NSNumber numberWithBool:    NO],                           dTraining,
                                 [NSNumber numberWithBool:    NO],                           dThrowHint,
@@ -646,6 +652,25 @@
     [[[[GorillasAppDelegate get] gameLayer] skiesLayer] reset];
 }
 
+
+-(BOOL) followThrow {
+    
+    return [defaults boolForKey: dFollowThrow];
+}
+-(void) setFollowThrow: (BOOL)nFollowThrow {
+    
+    [defaults setBool:nFollowThrow forKey: dFollowThrow];
+    [[GorillasAppDelegate get] updateConfig];
+}
+-(BOOL) multiplayerFlip {
+    
+    return [defaults boolForKey: dMultiplayerFlip];
+}
+-(void) setMultiplayerFlip: (BOOL)nMultiplayerFlip {
+    
+    [defaults setBool:nMultiplayerFlip forKey: dMultiplayerFlip];
+    [[GorillasAppDelegate get] updateConfig];
+}
 
 -(BOOL) training {
     

@@ -94,6 +94,9 @@
 @property (readwrite) BOOL                  vibration;
 @property (readwrite) BOOL                  visualFx;
 
+@property (readwrite) BOOL                  followThrow;
+@property (readwrite) BOOL                  multiplayerFlip;
+
 @property (readwrite) BOOL                  training;
 @property (readwrite) BOOL                  throwHint;
 @property (readwrite) BOOL                  throwHistory;

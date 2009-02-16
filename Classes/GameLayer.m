@@ -61,6 +61,9 @@
     windLayer = [[WindLayer alloc] init];
     [windLayer setColor:0xffffff00];
     [self add:windLayer z:5];
+    
+    CGSize winSize = [[Director sharedDirector] winSize];
+    [self setTransformAnchor:cpv(winSize.width / 2, winSize.height / 2)];
 
     return self;
 }
@@ -278,6 +281,10 @@
 
 -(void) started {
     
+    if([self rotation])
+        [self do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                        angle:0]];
+    
     running = true;
     paused = false;
     
@@ -298,6 +305,10 @@
 
 
 -(void) stopped {
+    
+    if([self rotation])
+        [self do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                        angle:0]];
     
     paused = true;
     [self pause];

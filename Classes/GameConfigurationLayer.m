@@ -90,8 +90,39 @@
                                                 target:self
                                               selector:@selector(gravity:)];
     
-    menu = [[Menu menuWithItems:themeT, themeI, levelT, levelI, gravityT, gravityI, nil] retain];
-    [menu alignItemsVertically];
+    
+    // Follow Throw.
+    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    MenuItem *followT  = [MenuItemFont itemFromString:@"Follow Throw"];
+    [followT setIsEnabled:false];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    MenuItem *followI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%@", [[GorillasConfig get] followThrow]? @"On": @"Off"]
+                                               target:self
+                                             selector:@selector(followThrow:)];
+    
+    
+    // Multiplayer Flip.
+    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    MenuItem *flipT  = [MenuItemFont itemFromString:@"Multiplayer Flipping"];
+    [flipT setIsEnabled:false];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    MenuItem *flipI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%@", [[GorillasConfig get] multiplayerFlip]? @"On": @"Off"]
+                                             target:self
+                                           selector:@selector(multiplayerFlip:)];
+    
+    menu = [[Menu menuWithItems:themeT, themeI, levelT, gravityT, levelI, gravityI, followT, flipT, followI, flipI, nil] retain];
+    [menu alignItemsInColumns:
+     [NSNumber numberWithUnsignedInteger:1],
+     [NSNumber numberWithUnsignedInteger:1],
+     [NSNumber numberWithUnsignedInteger:2],
+     [NSNumber numberWithUnsignedInteger:2],
+     [NSNumber numberWithUnsignedInteger:2],
+     [NSNumber numberWithUnsignedInteger:2],
+     nil];
     [self add:menu];
     
     
@@ -162,6 +193,29 @@
     [[GorillasConfig get] setCityTheme:newTheme];
     
     [[[GorillasAppDelegate get] gameLayer] reset];
+}
+
+
+-(void) followThrow: (id) sender {
+    
+    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasConfig get] setFollowThrow:![[GorillasConfig get] followThrow]];
+}
+
+
+-(void) multiplayerFlip: (id) sender {
+    
+    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasConfig get] setMultiplayerFlip:![[GorillasConfig get] multiplayerFlip]];
+    
+    if(![[GorillasConfig get] multiplayerFlip]) {
+        GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
+        
+        if([gameLayer rotation])
+            [gameLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                                 angle:0]];
+        
+    }
 }
 
 

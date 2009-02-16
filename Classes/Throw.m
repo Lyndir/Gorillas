@@ -185,9 +185,11 @@
     PanningLayer *panningLayer = [[[GorillasAppDelegate get] gameLayer] panningLayer];
     
     // MoveTo cpvzero happens without the gameScrollElapsed logic.
-    if(r.x == 0 && r.y == 0) {
-        [panningLayer do:[MoveTo actionWithDuration:[[GorillasConfig get] gameScrollDuration]
-                                           position:cpvzero]];
+    if((r.x == 0 && r.y == 0) || ![[GorillasConfig get] followThrow]) {
+        if([panningLayer position].x != 0 || [panningLayer position].y != 0)
+            [panningLayer do:[MoveTo actionWithDuration:[[GorillasConfig get] gameScrollDuration]
+                                               position:cpvzero]];
+        
         return;
     }
     

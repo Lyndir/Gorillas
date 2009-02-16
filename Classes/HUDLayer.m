@@ -105,7 +105,7 @@
     
     [self stopAllActions];
     [self do:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, 0)]];
-    [scoreLabel setVisible:[[[GorillasAppDelegate get] gameLayer] singlePlayer]];
+    [scoreLabel setVisible:[[[GorillasAppDelegate get] gameLayer] singlePlayer] && ![[GorillasConfig get] training]];
 }
 
 

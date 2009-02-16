@@ -44,6 +44,7 @@
     
     UIWindow                    *window;
     
+    Layer                       *uiLayer;
     GameLayer                   *gameLayer;
     ShadeLayer                  *currentLayer;
     ContinueMenuLayer           *continueMenuLayer;
@@ -51,7 +52,7 @@
     ConfigurationSectionLayer   *configLayer;
     GameConfigurationLayer      *gameConfigLayer;
     AVConfigurationLayer        *avConfigLayer;
-    TrainingConfigurationLayer       *trainingLayer;
+    TrainingConfigurationLayer  *trainingLayer;
     InformationLayer            *infoLayer;
     GuideLayer                  *guideLayer;
     StatisticsLayer             *statsLayer;
@@ -60,6 +61,7 @@
     NSString                    *nextTrack;
 }
 
+@property (readonly) Layer                      *uiLayer;
 @property (readonly) GameLayer                  *gameLayer;
 @property (readonly) HUDLayer                   *hudLayer;
 

@@ -30,7 +30,7 @@
 
 @implementation GorillasAppDelegate
 
-@synthesize gameLayer;
+@synthesize uiLayer, gameLayer;
 
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
@@ -67,6 +67,8 @@
     
     // Build the game scene.
 	gameLayer = [[GameLayer alloc] init];
+    uiLayer = [[Layer alloc] init];
+    [uiLayer add:gameLayer];
 	
     // Start the background music.
     [self playTrack:[[GorillasConfig get] currentTrack]];
@@ -78,9 +80,7 @@
 
 -(void) revealHud {
     
-    if([hudLayer parent])
-        [gameLayer removeAndStop:hudLayer];
-    
+    [[hudLayer parent] removeAndStop:hudLayer];
     [gameLayer add:[self hudLayer]];
 }
 
@@ -144,7 +144,7 @@
         [self dismissLayer];
     
     currentLayer = [layer retain];
-    [gameLayer add:currentLayer];
+    [uiLayer add:currentLayer];
 }
 
 
@@ -365,6 +365,9 @@
     
     [gameLayer release];
     gameLayer = nil;
+    
+    [uiLayer release];
+    uiLayer = nil;
     
     [currentLayer release];
     currentLayer = nil;

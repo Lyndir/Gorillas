@@ -62,7 +62,7 @@
         [self unschedule:@selector(switchScene:)];
 
         Scene *gameScene = [[Scene alloc] init];
-        [gameScene add: [[GorillasAppDelegate get] gameLayer]];
+        [gameScene add: [[GorillasAppDelegate get] uiLayer]];
         
         // Build a transition scene from the splash scene to the game scene.
         TransitionScene *transitionScene = [[ZoomFlipYTransition alloc] initWithDuration:[[GorillasConfig get] transitionDuration]

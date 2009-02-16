@@ -241,9 +241,17 @@
     
     UITouch *touch = [[event allTouches] anyObject];
 	CGPoint location = [touch locationInView: [touch view]];
+    CGSize winSize = [[Director sharedDirector] winSize];
+    cpVect halfWin = cpv(winSize.width / 2, winSize.height / 2);
     cpVect p = cpv(location.y, location.x);
+    cpFloat rot = (cpFloat)DEGREES_TO_RADIANS([[[GorillasAppDelegate get] gameLayer] rotation]);
+    p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
     for(CocosNode *n = self; n; n = [n parent])
         p = cpvmult(p, 1 / [n scale]);
+    
+    if([[[GorillasAppDelegate get] hudLayer] hitsHud:p])
+        // Ignore when moving/clicking over/on HUD.
+        return kEventIgnored;
     
     if(aim.x != -1 || aim.y != -1)
         // Has already began.
@@ -265,7 +273,11 @@
     
     UITouch *touch = [[event allTouches] anyObject];
 	CGPoint location = [touch locationInView: [touch view]];
+    CGSize winSize = [[Director sharedDirector] winSize];
+    cpVect halfWin = cpv(winSize.width / 2, winSize.height / 2);
     cpVect p = cpv(location.y, location.x);
+    cpFloat rot = (cpFloat)DEGREES_TO_RADIANS([[[GorillasAppDelegate get] gameLayer] rotation]);
+    p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
     for(CocosNode *n = self; n; n = [n parent])
         p = cpvmult(p, 1 / [n scale]);
     
@@ -295,8 +307,15 @@
     
 	UITouch *touch = [[event allTouches] anyObject];
 	CGPoint location = [touch locationInView: [touch view]];
+    CGSize winSize = [[Director sharedDirector] winSize];
+    cpVect halfWin = cpv(winSize.width / 2, winSize.height / 2);
+    cpVect p = cpv(location.y, location.x);
+    cpFloat rot = (cpFloat)DEGREES_TO_RADIANS([[[GorillasAppDelegate get] gameLayer] rotation]);
+    p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
+    for(CocosNode *n = self; n; n = [n parent])
+        p = cpvmult(p, 1 / [n scale]);
     
-    if([[[GorillasAppDelegate get] hudLayer] hitsHud:cpv(location.y, location.x)]
+    if([[[GorillasAppDelegate get] hudLayer] hitsHud:p]
         || aim.x <= 0
         || ![self mayThrow])
         // Cancel when: released over HUD, no aim vector, state doesn't allow throwing.
@@ -320,6 +339,12 @@
 
 
 -(void) nextGorilla {
+    
+    GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
+    if([activeGorilla human] && ![gameLayer singlePlayer] && [[GorillasConfig get] multiplayerFlip]) {
+        [gameLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                             angle:((int) [gameLayer rotation] + 180) % 360]];
+    }
     
     // Activate the next gorilla.
     // Look for the next live gorilla; first try the next gorilla AFTER the current.
@@ -449,8 +474,8 @@
 
 -(void) miss {
     
-    if(!([[[GorillasAppDelegate get] gameLayer] singlePlayer] && [activeGorilla human]))
-        // Only deduct points when single player game & throw was by human.
+    if(!([[[GorillasAppDelegate get] gameLayer] singlePlayer] && [activeGorilla human] && ![[GorillasConfig get] training]))
+        // Only deduct points when single player game & throw was by human & not in training mode.
         return;
     
     int nScore = [[GorillasConfig get] level] * [[GorillasConfig get] missScore];
@@ -496,8 +521,7 @@
                 if(liveGorillaCount == 1) {
                     [[[GorillasAppDelegate get] hudLayer] setMenuTitle:[NSString stringWithFormat:@"%@ wins!", [liveGorilla name]]];
                     
-                    if([[[GorillasAppDelegate get] gameLayer] singlePlayer]
-                        && ! [[GorillasConfig get] training]) {
+                    if([[[GorillasAppDelegate get] gameLayer] singlePlayer] && ! [[GorillasConfig get] training]) {
                         // One gorilla left in single player: modify the level depending on who survived.
                         
                         NSString *oldLevel = [[GorillasConfig get] levelName];
