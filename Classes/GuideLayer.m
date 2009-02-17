@@ -38,15 +38,10 @@
         return self;
 
     // Guide Content.
-    NSUInteger pageCount = 10;
-    NSString** pageData = malloc(sizeof(NSString *) * pageCount);
-    for(NSUInteger i = 0; i < pageCount; ++i)
-        pageData[i] = [NSString stringWithContentsOfFile:
-                       [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"page%d", i + 1]
-                                                       ofType:@"guide"]];
-    
-    NSArray *pages = [[NSArray alloc] initWithObjects:pageData count:pageCount];
-    free(pageData);
+    NSString *guideData = [NSString stringWithContentsOfFile:
+                           [[NSBundle mainBundle] pathForResource:@"guide"
+                                                           ofType:@"txt"]];
+    NSArray *pages = [guideData componentsSeparatedByString:@"\n\n===== NEXT PAGE =====\n"];
     
     guidePages = [[NSMutableArray alloc] initWithCapacity:[pages count]];
     guideTitles = [[NSMutableArray alloc] initWithCapacity:[pages count]];
@@ -56,7 +51,6 @@
         [guideTitles addObject:[guidePage substringToIndex:firstLineEnd]];
         [guidePages addObject:[guidePage substringFromIndex:firstLineEnd + 1]];
     }
-    [pages release];
     
     
     // Controls.

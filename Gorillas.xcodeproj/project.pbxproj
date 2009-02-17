@@ -38,17 +38,8 @@
 		DA379F380F09654A00541EF4 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4EA220EDB0A610093BA40 /* banana.png */; };
 		DA379F3E0F09654A00541EF4 /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2283090EE2CAC600BA53D2 /* hole.png */; };
 		DA379F3F0F09654A00541EF4 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5F1BD40EE74CE80041691E /* fps_images.png */; };
-		DA379F410F09654A00541EF4 /* page1.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEC0EF57EA500035664 /* page1.guide */; };
-		DA379F420F09654A00541EF4 /* page2.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAED0EF57EA500035664 /* page2.guide */; };
-		DA379F430F09654A00541EF4 /* page3.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEE0EF57EA500035664 /* page3.guide */; };
-		DA379F440F09654A00541EF4 /* page4.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEF0EF57EA500035664 /* page4.guide */; };
-		DA379F450F09654A00541EF4 /* page5.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2C0EF58BC300035664 /* page5.guide */; };
-		DA379F460F09654A00541EF4 /* page6.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2D0EF58BC300035664 /* page6.guide */; };
-		DA379F470F09654A00541EF4 /* page7.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2E0EF58BC300035664 /* page7.guide */; };
 		DA379F480F09654A00541EF4 /* blockdropper3.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059B0EFD12D100797E7A /* blockdropper3.wav */; };
 		DA379F490F09654A00541EF4 /* fighting_gorillas.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */; };
-		DA379F4A0F09654A00541EF4 /* page8.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9BF0EFDCA540074333B /* page8.guide */; };
-		DA379F4B0F09654A00541EF4 /* page9.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9C00EFDCA540074333B /* page9.guide */; };
 		DA379F4D0F09654A00541EF4 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
 		DA379F4E0F09654A00541EF4 /* forkbomb.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94D0F0409A000E94E84 /* forkbomb.wav */; };
 		DA379F4F0F09654A00541EF4 /* prideofthepacific.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94E0F0409A000E94E84 /* prideofthepacific.wav */; };
@@ -95,17 +86,8 @@
 		DA379FAD0F0965A600541EF4 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4EA220EDB0A610093BA40 /* banana.png */; };
 		DA379FB30F0965A600541EF4 /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2283090EE2CAC600BA53D2 /* hole.png */; };
 		DA379FB40F0965A600541EF4 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5F1BD40EE74CE80041691E /* fps_images.png */; };
-		DA379FB60F0965A600541EF4 /* page1.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEC0EF57EA500035664 /* page1.guide */; };
-		DA379FB70F0965A600541EF4 /* page2.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAED0EF57EA500035664 /* page2.guide */; };
-		DA379FB80F0965A600541EF4 /* page3.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEE0EF57EA500035664 /* page3.guide */; };
-		DA379FB90F0965A600541EF4 /* page4.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEF0EF57EA500035664 /* page4.guide */; };
-		DA379FBA0F0965A600541EF4 /* page5.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2C0EF58BC300035664 /* page5.guide */; };
-		DA379FBB0F0965A600541EF4 /* page6.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2D0EF58BC300035664 /* page6.guide */; };
-		DA379FBC0F0965A600541EF4 /* page7.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2E0EF58BC300035664 /* page7.guide */; };
 		DA379FBD0F0965A600541EF4 /* blockdropper3.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059B0EFD12D100797E7A /* blockdropper3.wav */; };
 		DA379FBE0F0965A600541EF4 /* fighting_gorillas.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */; };
-		DA379FBF0F0965A600541EF4 /* page8.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9BF0EFDCA540074333B /* page8.guide */; };
-		DA379FC00F0965A600541EF4 /* page9.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9C00EFDCA540074333B /* page9.guide */; };
 		DA379FC20F0965A600541EF4 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
 		DA379FC30F0965A600541EF4 /* forkbomb.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94D0F0409A000E94E84 /* forkbomb.wav */; };
 		DA379FC40F0965A600541EF4 /* prideofthepacific.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94E0F0409A000E94E84 /* prideofthepacific.wav */; };
@@ -402,7 +384,6 @@
 		DA4F4A260EF327A30062E0E8 /* GuideLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4A250EF327A30062E0E8 /* GuideLayer.m */; };
 		DA5A256D0F16D63900975E5A /* Splash.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5A256C0F16D63900975E5A /* Splash.m */; };
 		DA5A28E00F17C64100975E5A /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A28DF0F17C64000975E5A /* splash.png */; };
-		DA5A29580F180AC600975E5A /* page10.guide in Resources */ = {isa = PBXBuildFile; fileRef = DA5A29570F180AC600975E5A /* page10.guide */; };
 		DA5CA6370F421D60003324AB /* explosion0.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA5CA6350F421D60003324AB /* explosion0.wav */; };
 		DA5CA6380F421D60003324AB /* explosion3.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA5CA6360F421D60003324AB /* explosion3.wav */; };
 		DA5CA63B0F421D60003324AB /* explosion0.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA5CA6350F421D60003324AB /* explosion0.wav */; };
@@ -439,24 +420,14 @@
 		DA8B770F0F46120600DD88BF /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4EA220EDB0A610093BA40 /* banana.png */; };
 		DA8B77100F46120600DD88BF /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2283090EE2CAC600BA53D2 /* hole.png */; };
 		DA8B77110F46120600DD88BF /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5F1BD40EE74CE80041691E /* fps_images.png */; };
-		DA8B77120F46120600DD88BF /* page1.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEC0EF57EA500035664 /* page1.guide */; };
-		DA8B77130F46120600DD88BF /* page2.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAED0EF57EA500035664 /* page2.guide */; };
-		DA8B77140F46120600DD88BF /* page3.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEE0EF57EA500035664 /* page3.guide */; };
-		DA8B77150F46120600DD88BF /* page4.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEF0EF57EA500035664 /* page4.guide */; };
-		DA8B77160F46120600DD88BF /* page5.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2C0EF58BC300035664 /* page5.guide */; };
-		DA8B77170F46120600DD88BF /* page6.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2D0EF58BC300035664 /* page6.guide */; };
-		DA8B77180F46120600DD88BF /* page7.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2E0EF58BC300035664 /* page7.guide */; };
 		DA8B77190F46120600DD88BF /* blockdropper3.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059B0EFD12D100797E7A /* blockdropper3.wav */; };
 		DA8B771A0F46120600DD88BF /* fighting_gorillas.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */; };
-		DA8B771B0F46120600DD88BF /* page8.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9BF0EFDCA540074333B /* page8.guide */; };
-		DA8B771C0F46120600DD88BF /* page9.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9C00EFDCA540074333B /* page9.guide */; };
 		DA8B771D0F46120600DD88BF /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
 		DA8B771E0F46120600DD88BF /* forkbomb.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94D0F0409A000E94E84 /* forkbomb.wav */; };
 		DA8B771F0F46120600DD88BF /* prideofthepacific.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94E0F0409A000E94E84 /* prideofthepacific.wav */; };
 		DA8B77200F46120600DD88BF /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9420AA0F08C2CA00E105BD /* fire.png */; };
 		DA8B77210F46120600DD88BF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC318210F0980720043C885 /* Default.png */; };
 		DA8B77220F46120600DD88BF /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A28DF0F17C64000975E5A /* splash.png */; };
-		DA8B77230F46120600DD88BF /* page10.guide in Resources */ = {isa = PBXBuildFile; fileRef = DA5A29570F180AC600975E5A /* page10.guide */; };
 		DA8B77240F46120600DD88BF /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = DABD67A80F18BC1700EE213D /* iTunesArtwork */; };
 		DA8B77250F46120600DD88BF /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = DABD67C80F18F04500EE213D /* icon.icns */; };
 		DA8B77260F46120600DD88BF /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DABD67C90F18F04500EE213D /* icon.png */; };
@@ -587,9 +558,7 @@
 		DAB898D10F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB898CC0F487567005C1D06 /* TrainingConfigurationLayer.m */; };
 		DAB8C42E0EF1D582003D22DA /* ContinueMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */; };
 		DABD678D0F18BAEC00EE213D /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A28DF0F17C64000975E5A /* splash.png */; };
-		DABD678E0F18BAEC00EE213D /* page10.guide in Resources */ = {isa = PBXBuildFile; fileRef = DA5A29570F180AC600975E5A /* page10.guide */; };
 		DABD678F0F18BAF500EE213D /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A28DF0F17C64000975E5A /* splash.png */; };
-		DABD67900F18BAF500EE213D /* page10.guide in Resources */ = {isa = PBXBuildFile; fileRef = DA5A29570F180AC600975E5A /* page10.guide */; };
 		DABD67920F18BB1700EE213D /* Splash.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5A256C0F16D63900975E5A /* Splash.m */; };
 		DABD67930F18BB2800EE213D /* Splash.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5A256C0F16D63900975E5A /* Splash.m */; };
 		DABD67AB0F18BC1700EE213D /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = DABD67A80F18BC1700EE213D /* iTunesArtwork */; };
@@ -606,23 +575,13 @@
 		DABD67E60F190D4D00EE213D /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC4EA220EDB0A610093BA40 /* banana.png */; };
 		DABD67E70F190D4D00EE213D /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2283090EE2CAC600BA53D2 /* hole.png */; };
 		DABD67E80F190D4D00EE213D /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5F1BD40EE74CE80041691E /* fps_images.png */; };
-		DABD67EA0F190D4D00EE213D /* page1.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEC0EF57EA500035664 /* page1.guide */; };
-		DABD67EB0F190D4D00EE213D /* page2.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAED0EF57EA500035664 /* page2.guide */; };
-		DABD67EC0F190D4D00EE213D /* page3.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEE0EF57EA500035664 /* page3.guide */; };
-		DABD67ED0F190D4D00EE213D /* page4.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEF0EF57EA500035664 /* page4.guide */; };
-		DABD67EE0F190D4D00EE213D /* page5.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2C0EF58BC300035664 /* page5.guide */; };
-		DABD67EF0F190D4D00EE213D /* page6.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2D0EF58BC300035664 /* page6.guide */; };
-		DABD67F00F190D4D00EE213D /* page7.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2E0EF58BC300035664 /* page7.guide */; };
 		DABD67F10F190D4D00EE213D /* blockdropper3.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059B0EFD12D100797E7A /* blockdropper3.wav */; };
 		DABD67F20F190D4D00EE213D /* fighting_gorillas.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */; };
-		DABD67F30F190D4D00EE213D /* page8.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9BF0EFDCA540074333B /* page8.guide */; };
-		DABD67F40F190D4D00EE213D /* page9.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9C00EFDCA540074333B /* page9.guide */; };
 		DABD67F60F190D4D00EE213D /* forkbomb.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94D0F0409A000E94E84 /* forkbomb.wav */; };
 		DABD67F70F190D4D00EE213D /* prideofthepacific.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA6DC94E0F0409A000E94E84 /* prideofthepacific.wav */; };
 		DABD67F80F190D4D00EE213D /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9420AA0F08C2CA00E105BD /* fire.png */; };
 		DABD67F90F190D4D00EE213D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC318210F0980720043C885 /* Default.png */; };
 		DABD67FA0F190D4D00EE213D /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5A28DF0F17C64000975E5A /* splash.png */; };
-		DABD67FB0F190D4D00EE213D /* page10.guide in Resources */ = {isa = PBXBuildFile; fileRef = DA5A29570F180AC600975E5A /* page10.guide */; };
 		DABD67FC0F190D4D00EE213D /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = DABD67A80F18BC1700EE213D /* iTunesArtwork */; };
 		DABD67FD0F190D4D00EE213D /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = DABD67C80F18F04500EE213D /* icon.icns */; };
 		DABD67FE0F190D4D00EE213D /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DABD67C90F18F04500EE213D /* icon.png */; };
@@ -675,18 +634,14 @@
 		DACA4E6E0EB3AEA40096F970 /* BuildingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */; };
 		DACA4E8D0EB3B0E10096F970 /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
 		DACFEC210EE96AA300A0D08E /* CityTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = DACFEC200EE96AA300A0D08E /* CityTheme.m */; };
-		DAF6AAF00EF57EA500035664 /* page1.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEC0EF57EA500035664 /* page1.guide */; };
-		DAF6AAF10EF57EA500035664 /* page2.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAED0EF57EA500035664 /* page2.guide */; };
-		DAF6AAF20EF57EA500035664 /* page3.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEE0EF57EA500035664 /* page3.guide */; };
-		DAF6AAF30EF57EA500035664 /* page4.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AAEF0EF57EA500035664 /* page4.guide */; };
-		DAF6AB2F0EF58BC300035664 /* page5.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2C0EF58BC300035664 /* page5.guide */; };
-		DAF6AB300EF58BC300035664 /* page6.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2D0EF58BC300035664 /* page6.guide */; };
-		DAF6AB310EF58BC300035664 /* page7.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAF6AB2E0EF58BC300035664 /* page7.guide */; };
 		DAF9059D0EFD12D100797E7A /* blockdropper3.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059B0EFD12D100797E7A /* blockdropper3.wav */; };
 		DAF9059E0EFD12D100797E7A /* fighting_gorillas.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */; };
-		DAFEB9C10EFDCA540074333B /* page8.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9BF0EFDCA540074333B /* page8.guide */; };
-		DAFEB9C20EFDCA540074333B /* page9.guide in Resources */ = {isa = PBXBuildFile; fileRef = DAFEB9C00EFDCA540074333B /* page9.guide */; };
 		DAFEF9730ED847D40019F7E5 /* Throw.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* Throw.m */; };
+		DAFFF2840F4B3304004D9B34 /* guide.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAFFF2830F4B3304004D9B34 /* guide.txt */; };
+		DAFFF2850F4B3304004D9B34 /* guide.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAFFF2830F4B3304004D9B34 /* guide.txt */; };
+		DAFFF2860F4B3304004D9B34 /* guide.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAFFF2830F4B3304004D9B34 /* guide.txt */; };
+		DAFFF2870F4B3304004D9B34 /* guide.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAFFF2830F4B3304004D9B34 /* guide.txt */; };
+		DAFFF2880F4B3304004D9B34 /* guide.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAFFF2830F4B3304004D9B34 /* guide.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -865,7 +820,6 @@
 		DA5A256B0F16D63900975E5A /* Splash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Splash.h; sourceTree = "<group>"; };
 		DA5A256C0F16D63900975E5A /* Splash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Splash.m; sourceTree = "<group>"; };
 		DA5A28DF0F17C64000975E5A /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
-		DA5A29570F180AC600975E5A /* page10.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page10.guide; sourceTree = "<group>"; };
 		DA5CA6350F421D60003324AB /* explosion0.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion0.wav; sourceTree = "<group>"; };
 		DA5CA6360F421D60003324AB /* explosion3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion3.wav; sourceTree = "<group>"; };
 		DA5CA6520F42239F003324AB /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
@@ -897,7 +851,6 @@
 		DA859EC80EC5B2630036B7C0 /* AudioQueueObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioQueueObject.m; sourceTree = "<group>"; };
 		DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DA8B77990F46120600DD88BF /* Gorillas-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA8B779B0F46120600DD88BF /* Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info copy.plist"; sourceTree = "<group>"; };
 		DA9420AA0F08C2CA00E105BD /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
 		DAAC33230EC5E26800816338 /* veritech.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = veritech.wav; sourceTree = "<group>"; };
 		DAB308CC0F48B17600694C77 /* SwipeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeLayer.h; sourceTree = "<group>"; };
@@ -924,20 +877,12 @@
 		DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillasConfig.m; sourceTree = "<group>"; };
 		DACFEC1F0EE96AA300A0D08E /* CityTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityTheme.h; sourceTree = "<group>"; };
 		DACFEC200EE96AA300A0D08E /* CityTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityTheme.m; sourceTree = "<group>"; };
-		DAF6AAEC0EF57EA500035664 /* page1.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page1.guide; sourceTree = "<group>"; };
-		DAF6AAED0EF57EA500035664 /* page2.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page2.guide; sourceTree = "<group>"; };
-		DAF6AAEE0EF57EA500035664 /* page3.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page3.guide; sourceTree = "<group>"; };
-		DAF6AAEF0EF57EA500035664 /* page4.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page4.guide; sourceTree = "<group>"; };
-		DAF6AB2C0EF58BC300035664 /* page5.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page5.guide; sourceTree = "<group>"; };
-		DAF6AB2D0EF58BC300035664 /* page6.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page6.guide; sourceTree = "<group>"; };
-		DAF6AB2E0EF58BC300035664 /* page7.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page7.guide; sourceTree = "<group>"; };
 		DAF9059B0EFD12D100797E7A /* blockdropper3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blockdropper3.wav; sourceTree = "<group>"; };
 		DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fighting_gorillas.wav; sourceTree = "<group>"; };
 		DAF905A10EFD17BF00797E7A /* AudioControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioControllerDelegate.h; sourceTree = "<group>"; };
-		DAFEB9BF0EFDCA540074333B /* page8.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page8.guide; sourceTree = "<group>"; };
-		DAFEB9C00EFDCA540074333B /* page9.guide */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = page9.guide; sourceTree = "<group>"; };
 		DAFEF9710ED847D40019F7E5 /* Throw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Throw.h; sourceTree = "<group>"; };
 		DAFEF9720ED847D40019F7E5 /* Throw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Throw.m; sourceTree = "<group>"; };
+		DAFFF2830F4B3304004D9B34 /* guide.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = guide.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1064,7 +1009,6 @@
 				8D1107310486CEB800E47090 /* Info.plist */,
 				DA83EC190EFEE93100305C9F /* Entitlements.plist */,
 				DAC318210F0980720043C885 /* Default.png */,
-				DA8B779B0F46120600DD88BF /* Info copy.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1429,16 +1373,7 @@
 		DA83EBE90EFEE5E300305C9F /* Guide */ = {
 			isa = PBXGroup;
 			children = (
-				DAF6AAEC0EF57EA500035664 /* page1.guide */,
-				DAF6AAED0EF57EA500035664 /* page2.guide */,
-				DAF6AAEE0EF57EA500035664 /* page3.guide */,
-				DAF6AAEF0EF57EA500035664 /* page4.guide */,
-				DAF6AB2C0EF58BC300035664 /* page5.guide */,
-				DAF6AB2D0EF58BC300035664 /* page6.guide */,
-				DAF6AB2E0EF58BC300035664 /* page7.guide */,
-				DAFEB9BF0EFDCA540074333B /* page8.guide */,
-				DAFEB9C00EFDCA540074333B /* page9.guide */,
-				DA5A29570F180AC600975E5A /* page10.guide */,
+				DAFFF2830F4B3304004D9B34 /* guide.txt */,
 			);
 			name = Guide;
 			sourceTree = "<group>";
@@ -1639,16 +1574,6 @@
 				DAC4EA230EDB0A610093BA40 /* banana.png in Resources */,
 				DA22830A0EE2CAC600BA53D2 /* hole.png in Resources */,
 				DA5F1BD60EE74CE80041691E /* fps_images.png in Resources */,
-				DAF6AAF00EF57EA500035664 /* page1.guide in Resources */,
-				DAF6AAF10EF57EA500035664 /* page2.guide in Resources */,
-				DAF6AAF20EF57EA500035664 /* page3.guide in Resources */,
-				DAF6AAF30EF57EA500035664 /* page4.guide in Resources */,
-				DAF6AB2F0EF58BC300035664 /* page5.guide in Resources */,
-				DAF6AB300EF58BC300035664 /* page6.guide in Resources */,
-				DAF6AB310EF58BC300035664 /* page7.guide in Resources */,
-				DAFEB9C10EFDCA540074333B /* page8.guide in Resources */,
-				DAFEB9C20EFDCA540074333B /* page9.guide in Resources */,
-				DA5A29580F180AC600975E5A /* page10.guide in Resources */,
 				DAF9059D0EFD12D100797E7A /* blockdropper3.wav in Resources */,
 				DAF9059E0EFD12D100797E7A /* fighting_gorillas.wav in Resources */,
 				DA8B76B30F44EC6600DD88BF /* Entitlements.plist in Resources */,
@@ -1665,6 +1590,7 @@
 				DA5CA6370F421D60003324AB /* explosion0.wav in Resources */,
 				DA5CA6380F421D60003324AB /* explosion3.wav in Resources */,
 				DA5CA6530F42239F003324AB /* click.wav in Resources */,
+				DAFFF2880F4B3304004D9B34 /* guide.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1678,24 +1604,14 @@
 				DA379F380F09654A00541EF4 /* banana.png in Resources */,
 				DA379F3E0F09654A00541EF4 /* hole.png in Resources */,
 				DA379F3F0F09654A00541EF4 /* fps_images.png in Resources */,
-				DA379F410F09654A00541EF4 /* page1.guide in Resources */,
-				DA379F420F09654A00541EF4 /* page2.guide in Resources */,
-				DA379F430F09654A00541EF4 /* page3.guide in Resources */,
-				DA379F440F09654A00541EF4 /* page4.guide in Resources */,
-				DA379F450F09654A00541EF4 /* page5.guide in Resources */,
-				DA379F460F09654A00541EF4 /* page6.guide in Resources */,
-				DA379F470F09654A00541EF4 /* page7.guide in Resources */,
 				DA379F480F09654A00541EF4 /* blockdropper3.wav in Resources */,
 				DA379F490F09654A00541EF4 /* fighting_gorillas.wav in Resources */,
-				DA379F4A0F09654A00541EF4 /* page8.guide in Resources */,
-				DA379F4B0F09654A00541EF4 /* page9.guide in Resources */,
 				DA379F4D0F09654A00541EF4 /* Entitlements.plist in Resources */,
 				DA379F4E0F09654A00541EF4 /* forkbomb.wav in Resources */,
 				DA379F4F0F09654A00541EF4 /* prideofthepacific.wav in Resources */,
 				DA379F500F09654A00541EF4 /* fire.png in Resources */,
 				DAC318240F0980720043C885 /* Default.png in Resources */,
 				DABD678D0F18BAEC00EE213D /* splash.png in Resources */,
-				DABD678E0F18BAEC00EE213D /* page10.guide in Resources */,
 				DABD67AB0F18BC1700EE213D /* iTunesArtwork in Resources */,
 				DABD67CE0F18F04500EE213D /* icon.icns in Resources */,
 				DABD67CF0F18F04500EE213D /* icon.png in Resources */,
@@ -1704,6 +1620,7 @@
 				DA5CA63B0F421D60003324AB /* explosion0.wav in Resources */,
 				DA5CA63C0F421D60003324AB /* explosion3.wav in Resources */,
 				DA5CA6550F42239F003324AB /* click.wav in Resources */,
+				DAFFF2840F4B3304004D9B34 /* guide.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1717,24 +1634,14 @@
 				DA379FAD0F0965A600541EF4 /* banana.png in Resources */,
 				DA379FB30F0965A600541EF4 /* hole.png in Resources */,
 				DA379FB40F0965A600541EF4 /* fps_images.png in Resources */,
-				DA379FB60F0965A600541EF4 /* page1.guide in Resources */,
-				DA379FB70F0965A600541EF4 /* page2.guide in Resources */,
-				DA379FB80F0965A600541EF4 /* page3.guide in Resources */,
-				DA379FB90F0965A600541EF4 /* page4.guide in Resources */,
-				DA379FBA0F0965A600541EF4 /* page5.guide in Resources */,
-				DA379FBB0F0965A600541EF4 /* page6.guide in Resources */,
-				DA379FBC0F0965A600541EF4 /* page7.guide in Resources */,
 				DA379FBD0F0965A600541EF4 /* blockdropper3.wav in Resources */,
 				DA379FBE0F0965A600541EF4 /* fighting_gorillas.wav in Resources */,
-				DA379FBF0F0965A600541EF4 /* page8.guide in Resources */,
-				DA379FC00F0965A600541EF4 /* page9.guide in Resources */,
 				DA379FC20F0965A600541EF4 /* Entitlements.plist in Resources */,
 				DA379FC30F0965A600541EF4 /* forkbomb.wav in Resources */,
 				DA379FC40F0965A600541EF4 /* prideofthepacific.wav in Resources */,
 				DA379FC50F0965A600541EF4 /* fire.png in Resources */,
 				DAC318250F0980720043C885 /* Default.png in Resources */,
 				DABD678F0F18BAF500EE213D /* splash.png in Resources */,
-				DABD67900F18BAF500EE213D /* page10.guide in Resources */,
 				DABD67AC0F18BC1700EE213D /* iTunesArtwork in Resources */,
 				DABD67D00F18F04500EE213D /* icon.icns in Resources */,
 				DABD67D10F18F04500EE213D /* icon.png in Resources */,
@@ -1743,6 +1650,7 @@
 				DA5CA63D0F421D60003324AB /* explosion0.wav in Resources */,
 				DA5CA63E0F421D60003324AB /* explosion3.wav in Resources */,
 				DA5CA6560F42239F003324AB /* click.wav in Resources */,
+				DAFFF2860F4B3304004D9B34 /* guide.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1756,24 +1664,14 @@
 				DA8B770F0F46120600DD88BF /* banana.png in Resources */,
 				DA8B77100F46120600DD88BF /* hole.png in Resources */,
 				DA8B77110F46120600DD88BF /* fps_images.png in Resources */,
-				DA8B77120F46120600DD88BF /* page1.guide in Resources */,
-				DA8B77130F46120600DD88BF /* page2.guide in Resources */,
-				DA8B77140F46120600DD88BF /* page3.guide in Resources */,
-				DA8B77150F46120600DD88BF /* page4.guide in Resources */,
-				DA8B77160F46120600DD88BF /* page5.guide in Resources */,
-				DA8B77170F46120600DD88BF /* page6.guide in Resources */,
-				DA8B77180F46120600DD88BF /* page7.guide in Resources */,
 				DA8B77190F46120600DD88BF /* blockdropper3.wav in Resources */,
 				DA8B771A0F46120600DD88BF /* fighting_gorillas.wav in Resources */,
-				DA8B771B0F46120600DD88BF /* page8.guide in Resources */,
-				DA8B771C0F46120600DD88BF /* page9.guide in Resources */,
 				DA8B771D0F46120600DD88BF /* Entitlements.plist in Resources */,
 				DA8B771E0F46120600DD88BF /* forkbomb.wav in Resources */,
 				DA8B771F0F46120600DD88BF /* prideofthepacific.wav in Resources */,
 				DA8B77200F46120600DD88BF /* fire.png in Resources */,
 				DA8B77210F46120600DD88BF /* Default.png in Resources */,
 				DA8B77220F46120600DD88BF /* splash.png in Resources */,
-				DA8B77230F46120600DD88BF /* page10.guide in Resources */,
 				DA8B77240F46120600DD88BF /* iTunesArtwork in Resources */,
 				DA8B77250F46120600DD88BF /* icon.icns in Resources */,
 				DA8B77260F46120600DD88BF /* icon.png in Resources */,
@@ -1782,6 +1680,7 @@
 				DA8B77290F46120600DD88BF /* explosion0.wav in Resources */,
 				DA8B772A0F46120600DD88BF /* explosion3.wav in Resources */,
 				DA8B772B0F46120600DD88BF /* click.wav in Resources */,
+				DAFFF2870F4B3304004D9B34 /* guide.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1795,24 +1694,14 @@
 				DABD67E60F190D4D00EE213D /* banana.png in Resources */,
 				DABD67E70F190D4D00EE213D /* hole.png in Resources */,
 				DABD67E80F190D4D00EE213D /* fps_images.png in Resources */,
-				DABD67EA0F190D4D00EE213D /* page1.guide in Resources */,
-				DABD67EB0F190D4D00EE213D /* page2.guide in Resources */,
-				DABD67EC0F190D4D00EE213D /* page3.guide in Resources */,
-				DABD67ED0F190D4D00EE213D /* page4.guide in Resources */,
-				DABD67EE0F190D4D00EE213D /* page5.guide in Resources */,
-				DABD67EF0F190D4D00EE213D /* page6.guide in Resources */,
-				DABD67F00F190D4D00EE213D /* page7.guide in Resources */,
 				DABD67F10F190D4D00EE213D /* blockdropper3.wav in Resources */,
 				DABD67F20F190D4D00EE213D /* fighting_gorillas.wav in Resources */,
-				DABD67F30F190D4D00EE213D /* page8.guide in Resources */,
-				DABD67F40F190D4D00EE213D /* page9.guide in Resources */,
 				DAB898830F4854B0005C1D06 /* Entitlements.plist in Resources */,
 				DABD67F60F190D4D00EE213D /* forkbomb.wav in Resources */,
 				DABD67F70F190D4D00EE213D /* prideofthepacific.wav in Resources */,
 				DABD67F80F190D4D00EE213D /* fire.png in Resources */,
 				DABD67F90F190D4D00EE213D /* Default.png in Resources */,
 				DABD67FA0F190D4D00EE213D /* splash.png in Resources */,
-				DABD67FB0F190D4D00EE213D /* page10.guide in Resources */,
 				DABD67FC0F190D4D00EE213D /* iTunesArtwork in Resources */,
 				DABD67FD0F190D4D00EE213D /* icon.icns in Resources */,
 				DABD67FE0F190D4D00EE213D /* icon.png in Resources */,
@@ -1821,6 +1710,7 @@
 				DA5CA63F0F421D60003324AB /* explosion0.wav in Resources */,
 				DA5CA6400F421D60003324AB /* explosion3.wav in Resources */,
 				DA5CA6570F42239F003324AB /* click.wav in Resources */,
+				DAFFF2850F4B3304004D9B34 /* guide.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2712,7 +2602,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
 				PRODUCT_NAME = "Gorillas-Beta";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "65E1C9F5-CFA1-47AA-9F78-C4667AB4AF53";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "04E496FA-0D71-4F92-AF5E-94E78CF1F268";
 			};
 			name = Debug;
 		};
@@ -2721,7 +2611,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
 				PRODUCT_NAME = "Gorillas-Beta";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "65E1C9F5-CFA1-47AA-9F78-C4667AB4AF53";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "04E496FA-0D71-4F92-AF5E-94E78CF1F268";
 			};
 			name = Release;
 		};
@@ -2730,7 +2620,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
 				PRODUCT_NAME = "Gorillas-Beta";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "65E1C9F5-CFA1-47AA-9F78-C4667AB4AF53";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "04E496FA-0D71-4F92-AF5E-94E78CF1F268";
 			};
 			name = "Release Debugging";
 		};
@@ -2739,34 +2629,28 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
 				PRODUCT_NAME = "Gorillas-Beta";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7AE325F9-CC81-4C71-A555-09483C9CDDEA";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7761C74E-9BBB-4781-97D8-68BCF7F7D72C";
 			};
 			name = Distribution;
 		};
 		DABD68540F190D4D00EE213D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
 				PRODUCT_NAME = Gorillas;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "058ED07C-A0FD-418C-A51F-57CB42F18416";
 			};
 			name = Debug;
 		};
 		DABD68550F190D4D00EE213D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
 				PRODUCT_NAME = Gorillas;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "058ED07C-A0FD-418C-A51F-57CB42F18416";
 			};
 			name = Release;
 		};
 		DABD68560F190D4D00EE213D /* Release Debugging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
 				PRODUCT_NAME = Gorillas;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "058ED07C-A0FD-418C-A51F-57CB42F18416";
 			};
 			name = "Release Debugging";
 		};

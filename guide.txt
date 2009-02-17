@@ -1,0 +1,92 @@
+The Goal
+
+    Sling your deadly bananas over the roof tops toward your opponent to blow him out of town.
+
+    In Gorillas, you'll be trying to hit the opponent with deadly projectiles.  To aim, touch the screen and indicate the direction of your throw.  The length of your aim indicates its velocity.
+
+
+===== NEXT PAGE =====
+Hitting and Missing
+
+    With some luck, you'll send your banana flying on a collision course with your opponent.
+
+    On impact, your opponent will be obliterated.  Misses will leave nasty scars on the city scape.
+
+    Gorillas take turns in throwing:  Miss, and watch as one comes flying right back at you.
+
+
+===== NEXT PAGE =====
+Single Player
+
+    Playing against the computer is challanging and exciting.  Winning will make you go up in level, but as you do, the computer will get smarter.
+
+    Winning a single player game gives you a nice score boost, but misses and dying will take away from that, so watch out!
+
+
+===== NEXT PAGE =====
+Multi Player
+
+    In company of others?  Gorillas is sure to excite as you take turns in blasting each other off the map.
+
+    A multiplayer game will not affect your single player score and level progress.
+
+
+
+===== NEXT PAGE =====
+Training
+
+    Throw History allows you to see the aim of previous throws.
+
+    Throw Hints show up briefly after every ten seconds and tell you where to aim.
+
+    Note that you don't make any score or level progress while training mode is enabled.
+
+
+===== NEXT PAGE =====
+Configuration
+
+    You can change the computer's current difficulity level if you're interested in a real challenge.
+    The gravity can also be controlled:  Less gravity means your bananas don't fall as fast.
+    City themes allow you to completely change the game setting.  Different worlds have different gravities and wind strengths.
+
+
+===== NEXT PAGE =====
+Tactical
+
+    The key to avoiding buildings is to throw more vertical and with more velocity.  This makes aiming quite a bit harder, though!
+
+    Don't let buildings that are in your way stop you:  A few bananas should be sufficient to dig yourself a path through them.
+
+
+===== NEXT PAGE =====
+Statistics
+
+    As your score evolves, your daily and global top scores are remembered.
+    
+    The Statistics panel in the Information menu graphs out your recent score history and shows your global top score.
+
+
+===== NEXT PAGE =====
+Technical
+
+    Your aim represents the vector of your throw's initial velocity.
+    The current wind velocity will affect your banana's direction every step of the way.
+    The computer will throw more accurately as your difficulity level increases.  He will also begin preferring vertical shots over more horizontal ones.
+
+
+===== NEXT PAGE =====
+Thanks
+
+    Gorillas has been designed and written by Maarten Billemont. (http://lhunath.lyndir.com)
+
+    Thanks to Emmett for sharing some excellent retro-sounding music for the game.
+
+    Love and care goes out to my darling wife and adorable young daughter.
+
+
+===== NEXT PAGE =====
+Open Source
+
+    The Gorillas source code is freely available and licensed to anyone under the terms of the General Public License, version 2 (GPLv2).
+
+    For more information or to report problems, visit http://gorillas.lyndir.com/.
