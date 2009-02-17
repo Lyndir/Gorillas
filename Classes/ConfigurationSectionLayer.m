@@ -31,10 +31,19 @@
 @implementation ConfigurationSectionLayer
 
 
--(id) init {
+
+
+-(void) reset {
     
-    if(!(self = [super init]))
-        return self;
+    if(menu) {
+        [self removeAndStop:menu];
+        [menu release];
+        menu = nil;
+        
+        [self removeAndStop:backMenu];
+        [backMenu release];
+        backMenu = nil;
+    }
     
     // Section menus.
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
@@ -48,6 +57,7 @@
     MenuItem *training = [MenuItemFont itemFromString:@"Training"
                                                target:self
                                              selector:@selector(training:)];
+    [training setIsEnabled:![[[GorillasAppDelegate get] gameLayer] running]];
     
     menu = [[Menu menuWithItems:game, av, training, nil] retain];
     [menu alignItemsVertically];
@@ -60,14 +70,19 @@
                                                target: self
                                              selector: @selector(mainMenu:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-
+    
     backMenu = [[Menu menuWithItems:back, nil] retain];
     [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self add:backMenu];
+}
 
+
+-(void) onEnter {
     
-    return self;
+    [self reset];
+    
+    [super onEnter];
 }
 
 

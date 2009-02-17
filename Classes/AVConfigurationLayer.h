@@ -25,14 +25,12 @@
 //
 
 #import "ShadeLayer.h"
+#import "Resettable.h"
 
 
-@interface AVConfigurationLayer : ShadeLayer {
+@interface AVConfigurationLayer : ShadeLayer <Resettable> {
     
     Menu *menu, *backMenu;
 }
-
-
--(void) reset;
 
 @end

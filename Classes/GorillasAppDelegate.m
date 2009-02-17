@@ -102,6 +102,7 @@
 
 -(void) updateConfig {
 
+    [configLayer reset];
     [gameConfigLayer reset];
     [avConfigLayer reset];
     [trainingLayer reset];

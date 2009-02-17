@@ -25,14 +25,12 @@
 //
 
 #import "ShadeLayer.h"
+#import "Resettable.h"
 
 
-@interface GameConfigurationLayer : ShadeLayer {
+@interface GameConfigurationLayer : ShadeLayer <Resettable> {
     
     Menu *menu, *backMenu;
 }
-
-
--(void) reset;
 
 @end

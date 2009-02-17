@@ -25,14 +25,12 @@
 //
 
 #import "ShadeLayer.h"
+#import "Resettable.h"
 
 
-@interface TrainingConfigurationLayer : ShadeLayer {
+@interface TrainingConfigurationLayer : ShadeLayer <Resettable> {
     
     Menu *menu, *backMenu;
 }
-
-
--(void) reset;
 
 @end

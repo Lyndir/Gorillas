@@ -25,9 +25,10 @@
 //
 
 #import "ShadeLayer.h"
+#import "Resettable.h"
 
 
-@interface ConfigurationSectionLayer : ShadeLayer {
+@interface ConfigurationSectionLayer : ShadeLayer <Resettable> {
     
     Menu *menu, *backMenu;
 }
