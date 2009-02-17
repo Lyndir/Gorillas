@@ -33,7 +33,7 @@
 @implementation GameLayer
 
 
-@synthesize panningLayer, skiesLayer, buildingsLayer, windLayer, weather, singlePlayer, running, paused;
+@synthesize panningLayer, skiesLayer, buildingsLayer, windLayer, weather, continueAfterGame, singlePlayer, running, paused;
 
 
 -(id) init {
@@ -234,6 +234,7 @@
     
     running = true;
     singlePlayer = true;
+    continueAfterGame = true;
     
     [self message:[[GorillasConfig get] levelName]];
     
@@ -261,6 +262,7 @@
     
     running = true;
     singlePlayer = false;
+    continueAfterGame = false;
     
     GorillaLayer *gorillaA = [[GorillaLayer alloc] init];
     GorillaLayer *gorillaB = [[GorillaLayer alloc] init];
@@ -315,7 +317,7 @@
     
     running = false;
     
-    if(singlePlayer)
+    if(continueAfterGame)
         [[GorillasAppDelegate get] showContinueMenu];
     else
         [[GorillasAppDelegate get] showMainMenu];

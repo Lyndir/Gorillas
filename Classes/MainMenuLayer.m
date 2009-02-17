@@ -95,6 +95,7 @@
 -(void) stopGame: (id)sender {
     
     [[GorillasAppDelegate get] clickEffect];
+    [[[GorillasAppDelegate get] gameLayer] setContinueAfterGame:NO];
     [[[GorillasAppDelegate get] gameLayer] stopGame];
 }
 
