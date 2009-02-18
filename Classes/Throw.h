@@ -34,6 +34,7 @@
     cpVect v;
     cpVect r0;
     
+    Action *nextAction;
     MoveTo *gameScrollAction;
     ParticleSystem *smoke;
 }

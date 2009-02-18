@@ -45,6 +45,10 @@
     running = false;
     paused = true;
     
+    IntervalAction *l = [MoveBy actionWithDuration:.05f position:cpv(-3, 0)];
+    IntervalAction *r = [MoveBy actionWithDuration:.05f position:cpv(6, 0)];
+    shakeAction = [[Sequence actions:l, r, l, l, r, l, nil] retain];
+    
     // Sky, buildings and wind.
     buildingsLayer = [[BuildingsLayer alloc] init];
     [buildingsLayer setTransformAnchor:cpvzero];
@@ -195,6 +199,14 @@
 }
 
 
+-(void) shake {
+    
+    [AudioController vibrate];
+    
+    [buildingsLayer do:shakeAction];
+}
+
+
 -(void) message: (NSString *)msg {
     
     if(!msgLabel) {
@@ -325,6 +337,9 @@
 
 
 -(void) dealloc {
+    
+    [shakeAction release];
+    shakeAction = nil;
     
     [skiesLayer release];
     skiesLayer = nil;

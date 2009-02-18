@@ -50,6 +50,9 @@
     if(!(self = [super initWithDuration:t]))
         return self;
     
+    nextAction = [[Sequence alloc] initOne:[DelayTime actionWithDuration:1]
+                                       two:[CallFunc actionWithTarget:self selector:@selector(nextGorilla:)]];
+    
     smoke = [[ParticleMeteor alloc] init];
     [smoke setGravity:cpvzero];
     [smoke setPosition:cpvzero];
@@ -129,8 +132,15 @@
     while(true) {
         // Increment rTest toward r.
         rTest = cpvadd(rTest, rStep);
-
-        BOOL offScreen   = rTest.x < winSize.width * -0.5f || rTest.x > winSize.width * 1.5f
+        
+        float min = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] left];
+        float max = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] right];
+        if(![[GorillasConfig get] followThrow]) {
+            min = 0;
+            max = winSize.width;
+        }
+            
+        BOOL offScreen   = rTest.x < min || rTest.x > max
                         || rTest.y < 0 || rTest.y > winSize.height * 2;
         BOOL hitGorilla  = [buildingsLayer hitsGorilla:rTest];
         BOOL hitBuilding = [buildingsLayer hitsBuilding:rTest];
@@ -170,22 +180,30 @@
     } else if([smoke emissionRate])
         [smoke setEmissionRate:0];
     
-    if(!running) {
-        // End of the throw.
-        [self scrollToCenter:cpvzero];
-        
-        // Next Gorilla's turn.
-        [buildingsLayer nextGorilla];
-    }
+    if(!running)
+        [buildingsLayer do:nextAction];
+}
+
+
+-(void) nextGorilla:(id) sender {
+
+    BuildingsLayer *buildingsLayer = [[[GorillasAppDelegate get] gameLayer] buildingsLayer];
+    
+    // End of the throw.
+    [self scrollToCenter:cpvzero];
+    
+    // Next Gorilla's turn.
+    [buildingsLayer nextGorilla];
 }
 
 
 -(void) scrollToCenter:(cpVect)r {
     
+    CGSize winSize = [[Director sharedDirector] winSize];
     PanningLayer *panningLayer = [[[GorillasAppDelegate get] gameLayer] panningLayer];
     
     // MoveTo cpvzero happens without the gameScrollElapsed logic.
-    if((r.x == 0 && r.y == 0) || ![[GorillasConfig get] followThrow]) {
+    if(r.x == 0 && r.y == 0) {
         if([panningLayer position].x != 0 || [panningLayer position].y != 0)
             [panningLayer do:[MoveTo actionWithDuration:[[GorillasConfig get] gameScrollDuration]
                                                position:cpvzero]];
@@ -195,7 +213,6 @@
     
     // Figure out where the buildings start and end.
     // Use that for camera limits, take scaling into account.
-    CGSize winSize = [[Director sharedDirector] winSize];
     float min = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] left];
     float max = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] right];
     float top = winSize.height * 2;
@@ -205,8 +222,16 @@
     max *= scale;
     top *= scale;
     
-    r = cpv(fmaxf(fminf(r.x, max - winSize.width / 2), min + winSize.width / 2),
-            fmaxf(fminf(r.y, top - winSize.height / 2), winSize.height / 2));
+    if([[GorillasConfig get] followThrow]) {
+        r = cpv(fmaxf(fminf(r.x, max - winSize.width / 2), min + winSize.width / 2),
+                fmaxf(fminf(r.y, top - winSize.height / 2), winSize.height / 2));
+    }
+    
+    else {
+        r.x = winSize.width / 2;
+        if(r.y < winSize.height * 0.8f)
+            r.y = winSize.height / 2;
+    }
     
     // Scroll to current point should take initial duration minus what has already elapsed to scroll to approach previous points.
     ccTime gameScrollElapsed = [gameScrollAction elapsed];
@@ -246,6 +271,12 @@
     
     [smoke release];
     smoke = nil;
+    
+    [nextAction release];
+    nextAction = nil;
+    
+    [gameScrollAction release];
+    gameScrollAction = nil;
     
     [super dealloc];
 }

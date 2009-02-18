@@ -41,6 +41,7 @@
     BOOL singlePlayer;
     BOOL continueAfterGame;
 
+    Action *shakeAction;
     PanningLayer *panningLayer;
     SkiesLayer *skiesLayer;
     BuildingsLayer *buildingsLayer;
@@ -62,6 +63,7 @@
 -(void) pause;
 -(void) unpause;
 
+-(void) shake;
 -(void) message: (NSString *)msg;
 -(void) resetMessage: (id) sender;
 

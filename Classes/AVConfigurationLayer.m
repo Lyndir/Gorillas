@@ -88,7 +88,6 @@
     MenuItem *vibrationI  = [MenuItemFont itemFromString:[[GorillasConfig get] vibration]? @"On": @"Off"
                                                 target:self
                                               selector:@selector(vibration:)];
-    [vibrationI setIsEnabled:[[[UIDevice currentDevice] model] isEqualToString:@"iPhone"]];
     
     
     // Visual Effects.
