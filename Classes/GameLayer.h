@@ -65,7 +65,7 @@
 
 -(void) shake;
 -(void) message: (NSString *)msg;
--(void) resetMessage: (id) sender;
+-(void) resetMessage;
 
 -(void) startSinglePlayer;
 -(void) startMultiplayer;

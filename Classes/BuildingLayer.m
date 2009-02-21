@@ -197,7 +197,7 @@
                    wColors[isOn * 4 + 1],
                    wColors[isOn * 4 + 0]);
         
-        // == DRAW FRONT REAR WINDOWS ==
+        // == DRAW FRONT WINDOWS ==
         // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
         glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
         glDrawElements(GL_TRIANGLES, (isOn? windowOnCount: windowOffCount) * 6, GL_UNSIGNED_SHORT, 0);

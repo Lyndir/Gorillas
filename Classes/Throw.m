@@ -50,8 +50,9 @@
     if(!(self = [super initWithDuration:t]))
         return self;
     
-    nextAction = [[Sequence alloc] initOne:[DelayTime actionWithDuration:1]
-                                       two:[CallFunc actionWithTarget:self selector:@selector(nextGorilla:)]];
+    nextAction = [[Sequence alloc] initOne:[DelayTime actionWithDuration:1.5f]
+                                       two:[CallFunc actionWithTarget:self selector:@selector(throwEnded:)]];
+    endCount = [[[GorillasAppDelegate get] gameLayer] singlePlayer]? -1: 4;
     
     smoke = [[ParticleMeteor alloc] init];
     [smoke setGravity:cpvzero];
@@ -84,12 +85,14 @@
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Already started." userInfo:nil];
     
     running = true;
+    flipped = false;
     [super start];
     
     [target do:[Repeat actionWithAction:[RotateBy actionWithDuration:1
                                                                angle:360]
                                   times:(int)duration + 1]];
     [target setVisible:true];
+    [target setTag:tBananaFlying];
     
     
     [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:smoke affectAngle:false];
@@ -108,19 +111,19 @@
     if(!running)
         // We were stopped.
         return;
+
+    GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
+    BuildingsLayer *buildingsLayer = [gameLayer buildingsLayer];
+    CGSize winSize = [[Director sharedDirector] winSize];
     
     // Wind influence.
-    float w = [[[[GorillasAppDelegate get] gameLayer] windLayer] wind];
+    float w = [[gameLayer windLayer] wind];
     
     // Calculate banana position.
     float g = [[GorillasConfig get] gravity];
     ccTime t = dt * duration;
     cpVect r = cpv((v.x + w * t * [[GorillasConfig get] windModifier]) * t + r0.x,
                    v.y * t - t * t * g / 2 + r0.y);
-
-    // Figure out whether banana went off screen or hit something.
-    BuildingsLayer *buildingsLayer = [[[GorillasAppDelegate get] gameLayer] buildingsLayer];
-    CGSize winSize = [[Director sharedDirector] winSize];
 
     // Calculate the step size.
     cpVect rTest = [target position];
@@ -133,13 +136,14 @@
         // Increment rTest toward r.
         rTest = cpvadd(rTest, rStep);
         
-        float min = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] left];
-        float max = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] right];
+        float min = [buildingsLayer left];
+        float max = [buildingsLayer right];
         if(![[GorillasConfig get] followThrow]) {
             min = 0;
             max = winSize.width;
         }
             
+        // Figure out whether banana went off screen or hit something.
         BOOL offScreen   = rTest.x < min || rTest.x > max
                         || rTest.y < 0 || rTest.y > winSize.height * 2;
         BOOL hitGorilla  = [buildingsLayer hitsGorilla:rTest];
@@ -154,10 +158,10 @@
             
             // Update score on miss.
             if(hitBuilding || offScreen)
-                [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] miss];
+                [[gameLayer buildingsLayer] miss];
             
             // Hide banana.
-            [[[[GorillasAppDelegate get] gameLayer] windLayer] unregisterSystem:smoke];
+            [[gameLayer windLayer] unregisterSystem:smoke];
             [smoke setEmissionRate:0];
             [target setVisible:false];
             running = false;
@@ -185,14 +189,35 @@
 }
 
 
--(void) nextGorilla:(id) sender {
-
-    BuildingsLayer *buildingsLayer = [[[GorillasAppDelegate get] gameLayer] buildingsLayer];
+-(void) throwEnded:(id) sender {
     
     // End of the throw.
     [self scrollToCenter:cpvzero];
+
+    GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
+    BuildingsLayer *buildingsLayer = [gameLayer buildingsLayer];
+    
+    if(![gameLayer running])
+        return;
+    
+    if([[buildingsLayer activeGorilla] human] && ![gameLayer singlePlayer] && [[GorillasConfig get] multiplayerFlip] && !flipped) {
+        [gameLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                             angle:((int) [gameLayer rotation] + 180) % 360]];
+        flipped = true;
+    }
+
+    if(--endCount > 0) {
+        [gameLayer message:[NSString stringWithFormat:@"%d ..", endCount]];
+        [buildingsLayer do:[nextAction copy]];
+    
+        return;
+    }
+
+    if(endCount == 0)
+        [gameLayer message:@"Go .."];
     
     // Next Gorilla's turn.
+    [target setTag:tBananaNotFlying];
     [buildingsLayer nextGorilla];
 }
 

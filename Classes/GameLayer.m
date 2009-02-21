@@ -28,6 +28,7 @@
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
 #import "GorillasAppDelegate.h"
+#import "Remove.h"
 
 
 @implementation GameLayer
@@ -209,33 +210,39 @@
 
 -(void) message: (NSString *)msg {
     
-    if(!msgLabel) {
+    [self resetMessage];
+    [msgLabel setVisible:true];
+    [msgLabel setString:msg];
+    [msgLabel do:[Sequence actions:
+                    [MoveBy actionWithDuration:1 position:cpv(0, -([[GorillasConfig get] fontSize] * 2))],
+                    [FadeOut actionWithDuration:2],
+                    nil]];
+}
+
+
+-(void) resetMessage {
+    
+    CGSize winSize = [[Director sharedDirector] winSize];
+    cpVect messagePos = cpv([msgLabel contentSize].width / 2 + [[GorillasConfig get] fontSize], winSize.height + [[GorillasConfig get] fontSize]);
+    
+    if(!msgLabel || [msgLabel numberOfRunningActions]) {
+        [msgLabel stopAllActions];
+        [msgLabel do:[Spawn actions:
+                      [MoveTo actionWithDuration:0.5f position:cpvadd(messagePos, cpv(0, -([[GorillasConfig get] fontSize] * 2)))],
+                      [FadeOut actionWithDuration:0.5f],
+                      [Remove action],
+                      nil]];
+        [msgLabel release];
+        
         msgLabel = [[Label alloc] initWithString:@"" dimensions:CGSizeMake(1000, [[GorillasConfig get] fontSize] + 5)
                                        alignment:UITextAlignmentLeft
                                         fontName:[[GorillasConfig get] fixedFontName]
                                         fontSize: [[GorillasConfig get] fontSize]];
         [self add:msgLabel z:1];
     }
-    
-    [self resetMessage:nil];
-    [msgLabel setVisible:true];
-    [msgLabel setString:msg];
-    [msgLabel do:[Sequence actions:
-                    [MoveBy actionWithDuration:1 position:cpv(0, -([[GorillasConfig get] fontSize] * 2))],
-                    [FadeOut actionWithDuration:2],
-                    [CallFunc actionWithTarget:self selector:@selector(resetMessage:)],
-                    nil]];
-}
 
-
--(void) resetMessage: (id) sender {
-    
-    [msgLabel stopAllActions];
-
-    CGSize winSize = [[Director sharedDirector] winSize];
-    [msgLabel setPosition:cpv([msgLabel contentSize].width / 2 + [[GorillasConfig get] fontSize], winSize.height + [[GorillasConfig get] fontSize])];
+    [msgLabel setPosition:messagePos];
     [msgLabel setOpacity:0xff];
-    [msgLabel setVisible:false];
 }
 
 
@@ -323,6 +330,9 @@
     if([self rotation])
         [self do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                         angle:0]];
+    if([panningLayer position].x != 0 || [panningLayer position].y != 0)
+        [panningLayer do:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                           position:cpvzero]];
     
     paused = true;
     [self pause];

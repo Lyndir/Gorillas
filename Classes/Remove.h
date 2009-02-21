@@ -17,33 +17,18 @@
  */
 
 //
-//  Throw.h
+//  Remove.h
 //  Gorillas
 //
-//  Created by Maarten Billemont on 22/11/08.
+//  Created by Maarten Billemont on 21/02/09.
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "cocos2d.h"
 
 
-@interface Throw : IntervalAction {
+@interface Remove : InstantAction {
 
-    BOOL running;
-    BOOL flipped;
-    cpVect v;
-    cpVect r0;
-    int endCount;
-    
-    Action *nextAction;
-    MoveTo *gameScrollAction;
-    ParticleSystem *smoke;
 }
-
-+(Throw *) actionWithVelocity: (cpVect)velocity startPos: (cpVect)startPos;
--(Throw *) initWithVelocity: (cpVect)velocity startPos: (cpVect)startPos;
-
--(void) scrollToCenter:(cpVect)r;
 
 @end

@@ -405,6 +405,11 @@
 		DA7547F80EAB66D40083EC7C /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
 		DA75482C0EAB77450083EC7C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75482B0EAB77450083EC7C /* OpenGLES.framework */; };
 		DA75496D0EAB77970083EC7C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75496C0EAB77970083EC7C /* QuartzCore.framework */; };
+		DA7ED6680F4F745500881CBE /* Remove.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7ED6670F4F745500881CBE /* Remove.m */; };
+		DA7ED6690F4F745500881CBE /* Remove.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7ED6670F4F745500881CBE /* Remove.m */; };
+		DA7ED66A0F4F745500881CBE /* Remove.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7ED6670F4F745500881CBE /* Remove.m */; };
+		DA7ED66B0F4F745500881CBE /* Remove.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7ED6670F4F745500881CBE /* Remove.m */; };
+		DA7ED66C0F4F745500881CBE /* Remove.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7ED6670F4F745500881CBE /* Remove.m */; };
 		DA83F0BB0F00527B00305C9F /* WindLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83F0BA0F00527B00305C9F /* WindLayer.m */; };
 		DA859C500EC4F3950036B7C0 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DA859E700EC598E10036B7C0 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
@@ -836,6 +841,8 @@
 		DA7547F50EAB66D40083EC7C /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		DA75482B0EAB77450083EC7C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		DA75496C0EAB77970083EC7C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DA7ED6660F4F745500881CBE /* Remove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Remove.h; sourceTree = "<group>"; };
+		DA7ED6670F4F745500881CBE /* Remove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Remove.m; sourceTree = "<group>"; };
 		DA83EC190EFEE93100305C9F /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		DA83F0B90F00527B00305C9F /* WindLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindLayer.h; sourceTree = "<group>"; };
 		DA83F0BA0F00527B00305C9F /* WindLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindLayer.m; sourceTree = "<group>"; };
@@ -1097,6 +1104,8 @@
 			children = (
 				DA34FD0E0EB4851D00B68C06 /* PanAction.h */,
 				DA34FD0F0EB4851D00B68C06 /* PanAction.m */,
+				DA7ED6660F4F745500881CBE /* Remove.h */,
+				DA7ED6670F4F745500881CBE /* Remove.m */,
 				DA16C5170EEC855900E46246 /* ShadeTo.h */,
 				DA16C5180EEC856200E46246 /* ShadeTo.m */,
 				DAFEF9710ED847D40019F7E5 /* Throw.h */,
@@ -1878,6 +1887,7 @@
 				DAB896DF0F480411005C1D06 /* PanningLayer.m in Sources */,
 				DAB898CF0F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */,
 				DAB308D20F48B17600694C77 /* SwipeLayer.m in Sources */,
+				DA7ED66A0F4F745500881CBE /* Remove.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1983,6 +1993,7 @@
 				DAB896DD0F480411005C1D06 /* PanningLayer.m in Sources */,
 				DAB898CD0F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */,
 				DAB308CE0F48B17600694C77 /* SwipeLayer.m in Sources */,
+				DA7ED6680F4F745500881CBE /* Remove.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2088,6 +2099,7 @@
 				DAB896E00F480411005C1D06 /* PanningLayer.m in Sources */,
 				DAB898D00F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */,
 				DAB308D00F48B17600694C77 /* SwipeLayer.m in Sources */,
+				DA7ED6690F4F745500881CBE /* Remove.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2193,6 +2205,7 @@
 				DA8B778B0F46120600DD88BF /* CJSONSerializer.m in Sources */,
 				DAB898D10F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */,
 				DAB308D10F48B17600694C77 /* SwipeLayer.m in Sources */,
+				DA7ED66B0F4F745500881CBE /* Remove.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2298,6 +2311,7 @@
 				DAB896DE0F480411005C1D06 /* PanningLayer.m in Sources */,
 				DAB898CE0F487567005C1D06 /* TrainingConfigurationLayer.m in Sources */,
 				DAB308CF0F48B17600694C77 /* SwipeLayer.m in Sources */,
+				DA7ED66C0F4F745500881CBE /* Remove.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2458,7 +2472,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D1C191D1-2059-4CFA-97B3-F12C7A74796B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6B238D14-146F-435A-970D-1FAEDF00DCC2";
 				SDKROOT = iphoneos2.2;
 				VERSION_INFO_BUILDER = lhunath;
 				ZERO_LINK = NO;

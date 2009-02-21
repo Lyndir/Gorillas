@@ -32,6 +32,8 @@
 
 @implementation BuildingsLayer
 
+@synthesize activeGorilla;
+
 
 -(id) init {
     
@@ -208,7 +210,7 @@
                 cpVect from = [(GorillaLayer *) [gorillas objectAtIndex:i] position];
                 cpVect to   = cpvadd(from, throwHistory[i]);
                 
-                drawLinesTo(from, &to, 1, [[GorillasConfig get] windowColorOff] & 0xffffff22, 3);
+                drawLinesTo(from, &to, 1, [[GorillasConfig get] windowColorOff] & 0xffffff33, 3);
             }
         }
     }
@@ -340,12 +342,6 @@
 
 -(void) nextGorilla {
     
-    GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
-    if([activeGorilla human] && ![gameLayer singlePlayer] && [[GorillasConfig get] multiplayerFlip]) {
-        [gameLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                             angle:((int) [gameLayer rotation] + 180) % 360]];
-    }
-    
     // Activate the next gorilla.
     // Look for the next live gorilla; first try the next gorilla AFTER the current.
     // If none there is alive, try the first one from the beginning UNTIL the current.
@@ -428,7 +424,7 @@
             [hint setPosition:cpvadd([activeGorilla position], v)];
             [hint do:[RepeatForever actionWithAction:[Sequence actions:
                                                       [DelayTime actionWithDuration:10],
-                                                      [FadeTo actionWithDuration:2 opacity:0x33],
+                                                      [FadeTo actionWithDuration:2 opacity:0x55],
                                                       [FadeTo actionWithDuration:2 opacity:0x00],
                                                       nil]]];
         }

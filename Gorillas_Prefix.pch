@@ -20,5 +20,8 @@
     #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>
 #endif
+
+#define tBananaFlying 1
+#define tBananaNotFlying 2
 //#define DEBUG 0
 //#undefine _DEBUG_

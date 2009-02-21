@@ -84,4 +84,6 @@
 -(cpFloat) left;
 -(cpFloat) right;
 
+@property (readonly) GorillaLayer *activeGorilla;
+
 @end
