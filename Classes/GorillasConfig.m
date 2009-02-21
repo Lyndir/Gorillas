@@ -70,6 +70,8 @@
 #define dTopScoreHistory    @"v1.topScoreHistory"
 #define dMissScore          @"v1.missScore"
 #define dKillScore          @"v1.killScore"
+#define dBonusOneShot       @"v1.bonusOneShot"
+#define dBonusSkill         @"v1.bonusSkill"
 #define dDeathScoreRatio    @"v1.deathScoreRatio"
 
 #define dTracks             @"v1.tracks"
@@ -174,6 +176,8 @@
                                 ],                           dTopScoreHistory,
                                 [NSNumber numberWithInteger:    -5],                        dMissScore,
                                 [NSNumber numberWithInteger:    50],                        dKillScore,
+                                [NSNumber numberWithInteger:    100],                       dBonusOneShot,
+                                [NSNumber numberWithInteger:    100],                       dBonusSkill,
                                 [NSNumber numberWithInteger:    5],                         dDeathScoreRatio,
                                 
                                 [NSDictionary dictionaryWithObjectsAndKeys:
@@ -562,6 +566,22 @@
 -(void) setKillScore: (int)nKillScore {
     
     [defaults setInteger:nKillScore forKey: dKillScore];
+}
+-(int) bonusOneShot {
+    
+    return [defaults integerForKey: dBonusOneShot];
+}
+-(void) setBonusOneShot: (int)nBonusOneShot {
+    
+    [defaults setInteger:nBonusOneShot forKey: dBonusOneShot];
+}
+-(int) bonusSkill {
+    
+    return [defaults integerForKey: dBonusSkill];
+}
+-(void) setBonusSkill: (int)nBonusSkill {
+    
+    [defaults setInteger:nBonusSkill forKey: dBonusSkill];
 }
 -(int) deathScoreRatio {
     

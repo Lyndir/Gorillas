@@ -82,6 +82,8 @@
 @property (readwrite, assign) NSDictionary  *topScoreHistory;
 @property (readwrite) int                   missScore;
 @property (readwrite) int                   killScore;
+@property (readwrite) int                   bonusOneShot;
+@property (readwrite) int                   bonusSkill;
 @property (readwrite) int                   deathScoreRatio;
 @property (readonly) int                    deathScore;
 

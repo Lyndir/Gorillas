@@ -45,6 +45,9 @@
     singlePlayer = false;
     running = false;
     paused = true;
+
+    messageQueue = [[NSMutableArray alloc] initWithCapacity:3];
+    msgLabel = nil;
     
     IntervalAction *l = [MoveBy actionWithDuration:.05f position:cpv(-3, 0)];
     IntervalAction *r = [MoveBy actionWithDuration:.05f position:cpv(6, 0)];
@@ -210,38 +213,66 @@
 
 -(void) message: (NSString *)msg {
     
-    [self resetMessage];
-    [msgLabel setVisible:true];
-    [msgLabel setString:msg];
-    [msgLabel do:[Sequence actions:
-                    [MoveBy actionWithDuration:1 position:cpv(0, -([[GorillasConfig get] fontSize] * 2))],
-                    [FadeOut actionWithDuration:2],
-                    nil]];
+    @synchronized(messageQueue) {
+        [messageQueue insertObject:msg atIndex:0];
+
+        if(![self isScheduled:@selector(popMessageQueue:)])
+            [self schedule:@selector(popMessageQueue:)];
+    }
 }
 
 
--(void) resetMessage {
+-(void) popMessageQueue: (ccTime)dt {
     
-    CGSize winSize = [[Director sharedDirector] winSize];
-    cpVect messagePos = cpv([msgLabel contentSize].width / 2 + [[GorillasConfig get] fontSize], winSize.height + [[GorillasConfig get] fontSize]);
+    NSString *msg = nil;
+    @synchronized(messageQueue) {
+        [self unschedule:@selector(popMessageQueue:)];
+        
+        msg = [[messageQueue lastObject] retain];
+        [messageQueue removeLastObject];
+        
+        if([messageQueue count])
+            [self schedule:@selector(popMessageQueue:) interval:1.5f];
+    }
+    
+    [self resetMessage:msg];
+    [msgLabel do:[Sequence actions:
+                  [MoveBy actionWithDuration:1 position:cpv(0, -([[GorillasConfig get] fontSize] * 2))],
+                  [FadeTo actionWithDuration:2 opacity:0x00],
+                  nil]];
+    
+    [msg release];
+}
+
+
+-(void) resetMessage:(NSString *)msg {
     
     if(!msgLabel || [msgLabel numberOfRunningActions]) {
-        [msgLabel stopAllActions];
-        [msgLabel do:[Spawn actions:
-                      [MoveTo actionWithDuration:0.5f position:cpvadd(messagePos, cpv(0, -([[GorillasConfig get] fontSize] * 2)))],
-                      [FadeOut actionWithDuration:0.5f],
-                      [Remove action],
-                      nil]];
-        [msgLabel release];
+        // Detach existing label & create a new message label for the next message.
+        if(msgLabel) {
+            [msgLabel stopAllActions];
+            [msgLabel do:[Spawn actions:
+                          [MoveTo actionWithDuration:1
+                                            position:cpvadd([msgLabel position],
+                                                            cpv(-[msgLabel contentSize].width, 0))],
+                          [FadeOut actionWithDuration:1],
+                          [Remove action],
+                          nil]];
+            [msgLabel release];
+        }
         
-        msgLabel = [[Label alloc] initWithString:@"" dimensions:CGSizeMake(1000, [[GorillasConfig get] fontSize] + 5)
+        msgLabel = [[Label alloc] initWithString:msg dimensions:CGSizeMake(1000, [[GorillasConfig get] fontSize] + 5)
                                        alignment:UITextAlignmentLeft
                                         fontName:[[GorillasConfig get] fixedFontName]
                                         fontSize: [[GorillasConfig get] fontSize]];
         [self add:msgLabel z:1];
     }
+    else
+        [msgLabel setString:msg];
 
-    [msgLabel setPosition:messagePos];
+    CGSize winSize = [[Director sharedDirector] winSize];
+    [msgLabel setPosition:cpv([msgLabel contentSize].width / 2 + [[GorillasConfig get] fontSize],
+                              winSize.height + [[GorillasConfig get] fontSize])];
     [msgLabel setOpacity:0xff];
 }
 

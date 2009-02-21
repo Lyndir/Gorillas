@@ -48,6 +48,7 @@
     ParticleSystem *weather;
     WindLayer *windLayer;
     Label *msgLabel;
+    NSMutableArray *messageQueue;
 }
 
 @property (readonly) PanningLayer *panningLayer;
@@ -65,7 +66,7 @@
 
 -(void) shake;
 -(void) message: (NSString *)msg;
--(void) resetMessage;
+-(void) resetMessage: (NSString *)msg;
 
 -(void) startSinglePlayer;
 -(void) startMultiplayer;

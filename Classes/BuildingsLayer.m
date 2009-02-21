@@ -345,6 +345,7 @@
     // Activate the next gorilla.
     // Look for the next live gorilla; first try the next gorilla AFTER the current.
     // If none there is alive, try the first one from the beginning UNTIL the current.
+    BOOL foundNextGorilla = false;
     for(BOOL startFromAfterCurrent = true; true; startFromAfterCurrent = false) {
         BOOL reachedCurrent = false;
         
@@ -360,7 +361,7 @@
                     if(reachedCurrent && [gorilla alive]) {
                         [activeGorilla release];
                         activeGorilla = [gorilla retain];
-                        startFromAfterCurrent = false;
+                        foundNextGorilla = true;
                         break;
                     }
                 } else {
@@ -373,15 +374,20 @@
                     else if([gorilla alive]) {
                         [activeGorilla release];
                         activeGorilla = [gorilla retain];
-                        startFromAfterCurrent = false;
+                        foundNextGorilla = true;
                         break;
                     }
                 }
         }
         
-        if(!startFromAfterCurrent)
-            // Second run didn't find any gorillas -> no gorillas available.
+        if(foundNextGorilla)
             break;
+        
+        if(!startFromAfterCurrent) {
+            // Second run didn't find any gorillas -> no gorillas available.
+            [[[GorillasAppDelegate get] gameLayer] stopGame];
+            return;
+        }
     }
         
     // AI throw.
@@ -451,11 +457,11 @@
     
     float g = [[GorillasConfig get] gravity];
     float w = [[[[GorillasAppDelegate get] gameLayer] windLayer] wind];
-    ccTime t = 3 * 100 / g;
+    ccTime t = 5 * 100 / g;
     
     // Level-based error.
     rt = cpv(rt.x + random() % (int) ((1 - l) * 200), rt.y + random() % (int) (200 * (1 - l)));
-    t -= (float)   (random() % (int) ((1 - l) * t * 10)) / 10.0f;
+    t = (random() % (int) ((t / 2) * l * 10)) / 10.0f + (t / 2);
     
     // Velocity vector to hit rt in t seconds.
     cpVect v = cpv((rt.x - r0.x) / t,
@@ -491,6 +497,8 @@
     dbgPathCurInd = (dbgPathCurInd + 1) % dbgPathMaxInd;
 #endif
 
+    GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
+    
     // Figure out if a gorilla was hit.
     for(GorillaLayer *gorilla in gorillas)
         if([gorilla hitsGorilla:pos]) {
@@ -517,14 +525,19 @@
                 if(liveGorillaCount == 1) {
                     [[[GorillasAppDelegate get] hudLayer] setMenuTitle:[NSString stringWithFormat:@"%@ wins!", [liveGorilla name]]];
                     
-                    if([[[GorillasAppDelegate get] gameLayer] singlePlayer] && ! [[GorillasConfig get] training]) {
+                    if([gameLayer singlePlayer] && ! [[GorillasConfig get] training]) {
                         // One gorilla left in single player: modify the level depending on who survived.
                         
                         NSString *oldLevel = [[GorillasConfig get] levelName];
                         if([liveGorilla human]) {
                             
-                            // Increase difficulty level & update score.
-                            int nScore = [[GorillasConfig get] level] * [[GorillasConfig get] killScore];
+                            // Modify difficulty level & update score.
+                            int nScore = [[GorillasConfig get] killScore];
+                            if(![explosions count]) {
+                                [gameLayer message:@"Oneshot Bonus!"];
+                                nScore += [[GorillasConfig get] bonusOneShot];
+                            }
+                            nScore *= [[GorillasConfig get] level];
                             
                             [[GorillasConfig get] setScore:[[GorillasConfig get] score] + nScore];
                             [[[GorillasAppDelegate get] hudLayer] updateScore: nScore];
@@ -534,7 +547,7 @@
 
                             // Message in case we level up.
                             if(oldLevel != [[GorillasConfig get] levelName])
-                                [[[GorillasAppDelegate get] gameLayer] message:@"Level Up!"];
+                                [gameLayer message:@"Level Up!"];
                         }
                         
                         else {
@@ -549,13 +562,11 @@
                             
                             // Message in case we level down.
                             if(oldLevel != [[GorillasConfig get] levelName])
-                                [[[GorillasAppDelegate get] gameLayer] message:@"Level Down"];
+                                [gameLayer message:@"Level Down"];
                         }
                     }
                 } else
                     [[[GorillasAppDelegate get] hudLayer] setMenuTitle:@"Tie!"];
-                
-                [[[GorillasAppDelegate get] gameLayer] stopGame];
             }
             
             // Fade out the killed gorilla.

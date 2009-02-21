@@ -52,17 +52,17 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
 
     menuMenu = [[Menu menuWithItems:menuButton, nil] retain];
-    [menuMenu setPosition:cpv([menuMenu position].x, (height - 5) / 2)];
+    [menuMenu setPosition:cpv([menuMenu position].x, height / 2)];
     [menuMenu alignItemsHorizontally];
     [self add:menuMenu];
     
     // Score.
-    scoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%04d", [[GorillasConfig get] score]]
-                                    dimensions:CGSizeMake(80, [[GorillasConfig get] smallFontSize])
+    scoreLabel = [[Label alloc] initWithString:@""
+                                    dimensions:CGSizeMake(200, [[GorillasConfig get] smallFontSize] + 5)
                                      alignment:UITextAlignmentRight
                                       fontName:[[GorillasConfig get] fixedFontName]
                                       fontSize:[[GorillasConfig get] smallFontSize]];
-    [scoreLabel setPosition:cpv(winSize.width - [scoreLabel contentSize].width * 2 / 3, height / 2)];
+    [scoreLabel setPosition:cpv(winSize.width - ([scoreLabel contentSize].width + [[GorillasConfig get] smallFontSize]) / 2, height / 2)];
     [self add:scoreLabel];
     
     return self;
@@ -70,25 +70,35 @@
 
 
 -(void) updateScore: (int)nScore {
-    
-    long scoreColor = 0xFFFFFFff;
-    
-    if(nScore > 0)
-        scoreColor = 0x66CC66ff;
-    else if(nScore < 0)
-        scoreColor = 0xCC6666ff;
 
+    if([[GorillasConfig get] training]) {
+        [scoreLabel setString:@"Training"];
+        [scoreLabel setRGB:0xff :0xff :0x99];
+        
+        return;
+    }
+    
     [scoreLabel setString:[NSString stringWithFormat:@"%04d", [[GorillasConfig get] score]]];
-    [scoreLabel do:[Spawn actions:
-                    [Sequence actions:
-                     [ShadeTo actionWithColor:scoreColor duration:0.5f],
-                     [ShadeTo actionWithColor:0xFFFFFFFF duration:0.5f],
-                     nil],
-                    [Sequence actions:
-                     [ScaleTo actionWithDuration:0.5f scale:1.2f],
-                     [ScaleTo actionWithDuration:0.5f scale:1],
-                     nil],
-                    nil]];
+    
+    if(nScore) {
+        long scoreColor = 0xFFFFFFff;
+        
+        if(nScore > 0)
+            scoreColor = 0x66CC66ff;
+        else if(nScore < 0)
+            scoreColor = 0xCC6666ff;
+        
+        [scoreLabel do:[Spawn actions:
+                        [Sequence actions:
+                         [ShadeTo actionWithColor:scoreColor duration:0.5f],
+                         [ShadeTo actionWithColor:0xFFFFFFFF duration:0.5f],
+                         nil],
+                        [Sequence actions:
+                         [ScaleTo actionWithDuration:0.5f scale:1.2f],
+                         [ScaleTo actionWithDuration:0.5f scale:1],
+                         nil],
+                        nil]];
+    }
 }
 
 
@@ -105,7 +115,9 @@
     
     [self stopAllActions];
     [self do:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, 0)]];
-    [scoreLabel setVisible:[[[GorillasAppDelegate get] gameLayer] singlePlayer] && ![[GorillasConfig get] training]];
+    
+    [scoreLabel setVisible:[[[GorillasAppDelegate get] gameLayer] singlePlayer]];
+    [self updateScore:0];
 }
 
 
