@@ -31,7 +31,7 @@
 
 @implementation GorillaLayer
 
-@synthesize human, alive, name;
+@synthesize human, alive, name, turns;
 
 
 -(id) init {

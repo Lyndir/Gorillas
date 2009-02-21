@@ -58,7 +58,7 @@
 @property (readonly) WindLayer *windLayer;
 @property (readwrite) BOOL continueAfterGame;
 @property (readonly) BOOL singlePlayer;
-@property (readonly) BOOL running;
+@property (readwrite) BOOL running;
 @property (readonly) BOOL paused;
 
 -(void) pause;

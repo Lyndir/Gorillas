@@ -140,14 +140,16 @@
     
     // Make sure label remains on screen.
     CGSize winSize = [[Director sharedDirector] winSize];
-    if([msgLabel position].x < [[GorillasConfig get] fontSize] / 2)                 // Left edge
-        [msgLabel setPosition:cpv([[GorillasConfig get] fontSize] / 2, [msgLabel position].y)];
-    if([msgLabel position].x > winSize.width - [[GorillasConfig get] fontSize] / 2) // Right edge
-        [msgLabel setPosition:cpv(winSize.width - [[GorillasConfig get] fontSize] / 2, [msgLabel position].y)];
-    if([msgLabel position].y < [[GorillasConfig get] fontSize] / 2)                 // Bottom edge
-        [msgLabel setPosition:cpv([msgLabel position].x, [[GorillasConfig get] fontSize] / 2)];
-    if([msgLabel position].y > winSize.width - [[GorillasConfig get] fontSize] * 2) // Top edge
-        [msgLabel setPosition:cpv([msgLabel position].x, winSize.height - [[GorillasConfig get] fontSize] * 2)];
+    if(![[GorillasConfig get] followThrow]) {
+        if([msgLabel position].x < [[GorillasConfig get] fontSize] / 2)                 // Left edge
+            [msgLabel setPosition:cpv([[GorillasConfig get] fontSize] / 2, [msgLabel position].y)];
+        if([msgLabel position].x > winSize.width - [[GorillasConfig get] fontSize] / 2) // Right edge
+            [msgLabel setPosition:cpv(winSize.width - [[GorillasConfig get] fontSize] / 2, [msgLabel position].y)];
+        if([msgLabel position].y < [[GorillasConfig get] fontSize] / 2)                 // Bottom edge
+            [msgLabel setPosition:cpv([msgLabel position].x, [[GorillasConfig get] fontSize] / 2)];
+        if([msgLabel position].y > winSize.width - [[GorillasConfig get] fontSize] * 2) // Top edge
+            [msgLabel setPosition:cpv([msgLabel position].x, winSize.height - [[GorillasConfig get] fontSize] * 2)];
+    }
     
     // Color depending on whether message starts with -, + or neither.
     if([msg hasPrefix:@"+"])
@@ -342,6 +344,12 @@
 
 -(void) nextGorilla {
     
+    if(![[[GorillasAppDelegate get] gameLayer] running])
+        [[[GorillasAppDelegate get] gameLayer] stopGame];
+    
+    // Active gorilla's turn is over.
+    [activeGorilla setTurns:[activeGorilla turns] + 1];
+    
     // Activate the next gorilla.
     // Look for the next live gorilla; first try the next gorilla AFTER the current.
     // If none there is alive, try the first one from the beginning UNTIL the current.
@@ -533,10 +541,20 @@
                             
                             // Modify difficulty level & update score.
                             int nScore = [[GorillasConfig get] killScore];
-                            if(![explosions count]) {
-                                [gameLayer message:@"Oneshot Bonus!"];
-                                nScore += [[GorillasConfig get] bonusOneShot];
+                            
+                            // Skill modifier.
+                            if([activeGorilla turns] == 0) {
+                                [gameLayer message:@"Oneshot!"];
+                                nScore *= [[GorillasConfig get] bonusOneShot];
                             }
+                            
+                            // Oneshot bonus modifier.
+                            if([activeGorilla turns] == 0) {
+                                [gameLayer message:@"Oneshot!"];
+                                nScore *= [[GorillasConfig get] bonusOneShot];
+                            }
+                            
+                            // Level modifier.
                             nScore *= [[GorillasConfig get] level];
                             
                             [[GorillasConfig get] setScore:[[GorillasConfig get] score] + nScore];
@@ -564,6 +582,8 @@
                             if(oldLevel != [[GorillasConfig get] levelName])
                                 [gameLayer message:@"Level Down"];
                         }
+                        
+                        [[[GorillasAppDelegate get] gameLayer] setRunning:NO];
                     }
                 } else
                     [[[GorillasAppDelegate get] hudLayer] setMenuTitle:@"Tie!"];
@@ -718,9 +738,6 @@
 }
 
 -(void) stopGameCallback:(id)sender {
-    
-    if(![[[GorillasAppDelegate get] gameLayer] running])
-        return;
     
     for(GorillaLayer *gorilla in gorillas)
         [self removeAndStop:gorilla];

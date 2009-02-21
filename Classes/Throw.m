@@ -197,24 +197,23 @@
     GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
     BuildingsLayer *buildingsLayer = [gameLayer buildingsLayer];
     
-    if(![gameLayer running])
-        return;
-    
-    if([[buildingsLayer activeGorilla] human] && ![gameLayer singlePlayer] && [[GorillasConfig get] multiplayerFlip] && !flipped) {
-        [gameLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                             angle:((int) [gameLayer rotation] + 180) % 360]];
-        flipped = true;
+    if(![gameLayer running]) {
+        if([[buildingsLayer activeGorilla] human] && ![gameLayer singlePlayer] && [[GorillasConfig get] multiplayerFlip] && !flipped) {
+            [gameLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                                 angle:((int) [gameLayer rotation] + 180) % 360]];
+            flipped = true;
+        }
+        
+        if(--endCount > 0) {
+            [gameLayer message:[NSString stringWithFormat:@"%d ..", endCount]];
+            [buildingsLayer do:[nextAction copy]];
+            
+            return;
+        }
+        
+        if(endCount == 0)
+            [gameLayer message:@"Go .."];
     }
-
-    if(--endCount > 0) {
-        [gameLayer message:[NSString stringWithFormat:@"%d ..", endCount]];
-        [buildingsLayer do:[nextAction copy]];
-    
-        return;
-    }
-
-    if(endCount == 0)
-        [gameLayer message:@"Go .."];
     
     // Next Gorilla's turn.
     [target setTag:tBananaNotFlying];

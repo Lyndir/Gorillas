@@ -32,6 +32,7 @@
 
     NSString *name;
     
+    NSUInteger turns;
     BOOL human;
     BOOL alive;
 }
@@ -40,6 +41,7 @@
 
 @property (readwrite, retain) NSString *name;
 
+@property (readwrite, assign) NSUInteger turns;
 @property (readwrite, assign) BOOL human;
 @property (readwrite, assign) BOOL alive;
 

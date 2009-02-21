@@ -170,10 +170,6 @@
 
 -(void) pause {
     
-    if(!running)
-        // Only allow toggling pause state while game is running.
-        return;
-    
     if(!paused)
         [self message:@"Paused"];
     
@@ -186,10 +182,6 @@
 
 
 -(void) unpause {
-    
-    if(!running)
-        // Only allow toggling pause state while game is running.
-        return;
     
     if(paused)
         [self message:@"Unpaused!"];
@@ -345,9 +337,6 @@
 
 
 -(void) stopGame {
-    
-    if(!running)
-        return;
     
     paused = false;
     [self unpause];

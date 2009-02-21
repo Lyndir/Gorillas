@@ -173,11 +173,11 @@
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*18)] description],
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*19)] description],
                                  nil//*/
-                                ],                           dTopScoreHistory,
+                                ],                                                          dTopScoreHistory,
                                 [NSNumber numberWithInteger:    -5],                        dMissScore,
                                 [NSNumber numberWithInteger:    50],                        dKillScore,
-                                [NSNumber numberWithInteger:    100],                       dBonusOneShot,
-                                [NSNumber numberWithInteger:    100],                       dBonusSkill,
+                                [NSNumber numberWithFloat:      2],                         dBonusOneShot,
+                                [NSNumber numberWithFloat:      3],                         dBonusSkill,
                                 [NSNumber numberWithInteger:    5],                         dDeathScoreRatio,
                                 
                                 [NSDictionary dictionaryWithObjectsAndKeys:
@@ -188,7 +188,7 @@
                                  @"Fork Bomb",              @"forkbomb.wav",
                                  @"Off",                    @"",
                                  nil],                                                      dTracks,
-                                @"blockdropper3.wav",                                       dCurrentTrack,
+                                @"fighting_gorillas.wav",                                   dCurrentTrack,
                                 
                                 [NSNumber numberWithBool:    YES],                          dWeather,
                                 [NSNumber numberWithBool:    YES],                          dSoundFx,
@@ -567,21 +567,21 @@
     
     [defaults setInteger:nKillScore forKey: dKillScore];
 }
--(int) bonusOneShot {
+-(float) bonusOneShot {
     
-    return [defaults integerForKey: dBonusOneShot];
+    return [defaults floatForKey: dBonusOneShot];
 }
--(void) setBonusOneShot: (int)nBonusOneShot {
+-(void) setBonusOneShot: (float)nBonusOneShot {
     
-    [defaults setInteger:nBonusOneShot forKey: dBonusOneShot];
+    [defaults setFloat:nBonusOneShot forKey: dBonusOneShot];
 }
--(int) bonusSkill {
+-(float) bonusSkill {
     
-    return [defaults integerForKey: dBonusSkill];
+    return [defaults floatForKey: dBonusSkill];
 }
--(void) setBonusSkill: (int)nBonusSkill {
+-(void) setBonusSkill: (float)nBonusSkill {
     
-    [defaults setInteger:nBonusSkill forKey: dBonusSkill];
+    [defaults setFloat:nBonusSkill forKey: dBonusSkill];
 }
 -(int) deathScoreRatio {
     
