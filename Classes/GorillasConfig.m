@@ -67,6 +67,7 @@
 #define dLevelProgress      @"v1.levelProgress"
 
 #define dScore              @"v1.score"
+#define dSkill              @"v1.skill"
 #define dTopScoreHistory    @"v1.topScoreHistory"
 #define dMissScore          @"v1.missScore"
 #define dKillScore          @"v1.killScore"
@@ -152,6 +153,7 @@
                                 [NSNumber numberWithFloat:      0.03f],                     dLevelProgress,
                                 
                                 [NSNumber numberWithInteger:    0],                         dScore,
+                                [NSNumber numberWithInteger:    0],                         dSkill,
                                 [NSMutableDictionary dictionary/*WithObjectsAndKeys:
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*1)] description],
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*2)] description],
@@ -542,6 +544,14 @@
     }
     
     [defaults setInteger:nScore forKey: dScore];
+}
+-(float) skill {
+    
+    return [defaults floatForKey: dSkill];
+}
+-(void) setSkill: (float)nSkill {
+    
+    [defaults setFloat:nSkill forKey: dSkill];
 }
 -(NSDictionary *) topScoreHistory {
     

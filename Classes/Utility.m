@@ -89,8 +89,8 @@ void drawLinesTo(cpVect from, const cpVect* to, int n, long color, float width) 
     
     cpVect *points = malloc(sizeof(cpVect) * (n + 1));
     points[0] = from;
-    for(int i = 1; i < n + 1; ++i)
-        points[i] = to[i - 1];
+    for(int i = 0; i < n; ++i)
+        points[i + 1] = to[i];
 
     GLubyte *colorBytes = (GLubyte *)&color;
     glColor4ub(colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0]);

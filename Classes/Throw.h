@@ -35,6 +35,7 @@
     cpVect v;
     cpVect r0;
     int endCount;
+    float throwSkill;
     
     Action *nextAction;
     MoveTo *gameScrollAction;

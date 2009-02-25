@@ -79,6 +79,7 @@
 @property (readwrite) float                 levelProgress;
 
 @property (readwrite) int                   score;
+@property (readwrite) float                 skill;
 @property (readwrite, assign) NSDictionary  *topScoreHistory;
 @property (readwrite) int                   missScore;
 @property (readwrite) int                   killScore;

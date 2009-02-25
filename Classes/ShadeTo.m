@@ -51,15 +51,15 @@
 
 -(void) start {
     
-    if(![target respondsToSelector:@selector(setRGB:::)])
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"ShadeTo action target does not respond to setRGB:::" userInfo:nil];
+    if(![target conformsToProtocol:@protocol(CocosNodeRGB)])
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"ShadeTo action target does not cinform to CocosNodeRGB" userInfo:nil];
     if(![target conformsToProtocol:@protocol(CocosNodeOpacity)])
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"ShadeTo action target does not conform to CocosNodeOpacity" userInfo:nil];
-        
-    startCol    = [(TextureNode *)target r] << 24
-                | [(TextureNode *)target g] << 16
-                | [(TextureNode *)target b] << 8
-                | [(TextureNode *)target opacity];
+    
+    startCol    = [(CocosNode< CocosNodeRGB> *)     target r] << 24
+                | [(CocosNode< CocosNodeRGB> *)     target g] << 16
+                | [(CocosNode< CocosNodeRGB> *)     target b] << 8
+                | [(CocosNode< CocosNodeOpacity> *) target opacity];
     
     [super start];
 }

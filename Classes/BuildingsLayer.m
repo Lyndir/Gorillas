@@ -491,14 +491,14 @@
     int nScore = [[GorillasConfig get] level] * [[GorillasConfig get] missScore];
     
     [[GorillasConfig get] setScore:[[GorillasConfig get] score] + nScore];
-    [[[GorillasAppDelegate get] hudLayer] updateScore:nScore];
+    [[[GorillasAppDelegate get] hudLayer] updateScore:nScore skill:0];
 
     if(nScore)
         [self message:[NSString stringWithFormat:@"%+d", nScore] on:[bananaLayer banana]];
 }
 
 
--(BOOL) hitsGorilla: (cpVect)pos {
+-(BOOL) hitsGorilla: (cpVect)pos  throwSkill:(float)throwSkill {
 
 #ifdef _DEBUG_
     dbgPath[dbgPathCurInd] = pos;
@@ -531,7 +531,7 @@
             // If 0 or 1 gorillas left; show who won and stop the game.
             if(liveGorillaCount < 2) {
                 if(liveGorillaCount == 1) {
-                    [[[GorillasAppDelegate get] hudLayer] setMenuTitle:[NSString stringWithFormat:@"%@ wins!", [liveGorilla name]]];
+                    [[[GorillasAppDelegate get] hudLayer] setInfoString:[NSString stringWithFormat:@"%@ wins!", [liveGorilla name]]];
                     
                     if([gameLayer singlePlayer] && ! [[GorillasConfig get] training]) {
                         // One gorilla left in single player: modify the level depending on who survived.
@@ -557,8 +557,9 @@
                             // Level modifier.
                             nScore *= [[GorillasConfig get] level];
                             
+                            [[GorillasConfig get] setSkill:fminf(0.99f, [[GorillasConfig get] skill] + throwSkill)];
                             [[GorillasConfig get] setScore:[[GorillasConfig get] score] + nScore];
-                            [[[GorillasAppDelegate get] hudLayer] updateScore: nScore];
+                            [[[GorillasAppDelegate get] hudLayer] updateScore: nScore skill:0];
                             if(nScore)
                                 [self message:[NSString stringWithFormat:@"%+d", nScore] on:hitGorilla];
                             [[GorillasConfig get] levelUp];
@@ -573,7 +574,7 @@
                             int nScore = [[GorillasConfig get] level] * [[GorillasConfig get] deathScore];
                             
                             [[GorillasConfig get] setScore:[[GorillasConfig get] score] + nScore];
-                            [[[GorillasAppDelegate get] hudLayer] updateScore: nScore];
+                            [[[GorillasAppDelegate get] hudLayer] updateScore: nScore skill:0];
                             if(nScore)
                                 [self message:[NSString stringWithFormat:@"%+d", nScore] on:hitGorilla];
                             [[GorillasConfig get] levelDown];
@@ -586,7 +587,7 @@
                         [[[GorillasAppDelegate get] gameLayer] setRunning:NO];
                     }
                 } else
-                    [[[GorillasAppDelegate get] hudLayer] setMenuTitle:@"Tie!"];
+                    [[[GorillasAppDelegate get] hudLayer] setInfoString:@"Tie!"];
             }
             
             // Fade out the killed gorilla.
@@ -642,7 +643,7 @@
 
 -(void) startGameWithGorilla: (GorillaLayer *)gorillaA andGorilla: (GorillaLayer *)gorillaB {
     
-    [[[GorillasAppDelegate get] hudLayer] setMenuTitle: @"Menu"];
+    [[[GorillasAppDelegate get] hudLayer] setInfoString: @"Menu"];
     [self stopPanning];
     [self reset];
     

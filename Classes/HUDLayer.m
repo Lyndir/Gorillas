@@ -45,40 +45,38 @@
     height =[[GorillasConfig get] smallFontSize] + 10;
     position = cpv(0, -height);
     
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    menuButton = [[MenuItemFont itemFromString:@"                              "
-                                        target:self
-                                      selector:@selector(menuButton:)] retain];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    menuButton = [[MenuItemAtlasFont itemFromString:@"Menu"
+                                        charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '
+                                             target:self selector:@selector(menuButton:)] retain];
 
     menuMenu = [[Menu menuWithItems:menuButton, nil] retain];
-    [menuMenu setPosition:cpv([menuMenu position].x, height / 2)];
+    [menuMenu setPosition:cpv(width - [menuButton contentSize].width, height / 2)];
     [menuMenu alignItemsHorizontally];
     [self add:menuMenu];
     
     // Score.
-    scoreLabel = [[Label alloc] initWithString:@""
-                                    dimensions:CGSizeMake(200, [[GorillasConfig get] smallFontSize] + 5)
-                                     alignment:UITextAlignmentRight
-                                      fontName:[[GorillasConfig get] fixedFontName]
-                                      fontSize:[[GorillasConfig get] smallFontSize]];
-    [scoreLabel setPosition:cpv(winSize.width - ([scoreLabel contentSize].width + [[GorillasConfig get] smallFontSize]) / 2, height / 2)];
-    [self add:scoreLabel];
+    infoLabel = [[LabelAtlas alloc] initWithString:@""
+                                       charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
+    [infoLabel setPosition:cpvzero];
+    [self add:infoLabel];
     
     return self;
 }
 
 
--(void) updateScore: (int)nScore {
+-(void) updateScore: (int)nScore skill: (float)throwSkill {
 
     if([[GorillasConfig get] training]) {
-        [scoreLabel setString:@"Training"];
-        [scoreLabel setRGB:0xff :0xff :0x99];
+        [infoLabel setString:[NSString stringWithFormat:@" Training   | Skill: %02d%%",
+                              (int) (fminf(0.99f, [[GorillasConfig get] skill] + throwSkill) * 100)]];
+        [infoLabel setRGB:0xff :0xff :0x99];
         
         return;
     }
     
-    [scoreLabel setString:[NSString stringWithFormat:@"%04d", [[GorillasConfig get] score]]];
+    [infoLabel setString:[NSString stringWithFormat:@" Score: %03d | Skill: %02d%%",
+                          [[GorillasConfig get] score],
+                          (int) (fminf(0.99f, [[GorillasConfig get] skill] + throwSkill) * 100)]];
     
     if(nScore) {
         long scoreColor = 0xFFFFFFff;
@@ -88,24 +86,18 @@
         else if(nScore < 0)
             scoreColor = 0xCC6666ff;
         
-        [scoreLabel do:[Spawn actions:
-                        [Sequence actions:
-                         [ShadeTo actionWithColor:scoreColor duration:0.5f],
-                         [ShadeTo actionWithColor:0xFFFFFFFF duration:0.5f],
-                         nil],
-                        [Sequence actions:
-                         [ScaleTo actionWithDuration:0.5f scale:1.2f],
-                         [ScaleTo actionWithDuration:0.5f scale:1],
-                         nil],
-                        nil]];
+        [infoLabel do:[Sequence actions:
+                       [ShadeTo actionWithColor:scoreColor duration:0.5f],
+                       [ShadeTo actionWithColor:0xFFFFFFFF duration:0.5f],
+                       nil]];
     }
 }
 
 
 
--(void) setMenuTitle: (NSString *)title {
+-(void) setInfoString: (NSString *)string {
     
-    [menuButton setString:title];
+    [infoLabel setString:string];
 }
 
 
@@ -116,8 +108,8 @@
     [self stopAllActions];
     [self do:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, 0)]];
     
-    [scoreLabel setVisible:[[[GorillasAppDelegate get] gameLayer] singlePlayer]];
-    [self updateScore:0];
+    [infoLabel setVisible:[[[GorillasAppDelegate get] gameLayer] singlePlayer]];
+    [self updateScore:0 skill:0];
 }
 
 
@@ -155,7 +147,9 @@
 
 -(void) draw {
     
-    drawBoxFrom(cpvzero, cpv(width, height), [[GorillasConfig get] shadeColor], [[GorillasConfig get] shadeColor]);
+    cpVect to = cpv(width, height);
+    drawBoxFrom(cpvzero, to, 0x000000FF, 0x000000FF);
+    drawLinesTo(cpv(0, height), &to, 1, 0xFFFFFFFF, 1);
 }
 
 
@@ -167,8 +161,8 @@
     [menuMenu release];
     menuMenu = nil;
     
-    [scoreLabel release];
-    scoreLabel = nil;
+    [infoLabel release];
+    infoLabel = nil;
     
     [super dealloc];
 }

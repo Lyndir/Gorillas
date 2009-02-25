@@ -32,7 +32,7 @@
 
     MenuItemFont *menuButton;
     Menu *menuMenu;
-    Label *scoreLabel;
+    LabelAtlas *infoLabel;
     
     float width;
     float height;
@@ -40,8 +40,8 @@
 
 -(void) dismiss;
 
--(void) setMenuTitle: (NSString *)title;
--(void) updateScore: (int)nScore;
+-(void) setInfoString: (NSString *)string;
+-(void) updateScore: (int)nScore skill: (float)nSkill;
 
 -(BOOL) hitsHud: (cpVect)pos;
 

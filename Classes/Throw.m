@@ -146,7 +146,7 @@
         // Figure out whether banana went off screen or hit something.
         BOOL offScreen   = rTest.x < min || rTest.x > max
                         || rTest.y < 0 || rTest.y > winSize.height * 2;
-        BOOL hitGorilla  = [buildingsLayer hitsGorilla:rTest];
+        BOOL hitGorilla  = [buildingsLayer hitsGorilla:rTest throwSkill:throwSkill];
         BOOL hitBuilding = [buildingsLayer hitsBuilding:rTest];
         
         // Hitting something causes an explosion.
@@ -184,8 +184,15 @@
     } else if([smoke emissionRate])
         [smoke setEmissionRate:0];
     
-    if(!running)
+    if(running) {
+        if([gameLayer singlePlayer] && [[[gameLayer buildingsLayer] activeGorilla] human]) {
+            // Singleplayer game with human turn is still running; update the skill counter.
+            throwSkill = elapsed / 20;
+            [[[GorillasAppDelegate get] hudLayer] updateScore:0 skill:throwSkill];
+        }
+    } else
         [buildingsLayer do:nextAction];
+    
 }
 
 
