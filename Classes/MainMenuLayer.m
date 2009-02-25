@@ -74,28 +74,27 @@
 -(void) newGameSingle: (id)sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[[GorillasAppDelegate get] gameLayer] startSinglePlayer];
+    [[[GorillasAppDelegate get] gameLayer] startGameWithMode:GorillasModeQuick humans:1 ais:1];
 }
 
 
 -(void) newGameMulti: (id)sender {
 
     [[GorillasAppDelegate get] clickEffect];
-    [[[GorillasAppDelegate get] gameLayer] startMultiplayer];
+    [[[GorillasAppDelegate get] gameLayer] startGameWithMode:GorillasModeQuick humans:2 ais:0];
 }
 
 
 -(void) continueGame: (id)sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[[GorillasAppDelegate get] gameLayer] unpause];
+    [[[GorillasAppDelegate get] gameLayer] setPaused:NO];
 }
 
 
 -(void) stopGame: (id)sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[[GorillasAppDelegate get] gameLayer] setContinueAfterGame:NO];
     [[[GorillasAppDelegate get] gameLayer] stopGame];
 }
 

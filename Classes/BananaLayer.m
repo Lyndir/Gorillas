@@ -43,7 +43,7 @@
     banana = [[Sprite alloc] initWithFile:@"banana.png"];
     [banana setScale:[[GorillasConfig get] cityScale]];
     [banana setVisible:false];
-    [banana setTag:tBananaNotFlying];
+    [banana setTag:GorillasTagBananaNotFlying];
 
     return self;
 }
@@ -76,7 +76,7 @@
 
 -(BOOL) throwing {
     
-    return [banana tag] == tBananaFlying;
+    return [banana tag] == GorillasTagBananaFlying;
 }
 
 

@@ -92,7 +92,7 @@
                                                                angle:360]
                                   times:(int)duration + 1]];
     [target setVisible:true];
-    [target setTag:tBananaFlying];
+    [target setTag:GorillasTagBananaFlying];
     
     
     [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:smoke affectAngle:false];
@@ -185,7 +185,7 @@
         [smoke setEmissionRate:0];
     
     if(running) {
-        if([gameLayer singlePlayer] && [[[gameLayer buildingsLayer] activeGorilla] human]) {
+        if(gameLayer.singlePlayer && gameLayer.activeGorilla.human) {
             // Singleplayer game with human turn is still running; update the skill counter.
             throwSkill = elapsed / 20;
             [[[GorillasAppDelegate get] hudLayer] updateScore:0 skill:throwSkill];
@@ -205,7 +205,7 @@
     BuildingsLayer *buildingsLayer = [gameLayer buildingsLayer];
     
     if(![gameLayer running]) {
-        if([[buildingsLayer activeGorilla] human] && ![gameLayer singlePlayer] && [[GorillasConfig get] multiplayerFlip] && !flipped) {
+        if(gameLayer.activeGorilla.human && !gameLayer.singlePlayer && [[GorillasConfig get] multiplayerFlip] && !flipped) {
             [gameLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                                  angle:((int) [gameLayer rotation] + 180) % 360]];
             flipped = true;
@@ -223,7 +223,7 @@
     }
     
     // Next Gorilla's turn.
-    [target setTag:tBananaNotFlying];
+    [target setTag:GorillasTagBananaNotFlying];
     [buildingsLayer nextGorilla];
 }
 

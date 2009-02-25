@@ -32,8 +32,6 @@
 
 @implementation BuildingsLayer
 
-@synthesize activeGorilla;
-
 
 -(id) init {
     
@@ -56,7 +54,6 @@
     isTouchEnabled  = true;
 
     aim             = cpv(-1, -1);
-    gorillas        = [[NSMutableArray alloc] init];
     buildings       = [[NSMutableArray alloc] init];
     explosions      = [[NSMutableArray alloc] init];
     
@@ -207,9 +204,9 @@
 #endif
 
     if([[GorillasConfig get] training]) {
-        for(NSUInteger i = 0; i < [gorillas count]; ++i) {
+        for(NSUInteger i = 0; i < [[GorillasAppDelegate get].gameLayer.gorillas count]; ++i) {
             if([[GorillasConfig get] throwHistory]) {
-                cpVect from = [(GorillaLayer *) [gorillas objectAtIndex:i] position];
+                cpVect from = [(GorillaLayer *) [[GorillasAppDelegate get].gameLayer.gorillas objectAtIndex:i] position];
                 cpVect to   = cpvadd(from, throwHistory[i]);
                 
                 drawLinesTo(from, &to, 1, [[GorillasConfig get] windowColorOff] & 0xffffff33, 3);
@@ -217,11 +214,11 @@
         }
     }
     
-    if(activeGorilla && aim.x > 0) {
+    if([GorillasAppDelegate get].gameLayer.activeGorilla && aim.x > 0) {
         // Only draw aim when aiming and gorillas are set.
 
         const cpVect points[] = {
-            [activeGorilla position],
+            [[GorillasAppDelegate get].gameLayer.activeGorilla position],
             aim,
         };
         const long colors[] = {
@@ -325,11 +322,11 @@
         // Cancel when: released over HUD, no aim vector, state doesn't allow throwing.
         return [self ccTouchesCancelled:touches withEvent:event];
     
-    cpVect r0 = [activeGorilla position];
+    cpVect r0 = [[GorillasAppDelegate get].gameLayer.activeGorilla position];
     cpVect v = cpvsub(aim, r0);
     
     aim = cpv(-1.0f, -1.0f);
-    [self throwFrom:activeGorilla withVelocity:v];
+    [self throwFrom:[GorillasAppDelegate get].gameLayer.activeGorilla withVelocity:v];
     
     return kEventHandled;
 }
@@ -337,8 +334,8 @@
 
 -(BOOL) mayThrow {
 
-    return ![bananaLayer throwing] && [activeGorilla alive] && [activeGorilla human]
-            && ![[[GorillasAppDelegate get] gameLayer] paused];
+    return ![bananaLayer throwing] && [[GorillasAppDelegate get].gameLayer.activeGorilla alive] && [[GorillasAppDelegate get].gameLayer.activeGorilla human]
+            && ![GorillasAppDelegate get].gameLayer.paused;
 }
 
 
@@ -348,7 +345,7 @@
         [[[GorillasAppDelegate get] gameLayer] stopGame];
     
     // Active gorilla's turn is over.
-    [activeGorilla setTurns:[activeGorilla turns] + 1];
+    ++[GorillasAppDelegate get].gameLayer.activeGorilla.turns;
     
     // Activate the next gorilla.
     // Look for the next live gorilla; first try the next gorilla AFTER the current.
@@ -357,9 +354,9 @@
     for(BOOL startFromAfterCurrent = true; true; startFromAfterCurrent = false) {
         BOOL reachedCurrent = false;
         
-        for(GorillaLayer *gorilla in gorillas) {
+        for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas) {
         
-            if(gorilla == activeGorilla)
+            if(gorilla == [GorillasAppDelegate get].gameLayer.activeGorilla)
                 reachedCurrent = true;
             
             else
@@ -367,8 +364,7 @@
                     
                     // First run.
                     if(reachedCurrent && [gorilla alive]) {
-                        [activeGorilla release];
-                        activeGorilla = [gorilla retain];
+                        [GorillasAppDelegate get].gameLayer.activeGorilla = gorilla;
                         foundNextGorilla = true;
                         break;
                     }
@@ -380,8 +376,7 @@
                         break;
                     
                     else if([gorilla alive]) {
-                        [activeGorilla release];
-                        activeGorilla = [gorilla retain];
+                        [GorillasAppDelegate get].gameLayer.activeGorilla = gorilla;
                         foundNextGorilla = true;
                         break;
                     }
@@ -397,22 +392,22 @@
             return;
         }
     }
-        
-    // AI throw.
-    if(![activeGorilla human] && [activeGorilla alive]) {
-        NSMutableArray *enemies = [gorillas mutableCopy];
-        [enemies removeObject:activeGorilla];
+
+    if([GorillasAppDelegate get].gameLayer.activeGorilla.alive && ![GorillasAppDelegate get].gameLayer.activeGorilla.human) {
+        // Active gorilla is a live AI.
+        NSMutableArray *enemies = [[GorillasAppDelegate get].gameLayer.gorillas mutableCopy];
+        [enemies removeObject:[GorillasAppDelegate get].gameLayer.activeGorilla];
         
         GorillaLayer *target = [[enemies objectAtIndex:random() % [enemies count]] retain];
         [enemies release];
         
-        cpVect r0 = [activeGorilla position];
+        cpVect r0 = [GorillasAppDelegate get].gameLayer.activeGorilla.position;
         cpVect v = [self calculateThrowFrom:r0
                                          to:[target position]
                                  errorLevel:[[GorillasConfig get] level]];
         [target release];
 
-        [self throwFrom:activeGorilla withVelocity:v];
+        [self throwFrom:[GorillasAppDelegate get].gameLayer.activeGorilla withVelocity:v];
         
 #ifdef _DEBUG_
         dbgAI[dbgAICurInd] = activeGorilla;
@@ -422,20 +417,22 @@
     }
     
     // Throw hints.
-    for(NSUInteger i = 0; i < [gorillas count]; ++i) {
-        GorillaLayer *gorilla = [gorillas objectAtIndex:i];
+    for(NSUInteger i = 0; i < [[GorillasAppDelegate get].gameLayer.gorillas count]; ++i) {
+        GorillaLayer *gorilla = [[GorillasAppDelegate get].gameLayer.gorillas objectAtIndex:i];
 
         BOOL hintGorilla = [[GorillasConfig get] training] && [[GorillasConfig get] throwHint]
-                        && [activeGorilla human] && gorilla != activeGorilla && [gorilla alive];
+                        && [GorillasAppDelegate get].gameLayer.activeGorilla.human
+                        && gorilla != [GorillasAppDelegate get].gameLayer.activeGorilla && [gorilla alive];
         Sprite *hint = [throwHints objectAtIndex:i];
         [hint setVisible:hintGorilla];
         [hint stopAllActions];
         
         if(hintGorilla) {
-            cpVect v = [self calculateThrowFrom:[activeGorilla position] to:[gorilla position] errorLevel:0.9f];
+            cpVect v = [self calculateThrowFrom:[[GorillasAppDelegate get].gameLayer.activeGorilla position]
+                                             to:[gorilla position] errorLevel:0.9f];
 
             [hint setOpacity:0];
-            [hint setPosition:cpvadd([activeGorilla position], v)];
+            [hint setPosition:cpvadd([GorillasAppDelegate get].gameLayer.activeGorilla.position, v)];
             [hint do:[RepeatForever actionWithAction:[Sequence actions:
                                                       [DelayTime actionWithDuration:10],
                                                       [FadeTo actionWithDuration:2 opacity:0x55],
@@ -456,7 +453,7 @@
         }
     
     // Record throw history & start the actual throw.
-    throwHistory[[gorillas indexOfObject:gorilla]] = v;
+    throwHistory[[[GorillasAppDelegate get].gameLayer.gorillas indexOfObject:gorilla]] = v;
     [bananaLayer throwFrom:[gorilla position] withVelocity:v];
 }
 
@@ -484,7 +481,7 @@
 
 -(void) miss {
     
-    if(!([[[GorillasAppDelegate get] gameLayer] singlePlayer] && [activeGorilla human] && ![[GorillasConfig get] training]))
+    if(!([GorillasAppDelegate get].gameLayer.singlePlayer && [GorillasAppDelegate get].gameLayer.activeGorilla.human && ![[GorillasConfig get] training]))
         // Only deduct points when single player game & throw was by human & not in training mode.
         return;
     
@@ -508,10 +505,10 @@
     GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
     
     // Figure out if a gorilla was hit.
-    for(GorillaLayer *gorilla in gorillas)
+    for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
         if([gorilla hitsGorilla:pos]) {
 
-            if(gorilla == activeGorilla && ![bananaLayer clearedGorilla])
+            if(gorilla == [GorillasAppDelegate get].gameLayer.activeGorilla && ![bananaLayer clearedGorilla])
                 // Disregard this hit on active gorilla because the banana didn't clear him yet.
                 continue;
             
@@ -522,7 +519,7 @@
             // Check whether any gorillas are left.
             int liveGorillaCount = 0;
             GorillaLayer *liveGorilla;
-            for(GorillaLayer *gorillaState in gorillas)
+            for(GorillaLayer *gorillaState in [GorillasAppDelegate get].gameLayer.gorillas)
                 if([gorillaState alive]) {
                     liveGorillaCount++;
                     liveGorilla = gorillaState;
@@ -543,13 +540,13 @@
                             int nScore = [[GorillasConfig get] killScore];
                             
                             // Skill modifier.
-                            if([activeGorilla turns] == 0) {
+                            if([GorillasAppDelegate get].gameLayer.activeGorilla.turns == 0) {
                                 [gameLayer message:@"Oneshot!"];
                                 nScore *= [[GorillasConfig get] bonusOneShot];
                             }
                             
                             // Oneshot bonus modifier.
-                            if([activeGorilla turns] == 0) {
+                            if([GorillasAppDelegate get].gameLayer.activeGorilla.turns == 0) {
                                 [gameLayer message:@"Oneshot!"];
                                 nScore *= [[GorillasConfig get] bonusOneShot];
                             }
@@ -599,7 +596,7 @@
             return true;
         }
         
-        else if(gorilla == activeGorilla)
+        else if(gorilla == [GorillasAppDelegate get].gameLayer.activeGorilla)
             // Active gorilla was not hit -> banana cleared him.
             [bananaLayer setClearedGorilla:true];
     
@@ -641,18 +638,13 @@
 }
 
 
--(void) startGameWithGorilla: (GorillaLayer *)gorillaA andGorilla: (GorillaLayer *)gorillaB {
+-(void) startGame {
     
-    [[[GorillasAppDelegate get] hudLayer] setInfoString: @"Menu"];
     [self stopPanning];
-    [self reset];
-    
-    [gorillas addObject:gorillaA];
-    [gorillas addObject:gorillaB];
     
     // Create enough throw hint sprites / remove needless ones.
-    while([throwHints count] != [gorillas count]) {
-        if([throwHints count] < [gorillas count]) {
+    while([throwHints count] != [[GorillasAppDelegate get].gameLayer.gorillas count]) {
+        if([throwHints count] < [[GorillasAppDelegate get].gameLayer.gorillas count]) {
             Sprite *hint = [Sprite spriteWithFile:@"fire.png"];
             [throwHints addObject:hint];
             [self add:hint];
@@ -664,15 +656,13 @@
 
     // Reset throw history & throw hints.
     free(throwHistory);
-    throwHistory = malloc(sizeof(cpVect) * [gorillas count]);
-    for(NSUInteger i = 0; i < [gorillas count]; ++i) {
+    throwHistory = malloc(sizeof(cpVect) * [[GorillasAppDelegate get].gameLayer.gorillas count]);
+    for(NSUInteger i = 0; i < [[GorillasAppDelegate get].gameLayer.gorillas count]; ++i) {
         throwHistory[i] = cpv(-1, -1);
         [[throwHints objectAtIndex:i] setVisible:NO];
     }
     
-    [gorillaA setAlive:true];
-    [gorillaB setAlive:true];
-    
+    // Position our gorillas.
     int indexA = 0;
     for(BuildingLayer *building in buildings)
         if(position.x + [building position].x >= 0) {
@@ -680,6 +670,9 @@
             break;
         }
     int indexB = indexA + [[GorillasConfig get] buildingAmount] - 3;
+    
+    GorillaLayer *gorillaA = [[GorillasAppDelegate get].gameLayer.gorillas objectAtIndex:0];
+    GorillaLayer *gorillaB = [[GorillasAppDelegate get].gameLayer.gorillas objectAtIndex:1];
     
     BuildingLayer *buildingA = (BuildingLayer *) [buildings objectAtIndex:indexA];
     [gorillaA setPosition:cpv([buildingA position].x + [buildingA contentSize].width / 2, [buildingA contentSize].height + [gorillaA contentSize].height / 2)];
@@ -692,17 +685,19 @@
     [self add:gorillaA z:3];
     [self add:gorillaB z:3];
     
+    // Add a banana to the scene.
+    if(bananaLayer) {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"Tried to start a game while a(n old?) banana still existed."
+                                     userInfo:nil];
+    }
     bananaLayer = [[BananaLayer alloc] init];
-    [[bananaLayer banana] setPosition:gorillaA.position];
     [self add:bananaLayer z:2];
     
     [self do:[Sequence actions:
               /*[DelayTime actionWithDuration:1],*/
               [CallFunc actionWithTarget:self selector:@selector(startedCallback:)],
               nil]];
-    
-    [activeGorilla release];
-    activeGorilla = nil;
     
     [self nextGorilla];
 }
@@ -718,10 +713,8 @@
     
     [hitGorilla release];
     hitGorilla = nil;
-    [activeGorilla release];
-    activeGorilla = nil;
     
-    for(GorillaLayer *gorilla in gorillas) {
+    for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas) {
         [gorilla setAlive:false];
         [gorilla do:[FadeOut actionWithDuration:1]];
     }
@@ -740,20 +733,20 @@
 
 -(void) stopGameCallback:(id)sender {
     
-    for(GorillaLayer *gorilla in gorillas)
+    for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
         [self removeAndStop:gorilla];
-    [gorillas removeAllObjects];
+    [[GorillasAppDelegate get].gameLayer.gorillas removeAllObjects];
     
     [self startPanning];
     
-    [[[GorillasAppDelegate get] gameLayer] stopped];
+    [[GorillasAppDelegate get].gameLayer stopped];
 }
 
 
 -(void) removeGorilla: (GorillaLayer *)gorilla {
 
     [self removeAndStop:gorilla];
-    [gorillas removeObject:gorilla];
+    [[GorillasAppDelegate get].gameLayer.gorillas removeObject:gorilla];
 }
  
 
@@ -810,9 +803,6 @@
     [msgLabel release];
     msgLabel = nil;
     
-    [gorillas release];
-    gorillas = nil;
-    
     [buildings release];
     buildings = nil;
     
@@ -821,9 +811,6 @@
     
     [bananaLayer release];
     bananaLayer = nil;
-    
-    [activeGorilla release];
-    activeGorilla = nil;
     
     [hitGorilla release];
     hitGorilla = nil;

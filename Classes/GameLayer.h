@@ -36,44 +36,43 @@
 
 @interface GameLayer : Layer <Resettable> {
 
-    BOOL paused;
-    BOOL running;
-    BOOL singlePlayer;
-    BOOL continueAfterGame;
+    BOOL                                    paused;
+    BOOL                                    running;
+    GorillasMode                            mode;
+    NSMutableArray                          *gorillas;
+    GorillaLayer                            *activeGorilla;
 
-    Action *shakeAction;
-    PanningLayer *panningLayer;
-    SkiesLayer *skiesLayer;
-    BuildingsLayer *buildingsLayer;
-    ParticleSystem *weather;
-    WindLayer *windLayer;
-    Label *msgLabel;
-    NSMutableArray *messageQueue;
+    SkiesLayer                              *skiesLayer;
+    PanningLayer                            *panningLayer;
+    BuildingsLayer                          *buildingsLayer;
+    ParticleSystem                          *weather;
+    WindLayer                               *windLayer;
+    Action                                  *shakeAction;
+    
+    Label                                   *msgLabel;
+    NSMutableArray                          *messageQueue;
 }
 
-@property (readonly) PanningLayer *panningLayer;
-@property (readonly) SkiesLayer *skiesLayer;
-@property (readonly) BuildingsLayer *buildingsLayer;
-@property (readonly) ParticleSystem *weather;
-@property (readonly) WindLayer *windLayer;
-@property (readwrite) BOOL continueAfterGame;
-@property (readonly) BOOL singlePlayer;
-@property (readwrite) BOOL running;
-@property (readonly) BOOL paused;
+@property (readwrite) BOOL                  paused;
+@property (readwrite) BOOL                  running;
+@property (readwrite) GorillasMode          mode;
+@property (readonly) BOOL                   singlePlayer;
 
--(void) pause;
--(void) unpause;
+@property (readonly) NSMutableArray         *gorillas;
+@property (readwrite, retain) GorillaLayer  *activeGorilla;
+
+@property (readonly) SkiesLayer             *skiesLayer;
+@property (readonly) PanningLayer           *panningLayer;
+@property (readonly) BuildingsLayer         *buildingsLayer;
+@property (readonly) ParticleSystem         *weather;
+@property (readonly) WindLayer              *windLayer;
 
 -(void) shake;
 -(void) message: (NSString *)msg;
--(void) resetMessage: (NSString *)msg;
-
--(void) startSinglePlayer;
--(void) startMultiplayer;
--(void) started;
-
+-(void) startGameWithMode:(GorillasMode)nMode humans:(NSUInteger)humans ais:(NSUInteger)ais;
 -(void) stopGame;
--(void) stopped;
 
+-(void) started;
+-(void) stopped;
 
 @end

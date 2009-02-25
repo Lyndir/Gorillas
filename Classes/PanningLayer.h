@@ -26,8 +26,9 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
+#import "Resettable.h"
 
-@interface PanningLayer : Layer {
+@interface PanningLayer : Layer <Resettable> {
 
     cpFloat initialScale;
     cpFloat initialDist;

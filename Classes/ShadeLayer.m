@@ -47,7 +47,7 @@
     
     [super onEnter];
     
-    [[[GorillasAppDelegate get] gameLayer] pause];
+    [[[GorillasAppDelegate get] gameLayer] setPaused:YES];
     
     for(CocosNode *child in children)
         if([child conformsToProtocol:@protocol(CocosNodeOpacity)])

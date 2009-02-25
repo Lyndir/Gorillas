@@ -43,6 +43,20 @@
 }
 
 
+-(void) reset {
+
+    if ([self scale] != 1) {
+        if (scaleAction) {
+            [self stopAction:scaleAction];
+            [scaleAction release];
+        }
+        
+        [self do:scaleAction = [[ScaleTo alloc] initWithDuration:[[GorillasConfig get] transitionDuration]
+                                                           scale:1]];
+    }
+}
+
+
 -(BOOL) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     if([[event allTouches] count] != 2)
@@ -90,7 +104,8 @@
         [self stopAction:scaleAction];
     }
     [scaleAction release];
-    [self do:scaleAction = [[ScaleTo alloc] initWithDuration:[[GorillasConfig get] transitionDuration] scale:newScale]];
+    [self do:scaleAction = [[ScaleTo alloc] initWithDuration:[[GorillasConfig get] transitionDuration]
+                                                       scale:newScale]];
     
     return kEventHandled;
 }

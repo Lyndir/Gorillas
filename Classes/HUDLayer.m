@@ -66,31 +66,31 @@
 
 -(void) updateScore: (int)nScore skill: (float)throwSkill {
 
-    if([[GorillasConfig get] training]) {
-        [infoLabel setString:[NSString stringWithFormat:@" Training   | Skill: %02d%%",
-                              (int) (fminf(0.99f, [[GorillasConfig get] skill] + throwSkill) * 100)]];
-        [infoLabel setRGB:0xff :0xff :0x99];
-        
-        return;
+    if ([GorillasAppDelegate get].gameLayer.mode == GorillasModeTraining) {
+            [infoLabel setString:[NSString stringWithFormat:@" Training   | ",
+                                  (int) (fminf(0.99f, [[GorillasConfig get] skill] + throwSkill) * 100)]];
+            [infoLabel setRGB:0xff :0xff :0x99];
+            return;
     }
     
-    [infoLabel setString:[NSString stringWithFormat:@" Score: %03d | Skill: %02d%%",
-                          [[GorillasConfig get] score],
-                          (int) (fminf(0.99f, [[GorillasConfig get] skill] + throwSkill) * 100)]];
+    NSMutableString *infoString = [[NSMutableString alloc] initWithCapacity:20];
+    if ([GorillasAppDelegate get].gameLayer.mode & GorillasFeatureScore)
+        [infoString appendFormat:@"Score: %03d", [[GorillasConfig get] score]];
+    if ([GorillasAppDelegate get].gameLayer.mode & GorillasFeatureSkill)
+        [infoString appendFormat:@" | Skill: %02d%%", (int) (fminf(0.99f, [[GorillasConfig get] skill] + throwSkill) * 100)];
     
-    if(nScore) {
-        long scoreColor = 0xFFFFFFff;
-        
-        if(nScore > 0)
-            scoreColor = 0x66CC66ff;
-        else if(nScore < 0)
-            scoreColor = 0xCC6666ff;
-        
-        [infoLabel do:[Sequence actions:
-                       [ShadeTo actionWithColor:scoreColor duration:0.5f],
-                       [ShadeTo actionWithColor:0xFFFFFFFF duration:0.5f],
-                       nil]];
-    }
+    long scoreColor = 0xFFFFFFff;
+    if(nScore > 0)
+        scoreColor = 0x66CC66ff;
+    else if(nScore < 0)
+        scoreColor = 0xCC6666ff;
+
+    [infoLabel setString:infoString];
+    [infoString release];
+    [infoLabel do:[Sequence actions:
+                   [ShadeTo actionWithColor:scoreColor duration:0.5f],
+                   [ShadeTo actionWithColor:0xFFFFFFFF duration:0.5f],
+                   nil]];
 }
 
 

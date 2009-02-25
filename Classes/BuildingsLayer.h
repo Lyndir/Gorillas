@@ -34,34 +34,32 @@
 
 @interface BuildingsLayer : Layer <Resettable> {
 
-    PanAction *panAction;
-    Label *msgLabel;
+    PanAction           *panAction;
+    Label               *msgLabel;
     
-    NSMutableArray *gorillas;
-    NSMutableArray *buildings;
-    NSMutableArray *explosions;
+    NSMutableArray      *buildings;
+    NSMutableArray      *explosions;
 
-    cpVect aim;
-    BananaLayer *bananaLayer;
-    GorillaLayer *activeGorilla;
-    GorillaLayer *hitGorilla;
+    cpVect              aim;
+    BananaLayer         *bananaLayer;
+    GorillaLayer        *hitGorilla;
     
-    cpVect *throwHistory;
-    NSMutableArray *throwHints;
+    cpVect              *throwHistory;
+    NSMutableArray      *throwHints;
     
 #ifdef _DEBUG_
-    NSUInteger dbgTraceStep;
-    NSUInteger dbgPathMaxInd;
-    NSUInteger dbgPathCurInd;
-    cpVect *dbgPath;
-    NSUInteger dbgAIMaxInd;
-    NSUInteger dbgAICurInd;
-    GorillaLayer **dbgAI;
-    cpVect *dbgAIVect;
+    NSUInteger          dbgTraceStep;
+    NSUInteger          dbgPathMaxInd;
+    NSUInteger          dbgPathCurInd;
+    cpVect              *dbgPath;
+    NSUInteger          dbgAIMaxInd;
+    NSUInteger          dbgAICurInd;
+    GorillaLayer        **dbgAI;
+    cpVect              *dbgAIVect;
 #endif
 }
 
--(void) startGameWithGorilla: (GorillaLayer *)gorillaA andGorilla: (GorillaLayer *)gorillaB;
+-(void) startGame;
 -(void) stopGame;
 
 -(void) startPanning;
@@ -83,7 +81,5 @@
 
 -(cpFloat) left;
 -(cpFloat) right;
-
-@property (readonly) GorillaLayer *activeGorilla;
 
 @end

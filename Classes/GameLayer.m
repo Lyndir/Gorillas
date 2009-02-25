@@ -31,27 +31,182 @@
 #import "Remove.h"
 
 
+@interface GameLayer (Private)
+
+-(void) setPausedSilently:(BOOL)_paused;
+-(void) resetMessage:(NSString *)msg;
+
+@end
+
 @implementation GameLayer
 
 
-@synthesize panningLayer, skiesLayer, buildingsLayer, windLayer, weather, continueAfterGame, singlePlayer, running, paused;
+#pragma mark Properties
 
+@synthesize running, paused, mode;
+@synthesize gorillas, activeGorilla;
+@synthesize skiesLayer, panningLayer, buildingsLayer, windLayer, weather;
+
+-(BOOL) singlePlayer {
+
+    int humans = 0;
+    for(GorillaLayer *gorilla in gorillas)
+        if ([gorilla human])
+            ++humans;
+    
+    return humans == 1;
+}
+
+
+-(void) setPaused:(BOOL)_paused {
+    
+    [self setPausedSilently:_paused];
+    
+    if(paused)
+        [self message:@"Paused"];
+    else
+        [self message:@"Unpaused"];
+}
+
+
+-(void) setPausedSilently:(BOOL)_paused {
+    
+    paused = _paused;
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:!paused animated:YES];
+    
+    if(paused) {
+        [[GorillasAppDelegate get] hideHud];
+        [windLayer do:[FadeOut actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    } else {
+        [[GorillasAppDelegate get] dismissLayer];
+        [[GorillasAppDelegate get] revealHud];
+        [windLayer do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    }
+}
+
+
+#pragma mark Interact
+
+-(void) reset {
+    
+    [skiesLayer reset];
+    [panningLayer reset];
+    [buildingsLayer reset];
+    [windLayer reset];
+    
+    if ([self rotation])
+        [self do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                        angle:0]];
+}
+
+-(void) shake {
+    
+    [AudioController vibrate];
+    
+    [buildingsLayer do:shakeAction];
+}
+
+
+-(void) message: (NSString *)msg {
+    
+    @synchronized(messageQueue) {
+        [messageQueue insertObject:msg atIndex:0];
+        
+        if(![self isScheduled:@selector(popMessageQueue:)])
+            [self schedule:@selector(popMessageQueue:)];
+    }
+}
+
+
+-(void) startGameWithMode:(GorillasMode)nMode humans:(NSUInteger)humans ais:(NSUInteger)ais {
+    
+    if(running)
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"Tried to start a game while one's still running."
+                                     userInfo:nil];
+    
+    // Create gorillas array.
+    if(activeGorilla)
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"Tried to start a game while there's still an active gorilla in the field."
+                                     userInfo:nil];
+    if(!gorillas)
+        gorillas = [[NSMutableArray alloc] initWithCapacity:4];
+    if([gorillas count])
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"Tried to start a game while there's still gorillas in the field."
+                                     userInfo:nil];
+    
+    // Checks done, set game mode.
+    mode = nMode;
+    
+    // Add humans to the game.
+    for (NSUInteger i = 0; i < humans; ++i) {
+        GorillaLayer *gorilla = [[GorillaLayer alloc] init];
+        [gorilla setHuman:YES];
+        [gorilla setAlive:YES];
+        
+        if(humans == 1)
+            [gorilla setName:@"Player"];
+        else
+            [gorilla setName:[NSString stringWithFormat:@"Player %d", i + 1]];
+        
+        [gorillas addObject:gorilla];
+        [gorilla release];
+    }
+    
+    // Add AIs to the game.
+    for (NSUInteger i = 0; i < ais; ++i) {
+        GorillaLayer *gorilla = [[GorillaLayer alloc] init];
+        [gorilla setHuman:NO];
+        [gorilla setAlive:YES];
+        
+        if(ais == 1)
+            [gorilla setName:@"Phone"];
+        else
+            [gorilla setName:[NSString stringWithFormat:@"Chip %d", i + 1]];
+        
+        [gorillas addObject:gorilla];
+        [gorilla release];
+    }
+    
+    // When there are AIs in the game, show their difficulity.
+    if (ais)
+        [self message:[[GorillasConfig get] levelName]];
+    
+    // Reset the game field and start the game.
+    [self reset];
+    [buildingsLayer startGame];
+}
+
+
+-(void) stopGame {
+    
+    [buildingsLayer stopGame];
+}
+
+
+#pragma mark Internal
 
 -(id) init {
     
 	if (!(self = [super init]))
 		return self;
-    
-    singlePlayer = false;
-    running = false;
-    paused = true;
 
+    running = false;
+
+    // Build internal structures.
     messageQueue = [[NSMutableArray alloc] initWithCapacity:3];
     msgLabel = nil;
     
     IntervalAction *l = [MoveBy actionWithDuration:.05f position:cpv(-3, 0)];
     IntervalAction *r = [MoveBy actionWithDuration:.05f position:cpv(6, 0)];
     shakeAction = [[Sequence actions:l, r, l, l, r, l, nil] retain];
+    
+    // Set up our own layer.
+    CGSize winSize = [[Director sharedDirector] winSize];
+    [self setTransformAnchor:cpv(winSize.width / 2, winSize.height / 2)];
     
     // Sky, buildings and wind.
     buildingsLayer = [[BuildingsLayer alloc] init];
@@ -69,9 +224,9 @@
     windLayer = [[WindLayer alloc] init];
     [windLayer setColor:0xffffff00];
     [self add:windLayer z:5];
-    
-    CGSize winSize = [[Director sharedDirector] winSize];
-    [self setTransformAnchor:cpv(winSize.width / 2, winSize.height / 2)];
+
+    // Make sure we're paused, hide HUD and show status bar.
+    [self setPausedSilently:YES];
 
     return self;
 }
@@ -81,7 +236,7 @@
     
     [super onEnter];
     
-    if([[GorillasConfig get] weather])
+    if ([[GorillasConfig get] weather])
         [self schedule:@selector(updateWeather:) interval:1];
 }
 
@@ -96,43 +251,42 @@
 
 -(void) updateWeather:(ccTime)dt {
     
-    if(![[GorillasConfig get] weather])
-        [self unschedule:@selector(updateWeather:)];
+    if (![[GorillasConfig get] weather] && [weather active])
+        [weather stopSystem];
     
-    if(![weather emissionRate]) {
+    if (![weather emissionRate]) {
         // If not emitting ..
         
-        if([weather active])
+        if ([weather active])
             // Stop active system.
             [weather stopSystem];
         
-        if([weather particleCount] == 0) {
+        if ([weather particleCount] == 0) {
             // If system has no particles left alive ..
             
             // Remove & release it.
-            [[[[GorillasAppDelegate get] gameLayer] windLayer] unregisterSystem:weather];
-            if([weather parent])
-                [[weather parent] removeAndStop:weather];
+            [windLayer unregisterSystem:weather];
+            [[weather parent] removeAndStop:weather];
             [weather release];
             weather = nil;
             
-            if(random() % 10 == 0) {
-                // 10% chance to start snow/rain.
+            if ([[GorillasConfig get] weather] && random() % 10 == 0) {
+                // 10% chance to start snow/rain when weather is enabled.
             
                 switch (random() % 2) {
                     case 0:
                         weather = [[ParticleRain alloc] init];
                         [weather setEmissionRate:60];
-                        [weather setSize:3];
                         [weather setSizeVar:1.5f];
+                        [weather setSize:3];
                         break;
                     
                     case 1:
                         weather = [[ParticleSnow alloc] init];
                         [weather setSpeed:10];
                         [weather setEmissionRate:3];
-                        [weather setSize:4];
                         [weather setSizeVar:3];
+                        [weather setSize:4];
                         break;
                 }
                 
@@ -140,7 +294,7 @@
                 [weather setPosition:cpv([weather position].x, [weather position].y * 2)]; // Space above screen.
                 [buildingsLayer add:weather z:-3 parallaxRatio:cpv(1.3f, 1.8f)];
 
-                [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:weather affectAngle:true];
+                [windLayer registerSystem:weather affectAngle:true];
             }
         }
     }
@@ -156,60 +310,6 @@
             rate = 0;
     
         [weather setEmissionRate:rate];
-    }
-}
-
-
--(void) reset {
-
-    [skiesLayer reset];
-    [buildingsLayer reset];
-    [windLayer reset];
-}
-
-
--(void) pause {
-    
-    if(!paused)
-        [self message:@"Paused"];
-    
-    paused = true;
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:false animated:true];
-    [[GorillasAppDelegate get] hideHud];
-    [windLayer do:[FadeOut actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-}
-
-
--(void) unpause {
-    
-    if(paused)
-        [self message:@"Unpaused!"];
-
-    paused = false;
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:true animated:true];
-    [[GorillasAppDelegate get] dismissLayer];
-    [[GorillasAppDelegate get] revealHud];
-    [windLayer do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-}
-
-
--(void) shake {
-    
-    [AudioController vibrate];
-    
-    [buildingsLayer do:shakeAction];
-}
-
-
--(void) message: (NSString *)msg {
-    
-    @synchronized(messageQueue) {
-        [messageQueue insertObject:msg atIndex:0];
-
-        if(![self isScheduled:@selector(popMessageQueue:)])
-            [self schedule:@selector(popMessageQueue:)];
     }
 }
 
@@ -269,83 +369,18 @@
 }
 
 
--(void) startSinglePlayer {
-    
-    if(running)
-        return;
-    
-    running = true;
-    singlePlayer = true;
-    continueAfterGame = true;
-    
-    [self message:[[GorillasConfig get] levelName]];
-    
-    GorillaLayer *gorillaA = [[GorillaLayer alloc] init];
-    GorillaLayer *gorillaB = [[GorillaLayer alloc] init];
-    
-    [gorillaA setName:@"Player"];
-    [gorillaA setHuman:true];
-    
-    [gorillaB setName:@"Phone"];
-    [gorillaB setHuman:false];
-    
-    [windLayer reset];
-    [buildingsLayer startGameWithGorilla:gorillaA andGorilla:gorillaB];
-    
-    [gorillaA release];
-    [gorillaB release];
-}
-
-
--(void) startMultiplayer {
-    
-    if(running)
-        return;
-    
-    running = true;
-    singlePlayer = false;
-    continueAfterGame = false;
-    
-    GorillaLayer *gorillaA = [[GorillaLayer alloc] init];
-    GorillaLayer *gorillaB = [[GorillaLayer alloc] init];
-    
-    [gorillaA setName:@"Gorilla One"];
-    [gorillaA setHuman:true];
-    
-    [gorillaB setName:@"Gorilla Two"];
-    [gorillaB setHuman:true];
-    
-    [windLayer reset];
-    [buildingsLayer startGameWithGorilla:gorillaA andGorilla:gorillaB];
-    
-    [gorillaA release];
-    [gorillaB release];
-}
-
-
 -(void) started {
     
-    if([self rotation])
-        [self do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                        angle:0]];
-    
     running = true;
-    paused = false;
-    
-    [self unpause];
-}
 
-
--(void) stopGame {
-    
-    paused = false;
-    [self unpause];
-    
-    [buildingsLayer stopGame];
+    [self setPausedSilently:NO];
 }
 
 
 -(void) stopped {
+    
+    [activeGorilla release];
+    activeGorilla = nil;
     
     if([self rotation])
         [self do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
@@ -354,15 +389,16 @@
         [panningLayer do:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                            position:cpvzero]];
     
-    paused = true;
-    [self pause];
+    [self setPausedSilently:YES];
     
-    running = false;
-    
-    if(continueAfterGame)
+    if([self singlePlayer] && running)
+        // For a singleplayer game that hasn't been stopped yet,
+        // don't show the main menu, just a quick menu to get back into the game.
         [[GorillasAppDelegate get] showContinueMenu];
     else
         [[GorillasAppDelegate get] showMainMenu];
+    
+    running = false;
 }
 
 
@@ -385,6 +421,12 @@
     
     [windLayer release];
     windLayer = nil;
+    
+    [gorillas release];
+    gorillas = nil;
+    
+    [activeGorilla release];
+    activeGorilla = nil;
     
     [msgLabel release];
     msgLabel = nil;
