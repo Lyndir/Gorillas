@@ -30,6 +30,12 @@
 #import "GorillasAppDelegate.h"
 
 
+@interface WindLayer (Private)
+
+-(void) updateSystems;
+
+@end
+
 @implementation WindLayer
 
 @synthesize color, wind;
@@ -45,6 +51,14 @@
     
     [self reset];
     
+    // Dynamic wind.
+    // Disabled for now, it makes the banana's course fluxuate too much.
+    // Would need to revise banana course calculation; it currently assumes
+    // the active wind has been applied to the banana the whole time it's
+    // been flying already (assumes constant wind).
+    incrementDuration = 0.5f;
+    //[self schedule:@selector(updateWind:)];
+    
 	return self;
 }
 
@@ -53,6 +67,26 @@
 
     wind = (random() % 100) / 100.0f - 0.5f;
 
+    [self updateSystems];
+}
+
+
+-(void) updateWind:(ccTime)dt {
+    
+    elapsed += dt;
+    wind += dt / incrementDuration * windIncrement;
+    
+    if(elapsed >= incrementDuration) {
+        windIncrement = (random() % 100) / 1000.0f - 0.05f;
+        elapsed = 0;
+    }
+    
+    [self updateSystems];
+}
+
+
+-(void) updateSystems {
+    
     for(uint i = 0; i < [systems count]; ++i) {
         ParticleSystem *system = [systems objectAtIndex:i];
         

@@ -27,11 +27,13 @@
 #import <UIKit/UIKit.h>
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
+#import "NewGameLayer.h"
+#import "CustomGameLayer.h"
 #import "ContinueMenuLayer.h"
 #import "ConfigurationSectionLayer.h"
 #import "GameConfigurationLayer.h"
 #import "AVConfigurationLayer.h"
-#import "TrainingConfigurationLayer.h"
+#import "BootCampConfigurationLayer.h"
 #import "InformationLayer.h"
 #import "GuideLayer.h"
 #import "StatisticsLayer.h"
@@ -49,10 +51,12 @@
     ShadeLayer                  *currentLayer;
     ContinueMenuLayer           *continueMenuLayer;
     MainMenuLayer               *mainMenuLayer;
+    NewGameLayer                *newGameLayer;
+    CustomGameLayer             *customGameLayer;
     ConfigurationSectionLayer   *configLayer;
     GameConfigurationLayer      *gameConfigLayer;
     AVConfigurationLayer        *avConfigLayer;
-    TrainingConfigurationLayer  *trainingLayer;
+    BootCampConfigurationLayer  *bootCampLayer;
     InformationLayer            *infoLayer;
     GuideLayer                  *guideLayer;
     StatisticsLayer             *statsLayer;
@@ -62,6 +66,8 @@
 }
 
 @property (readonly) Layer                      *uiLayer;
+@property (readonly) NewGameLayer               *newGameLayer;
+@property (readonly) CustomGameLayer            *customGameLayer;
 @property (readonly) GameLayer                  *gameLayer;
 @property (readonly) HUDLayer                   *hudLayer;
 
@@ -71,11 +77,13 @@
 -(void) cleanup;
 
 -(void) showMainMenu;
+-(void) showNewGame;
+-(void) showCustomGame;
 -(void) showContinueMenu;
 -(void) showConfiguration;
 -(void) showGameConfiguration;
 -(void) showAVConfiguration;
--(void) showTraining;
+-(void) showBootCamp;
 -(void) showInformation;
 -(void) showGuide;
 -(void) showStatistics;

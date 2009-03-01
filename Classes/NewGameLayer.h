@@ -17,20 +17,21 @@
  */
 
 //
-//  TrainingConfiguration.h
+//  NewGameLayer.h
 //  Gorillas
 //
-//  Created by Maarten Billemont on 15/02/09.
+//  Created by Maarten Billemont on 28/02/09.
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
 #import "ShadeLayer.h"
 #import "Resettable.h"
+#import "GameConfiguration.h"
 
 
-@interface TrainingConfigurationLayer : ShadeLayer <Resettable> {
+@interface NewGameLayer : ShadeLayer <Resettable> {
     
-    Menu *menu, *backMenu;
+    Menu                *menu, *backMenu;
 }
 
 @end

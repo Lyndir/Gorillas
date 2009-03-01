@@ -29,14 +29,13 @@
 #import "cocos2d.h"
 #import "GorillasAppDelegate.h"
 
-#define dCityTheme          @"v1.cityTheme"
-
 #define dFontSize           @"v1.fontSize"
 #define dLargeFontSize      @"v1.largeFontSize"
 #define dSmallFontSize      @"v1.smallFontSize"
 #define dFixedFontName      @"v1.fixedFontName"
 #define dFontName           @"v1.fontName"
 
+#define dCityTheme          @"v1.cityTheme"
 #define dFixedFloors        @"v1.fixedFloors"
 #define dBuildingMax        @"v1.buildingMax"
 #define dBuildingAmount     @"v1.buildingAmount"
@@ -53,30 +52,23 @@
 #define dStarSpeed          @"v1.starSpeed"
 #define dStarAmount         @"v1.starAmount"
 
+#define dLives              @"v1.lives"
 #define dWindModifier       @"v1.windModifier"
 #define dGravity            @"v1.gravity"
 #define dMinGravity         @"v1.minGravity"
 #define dMaxGravity         @"v1.maxGravity"
+
 #define dShadeColor         @"v1.shadeColor"
 #define dTransitionDuration @"v1.transitionDuration"
 #define dGameScrollDuration @"v1.gameScrollDuration"
 
-#define dLevel              @"v1.level"
-#define dLevelNameCount     @"v1.levelNameCount"
-#define dLevelNames         @"v1.levelNames"
-#define dLevelProgress      @"v1.levelProgress"
-
-#define dScore              @"v1.score"
-#define dSkill              @"v1.skill"
-#define dTopScoreHistory    @"v1.topScoreHistory"
+#define dGameConfiguration  @"v1.gameConfiguration"
+#define dMode               @"v1.mode"
 #define dMissScore          @"v1.missScore"
 #define dKillScore          @"v1.killScore"
 #define dBonusOneShot       @"v1.bonusOneShot"
 #define dBonusSkill         @"v1.bonusSkill"
 #define dDeathScoreRatio    @"v1.deathScoreRatio"
-
-#define dTracks             @"v1.tracks"
-#define dCurrentTrack       @"v1.currentTrack"
 
 #define dWeather            @"v1.weather"
 #define dSoundFx            @"v1.soundFx"
@@ -86,13 +78,26 @@
 #define dFollowThrow        @"v1.followThrow"
 #define dMultiplayerFlip    @"v1.multiplayerFlip"
 
-#define dTraining           @"v1.training"
+#define dTracks             @"v1.tracks"
+#define dCurrentTrack       @"v1.currentTrack"
+
+#define dScore              @"v1.score"
+#define dSkill              @"v1.skill"
+#define dTopScoreHistory    @"v1.topScoreHistory"
+#define dLevel              @"v1.level"
+#define dLevelNames         @"v1.levelNames"
+#define dLevelProgress      @"v1.levelProgress"
+
 #define dThrowHint          @"v1.throwHint"
 #define dThrowHistory       @"v1.throwHistory"
 
 
 @implementation GorillasConfig
 
+@synthesize modes;
+
+
+#pragma mark Internal
 
 -(id) init {
 
@@ -111,6 +116,42 @@
                                @"Deadly",
                                @"Impossible",
                                nil];
+    
+    gameConfigurations = [[NSArray alloc] initWithObjects:
+                          [GameConfiguration configurationWithName:@"Boot Camp"
+                                                       description:@"Practice your aim with some helpful hints."
+                                                              mode:GorillasModeBootCamp
+                                                           sHumans:1 mHumans:0
+                                                              sAis:1    mAis:0],
+                          [GameConfiguration configurationWithName:@"Classic"
+                                                       description:@"Quick and simple one-on-one battle."
+                                                              mode:GorillasModeClassic
+                                                           sHumans:1 mHumans:2
+                                                              sAis:1    mAis:0],
+                          [GameConfiguration configurationWithName:@"Dynamic"
+                                                       description:@"One-on-one battle with adapting skill and difficulty."
+                                                              mode:GorillasModeDynamic
+                                                           sHumans:1 mHumans:0
+                                                              sAis:1    mAis:0],
+                          [GameConfiguration configurationWithName:@"Team Battle"
+                                                       description:@"Face the AIs with a little help from your friends."
+                                                              mode:GorillasModeTeam
+                                                           sHumans:0 mHumans:2
+                                                              sAis:0    mAis:2],
+                          [GameConfiguration configurationWithName:@"Last Man Standing"
+                                                       description:@"Gorillas have lives; be the last left standing!"
+                                                              mode:GorillasModeLMS
+                                                           sHumans:1 mHumans:2
+                                                              sAis:3    mAis:3],
+                          nil];
+    
+    modes = [[NSArray alloc] initWithObjects:
+             [NSNumber numberWithUnsignedInt:GorillasModeBootCamp],
+             [NSNumber numberWithUnsignedInt:GorillasModeClassic],
+             [NSNumber numberWithUnsignedInt:GorillasModeDynamic],
+             [NSNumber numberWithUnsignedInt:GorillasModeTeam],
+             [NSNumber numberWithUnsignedInt:GorillasModeLMS],
+             nil];
 
     NSDictionary *themes = [CityTheme getThemes];
     NSString *defaultThemeName = [CityTheme defaultThemeName];
@@ -139,18 +180,41 @@
                                 [NSNumber numberWithInteger:    30],                        dStarSpeed,
                                 [NSNumber numberWithInteger:    [theme starAmount]],        dStarAmount,
                                 
+                                [NSNumber numberWithInteger:    3],                         dLives,
                                 [NSNumber numberWithFloat:      [theme windModifier]],      dWindModifier,
                                 [NSNumber numberWithInteger:    [theme gravity]],           dGravity,
                                 [NSNumber numberWithInteger:    30],                        dMinGravity,
                                 [NSNumber numberWithInteger:    150],                       dMaxGravity,
+                                
                                 [NSNumber numberWithLong:       0x000000dd],                dShadeColor,
                                 [NSNumber numberWithFloat:      0.5f],                      dTransitionDuration,
                                 [NSNumber numberWithFloat:      0.5f],                      dGameScrollDuration,
-     
-                                [NSNumber numberWithFloat:      0.1f],                      dLevel,
-                                [NSNumber numberWithInteger:    8],                         dLevelNameCount,
-                                [levelNames retain],                                        dLevelNames,
-                                [NSNumber numberWithFloat:      0.03f],                     dLevelProgress,
+                                
+                                [NSNumber numberWithBool:    YES],                          dWeather,
+                                [NSNumber numberWithBool:    YES],                          dSoundFx,
+                                [NSNumber numberWithBool:    YES],                          dVibration,
+                                [NSNumber numberWithBool:    YES],                          dVisualFx,
+                                
+                                [NSNumber numberWithBool:    YES],                          dFollowThrow,
+                                [NSNumber numberWithBool:    NO],                           dMultiplayerFlip,
+                                
+                                [NSDictionary dictionaryWithObjectsAndKeys:
+                                 @"Sky High",               @"blockdropper3.wav",
+                                 @"Veritech",               @"veritech.wav",
+                                 @"Fighting Gorillas",      @"fighting_gorillas.wav",
+                                 @"Pride of the Pacific",   @"prideofthepacific.wav",
+                                 @"Fork Bomb",              @"forkbomb.wav",
+                                 @"Off",                    @"",
+                                 nil],                                                      dTracks,
+                                @"fighting_gorillas.wav",                                   dCurrentTrack,
+                                
+                                [NSNumber numberWithInteger:    1],                         dGameConfiguration,
+                                [NSNumber numberWithInteger:    GorillasModeBootCamp],      dMode,
+                                [NSNumber numberWithInteger:    -5],                        dMissScore,
+                                [NSNumber numberWithInteger:    50],                        dKillScore,
+                                [NSNumber numberWithFloat:      2],                         dBonusOneShot,
+                                [NSNumber numberWithFloat:      50],                        dBonusSkill,
+                                [NSNumber numberWithInteger:    5],                         dDeathScoreRatio,
                                 
                                 [NSNumber numberWithInteger:    0],                         dScore,
                                 [NSNumber numberWithInteger:    0],                         dSkill,
@@ -174,39 +238,30 @@
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*17)] description],
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*18)] description],
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*19)] description],
-                                 nil//*/
-                                ],                                                          dTopScoreHistory,
-                                [NSNumber numberWithInteger:    -5],                        dMissScore,
-                                [NSNumber numberWithInteger:    50],                        dKillScore,
-                                [NSNumber numberWithFloat:      2],                         dBonusOneShot,
-                                [NSNumber numberWithFloat:      3],                         dBonusSkill,
-                                [NSNumber numberWithInteger:    5],                         dDeathScoreRatio,
+                                 nil//*/],                                                  dTopScoreHistory,
+                                [NSNumber numberWithFloat:      0.1f],                      dLevel,
+                                [levelNames retain],                                        dLevelNames,
+                                [NSNumber numberWithFloat:      0.03f],                     dLevelProgress,
                                 
-                                [NSDictionary dictionaryWithObjectsAndKeys:
-                                 @"Sky High",               @"blockdropper3.wav",
-                                 @"Veritech",               @"veritech.wav",
-                                 @"Fighting Gorillas",      @"fighting_gorillas.wav",
-                                 @"Pride of the Pacific",   @"prideofthepacific.wav",
-                                 @"Fork Bomb",              @"forkbomb.wav",
-                                 @"Off",                    @"",
-                                 nil],                                                      dTracks,
-                                @"fighting_gorillas.wav",                                   dCurrentTrack,
-                                
-                                [NSNumber numberWithBool:    YES],                          dWeather,
-                                [NSNumber numberWithBool:    YES],                          dSoundFx,
-                                [NSNumber numberWithBool:    YES],                          dVibration,
-                                [NSNumber numberWithBool:    YES],                          dVisualFx,
-                                
-                                [NSNumber numberWithBool:    YES],                          dFollowThrow,
-                                [NSNumber numberWithBool:    NO],                           dMultiplayerFlip,
-                                
-                                [NSNumber numberWithBool:    NO],                           dTraining,
                                 [NSNumber numberWithBool:    NO],                           dThrowHint,
                                 [NSNumber numberWithBool:    YES],                          dThrowHistory,
                                 
                                 nil]];
 
     return self;
+}
+
+
+-(void) dealloc {
+    
+    [[CityTheme getThemes] release];
+    [defaults release];
+    defaults = nil;
+    
+    free(modes);
+    modes = nil;
+    
+    [super dealloc];
 }
 
 
@@ -220,18 +275,11 @@
 }
 
 
--(NSString *) cityTheme {
-    
-    return [defaults stringForKey: dCityTheme];
-}
--(void) setCityTheme: (NSString *)cityTheme {
-    
-    [defaults setObject:cityTheme forKey: dCityTheme];
-    [[GorillasAppDelegate get] updateConfig];
-}
+#pragma mark Text
+
 -(int) largeFontSize {
     
-    return [defaults integerForKey: dLargeFontSize];
+    return [defaults integerForKey:dLargeFontSize];
 }
 -(void) setLargeFontSize: (int)largeFontSize {
     
@@ -276,11 +324,22 @@
 }
 
 
--(int) fixedFloors {
+#pragma mark City
+
+-(NSString *) cityTheme {
+    
+    return [defaults stringForKey: dCityTheme];
+}
+-(void) setCityTheme: (NSString *)cityTheme {
+    
+    [defaults setObject:cityTheme forKey: dCityTheme];
+    [[GorillasAppDelegate get] updateConfig];
+}
+-(NSUInteger) fixedFloors {
 
     return [defaults integerForKey: dFixedFloors];
 }
--(void) setFixedFloors: (int)fixedFloors {
+-(void) setFixedFloors: (NSUInteger)fixedFloors {
 
     [defaults setInteger:fixedFloors forKey: dFixedFloors];
 }
@@ -301,11 +360,11 @@
 	CGSize size = [[Director sharedDirector] winSize];
     return (size.width / [self buildingAmount] - 1);
 }
--(int) buildingAmount {
+-(NSUInteger) buildingAmount {
 
     return [defaults integerForKey: dBuildingAmount];
 }
--(void) setBuildingAmount: (int)buildingAmount {
+-(void) setBuildingAmount: (NSUInteger)buildingAmount {
 
     [defaults setInteger:buildingAmount forKey: dBuildingAmount];
 }
@@ -344,11 +403,11 @@
     
     return [self windowWidth];
 }
--(int) windowAmount {
+-(NSUInteger) windowAmount {
 
     return [defaults integerForKey: dWindowAmount];
 }
--(void) setWindowAmount: (int)windowAmount {
+-(void) setWindowAmount: (NSUInteger)windowAmount {
 
     [defaults setInteger:windowAmount forKey: dWindowAmount];
 }
@@ -369,6 +428,8 @@
     [defaults setObject:[NSNumber numberWithLong:windowColorOff] forKey: dWindowColorOff];
 }
 
+
+#pragma mark Environment
 
 -(long) skyColor {
 
@@ -404,6 +465,16 @@
 }
 
 
+#pragma mark Gameplay
+
+-(int) lives {
+    
+    return [defaults integerForKey:dLives];
+}
+-(void) setLives: (int)_lives {
+    
+    [defaults setInteger:_lives forKey: dLives];
+}
 -(float) windModifier {
     
     return [defaults floatForKey: dWindModifier];
@@ -412,11 +483,11 @@
     
     [defaults setFloat:windModifier forKey:dWindModifier];
 }
--(int) gravity {
+-(NSUInteger) gravity {
     
     return [defaults integerForKey: dGravity];
 }
--(void) setGravity: (int)gravity {
+-(void) setGravity: (NSUInteger)gravity {
 
     if(gravity > [self maxGravity])
         gravity = [self maxGravity];
@@ -426,22 +497,26 @@
     [defaults setInteger:gravity forKey: dGravity];
     [[GorillasAppDelegate get] updateConfig];
 }
--(int) minGravity {
+-(NSUInteger) minGravity {
     
     return [defaults integerForKey: dMinGravity];
 }
--(void) setMinGravity: (int)minGravity {
+-(void) setMinGravity: (NSUInteger)minGravity {
     
     [defaults setInteger:minGravity forKey: dMinGravity];
 }
--(int) maxGravity {
+-(NSUInteger) maxGravity {
     
     return [defaults integerForKey: dMaxGravity];
 }
--(void) setMaxGravity: (int)maxGravity {
+-(void) setMaxGravity: (NSUInteger)maxGravity {
     
     [defaults setInteger:maxGravity forKey: dMaxGravity];
 }
+
+
+#pragma mark User Interface
+
 -(long) shadeColor {
 
     return [(NSNumber *)[defaults objectForKey:dShadeColor] longValue];
@@ -468,181 +543,7 @@
 }
 
 
--(float) level {
-
-    return [defaults floatForKey: dLevel];
-}
--(void) setLevel: (float)level {
-
-    if(level < 0.1f)
-        level = 0.1f;
-    if(level > 0.9f)
-        level = 0.9f;
-    
-    [defaults setFloat:level forKey: dLevel];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(NSString *) levelName {
-
-    int levelNameCount = [[self levelNames] count];
-    int levelIndex = (int) ([self level] * levelNameCount);
-    
-    return [[self levelNames] objectAtIndex:levelIndex];
-}
--(NSArray *) levelNames {
-
-    return [defaults arrayForKey: dLevelNames];
-}
--(void) setLevelNames: (NSArray *)levelNames {
-
-    [defaults setObject:levelNames forKey: dLevelNames];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(int) levelNameCount {
-
-    return [defaults integerForKey: dLevelNameCount];
-}
--(void) setLevelNameCount: (int)levelNameCount {
-
-    [defaults setInteger:levelNameCount forKey: dLevelNameCount];
-}
--(float) levelProgress {
-    
-    return [defaults floatForKey: dLevelProgress];
-}
--(void) setLevelProgress: (float)levelProgress {
-    
-    [defaults setFloat:levelProgress forKey: dLevelProgress];
-}
-
-
--(NSDate *) today {
-    
-    long now = (long) [[NSDate date] timeIntervalSince1970];
-    return [NSDate dateWithTimeIntervalSince1970:(now / (3600 * 24)) * (3600 * 24)];
-}
--(int) score {
-    
-    return [defaults integerForKey: dScore];
-}
--(void) setScore: (int)nScore {
-
-    if(nScore < 0)
-        nScore = 0;    
-
-    // Is this a new top score for today?
-    NSDictionary *topScores = [self topScoreHistory];
-    NSString *today = [[self today] description];
-    NSNumber *topScoreToday = [topScores objectForKey:today];
-    
-    if(topScoreToday == nil || [topScoreToday intValue] < nScore) {
-        // Record top score.
-        NSMutableDictionary *newTopScores = [topScores mutableCopy];
-        [newTopScores setObject:[NSNumber numberWithInt:nScore] forKey:today];
-        [self setTopScoreHistory:newTopScores];
-        [newTopScores release];
-    }
-    
-    [defaults setInteger:nScore forKey: dScore];
-}
--(float) skill {
-    
-    return [defaults floatForKey: dSkill];
-}
--(void) setSkill: (float)nSkill {
-    
-    [defaults setFloat:nSkill forKey: dSkill];
-}
--(NSDictionary *) topScoreHistory {
-    
-    return [defaults dictionaryForKey: dTopScoreHistory];
-}
--(void) setTopScoreHistory: (NSDictionary *)nTopScoreHistory {
-    
-    [defaults setObject:nTopScoreHistory forKey: dTopScoreHistory];
-}
--(int) missScore {
-    
-    return [defaults integerForKey: dMissScore];
-}
--(void) setMissScore: (int)nMissScore {
-    
-    [defaults setInteger:nMissScore forKey: dMissScore];
-}
--(int) killScore {
-    
-    return [defaults integerForKey: dKillScore];
-}
--(void) setKillScore: (int)nKillScore {
-    
-    [defaults setInteger:nKillScore forKey: dKillScore];
-}
--(float) bonusOneShot {
-    
-    return [defaults floatForKey: dBonusOneShot];
-}
--(void) setBonusOneShot: (float)nBonusOneShot {
-    
-    [defaults setFloat:nBonusOneShot forKey: dBonusOneShot];
-}
--(float) bonusSkill {
-    
-    return [defaults floatForKey: dBonusSkill];
-}
--(void) setBonusSkill: (float)nBonusSkill {
-    
-    [defaults setFloat:nBonusSkill forKey: dBonusSkill];
-}
--(int) deathScoreRatio {
-    
-    return [defaults integerForKey: dDeathScoreRatio];
-}
--(void) setDeathScoreRatio: (int)nDeathScoreRatio {
-    
-    [defaults setInteger:nDeathScoreRatio forKey: dDeathScoreRatio];
-}
--(int) deathScore {
-    
-    // Some info on Death Score Ratios:
-    // Death score balances with kill score when player makes [deathScoreRatio] amount of misses.
-    // More misses -> score goes down faster.
-    // Less misses -> score goes down slower.
-    // As a result, when player A dies equally often as player B but misses less, his score will be higher.
-    
-    return -1 * ([self killScore] + [self deathScoreRatio] * [self missScore]);
-}
-
-
--(NSDictionary *) tracks {
-    
-    return [defaults dictionaryForKey: dTracks];
-}
--(void) setTracks: (NSDictionary *)tracks {
-    
-    [defaults setObject:tracks forKey: dTracks];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(NSString *) currentTrack {
-    
-    return [defaults stringForKey: dCurrentTrack];
-}
--(void) setCurrentTrack: (NSString *)currentTrack {
-    
-    if(currentTrack == nil)
-        currentTrack = @"";
-    
-    [defaults setObject:currentTrack forKey: dCurrentTrack];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(NSString *) currentTrackName {
-    
-    id currentTrack = [self currentTrack];
-    if(!currentTrack)
-        currentTrack = @"";
-    
-    return [[self tracks] objectForKey:currentTrack];
-}
-
+#pragma mark Global Configuration
 
 -(BOOL) weather {
     
@@ -702,15 +603,7 @@
     [[GorillasAppDelegate get] updateConfig];
 }
 
--(BOOL) training {
-    
-    return [defaults boolForKey: dTraining];
-}
--(void) setTraining: (BOOL)nTraining {
-    
-    [defaults setBool:nTraining forKey: dTraining];
-    [[GorillasAppDelegate get] updateConfig];
-}
+
 -(BOOL) throwHint {
     
     return [defaults boolForKey: dThrowHint];
@@ -731,6 +624,225 @@
 }
 
 
+#pragma mark Audio
+
+-(NSDictionary *) tracks {
+    
+    return [defaults dictionaryForKey: dTracks];
+}
+-(void) setTracks: (NSDictionary *)tracks {
+    
+    [defaults setObject:tracks forKey: dTracks];
+    [[GorillasAppDelegate get] updateConfig];
+}
+-(NSString *) currentTrack {
+    
+    return [defaults stringForKey: dCurrentTrack];
+}
+-(void) setCurrentTrack: (NSString *)currentTrack {
+    
+    if(currentTrack == nil)
+        currentTrack = @"";
+    
+    [defaults setObject:currentTrack forKey: dCurrentTrack];
+    [[GorillasAppDelegate get] updateConfig];
+}
+-(NSString *) currentTrackName {
+    
+    id currentTrack = [self currentTrack];
+    if(!currentTrack)
+        currentTrack = @"";
+    
+    return [[self tracks] objectForKey:currentTrack];
+}
+
+
+#pragma mark Game Configuration
+
+-(NSDate *) today {
+    
+    long now = (long) [[NSDate date] timeIntervalSince1970];
+    return [NSDate dateWithTimeIntervalSince1970:(now / (3600 * 24)) * (3600 * 24)];
+}
+-(NSUInteger) activeGameConfigurationIndex {
+    
+    return [defaults integerForKey:dGameConfiguration];
+}
+-(void) setActiveGameConfigurationIndex:(NSUInteger)_activeGameConfigurationIndex {
+    
+    [defaults setInteger:_activeGameConfigurationIndex % [gameConfigurations count] forKey:dGameConfiguration];
+    [[[GorillasAppDelegate get] newGameLayer] reset];
+}
+-(GameConfiguration *) gameConfiguration {
+    
+    return [gameConfigurations objectAtIndex:[self activeGameConfigurationIndex]];
+}
+-(NSUInteger) mode {
+    
+    return [defaults integerForKey: dMode];
+}
+-(void) setMode: (NSUInteger)_mode {
+    
+    [defaults setInteger:_mode forKey: dMode];
+    [[[GorillasAppDelegate get] customGameLayer] reset];
+}
+-(NSString *) modeString {
+    
+    switch ([self mode]) {
+        case GorillasModeBootCamp:
+            return @"Boot Camp";
+            
+        case GorillasModeClassic:
+            return @"Classic Game";
+            
+        case GorillasModeDynamic:
+            return @"Dynamic Game";
+            
+        case GorillasModeTeam:
+            return @"Teamed Game";
+            
+        case GorillasModeLMS:
+            return @"Last Man Standing";
+            
+        default:
+            @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                           reason:@"Unsupported game mode." userInfo:nil];
+    }
+}
+-(int) missScore {
+    
+    return [defaults integerForKey: dMissScore];
+}
+-(void) setMissScore: (int)nMissScore {
+    
+    [defaults setInteger:nMissScore forKey: dMissScore];
+}
+-(int) killScore {
+    
+    return [defaults integerForKey: dKillScore];
+}
+-(void) setKillScore: (int)nKillScore {
+    
+    [defaults setInteger:nKillScore forKey: dKillScore];
+}
+-(float) bonusOneShot {
+    
+    return [defaults floatForKey: dBonusOneShot];
+}
+-(void) setBonusOneShot: (float)nBonusOneShot {
+    
+    [defaults setFloat:nBonusOneShot forKey: dBonusOneShot];
+}
+-(float) bonusSkill {
+    
+    return [defaults floatForKey: dBonusSkill];
+}
+-(void) setBonusSkill: (float)nBonusSkill {
+    
+    [defaults setFloat:nBonusSkill forKey: dBonusSkill];
+}
+-(int) deathScoreRatio {
+    
+    return [defaults integerForKey: dDeathScoreRatio];
+}
+-(void) setDeathScoreRatio: (int)nDeathScoreRatio {
+    
+    [defaults setInteger:nDeathScoreRatio forKey: dDeathScoreRatio];
+}
+-(int) deathScore {
+    
+    // Some info on Death Score Ratios:
+    // Death score balances with kill score when player makes [deathScoreRatio] amount of misses.
+    // More misses -> score goes down faster.
+    // Less misses -> score goes down slower.
+    // As a result, when player A dies equally often as player B but misses less, his score will be higher.
+    
+    return -([self killScore] + [self deathScoreRatio] * [self missScore]);
+}
+
+
+#pragma mark User Status
+
+-(int) score {
+    
+    return [defaults integerForKey: dScore];
+}
+-(void) setScore: (int)nScore {
+    
+    if(nScore < 0)
+        nScore = 0;    
+    
+    // Is this a new top score for today?
+    NSDictionary *topScores = [self topScoreHistory];
+    NSString *today = [[self today] description];
+    NSNumber *topScoreToday = [topScores objectForKey:today];
+    
+    if(topScoreToday == nil || [topScoreToday intValue] < nScore) {
+        // Record top score.
+        NSMutableDictionary *newTopScores = [topScores mutableCopy];
+        [newTopScores setObject:[NSNumber numberWithInt:nScore] forKey:today];
+        [self setTopScoreHistory:newTopScores];
+        [newTopScores release];
+    }
+    
+    [defaults setInteger:nScore forKey: dScore];
+}
+-(float) skill {
+    
+    return [defaults floatForKey: dSkill];
+}
+-(void) setSkill: (float)nSkill {
+    
+    [defaults setFloat:nSkill forKey: dSkill];
+}
+-(NSDictionary *) topScoreHistory {
+    
+    return [defaults dictionaryForKey: dTopScoreHistory];
+}
+-(void) setTopScoreHistory: (NSDictionary *)nTopScoreHistory {
+    
+    [defaults setObject:nTopScoreHistory forKey: dTopScoreHistory];
+}
+-(float) level {
+
+    return [defaults floatForKey: dLevel];
+}
+-(void) setLevel: (float)level {
+
+    if(level < 0.1f)
+        level = 0.1f;
+    if(level > 0.9f)
+        level = 0.9f;
+    
+    [defaults setFloat:level forKey: dLevel];
+    [[GorillasAppDelegate get] updateConfig];
+}
+-(NSString *) levelName {
+
+    int levelNameCount = [[self levelNames] count];
+    int levelIndex = (int) ([self level] * levelNameCount);
+    
+    return [[self levelNames] objectAtIndex:levelIndex];
+}
+-(NSArray *) levelNames {
+
+    return [defaults arrayForKey: dLevelNames];
+}
+-(void) setLevelNames: (NSArray *)levelNames {
+
+    [defaults setObject:levelNames forKey: dLevelNames];
+    [[GorillasAppDelegate get] updateConfig];
+}
+-(float) levelProgress {
+    
+    return [defaults floatForKey: dLevelProgress];
+}
+-(void) setLevelProgress: (float)levelProgress {
+    
+    [defaults setFloat:levelProgress forKey: dLevelProgress];
+}
+
+
 -(void) levelUp {
     
     [self setLevel:[self level] + [self levelProgress]];
@@ -738,16 +850,6 @@
 -(void) levelDown {
     
     [self setLevel:[self level] - [self levelProgress]];
-}
-
-
--(void) dealloc {
-    
-    [[CityTheme getThemes] release];
-    [defaults release];
-    defaults = nil;
-    
-    [super dealloc];
 }
 
 

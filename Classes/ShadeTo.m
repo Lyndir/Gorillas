@@ -32,18 +32,18 @@
 @implementation ShadeTo
 
 
-+(ShadeTo *) actionWithColor: (long)nColor duration: (ccTime)nDuration {
++(ShadeTo *) actionWithDuration:(ccTime)_duration color:(long)_color {
     
-    return [[[ShadeTo alloc] initWithColor: nColor duration: nDuration] autorelease];
+    return [[[ShadeTo alloc] initWithDuration:_duration color:_color] autorelease];
 }
 
 
--(ShadeTo *) initWithColor: (long)nColor duration: (ccTime)nDuration {
+-(ShadeTo *) initWithDuration:(ccTime)_duration color:(long)_color {
     
-    if(!(self = [super initWithDuration:nDuration]))
+    if(!(self = [super initWithDuration: _duration]))
         return self;
     
-    endCol = nColor;
+    endCol = _color;
     
     return self;
 }

@@ -29,6 +29,7 @@
 #import "ExplosionLayer.h"
 #import "GorillasAppDelegate.h"
 #import "Utility.h"
+#import "ShadeTo.h"
 
 @implementation BuildingsLayer
 
@@ -82,9 +83,11 @@
 -(void) reset {
     
     BOOL wasPanning = panAction != nil;
-    [self stopAction:panAction];
     [panAction release];
     panAction = nil;
+    
+    [self stopAllActions];
+    [self setPosition:cpvzero];
     
     for(ExplosionLayer *explosion in explosions) {
         [self removeAndStop:explosion];
@@ -95,10 +98,7 @@
         [self removeAndStop:building];
     [buildings removeAllObjects];
     
-    [self stopAllActions];
-    [self setPosition:cpvzero];
-    
-    for (int i = 0; i < [[GorillasConfig get] buildingAmount] * 2; ++i) {
+    for (NSUInteger i = 0; i < [[GorillasConfig get] buildingAmount] * 2; ++i) {
         float x = i * ([[GorillasConfig get] buildingWidth] + 1)
                 - ([[GorillasConfig get] buildingWidth] + 1) * [[GorillasConfig get] buildingAmount] / 2;
         
@@ -203,7 +203,7 @@
     free(hep);
 #endif
 
-    if([[GorillasConfig get] training]) {
+    if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureCheat]) {
         for(NSUInteger i = 0; i < [[GorillasAppDelegate get].gameLayer.gorillas count]; ++i) {
             if([[GorillasConfig get] throwHistory]) {
                 cpVect from = [(GorillaLayer *) [[GorillasAppDelegate get].gameLayer.gorillas objectAtIndex:i] position];
@@ -341,11 +341,13 @@
 
 -(void) nextGorilla {
     
-    if(![[[GorillasAppDelegate get] gameLayer] running])
-        [[[GorillasAppDelegate get] gameLayer] stopGame];
-    
     // Active gorilla's turn is over.
     ++[GorillasAppDelegate get].gameLayer.activeGorilla.turns;
+    [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:NO];
+    
+    // Make sure the game hasn't ended.
+    if(![[GorillasAppDelegate get].gameLayer checkGameStillOn])
+        return;
     
     // Activate the next gorilla.
     // Look for the next live gorilla; first try the next gorilla AFTER the current.
@@ -365,6 +367,7 @@
                     // First run.
                     if(reachedCurrent && [gorilla alive]) {
                         [GorillasAppDelegate get].gameLayer.activeGorilla = gorilla;
+                        [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:YES];
                         foundNextGorilla = true;
                         break;
                     }
@@ -377,6 +380,7 @@
                     
                     else if([gorilla alive]) {
                         [GorillasAppDelegate get].gameLayer.activeGorilla = gorilla;
+                        [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:YES];
                         foundNextGorilla = true;
                         break;
                     }
@@ -386,17 +390,30 @@
         if(foundNextGorilla)
             break;
         
-        if(!startFromAfterCurrent) {
+        if(!startFromAfterCurrent)
             // Second run didn't find any gorillas -> no gorillas available.
-            [[[GorillasAppDelegate get] gameLayer] stopGame];
-            return;
-        }
+            @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                           reason:@"No next gorilla to be found; game should've ended in previous check." userInfo:nil];
     }
+    
+    // Make sure the game hasn't ended.
+    if(![[GorillasAppDelegate get].gameLayer checkGameStillOn])
+        return;
 
     if([GorillasAppDelegate get].gameLayer.activeGorilla.alive && ![GorillasAppDelegate get].gameLayer.activeGorilla.human) {
         // Active gorilla is a live AI.
         NSMutableArray *enemies = [[GorillasAppDelegate get].gameLayer.gorillas mutableCopy];
-        [enemies removeObject:[GorillasAppDelegate get].gameLayer.activeGorilla];
+        
+        if([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureTeam]) {
+            // In team mode, not an enemy of AIs.
+
+            for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
+                if(![gorilla human])
+                    [enemies removeObject:gorilla];
+        }
+        else
+            // Out of team mode, just not an enemy of ourself.
+            [enemies removeObject:[GorillasAppDelegate get].gameLayer.activeGorilla];
         
         GorillaLayer *target = [[enemies objectAtIndex:random() % [enemies count]] retain];
         [enemies release];
@@ -420,7 +437,7 @@
     for(NSUInteger i = 0; i < [[GorillasAppDelegate get].gameLayer.gorillas count]; ++i) {
         GorillaLayer *gorilla = [[GorillasAppDelegate get].gameLayer.gorillas objectAtIndex:i];
 
-        BOOL hintGorilla = [[GorillasConfig get] training] && [[GorillasConfig get] throwHint]
+        BOOL hintGorilla = ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureCheat]) && [[GorillasConfig get] throwHint]
                         && [GorillasAppDelegate get].gameLayer.activeGorilla.human
                         && gorilla != [GorillasAppDelegate get].gameLayer.activeGorilla && [gorilla alive];
         Sprite *hint = [throwHints objectAtIndex:i];
@@ -454,6 +471,7 @@
     
     // Record throw history & start the actual throw.
     throwHistory[[[GorillasAppDelegate get].gameLayer.gorillas indexOfObject:gorilla]] = v;
+    [[GorillasAppDelegate get].gameLayer.activeGorilla threw:v];
     [bananaLayer throwFrom:[gorilla position] withVelocity:v];
 }
 
@@ -481,17 +499,17 @@
 
 -(void) miss {
     
-    if(!([GorillasAppDelegate get].gameLayer.singlePlayer && [GorillasAppDelegate get].gameLayer.activeGorilla.human && ![[GorillasConfig get] training]))
-        // Only deduct points when single player game & throw was by human & not in training mode.
+    if(!([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureScore]))
+        // Only deduct points when scoring is enabled
         return;
     
-    int nScore = [[GorillasConfig get] level] * [[GorillasConfig get] missScore];
+    int score = [[GorillasConfig get] level] * [[GorillasConfig get] missScore];
     
-    [[GorillasConfig get] setScore:[[GorillasConfig get] score] + nScore];
-    [[[GorillasAppDelegate get] hudLayer] updateScore:nScore skill:0];
+    [[GorillasConfig get] setScore:[[GorillasConfig get] score] + score];
+    [[[GorillasAppDelegate get] hudLayer] updateHudWithScore:score skill:0];
 
-    if(nScore)
-        [self message:[NSString stringWithFormat:@"%+d", nScore] on:[bananaLayer banana]];
+    if(score)
+        [self message:[NSString stringWithFormat:@"%+d", score] on:[bananaLayer banana]];
 }
 
 
@@ -514,8 +532,115 @@
             
             // A gorilla was hit.
             hitGorilla = [gorilla retain];
-            [hitGorilla setAlive:false];
+            [hitGorilla kill];
             
+            // Update Skill.
+            if([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureScore])
+                if([[GorillasAppDelegate get].gameLayer.activeGorilla human])
+                    [[GorillasConfig get] setSkill:fminf(0.99f, [[GorillasConfig get] skill] / 2 + throwSkill)];
+            
+            // Calculate hit impact on game state.
+            int score = 0;
+            BOOL cheer = NO;
+            if([[GorillasAppDelegate get].gameLayer.activeGorilla human]) {
+                // Human hits ...
+                
+                if([gorilla human]) {
+                    // ... Human.
+                    if([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureTeam])
+                        // In team mode, deduct score.
+                        score = [[GorillasConfig get] deathScore];
+                    else
+                        if(gorilla != [GorillasAppDelegate get].gameLayer.activeGorilla)
+                            cheer = YES;
+                }
+                
+                else {
+                    // ... AI.  Score boost.
+                    score = [[GorillasConfig get] killScore];
+                    cheer = YES;
+                }
+                
+                // Apply player skill.
+                if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureSkill]) {
+                    float skill = [GorillasConfig get].skill;
+                    
+                    // Apply oneshot bonus.
+                    if([GorillasAppDelegate get].gameLayer.activeGorilla.turns == 0) {
+                        [gameLayer message:@"Oneshot!"];
+                        skill *= [[GorillasConfig get] bonusOneShot];
+                    }
+                    
+                    score += (score / abs(score)) * [GorillasConfig get].bonusSkill * skill;
+                }
+            } else {
+                // AI hits ...
+                
+                if([gorilla human]) {
+                    // ... Human.  Deduct score.
+                    score = [[GorillasConfig get] deathScore];
+                    cheer = YES;
+                } else {
+                    // ... AI.
+                     if(![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureTeam])
+                         if(gorilla != [GorillasAppDelegate get].gameLayer.activeGorilla)
+                             cheer = YES;
+                }
+                
+                // Apply AI skill.
+                if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureSkill]) {
+                    float skill = [GorillasConfig get].level;
+                    
+                    // Apply oneshot bonus.
+                    if([GorillasAppDelegate get].gameLayer.activeGorilla.turns == 0) {
+                        [gameLayer message:@"Oneshot!"];
+                        skill *= [[GorillasConfig get] bonusOneShot];
+                    }
+                    
+                    score += (score / abs(score)) * [GorillasConfig get].bonusSkill * skill;
+                }
+            }
+            
+            // Update Level.
+            if([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLevel]) {
+                score *= [[GorillasConfig get] level];
+                
+                NSString *oldLevel = [[GorillasConfig get] levelName];
+                if(score > 0)
+                    [[GorillasConfig get] levelUp];
+                else
+                    [[GorillasConfig get] levelDown];
+                
+                // Message in case we level up.
+                if(![oldLevel isEqualToString:[[GorillasConfig get] levelName]]) {
+                    if(score > 0)
+                        [gameLayer message:@"Level Up!"];
+                    else
+                        [gameLayer message:@"Level Down"];
+                }
+            }
+            
+            // Update score.
+            if([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureScore]) {
+                if(score) {
+                    if (![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureScore])
+                        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                                       reason:@"Tried to modify score though the score feature is not enabled." userInfo:nil];
+                    
+                    [GorillasConfig get].score += score;
+                    [[[GorillasAppDelegate get] hudLayer] updateHudWithScore:score skill:0];
+                    [self message:[NSString stringWithFormat:@"%+d", score] on:hitGorilla];
+                }
+            }
+
+            // If good for player: Cheering and dancing.
+            if(cheer) {
+                if ([hitGorilla alive])
+                    [[GorillasAppDelegate get].gameLayer.activeGorilla cheer];
+                else
+                    [[GorillasAppDelegate get].gameLayer.activeGorilla dance];
+            }
+
             // Check whether any gorillas are left.
             int liveGorillaCount = 0;
             GorillaLayer *liveGorilla;
@@ -527,72 +652,27 @@
             
             // If 0 or 1 gorillas left; show who won and stop the game.
             if(liveGorillaCount < 2) {
-                if(liveGorillaCount == 1) {
+                if(liveGorillaCount == 1)
                     [[[GorillasAppDelegate get] hudLayer] setInfoString:[NSString stringWithFormat:@"%@ wins!", [liveGorilla name]]];
-                    
-                    if([gameLayer singlePlayer] && ! [[GorillasConfig get] training]) {
-                        // One gorilla left in single player: modify the level depending on who survived.
-                        
-                        NSString *oldLevel = [[GorillasConfig get] levelName];
-                        if([liveGorilla human]) {
-                            
-                            // Modify difficulty level & update score.
-                            int nScore = [[GorillasConfig get] killScore];
-                            
-                            // Skill modifier.
-                            if([GorillasAppDelegate get].gameLayer.activeGorilla.turns == 0) {
-                                [gameLayer message:@"Oneshot!"];
-                                nScore *= [[GorillasConfig get] bonusOneShot];
-                            }
-                            
-                            // Oneshot bonus modifier.
-                            if([GorillasAppDelegate get].gameLayer.activeGorilla.turns == 0) {
-                                [gameLayer message:@"Oneshot!"];
-                                nScore *= [[GorillasConfig get] bonusOneShot];
-                            }
-                            
-                            // Level modifier.
-                            nScore *= [[GorillasConfig get] level];
-                            
-                            [[GorillasConfig get] setSkill:fminf(0.99f, [[GorillasConfig get] skill] + throwSkill)];
-                            [[GorillasConfig get] setScore:[[GorillasConfig get] score] + nScore];
-                            [[[GorillasAppDelegate get] hudLayer] updateScore: nScore skill:0];
-                            if(nScore)
-                                [self message:[NSString stringWithFormat:@"%+d", nScore] on:hitGorilla];
-                            [[GorillasConfig get] levelUp];
-
-                            // Message in case we level up.
-                            if(oldLevel != [[GorillasConfig get] levelName])
-                                [gameLayer message:@"Level Up!"];
-                        }
-                        
-                        else {
-                            // Decrease difficulty level & update score.
-                            int nScore = [[GorillasConfig get] level] * [[GorillasConfig get] deathScore];
-                            
-                            [[GorillasConfig get] setScore:[[GorillasConfig get] score] + nScore];
-                            [[[GorillasAppDelegate get] hudLayer] updateScore: nScore skill:0];
-                            if(nScore)
-                                [self message:[NSString stringWithFormat:@"%+d", nScore] on:hitGorilla];
-                            [[GorillasConfig get] levelDown];
-                            
-                            // Message in case we level down.
-                            if(oldLevel != [[GorillasConfig get] levelName])
-                                [gameLayer message:@"Level Down"];
-                        }
-                        
-                        [[[GorillasAppDelegate get] gameLayer] setRunning:NO];
-                    }
-                } else
+                else
                     [[[GorillasAppDelegate get] hudLayer] setInfoString:@"Tie!"];
             }
             
-            // Fade out the killed gorilla.
-            [hitGorilla do:[Sequence actions:
-                            [FadeOut actionWithDuration:1],
-                            [CallFunc actionWithTarget:self selector:@selector(hitGorillaCallback:)],
-                            nil]];
-
+            // Reset the wind.
+            [[GorillasAppDelegate get].gameLayer.windLayer reset];
+            
+            // Redden non-lethal blow or fade out the killed gorilla.
+            if ([hitGorilla alive])
+                [hitGorilla do:[Sequence actions:
+                                [ShadeTo actionWithDuration:0.5f color:0xFF0000FF],
+                                [ShadeTo actionWithDuration:0.5f color:0xFFFFFFFF],
+                                nil]];
+            else
+                [hitGorilla do:[Sequence actions:
+                                [FadeOut actionWithDuration:1],
+                                [CallFunc actionWithTarget:self selector:@selector(hitGorillaCallback)],
+                                nil]];
+            
             return true;
         }
         
@@ -632,7 +712,7 @@
 }
 
 
--(void) hitGorillaCallback: (id) sender {
+-(void) hitGorillaCallback {
 
     [self removeGorilla:hitGorilla];
 }
@@ -641,10 +721,11 @@
 -(void) startGame {
     
     [self stopPanning];
+    NSArray *gorillas = [GorillasAppDelegate get].gameLayer.gorillas;
     
     // Create enough throw hint sprites / remove needless ones.
-    while([throwHints count] != [[GorillasAppDelegate get].gameLayer.gorillas count]) {
-        if([throwHints count] < [[GorillasAppDelegate get].gameLayer.gorillas count]) {
+    while([throwHints count] != [gorillas count]) {
+        if([throwHints count] < [gorillas count]) {
             Sprite *hint = [Sprite spriteWithFile:@"fire.png"];
             [throwHints addObject:hint];
             [self add:hint];
@@ -656,34 +737,39 @@
 
     // Reset throw history & throw hints.
     free(throwHistory);
-    throwHistory = malloc(sizeof(cpVect) * [[GorillasAppDelegate get].gameLayer.gorillas count]);
-    for(NSUInteger i = 0; i < [[GorillasAppDelegate get].gameLayer.gorillas count]; ++i) {
+    throwHistory = malloc(sizeof(cpVect) * [gorillas count]);
+    for(NSUInteger i = 0; i < [gorillas count]; ++i) {
         throwHistory[i] = cpv(-1, -1);
         [[throwHints objectAtIndex:i] setVisible:NO];
     }
     
     // Position our gorillas.
-    int indexA = 0;
+    NSUInteger indexA = 0;
     for(BuildingLayer *building in buildings)
         if(position.x + [building position].x >= 0) {
             indexA = [buildings indexOfObject:building] + 1;
             break;
         }
-    int indexB = indexA + [[GorillasConfig get] buildingAmount] - 3;
+    NSUInteger indexB = indexA + [[GorillasConfig get] buildingAmount] - 3;
+    NSUInteger delta = indexB - indexA;
+    float increment = delta / ([gorillas count] - 1);
+    if (increment < 0)
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"Tried to start a game with more gorillas than there's room in the field." userInfo:nil];
     
-    GorillaLayer *gorillaA = [[GorillasAppDelegate get].gameLayer.gorillas objectAtIndex:0];
-    GorillaLayer *gorillaB = [[GorillasAppDelegate get].gameLayer.gorillas objectAtIndex:1];
+    NSMutableArray *gorillaIndexes = [[NSMutableArray alloc] initWithCapacity: [gorillas count]];
+    for(NSUInteger i = 0; i < [gorillas count]; ++i)
+        [gorillaIndexes addObject:[NSNumber numberWithLong:indexA + lroundf(i * increment)]];
     
-    BuildingLayer *buildingA = (BuildingLayer *) [buildings objectAtIndex:indexA];
-    [gorillaA setPosition:cpv([buildingA position].x + [buildingA contentSize].width / 2, [buildingA contentSize].height + [gorillaA contentSize].height / 2)];
-    
-    BuildingLayer *buildingB = (BuildingLayer *) [buildings objectAtIndex:indexB];
-    [gorillaB setPosition:cpv([buildingB position].x + [buildingB contentSize].width / 2, [buildingB contentSize].height + [gorillaB contentSize].height / 2)];
-    
-    [gorillaA do:[FadeIn actionWithDuration:1]];
-    [gorillaB do:[FadeIn actionWithDuration:1]];
-    [self add:gorillaA z:3];
-    [self add:gorillaB z:3];
+    for(NSUInteger i = 0; i < [gorillas count]; ++i) {
+        BuildingLayer *building = [buildings objectAtIndex:[(NSNumber *) [gorillaIndexes objectAtIndex:i] unsignedIntegerValue]];
+        GorillaLayer *gorilla = [gorillas objectAtIndex:i];
+        
+        [gorilla setPosition:cpv([building position].x + [building contentSize].width / 2, [building contentSize].height + [gorilla contentSize].height / 2)];
+        [gorilla do:[FadeIn actionWithDuration:1]];
+        [self add:gorilla z:3];
+    }
+    [gorillaIndexes release];
     
     // Add a banana to the scene.
     if(bananaLayer) {
@@ -696,14 +782,14 @@
     
     [self do:[Sequence actions:
               /*[DelayTime actionWithDuration:1],*/
-              [CallFunc actionWithTarget:self selector:@selector(startedCallback:)],
+              [CallFunc actionWithTarget:self selector:@selector(startedCallback)],
               nil]];
     
     [self nextGorilla];
 }
 
 
--(void) startedCallback: (id) sender {
+-(void) startedCallback {
  
     [[[GorillasAppDelegate get] gameLayer] started];
 }
@@ -715,7 +801,7 @@
     hitGorilla = nil;
     
     for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas) {
-        [gorilla setAlive:false];
+        [gorilla killDead];
         [gorilla do:[FadeOut actionWithDuration:1]];
     }
     
@@ -727,11 +813,12 @@
     
     [self do:[Sequence actions:
               [DelayTime actionWithDuration:1],
-              [CallFunc actionWithTarget:self selector:@selector(stopGameCallback:)],
+              [CallFunc actionWithTarget:self selector:@selector(stopGameCallback)],
               nil]];
 }
 
--(void) stopGameCallback:(id)sender {
+
+-(void) stopGameCallback {
     
     for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
         [self removeAndStop:gorilla];

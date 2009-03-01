@@ -33,7 +33,7 @@
     long startCol, endCol;
 }
 
-+(ShadeTo *) actionWithColor: (long)nColorr duration: (ccTime)nDuration;
--(ShadeTo *) initWithColor: (long)nColor duration: (ccTime)nDuration;
++(ShadeTo *) actionWithDuration:(ccTime)_duration color:(long)_color;
+-(ShadeTo *) initWithDuration:(ccTime)_duration color:(long)_color;
 
 @end

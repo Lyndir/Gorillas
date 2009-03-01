@@ -26,23 +26,14 @@
 
 #import <UIKit/UIKit.h>
 #import "ShadeLayer.h"
+#import "Resettable.h"
 
-@interface MainMenuLayer : ShadeLayer {
+@interface MainMenuLayer : ShadeLayer <Resettable> {
 
     Menu *menu;
-    
-    MenuItem *newSingle;
-    MenuItem *newMulti;
-    
-    MenuItem *continueGame;
-    MenuItem *stopGame;
-    
-    MenuItem *config;
-    MenuItem *info;
 }
 
--(void) newGameSingle: (id)sender;
--(void) newGameMulti: (id)sender;
+-(void) newGame: (id)sender;
 -(void) continueGame: (id)sender;
 -(void) stopGame: (id)sender;
 -(void) information: (id)sender;

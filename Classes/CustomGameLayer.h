@@ -17,33 +17,22 @@
  */
 
 //
-//  WindLayer.h
+//  CustomGameLayer.h
 //  Gorillas
 //
-//  Created by Maarten Billemont on 25/10/08.
+//  Created by Maarten Billemont on 26/02/09.
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "ShadeLayer.h"
 #import "Resettable.h"
 
 
-@interface WindLayer : Layer <CocosNodeOpacity, Resettable> {
-
-    long        color;
-    float       wind;
-    float       windIncrement;
-    ccTime      elapsed, incrementDuration;
+@interface CustomGameLayer : ShadeLayer <Resettable> {
     
-    NSMutableArray *systems, *affectAngles;
+    Menu *menu, *backMenu;
+    
+    NSUInteger humans, ais;
 }
-
--(void) registerSystem:(ParticleSystem *)system affectAngle:(BOOL)affectAngle;
--(void) unregisterSystem:(ParticleSystem *)system;
-
-@property (readonly) float wind;
-@property (readwrite) long color;
-@property (readwrite) GLubyte opacity;
 
 @end

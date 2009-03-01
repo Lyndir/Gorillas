@@ -34,7 +34,5 @@
 
 -(void) guide: (id)sender;
 -(void) stats: (id)sender;
--(void) mainMenu: (id)sender;
-
 
 @end

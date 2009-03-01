@@ -37,51 +37,56 @@
     if(!(self = [super init]))
         return self;
     
-    newSingle       = [[MenuItemFont itemFromString:@"Single Player"    target:self selector:@selector(newGameSingle:)] retain];
-    newMulti        = [[MenuItemFont itemFromString:@"Multiplayer"      target:self selector:@selector(newGameMulti:)] retain];
-
-    continueGame    = [[MenuItemFont itemFromString:@"Continue Game"    target:self selector:@selector(continueGame:)] retain];
-    stopGame        = [[MenuItemFont itemFromString:@"End Game"         target:self selector:@selector(stopGame:)] retain];
-    
-    config          = [[MenuItemFont itemFromString:@"Configuration"    target:self selector:@selector(options:)] retain];
-    info            = [[MenuItemFont itemFromString:@"Information"      target:self selector:@selector(information:)] retain];
-    
     return self;
 }
 
 
 -(void) onEnter {
     
+    [self reset];
+
+    [super onEnter];
+}
+
+
+-(void) reset {
+
     if(menu) {
         [menu removeAndStopAll];
         [self removeAndStop:menu];
         [menu release];
         menu = nil;
     }
-    
-    if([[[GorillasAppDelegate get] gameLayer] running])
-        menu = [[Menu menuWithItems:continueGame, stopGame, config, info, nil] retain];
-    else
-        menu = [[Menu menuWithItems:newSingle, newMulti, config, info, nil] retain];
 
+    MenuItemFont *info              = [MenuItemFont itemFromString:@"Information"
+                                                            target:self selector:@selector(information:)];
+    MenuItemFont *config            = [MenuItemFont itemFromString:@"Configuration"
+                                                            target:self selector:@selector(options:)];
+    
+    if([[[GorillasAppDelegate get] gameLayer] checkGameStillOn]) {
+        MenuItemFont *continueGame  = [MenuItemFont itemFromString:@"Continue Game"
+                                                            target:self selector:@selector(continueGame:)];
+        MenuItemFont *stopGame      = [MenuItemFont itemFromString:@"End Game"
+                                                            target:self selector:@selector(stopGame:)];
+        
+        menu = [[Menu menuWithItems:continueGame, stopGame, info, config, nil] retain];
+    }
+    else {
+        MenuItemFont *newGame       = [MenuItemFont itemFromString:@"New Game"
+                                                            target:self selector:@selector(newGame:)];
+        
+        menu = [[Menu menuWithItems:newGame, info, config, nil] retain];
+    }
+    
     [menu alignItemsVertically];
     [self add:menu];
-
-    [super onEnter];
 }
 
 
--(void) newGameSingle: (id)sender {
+-(void) newGame: (id)sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[[GorillasAppDelegate get] gameLayer] startGameWithMode:GorillasModeQuick humans:1 ais:1];
-}
-
-
--(void) newGameMulti: (id)sender {
-
-    [[GorillasAppDelegate get] clickEffect];
-    [[[GorillasAppDelegate get] gameLayer] startGameWithMode:GorillasModeQuick humans:2 ais:0];
+    [[GorillasAppDelegate get] showNewGame];
 }
 
 
@@ -117,25 +122,7 @@
     
     [menu release];
     menu = nil;
-    
-    [newSingle release];
-    newSingle = nil;
-    
-    [newMulti release];
-    newMulti = nil;
-    
-    [continueGame release];
-    continueGame = nil;
-    
-    [stopGame release];
-    stopGame = nil;
-    
-    [config release];
-    config = nil;
-    
-    [info release];
-    info = nil;
-    
+
     [super dealloc];
 }
 

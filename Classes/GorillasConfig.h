@@ -28,11 +28,14 @@
 #define _GORILLACONFIG
 
 #import "cocos2d.h"
+#import "GameConfiguration.h"
 
 
 @interface GorillasConfig : NSObject {
 
-    NSUserDefaults *defaults;
+    NSUserDefaults  *defaults;
+    NSArray         *modes;
+    NSArray         *gameConfigurations;
 }
 
 
@@ -44,17 +47,17 @@
 
 @property (readwrite, assign) NSString      *cityTheme;
 
-@property (readwrite) int                   fixedFloors;
+@property (readwrite) NSUInteger            fixedFloors;
 @property (readonly) float                  cityScale;
 @property (readwrite) float                 buildingMax;
 @property (readonly) float                  buildingWidth;
-@property (readwrite) int                   buildingAmount;
+@property (readwrite) NSUInteger            buildingAmount;
 @property (readwrite) int                   buildingSpeed;
 @property (readwrite, assign) NSArray       *buildingColors;
 
 @property (readonly) float                  windowWidth;
 @property (readonly) float                  windowHeight;
-@property (readwrite) int                   windowAmount;
+@property (readwrite) NSUInteger            windowAmount;
 @property (readonly) float                  windowPadding;
 @property (readwrite) long                  windowColorOn;
 @property (readwrite) long                  windowColorOff;
@@ -64,10 +67,12 @@
 @property (readwrite) int                   starSpeed;
 @property (readwrite) NSUInteger            starAmount;
 
+@property (readwrite) int                   lives;
 @property (readwrite) float                 windModifier;
-@property (readwrite) int                   gravity;
-@property (readwrite) int                   minGravity;
-@property (readwrite) int                   maxGravity;
+@property (readwrite) NSUInteger            gravity;
+@property (readwrite) NSUInteger            minGravity;
+@property (readwrite) NSUInteger            maxGravity;
+
 @property (readwrite) long                  shadeColor;
 @property (readwrite) ccTime                transitionDuration;
 @property (readwrite) ccTime                gameScrollDuration;
@@ -75,9 +80,13 @@
 @property (readwrite) float                 level;
 @property (readonly) NSString               *levelName;
 @property (readwrite, assign) NSArray       *levelNames;
-@property (readonly) int                    levelNameCount;
 @property (readwrite) float                 levelProgress;
 
+@property (readonly) GameConfiguration      *gameConfiguration;
+@property (readwrite) NSUInteger            activeGameConfigurationIndex;
+@property (readwrite) NSUInteger            mode;
+@property (readonly) NSArray                *modes;
+@property (readonly) NSString               *modeString;
 @property (readwrite) int                   score;
 @property (readwrite) float                 skill;
 @property (readwrite, assign) NSDictionary  *topScoreHistory;
@@ -100,7 +109,6 @@
 @property (readwrite) BOOL                  followThrow;
 @property (readwrite) BOOL                  multiplayerFlip;
 
-@property (readwrite) BOOL                  training;
 @property (readwrite) BOOL                  throwHint;
 @property (readwrite) BOOL                  throwHistory;
 

@@ -26,6 +26,7 @@
 
 #import "ShadeLayer.h"
 #import "GorillasAppDelegate.h"
+#import "Remove.h"
 
 
 @implementation ShadeLayer
@@ -57,14 +58,8 @@
               [FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                  opacity:[[GorillasConfig get] shadeColor] & 0xff],
               [CallFunc actionWithTarget:self
-                                selector:@selector(revealCallback:)],
+                                selector:@selector(ready)],
               nil]];
-}
-
-
--(void) revealCallback: (id) sender {
-    
-    [self ready];
 }
 
 
@@ -84,16 +79,9 @@
     
     [self do:[Sequence actions:
               [FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration] opacity:0],
-              [CallFunc actionWithTarget:self selector:@selector(dismissCallback:)],
+              [Remove action],
+              [CallFunc actionWithTarget:self selector:@selector(gone)],
               nil]];
-}
-
-
--(void) dismissCallback: (id) sender {
-
-    [parent removeAndStop:self];
-    
-    [self gone];
 }
 
 

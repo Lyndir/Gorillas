@@ -29,21 +29,24 @@ typedef enum {
 typedef enum {
     GorillasFeatureScore    = 2 << 0,
     GorillasFeatureSkill    = 2 << 1,
-    GorillasFeatureLivesPl  = 2 << 2,
-    GorillasFeatureLivesAi  = 2 << 3,
-    GorillasFeatureCheat    = 2 << 4,
-    GorillasFeatureLMS      = 2 << 5,
+    GorillasFeatureLevel    = 2 << 2,
+    GorillasFeatureLivesPl  = 2 << 3,
+    GorillasFeatureLivesAi  = 2 << 4,
+    GorillasFeatureTeam     = 2 << 5,
+    GorillasFeatureCheat    = 2 << 6,
 } GorillasFeature;
 
 typedef enum {
-    // Training mode:       No score, No skill  | Enable cheats.
-    GorillasModeTraining    = GorillasFeatureCheat,
-    // Quick mode:          Score   , No skill  | Player has X lives, AI infinite.
-    GorillasModeQuick       = GorillasFeatureLivesPl    | GorillasFeatureScore,
-    // Last Man Standing:   No score, No skill  | Both player and AI have X lives.
+    // Boot Camp:
+    GorillasModeBootCamp    = GorillasFeatureCheat,
+    // Quick Game:
+    GorillasModeClassic     = GorillasFeatureScore      | GorillasFeatureLevel,
+    // Dynamic Game:
+    GorillasModeDynamic     = GorillasFeatureSkill      | GorillasFeatureScore  | GorillasFeatureLevel,
+    // Dynamic Game:
+    GorillasModeTeam        = GorillasFeatureScore      | GorillasFeatureTeam,
+    // Last Man Standing:
     GorillasModeLMS         = GorillasFeatureLivesPl    | GorillasFeatureLivesAi,
-    // Skilled game:        Score   , Skill     | Modify score increase by skill.
-    GorillasModeSkill       = GorillasFeatureScore      | GorillasFeatureSkill,
 } GorillasMode;
 
 //#define DEBUG 0

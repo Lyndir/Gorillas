@@ -51,7 +51,7 @@
 -(void) continueGame: (id)sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[[GorillasAppDelegate get] gameLayer] startGameWithMode:GorillasModeQuick humans:1 ais:1];
+    [[[GorillasAppDelegate get] gameLayer] startGame];
 }
 
 

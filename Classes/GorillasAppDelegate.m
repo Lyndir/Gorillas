@@ -26,11 +26,12 @@
 
 #import "GorillasAppDelegate.h"
 #import "Splash.h"
+#import "Resettable.h"
 
 
 @implementation GorillasAppDelegate
 
-@synthesize uiLayer, gameLayer;
+@synthesize uiLayer, gameLayer, newGameLayer, customGameLayer;
 
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
@@ -105,7 +106,7 @@
     [configLayer reset];
     [gameConfigLayer reset];
     [avConfigLayer reset];
-    [trainingLayer reset];
+    [bootCampLayer reset];
 }
 
 
@@ -137,9 +138,13 @@
 
 -(void) showLayer: (ShadeLayer *)layer {
     
-    if(layer == currentLayer)
+    if(layer == currentLayer) {
         // Layer is already showing, ignore.
+        if ([layer conformsToProtocol:@protocol(Resettable)])
+            [(ShadeLayer<Resettable> *) layer reset];
+        
         return;
+    }
     
     if([currentLayer parent])
         [self dismissLayer];
@@ -153,8 +158,26 @@
     
     if(!mainMenuLayer)
         mainMenuLayer = [[MainMenuLayer alloc] init];
-    
+
     [self showLayer:mainMenuLayer];
+}
+
+
+-(void) showNewGame {
+    
+    if(!newGameLayer)
+        newGameLayer = [[NewGameLayer alloc] init];
+    
+    [self showLayer:newGameLayer];
+}
+
+
+-(void) showCustomGame {
+    
+    if(!customGameLayer)
+        customGameLayer = [[CustomGameLayer alloc] init];
+    
+    [self showLayer: customGameLayer];
 }
 
 
@@ -194,12 +217,12 @@
 }
 
 
--(void) showTraining {
+-(void) showBootCamp {
     
-    if(!trainingLayer)
-        trainingLayer = [[TrainingConfigurationLayer alloc] init];
+    if(!bootCampLayer)
+        bootCampLayer = [[BootCampConfigurationLayer alloc] init];
     
-    [self showLayer:trainingLayer];
+    [self showLayer:bootCampLayer];
 }
 
 
@@ -307,6 +330,16 @@
         [mainMenuLayer release];
         mainMenuLayer = nil;
     }
+    if(newGameLayer && ![newGameLayer parent]) {
+        [newGameLayer stopAllActions];
+        [newGameLayer release];
+        newGameLayer = nil;
+    }
+    if(customGameLayer && ![customGameLayer parent]) {
+        [customGameLayer stopAllActions];
+        [customGameLayer release];
+        customGameLayer = nil;
+    }
     if(continueMenuLayer && ![continueMenuLayer parent]) {
         [continueMenuLayer stopAllActions];
         [continueMenuLayer release];
@@ -327,10 +360,10 @@
         [avConfigLayer release];
         avConfigLayer = nil;
     }
-    if(trainingLayer && ![trainingLayer parent]) {
-        [trainingLayer stopAllActions];
-        [trainingLayer release];
-        trainingLayer = nil;
+    if(bootCampLayer && ![bootCampLayer parent]) {
+        [bootCampLayer stopAllActions];
+        [bootCampLayer release];
+        bootCampLayer = nil;
     }
     if(infoLayer && ![infoLayer parent]) {
         [infoLayer stopAllActions];
@@ -376,6 +409,12 @@
     [mainMenuLayer release];
     mainMenuLayer = nil;
     
+    [newGameLayer release];
+    newGameLayer = nil;
+    
+    [customGameLayer release];
+    customGameLayer = nil;
+    
     [continueMenuLayer release];
     continueMenuLayer = nil;
     
@@ -388,8 +427,8 @@
     [avConfigLayer release];
     avConfigLayer = nil;
 
-    [trainingLayer release];
-    trainingLayer = nil;
+    [bootCampLayer release];
+    bootCampLayer = nil;
 
     [infoLayer release];
     infoLayer = nil;

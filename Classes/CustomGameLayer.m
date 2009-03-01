@@ -17,24 +17,27 @@
  */
 
 //
-//  TrainingConfiguration.m
+//  CustomGameLayer.m
 //  Gorillas
 //
-//  Created by Maarten Billemont on 15/02/09.
+//  Created by Maarten Billemont on 26/02/09.
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "TrainingConfigurationLayer.h"
+#import "CustomGameLayer.h"
 #import "GorillasAppDelegate.h"
 
 
-@implementation TrainingConfigurationLayer
+@implementation CustomGameLayer
 
 
 -(id) init {
     
-    if(!(self = [super init]))
+    if (!(self = [super init]))
         return self;
+    
+    humans = 1;
+    ais = 1;
     
     return self;
 }
@@ -52,49 +55,63 @@
         backMenu = nil;
     }
     
-    
-    // Training Mode.
+    // Humans.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *trainingT    = [MenuItemFont itemFromString:@"Training Mode"];
-    [trainingT setIsEnabled:false];
+    MenuItem *humansT  = [MenuItemFont itemFromString:@"Humans"];
+    [humansT setIsEnabled:false];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *trainingI    = [MenuItemFont itemFromString:[[GorillasConfig get] training]? @"On": @"Off"
+    MenuItem *humansI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%d Player%s", humans, humans == 1? "": "s"]
                                                    target:self
-                                                 selector:@selector(training:)];
+                                                 selector:@selector(humans:)];
     
     
-    // Throw Hints.
+    // Game Mode.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *throwHintsT  = [MenuItemFont itemFromString:@"Throw Hints"];
-    [throwHintsT setIsEnabled:false];
+    MenuItem *gameModeT    = [MenuItemFont itemFromString:@"Game Mode"];
+    [gameModeT setIsEnabled:false];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *throwHintsI  = [MenuItemFont itemFromString:[[GorillasConfig get] throwHint]? @"On": @"Off"
+    MenuItem *gameModeI    = [MenuItemFont itemFromString:[[GorillasConfig get] modeString]
                                                    target:self
-                                                 selector:@selector(throwHint:)];
+                                                 selector:@selector(gameMode:)];
     
     
     // Throw History.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *throwHistoryT  = [MenuItemFont itemFromString:@"Throw History"];
-    [throwHistoryT setIsEnabled:false];
+    MenuItem *aisT  = [MenuItemFont itemFromString:@"AIs"];
+    [aisT setIsEnabled:false];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *throwHistoryI  = [MenuItemFont itemFromString:[[GorillasConfig get] throwHistory]? @"On": @"Off"
+    MenuItem *aisI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%d AI%s", ais, ais == 1? "": "s"]
                                                      target:self
-                                                   selector:@selector(throwHistory:)];
+                                                   selector:@selector(ais:)];
     
     
-    menu = [[Menu menuWithItems:trainingT, trainingI, throwHintsT, throwHistoryT, throwHintsI, throwHistoryI, nil] retain];
+    // Start Game.
+    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    MenuItem *startGameT  = [MenuItemFont itemFromString:@" "];
+    [startGameT setIsEnabled:false];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    MenuItem *startGameI  = [MenuItemFont itemFromString:@"Start!"
+                                            target:self
+                                          selector:@selector(startGame:)];
+    [startGameI setIsEnabled:humans + ais > 1];
+    
+    
+    menu = [[Menu menuWithItems:humansT, aisT, humansI, aisI, gameModeT, gameModeI, startGameT, startGameI, nil] retain];
     [menu alignItemsInColumns:
-     [NSNumber numberWithUnsignedInteger:1],
-     [NSNumber numberWithUnsignedInteger:1],
      [NSNumber numberWithUnsignedInteger:2],
      [NSNumber numberWithUnsignedInteger:2],
+     [NSNumber numberWithUnsignedInteger:1],
+     [NSNumber numberWithUnsignedInteger:1],
+     [NSNumber numberWithUnsignedInteger:1],
+     [NSNumber numberWithUnsignedInteger:1],
      nil];
     [self add:menu];
     
@@ -121,31 +138,48 @@
 }
 
 
--(void) training: (id) sender {
+-(void) gameMode: (id) sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[GorillasConfig get] setTraining:![[GorillasConfig get] training]];
+
+    NSArray *modes = [[GorillasConfig get] modes];
+    NSUInteger curModeIndex = [modes indexOfObject:[NSNumber numberWithUnsignedInt:[[GorillasConfig get] mode]]];
+    
+    [GorillasConfig get].mode = [[modes objectAtIndex:(curModeIndex + 1) % [modes count]] unsignedIntegerValue];
 }
 
 
--(void) throwHint: (id) sender {
+-(void) humans: (id) sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[GorillasConfig get] setThrowHint:![[GorillasConfig get] throwHint]];
+    humans = (humans + 1) % 4;
+    
+    [self reset];
 }
 
 
--(void) throwHistory: (id) sender {
+-(void) ais: (id) sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[GorillasConfig get] setThrowHistory:![[GorillasConfig get] throwHistory]];
+    ais = (ais + 1) % 4;
+
+    [self reset];
+}
+
+
+-(void) startGame: (id) sender {
+    
+    [[GorillasAppDelegate get] clickEffect];
+    [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:[[GorillasConfig get] mode]
+                                                          humans:humans ais:ais];
+    [[[GorillasAppDelegate get] gameLayer] startGame];
 }
 
 
 -(void) back: (id) sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[GorillasAppDelegate get] showConfiguration];
+    [[GorillasAppDelegate get] showMainMenu];
 }
 
 

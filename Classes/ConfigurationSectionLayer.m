@@ -31,8 +31,6 @@
 @implementation ConfigurationSectionLayer
 
 
-
-
 -(void) reset {
     
     if(menu) {
@@ -54,12 +52,8 @@
     MenuItem *av    = [MenuItemFont itemFromString:@"Audio / Video"
                                             target:self
                                           selector:@selector(av:)];
-    MenuItem *training = [MenuItemFont itemFromString:@"Training"
-                                               target:self
-                                             selector:@selector(training:)];
-    [training setIsEnabled:![[[GorillasAppDelegate get] gameLayer] running]];
     
-    menu = [[Menu menuWithItems:game, av, training, nil] retain];
+    menu = [[Menu menuWithItems:game, av, nil] retain];
     [menu alignItemsVertically];
     [self add:menu];
     
@@ -68,7 +62,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] largeFontSize]];
     MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
                                                target: self
-                                             selector: @selector(mainMenu:)];
+                                             selector: @selector(back:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
     backMenu = [[Menu menuWithItems:back, nil] retain];
@@ -100,14 +94,7 @@
 }
 
 
--(void) training: (id) sender {
-    
-    [[GorillasAppDelegate get] clickEffect];
-    [[GorillasAppDelegate get] showTraining];
-}
-
-
--(void) mainMenu: (id) sender {
+-(void) back: (id) sender {
     
     [[GorillasAppDelegate get] clickEffect];
     [[GorillasAppDelegate get] showMainMenu];

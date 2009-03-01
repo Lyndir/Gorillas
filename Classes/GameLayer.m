@@ -35,6 +35,7 @@
 
 -(void) setPausedSilently:(BOOL)_paused;
 -(void) resetMessage:(NSString *)msg;
+-(void) shuffleGorillas;
 
 @end
 
@@ -43,29 +44,36 @@
 
 #pragma mark Properties
 
-@synthesize running, paused, mode;
+@synthesize paused;
 @synthesize gorillas, activeGorilla;
 @synthesize skiesLayer, panningLayer, buildingsLayer, windLayer, weather;
 
 -(BOOL) singlePlayer {
 
-    int humans = 0;
-    for(GorillaLayer *gorilla in gorillas)
-        if ([gorilla human])
-            ++humans;
-    
     return humans == 1;
 }
 
 
+-(BOOL) isEnabled:(GorillasFeature)feature {
+    
+    return mode & feature;
+}
+
+
 -(void) setPaused:(BOOL)_paused {
+
+    if(paused == _paused)
+        // Nothing changed.
+        return;
     
     [self setPausedSilently:_paused];
     
-    if(paused)
-        [self message:@"Paused"];
-    else
-        [self message:@"Unpaused"];
+    if(running) {
+        if(paused)
+            [self message:@"Paused"];
+        else
+            [self message:@"Unpaused"];
+    }
 }
 
 
@@ -77,12 +85,22 @@
     
     if(paused) {
         [[GorillasAppDelegate get] hideHud];
-        [windLayer do:[FadeOut actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+        [windLayer do:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                         opacity:0x00]];
     } else {
         [[GorillasAppDelegate get] dismissLayer];
         [[GorillasAppDelegate get] revealHud];
-        [windLayer do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+        [windLayer do:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                         opacity:0xFF]];
     }
+}
+
+
+-(void) configureGameWithMode:(GorillasMode)_mode humans:(NSUInteger)_humans ais:(NSUInteger)_ais {
+    
+    mode = _mode;
+    humans = _humans;
+    ais = _ais;
 }
 
 
@@ -108,10 +126,25 @@
 }
 
 
--(void) message: (NSString *)msg {
+-(void) message:(NSString *)msg {
+    
+    [self message:msg callback:nil :nil];
+}
+
+
+-(void) message:(NSString *)msg callback:(id)target :(SEL)selector {
+    
+    NSInvocation *callback = nil;
+    if(target) {
+        NSMethodSignature *signature = [[target class] instanceMethodSignatureForSelector:selector];
+        callback = [NSInvocation invocationWithMethodSignature:signature];
+        [callback setTarget:[target retain]];
+        [callback setSelector:selector];
+    }
     
     @synchronized(messageQueue) {
         [messageQueue insertObject:msg atIndex:0];
+        [callbackQueue insertObject:callback? callback: (id)[NSNull null] atIndex:0];
         
         if(![self isScheduled:@selector(popMessageQueue:)])
             [self schedule:@selector(popMessageQueue:)];
@@ -119,8 +152,8 @@
 }
 
 
--(void) startGameWithMode:(GorillasMode)nMode humans:(NSUInteger)humans ais:(NSUInteger)ais {
-    
+-(void) startGame {
+
     if(running)
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:@"Tried to start a game while one's still running."
@@ -138,14 +171,9 @@
                                        reason:@"Tried to start a game while there's still gorillas in the field."
                                      userInfo:nil];
     
-    // Checks done, set game mode.
-    mode = nMode;
-    
     // Add humans to the game.
     for (NSUInteger i = 0; i < humans; ++i) {
-        GorillaLayer *gorilla = [[GorillaLayer alloc] init];
-        [gorilla setHuman:YES];
-        [gorilla setAlive:YES];
+        GorillaLayer *gorilla = [[GorillaLayer alloc] initAsHuman:YES];
         
         if(humans == 1)
             [gorilla setName:@"Player"];
@@ -158,9 +186,7 @@
     
     // Add AIs to the game.
     for (NSUInteger i = 0; i < ais; ++i) {
-        GorillaLayer *gorilla = [[GorillaLayer alloc] init];
-        [gorilla setHuman:NO];
-        [gorilla setAlive:YES];
+        GorillaLayer *gorilla = [[GorillaLayer alloc] initAsHuman:NO];
         
         if(ais == 1)
             [gorilla setName:@"Phone"];
@@ -171,18 +197,76 @@
         [gorilla release];
     }
     
+    // Shuffle the order of the gorillas.
+    [self shuffleGorillas];
+    
     // When there are AIs in the game, show their difficulity.
     if (ais)
         [self message:[[GorillasConfig get] levelName]];
     
     // Reset the game field and start the game.
+    [buildingsLayer stopPanning];
     [self reset];
     [buildingsLayer startGame];
 }
 
 
+- (void)shuffleGorillas {
+    
+    NSUInteger count = [gorillas count];
+    for (NSUInteger i = 0; i < count; ++i) {
+        // Select a random element between i and end of array to swap with.
+        int nElements = count - i;
+        int n = (random() % nElements) + i;
+        [gorillas exchangeObjectAtIndex:i withObjectAtIndex:n];
+    }
+}
+
+
+-(BOOL) checkGameStillOn {
+
+    if(running) {
+        // Check to see if there are any opponents left.
+        NSUInteger liveGorillas = 0;
+        for (GorillaLayer *gorilla in gorillas)
+            if ([gorilla alive])
+                ++liveGorillas;
+        
+        if(liveGorillas < 2)
+            running = false;
+        
+        // Team mode: Check if there are any gorillas left in the other team.
+        if([self isEnabled:GorillasFeatureTeam]) {
+            NSUInteger liveEnemyGorillas = 0;
+            for (GorillaLayer *gorilla in gorillas)
+                if (gorilla.alive && gorilla.human != activeGorilla.human)
+                    ++liveEnemyGorillas;
+            
+            if(!liveEnemyGorillas)
+                running = false;
+        }
+        
+        if (!running)
+            [self endGame];
+    }
+    
+    return running;
+}
+
+
 -(void) stopGame {
     
+    mode = 0;
+    humans = 0;
+    ais = 0;
+    
+    [self endGame];
+}
+
+
+-(void) endGame {
+    
+    [self setPausedSilently:NO];
     [buildingsLayer stopGame];
 }
 
@@ -198,6 +282,7 @@
 
     // Build internal structures.
     messageQueue = [[NSMutableArray alloc] initWithCapacity:3];
+    callbackQueue = [[NSMutableArray alloc] initWithCapacity:3];
     msgLabel = nil;
     
     IntervalAction *l = [MoveBy actionWithDuration:.05f position:cpv(-3, 0)];
@@ -316,16 +401,21 @@
 
 -(void) popMessageQueue: (ccTime)dt {
     
-    NSString *msg = nil;
     @synchronized(messageQueue) {
         [self unschedule:@selector(popMessageQueue:)];
+
+        if(![messageQueue count])
+            // No messages left, don't reschedule.
+            return;
         
-        msg = [[messageQueue lastObject] retain];
-        [messageQueue removeLastObject];
-        
-        if([messageQueue count])
-            [self schedule:@selector(popMessageQueue:) interval:1.5f];
+        [self schedule:@selector(popMessageQueue:) interval:1.5f];
     }
+    
+    NSString *msg = [[messageQueue lastObject] retain];
+    [messageQueue removeLastObject];
+    
+    NSInvocation *callback = [[callbackQueue lastObject] retain];
+    [callbackQueue removeLastObject];
     
     [self resetMessage:msg];
     [msgLabel do:[Sequence actions:
@@ -333,7 +423,13 @@
                   [FadeTo actionWithDuration:2 opacity:0x00],
                   nil]];
     
+    if(callback != (id)[NSNull null]) {
+        [callback invoke];
+        [[callback target] release];
+    }
+    
     [msg release];
+    [callback release];
 }
 
 
@@ -343,18 +439,16 @@
         // Detach existing label & create a new message label for the next message.
         if(msgLabel) {
             [msgLabel stopAllActions];
-            [msgLabel do:[Spawn actions:
+            [msgLabel do:[Sequence actions:
                           [MoveTo actionWithDuration:1
-                                            position:cpvadd([msgLabel position],
-                                                            cpv(-[msgLabel contentSize].width, 0))],
+                                            position:cpv(-[msgLabel contentSize].width / 2, [msgLabel position].y)],
                           [FadeOut actionWithDuration:1],
                           [Remove action],
                           nil]];
             [msgLabel release];
         }
         
-        msgLabel = [[Label alloc] initWithString:msg dimensions:CGSizeMake(1000, [[GorillasConfig get] fontSize] + 5)
-                                       alignment:UITextAlignmentLeft
+        msgLabel = [[Label alloc] initWithString:msg
                                         fontName:[[GorillasConfig get] fixedFontName]
                                         fontSize: [[GorillasConfig get] fontSize]];
         [self add:msgLabel z:1];
@@ -379,6 +473,8 @@
 
 -(void) stopped {
     
+    running = false;
+    
     [activeGorilla release];
     activeGorilla = nil;
     
@@ -389,20 +485,21 @@
         [panningLayer do:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                            position:cpvzero]];
     
-    [self setPausedSilently:YES];
-    
-    if([self singlePlayer] && running)
-        // For a singleplayer game that hasn't been stopped yet,
-        // don't show the main menu, just a quick menu to get back into the game.
+    if(mode)
         [[GorillasAppDelegate get] showContinueMenu];
     else
+        // Selected game mode was unset, can't "continue".
         [[GorillasAppDelegate get] showMainMenu];
-    
-    running = false;
 }
 
 
 -(void) dealloc {
+    
+    [messageQueue release];
+    messageQueue = nil;
+    
+    [callbackQueue release];
+    callbackQueue = nil;
     
     [shakeAction release];
     shakeAction = nil;

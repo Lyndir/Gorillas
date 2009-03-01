@@ -64,7 +64,7 @@
     MenuItem *themeI    = [MenuItemFont itemFromString:[[GorillasConfig get] cityTheme]
                                                 target:self
                                               selector:@selector(cityTheme:)];
-    [themeI setIsEnabled:![[[GorillasAppDelegate get] gameLayer] running]];
+    [themeI setIsEnabled:![[[GorillasAppDelegate get] gameLayer] checkGameStillOn]];
     
     
     // Difficulity Level.
@@ -152,15 +152,8 @@
     
     [[GorillasAppDelegate get] clickEffect];
 
-    NSString *curLevelName = [[GorillasConfig get] levelName];
-    int curLevelInd;
-    
-    for(curLevelInd = 0; curLevelInd < [[GorillasConfig get] levelNameCount]; ++curLevelInd) {
-        if([[[GorillasConfig get] levelNames] objectAtIndex:curLevelInd] == curLevelName)
-            break;
-    }
-
-    [[GorillasConfig get] setLevel:(float) ((curLevelInd + 1) % [[GorillasConfig get] levelNameCount]) / [[GorillasConfig get] levelNameCount]];
+    NSUInteger curLevelInd = [[[GorillasConfig get] levelNames] indexOfObject:[[GorillasConfig get] levelName]];
+    [[GorillasConfig get] setLevel:(float) ((curLevelInd + 1) % [[[GorillasConfig get] levelNames] count]) / [[[GorillasConfig get] levelNames] count]];
 }
 
 

@@ -33,6 +33,8 @@
     MenuItemFont *menuButton;
     Menu *menuMenu;
     LabelAtlas *infoLabel;
+    Layer *livesLayer;
+    Sprite *infiniteLives;
     
     float width;
     float height;
@@ -41,7 +43,7 @@
 -(void) dismiss;
 
 -(void) setInfoString: (NSString *)string;
--(void) updateScore: (int)nScore skill: (float)nSkill;
+-(void) updateHudWithScore:(int)score skill: (float)throwSkill;
 
 -(BOOL) hitsHud: (cpVect)pos;
 

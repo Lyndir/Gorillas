@@ -29,6 +29,7 @@
 #import "GorillasConfig.h"
 #import "Utility.h"
 #import "ShadeTo.h"
+#import "Remove.h"
 
 
 @implementation HUDLayer
@@ -45,12 +46,12 @@
     height =[[GorillasConfig get] smallFontSize] + 10;
     position = cpv(0, -height);
     
-    menuButton = [[MenuItemAtlasFont itemFromString:@"Menu"
+    menuButton = [[MenuItemAtlasFont itemFromString:@"Menu "
                                         charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '
                                              target:self selector:@selector(menuButton:)] retain];
 
     menuMenu = [[Menu menuWithItems:menuButton, nil] retain];
-    [menuMenu setPosition:cpv(width - [menuButton contentSize].width, height / 2)];
+    [menuMenu setPosition:cpv(width - [menuButton contentSize].width / 2, [menuButton contentSize].height / 2)];
     [menuMenu alignItemsHorizontally];
     [self add:menuMenu];
     
@@ -60,56 +61,114 @@
     [infoLabel setPosition:cpvzero];
     [self add:infoLabel];
     
+    // Lives.
+    livesLayer = [[Layer alloc] init];
+    [livesLayer setVisible:NO];
+    infiniteLives = [Sprite spriteWithFile:@"infinite-shape.png"];
+    [infiniteLives setPosition:cpv([infiniteLives contentSize].width / 2, height / 2)];
+    [infiniteLives setVisible:NO];
+    [self add:livesLayer];
+    [livesLayer add:infiniteLives];
+    
     return self;
 }
 
 
--(void) updateScore: (int)nScore skill: (float)throwSkill {
-
-    if ([GorillasAppDelegate get].gameLayer.mode == GorillasModeTraining) {
-            [infoLabel setString:[NSString stringWithFormat:@" Training   | ",
-                                  (int) (fminf(0.99f, [[GorillasConfig get] skill] + throwSkill) * 100)]];
-            [infoLabel setRGB:0xff :0xff :0x99];
-            return;
+-(void) updateHudWithScore:(int)score skill: (float)throwSkill {
+    
+    int lives = [GorillasAppDelegate get].gameLayer.activeGorilla.lives;
+    NSMutableString *infoString = [[NSMutableString alloc] initWithCapacity:20];
+    
+    // Make sure there are enough life sprites on the livesLayer.
+    NSUInteger l = [[livesLayer children] count] - 1;
+    while((int)[[livesLayer children] count] - 1 < lives) {
+        Sprite *life = [Sprite spriteWithFile:@"gorilla-shape.png"];
+        [life setPosition:cpv(l++ * [life contentSize].width + [life contentSize].width / 2, height / 2)];
+        
+        [livesLayer add:life];
     }
     
-    NSMutableString *infoString = [[NSMutableString alloc] initWithCapacity:20];
-    if ([GorillasAppDelegate get].gameLayer.mode & GorillasFeatureScore)
-        [infoString appendFormat:@"Score: %03d", [[GorillasConfig get] score]];
-    if ([GorillasAppDelegate get].gameLayer.mode & GorillasFeatureSkill)
-        [infoString appendFormat:@" | Skill: %02d%%", (int) (fminf(0.99f, [[GorillasConfig get] skill] + throwSkill) * 100)];
+    // Toggle the visibility of the lives depending on how many are left.
+    for(int l = 1; l < (int)[[livesLayer children] count]; ++l)
+        [[[livesLayer children] objectAtIndex:l] setVisible:l - 1 < lives];
+    [infiniteLives setVisible:lives < 0];
+
+    // Boot Camp message.
+    if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureCheat]) {
+        if([infoString length])
+            [infoString appendString:@"  "];
+        
+        [infoString appendString:@"Boot Camp"];
+        [infoLabel setRGB:0xff :0xff :0x99];
+    }
     
-    long scoreColor = 0xFFFFFFff;
-    if(nScore > 0)
-        scoreColor = 0x66CC66ff;
-    else if(nScore < 0)
-        scoreColor = 0xCC6666ff;
+    // Put score on HUD.
+    if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureScore]) {
+        if([infoString length])
+            [infoString appendString:@"  "];
+        
+        [infoString appendFormat:@"Score:%03d", [[GorillasConfig get] score]];
+    }
 
-    [infoLabel setString:infoString];
+    // Put skill on HUD.
+    if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureSkill]) {
+        if([infoString length])
+            [infoString appendString:@"  "];
+    
+        float skill = [[GorillasConfig get] skill];
+        if(throwSkill)
+            skill = [[GorillasConfig get] skill] / 2 + throwSkill;
+        
+        [infoString appendFormat:@"Skill:%02d%%", (int) (fminf(0.99f, skill) * 100)];
+    }
+    
+    // Put name and lives on HUD.
+    if([GorillasAppDelegate get].gameLayer.activeGorilla.name) {
+        if([infoString length])
+            [infoString appendString:@"  "];
+    
+        [infoString appendString:[GorillasAppDelegate get].gameLayer.activeGorilla.name];
+    }
+    if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesPl]) {
+        if([infoString length])
+            [infoString appendString:@":"];
+        [livesLayer setVisible:YES];
+    } else
+        [livesLayer setVisible:NO];
+
+    [self setInfoString:infoString];
     [infoString release];
-    [infoLabel do:[Sequence actions:
-                   [ShadeTo actionWithColor:scoreColor duration:0.5f],
-                   [ShadeTo actionWithColor:0xFFFFFFFF duration:0.5f],
-                   nil]];
-}
 
+    if(score) {
+        long scoreColor;
+        if(score > 0)
+            scoreColor = 0x99FF99ff;
+        else if(score < 0)
+            scoreColor = 0xFF9999ff;
+        
+        [infoLabel do:[Sequence actions:
+                       [ShadeTo actionWithDuration:0.5f color:scoreColor],
+                       [ShadeTo actionWithDuration:0.5f color:0xFFFFFFff],
+                       nil]];
+    }
+}
 
 
 -(void) setInfoString: (NSString *)string {
     
-    [infoLabel setString:string];
+    [infoLabel setString:[NSString stringWithFormat:@" %@", string]];
+    [livesLayer setPosition:cpv([infoLabel position].x + 13 * ([string length] + 1), [infoLabel position].y)];
 }
 
 
 -(void) onEnter {
-
+    
     [super onEnter];
     
     [self stopAllActions];
     [self do:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, 0)]];
     
-    [infoLabel setVisible:[[[GorillasAppDelegate get] gameLayer] singlePlayer]];
-    [self updateScore:0 skill:0];
+    [self updateHudWithScore:0 skill:0];
 }
 
 
@@ -118,14 +177,8 @@
     [self stopAllActions];
     [self do:[Sequence actions:
               [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, -height)],
-              [CallFunc actionWithTarget:self selector:@selector(gone)],
+              [Remove action],
               nil]];
-}
-
-
--(void) gone {
-    
-    [parent removeAndStop:self];
 }
 
 
@@ -148,8 +201,8 @@
 -(void) draw {
     
     cpVect to = cpv(width, height);
-    drawBoxFrom(cpvzero, to, 0x000000FF, 0x000000FF);
-    drawLinesTo(cpv(0, height), &to, 1, 0xFFFFFFFF, 1);
+    drawBoxFrom(cpvzero, to, 0x000000FF, 0x666666FF);
+    drawLinesTo(cpv(0, height), &to, 1, 0x999999FF, 1);
 }
 
 

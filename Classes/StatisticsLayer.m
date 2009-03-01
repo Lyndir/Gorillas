@@ -58,16 +58,24 @@
 
 
 -(void) onEnter {
+    
+    [self reset];
 
+    [super onEnter];
+}
+
+
+-(void) reset {
+    
     // Get the top scores.
     NSDictionary *topScores = [[GorillasConfig get] topScoreHistory];
     NSMutableArray *dates = [[NSMutableArray alloc] initWithCapacity:[topScores count]];
     NSMutableArray *scores = [[NSMutableArray alloc] initWithCapacity:[topScores count]];
-
+    
     NSString **tDates = malloc(sizeof(NSString *) * [topScores count]);
     NSNumber **tScores = malloc(sizeof(NSNumber *) * [topScores count]);
     [topScores getObjects:tScores andKeys:tDates];
-
+    
     // Convert their keys from NSStrings into NSDates for sorting.
     int topScore = 0;
     NSDateFormatter *defaultDateFormatter = [[NSDateFormatter alloc] init];
@@ -105,7 +113,7 @@
     [scores release];
     dates = nil;
     scores = nil;
-
+    
     NSEnumerator *datesEnumerator = [[[history allKeys] sortedArrayUsingSelector:@selector(compare:)] reverseObjectEnumerator];
     for(NSDate *date in [datesEnumerator allObjects]) {
         
@@ -118,11 +126,11 @@
         scoreRatio /= [[GorillasConfig get] buildingMax];
         if(!score)
             scoreRatio = 0.001f;
-
+        
         // Score tower.
         BuildingLayer *scoreTower = [[BuildingLayer alloc] initWithWidth:gBarSize
                                                              heightRatio:scoreRatio];
-
+        
         // Score label.
         Label *scoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%d", score]
                                                dimensions:CGSizeMake(gBarSize * 2, [[GorillasConfig get] smallFontSize] / 2)
@@ -155,7 +163,7 @@
                        [Sequence actionWithDuration:0.1f * i],
                        [FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]],
                        nil]];
-
+        
         [scoreTower setPosition:cpv(x, -[scoreTower contentSize].height - [scoreLabel contentSize].height)];
         [scoreTower add:scoreLabel];
         [scoreTower add:dateLabel];
@@ -176,8 +184,6 @@
     dateFormatter = nil;
     [history release];
     history = nil;
-
-    [super onEnter];
 }
 
 

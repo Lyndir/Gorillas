@@ -25,9 +25,10 @@
 //
 
 #import "ShadeLayer.h"
+#import "Resettable.h"
 
 
-@interface StatisticsLayer : ShadeLayer {
+@interface StatisticsLayer : ShadeLayer <Resettable> {
     
     Menu *menu;
     NSMutableArray *scoreTowers;

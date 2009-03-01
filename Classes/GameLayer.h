@@ -39,6 +39,9 @@
     BOOL                                    paused;
     BOOL                                    running;
     GorillasMode                            mode;
+    NSUInteger                              humans;
+    NSUInteger                              ais;
+    
     NSMutableArray                          *gorillas;
     GorillaLayer                            *activeGorilla;
 
@@ -50,12 +53,10 @@
     Action                                  *shakeAction;
     
     Label                                   *msgLabel;
-    NSMutableArray                          *messageQueue;
+    NSMutableArray                          *messageQueue, *callbackQueue;
 }
 
 @property (readwrite) BOOL                  paused;
-@property (readwrite) BOOL                  running;
-@property (readwrite) GorillasMode          mode;
 @property (readonly) BOOL                   singlePlayer;
 
 @property (readonly) NSMutableArray         *gorillas;
@@ -68,9 +69,15 @@
 @property (readonly) WindLayer              *windLayer;
 
 -(void) shake;
--(void) message: (NSString *)msg;
--(void) startGameWithMode:(GorillasMode)nMode humans:(NSUInteger)humans ais:(NSUInteger)ais;
+-(void) message:(NSString *)msg;
+-(void) message:(NSString *)msg callback:(id)target :(SEL)selector;
+-(BOOL) isEnabled:(GorillasFeature)feature;
+-(void) configureGameWithMode:(GorillasMode)nMode humans:(NSUInteger)humans ais:(NSUInteger)ais;
+
+-(BOOL) checkGameStillOn;
+-(void) startGame;
 -(void) stopGame;
+-(void) endGame;
 
 -(void) started;
 -(void) stopped;

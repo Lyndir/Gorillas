@@ -17,47 +17,72 @@
  */
 
 //
-//  InformationLayer.m
+//  BootCampConfiguration.m
 //  Gorillas
 //
-//  Created by Maarten Billemont on 26/10/08.
+//  Created by Maarten Billemont on 15/02/09.
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "InformationLayer.h"
-#import "GorillasConfig.h"
+#import "BootCampConfigurationLayer.h"
 #import "GorillasAppDelegate.h"
 
 
-@implementation InformationLayer
+@implementation BootCampConfigurationLayer
 
 
 -(id) init {
-
+    
     if(!(self = [super init]))
         return self;
+    
+    return self;
+}
 
-    // Version string.
+
+-(void) reset {
+    
+    if(menu) {
+        [self removeAndStop:menu];
+        [menu release];
+        menu = nil;
+        
+        [self removeAndStop:backMenu];
+        [backMenu release];
+        backMenu = nil;
+    }
+    
+    
+    // Throw Hints.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *ver   = [MenuItemFont itemFromString:[[NSBundle mainBundle]
-                                                    objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
-    [ver setIsEnabled:false];
-    
-    // Information menus.
+    MenuItem *throwHintsT  = [MenuItemFont itemFromString:@"Throw Hints"];
+    [throwHintsT setIsEnabled:false];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *guide = [MenuItemFont itemFromString:@"Game Guide"
-                                            target:self
-                                          selector:@selector(guide:)];
-    MenuItem *stats = [MenuItemFont itemFromString:@"Statistics"
-                                            target:self
-                                          selector:@selector(stats:)];
+    MenuItem *throwHintsI  = [MenuItemFont itemFromString:[[GorillasConfig get] throwHint]? @"On": @"Off"
+                                                   target:self
+                                                 selector:@selector(throwHint:)];
     
-    menu = [[Menu menuWithItems:ver, guide, stats, nil] retain];
-    [menu alignItemsVertically];
+    
+    // Throw History.
+    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    MenuItem *throwHistoryT  = [MenuItemFont itemFromString:@"Throw History"];
+    [throwHistoryT setIsEnabled:false];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    MenuItem *throwHistoryI  = [MenuItemFont itemFromString:[[GorillasConfig get] throwHistory]? @"On": @"Off"
+                                                     target:self
+                                                   selector:@selector(throwHistory:)];
+    
+    
+    menu = [[Menu menuWithItems:throwHintsT, throwHintsI, throwHistoryT, throwHistoryI, nil] retain];
+    [menu alignItemsInRows:
+     [NSNumber numberWithUnsignedInteger:4],
+     nil];
     [self add:menu];
-
+    
     
     // Back.
     [MenuItemFont setFontSize:[[GorillasConfig get] largeFontSize]];
@@ -70,30 +95,35 @@
     [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self add:backMenu];
-
-    
-    return self;
 }
 
 
--(void) guide: (id) sender {
+-(void) onEnter {
     
-    [[GorillasAppDelegate get] clickEffect];
-    [[GorillasAppDelegate get] showGuide];
+    [self reset];
+    
+    [super onEnter];
 }
 
 
--(void) stats: (id) sender {
+-(void) throwHint: (id) sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[GorillasAppDelegate get] showStatistics];
+    [[GorillasConfig get] setThrowHint:![[GorillasConfig get] throwHint]];
+}
+
+
+-(void) throwHistory: (id) sender {
+    
+    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasConfig get] setThrowHistory:![[GorillasConfig get] throwHistory]];
 }
 
 
 -(void) back: (id) sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[GorillasAppDelegate get] showMainMenu];
+    [[GorillasAppDelegate get] showConfiguration];
 }
 
 

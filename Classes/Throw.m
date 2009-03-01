@@ -30,6 +30,12 @@
 #define gMaxDiff 4
 
 
+@interface Throw (Private)
+
+-(void) nextTurn;
+
+@end
+
 @implementation Throw
 
 
@@ -131,6 +137,7 @@
     float drLen = cpvlength(dr);
     int step = 0, stepCount = drLen <= gMaxDiff? 1: (int) (drLen / gMaxDiff) + 1;
     cpVect rStep = stepCount == 1? dr: cpvmult(dr, 1.0f / stepCount);
+    BOOL offScreen = NO, hitGorilla = NO, hitBuilding = NO;
 
     while(true) {
         // Increment rTest toward r.
@@ -144,10 +151,10 @@
         }
             
         // Figure out whether banana went off screen or hit something.
-        BOOL offScreen   = rTest.x < min || rTest.x > max
+        offScreen   = rTest.x < min || rTest.x > max
                         || rTest.y < 0 || rTest.y > winSize.height * 2;
-        BOOL hitGorilla  = [buildingsLayer hitsGorilla:rTest throwSkill:throwSkill];
-        BOOL hitBuilding = [buildingsLayer hitsBuilding:rTest];
+        hitGorilla  = [buildingsLayer hitsGorilla:rTest throwSkill:throwSkill];
+        hitBuilding = [buildingsLayer hitsBuilding:rTest];
         
         // Hitting something causes an explosion.
         if(hitBuilding || hitGorilla)
@@ -187,11 +194,17 @@
     if(running) {
         if(gameLayer.singlePlayer && gameLayer.activeGorilla.human) {
             // Singleplayer game with human turn is still running; update the skill counter.
-            throwSkill = elapsed / 20;
-            [[[GorillasAppDelegate get] hudLayer] updateScore:0 skill:throwSkill];
+            throwSkill = elapsed / 10;
+            [[[GorillasAppDelegate get] hudLayer] updateHudWithScore:0 skill:throwSkill];
         }
-    } else
+    } else {
+        if(hitGorilla)
+            // End of the throw.
+            [self scrollToCenter:cpvzero];
+        
+        [buildingsLayer stopAction:nextAction];
         [buildingsLayer do:nextAction];
+    }
     
 }
 
@@ -204,27 +217,42 @@
     GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
     BuildingsLayer *buildingsLayer = [gameLayer buildingsLayer];
     
-    if(![gameLayer running]) {
-        if(gameLayer.activeGorilla.human && !gameLayer.singlePlayer && [[GorillasConfig get] multiplayerFlip] && !flipped) {
+    if(![gameLayer checkGameStillOn])
+        return;
+    
+    NSUInteger liveHumans = 0;
+    for(GorillaLayer *gorilla in gameLayer.gorillas)
+        if([gorilla human] && [gorilla alive])
+            ++liveHumans;
+    
+    if(gameLayer.activeGorilla.human && liveHumans > 1) {
+        if([[GorillasConfig get] multiplayerFlip] && !flipped) {
             [gameLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                                  angle:((int) [gameLayer rotation] + 180) % 360]];
-            flipped = true;
+            flipped = YES;
         }
         
-        if(--endCount > 0) {
-            [gameLayer message:[NSString stringWithFormat:@"%d ..", endCount]];
-            [buildingsLayer do:[nextAction copy]];
+        --endCount;
+        if(endCount >= 0) {
+            if(endCount > 0) {
+                [gameLayer message:[NSString stringWithFormat:@"%d ..", endCount]];
+                [buildingsLayer stopAction:nextAction];
+                [buildingsLayer do:nextAction];
+            } else
+                [gameLayer message:@"Go .." callback:self :@selector(nextTurn)];
             
             return;
         }
-        
-        if(endCount == 0)
-            [gameLayer message:@"Go .."];
     }
     
-    // Next Gorilla's turn.
+    [self nextTurn];
+}
+
+
+-(void) nextTurn {
+
     [target setTag:GorillasTagBananaNotFlying];
-    [buildingsLayer nextGorilla];
+    [[GorillasAppDelegate get].gameLayer.buildingsLayer nextGorilla];
 }
 
 
