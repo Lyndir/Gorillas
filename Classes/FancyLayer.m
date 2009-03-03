@@ -96,26 +96,26 @@
      */
     
     GLfloat *vertices = malloc(sizeof(GLfloat) * 10 * 2);
-    vertices[0]     = contentSize.width / 2;                                    // 1
+    vertices[0]     = contentSize.width / 2;                        // 1
     vertices[1]     = contentSize.height / 2;
-    vertices[2]     = position.x + outerPadding + inner;                        // 2
-    vertices[3]     = position.y + outerPadding;
-    vertices[4]     = position.x + outerPadding;                                // 3
-    vertices[5]     = position.y + outerPadding + inner;
-    vertices[6]     = position.x + outerPadding;                                // 4
-    vertices[7]     = position.y + contentSize.height - outerPadding - inner;
-    vertices[8]     = position.x + outerPadding + inner;                        // 5
-    vertices[9]     = position.y + contentSize.height - outerPadding;
-    vertices[10]    = position.x + contentSize.width - outerPadding - inner;    // 6
-    vertices[11]    = position.y + contentSize.height - outerPadding;
-    vertices[12]    = position.x + contentSize.width - outerPadding;            // 7
-    vertices[13]    = position.y + contentSize.height - outerPadding - inner;
-    vertices[14]    = position.x + contentSize.width - outerPadding;            // 8
-    vertices[15]    = position.y + outerPadding + inner;
-    vertices[16]    = position.x + contentSize.width - outerPadding - inner;    // 9
-    vertices[17]    = position.y + outerPadding;
-    vertices[18]    = position.x + outerPadding + inner;                        // 10
-    vertices[19]    = position.y + outerPadding;
+    vertices[2]     = outerPadding + inner;                         // 2
+    vertices[3]     = outerPadding;
+    vertices[4]     = outerPadding;                                 // 3
+    vertices[5]     = outerPadding + inner;
+    vertices[6]     = outerPadding;                                 // 4
+    vertices[7]     = contentSize.height - outerPadding - inner;
+    vertices[8]     = outerPadding + inner;                         // 5
+    vertices[9]     = contentSize.height - outerPadding;
+    vertices[10]    = contentSize.width - outerPadding - inner;     // 6
+    vertices[11]    = contentSize.height - outerPadding;
+    vertices[12]    = contentSize.width - outerPadding;             // 7
+    vertices[13]    = contentSize.height - outerPadding - inner;
+    vertices[14]    = contentSize.width - outerPadding;             // 8
+    vertices[15]    = outerPadding + inner;
+    vertices[16]    = contentSize.width - outerPadding - inner;     // 9
+    vertices[17]    = outerPadding;
+    vertices[18]    = outerPadding + inner;                         // 10
+    vertices[19]    = outerPadding;
 
     const GLubyte *colorBytes = (GLubyte *)&color;
     GLubyte *colors = malloc(sizeof(GLubyte) * 10 * 4);
@@ -143,7 +143,48 @@
 }
 
 
-- (void)draw {
+-(void) setOuterPadding:(float)_outerPadding {
+    
+    outerPadding = _outerPadding;
+    [self update];
+}
+
+
+-(void) setPadding:(float)_padding {
+    
+    padding = _padding;
+    [self update];
+}
+
+
+-(void) setInnerRatio:(float)_innerRatio {
+    
+    innerRatio = _innerRatio;
+    [self update];
+}
+
+
+- (void)setColor: (long)_color {
+    
+    color = _color;
+    
+    const GLubyte *colorBytes = (GLubyte *)&color;
+    opacity = colorBytes[0];
+    
+    [self update];
+}
+
+
+- (void)setOpacity: (GLubyte)_opacity {
+    
+    opacity = _opacity;
+    color = (color & 0xffffff00) | opacity;
+    
+    [self update];
+}
+
+
+-(void) draw {
     
     // Tell OpenGL about our data.
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -162,26 +203,6 @@
     // Reset data source.
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
-}
-
-
-- (void)setColor: (long)c {
-    
-    color = c;
-    
-    const GLubyte *colorBytes = (GLubyte *)&color;
-    opacity = colorBytes[0];
-
-    [self update];
-}
-
-
-- (void)setOpacity: (GLubyte)o {
-    
-    opacity = o;
-    color = (color & 0xffffff00) | opacity;
-    
-    [self update];
 }
 
 

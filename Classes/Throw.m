@@ -57,7 +57,7 @@
     if(!(self = [super initWithDuration:t]))
         return self;
     
-    endCount = [[[GorillasAppDelegate get] gameLayer] singlePlayer]? -1: 4;
+    endCount = [[[GorillasAppDelegate get] gameLayer] singlePlayer]? -1: 3;
     
     smoke = [[ParticleMeteor alloc] init];
     [smoke setGravity:cpvzero];
@@ -210,7 +210,10 @@
             [self scrollToCenter:cpvzero];
         
         if([gameLayer checkGameStillOn])
-            [self throwEnded];
+            [buildingsLayer do:[Sequence actions:
+                                [DelayTime actionWithDuration:1.5f],
+                                [CallFunc actionWithTarget:self selector:@selector(throwEnded)],
+                                nil]];
     }
     
 }
@@ -229,20 +232,15 @@
             ++liveHumans;
     
     if(gameLayer.activeGorilla.human && liveHumans > 1) {
-        if([[GorillasConfig get] multiplayerFlip] && !flipped) {
+        if([[GorillasConfig get] multiplayerFlip])
             [gameLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                                  angle:((int) [gameLayer rotation] + 180) % 360]];
-            flipped = YES;
-        }
         
-        --endCount;
-        if(endCount >= 0) {
-            if(endCount > 0) {
+        if(endCount) {
+            for(int count = endCount; count > 0; --count)
                 [gameLayer message:[NSString stringWithFormat:@"%d ..", endCount]];
-                [self throwEnded];
-            } else
-                [gameLayer message:@"Go .." callback:self :@selector(nextTurn)];
-            
+
+            [gameLayer message:@"Go .." callback:self :@selector(nextTurn)];
             return;
         }
     }

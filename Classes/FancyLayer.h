@@ -44,7 +44,7 @@
 -(void) update;
 
 @property (readwrite) GLubyte   opacity;
-@property (readwrite) CGSize    contentSize;
+@property (readonly) CGSize     contentSize;
 @property (readwrite) float     outerPadding;
 @property (readwrite) float     padding;
 @property (readwrite) float     innerRatio;

@@ -353,15 +353,28 @@
 }
 
 
--(void) nextGorilla {
+-(void) tryNextGorilla:(ccTime)dt {
     
-    // Active gorilla's turn is over.
-    ++[GorillasAppDelegate get].gameLayer.activeGorilla.turns;
-    [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:NO];
+    [self unschedule:@selector(tryNextGorilla:)];
+    [self nextGorilla];
+}
+
+
+-(void) nextGorilla {
     
     // Make sure the game hasn't ended.
     if(![[GorillasAppDelegate get].gameLayer checkGameStillOn])
         return;
+
+    // Schedule to retry later if game is paused.
+    if([GorillasAppDelegate get].gameLayer.paused) {
+        [self schedule:@selector(tryNextGorilla:) interval:0.1f];
+        return;
+    }
+    
+    // Active gorilla's turn is over.
+    ++[GorillasAppDelegate get].gameLayer.activeGorilla.turns;
+    [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:NO];
     
     // Activate the next gorilla.
     // Look for the next live gorilla; first try the next gorilla AFTER the current.
@@ -799,7 +812,16 @@
     bananaLayer = [[BananaLayer alloc] init];
     [self add:bananaLayer z:2];
     
+    [self do:[Sequence actions:
+              [DelayTime actionWithDuration:1.5f],
+              [CallFunc actionWithTarget:self selector:@selector(startGameCallback)],
+              nil]];
+    
     [[[GorillasAppDelegate get] gameLayer] started];
+}
+
+
+-(void) startGameCallback {
     
     [self nextGorilla];
 }

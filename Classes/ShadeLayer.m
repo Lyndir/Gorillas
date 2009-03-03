@@ -38,7 +38,6 @@
         return self;
     
     [self setColor:[[GorillasConfig get] shadeColor]];
-    [self setOpacity:0];
     
     return self;
 }
@@ -49,17 +48,25 @@
     [super onEnter];
     
     [[[GorillasAppDelegate get] gameLayer] setPaused:YES];
-    
-    for(CocosNode *child in children)
-        if([child conformsToProtocol:@protocol(CocosNodeOpacity)])
-            [child do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-    
+
+    CGSize winSize = [Director sharedDirector].winSize;
+    [self setPosition:cpv(-winSize.width, 0)];
     [self do:[Sequence actions:
-              [FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                 opacity:[[GorillasConfig get] shadeColor] & 0xff],
-              [CallFunc actionWithTarget:self
-                                selector:@selector(ready)],
+              [EaseQuadOut actionWithAction:
+               [MoveTo actionWithDuration:[GorillasConfig get].transitionDuration position:cpvzero]],
+              [CallFunc actionWithTarget:self selector:@selector(ready)],
               nil]];
+
+//    for(CocosNode *child in children)
+//        if([child conformsToProtocol:@protocol(CocosNodeOpacity)])
+//            [child do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+//    
+//    [self do:[Sequence actions:
+//              [FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+//                                 opacity:[[GorillasConfig get] shadeColor] & 0xff],
+//              [CallFunc actionWithTarget:self
+//                                selector:@selector(ready)],
+//              nil]];
 }
 
 
@@ -73,15 +80,23 @@
 
     [self stopAllActions];
     
-    for(CocosNode *child in children)
-        if([child conformsToProtocol:@protocol(CocosNodeOpacity)])
-            [child do:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration] opacity:0]];
-    
+    CGSize winSize = [Director sharedDirector].winSize;
     [self do:[Sequence actions:
-              [FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration] opacity:0],
+              [EaseQuadIn actionWithAction:
+               [MoveTo actionWithDuration:[GorillasConfig get].transitionDuration position:cpv(winSize.width, 0)]],
               [Remove action],
               [CallFunc actionWithTarget:self selector:@selector(gone)],
               nil]];
+    
+//    for(CocosNode *child in children)
+//        if([child conformsToProtocol:@protocol(CocosNodeOpacity)])
+//            [child do:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration] opacity:0]];
+//    
+//    [self do:[Sequence actions:
+//              [FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration] opacity:0],
+//              [Remove action],
+//              [CallFunc actionWithTarget:self selector:@selector(gone)],
+//              nil]];
 }
 
 
