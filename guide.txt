@@ -16,46 +16,95 @@ Hitting and Missing
 
 
 ===== NEXT PAGE =====
-Single Player
+Controls
 
-    Playing against the computer is challanging and exciting.  Winning will make you go up in level, but as you do, the computer will get smarter.
+    You throw by tapping onto or dragging toward the location you want to aim at with one finger.
 
-    Winning a single player game gives you a nice score boost, but misses and dying will take away from that, so watch out!
-
-
-===== NEXT PAGE =====
-Multi Player
-
-    In company of others?  Gorillas is sure to excite as you take turns in blasting each other off the map.
-
-    A multiplayer game will not affect your single player score and level progress.
-
+    Zooming is achieved by pinching or pulling the screen with two fingers.
+    
+    Notice that while aiming, you can add a second finger to the screen to cancel your aim.
 
 
 ===== NEXT PAGE =====
-Training
+Game Modes
 
-    Throw History allows you to see the aim of previous throws.
+    There are several game styles from which you can choose.  Most of them can be played either as single or multi player.
 
-    Throw Hints show up briefly after every ten seconds and tell you where to aim.
+    Choosing a custom game allows you to pick the amount of human players and AIs you want to put in the field.
 
-    Note that you don't make any score or level progress while training mode is enabled.
+
+===== NEXT PAGE =====
+Boot Camp
+
+    To get the hang of the game and train your aiming, try playing a few Boot Camp games.
+
+    Faint lines indicate your and your opponent's last aim: A good indication of how to course correct your next throw.
+    After every five seconds, you'll also be given a hint of where you might considder aiming.
+
+
+===== NEXT PAGE =====
+Classic Game
+
+    The quickest way to play a game of Gorillas is the Classic game.
+
+    A direct hit kills the opponent and increases your score.
+    
+    Increase the difficulty for a more rewarding and challanging fight.
+
+
+===== NEXT PAGE =====
+Dynamic Game
+
+    For a more sophisticated gameplay, start a Dynamic game.
+
+    The more skillful your throws are, the higher your kill score will get.
+
+    As you continue to play, your skill will evolve as well as the difficulty of your opponent.
+
+
+===== NEXT PAGE =====
+Team Game
+
+    Team games are excellent for when you're in company of friends.
+    
+    Challenge the AIs together, but be careful not to hit each other!
+
+    Up to three human players can challenge up to three AIs.
+
+
+===== NEXT PAGE =====
+Last Man Standing
+
+    Finally, there's Last Man Standing.  Here you play a completely different game style where the object is simply to stay alive.
+
+    Every gorillas has three lives.  Battle it out for supremacy in this endurance fight to remain the last one alive.
 
 
 ===== NEXT PAGE =====
 Configuration
 
-    You can change the computer's current difficulity level if you're interested in a real challenge.
+    You can change the AI's difficulty level if you're interested in a real challenge.
+
     The gravity can also be controlled:  Less gravity means your bananas don't fall as fast.
-    City themes allow you to completely change the game setting.  Different worlds have different gravities and wind strengths.
+
+    City themes completely change the game setting.  Different worlds have different gravities.
 
 
 ===== NEXT PAGE =====
-Tactical
+Tactical 1
 
     The key to avoiding buildings is to throw more vertical and with more velocity.  This makes aiming quite a bit harder, though!
 
     Don't let buildings that are in your way stop you:  A few bananas should be sufficient to dig yourself a path through them.
+
+
+===== NEXT PAGE =====
+Tactical 2
+
+    Zoom out to get a wider aiming range.  That's especially handy for those long throws.
+    
+    Remember that high throws are better throws.  They land more vertically and are excellent for dodging buildings.
+    Plus, in Dynamic games, if they hit, they'll yield far higher skill values.
 
 
 ===== NEXT PAGE =====
@@ -71,16 +120,15 @@ Technical
 
     Your aim represents the vector of your throw's initial velocity.
     The current wind velocity will affect your banana's direction every step of the way.
-    The computer will throw more accurately as your difficulity level increases.  He will also begin preferring vertical shots over more horizontal ones.
+    Higher difficulty means the AI will throw more accurately and prefers vertical shots over more horizontal ones.
 
 
 ===== NEXT PAGE =====
 Thanks
 
     Gorillas has been designed and written by Maarten Billemont. (http://lhunath.lyndir.com)
-
-    Thanks to Emmett for sharing some excellent retro-sounding music for the game.
-
+    Thanks to Emmett for the excellent retro-sounding music.
+    Thanks to the people at iBetaTest for excellent feedback.
     Love and care goes out to my darling wife and adorable young daughter.
 
 

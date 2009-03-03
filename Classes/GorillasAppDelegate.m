@@ -106,7 +106,6 @@
     [configLayer reset];
     [gameConfigLayer reset];
     [avConfigLayer reset];
-    [bootCampLayer reset];
 }
 
 
@@ -148,6 +147,9 @@
     
     if([currentLayer parent])
         [self dismissLayer];
+    
+    if([layer parent])
+        [[layer parent] removeAndStop:layer];
     
     currentLayer = [layer retain];
     [uiLayer add:currentLayer];
@@ -214,15 +216,6 @@
         avConfigLayer = [[AVConfigurationLayer alloc] init];
     
     [self showLayer:avConfigLayer];
-}
-
-
--(void) showBootCamp {
-    
-    if(!bootCampLayer)
-        bootCampLayer = [[BootCampConfigurationLayer alloc] init];
-    
-    [self showLayer:bootCampLayer];
 }
 
 
@@ -360,11 +353,6 @@
         [avConfigLayer release];
         avConfigLayer = nil;
     }
-    if(bootCampLayer && ![bootCampLayer parent]) {
-        [bootCampLayer stopAllActions];
-        [bootCampLayer release];
-        bootCampLayer = nil;
-    }
     if(infoLayer && ![infoLayer parent]) {
         [infoLayer stopAllActions];
         [infoLayer release];
@@ -426,9 +414,6 @@
 
     [avConfigLayer release];
     avConfigLayer = nil;
-
-    [bootCampLayer release];
-    bootCampLayer = nil;
 
     [infoLayer release];
     infoLayer = nil;

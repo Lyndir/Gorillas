@@ -27,12 +27,11 @@
 #import "BananaLayer.h"
 #import "GorillasConfig.h"
 #import "GorillasAppDelegate.h"
-#import "Throw.h"
 
 
 @implementation BananaLayer
 
-@synthesize clearedGorilla, banana;
+@synthesize clearedGorilla, banana, throwAction;
 
 
 -(id) init {
@@ -44,6 +43,8 @@
     [banana setScale:[[GorillasConfig get] cityScale]];
     [banana setVisible:false];
     [banana setTag:GorillasTagBananaNotFlying];
+    
+    throwAction = nil;
 
     return self;
 }
@@ -53,8 +54,21 @@
     
     [self setClearedGorilla:false];
 
+    [throwAction release];
     [banana setPosition:r0];
-    [banana do:[Throw actionWithVelocity:v startPos:r0]];
+    [banana do:[throwAction = [Throw actionWithVelocity:v startPos:r0] retain]];
+}
+
+
+-(void) halt {
+    
+    [throwAction scaleTo:0 duration:0.5f];
+}
+
+
+-(void) resume {
+
+    [throwAction scaleTo:1 duration:1];
 }
 
 
@@ -70,6 +84,9 @@
     
     [super onExit];
     
+    [throwAction release];
+    throwAction = nil;
+    
     [self removeAndStop:banana];
 }
 
@@ -84,6 +101,9 @@
     
     [banana release];
     banana = nil;
+    
+    [throwAction release];
+    throwAction = nil;
     
     [super dealloc];
 }

@@ -39,7 +39,6 @@
     int initialLives;
     int lives;
     BOOL human;
-    BOOL alive;
     BOOL active;
 }
 

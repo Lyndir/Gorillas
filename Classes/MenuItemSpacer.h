@@ -17,20 +17,29 @@
  */
 
 //
-//  BootCampConfiguration.h
+//  MenuItemSpacer.h
 //  Gorillas
 //
-//  Created by Maarten Billemont on 15/02/09.
-//  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
+//  Created by Maarten Billemont on 02/03/09.
+//  Copyright 2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "ShadeLayer.h"
-#import "Resettable.h"
+#import "cocos2d.h"
 
 
-@interface BootCampConfigurationLayer : ShadeLayer <Resettable> {
-    
-    Menu *menu, *backMenu;
+@interface MenuItemSpacer : MenuItem {
+
+    cpFloat height;
 }
+
++(id) small;
++(id) normal;
++(id) large;
+
+-(id) initSmall;
+-(id) initNormal;
+-(id) initLarge;
+
+-(id) initWithHeight:(cpFloat)_height;
 
 @end

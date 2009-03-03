@@ -84,10 +84,12 @@
     [[UIApplication sharedApplication] setStatusBarHidden:!paused animated:YES];
     
     if(paused) {
+        [buildingsLayer.bananaLayer halt];
         [[GorillasAppDelegate get] hideHud];
         [windLayer do:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                          opacity:0x00]];
     } else {
+        [buildingsLayer.bananaLayer resume];
         [[GorillasAppDelegate get] dismissLayer];
         [[GorillasAppDelegate get] revealHud];
         [windLayer do:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
@@ -228,23 +230,25 @@
     if(running) {
         // Check to see if there are any opponents left.
         NSUInteger liveGorillas = 0;
-        for (GorillaLayer *gorilla in gorillas)
-            if ([gorilla alive])
-                ++liveGorillas;
+        NSUInteger liveEnemyGorillas = 0;
+        for (GorillaLayer *gorilla in gorillas) {
+            if (![gorilla alive])
+                continue;
+            
+            // Gorilla is alive.
+            ++liveGorillas;
+            
+            // Gorilla is on active gorilla's team.
+            if (gorilla.human != activeGorilla.human)
+                ++liveEnemyGorillas;
+        }
         
         if(liveGorillas < 2)
-            running = false;
+            running = NO;
         
-        // Team mode: Check if there are any gorillas left in the other team.
-        if([self isEnabled:GorillasFeatureTeam]) {
-            NSUInteger liveEnemyGorillas = 0;
-            for (GorillaLayer *gorilla in gorillas)
-                if (gorilla.alive && gorilla.human != activeGorilla.human)
-                    ++liveEnemyGorillas;
-            
-            if(!liveEnemyGorillas)
-                running = false;
-        }
+        if([self isEnabled:GorillasFeatureTeam]
+           && !liveEnemyGorillas)
+            running = NO;
         
         if (!running)
             [self endGame];

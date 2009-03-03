@@ -26,6 +26,7 @@
 
 #import "NewGameLayer.h"
 #import "GorillasAppDelegate.h"
+#import "MenuItemSpacer.h"
 
 
 @implementation NewGameLayer
@@ -54,10 +55,6 @@
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *descriptionT    = [MenuItemFont itemFromString:[[GorillasConfig get] gameConfiguration].description];
     [descriptionT setIsEnabled:false];
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *spacerT    = [MenuItemFont itemFromString:@" "];
-    [spacerT setIsEnabled:false];
     
     
     // Type (Single / Multi).
@@ -80,7 +77,11 @@
                                                     selector:@selector(custom:)];
     
     
-    menu = [[Menu menuWithItems:singlePlayerI, multiPlayerI, spacerT, configurationI, descriptionT, spacerT, customI, nil] retain];
+    menu = [[Menu menuWithItems:
+             configurationI, descriptionT, [MenuItemSpacer small],
+             singlePlayerI, multiPlayerI, [MenuItemSpacer small],
+             customI,
+             nil] retain];
     [menu alignItemsVertically];
     [self add:menu];
     

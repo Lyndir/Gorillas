@@ -129,7 +129,9 @@
     
         [infoString appendString:[GorillasAppDelegate get].gameLayer.activeGorilla.name];
     }
-    if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesPl]) {
+    if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesPl]
+        && [GorillasAppDelegate get].gameLayer.activeGorilla.lives
+        && [[GorillasAppDelegate get].gameLayer checkGameStillOn]) {
         if([infoString length])
             [infoString appendString:@":"];
         [livesLayer setVisible:YES];

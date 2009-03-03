@@ -27,6 +27,7 @@
 #import "ContinueMenuLayer.h"
 #import "GorillasConfig.h"
 #import "GorillasAppDelegate.h"
+#import "MenuItemSpacer.h"
 
 
 @implementation ContinueMenuLayer
@@ -40,7 +41,10 @@
     continueGame    = [[MenuItemFont itemFromString:@"Continue"     target:self selector:@selector(continueGame:)] retain];
     stopGame        = [[MenuItemFont itemFromString:@"Main Menu"    target:self selector:@selector(stopGame:)] retain];
     
-    menu            = [[Menu menuWithItems:continueGame, stopGame, nil] retain];
+    menu            = [[Menu menuWithItems:
+                        continueGame, [MenuItemSpacer small],
+                        stopGame,
+                        nil] retain];
     [menu alignItemsVertically];
     [self add:menu];
 

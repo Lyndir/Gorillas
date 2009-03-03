@@ -33,7 +33,6 @@
 #import "ConfigurationSectionLayer.h"
 #import "GameConfigurationLayer.h"
 #import "AVConfigurationLayer.h"
-#import "BootCampConfigurationLayer.h"
 #import "InformationLayer.h"
 #import "GuideLayer.h"
 #import "StatisticsLayer.h"
@@ -56,7 +55,6 @@
     ConfigurationSectionLayer   *configLayer;
     GameConfigurationLayer      *gameConfigLayer;
     AVConfigurationLayer        *avConfigLayer;
-    BootCampConfigurationLayer  *bootCampLayer;
     InformationLayer            *infoLayer;
     GuideLayer                  *guideLayer;
     StatisticsLayer             *statsLayer;
@@ -83,7 +81,6 @@
 -(void) showConfiguration;
 -(void) showGameConfiguration;
 -(void) showAVConfiguration;
--(void) showBootCamp;
 -(void) showInformation;
 -(void) showGuide;
 -(void) showStatistics;

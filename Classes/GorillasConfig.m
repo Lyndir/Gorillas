@@ -88,9 +88,6 @@
 #define dLevelNames         @"v1.levelNames"
 #define dLevelProgress      @"v1.levelProgress"
 
-#define dThrowHint          @"v1.throwHint"
-#define dThrowHistory       @"v1.throwHistory"
-
 
 @implementation GorillasConfig
 
@@ -242,9 +239,6 @@
                                 [NSNumber numberWithFloat:      0.1f],                      dLevel,
                                 [levelNames retain],                                        dLevelNames,
                                 [NSNumber numberWithFloat:      0.03f],                     dLevelProgress,
-                                
-                                [NSNumber numberWithBool:    NO],                           dThrowHint,
-                                [NSNumber numberWithBool:    YES],                          dThrowHistory,
                                 
                                 nil]];
 
@@ -600,26 +594,6 @@
 -(void) setMultiplayerFlip: (BOOL)nMultiplayerFlip {
     
     [defaults setBool:nMultiplayerFlip forKey: dMultiplayerFlip];
-    [[GorillasAppDelegate get] updateConfig];
-}
-
-
--(BOOL) throwHint {
-    
-    return [defaults boolForKey: dThrowHint];
-}
--(void) setThrowHint: (BOOL)nThrowHint {
-    
-    [defaults setBool:nThrowHint forKey: dThrowHint];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(BOOL) throwHistory {
-    
-    return [defaults boolForKey: dThrowHistory];
-}
--(void) setThrowHistory: (BOOL)nThrowHistory {
-    
-    [defaults setBool:nThrowHistory forKey: dThrowHistory];
     [[GorillasAppDelegate get] updateConfig];
 }
 

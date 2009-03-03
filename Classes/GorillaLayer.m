@@ -57,7 +57,6 @@
     du = [[[TextureMgr sharedTextureMgr] addImage:[NSString stringWithFormat:@"gorilla-%@-DU.png", type]] retain];
     uu = [[[TextureMgr sharedTextureMgr] addImage:[NSString stringWithFormat:@"gorilla-%@-UU.png", type]] retain];
     
-    alive = YES;
     human = _human;
     bobber = [[Sprite alloc] initWithFile:@"bobber.png"];
     [bobber setPosition:cpv([self contentSize].width / 2,
@@ -119,7 +118,7 @@
                                         [CallFunc actionWithTarget:self selector:@selector(du)],
                                         [DelayTime actionWithDuration:0.2f],
                                         nil]
-                                 times:5],
+                                 times:7],
               [CallFunc actionWithTarget:self selector:@selector(uu)],
               [DelayTime actionWithDuration:0.5f],
               [CallFunc actionWithTarget:self selector:@selector(dd)],
@@ -192,6 +191,9 @@
 
 
 -(BOOL) hitsGorilla: (cpVect)pos {
+    
+    if(![self alive])
+        return NO;
     
     return  pos.x >= position.x - [self contentSize].width  / 2 &&
             pos.y >= position.y - [self contentSize].height / 2 &&

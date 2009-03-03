@@ -37,7 +37,7 @@
     int endCount;
     float throwSkill;
     
-    Action *nextAction;
+    IntervalAction *spinAction;
     MoveTo *gameScrollAction;
     ParticleSystem *smoke;
 }

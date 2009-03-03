@@ -109,9 +109,6 @@
 @property (readwrite) BOOL                  followThrow;
 @property (readwrite) BOOL                  multiplayerFlip;
 
-@property (readwrite) BOOL                  throwHint;
-@property (readwrite) BOOL                  throwHistory;
-
 -(long)                                     buildingColor;
 
 -(void)                                     levelUp;

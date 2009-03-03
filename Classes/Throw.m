@@ -33,6 +33,7 @@
 @interface Throw (Private)
 
 -(void) nextTurn;
+-(void) throwEnded;
 
 @end
 
@@ -56,8 +57,6 @@
     if(!(self = [super initWithDuration:t]))
         return self;
     
-    nextAction = [[Sequence alloc] initOne:[DelayTime actionWithDuration:1.5f]
-                                       two:[CallFunc actionWithTarget:self selector:@selector(throwEnded:)]];
     endCount = [[[GorillasAppDelegate get] gameLayer] singlePlayer]? -1: 4;
     
     smoke = [[ParticleMeteor alloc] init];
@@ -94,9 +93,10 @@
     flipped = false;
     [super start];
     
-    [target do:[Repeat actionWithAction:[RotateBy actionWithDuration:1
-                                                               angle:360]
-                                  times:(int)duration + 1]];
+    [target do:
+     [spinAction = [Repeat actionWithAction:[RotateBy actionWithDuration:1
+                                                                   angle:360]
+                                      times:(int)duration + 1] retain]];
     [target setVisible:true];
     [target setTag:GorillasTagBananaFlying];
     
@@ -109,6 +109,14 @@
         [smoke setSizeVar:5.0f * [target scale]];
         [[target parent] add:smoke];
     }
+}
+
+
+-(void) scaleTo:(float)_timeScaleTarget duration:(ccTime)_timeScaleDuration {
+
+    [super scaleTo:_timeScaleTarget duration:_timeScaleDuration];
+    [smoke scaleTo:_timeScaleTarget duration:_timeScaleDuration];
+    [spinAction scaleTo:_timeScaleTarget duration:_timeScaleDuration];
 }
 
 
@@ -139,20 +147,22 @@
     cpVect rStep = stepCount == 1? dr: cpvmult(dr, 1.0f / stepCount);
     BOOL offScreen = NO, hitGorilla = NO, hitBuilding = NO;
 
-    while(true) {
+    do {
         // Increment rTest toward r.
         rTest = cpvadd(rTest, rStep);
         
         float min = [buildingsLayer left];
         float max = [buildingsLayer right];
+        float top = winSize.height * 2;
         if(![[GorillasConfig get] followThrow]) {
+            cpFloat scale = [gameLayer.panningLayer scale];
             min = 0;
-            max = winSize.width;
+            max = winSize.width / scale;
         }
             
         // Figure out whether banana went off screen or hit something.
         offScreen   = rTest.x < min || rTest.x > max
-                        || rTest.y < 0 || rTest.y > winSize.height * 2;
+                        || rTest.y < 0 || rTest.y > top;
         hitGorilla  = [buildingsLayer hitsGorilla:rTest throwSkill:throwSkill];
         hitBuilding = [buildingsLayer hitsBuilding:rTest];
         
@@ -175,10 +185,7 @@
 
             break;
         }
-        
-        if(++step >= stepCount)
-            break;
-    }
+    } while(++step < stepCount);
     
     [self scrollToCenter:r];
     
@@ -202,23 +209,19 @@
             // End of the throw.
             [self scrollToCenter:cpvzero];
         
-        [buildingsLayer stopAction:nextAction];
-        [buildingsLayer do:nextAction];
+        if([gameLayer checkGameStillOn])
+            [self throwEnded];
     }
     
 }
 
 
--(void) throwEnded:(id) sender {
+-(void) throwEnded {
     
     // End of the throw.
     [self scrollToCenter:cpvzero];
 
     GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
-    BuildingsLayer *buildingsLayer = [gameLayer buildingsLayer];
-    
-    if(![gameLayer checkGameStillOn])
-        return;
     
     NSUInteger liveHumans = 0;
     for(GorillaLayer *gorilla in gameLayer.gorillas)
@@ -236,8 +239,7 @@
         if(endCount >= 0) {
             if(endCount > 0) {
                 [gameLayer message:[NSString stringWithFormat:@"%d ..", endCount]];
-                [buildingsLayer stopAction:nextAction];
-                [buildingsLayer do:nextAction];
+                [self throwEnded];
             } else
                 [gameLayer message:@"Go .." callback:self :@selector(nextTurn)];
             
@@ -331,8 +333,8 @@
     [smoke release];
     smoke = nil;
     
-    [nextAction release];
-    nextAction = nil;
+    [spinAction release];
+    spinAction = nil;
     
     [gameScrollAction release];
     gameScrollAction = nil;

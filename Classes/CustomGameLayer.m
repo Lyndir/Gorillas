@@ -26,6 +26,7 @@
 
 #import "CustomGameLayer.h"
 #import "GorillasAppDelegate.h"
+#import "MenuItemSpacer.h"
 
 
 @implementation CustomGameLayer
@@ -92,19 +93,24 @@
     
     
     // Start Game.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *startGameT  = [MenuItemFont itemFromString:@" "];
-    [startGameT setIsEnabled:false];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *startGameI  = [MenuItemFont itemFromString:@"Start!"
                                             target:self
                                           selector:@selector(startGame:)];
+
+    // Disable start button when less than 2 gorillas chosen
+    // or when multiple humans are chosen for Dynamic mode.
     [startGameI setIsEnabled:humans + ais > 1];
+    if([[GorillasConfig get] mode] == GorillasModeDynamic && humans > 1)
+        [startGameI setIsEnabled:NO];
     
     
-    menu = [[Menu menuWithItems:humansT, aisT, humansI, aisI, gameModeT, gameModeI, startGameT, startGameI, nil] retain];
+    menu = [[Menu menuWithItems:
+             humansT, aisT, humansI, aisI,
+             gameModeT, gameModeI, [MenuItemSpacer small],
+             startGameI,
+             nil] retain];
     [menu alignItemsInColumns:
      [NSNumber numberWithUnsignedInteger:2],
      [NSNumber numberWithUnsignedInteger:2],

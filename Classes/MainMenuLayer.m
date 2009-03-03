@@ -27,6 +27,7 @@
 #import "MainMenuLayer.h"
 #import "GorillasConfig.h"
 #import "GorillasAppDelegate.h"
+#import "MenuItemSpacer.h"
 
 
 @implementation MainMenuLayer
@@ -69,13 +70,19 @@
         MenuItemFont *stopGame      = [MenuItemFont itemFromString:@"End Game"
                                                             target:self selector:@selector(stopGame:)];
         
-        menu = [[Menu menuWithItems:continueGame, stopGame, info, config, nil] retain];
+        menu = [[Menu menuWithItems:
+                 continueGame, stopGame, [MenuItemSpacer small],
+                 info, config,
+                 nil] retain];
     }
     else {
         MenuItemFont *newGame       = [MenuItemFont itemFromString:@"New Game"
                                                             target:self selector:@selector(newGame:)];
         
-        menu = [[Menu menuWithItems:newGame, info, config, nil] retain];
+        menu = [[Menu menuWithItems:
+                 newGame, [MenuItemSpacer small],
+                 info, config,
+                 nil] retain];
     }
     
     [menu alignItemsVertically];

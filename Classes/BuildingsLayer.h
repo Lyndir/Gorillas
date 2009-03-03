@@ -72,14 +72,14 @@
 -(BOOL) hitsBuilding: (cpVect)pos;
 -(void) explodeAt: (cpVect)point isGorilla:(BOOL)isGorilla;
 -(void) throwFrom:(GorillaLayer *)gorilla withVelocity:(cpVect)v;
-
 -(void) nextGorilla;
--(void) removeGorilla: (GorillaLayer *)gorilla;
 
 -(void) message: (NSString *)msg on: (CocosNode<CocosNodeSize> *)node;
 -(cpVect) calculateThrowFrom:(cpVect)r0 to:(cpVect)rt errorLevel:(cpFloat)l;
 
 -(cpFloat) left;
 -(cpFloat) right;
+
+@property (readonly) BananaLayer *bananaLayer;
 
 @end

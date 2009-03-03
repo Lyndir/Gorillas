@@ -26,6 +26,7 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
+#import "Throw.h"
 
 
 @interface BananaLayer : Layer {
@@ -33,12 +34,17 @@
     BOOL clearedGorilla;
 
     Sprite *banana;
+    Throw *throwAction;
 }
 
 -(void) throwFrom: (cpVect)r0 withVelocity: (cpVect)v;
 -(BOOL) throwing;
 
+-(void) halt;
+-(void) resume;
+
 @property (readwrite) BOOL clearedGorilla;
 @property (readonly) Sprite *banana;
+@property (readonly) Throw *throwAction;
 
 @end
