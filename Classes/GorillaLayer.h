@@ -50,6 +50,7 @@
 -(void) threw:(cpVect)aim;
 -(void) kill;
 -(void) killDead;
+-(void) revive;
 
 @property (readwrite, retain) NSString *name;
 

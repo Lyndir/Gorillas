@@ -98,14 +98,7 @@
         initialScale = newScale;
     }
 
-    cpFloat duration = 0.1f;
-    if(scaleAction != nil && ![scaleAction isDone]) {
-        duration -= [scaleAction elapsed];
-        [self stopAction:scaleAction];
-    }
-    [scaleAction release];
-    [self do:scaleAction = [[ScaleTo alloc] initWithDuration:[[GorillasConfig get] transitionDuration]
-                                                       scale:newScale]];
+    [self scaleTo:newScale];
     
     return kEventHandled;
 }
@@ -131,6 +124,19 @@
     initialDist = -1;
     
     return kEventHandled;
+}
+
+
+-(void) scaleTo:(cpFloat)newScale {
+    
+    cpFloat duration = [GorillasConfig get].transitionDuration;
+    if(scaleAction != nil && ![scaleAction isDone]) {
+        duration -= [scaleAction elapsed];
+        [self stopAction:scaleAction];
+    }
+    [scaleAction release];
+    [self do:scaleAction = [[ScaleTo alloc] initWithDuration:duration
+                                                       scale:newScale]];
 }
 
 

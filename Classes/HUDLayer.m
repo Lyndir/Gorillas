@@ -27,33 +27,25 @@
 #import "HUDLayer.h"
 #import "GorillasAppDelegate.h"
 #import "GorillasConfig.h"
-#import "Utility.h"
 #import "ShadeTo.h"
-#import "Remove.h"
 
+@interface HUDLayer (Private)
+
+-(void) setInfoString: (NSString *)string;
+
+@end
 
 @implementation HUDLayer
 
 
 -(id) init {
     
-    if(!(self = [super init]))
+    if(!(self = [super initWithColorFrom:0x000000FF to:0x666666FF position:cpvzero]))
         return self;
 
-    CGSize winSize = [[Director sharedDirector] winSize];
-
-    width = winSize.width;
-    height =[[GorillasConfig get] smallFontSize] + 10;
-    position = cpv(0, -height);
-    
-    menuButton = [[MenuItemAtlasFont itemFromString:@"Menu "
-                                        charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '
-                                             target:self selector:@selector(menuButton:)] retain];
-
-    menuMenu = [[Menu menuWithItems:menuButton, nil] retain];
-    [menuMenu setPosition:cpv(width - [menuButton contentSize].width / 2, [menuButton contentSize].height / 2)];
-    [menuMenu alignItemsHorizontally];
-    [self add:menuMenu];
+    [super setButtonString:@"Menu"
+                  callback:self :@selector(menuButton:)];
+    messageBar          = [[BarLayer alloc] initWithColorFrom:0x666666FF to:0x000000FF position:cpv(0, height)];
     
     // Score.
     infoLabel = [[LabelAtlas alloc] initWithString:@""
@@ -163,24 +155,58 @@
 }
 
 
--(void) onEnter {
+-(void) message:(NSString *)msg duration:(ccTime)_duration isImportant:(BOOL)important {
+    // Proxy to messageBar
     
+    if([messageBar parent] && [messageBar dismissed])
+        [self removeAndStop:messageBar];
+
+    if(![messageBar parent])
+        [self add:messageBar z:-1];
+    
+    [messageBar message:msg duration:0 isImportant:important];
+    
+    if(_duration)
+        [self do:[Sequence actions:
+                  [DelayTime actionWithDuration:_duration],
+                  [CallFunc actionWithTarget:self selector:@selector(dismissMessage)],
+                  nil]];
+}
+
+
+-(void) dismissMessage {
+    // Proxy to messageBar
+
+    [messageBar dismiss];
+    [messageBar setButtonString:nil callback:nil :nil];
+}
+
+
+-(void) setButtonString:(NSString *)_string callback:(id)target :(SEL)selector {
+    // Proxy to messageBar
+
+    [messageBar setButtonString:_string callback:target :selector];
+}
+
+
+-(void) onEnter {
+
     [super onEnter];
     
-    [self stopAllActions];
-    [self do:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, 0)]];
+    if([messageBar parent])
+        [self removeAndStop:messageBar];
     
     [self updateHudWithScore:0 skill:0];
 }
 
+-(void) onExit {
+    
+    [super onExit];
+}
 
 -(void) dismiss {
     
-    [self stopAllActions];
-    [self do:[Sequence actions:
-              [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] position:cpv(0, -height)],
-              [Remove action],
-              nil]];
+    [super dismiss];
 }
 
 
@@ -200,21 +226,7 @@
 }
 
 
--(void) draw {
-    
-    cpVect to = cpv(width, height);
-    drawBoxFrom(cpvzero, to, 0x000000FF, 0x666666FF);
-    drawLinesTo(cpv(0, height), &to, 1, 0x999999FF, 1);
-}
-
-
 -(void) dealloc {
-    
-    [menuButton release];
-    menuButton = nil;
-    
-    [menuMenu release];
-    menuMenu = nil;
     
     [infoLabel release];
     infoLabel = nil;

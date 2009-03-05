@@ -68,7 +68,7 @@
 -(BOOL) mayThrow;
 
 -(void) miss;
--(BOOL) hitsGorilla: (cpVect)pos throwSkill:(float)throwSkill;
+-(BOOL) hitsGorilla: (cpVect)pos;
 -(BOOL) hitsBuilding: (cpVect)pos;
 -(void) explodeAt: (cpVect)point isGorilla:(BOOL)isGorilla;
 -(void) throwFrom:(GorillaLayer *)gorilla withVelocity:(cpVect)v;
@@ -81,5 +81,6 @@
 -(cpFloat) right;
 
 @property (readonly) BananaLayer *bananaLayer;
+@property (readonly) GorillaLayer *hitGorilla;
 
 @end

@@ -187,9 +187,9 @@
 }
 
 
--(void) dismiss {
+-(void) dismissAsPush:(BOOL)_pushed {
     
-    [super dismiss];
+    [super dismissAsPush:_pushed];
     
     int i = 0;
     for(BuildingLayer *scoreTower in scoreTowers)
@@ -214,7 +214,7 @@
 -(void) back: (id) sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[GorillasAppDelegate get] showInformation];
+    [[GorillasAppDelegate get] popLayer];
 }
 
 

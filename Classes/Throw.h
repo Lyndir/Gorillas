@@ -31,7 +31,9 @@
 @interface Throw : IntervalAction {
 
     BOOL running;
-    BOOL flipped;
+    BOOL skipped;
+    ccTime recap;
+    cpVect recapr;
     cpVect v;
     cpVect r0;
     int endCount;
@@ -46,5 +48,7 @@
 -(Throw *) initWithVelocity: (cpVect)velocity startPos: (cpVect)startPos;
 
 -(void) scrollToCenter:(cpVect)r;
+
+@property (readwrite) ccTime recap;
 
 @end

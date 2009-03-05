@@ -31,10 +31,11 @@
 
 
 @interface ShadeLayer : FancyLayer {
-
+    
+    BOOL pushed;
 }
 
--(void) dismiss;
+-(void) dismissAsPush:(BOOL)_pushed;
 
 -(void) ready;
 -(void) gone;

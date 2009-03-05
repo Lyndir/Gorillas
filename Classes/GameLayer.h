@@ -74,6 +74,7 @@
 -(BOOL) isEnabled:(GorillasFeature)feature;
 -(void) configureGameWithMode:(GorillasMode)nMode humans:(NSUInteger)humans ais:(NSUInteger)ais;
 
+-(void) updateStateHitGorilla:(BOOL)hitGorilla hitBuilding:(BOOL)hitBuilding offScreen:(BOOL)offScreen throwSkill:(float)throwSkill;
 -(BOOL) checkGameStillOn;
 -(void) startGame;
 -(void) stopGame;

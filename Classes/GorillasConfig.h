@@ -36,6 +36,7 @@
     NSUserDefaults  *defaults;
     NSArray         *modes;
     NSArray         *gameConfigurations;
+    NSArray         *offMessages, *hitMessages;
 }
 
 
@@ -97,7 +98,9 @@
 @property (readwrite) int                   deathScoreRatio;
 @property (readonly) int                    deathScore;
 
-@property (readwrite, assign) NSDictionary  *tracks;
+@property (readwrite, assign) NSArray       *tracks;
+@property (readwrite, assign) NSArray       *trackNames;
+@property (readonly) NSString               *randomTrack;
 @property (readwrite, assign) NSString      *currentTrack;
 @property (readonly, assign) NSString       *currentTrackName;
 
@@ -108,6 +111,9 @@
 
 @property (readwrite) BOOL                  followThrow;
 @property (readwrite) BOOL                  multiplayerFlip;
+
+@property (readonly) NSString               *offMessage;
+@property (readonly) NSString               *hitMessage;
 
 -(long)                                     buildingColor;
 

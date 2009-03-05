@@ -151,7 +151,7 @@
 
     [[GorillasAppDelegate get] clickEffect];
 
-    NSArray *tracks = [[[GorillasConfig get] tracks] allKeys];
+    NSArray *tracks = [GorillasConfig get].tracks;
     NSString *newTrack = [tracks objectAtIndex:0];
     
     BOOL found = false;
@@ -205,7 +205,7 @@
 -(void) back: (id) sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[GorillasAppDelegate get] showConfiguration];
+    [[GorillasAppDelegate get] popLayer];
 }
 
 

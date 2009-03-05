@@ -40,9 +40,6 @@
 -(void) throwFrom: (cpVect)r0 withVelocity: (cpVect)v;
 -(BOOL) throwing;
 
--(void) halt;
--(void) resume;
-
 @property (readwrite) BOOL clearedGorilla;
 @property (readonly) Sprite *banana;
 @property (readonly) Throw *throwAction;

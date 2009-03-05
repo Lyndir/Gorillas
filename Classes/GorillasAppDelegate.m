@@ -60,6 +60,7 @@
     // Menu items font.
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    menuLayers = [[NSMutableArray alloc] initWithCapacity:3];
 
 	// Build the splash scene.
     Scene *splashScene = [Scene node];
@@ -81,7 +82,16 @@
 
 -(void) revealHud {
     
-    [[hudLayer parent] removeAndStop:hudLayer];
+    if(hudLayer) {
+        if(![hudLayer dismissed])
+            // Already showing and not dismissed.
+            return;
+    
+        if([hudLayer parent])
+            // Already showing and being dismissed.
+            [gameLayer removeAndStop:hudLayer];
+    }
+
     [gameLayer add:[self hudLayer]];
 }
 
@@ -109,14 +119,6 @@
 }
 
 
--(void) dismissLayer {
-    
-    [currentLayer dismiss];
-    [currentLayer release];
-    currentLayer = nil;
-}
-
-
 -(void) clickEffect {
     
     static SystemSoundID clicky = 0;
@@ -135,24 +137,48 @@
 }
 
 
--(void) showLayer: (ShadeLayer *)layer {
+-(void) popLayer {
+
+    [(ShadeLayer *) [menuLayers lastObject] dismissAsPush:NO];
+    [menuLayers removeLastObject];
+    if([menuLayers count])
+        [uiLayer add:[menuLayers lastObject]];
+}
+
+
+-(void) popAllLayers {
     
-    if(layer == currentLayer) {
-        // Layer is already showing, ignore.
-        if ([layer conformsToProtocol:@protocol(Resettable)])
-            [(ShadeLayer<Resettable> *) layer reset];
-        
+    if(![menuLayers count])
         return;
+
+    id last = [menuLayers lastObject];
+    [menuLayers makeObjectsPerformSelector:@selector(dismissAsPush:) withObject:NO];
+    [menuLayers removeAllObjects];
+    [menuLayers addObject:last];
+
+    [self popLayer];
+}
+
+
+-(void) pushLayer: (ShadeLayer *)layer {
+    
+    if([layer parent]) {
+        if (![menuLayers containsObject:layer])
+            // Layer is showing but shouldn't have been; probably being dismissed.
+            [uiLayer removeAndStop:layer];
+        
+        else {
+            // Layer is already showing.
+            if ([layer conformsToProtocol:@protocol(Resettable)])
+                [(ShadeLayer<Resettable> *) layer reset];
+        
+            return;
+        }
     }
-    
-    if([currentLayer parent])
-        [self dismissLayer];
-    
-    if([layer parent])
-        [[layer parent] removeAndStop:layer];
-    
-    currentLayer = [layer retain];
-    [uiLayer add:currentLayer];
+
+    [(ShadeLayer *) [menuLayers lastObject] dismissAsPush:YES];
+    [menuLayers addObject:layer];
+    [uiLayer add:layer];
 }
 
 
@@ -161,7 +187,7 @@
     if(!mainMenuLayer)
         mainMenuLayer = [[MainMenuLayer alloc] init];
 
-    [self showLayer:mainMenuLayer];
+    [self pushLayer:mainMenuLayer];
 }
 
 
@@ -170,7 +196,7 @@
     if(!newGameLayer)
         newGameLayer = [[NewGameLayer alloc] init];
     
-    [self showLayer:newGameLayer];
+    [self pushLayer:newGameLayer];
 }
 
 
@@ -179,7 +205,7 @@
     if(!customGameLayer)
         customGameLayer = [[CustomGameLayer alloc] init];
     
-    [self showLayer: customGameLayer];
+    [self pushLayer: customGameLayer];
 }
 
 
@@ -188,7 +214,7 @@
     if(!continueMenuLayer)
         continueMenuLayer = [[ContinueMenuLayer alloc] init];
     
-    [self showLayer:continueMenuLayer];
+    [self pushLayer:continueMenuLayer];
 }
 
 
@@ -197,7 +223,7 @@
     if(!configLayer)
         configLayer = [[ConfigurationSectionLayer alloc] init];
     
-    [self showLayer:configLayer];
+    [self pushLayer:configLayer];
 }
 
 
@@ -206,7 +232,7 @@
     if(!gameConfigLayer)
         gameConfigLayer = [[GameConfigurationLayer alloc] init];
     
-    [self showLayer:gameConfigLayer];
+    [self pushLayer:gameConfigLayer];
 }
 
 
@@ -215,7 +241,7 @@
     if(!avConfigLayer)
         avConfigLayer = [[AVConfigurationLayer alloc] init];
     
-    [self showLayer:avConfigLayer];
+    [self pushLayer:avConfigLayer];
 }
 
 
@@ -224,7 +250,7 @@
     if(!infoLayer)
         infoLayer = [[InformationLayer alloc] init];
     
-    [self showLayer:infoLayer];
+    [self pushLayer:infoLayer];
 }
 
 
@@ -233,7 +259,7 @@
     if(!guideLayer)
         guideLayer = [[GuideLayer alloc] init];
     
-    [self showLayer:guideLayer];
+    [self pushLayer:guideLayer];
 }
 
 
@@ -242,7 +268,7 @@
     if(!statsLayer)
         statsLayer = [[StatisticsLayer alloc] init];
     
-    [self showLayer:statsLayer];
+    [self pushLayer:statsLayer];
 }
 
 
@@ -257,8 +283,12 @@
 
 
 -(void) audioStarted:(AudioPlayer *)player {
+
+    NSString *track = [audioController soundFile];
+    if([nextTrack isEqualToString:@"random"])
+        track = nextTrack;
     
-    [[GorillasConfig get] setCurrentTrack:[audioController soundFile]];
+    [[GorillasConfig get] setCurrentTrack:track];
 }
 
 
@@ -284,7 +314,11 @@
     }
 
     else if(nextTrack) {
-        audioController = [[AudioController alloc] initWithFile:nextTrack];
+        NSString *track = nextTrack;
+        if([track isEqualToString:@"random"])
+            track = [GorillasConfig get].randomTrack;
+        
+        audioController = [[AudioController alloc] initWithFile:track];
         [audioController play];
         [audioController setDelegate:self];
     }
@@ -368,10 +402,6 @@
         [statsLayer release];
         statsLayer = nil;
     }
-    if(currentLayer && ![currentLayer parent]) {
-        [currentLayer release];
-        currentLayer = nil;
-    }
     
     [self playTrack:nil];
 }
@@ -391,8 +421,8 @@
     [uiLayer release];
     uiLayer = nil;
     
-    [currentLayer release];
-    currentLayer = nil;
+    [menuLayers release];
+    menuLayers = nil;
     
     [mainMenuLayer release];
     mainMenuLayer = nil;

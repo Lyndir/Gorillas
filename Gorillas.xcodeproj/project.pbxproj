@@ -12,6 +12,11 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		DA0087690F5FB7A9009C1053 /* BarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0087680F5FB7A9009C1053 /* BarLayer.m */; };
+		DA00876A0F5FB7A9009C1053 /* BarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0087680F5FB7A9009C1053 /* BarLayer.m */; };
+		DA00876B0F5FB7A9009C1053 /* BarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0087680F5FB7A9009C1053 /* BarLayer.m */; };
+		DA00876C0F5FB7A9009C1053 /* BarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0087680F5FB7A9009C1053 /* BarLayer.m */; };
+		DA00876D0F5FB7A9009C1053 /* BarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0087680F5FB7A9009C1053 /* BarLayer.m */; };
 		DA126C8F0EDDF19100EADDE2 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = DA126C8E0EDDF19100EADDE2 /* Utility.m */; };
 		DA16C5190EEC856200E46246 /* ShadeTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DA16C5180EEC856200E46246 /* ShadeTo.m */; };
 		DA1816260F0E227C0064F470 /* ConfigurationSectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816250F0E227C0064F470 /* ConfigurationSectionLayer.m */; };
@@ -723,6 +728,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Gorillas_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gorillas_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA0087670F5FB7A9009C1053 /* BarLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarLayer.h; sourceTree = "<group>"; };
+		DA0087680F5FB7A9009C1053 /* BarLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarLayer.m; sourceTree = "<group>"; };
 		DA126C8D0EDDF19100EADDE2 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		DA126C8E0EDDF19100EADDE2 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		DA16C3250EEBDE7900E46246 /* Resettable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resettable.h; sourceTree = "<group>"; };
@@ -1548,6 +1555,8 @@
 				DA6314C40EFAEAD0007D203B /* FancyLayer.m */,
 				DA34FF6A0EB4E48E00B68C06 /* ShadeLayer.h */,
 				DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */,
+				DA0087670F5FB7A9009C1053 /* BarLayer.h */,
+				DA0087680F5FB7A9009C1053 /* BarLayer.m */,
 				DA1816480F0E24F50064F470 /* Menus */,
 			);
 			name = Views;
@@ -2038,6 +2047,7 @@
 				DA79D73E0F59425500D36C7C /* NewGameLayer.m in Sources */,
 				DA79D7A40F59531100D36C7C /* GameConfiguration.m in Sources */,
 				DA79DBF10F5BBFC100D36C7C /* MenuItemSpacer.m in Sources */,
+				DA00876D0F5FB7A9009C1053 /* BarLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2147,6 +2157,7 @@
 				DA79D73C0F59425500D36C7C /* NewGameLayer.m in Sources */,
 				DA79D7A20F59531100D36C7C /* GameConfiguration.m in Sources */,
 				DA79DBEF0F5BBFC100D36C7C /* MenuItemSpacer.m in Sources */,
+				DA0087690F5FB7A9009C1053 /* BarLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2256,6 +2267,7 @@
 				DA79D73D0F59425500D36C7C /* NewGameLayer.m in Sources */,
 				DA79D7A00F59531100D36C7C /* GameConfiguration.m in Sources */,
 				DA79DBED0F5BBFC100D36C7C /* MenuItemSpacer.m in Sources */,
+				DA00876B0F5FB7A9009C1053 /* BarLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2365,6 +2377,7 @@
 				DA79D73F0F59425500D36C7C /* NewGameLayer.m in Sources */,
 				DA79D7A10F59531100D36C7C /* GameConfiguration.m in Sources */,
 				DA79DBEE0F5BBFC100D36C7C /* MenuItemSpacer.m in Sources */,
+				DA00876A0F5FB7A9009C1053 /* BarLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2474,6 +2487,7 @@
 				DA79D7400F59425500D36C7C /* NewGameLayer.m in Sources */,
 				DA79D7A30F59531100D36C7C /* GameConfiguration.m in Sources */,
 				DA79DBF00F5BBFC100D36C7C /* MenuItemSpacer.m in Sources */,
+				DA00876C0F5FB7A9009C1053 /* BarLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -60,18 +60,6 @@
 }
 
 
--(void) halt {
-    
-    [throwAction scaleTo:0 duration:0.5f];
-}
-
-
--(void) resume {
-
-    [throwAction scaleTo:1 duration:1];
-}
-
-
 -(void) onEnter {
     
     [super onEnter];

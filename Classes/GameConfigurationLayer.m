@@ -215,7 +215,7 @@
 -(void) back: (id) sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[GorillasAppDelegate get] showConfiguration];
+    [[GorillasAppDelegate get] popLayer];
 }
 
 

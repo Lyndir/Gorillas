@@ -25,24 +25,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "cocos2d.h"
+#import "BarLayer.h"
 
 
-@interface HUDLayer : Layer {
+@interface HUDLayer : BarLayer {
 
-    MenuItemFont *menuButton;
-    Menu *menuMenu;
-    LabelAtlas *infoLabel;
-    Layer *livesLayer;
-    Sprite *infiniteLives;
-    
-    float width;
-    float height;
+    LabelAtlas          *infoLabel;
+    Layer               *livesLayer;
+    Sprite              *infiniteLives;
+    BarLayer            *messageBar;
 }
 
--(void) dismiss;
-
--(void) setInfoString: (NSString *)string;
 -(void) updateHudWithScore:(int)score skill: (float)throwSkill;
 
 -(BOOL) hitsHud: (cpVect)pos;

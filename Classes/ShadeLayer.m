@@ -37,6 +37,8 @@
     if(!(self = [super init]))
         return self;
     
+    pushed = NO;
+    
     [self setColor:[[GorillasConfig get] shadeColor]];
     
     return self;
@@ -45,28 +47,20 @@
 
 -(void) onEnter {
     
+    [[[GorillasAppDelegate get] gameLayer] setPaused:YES];
+    
+    CGSize winSize = [Director sharedDirector].winSize;
+    [self setPosition:cpv((pushed? -1: 1) * winSize.width, 0)];
+
+    [self stopAllActions];
+
     [super onEnter];
     
-    [[[GorillasAppDelegate get] gameLayer] setPaused:YES];
-
-    CGSize winSize = [Director sharedDirector].winSize;
-    [self setPosition:cpv(-winSize.width, 0)];
     [self do:[Sequence actions:
               [EaseQuadOut actionWithAction:
                [MoveTo actionWithDuration:[GorillasConfig get].transitionDuration position:cpvzero]],
               [CallFunc actionWithTarget:self selector:@selector(ready)],
               nil]];
-
-//    for(CocosNode *child in children)
-//        if([child conformsToProtocol:@protocol(CocosNodeOpacity)])
-//            [child do:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
-//    
-//    [self do:[Sequence actions:
-//              [FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-//                                 opacity:[[GorillasConfig get] shadeColor] & 0xff],
-//              [CallFunc actionWithTarget:self
-//                                selector:@selector(ready)],
-//              nil]];
 }
 
 
@@ -76,27 +70,20 @@
 }
 
 
--(void) dismiss {
+-(void) dismissAsPush:(BOOL)_pushed {
 
     [self stopAllActions];
+    
+    pushed = _pushed;
     
     CGSize winSize = [Director sharedDirector].winSize;
     [self do:[Sequence actions:
               [EaseQuadIn actionWithAction:
-               [MoveTo actionWithDuration:[GorillasConfig get].transitionDuration position:cpv(winSize.width, 0)]],
-              [Remove action],
+               [MoveTo actionWithDuration:[GorillasConfig get].transitionDuration
+                                 position:cpv((pushed? -1: 1) * winSize.width, 0)]],
               [CallFunc actionWithTarget:self selector:@selector(gone)],
+              [Remove action],
               nil]];
-    
-//    for(CocosNode *child in children)
-//        if([child conformsToProtocol:@protocol(CocosNodeOpacity)])
-//            [child do:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration] opacity:0]];
-//    
-//    [self do:[Sequence actions:
-//              [FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration] opacity:0],
-//              [Remove action],
-//              [CallFunc actionWithTarget:self selector:@selector(gone)],
-//              nil]];
 }
 
 

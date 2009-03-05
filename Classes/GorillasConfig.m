@@ -29,69 +29,70 @@
 #import "cocos2d.h"
 #import "GorillasAppDelegate.h"
 
-#define dFontSize           @"v1.fontSize"
-#define dLargeFontSize      @"v1.largeFontSize"
-#define dSmallFontSize      @"v1.smallFontSize"
-#define dFixedFontName      @"v1.fixedFontName"
-#define dFontName           @"v1.fontName"
+#define dFontSize           @"v1.0.fontSize"
+#define dLargeFontSize      @"v1.1.largeFontSize"
+#define dSmallFontSize      @"v1.0.smallFontSize"
+#define dFixedFontName      @"v1.0.fixedFontName"
+#define dFontName           @"v1.0.fontName"
 
-#define dCityTheme          @"v1.cityTheme"
-#define dFixedFloors        @"v1.fixedFloors"
-#define dBuildingMax        @"v1.buildingMax"
-#define dBuildingAmount     @"v1.buildingAmount"
-#define dBuildingSpeed      @"v1.buildingSpeed"
-#define dBuildingColorCount @"v1.buildingColorCount"
-#define dBuildingColors     @"v1.buildingColors"
+#define dCityTheme          @"v1.0.cityTheme"
+#define dFixedFloors        @"v1.0.fixedFloors"
+#define dBuildingMax        @"v1.0.buildingMax"
+#define dBuildingAmount     @"v1.0.buildingAmount"
+#define dBuildingSpeed      @"v1.0.buildingSpeed"
+#define dBuildingColorCount @"v1.0.buildingColorCount"
+#define dBuildingColors     @"v1.0.buildingColors"
 
-#define dWindowAmount       @"v1.windowAmount"
-#define dWindowColorOn      @"v1.windowColorOn"
-#define dWindowColorOff     @"v1.windowColorOff"
+#define dWindowAmount       @"v1.0.windowAmount"
+#define dWindowColorOn      @"v1.0.windowColorOn"
+#define dWindowColorOff     @"v1.0.windowColorOff"
 
-#define dSkyColor           @"v1.skyColor"
-#define dStarColor          @"v1.starColor"
-#define dStarSpeed          @"v1.starSpeed"
-#define dStarAmount         @"v1.starAmount"
+#define dSkyColor           @"v1.0.skyColor"
+#define dStarColor          @"v1.0.starColor"
+#define dStarSpeed          @"v1.0.starSpeed"
+#define dStarAmount         @"v1.0.starAmount"
 
-#define dLives              @"v1.lives"
-#define dWindModifier       @"v1.windModifier"
-#define dGravity            @"v1.gravity"
-#define dMinGravity         @"v1.minGravity"
-#define dMaxGravity         @"v1.maxGravity"
+#define dLives              @"v1.1.lives"
+#define dWindModifier       @"v1.0.windModifier"
+#define dGravity            @"v1.0.gravity"
+#define dMinGravity         @"v1.0.minGravity"
+#define dMaxGravity         @"v1.0.maxGravity"
 
-#define dShadeColor         @"v1.shadeColor"
-#define dTransitionDuration @"v1.transitionDuration"
-#define dGameScrollDuration @"v1.gameScrollDuration"
+#define dShadeColor         @"v1.0.shadeColor"
+#define dTransitionDuration @"v1.0.transitionDuration"
+#define dGameScrollDuration @"v1.1.gameScrollDuration"
 
-#define dGameConfiguration  @"v1.gameConfiguration"
-#define dMode               @"v1.mode"
-#define dMissScore          @"v1.missScore"
-#define dKillScore          @"v1.killScore"
-#define dBonusOneShot       @"v1.bonusOneShot"
-#define dBonusSkill         @"v1.bonusSkill"
-#define dDeathScoreRatio    @"v1.deathScoreRatio"
+#define dGameConfiguration  @"v1.1.gameConfiguration"
+#define dMode               @"v1.1.mode"
+#define dMissScore          @"v1.0.missScore"
+#define dKillScore          @"v1.0.killScore"
+#define dBonusOneShot       @"v1.1.bonusOneShot"
+#define dBonusSkill         @"v1.1.bonusSkill"
+#define dDeathScoreRatio    @"v1.0.deathScoreRatio"
 
-#define dWeather            @"v1.weather"
-#define dSoundFx            @"v1.soundFx"
-#define dVibration          @"v1.vibration"
-#define dVisualFx           @"v1.visualFx"
+#define dWeather            @"v1.0.weather"
+#define dSoundFx            @"v1.1.soundFx"
+#define dVibration          @"v1.1.vibration"
+#define dVisualFx           @"v1.1.visualFx"
 
-#define dFollowThrow        @"v1.followThrow"
-#define dMultiplayerFlip    @"v1.multiplayerFlip"
+#define dFollowThrow        @"v1.1.followThrow"
+#define dMultiplayerFlip    @"v1.1.multiplayerFlip"
 
-#define dTracks             @"v1.tracks"
-#define dCurrentTrack       @"v1.currentTrack"
+#define dTracks             @"v1.1.tracks"
+#define dTrackNames         @"v1.1.trackNames"
+#define dCurrentTrack       @"v1.0.currentTrack"
 
-#define dScore              @"v1.score"
-#define dSkill              @"v1.skill"
-#define dTopScoreHistory    @"v1.topScoreHistory"
-#define dLevel              @"v1.level"
-#define dLevelNames         @"v1.levelNames"
-#define dLevelProgress      @"v1.levelProgress"
+#define dScore              @"v1.0.score"
+#define dSkill              @"v1.1.skill"
+#define dTopScoreHistory    @"v1.0.topScoreHistory"
+#define dLevel              @"v1.0.level"
+#define dLevelNames         @"v1.0.levelNames"
+#define dLevelProgress      @"v1.0.levelProgress"
 
 
 @implementation GorillasConfig
 
-@synthesize modes;
+@synthesize modes, offMessage, hitMessage;
 
 
 #pragma mark Internal
@@ -103,53 +104,65 @@
 
     defaults = [[NSUserDefaults standardUserDefaults] retain];
 
-    NSArray *levelNames     = [NSArray arrayWithObjects:
-                               @"Junior",
-                               @"Trainee",
-                               @"Adept",
-                               @"Skilled",
-                               @"Masterful",
-                               @"Sniper",
-                               @"Deadly",
-                               @"Impossible",
-                               nil];
+    NSArray *levelNames = [NSArray arrayWithObjects:
+                           @"Junior",
+                           @"Trainee",
+                           @"Adept",
+                           @"Skilled",
+                           @"Masterful",
+                           @"Sniper",
+                           @"Deadly",
+                           @"Impossible",
+                           nil];
     
-    gameConfigurations = [[NSArray alloc] initWithObjects:
-                          [GameConfiguration configurationWithName:@"Boot Camp"
-                                                       description:@"Practice your aim with some helpful hints."
-                                                              mode:GorillasModeBootCamp
-                                                           sHumans:1 mHumans:0
-                                                              sAis:1    mAis:0],
-                          [GameConfiguration configurationWithName:@"Classic"
-                                                       description:@"Quick and simple one-on-one battle."
-                                                              mode:GorillasModeClassic
-                                                           sHumans:1 mHumans:2
-                                                              sAis:1    mAis:0],
-                          [GameConfiguration configurationWithName:@"Dynamic"
-                                                       description:@"One-on-one battle with adapting skill and difficulty."
-                                                              mode:GorillasModeDynamic
-                                                           sHumans:1 mHumans:0
-                                                              sAis:1    mAis:0],
-                          [GameConfiguration configurationWithName:@"Team Battle"
-                                                       description:@"Face the AIs with a little help from your friends."
-                                                              mode:GorillasModeTeam
-                                                           sHumans:0 mHumans:2
-                                                              sAis:0    mAis:2],
-                          [GameConfiguration configurationWithName:@"Last Man Standing"
-                                                       description:@"Gorillas have lives; be the last left standing!"
-                                                              mode:GorillasModeLMS
-                                                           sHumans:1 mHumans:2
-                                                              sAis:3    mAis:3],
-                          nil];
+    gameConfigurations  = [[NSArray alloc] initWithObjects:
+                           [GameConfiguration configurationWithName:@"Boot Camp"
+                                                        description:@"Practice your aim with some helpful hints."
+                                                               mode:GorillasModeBootCamp
+                                                            sHumans:1 mHumans:0
+                                                               sAis:1    mAis:0],
+                           [GameConfiguration configurationWithName:@"Classic"
+                                                        description:@"Quick and simple one-on-one battle."
+                                                               mode:GorillasModeClassic
+                                                            sHumans:1 mHumans:2
+                                                               sAis:1    mAis:0],
+                           [GameConfiguration configurationWithName:@"Dynamic"
+                                                        description:@"One-on-one battle with adapting skill and difficulty."
+                                                               mode:GorillasModeDynamic
+                                                            sHumans:1 mHumans:0
+                                                               sAis:1    mAis:0],
+                           [GameConfiguration configurationWithName:@"Team Battle"
+                                                        description:@"Face the AIs with a little help from your friends."
+                                                               mode:GorillasModeTeam
+                                                            sHumans:0 mHumans:2
+                                                               sAis:0    mAis:2],
+                           [GameConfiguration configurationWithName:@"Last Man Standing"
+                                                        description:@"Gorillas have lives; be the last left standing!"
+                                                               mode:GorillasModeLMS
+                                                            sHumans:1 mHumans:2
+                                                               sAis:3    mAis:3],
+                           nil];
     
-    modes = [[NSArray alloc] initWithObjects:
-             [NSNumber numberWithUnsignedInt:GorillasModeBootCamp],
-             [NSNumber numberWithUnsignedInt:GorillasModeClassic],
-             [NSNumber numberWithUnsignedInt:GorillasModeDynamic],
-             [NSNumber numberWithUnsignedInt:GorillasModeTeam],
-             [NSNumber numberWithUnsignedInt:GorillasModeLMS],
-             nil];
-
+    modes               = [[NSArray alloc] initWithObjects:
+                           [NSNumber numberWithUnsignedInt:GorillasModeBootCamp],
+                           [NSNumber numberWithUnsignedInt:GorillasModeClassic],
+                           [NSNumber numberWithUnsignedInt:GorillasModeDynamic],
+                           [NSNumber numberWithUnsignedInt:GorillasModeTeam],
+                           [NSNumber numberWithUnsignedInt:GorillasModeLMS],
+                           nil];
+    
+    offMessages         = [[NSArray alloc] initWithObjects:
+                           @"Way out.",
+                           @"Just a little too far.",
+                           nil];
+    
+    hitMessages         = [[NSArray alloc] initWithObjects:
+                           @"%2$@ ate %1$@'s banana.",
+                           @"%2$@ didn't dodge %1$@'s banana.",
+                           @"%1$@ burried %2$@.",
+                           @"%1$@ incinerated %2$@.",
+                           nil];
+    
     NSDictionary *themes = [CityTheme getThemes];
     NSString *defaultThemeName = [CityTheme defaultThemeName];
     CityTheme *theme = [themes objectForKey:defaultThemeName];
@@ -195,14 +208,24 @@
                                 [NSNumber numberWithBool:    YES],                          dFollowThrow,
                                 [NSNumber numberWithBool:    NO],                           dMultiplayerFlip,
                                 
-                                [NSDictionary dictionaryWithObjectsAndKeys:
-                                 @"Sky High",               @"blockdropper3.wav",
-                                 @"Veritech",               @"veritech.wav",
-                                 @"Fighting Gorillas",      @"fighting_gorillas.wav",
-                                 @"Pride of the Pacific",   @"prideofthepacific.wav",
-                                 @"Fork Bomb",              @"forkbomb.wav",
-                                 @"Off",                    @"",
+                                [NSArray arrayWithObjects:
+                                 @"blockdropper3.wav",
+                                 @"veritech.wav",
+                                 @"fighting_gorillas.wav",
+                                 @"prideofthepacific.wav",
+                                 @"forkbomb.wav",
+                                 @"random",
+                                 @"",
                                  nil],                                                      dTracks,
+                                [NSArray arrayWithObjects:
+                                 @"Sky High",
+                                 @"Veritech",
+                                 @"Fighting Gorillas",
+                                 @"Pride of the Pacific",
+                                 @"Fork Bomb",
+                                 @"[Shuffle]",
+                                 @"[Off]",
+                                 nil],                                                      dTrackNames,
                                 @"fighting_gorillas.wav",                                   dCurrentTrack,
                                 
                                 [NSNumber numberWithInteger:    1],                         dGameConfiguration,
@@ -236,7 +259,7 @@
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*18)] description],
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*19)] description],
                                  nil//*/],                                                  dTopScoreHistory,
-                                [NSNumber numberWithFloat:      0.1f],                      dLevel,
+                                [NSNumber numberWithFloat:      0.4f],                      dLevel,
                                 [levelNames retain],                                        dLevelNames,
                                 [NSNumber numberWithFloat:      0.03f],                     dLevelProgress,
                                 
@@ -315,6 +338,14 @@
     
     [defaults setObject:fixedFontName forKey: dFixedFontName];
     [[GorillasAppDelegate get] updateConfig];
+}
+-(NSString *) offMessage {
+
+    return [offMessages objectAtIndex:random() % offMessages.count];
+}
+-(NSString *) hitMessage {
+    
+    return [hitMessages objectAtIndex:random() % hitMessages.count];
 }
 
 
@@ -600,14 +631,28 @@
 
 #pragma mark Audio
 
--(NSDictionary *) tracks {
+-(NSArray *) tracks {
     
-    return [defaults dictionaryForKey: dTracks];
+    return [defaults arrayForKey: dTracks];
 }
--(void) setTracks: (NSDictionary *)tracks {
+-(void) setTracks: (NSArray *)tracks {
     
     [defaults setObject:tracks forKey: dTracks];
     [[GorillasAppDelegate get] updateConfig];
+}
+-(NSArray *) trackNames {
+    
+    return [defaults arrayForKey: dTrackNames];
+}
+-(void) setTrackNames: (NSArray *)trackNames {
+    
+    [defaults setObject:trackNames forKey: dTrackNames];
+    [[GorillasAppDelegate get] updateConfig];
+}
+-(NSString *) randomTrack {
+    
+    NSArray *tracks = self.tracks;
+    return [tracks objectAtIndex:random() % ([tracks count] - 2)];
 }
 -(NSString *) currentTrack {
     
@@ -627,7 +672,8 @@
     if(!currentTrack)
         currentTrack = @"";
     
-    return [[self tracks] objectForKey:currentTrack];
+    NSUInteger currentTrackIndex = [[self tracks] indexOfObject:currentTrack];
+    return [[self trackNames] objectAtIndex:currentTrackIndex];
 }
 
 

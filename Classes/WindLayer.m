@@ -100,7 +100,7 @@
 
 -(void) registerSystem:(ParticleSystem *)system affectAngle:(BOOL)affectAngle {
     
-    if(!system)
+    if(!system || [systems containsObject:system])
         return;
     
     [systems addObject:system];

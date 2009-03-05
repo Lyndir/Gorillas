@@ -68,14 +68,15 @@
         TransitionScene *transitionScene = [[ZoomFlipYTransition alloc] initWithDuration:[[GorillasConfig get] transitionDuration]
                                                                                    scene:gameScene
                                                                              orientation:kOrientationDownOver];
+        [gameScene do:[Sequence actions:
+                       [DelayTime actionWithDuration:0.5f],
+                       [CallFunc actionWithTarget:[GorillasAppDelegate get] selector:@selector(showMainMenu)],
+                       nil]];
         [gameScene release];
         
         // Start the scene and bring up the menu.
         [[Director sharedDirector] replaceScene:transitionScene];
         [transitionScene release];
-        
-        // Open up the main menu.
-        [[GorillasAppDelegate get] showMainMenu];
     }
 }
 

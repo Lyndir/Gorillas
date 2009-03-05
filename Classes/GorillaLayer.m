@@ -29,6 +29,7 @@
 #import "Utility.h"
 #import "GorillasAppDelegate.h"
 #import "ShadeTo.h"
+#import "Remove.h"
 
 
 @interface GorillaLayer (Private)
@@ -168,16 +169,37 @@
     
     if(lives > 0)
         --lives;
-    
+
+    if(lives == 0) {
+        [self stopAllActions];
+        [self do:[Sequence actions:
+                  [FadeTo actionWithDuration:0.5f opacity:0x00],
+                  [Remove action],
+                  nil]];
+    } else
+        [self do:[Sequence actions:
+                  [ShadeTo actionWithDuration:0.5f color:0xFF0000FF],
+                  [ShadeTo actionWithDuration:0.5f color:0xFFFFFFFF],
+                  nil]];
+
     [[GorillasAppDelegate get].hudLayer updateHudWithScore:0 skill:0];
 }
 
 
 -(void) killDead {
     
-    lives = 0;
+    lives = 1;
     
-    [[GorillasAppDelegate get].hudLayer updateHudWithScore:0 skill:0];
+    [self kill];
+}
+
+
+-(void) revive {
+    
+    lives = 1;
+    
+    [self stopAllActions];
+    [self do:[FadeTo actionWithDuration:0.5f opacity:0xFF]];
 }
 
 

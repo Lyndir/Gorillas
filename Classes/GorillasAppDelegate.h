@@ -47,7 +47,6 @@
     
     Layer                       *uiLayer;
     GameLayer                   *gameLayer;
-    ShadeLayer                  *currentLayer;
     ContinueMenuLayer           *continueMenuLayer;
     MainMenuLayer               *mainMenuLayer;
     NewGameLayer                *newGameLayer;
@@ -61,6 +60,8 @@
     HUDLayer                    *hudLayer;
     AudioController             *audioController;
     NSString                    *nextTrack;
+    
+    NSMutableArray              *menuLayers;
 }
 
 @property (readonly) Layer                      *uiLayer;
@@ -71,7 +72,8 @@
 
 -(void) updateConfig;
 -(void) clickEffect;
--(void) dismissLayer;
+-(void) popAllLayers;
+-(void) popLayer;
 -(void) cleanup;
 
 -(void) showMainMenu;

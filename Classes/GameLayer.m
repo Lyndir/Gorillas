@@ -84,13 +84,14 @@
     [[UIApplication sharedApplication] setStatusBarHidden:!paused animated:YES];
     
     if(paused) {
-        [buildingsLayer.bananaLayer halt];
+        if(running)
+            [self scaleTimeTo:0 duration:0.5f];
         [[GorillasAppDelegate get] hideHud];
         [windLayer do:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                          opacity:0x00]];
     } else {
-        [buildingsLayer.bananaLayer resume];
-        [[GorillasAppDelegate get] dismissLayer];
+        [self scaleTimeTo:1 duration:1];
+        [[GorillasAppDelegate get] popAllLayers];
         [[GorillasAppDelegate get] revealHud];
         [windLayer do:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                          opacity:0xFF]];
@@ -225,6 +226,172 @@
 }
 
 
+-(void) updateStateHitGorilla:(BOOL)hitGorilla hitBuilding:(BOOL)hitBuilding offScreen:(BOOL)offScreen throwSkill:(float)throwSkill {
+
+    if (offScreen)
+        [[[GorillasAppDelegate get] hudLayer] message:[GorillasConfig get].offMessage
+                                             duration:2 isImportant:NO];
+    else if(hitGorilla && !buildingsLayer.hitGorilla.alive)
+        [[[GorillasAppDelegate get] hudLayer] message:[NSString stringWithFormat:[GorillasConfig get].hitMessage,
+                                                       activeGorilla.name, buildingsLayer.hitGorilla.name]
+                                             duration:2 isImportant:NO];
+
+    if (hitGorilla) {
+        // Gorilla hit a gorilla.
+        
+        int score = 0;
+        BOOL cheer = NO;
+        if([activeGorilla human]) {
+            // Human hits ...
+            
+            if([buildingsLayer.hitGorilla human]) {
+                // ... Human.
+                if([self isEnabled:GorillasFeatureTeam]
+                   || buildingsLayer.hitGorilla == activeGorilla)
+                    // In team mode or when suiciding, deduct score.
+                    score = [[GorillasConfig get] deathScore];
+                else
+                    cheer = YES;
+            }
+            
+            else {
+                // ... AI.  Score boost.
+                score = [[GorillasConfig get] killScore];
+                cheer = YES;
+            }
+        } else {
+            // AI hits ...
+            
+            if([buildingsLayer.hitGorilla human]) {
+                // ... Human.
+                if(![self isEnabled:GorillasFeatureTeam])
+                    // In team mode, deduct score.
+                    score = [[GorillasConfig get] deathScore];
+                
+                cheer = YES;
+            } else {
+                // ... AI.
+                if(![self isEnabled:GorillasFeatureTeam]
+                   && buildingsLayer.hitGorilla != activeGorilla)
+                    // Not in team and not suiciding.
+                    cheer = YES;
+            }
+        }
+        
+        // Update Skill.
+        if([self isEnabled:GorillasFeatureSkill]) {
+            float skill = 0;
+            
+            if([activeGorilla human]) {
+                // Human skill.
+                [[GorillasConfig get] setSkill:fminf(0.99f, [[GorillasConfig get] skill] / 2 + throwSkill)];
+                skill = [GorillasConfig get].skill;
+            } else
+                // AI skill.
+                skill = [GorillasConfig get].level;
+            
+            // Apply oneshot bonus.
+            if(activeGorilla.turns == 0) {
+                [self message:@"Oneshot!"];
+                skill *= [[GorillasConfig get] bonusOneShot];
+            }
+            
+            if(score)
+                score += (score / abs(score)) * [GorillasConfig get].bonusSkill * skill;
+        }
+        
+        // Update Level.
+        if([self isEnabled:GorillasFeatureLevel]) {
+            score *= [[GorillasConfig get] level];
+            
+            NSString *oldLevel = [[GorillasConfig get] levelName];
+            if(score > 0)
+                [[GorillasConfig get] levelUp];
+            else
+                [[GorillasConfig get] levelDown];
+            
+            // Message in case we level up.
+            if(![oldLevel isEqualToString:[[GorillasConfig get] levelName]]) {
+                if(score > 0)
+                    [self message:@"Level Up!"];
+                else
+                    [self message:@"Level Down"];
+            }
+        }
+        
+        // Update score.
+        if([self isEnabled:GorillasFeatureScore] && score) {
+            [GorillasConfig get].score += score;
+            
+            [[[GorillasAppDelegate get] hudLayer] updateHudWithScore:score skill:0];
+            [buildingsLayer message:[NSString stringWithFormat:@"%+d", score] on:buildingsLayer.hitGorilla];
+        }
+        
+        // If gorilla did something benefitial: cheer or dance.
+        if(cheer) {
+            if ([buildingsLayer.hitGorilla alive])
+                [activeGorilla cheer];
+            else
+                [activeGorilla dance];
+        }
+        
+        // Check whether any gorillas are left.
+        int liveGorillaCount = 0;
+        GorillaLayer *liveGorilla;
+        for(GorillaLayer *_gorilla in gorillas)
+            if([_gorilla alive]) {
+                liveGorillaCount++;
+                liveGorilla = _gorilla;
+            }
+        
+        // If 0 or 1 gorillas left; show who won and stop the game.
+        if(liveGorillaCount < 2) {
+            if(liveGorillaCount == 1)
+                [[[GorillasAppDelegate get] hudLayer] message:[NSString stringWithFormat:@"%@ wins!", [liveGorilla name]] duration:2 isImportant:NO];
+            else
+                [[[GorillasAppDelegate get] hudLayer] message:@"Tie!" duration:2 isImportant:NO];
+        }
+        
+        // Reset the wind.
+        [windLayer reset];
+    }
+    
+    else if (hitBuilding || offScreen) {
+        // Gorilla missed gorilla: either hit building or threw off screen.
+        BOOL considderMiss = YES;
+        
+        if (!([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureScore]))
+            // Don't deduct score when score not enabled.
+            considderMiss = NO;
+        
+        if (!([[GorillasAppDelegate get].gameLayer.activeGorilla human]))
+            // Don't deduct score for AI misses.
+            considderMiss = NO;
+        
+        if (![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureTeam]) {
+            NSUInteger humanGorillas = 0;
+            for (GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
+                if ([gorilla human])
+                    ++humanGorillas;
+            
+            if(humanGorillas != 1)
+                // Don't deduct score for non-teamed multiplayer.
+                considderMiss = NO;
+        }
+        
+        if (considderMiss) {
+            int score = [[GorillasConfig get] level] * [[GorillasConfig get] missScore];
+            
+            [GorillasConfig get].score += score;
+            [[[GorillasAppDelegate get] hudLayer] updateHudWithScore:score skill:0];
+            
+            if(score)
+                [buildingsLayer message:[NSString stringWithFormat:@"%+d", score] on:buildingsLayer.bananaLayer.banana];
+        }
+    }
+}
+
+
 -(BOOL) checkGameStillOn {
 
     if(running) {
@@ -249,9 +416,6 @@
         if([self isEnabled:GorillasFeatureTeam]
            && !liveEnemyGorillas)
             running = NO;
-        
-        if (!running)
-            [self endGame];
     }
     
     return running;

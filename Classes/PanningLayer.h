@@ -35,4 +35,6 @@
     ScaleTo *scaleAction;
 }
 
+-(void) scaleTo:(cpFloat)newScale;
+
 @end

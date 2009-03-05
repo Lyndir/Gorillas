@@ -97,7 +97,7 @@
 -(void) back: (id) sender {
     
     [[GorillasAppDelegate get] clickEffect];
-    [[GorillasAppDelegate get] showMainMenu];
+    [[GorillasAppDelegate get] popLayer];
 }
 
 
