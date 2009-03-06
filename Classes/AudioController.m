@@ -161,7 +161,7 @@ void interruptionListenerCallback (
 			[self.audioPlayer setNotificationDelegate: self];	// sets up the playback object to receive property change notifications from the playback audio queue object
             
 			// activate the audio session immmediately before playback starts
-			AudioSessionSetActive(true);
+			AudioSessionSetActive(YES);
 			[self.audioPlayer play];
 		}
 	}
@@ -183,7 +183,7 @@ void interruptionListenerCallback (
         audioPlayer = nil;
         
         // now that playback has stopped, deactivate the audio session
-        AudioSessionSetActive(false);
+        AudioSessionSetActive(NO);
         [self release];
 	}
 }
@@ -210,7 +210,7 @@ void interruptionListenerCallback (
 		sizeof (sessionCategory),
 		&sessionCategory
 	);
-	AudioSessionSetActive(true);
+	AudioSessionSetActive(YES);
 
 	[self.audioPlayer resume];
 }

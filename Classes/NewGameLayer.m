@@ -54,7 +54,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *descriptionT    = [MenuItemFont itemFromString:[[GorillasConfig get] gameConfiguration].description];
-    [descriptionT setIsEnabled:false];
+    [descriptionT setIsEnabled:NO];
     
     
     // Type (Single / Multi).

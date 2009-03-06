@@ -63,7 +63,7 @@
     
     throwHints      = [[NSMutableArray alloc] initWithCapacity:2];
     
-    isTouchEnabled  = true;
+    isTouchEnabled  = YES;
 
     aim             = cpv(-1, -1);
     buildings       = [[NSMutableArray alloc] init];
@@ -192,7 +192,7 @@
         for(float y = 0; y < [[Director sharedDirector] winSize].size.height; y += dbgTraceStep) {
             cpVect pos = cpv(x, y);
 
-            BOOL hg = false, he = false;
+            BOOL hg = NO, he = NO;
             for(ExplosionLayer *explosion in explosions)
                 if((he = [explosion hitsExplosion:pos]))
                     break;
@@ -381,14 +381,14 @@
     // Activate the next gorilla.
     // Look for the next live gorilla; first try the next gorilla AFTER the current.
     // If none there is alive, try the first one from the beginning UNTIL the current.
-    BOOL foundNextGorilla = false;
-    for(BOOL startFromAfterCurrent = true; true; startFromAfterCurrent = false) {
-        BOOL reachedCurrent = false;
+    BOOL foundNextGorilla = NO;
+    for(BOOL startFromAfterCurrent = YES; YES; startFromAfterCurrent = NO) {
+        BOOL reachedCurrent = NO;
         
         for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas) {
         
             if(gorilla == [GorillasAppDelegate get].gameLayer.activeGorilla)
-                reachedCurrent = true;
+                reachedCurrent = YES;
             
             else
                 if(startFromAfterCurrent) {
@@ -397,7 +397,7 @@
                     if(reachedCurrent && [gorilla alive]) {
                         [GorillasAppDelegate get].gameLayer.activeGorilla = gorilla;
                         [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:YES];
-                        foundNextGorilla = true;
+                        foundNextGorilla = YES;
                         break;
                     }
                 } else {
@@ -410,7 +410,7 @@
                     else if([gorilla alive]) {
                         [GorillasAppDelegate get].gameLayer.activeGorilla = gorilla;
                         [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:YES];
-                        foundNextGorilla = true;
+                        foundNextGorilla = YES;
                         break;
                     }
                 }
@@ -610,19 +610,19 @@
 
             // A building was hit, but if it's in an explosion crater we
             // need to let the banana continue flying.
-            BOOL hitsExplosion = false;
+            BOOL hitsExplosion = NO;
             
             for(ExplosionLayer *explosion in explosions)
                 if([explosion hitsExplosion: pos])
-                    hitsExplosion = true;
+                    hitsExplosion = YES;
             
             if(!hitsExplosion)
                 // Hit was not in an explosion.
-                return true;
+                return YES;
         }
     
     // No hit.
-    return false;
+    return NO;
 }
 
 

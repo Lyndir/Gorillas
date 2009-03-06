@@ -41,7 +41,7 @@
     
     banana = [[Sprite alloc] initWithFile:@"banana.png"];
     [banana setScale:[[GorillasConfig get] cityScale]];
-    [banana setVisible:false];
+    [banana setVisible:NO];
     [banana setTag:GorillasTagBananaNotFlying];
     
     throwAction = nil;
@@ -52,7 +52,7 @@
 
 -(void) throwFrom: (cpVect)r0 withVelocity: (cpVect)v {
     
-    [self setClearedGorilla:false];
+    [self setClearedGorilla:NO];
 
     [throwAction release];
     [banana setPosition:r0];

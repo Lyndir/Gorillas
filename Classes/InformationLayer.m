@@ -42,7 +42,7 @@
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *ver   = [MenuItemFont itemFromString:[[NSBundle mainBundle]
                                                     objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
-    [ver setIsEnabled:false];
+    [ver setIsEnabled:NO];
     
     // Information menus.
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];

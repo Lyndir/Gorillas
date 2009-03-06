@@ -58,7 +58,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *themeT    = [MenuItemFont itemFromString:@"City Theme"];
-    [themeT setIsEnabled:false];
+    [themeT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *themeI    = [MenuItemFont itemFromString:[[GorillasConfig get] cityTheme]
@@ -71,7 +71,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *gravityT  = [MenuItemFont itemFromString:@"Gravity"];
-    [gravityT setIsEnabled:false];
+    [gravityT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *gravityI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%d", [[GorillasConfig get] gravity]]
@@ -83,7 +83,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *levelT    = [MenuItemFont itemFromString:@"Level"];
-    [levelT setIsEnabled:false];
+    [levelT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *levelI    = [MenuItemFont itemFromString:[[GorillasConfig get] levelName]
@@ -95,7 +95,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *replayT  = [MenuItemFont itemFromString:@"Replays"];
-    [replayT setIsEnabled:false];
+    [replayT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *replayI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%@", [[GorillasConfig get] replay]? @"On": @"Off"]
@@ -107,7 +107,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *followT  = [MenuItemFont itemFromString:@"Follow Throw"];
-    [followT setIsEnabled:false];
+    [followT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *followI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%@", [[GorillasConfig get] followThrow]? @"On": @"Off"]
@@ -119,7 +119,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *flipT  = [MenuItemFont itemFromString:@"Multiplayer Flipping"];
-    [flipT setIsEnabled:false];
+    [flipT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *flipI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%@", [[GorillasConfig get] multiplayerFlip]? @"On": @"Off"]
@@ -183,7 +183,7 @@
     NSArray *themes = [[CityTheme getThemes] allKeys];
     NSString *newTheme = [themes objectAtIndex:0];
     
-    BOOL found = false;
+    BOOL found = NO;
     for(NSString *theme in themes) {
         if(found) {
             newTheme = theme;
@@ -191,7 +191,7 @@
         }
         
         if([[[GorillasConfig get] cityTheme] isEqualToString:theme])
-            found = true;
+            found = YES;
     }
     
     [[[CityTheme getThemes] objectForKey:newTheme] apply];

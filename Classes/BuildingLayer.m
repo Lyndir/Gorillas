@@ -186,7 +186,7 @@
     drawBoxFrom(cpvzero, cpv(contentSize.width, contentSize.height), buildingColor, buildingColor);
 
     // == DRAW WINDOWS ==
-    for(BOOL isOn = false; isOn < 2; ++isOn) {
+    for(BOOL isOn = NO; isOn < 2; ++isOn) {
         
         // Bind our VBOs & colors.
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, windowsIndicesBuffer[isOn]);

@@ -58,7 +58,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *audioT    = [MenuItemFont itemFromString:@"Audio Track"];
-    [audioT setIsEnabled:false];
+    [audioT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *audioI    = [MenuItemFont itemFromString:[[GorillasConfig get] currentTrackName]
@@ -70,7 +70,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *soundFxT  = [MenuItemFont itemFromString:@"Sound Effects"];
-    [soundFxT setIsEnabled:false];
+    [soundFxT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *soundFxI  = [MenuItemFont itemFromString:[[GorillasConfig get] soundFx]? @"On": @"Off"
@@ -82,7 +82,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *vibrationT  = [MenuItemFont itemFromString:@"Vibration"];
-    [vibrationT setIsEnabled:false];
+    [vibrationT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *vibrationI  = [MenuItemFont itemFromString:[[GorillasConfig get] vibration]? @"On": @"Off"
@@ -94,7 +94,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *visualFxT  = [MenuItemFont itemFromString:@"Visual Effects"];
-    [visualFxT setIsEnabled:false];
+    [visualFxT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *visualFxI  = [MenuItemFont itemFromString:[[GorillasConfig get] visualFx]? @"On": @"Off"
@@ -105,7 +105,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *weatherT  = [MenuItemFont itemFromString:@"Weather"];
-    [weatherT setIsEnabled:false];
+    [weatherT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *weatherI  = [MenuItemFont itemFromString:[[GorillasConfig get] weather]? @"On": @"Off"
@@ -154,7 +154,7 @@
     NSArray *tracks = [GorillasConfig get].tracks;
     NSString *newTrack = [tracks objectAtIndex:0];
     
-    BOOL found = false;
+    BOOL found = NO;
     for(NSString *track in tracks) {
         if(found) {
             newTrack = track;
@@ -162,7 +162,7 @@
         }
         
         if([[[GorillasConfig get] currentTrack] isEqualToString:track])
-            found = true;
+            found = YES;
     }
 
     if(![newTrack length])

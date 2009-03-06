@@ -109,7 +109,7 @@ void drawLines(const cpVect* points, const long* longColors, int n, float width)
         glEnableClientState(GL_VERTEX_ARRAY);
     
     // Define colors and pass to GL.
-    BOOL cWasEnabled = true; // true keeps us from disabling it at the end.
+    BOOL cWasEnabled = YES; // keeps us from disabling it at the end.
     if(longColors != nil) {
         glColorPointer(4, GL_UNSIGNED_BYTE, 0, longColors);
         
@@ -148,7 +148,7 @@ void drawBoxFrom(cpVect from, cpVect to, long fromColor, long toColor) {
     glVertexPointer(2, GL_FLOAT, 0, vertices);
 
     // Define colors and pass to GL.
-    BOOL cWasEnabled = true; // true keeps us from disabling it at the end.
+    BOOL cWasEnabled = YES; // keeps us from disabling it at the end.
     const GLubyte *fromColorBytes = (GLubyte *)&fromColor;
     if(fromColor != toColor) {
         const GLubyte *toColorBytes = (GLubyte *)&toColor;

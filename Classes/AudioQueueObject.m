@@ -84,7 +84,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 				);
 
 	if (result != noErr) {
-		return false;
+		return NO;
 	} else {
 		return isRunning;
 	}
@@ -98,7 +98,7 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 	// allocate the memory needed to store audio level information
 	self.audioLevels = (AudioQueueLevelMeterState *) calloc (sizeof (AudioQueueLevelMeterState), audioFormat.mChannelsPerFrame);
 
-	UInt32 trueValue = true;
+	UInt32 trueValue = YES;
 
 	AudioQueueSetProperty(
 		self.queueObject,

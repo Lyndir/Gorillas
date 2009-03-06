@@ -446,7 +446,7 @@
 	if (!(self = [super init]))
 		return self;
 
-    running = false;
+    running = NO;
 
     // Build internal structures.
     messageQueue = [[NSMutableArray alloc] initWithCapacity:3];
@@ -547,7 +547,7 @@
                 [weather setPosition:cpv([weather position].x, [weather position].y * 2)]; // Space above screen.
                 [buildingsLayer add:weather z:-3 parallaxRatio:cpv(1.3f, 1.8f)];
 
-                [windLayer registerSystem:weather affectAngle:true];
+                [windLayer registerSystem:weather affectAngle:YES];
             }
         }
     }
@@ -633,7 +633,7 @@
 
 -(void) started {
     
-    running = true;
+    running = YES;
 
     [self setPausedSilently:NO];
 }
@@ -641,7 +641,7 @@
 
 -(void) stopped {
     
-    running = false;
+    running = NO;
     
     [activeGorilla release];
     activeGorilla = nil;

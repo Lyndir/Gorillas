@@ -37,7 +37,7 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
 	// Init the window.
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:false];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	[window setUserInteractionEnabled:YES];
 	[window setMultipleTouchEnabled:YES];
@@ -47,8 +47,8 @@
     [Director useFastDirector];
 	[[Director sharedDirector] attachInWindow:window];
 	[[Director sharedDirector] setDisplayFPS:NO];
-	[[Director sharedDirector] setDepthTest:false];
-	[[Director sharedDirector] setLandscape:true];
+	[[Director sharedDirector] setDepthTest:NO];
+	[[Director sharedDirector] setLandscape:YES];
 	//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

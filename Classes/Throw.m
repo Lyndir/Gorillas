@@ -104,11 +104,11 @@
      [spinAction = [Repeat actionWithAction:[RotateBy actionWithDuration:1
                                                                    angle:360]
                                       times:(int)duration + 1] retain]];
-    [target setVisible:true];
+    [target setVisible:YES];
     [target setTag:GorillasTagBananaFlying];
     
     
-    [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:smoke affectAngle:false];
+    [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:smoke affectAngle:NO];
     
     if([[GorillasConfig get] visualFx]) {
         [smoke setEmissionRate:30];
@@ -193,8 +193,8 @@
                 [gameLayer.buildingsLayer.hitGorilla killDead];
             [[gameLayer windLayer] unregisterSystem:smoke];
             [smoke setEmissionRate:0];
-            [target setVisible:false];
-            running = false;
+            [target setVisible:NO];
+            running = NO;
             
             // Update game state.
             [gameLayer updateStateHitGorilla:hitGorilla hitBuilding:hitBuilding offScreen:offScreen throwSkill:throwSkill];
@@ -362,7 +362,7 @@
 -(void) stop {
 
     duration = 0;
-    running = false;
+    running = NO;
 }
 
 

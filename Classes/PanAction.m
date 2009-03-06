@@ -45,7 +45,7 @@
     
     subNodes = [nSubNodes retain];
     padding = nPadding;
-    cancelled = false;
+    cancelled = NO;
     
     return self;
 }
@@ -78,7 +78,7 @@
 
 -(void) cancel {
     
-    cancelled = true;
+    cancelled = YES;
 }
 
 

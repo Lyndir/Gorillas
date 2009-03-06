@@ -60,7 +60,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *humansT  = [MenuItemFont itemFromString:@"Humans"];
-    [humansT setIsEnabled:false];
+    [humansT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *humansI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%d Player%s", humans, humans == 1? "": "s"]
@@ -72,7 +72,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *gameModeT    = [MenuItemFont itemFromString:@"Game Mode"];
-    [gameModeT setIsEnabled:false];
+    [gameModeT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *gameModeI    = [MenuItemFont itemFromString:[[GorillasConfig get] modeString]
@@ -84,7 +84,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *aisT  = [MenuItemFont itemFromString:@"AIs"];
-    [aisT setIsEnabled:false];
+    [aisT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *aisI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%d AI%s", ais, ais == 1? "": "s"]

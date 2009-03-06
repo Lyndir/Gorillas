@@ -128,7 +128,7 @@
         [flames setStartColorVar:startColorVar];
         [flames setEmissionRate:[flames emissionRate] * 1.5f];
         
-        [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:flames affectAngle:false];
+        [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:flames affectAngle:NO];
         [self add:flames z:1];
     }
 }

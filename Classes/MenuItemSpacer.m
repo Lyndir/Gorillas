@@ -67,7 +67,7 @@
         return self;
     
     height = _height;
-    [self setIsEnabled:false];
+    [self setIsEnabled:NO];
     
     return self;
 }
