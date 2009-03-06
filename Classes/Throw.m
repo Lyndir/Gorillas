@@ -204,7 +204,7 @@
             // Game is over but no recap done yet, start a recap.
             [gameLayer.buildingsLayer.bananaLayer setClearedGorilla:NO];
             [gameLayer.buildingsLayer.hitGorilla revive];
-            [[GorillasAppDelegate get].hudLayer message:@"Kill Shot Recap" isImportant:YES];
+            [[GorillasAppDelegate get].hudLayer message:@"Kill Shot Replay" isImportant:YES];
             [[GorillasAppDelegate get].hudLayer setButtonString:@"Skip" callback:self :@selector(skip:)];
             recapr = r;
             recap = elapsed - recapTime;
