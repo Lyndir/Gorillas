@@ -182,7 +182,7 @@
     if([self isDone] || offScreen || hitBuilding || hitGorilla) {
         r = rTest;
         
-        if ([gameLayer checkGameStillOn] || recap) {
+        if ([gameLayer checkGameStillOn] || recap || ![GorillasConfig get].replay) {
             
             // Hitting something causes an explosion.
             if(hitBuilding || hitGorilla)

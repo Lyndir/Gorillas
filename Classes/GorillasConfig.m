@@ -75,6 +75,7 @@
 #define dVibration          @"v1.1.vibration"
 #define dVisualFx           @"v1.1.visualFx"
 
+#define dReplay             @"v1.1.replay"
 #define dFollowThrow        @"v1.1.followThrow"
 #define dMultiplayerFlip    @"v1.1.multiplayerFlip"
 
@@ -205,6 +206,7 @@
                                 [NSNumber numberWithBool:    YES],                          dVibration,
                                 [NSNumber numberWithBool:    YES],                          dVisualFx,
                                 
+                                [NSNumber numberWithBool:    YES],                          dReplay,
                                 [NSNumber numberWithBool:    YES],                          dFollowThrow,
                                 [NSNumber numberWithBool:    NO],                           dMultiplayerFlip,
                                 
@@ -609,6 +611,15 @@
 }
 
 
+-(BOOL) replay {
+    
+    return [defaults boolForKey: dReplay];
+}
+-(void) setReplay: (BOOL)nReplay {
+    
+    [defaults setBool:nReplay forKey: dReplay];
+    [[GorillasAppDelegate get] updateConfig];
+}
 -(BOOL) followThrow {
     
     return [defaults boolForKey: dFollowThrow];

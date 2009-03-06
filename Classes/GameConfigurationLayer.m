@@ -67,6 +67,18 @@
     [themeI setIsEnabled:![[[GorillasAppDelegate get] gameLayer] checkGameStillOn]];
     
     
+    // Gravity.
+    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    MenuItem *gravityT  = [MenuItemFont itemFromString:@"Gravity"];
+    [gravityT setIsEnabled:false];
+    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    MenuItem *gravityI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%d", [[GorillasConfig get] gravity]]
+                                                target:self
+                                              selector:@selector(gravity:)];
+    
+    
     // Difficulity Level.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
@@ -79,16 +91,16 @@
                                               selector:@selector(level:)];
     
     
-    // Gravity.
+    // Killshot Replays.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *gravityT  = [MenuItemFont itemFromString:@"Gravity"];
-    [gravityT setIsEnabled:false];
+    MenuItem *replayT  = [MenuItemFont itemFromString:@"Replays"];
+    [replayT setIsEnabled:false];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *gravityI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%d", [[GorillasConfig get] gravity]]
-                                                target:self
-                                              selector:@selector(gravity:)];
+    MenuItem *replayI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%@", [[GorillasConfig get] replay]? @"On": @"Off"]
+                                               target:self
+                                             selector:@selector(replay:)];
     
     
     // Follow Throw.
@@ -114,10 +126,10 @@
                                              target:self
                                            selector:@selector(multiplayerFlip:)];
     
-    menu = [[Menu menuWithItems:themeT, themeI, levelT, gravityT, levelI, gravityI, followT, flipT, followI, flipI, nil] retain];
+    menu = [[Menu menuWithItems:themeT, gravityT, themeI, gravityI, levelT, replayT, levelI, replayI, followT, flipT, followI, flipI, nil] retain];
     [menu alignItemsInColumns:
-     [NSNumber numberWithUnsignedInteger:1],
-     [NSNumber numberWithUnsignedInteger:1],
+     [NSNumber numberWithUnsignedInteger:2],
+     [NSNumber numberWithUnsignedInteger:2],
      [NSNumber numberWithUnsignedInteger:2],
      [NSNumber numberWithUnsignedInteger:2],
      [NSNumber numberWithUnsignedInteger:2],
@@ -186,6 +198,13 @@
     [[GorillasConfig get] setCityTheme:newTheme];
     
     [[[GorillasAppDelegate get] gameLayer] reset];
+}
+
+
+-(void) replay: (id) sender {
+    
+    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasConfig get] setReplay:![[GorillasConfig get] replay]];
 }
 
 

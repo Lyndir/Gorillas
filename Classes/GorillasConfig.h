@@ -109,6 +109,7 @@
 @property (readwrite) BOOL                  vibration;
 @property (readwrite) BOOL                  visualFx;
 
+@property (readwrite) BOOL                  replay;
 @property (readwrite) BOOL                  followThrow;
 @property (readwrite) BOOL                  multiplayerFlip;
 
