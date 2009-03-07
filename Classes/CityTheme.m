@@ -147,7 +147,7 @@
                     
                                           skyColor:0x0000b7ff
                                          starColor:0xb7b700ff
-                                        starAmount:30
+                                        starAmount:50
                     
                                       windModifier:20
                                            gravity:100
@@ -168,7 +168,7 @@
                     
                                           skyColor:0x1E3615ff
                                          starColor:0xF2D129ff
-                                        starAmount:100
+                                        starAmount:150
                     
                                       windModifier:30
                                            gravity:60
@@ -189,7 +189,7 @@
                     
                                           skyColor:0x0B0F0Eff
                                          starColor:0xFFF1BFff
-                                        starAmount:200
+                                        starAmount:250
                     
                                       windModifier:10
                                            gravity:40
@@ -210,7 +210,7 @@
                    
                                          skyColor:0x0000b7ff
                                         starColor:0xb7b700ff
-                                       starAmount:60
+                                       starAmount:150
                    
                                      windModifier:40
                                           gravity:140
@@ -231,7 +231,7 @@
                    
                                          skyColor:0x021343ff
                                         starColor:0xF2E3B3ff
-                                       starAmount:50
+                                       starAmount:100
                    
                                      windModifier:15
                                           gravity:80

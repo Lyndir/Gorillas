@@ -28,13 +28,19 @@
 #import "Resettable.h"
 #import "GorillasConfig.h"
 
+typedef struct _Star {
+    cpVect p;
+    GLfloat s;
+    ccColorB c;
+} Star;
+
 
 @interface SkyLayer : Layer <CocosNodeSize, Resettable> {
 
-    CGSize contentSize;
+    CGSize      contentSize;
     
-    GLfloat *stars;
-    NSUInteger starCount;
+    GLuint      starVertexBuffer;
+    NSUInteger  starCount;
 }
 
 @property (readonly) CGSize contentSize;

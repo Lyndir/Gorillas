@@ -26,6 +26,7 @@
 
 #import "SkyLayer.h"
 #import "Utility.h"
+#define maxStarSize 2
 
 
 @implementation SkyLayer
@@ -38,7 +39,9 @@
 	if (!(self = [super init]))
         return self;
     
-    starCount = -1;
+    starVertexBuffer    = 0;
+    starCount           = -1;
+    
     [self reset];
     
     return self;
@@ -50,40 +53,55 @@
     if (starCount == [[GorillasConfig get] starAmount])
         return;
     
-    contentSize = [[Director sharedDirector] winSize];
-    contentSize = CGSizeMake(contentSize.width * 2, contentSize.height * 2);
+    CGSize winSize = [[Director sharedDirector] winSize];
+    contentSize = CGSizeMake(winSize.width * 2, winSize.height * 2);
     starCount = [[GorillasConfig get] starAmount];
     
-    free(stars);
-    stars = malloc(sizeof(GLfloat) * 2 * starCount * 4);
+    Star *starVertices = malloc(sizeof(Star) * starCount * 4);
     
     for (NSUInteger s = 0; s < starCount * 4; ++s) {
-        stars[s * 2 + 0] = random() % (long) contentSize.width;
-        stars[s * 2 + 1] = random() % (long) contentSize.height;
+        starVertices[s].p   = cpv(random() % (long) contentSize.width,
+                                  random() % (long) contentSize.height);
+        starVertices[s].c   = ccc([GorillasConfig get].starColor);
+        starVertices[s].c.a = fminf(0xff, (random() % (int) (starVertices[s].c.a * 256)) / 256.0f);
+        starVertices[s].s   = (random() % (maxStarSize * 10)) / 10.0f + 0.5f;
     }
+    
+    // Push our window data into VBOs.
+    glDeleteBuffers(1, &starVertexBuffer);
+    glGenBuffers(1, &starVertexBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Star) * starCount * 4, starVertices, GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    free(starVertices);
 }
 
 
 -(void) draw {
     
-    // Stars.
-    const long color = [[GorillasConfig get] starColor];
-    const GLubyte *colorBytes = (GLubyte *)&color;
-    glColor4f(colorBytes[3], colorBytes[2], colorBytes[1], colorBytes[0]);
-    
-    glVertexPointer(2, GL_FLOAT, 0, stars);
+    glEnableClientState(GL_COLOR_ARRAY);
     glEnableClientState(GL_VERTEX_ARRAY);
-
+    glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
+    
+    // Stars.
+    glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
+    glVertexPointer(2, GL_FLOAT, sizeof(Star), 0);
+    glPointSizePointerOES(GL_FLOAT, sizeof(Star), (GLvoid *) sizeof(cpVect));
+    glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(Star), (GLvoid *) (sizeof(cpVect) + sizeof(GLfloat)));
+    
     glDrawArrays(GL_POINTS, 0, starCount * 4);
     
+    glDisableClientState(GL_POINT_SIZE_ARRAY_OES);
     glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_COLOR_ARRAY);
 }
 
 
 -(void) dealloc {
-    
-    free(stars);
-    stars = nil;
+
+    glDeleteBuffers(1, &starVertexBuffer);
+    starVertexBuffer = 0;
     
     [super dealloc];
 }

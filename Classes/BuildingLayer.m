@@ -67,8 +67,8 @@
     float wPad = [[GorillasConfig get] windowPadding];
     float wWidth = [[GorillasConfig get] windowWidth];
     float wHeight = [[GorillasConfig get] windowHeight];
-    //ccColorB wColor0 = ccc([[GorillasConfig get] windowColorOff]);
-    //ccColorB wColor1 = ccc([[GorillasConfig get] windowColorOn]);
+    ccColorB wColor0 = ccc([[GorillasConfig get] windowColorOff]);
+    ccColorB wColor1 = ccc([[GorillasConfig get] windowColorOn]);
 
     // Remember the window on and off colors in an array.
     /*memcpy(&wColors, (GLubyte *)&wColor0, sizeof(long));
@@ -101,10 +101,10 @@
              x += wPad + wWidth) {
 
             NSUInteger i = w * 4, j = w * 6;
-            //BOOL isOff = random() % 100 < 20;
+            BOOL isOff = random() % 100 < 20;
             
             windowVertices[i + 0].c = windowVertices[i + 1].c = windowVertices[i + 2].c = windowVertices[i + 3].c
-                = ccc(0xFF0000FF); //isOff? wColor0: wColor1;
+                = isOff? wColor0: wColor1;
             
             windowVertices[i + 0].p = cpv(x         , y);
             windowVertices[i + 1].p = cpv(x + wWidth, y);
@@ -123,7 +123,7 @@
     }
     if(w != windowCount)
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:@"Window vertix count not the same as window amount." userInfo:nil];
+                                       reason:@"Windows vertix count not the same as window amount." userInfo:nil];
     
     // Push our window data into VBOs.
     glDeleteBuffers(1, &windowsVertexBuffer);
@@ -155,11 +155,11 @@
     // == DRAW WINDOWS ==
     // Bind our VBOs & colors.
     glBindBuffer(GL_ARRAY_BUFFER, windowsVertexBuffer);
-    glVertexPointer(2, GL_FLOAT, sizeof(ccColorB), 0);
+    glVertexPointer(2, GL_FLOAT, sizeof(Vertex), 0);
     
-    //glEnableClientState(GL_COLOR_ARRAY);
-    //glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(cpVect), (GLvoid *) sizeof(cpVect));
-    glColor4ub(0xFF, 0x00, 0x00, 0xFF);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(Vertex), (GLvoid *) sizeof(cpVect));
+    //glColor4ub(0xFF, 0x00, 0x00, 0xFF);
     
     // == DRAW FRONT WINDOWS ==
     // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
