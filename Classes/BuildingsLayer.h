@@ -30,6 +30,8 @@
 #import "GorillaLayer.h"
 #import "BananaLayer.h"
 #import "Resettable.h"
+#import "ExplosionsLayer.h"
+#import "HolesLayer.h"
 //#define _DEBUG_
 
 @interface BuildingsLayer : Layer <Resettable> {
@@ -38,7 +40,8 @@
     Label               *msgLabel;
     
     NSMutableArray      *buildings;
-    NSMutableArray      *explosions;
+    HolesLayer          *holes;
+    ExplosionsLayer     *explosions;
 
     cpVect              aim;
     BananaLayer         *bananaLayer;

@@ -17,7 +17,7 @@
  */
 
 //
-//  HoleLayer.h
+//  HolesLayer.h
 //  Gorillas
 //
 //  Created by Maarten Billemont on 04/01/09.
@@ -27,8 +27,16 @@
 #import "cocos2d.h"
 
 
-@interface HoleLayer : Sprite {
+@interface HolesLayer : Layer {
 
+    Texture2D   *texture;
+    NSUInteger  holeCount;
+    cpVect      *holes;
+    
+    GLuint      holeVertexBuffer;
 }
+
+-(BOOL) hitsHole:(cpVect)pos;
+-(void) addHoleAt:(cpVect)pos;
 
 @end

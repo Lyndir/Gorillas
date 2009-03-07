@@ -27,6 +27,19 @@
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
 
+typedef struct _Vertex {
+	cpVect p;
+    ccColorB c;
+} Vertex;
+
+static inline ccColorB
+ccc(const long c)
+{
+    GLubyte *components = (GLubyte *)&c;
+	ccColorB cc = { components[3], components[2], components[1], components[0] };
+	return cc;
+}
+
 NSString* rpad(NSString* string, NSUInteger l);
 NSString* lpad(NSString* string, NSUInteger l);
 NSString* appendOrdinalPrefix(int number, NSString* prefix);

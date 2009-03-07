@@ -17,7 +17,7 @@
  */
 
 //
-//  ExplosionLayer.h
+//  ExplosionsLayer.h
 //  Gorillas
 //
 //  Created by Maarten Billemont on 04/11/08.
@@ -26,24 +26,18 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
-#import "HoleLayer.h"
 #import "AudioController.h"
 
 
-@interface ExplosionLayer : Layer <CocosNodeSize> {
+@interface ExplosionsLayer : Layer {
     
-    HoleLayer *hole;
-    ParticleSystem *explosion;
-    ParticleSystem *flames;
-    
-    BOOL heavy, hitsGorilla;
+    cpVect          *positions;
+    NSMutableArray  *explosions;
+    NSMutableArray  *flames;
 }
 
--(id) initHitsGorilla: (BOOL)hitsGorilla;
--(BOOL) hitsExplosion: (cpVect)pos;
+-(void) addExplosionAt:(cpVect)pos hitsGorilla:(BOOL)gorillaHit;
 
 +(SystemSoundID) explosionEffect: (BOOL)heavy;
-
-@property (readonly) HoleLayer *hole;
 
 @end

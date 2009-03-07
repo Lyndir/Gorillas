@@ -26,7 +26,7 @@
 
 #import "BuildingsLayer.h"
 #import "BuildingLayer.h"
-#import "ExplosionLayer.h"
+#import "ExplosionsLayer.h"
 #import "GorillasAppDelegate.h"
 #import "Utility.h"
 #import "ShadeTo.h"
@@ -67,7 +67,8 @@
 
     aim             = cpv(-1, -1);
     buildings       = [[NSMutableArray alloc] init];
-    explosions      = [[NSMutableArray alloc] init];
+    holes           = nil;
+    explosions      = nil;
     
     [self reset];
     
@@ -100,11 +101,19 @@
     [self stopAllActions];
     [self setPosition:cpvzero];
     
-    for(ExplosionLayer *explosion in explosions) {
-        [self removeAndStop:explosion];
-        [self removeAndStop:[explosion hole]];
+    if(holes) {
+        [self removeAndStop:holes];
+        [holes release];
     }
-    [explosions removeAllObjects];
+    if(explosions) {
+        [self removeAndStop:explosions];
+        [explosions release];
+    }
+    holes = [[HolesLayer alloc] init];
+    [self add:holes z:-1];
+    explosions = [[ExplosionsLayer alloc] init];
+    [self add:explosions z:3];
+
     for (BuildingLayer *building in buildings)
         [self removeAndStop:building];
     [buildings removeAllObjects];
@@ -193,9 +202,8 @@
             cpVect pos = cpv(x, y);
 
             BOOL hg = NO, he = NO;
-            for(ExplosionLayer *explosion in explosions)
-                if((he = [explosion hitsExplosion:pos]))
-                    break;
+            if((he = [holes hitsHole:pos]))
+                break;
 
             for(GorillaLayer *gorilla in gorillas)
                 if((hg = [gorilla hitsGorilla:pos]))
@@ -610,14 +618,8 @@
 
             // A building was hit, but if it's in an explosion crater we
             // need to let the banana continue flying.
-            BOOL hitsExplosion = NO;
-            
-            for(ExplosionLayer *explosion in explosions)
-                if([explosion hitsExplosion: pos])
-                    hitsExplosion = YES;
-            
-            if(!hitsExplosion)
-                // Hit was not in an explosion.
+            if(![holes hitsHole: pos])
+                // Hit was not in a hole.
                 return YES;
         }
     
@@ -691,16 +693,10 @@
     
     [self do:[Sequence actions:
               [DelayTime actionWithDuration:1],
-              [CallFunc actionWithTarget:self selector:@selector(startGameCallback)],
+              [CallFunc actionWithTarget:self selector:@selector(nextGorilla)],
               nil]];
     
     [[[GorillasAppDelegate get] gameLayer] started];
-}
-
-
--(void) startGameCallback {
-    
-    [self nextGorilla];
 }
 
 
@@ -764,13 +760,8 @@
 
 -(void) explodeAt: (cpVect)point isGorilla:(BOOL)isGorilla {
     
-    ExplosionLayer *explosion = [[ExplosionLayer alloc] initHitsGorilla:isGorilla];
-    [explosions addObject:explosion];
-
-    [explosion setPosition:point];
-    [self add:explosion z:3];
-    [self add:[explosion hole] z:-1];
-    [explosion release];
+    [holes addHoleAt:point];
+    [explosions addExplosionAt:point hitsGorilla:isGorilla];
 }
 
 
@@ -799,6 +790,9 @@
     [buildings release];
     buildings = nil;
     
+    [holes release];
+    holes = nil;
+
     [explosions release];
     explosions = nil;
     

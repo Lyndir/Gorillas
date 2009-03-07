@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+source bashlib
+
+
+# Configuration.
+srcs=(
+    fire
+    smoke
+)
+weightings=(
+    linear
+    linear
+)
+bpps=(
+    2
+    2
+)
+
+
+# Perform conversion.
+emit "Converting:" --
+    for i in "${!srcs[@]}"; do
+        src=../png/${srcs[i]}.png
+        weighting=${weightings[i]}
+        bpp=${bpps[i]}
+
+        [[ -f $src ]] || {
+            emit -r "Couldn't find '$src'"
+            continue
+        }
+
+        dst=${src##*/}
+        emit "Converting: $dst (${bpp}bpp, $weighting)"
+
+        texturetool -e PVRTC -f PVR \
+            --channel-weighting-linear --bits-per-pixel-2 \
+            -p "$dst" -o "${dst%.png}.pvr" "$src"
+    done
+emit -$?
