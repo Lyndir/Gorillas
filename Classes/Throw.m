@@ -252,7 +252,6 @@
     
     // End of the throw.
     [self scrollToCenter:cpvzero];
-    [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:1];
     [[GorillasAppDelegate get].gameLayer scaleTimeTo:1 duration:0.5f];
 
     NSUInteger liveHumans = 0;

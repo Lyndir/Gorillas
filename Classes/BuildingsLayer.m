@@ -382,6 +382,9 @@
         return;
     }
     
+    // Save the active gorilla's zoom.
+    [GorillasAppDelegate get].gameLayer.activeGorilla.zoom = [GorillasAppDelegate get].gameLayer.panningLayer.scale;
+    
     // Active gorilla's turn is over.
     ++[GorillasAppDelegate get].gameLayer.activeGorilla.turns;
     [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:NO];
@@ -438,6 +441,9 @@
         [[GorillasAppDelegate get].gameLayer endGame];
         return;
     }
+    
+    // Scale to the active gorilla's saved scale.
+    [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:[GorillasAppDelegate get].gameLayer.activeGorilla.zoom];
 
     if([GorillasAppDelegate get].gameLayer.activeGorilla.alive && ![GorillasAppDelegate get].gameLayer.activeGorilla.human) {
         // Active gorilla is a live AI.

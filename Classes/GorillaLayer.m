@@ -43,23 +43,25 @@
 
 @implementation GorillaLayer
 
-@synthesize human, name, turns, lives, active;
+@synthesize human, name, turns, lives, active, zoom;
 
 
 -(id) initAsHuman:(BOOL)_human {
     
-    type = _human? @"brown": @"silver";
+    type    = _human? @"brown": @"silver";
     
     if(!(self = [super initWithFile:[NSString stringWithFormat:@"gorilla-%@-DD.png", type]]))
         return self;
     
-    dd = [texture retain];
-    ud = [[[TextureMgr sharedTextureMgr] addImage:[NSString stringWithFormat:@"gorilla-%@-UD.png", type]] retain];
-    du = [[[TextureMgr sharedTextureMgr] addImage:[NSString stringWithFormat:@"gorilla-%@-DU.png", type]] retain];
-    uu = [[[TextureMgr sharedTextureMgr] addImage:[NSString stringWithFormat:@"gorilla-%@-UU.png", type]] retain];
+    zoom    = 1;
     
-    human = _human;
-    bobber = [[Sprite alloc] initWithFile:@"bobber.png"];
+    dd      = [texture retain];
+    ud      = [[[TextureMgr sharedTextureMgr] addImage:[NSString stringWithFormat:@"gorilla-%@-UD.png", type]] retain];
+    du      = [[[TextureMgr sharedTextureMgr] addImage:[NSString stringWithFormat:@"gorilla-%@-DU.png", type]] retain];
+    uu      = [[[TextureMgr sharedTextureMgr] addImage:[NSString stringWithFormat:@"gorilla-%@-UU.png", type]] retain];
+    
+    human   = _human;
+    bobber  = [[Sprite alloc] initWithFile:@"bobber.png"];
     [bobber setPosition:cpv([self contentSize].width / 2,
                             [self contentSize].height + [bobber contentSize].height / 2 + 15)];
     [bobber do:[RepeatForever actionWithAction:[Sequence actions:

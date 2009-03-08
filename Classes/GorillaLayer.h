@@ -30,16 +30,16 @@
 
 @interface GorillaLayer : Sprite {
 
-    NSString *name, *type;
-    Sprite *bobber;
+    NSString            *name;
+    int                 initialLives, lives;
+    BOOL                human;
+    NSUInteger          turns;
+    BOOL                active;
+    float               zoom;
     
-    Texture2D *dd, *ud, *du, *uu;
-    
-    NSUInteger turns;
-    int initialLives;
-    int lives;
-    BOOL human;
-    BOOL active;
+    Sprite              *bobber;
+    NSString            *type;
+    Texture2D           *dd, *ud, *du, *uu;
 }
 
 -(id) initAsHuman:(BOOL)_human;
@@ -52,12 +52,13 @@
 -(void) killDead;
 -(void) revive;
 
-@property (readwrite, retain) NSString *name;
+@property (readwrite, retain) NSString  *name;
 
-@property (readwrite) NSUInteger turns;
-@property (readwrite) BOOL active;
-@property (readonly) int lives;
-@property (readonly) BOOL human;
-@property (readonly) BOOL alive;
+@property (readwrite) NSUInteger        turns;
+@property (readwrite) BOOL              active;
+@property (readonly) int                lives;
+@property (readonly) BOOL               human;
+@property (readonly) BOOL               alive;
+@property (readwrite) float             zoom;
 
 @end
