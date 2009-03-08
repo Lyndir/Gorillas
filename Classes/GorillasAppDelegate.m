@@ -75,7 +75,7 @@
     
     // Build the game scene.
 	gameLayer = [[GameLayer alloc] init];
-    uiLayer = [[Layer alloc] init];
+    uiLayer = [[UILayer alloc] init];
     [uiLayer add:gameLayer];
 	
     // Start the background music.

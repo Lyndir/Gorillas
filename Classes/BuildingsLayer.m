@@ -751,12 +751,16 @@
         // If already panning, stop first.
         [self stopPanning];
     
+    [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:0.7f];
+    
     panAction = [[PanAction alloc] initWithSubNodes:buildings duration:[[GorillasConfig get] buildingSpeed] padding:1];
     [self do: panAction];
 }
 
 
 -(void) stopPanning {
+    
+    [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:1];
     
     [panAction cancel];
     [panAction release];

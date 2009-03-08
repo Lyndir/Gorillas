@@ -265,8 +265,8 @@
                                                  angle:((int) [gameLayer rotation] + 180) % 360]];
         
         if(endCount) {
-            [gameLayer message:@"Next player .."];
-            [gameLayer message:@"Go .." callback:self :@selector(nextTurn)];
+            [[GorillasAppDelegate get].uiLayer message:@"Next player .."];
+            [[GorillasAppDelegate get].uiLayer message:@"Go .." callback:self :@selector(nextTurn)];
             return;
         }
     }

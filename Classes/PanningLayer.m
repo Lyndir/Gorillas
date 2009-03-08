@@ -140,6 +140,18 @@
 }
 
 
+-(void) onEnter {
+    
+    [super onEnter];
+}
+
+
+-(void) activateTimers {
+    
+    [(id)super activateTimers];
+}
+
+
 -(void) dealloc {
     
     [scaleAction release];

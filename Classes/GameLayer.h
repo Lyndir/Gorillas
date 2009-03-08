@@ -51,9 +51,6 @@
     ParticleSystem                          *weather;
     WindLayer                               *windLayer;
     Action                                  *shakeAction;
-    
-    Label                                   *msgLabel;
-    NSMutableArray                          *messageQueue, *callbackQueue;
 }
 
 @property (readwrite) BOOL                  paused;
@@ -69,8 +66,6 @@
 @property (readonly) WindLayer              *windLayer;
 
 -(void) shake;
--(void) message:(NSString *)msg;
--(void) message:(NSString *)msg callback:(id)target :(SEL)selector;
 -(BOOL) isEnabled:(GorillasFeature)feature;
 -(void) configureGameWithMode:(GorillasMode)nMode humans:(NSUInteger)humans ais:(NSUInteger)ais;
 

@@ -34,7 +34,6 @@
 @interface GameLayer (Private)
 
 -(void) setPausedSilently:(BOOL)_paused;
--(void) resetMessage:(NSString *)msg;
 -(void) shuffleGorillas;
 
 @end
@@ -70,9 +69,9 @@
     
     if(running) {
         if(paused)
-            [self message:@"Paused"];
+            [[GorillasAppDelegate get].uiLayer message:@"Paused"];
         else
-            [self message:@"Unpaused"];
+            [[GorillasAppDelegate get].uiLayer message:@"Unpaused"];
     }
 }
 
@@ -129,32 +128,6 @@
 }
 
 
--(void) message:(NSString *)msg {
-    
-    [self message:msg callback:nil :nil];
-}
-
-
--(void) message:(NSString *)msg callback:(id)target :(SEL)selector {
-    
-    NSInvocation *callback = nil;
-    if(target) {
-        NSMethodSignature *signature = [[target class] instanceMethodSignatureForSelector:selector];
-        callback = [NSInvocation invocationWithMethodSignature:signature];
-        [callback setTarget:[target retain]];
-        [callback setSelector:selector];
-    }
-    
-    @synchronized(messageQueue) {
-        [messageQueue insertObject:msg atIndex:0];
-        [callbackQueue insertObject:callback? callback: (id)[NSNull null] atIndex:0];
-        
-        if(![self isScheduled:@selector(popMessageQueue:)])
-            [self schedule:@selector(popMessageQueue:)];
-    }
-}
-
-
 -(void) startGame {
 
     if(running)
@@ -205,7 +178,7 @@
     
     // When there are AIs in the game, show their difficulity.
     if (ais)
-        [self message:[[GorillasConfig get] levelName]];
+        [[GorillasAppDelegate get].uiLayer message:[[GorillasConfig get] levelName]];
     
     // Reset the game field and start the game.
     [buildingsLayer stopPanning];
@@ -292,7 +265,7 @@
             
             // Apply oneshot bonus.
             if(activeGorilla.turns == 0) {
-                [self message:@"Oneshot!"];
+                [[GorillasAppDelegate get].uiLayer message:@"Oneshot!"];
                 skill *= [[GorillasConfig get] bonusOneShot];
             }
             
@@ -313,9 +286,9 @@
             // Message in case we level up.
             if(![oldLevel isEqualToString:[[GorillasConfig get] levelName]]) {
                 if(score > 0)
-                    [self message:@"Level Up!"];
+                    [[GorillasAppDelegate get].uiLayer message:@"Level Up!"];
                 else
-                    [self message:@"Level Down"];
+                    [[GorillasAppDelegate get].uiLayer message:@"Level Down"];
             }
         }
         
@@ -447,11 +420,6 @@
 		return self;
 
     running = NO;
-
-    // Build internal structures.
-    messageQueue = [[NSMutableArray alloc] initWithCapacity:3];
-    callbackQueue = [[NSMutableArray alloc] initWithCapacity:3];
-    msgLabel = nil;
     
     IntervalAction *l = [MoveBy actionWithDuration:.05f position:cpv(-3, 0)];
     IntervalAction *r = [MoveBy actionWithDuration:.05f position:cpv(6, 0)];
@@ -567,70 +535,6 @@
 }
 
 
--(void) popMessageQueue: (ccTime)dt {
-    
-    @synchronized(messageQueue) {
-        [self unschedule:@selector(popMessageQueue:)];
-
-        if(![messageQueue count])
-            // No messages left, don't reschedule.
-            return;
-        
-        [self schedule:@selector(popMessageQueue:) interval:1.5f];
-    }
-    
-    NSString *msg = [[messageQueue lastObject] retain];
-    [messageQueue removeLastObject];
-    
-    NSInvocation *callback = [[callbackQueue lastObject] retain];
-    [callbackQueue removeLastObject];
-    
-    [self resetMessage:msg];
-    [msgLabel do:[Sequence actions:
-                  [MoveBy actionWithDuration:1 position:cpv(0, -([[GorillasConfig get] fontSize] * 2))],
-                  [FadeTo actionWithDuration:2 opacity:0x00],
-                  nil]];
-    
-    if(callback != (id)[NSNull null]) {
-        [callback invoke];
-        [[callback target] release];
-    }
-    
-    [msg release];
-    [callback release];
-}
-
-
--(void) resetMessage:(NSString *)msg {
-    
-    if(!msgLabel || [msgLabel numberOfRunningActions]) {
-        // Detach existing label & create a new message label for the next message.
-        if(msgLabel) {
-            [msgLabel stopAllActions];
-            [msgLabel do:[Sequence actions:
-                          [MoveTo actionWithDuration:1
-                                            position:cpv(-[msgLabel contentSize].width / 2, [msgLabel position].y)],
-                          [FadeOut actionWithDuration:1],
-                          [Remove action],
-                          nil]];
-            [msgLabel release];
-        }
-        
-        msgLabel = [[Label alloc] initWithString:msg
-                                        fontName:[[GorillasConfig get] fixedFontName]
-                                        fontSize: [[GorillasConfig get] fontSize]];
-        [self add:msgLabel z:1];
-    }
-    else
-        [msgLabel setString:msg];
-
-    CGSize winSize = [[Director sharedDirector] winSize];
-    [msgLabel setPosition:cpv([msgLabel contentSize].width / 2 + [[GorillasConfig get] fontSize],
-                              winSize.height + [[GorillasConfig get] fontSize])];
-    [msgLabel setOpacity:0xff];
-}
-
-
 -(void) started {
     
     running = YES;
@@ -663,12 +567,6 @@
 
 -(void) dealloc {
     
-    [messageQueue release];
-    messageQueue = nil;
-    
-    [callbackQueue release];
-    callbackQueue = nil;
-    
     [shakeAction release];
     shakeAction = nil;
     
@@ -692,9 +590,6 @@
     
     [activeGorilla release];
     activeGorilla = nil;
-    
-    [msgLabel release];
-    msgLabel = nil;
     
     [super dealloc];
 }

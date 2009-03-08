@@ -39,13 +39,14 @@
 #import "HUDLayer.h"
 #import "AudioController.h"
 #import "AudioControllerDelegate.h"
+#import "UILayer.h"
 
 
 @interface GorillasAppDelegate : NSObject <UIApplicationDelegate, AudioControllerDelegate> {
     
     UIWindow                    *window;
     
-    Layer                       *uiLayer;
+    UILayer                     *uiLayer;
     GameLayer                   *gameLayer;
     ContinueMenuLayer           *continueMenuLayer;
     MainMenuLayer               *mainMenuLayer;
@@ -64,7 +65,7 @@
     NSMutableArray              *menuLayers;
 }
 
-@property (readonly) Layer                      *uiLayer;
+@property (readonly) UILayer                    *uiLayer;
 @property (readonly) NewGameLayer               *newGameLayer;
 @property (readonly) CustomGameLayer            *customGameLayer;
 @property (readonly) GameLayer                  *gameLayer;
