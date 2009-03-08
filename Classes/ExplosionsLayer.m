@@ -208,7 +208,7 @@ static ParticleSystem **flameTypes = nil;
             flame.speed             = 8;
             flame.speedVar          = 10;
             flame.life              = typeIsHeavy? 2: 1;
-            ccColorF startColor     = { 0.9f, 0.6f, 0.0f, 0.9f };
+            ccColorF startColor     = { 0.9f, 0.5f, 0.0f, 1.0f };
             flame.startColor        = startColor;
             ccColorF startColorVar  = { 0.1f, 0.2f, 0.0f, 0.1f };
             flame.startColorVar     = startColorVar;
@@ -216,12 +216,10 @@ static ParticleSystem **flameTypes = nil;
             
             [[GorillasAppDelegate get].gameLayer.windLayer registerSystem:flame affectAngle:NO];
             flameTypes[type]        = flame;
-            NSLog(@"type: %d created is heavy? %d", type, typeIsHeavy);
         }
     }
     
     NSUInteger t = (heavy? 1: 0) * flameVariantion + random() % flameVariantion;
-    NSLog(@"heavy? %d -> type: %d", heavy, t);
     return flameTypes[t];
 }
 

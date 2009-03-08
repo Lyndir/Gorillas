@@ -169,11 +169,11 @@
     
     // == DRAW REAR WINDOWS ==
     // Set opacity of DST to 1 where there are windows -> building back won't draw over it.
-    /*glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
+    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
     glBlendFunc(GL_ONE, GL_ZERO);
     glDrawElements(GL_TRIANGLES, windowCount * 6, GL_UNSIGNED_SHORT, 0);
     
-    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);*/
+    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
     
     // Turn off VBOs.
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

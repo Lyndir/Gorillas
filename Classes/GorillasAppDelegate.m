@@ -28,6 +28,12 @@
 #import "Splash.h"
 #import "Resettable.h"
 
+@interface Director (Reveal)
+
+-(void) startAnimation;
+
+@end
+
 
 @implementation GorillasAppDelegate
 
@@ -46,7 +52,7 @@
 	// Director and OpenGL Setup.
     [Director useFastDirector];
 	[[Director sharedDirector] attachInWindow:window];
-	[[Director sharedDirector] setDisplayFPS:YES];
+	[[Director sharedDirector] setDisplayFPS:NO];
 	[[Director sharedDirector] setDepthTest:NO];
 	[[Director sharedDirector] setLandscape:YES];
 	//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
@@ -76,7 +82,15 @@
     [self playTrack:[[GorillasConfig get] currentTrack]];
 
     // Show the splash screen, this starts the main loop in the current thread.
-	[[Director sharedDirector] runWithScene:splashScene];
+    [[Director sharedDirector] replaceScene:splashScene];
+    do {
+        @try {
+            [[Director sharedDirector] startAnimation];
+        }
+        @catch (NSException * e) {
+            [hudLayer message:[e reason] duration:3 isImportant:YES];
+        }
+    } while ([[Director sharedDirector] runningScene]);
 }
 
 

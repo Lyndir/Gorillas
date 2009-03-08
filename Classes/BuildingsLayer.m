@@ -112,7 +112,7 @@
     holes = [[HolesLayer alloc] init];
     [self add:holes z:-1];
     explosions = [[ExplosionsLayer alloc] init];
-    [self add:explosions z:3];
+    [self add:explosions z:4];
 
     for (BuildingLayer *building in buildings)
         [self removeAndStop:building];

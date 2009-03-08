@@ -179,6 +179,9 @@
 
     [messageBar dismiss];
     [messageBar setButtonString:nil callback:nil :nil];
+    
+    if(![menuMenu parent])
+        [self add:menuMenu];
 }
 
 
@@ -186,6 +189,7 @@
     // Proxy to messageBar
 
     [messageBar setButtonString:_string callback:target :selector];
+    [self remove:menuMenu];
 }
 
 

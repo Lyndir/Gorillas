@@ -112,10 +112,10 @@
     
     if([[GorillasConfig get] visualFx]) {
         [smoke setEmissionRate:30];
-        [smoke setSize:10.0f * [target scale]];
-        [smoke setSizeVar:5.0f * [target scale]];
+        [smoke setSize:15.0f * [target scale]];
+        [smoke setSizeVar:10.0f * [target scale]];
         if(![smoke parent])
-            [[target parent] add:smoke];
+            [[GorillasAppDelegate get].gameLayer.buildingsLayer add:smoke];
         else
             [smoke resetSystem];
     }
@@ -248,7 +248,6 @@
     
     GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
     [[[[GorillasAppDelegate get] gameLayer] windLayer] unregisterSystem:smoke];
-    [[smoke parent] removeAndStop:smoke];
     [target stopAction:spinAction];
     
     // End of the throw.
