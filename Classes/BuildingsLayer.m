@@ -192,20 +192,19 @@
 #ifdef _DEBUG_
     BuildingLayer *fb = [buildings objectAtIndex:0], *lb = [buildings lastObject];
     int pCount = (([lb position].x - [fb position].x) / dbgTraceStep + 1)
-                * ([[Director sharedDirector] winSize].size.height / dbgTraceStep + 1);
+                * ([[Director sharedDirector] winSize].height / dbgTraceStep + 1);
     cpVect *hgp = malloc(sizeof(cpVect) * pCount);
     cpVect *hep = malloc(sizeof(cpVect) * pCount);
     int hgc = 0, hec = 0;
     
     for(float x = [fb position].x; x < [lb position].x; x += dbgTraceStep)
-        for(float y = 0; y < [[Director sharedDirector] winSize].size.height; y += dbgTraceStep) {
+        for(float y = 0; y < [[Director sharedDirector] winSize].height; y += dbgTraceStep) {
             cpVect pos = cpv(x, y);
 
             BOOL hg = NO, he = NO;
-            if((he = [holes hitsHole:pos]))
-                break;
+            he = [holes hitsHole:pos];
 
-            for(GorillaLayer *gorilla in gorillas)
+            for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
                 if((hg = [gorilla hitsGorilla:pos]))
                     break;
             
@@ -473,7 +472,7 @@
         [self throwFrom:[GorillasAppDelegate get].gameLayer.activeGorilla withVelocity:v];
         
 #ifdef _DEBUG_
-        dbgAI[dbgAICurInd] = activeGorilla;
+        dbgAI[dbgAICurInd] = [GorillasAppDelegate get].gameLayer.activeGorilla;
         dbgAIVect[dbgAICurInd] = v;
         dbgAICurInd = (dbgAICurInd + 1) % dbgAIMaxInd;
 #endif

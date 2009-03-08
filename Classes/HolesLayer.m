@@ -83,7 +83,11 @@
 	glBindBuffer(GL_ARRAY_BUFFER, holeVertexBuffer);
 	glVertexPointer(2, GL_FLOAT, sizeof(cpVect), 0);
 	
-    glPointSize(texture.pixelsWide);
+    GLfloat width = texture.pixelsWide;
+    for(CocosNode *node = self; [node parent]; node = [node parent])
+        width *= node.scale;
+    
+    glPointSize(width);
 	
 	glDrawArrays(GL_POINTS, 0, holeCount);
 	

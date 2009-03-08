@@ -79,7 +79,7 @@
 
 
 -(void) draw {
-    
+
     glEnableClientState(GL_COLOR_ARRAY);
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
