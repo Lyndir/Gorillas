@@ -265,9 +265,7 @@
                                                  angle:((int) [gameLayer rotation] + 180) % 360]];
         
         if(endCount) {
-            for(int count = endCount; count > 0; --count)
-                [gameLayer message:[NSString stringWithFormat:@"%d ..", count]];
-
+            [gameLayer message:@"Next player .."];
             [gameLayer message:@"Go .." callback:self :@selector(nextTurn)];
             return;
         }
