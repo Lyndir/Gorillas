@@ -261,14 +261,16 @@
         0xFF3333CC,
     };
     
+    GLubyte o = active? 0xFF: 0x33;
+    
     if ([[GorillasConfig get] visualFx]) {
-        drawBoxFrom(cpvadd(lines[0], cpv(0, -3)), cpvadd(lines[1], cpv(0, 3)), 0x99CC99FF, 0x33CC33FF);
-        drawBoxFrom(cpvadd(lines[2], cpv(0, -3)), cpvadd(lines[3], cpv(0, 3)), 0xCC9999FF, 0xCC3333FF);
+        drawBoxFrom(cpvadd(lines[0], cpv(0, -3)), cpvadd(lines[1], cpv(0, 3)), 0xCCFFCC00 | o, 0x33CC3300 | o);
+        drawBoxFrom(cpvadd(lines[2], cpv(0, -3)), cpvadd(lines[3], cpv(0, 3)), 0xFFCCCC00 | o, 0xCC333300 | o);
     }
     else
         drawLines(lines, colors, 4, 6);
     
-    drawBorderFrom(cpvadd(lines[0], cpv(0, -3)), cpvadd(lines[3], cpv(0, 3)), 0xCCCC33CC, 1);
+    drawBorderFrom(cpvadd(lines[0], cpv(0, -3)), cpvadd(lines[3], cpv(0, 3)), 0xCCCC3300 | (o - 0x33), 1);
 }
 
 

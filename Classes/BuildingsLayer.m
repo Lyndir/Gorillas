@@ -721,11 +721,14 @@
         if((runningActions = [gorilla numberOfRunningActions]))
             break;
 
-    if(runningActions)
+    if(runningActions) {
+        [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:[GorillasAppDelegate get].gameLayer.activeGorilla.position
+                                                              horizontal:YES];
         [self do:[Sequence actions:
                   [DelayTime actionWithDuration:1],
                   [CallFunc actionWithTarget:self selector:@selector(stopGameCallback)],
                   nil]];
+    }
     else
         [self stopGameCallback];
 }

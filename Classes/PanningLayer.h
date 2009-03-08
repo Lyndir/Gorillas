@@ -33,8 +33,10 @@
     cpFloat initialScale;
     cpFloat initialDist;
     ScaleTo *scaleAction;
+    MoveTo *scrollAction;
 }
 
 -(void) scaleTo:(cpFloat)newScale;
+-(void) scrollToCenter:(cpVect)r horizontal:(BOOL)horizontal;
 
 @end

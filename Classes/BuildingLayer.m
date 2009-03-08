@@ -69,6 +69,7 @@
     float wHeight = [[GorillasConfig get] windowHeight];
     ccColorB wColor0 = ccc([[GorillasConfig get] windowColorOff]);
     ccColorB wColor1 = ccc([[GorillasConfig get] windowColorOn]);
+    ccColorB wColor10 = { (wColor0.r + wColor1.r) / 2, (wColor0.g + wColor1.g) / 2, (wColor0.b + wColor1.b) / 2, (wColor0.a + wColor1.a) / 2 };
 
     // Remember the window on and off colors in an array.
     /*memcpy(&wColors, (GLubyte *)&wColor0, sizeof(long));
@@ -103,7 +104,10 @@
             NSUInteger i = w * 4, j = w * 6;
             BOOL isOff = random() % 100 < 20;
             
-            windowVertices[i + 0].c = windowVertices[i + 1].c = windowVertices[i + 2].c = windowVertices[i + 3].c
+            
+            windowVertices[i + 0].c = windowVertices[i + 1].c
+                = isOff? wColor0: [GorillasConfig get].visualFx? wColor10: wColor1;
+            windowVertices[i + 2].c = windowVertices[i + 3].c
                 = isOff? wColor0: wColor1;
             
             windowVertices[i + 0].p = cpv(x         , y);

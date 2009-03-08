@@ -26,6 +26,7 @@
 
 #import "PanningLayer.h"
 #import "GorillasConfig.h"
+#import "GorillasAppDelegate.h"
 
 
 @implementation PanningLayer
@@ -140,19 +141,56 @@
 }
 
 
--(void) onEnter {
+-(void) scrollToCenter:(cpVect)r horizontal:(BOOL)horizontal {
     
-    [super onEnter];
-}
-
-
--(void) activateTimers {
+    CGSize winSize = [Director sharedDirector].winSize;
     
-    [(id)super activateTimers];
+    // Figure out where the buildings start and end.
+    // Use that for camera limits, take scaling into account.
+    float min = [[GorillasAppDelegate get].gameLayer.buildingsLayer left];
+    float max = [[GorillasAppDelegate get].gameLayer.buildingsLayer right];
+    float top = winSize.height * 2;
+    cpFloat _scale = self.scale;
+    r = cpvmult(r, _scale);
+    min *= _scale;
+    max *= _scale;
+    top *= _scale;
+    
+    if(horizontal) {
+        r = cpv(fmaxf(fminf(r.x, max - winSize.width / 2), min + winSize.width / 2),
+                fmaxf(fminf(r.y, top - winSize.height / 2), winSize.height / 2));
+    }
+    
+    else {
+        r.x = winSize.width / 2;
+        if(r.y < winSize.height * 0.8f)
+            r.y = winSize.height / 2;
+    }
+    
+    // Stop the current scroll.
+    ccTime scrollActionElapsed = [scrollAction isDone]? 0: scrollAction.elapsed;
+    if(scrollAction)
+        [self stopAction: scrollAction];
+    [scrollAction release];
+    
+    // Start a new scroll with an updated destination point.
+    cpVect g = cpv(winSize.width / 2 - r.x, winSize.height / 2 - r.y);
+    
+    // Scroll to current point should take initial duration minus what has already elapsed to scroll to approach previous points.
+    if(scrollActionElapsed < [[GorillasConfig get] gameScrollDuration])
+        [self do:(scrollAction = [[MoveTo alloc] initWithDuration:[[GorillasConfig get] gameScrollDuration] - scrollActionElapsed
+                                                         position:g])];
+    else {
+        scrollAction = nil;
+        self.position = g;
+    }
 }
 
 
 -(void) dealloc {
+    
+    [scrollAction release];
+    scrollAction = nil;
     
     [scaleAction release];
     scaleAction = nil;

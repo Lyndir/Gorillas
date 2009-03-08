@@ -113,9 +113,9 @@
     if([[GorillasConfig get] visualFx]) {
         [smoke setEmissionRate:30];
         [smoke setSize:15.0f * [target scale]];
-        [smoke setSizeVar:10.0f * [target scale]];
+        [smoke setSizeVar:5.0f * [target scale]];
         if(![smoke parent])
-            [[GorillasAppDelegate get].gameLayer.buildingsLayer add:smoke];
+            [target.parent add:smoke];
         else
             [smoke resetSystem];
     }
@@ -214,8 +214,13 @@
         }
     }
     
-    [self scrollToCenter:r];
-    
+    if(recap && elapsed > recap) {
+        [[GorillasAppDelegate get].gameLayer scaleTimeTo:0.5f duration:0.5f];
+        [gameLayer.panningLayer scaleTo:1.5f];
+        [gameLayer.panningLayer scrollToCenter:r horizontal:YES];
+    } else
+        [gameLayer.panningLayer scrollToCenter:r horizontal:[GorillasConfig get].followThrow];
+
     [target setPosition:r];
     if([[GorillasConfig get] visualFx]) {
         [smoke setAngle:atan2f([smoke source].y - r.y,
@@ -237,7 +242,7 @@
 
         else
             [buildingsLayer do:[Sequence actions:
-                                [DelayTime actionWithDuration:1.5f],
+                                [DelayTime actionWithDuration:1],
                                 [CallFunc actionWithTarget:self selector:@selector(throwEnded)],
                                 nil]];
     }
@@ -246,23 +251,22 @@
 
 -(void) throwEnded {
     
-    GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
     [[[[GorillasAppDelegate get] gameLayer] windLayer] unregisterSystem:smoke];
     [target stopAction:spinAction];
     
     // End of the throw.
-    [self scrollToCenter:cpvzero];
+    [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:cpvzero horizontal:NO];
     [[GorillasAppDelegate get].gameLayer scaleTimeTo:1 duration:0.5f];
 
     NSUInteger liveHumans = 0;
-    for(GorillaLayer *gorilla in gameLayer.gorillas)
-        if([gorilla human] && [gorilla alive])
+    for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
+        if(gorilla.human && gorilla.alive)
             ++liveHumans;
     
-    if(gameLayer.activeGorilla.human && liveHumans > 1) {
+    if([GorillasAppDelegate get].gameLayer.activeGorilla.human && liveHumans > 1) {
         if([[GorillasConfig get] multiplayerFlip])
-            [gameLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                                 angle:((int) [gameLayer rotation] + 180) % 360]];
+            [[GorillasAppDelegate get].gameLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                                                           angle:((int) [[GorillasAppDelegate get].gameLayer rotation] + 180) % 360]];
         
         if(endCount) {
             [[GorillasAppDelegate get].uiLayer message:@"Next player .."];
@@ -282,69 +286,6 @@
     
     [target setTag:GorillasTagBananaNotFlying];
     [[GorillasAppDelegate get].gameLayer.buildingsLayer nextGorilla];
-}
-
-
--(void) scrollToCenter:(cpVect)r {
-    
-    CGSize winSize = [[Director sharedDirector] winSize];
-    PanningLayer *panningLayer = [[[GorillasAppDelegate get] gameLayer] panningLayer];
-    
-    // MoveTo cpvzero happens without the gameScrollElapsed logic.
-    if(r.x == 0 && r.y == 0) {
-        if([panningLayer position].x != 0 || [panningLayer position].y != 0)
-            [panningLayer do:[MoveTo actionWithDuration:[[GorillasConfig get] gameScrollDuration]
-                                               position:cpvzero]];
-        
-        return;
-    }
-    
-    // Figure out where the buildings start and end.
-    // Use that for camera limits, take scaling into account.
-    float min = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] left];
-    float max = [[[[GorillasAppDelegate get] gameLayer] buildingsLayer] right];
-    float top = winSize.height * 2;
-    cpFloat scale = [panningLayer scale];
-    r = cpvmult(r, scale);
-    min *= scale;
-    max *= scale;
-    top *= scale;
-    
-    if(recap && elapsed > recap) {
-        [panningLayer scaleTo:1.5f];
-        [[GorillasAppDelegate get].gameLayer scaleTimeTo:0.5f duration:0.5f];
-    }
-    
-    if([[GorillasConfig get] followThrow]
-       || (recap && elapsed > recap)) {
-        r = cpv(fmaxf(fminf(r.x, max - winSize.width / 2), min + winSize.width / 2),
-                fmaxf(fminf(r.y, top - winSize.height / 2), winSize.height / 2));
-    }
-    
-    else {
-        r.x = winSize.width / 2;
-        if(r.y < winSize.height * 0.8f)
-            r.y = winSize.height / 2;
-    }
-    
-    // Scroll to current point should take initial duration minus what has already elapsed to scroll to approach previous points.
-    ccTime gameScrollElapsed = [gameScrollAction elapsed];
-
-    // Stop the current scroll.
-    if(gameScrollAction)
-        [panningLayer stopAction:gameScrollAction];
-    [gameScrollAction release];
-    
-    // Start a new scroll with an updated destination point.
-    cpVect g = cpv(winSize.width / 2 - r.x, winSize.height / 2 - r.y);
-    
-    if(gameScrollElapsed < [[GorillasConfig get] gameScrollDuration])
-        [panningLayer do:(gameScrollAction = [[MoveTo alloc] initWithDuration:[[GorillasConfig get] gameScrollDuration] - gameScrollElapsed
-                                                                       position:g])];
-    else {
-        gameScrollAction = nil;
-        [panningLayer setPosition:g];
-    }
 }
 
 
@@ -375,9 +316,6 @@
     
     [spinAction release];
     spinAction = nil;
-    
-    [gameScrollAction release];
-    gameScrollAction = nil;
     
     [super dealloc];
 }
