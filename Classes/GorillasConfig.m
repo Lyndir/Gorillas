@@ -261,7 +261,7 @@
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*18)] description],
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*19)] description],
                                  nil//*/],                                                  dTopScoreHistory,
-                                [NSNumber numberWithFloat:      0.4f],                      dLevel,
+                                [NSNumber numberWithFloat:      0.2f],                      dLevel,
                                 [levelNames retain],                                        dLevelNames,
                                 [NSNumber numberWithFloat:      0.03f],                     dLevelProgress,
                                 

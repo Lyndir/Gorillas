@@ -92,11 +92,18 @@
 
 -(void) message:(NSString *)msg duration:(ccTime)_duration isImportant:(BOOL)important {
     
+    CGSize winSize = [Director sharedDirector].winSize;
+    msg = [NSString stringWithFormat:@" %@ ", msg];
+    
     if (!messageLabel)
         messageLabel = [[LabelAtlas alloc] initWithString:msg
                                               charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
     else
         [messageLabel setString:msg];
+
+    // Make sure message fits on screen.
+    [messageLabel setScale:fminf(1, winSize.width / ([msg length] * 13))];
+    NSLog(@"scale: %f", fminf(1, winSize.width / ([msg length] * 13)));
     
     if(important) {
         renderFromColor = 0x993333FF;
@@ -111,8 +118,8 @@
     if([messageLabel parent])
         [self removeAndStop:messageLabel];
     
-    CGSize winSize = [Director sharedDirector].winSize;
-    [messageLabel setPosition:cpv((winSize.width - [messageLabel contentSize].width) / 2, (height - [messageLabel contentSize].height) / 2)];
+    [messageLabel setPosition:cpv((winSize.width - [messageLabel contentSize].width * messageLabel.scale) / 2,
+                                  (height - [messageLabel contentSize].height * messageLabel.scale) / 2)];
     [self add:messageLabel];
     
     if(_duration)

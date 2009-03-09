@@ -41,18 +41,31 @@
 
 @end
 
+static NSUInteger _teamIndex, _globalIndex;
+
 @implementation GorillaLayer
 
-@synthesize human, name, turns, lives, active, zoom;
+@synthesize human, name, turns, lives, active, zoom, teamIndex, globalIndex;
 
 
--(id) initAsHuman:(BOOL)_human {
++(void) prepareCreation {
+
+    _teamIndex      = 0;
+    _globalIndex    = 0;
+}
+
+
+-(id) initWithName:(NSString *)_name isHuman:(BOOL)_human {
     
     type    = _human? @"brown": @"silver";
     
     if(!(self = [super initWithFile:[NSString stringWithFormat:@"gorilla-%@-DD.png", type]]))
         return self;
     
+    name        = [_name retain];
+    teamIndex   = _teamIndex++;
+    globalIndex = _globalIndex++;
+
     zoom    = 1;
     
     dd      = [texture retain];

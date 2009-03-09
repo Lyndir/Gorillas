@@ -266,10 +266,11 @@
     CGSize winSize = [[Director sharedDirector] winSize];
     cpVect halfWin = cpv(winSize.width / 2, winSize.height / 2);
     cpVect p = cpv(location.y, location.x);
-    cpFloat rot = (cpFloat)DEGREES_TO_RADIANS([[[GorillasAppDelegate get] gameLayer] rotation]);
-    p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
-    for(CocosNode *n = self; n; n = [n parent])
-        p = cpvmult(p, 1 / [n scale]);
+    for(CocosNode *n = self; n; n = [n parent]) {
+        cpFloat rot = (cpFloat)DEGREES_TO_RADIANS(n.rotation);
+        p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
+        p = cpvmult(p, 1 / n.scale);
+    }
     
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:p])
         // Ignore when moving/clicking over/on HUD.
@@ -298,10 +299,11 @@
     CGSize winSize = [[Director sharedDirector] winSize];
     cpVect halfWin = cpv(winSize.width / 2, winSize.height / 2);
     cpVect p = cpv(location.y, location.x);
-    cpFloat rot = (cpFloat)DEGREES_TO_RADIANS([[[GorillasAppDelegate get] gameLayer] rotation]);
-    p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
-    for(CocosNode *n = self; n; n = [n parent])
-        p = cpvmult(p, 1 / [n scale]);
+    for(CocosNode *n = self; n; n = [n parent]) {
+        cpFloat rot = (cpFloat)DEGREES_TO_RADIANS(n.rotation);
+        p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
+        p = cpvmult(p, 1 / n.scale);
+    }
     
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:p])
         // Ignore when moving/clicking over/on HUD.
@@ -332,10 +334,11 @@
     CGSize winSize = [[Director sharedDirector] winSize];
     cpVect halfWin = cpv(winSize.width / 2, winSize.height / 2);
     cpVect p = cpv(location.y, location.x);
-    cpFloat rot = (cpFloat)DEGREES_TO_RADIANS([[[GorillasAppDelegate get] gameLayer] rotation]);
-    p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
-    for(CocosNode *n = self; n; n = [n parent])
-        p = cpvmult(p, 1 / [n scale]);
+    for(CocosNode *n = self; n; n = [n parent]) {
+        cpFloat rot = (cpFloat)DEGREES_TO_RADIANS(n.rotation);
+        p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
+        p = cpvmult(p, 1 / n.scale);
+    }
     
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:p]
         || aim.x <= 0
@@ -444,6 +447,12 @@
     // Scale to the active gorilla's saved scale.
     [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:[GorillasAppDelegate get].gameLayer.activeGorilla.zoom];
 
+    // Flip to the active gorilla's orientation.
+    // Rotate normal for even and upside-down for odd humanIndex.
+    if ([GorillasAppDelegate get].gameLayer.activeGorilla.human && [GorillasConfig get].multiplayerFlip)
+        [[GorillasAppDelegate get].uiLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                                                     angle:(180 * [GorillasAppDelegate get].gameLayer.activeGorilla.teamIndex) % 360]];
+    
     if([GorillasAppDelegate get].gameLayer.activeGorilla.alive && ![GorillasAppDelegate get].gameLayer.activeGorilla.human) {
         // Active gorilla is a live AI.
         NSMutableArray *enemies = [[GorillasAppDelegate get].gameLayer.gorillas mutableCopy];

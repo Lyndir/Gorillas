@@ -263,17 +263,12 @@
         if(gorilla.human && gorilla.alive)
             ++liveHumans;
     
-    if([GorillasAppDelegate get].gameLayer.activeGorilla.human && liveHumans > 1) {
-        if([[GorillasConfig get] multiplayerFlip])
-            [[GorillasAppDelegate get].gameLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                                                           angle:((int) [[GorillasAppDelegate get].gameLayer rotation] + 180) % 360]];
-        
+    if([GorillasAppDelegate get].gameLayer.activeGorilla.human && liveHumans > 1)
         if(endCount) {
             [[GorillasAppDelegate get].uiLayer message:@"Next player .."];
             [[GorillasAppDelegate get].uiLayer message:@"Go .." callback:self :@selector(nextTurn)];
             return;
         }
-    }
     
     [self nextTurn];
 }

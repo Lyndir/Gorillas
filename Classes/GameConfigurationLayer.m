@@ -220,14 +220,10 @@
     [[GorillasAppDelegate get] clickEffect];
     [[GorillasConfig get] setMultiplayerFlip:![[GorillasConfig get] multiplayerFlip]];
     
-    if(![[GorillasConfig get] multiplayerFlip]) {
-        GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
-        
-        if([gameLayer rotation])
-            [gameLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                                 angle:0]];
-        
-    }
+    if(![[GorillasConfig get] multiplayerFlip])
+        if([[GorillasAppDelegate get].uiLayer rotation])
+            [[GorillasAppDelegate get].uiLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                                                         angle:0]];
 }
 
 

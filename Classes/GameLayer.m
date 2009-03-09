@@ -55,6 +55,13 @@
 
 -(BOOL) isEnabled:(GorillasFeature)feature {
     
+    // Make an exception for Score:
+    if (feature == GorillasFeatureScore) {
+        // Score is disabled if not single player AND not in team mode (non-team multiplayer), even if the feature is enabled.
+        if (!self.singlePlayer && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureTeam])
+            return NO;
+    }
+    
     return mode & feature;
 }
 
@@ -115,9 +122,9 @@
     [buildingsLayer reset];
     [windLayer reset];
     
-    if ([self rotation])
-        [self do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                        angle:0]];
+    if ([[GorillasAppDelegate get].uiLayer rotation])
+        [[GorillasAppDelegate get].uiLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                                                     angle:0]];
 }
 
 -(void) shake {
@@ -147,28 +154,26 @@
                                        reason:@"Tried to start a game while there's still gorillas in the field."
                                      userInfo:nil];
     
+    [GorillaLayer prepareCreation];
+    
     // Add humans to the game.
     for (NSUInteger i = 0; i < humans; ++i) {
-        GorillaLayer *gorilla = [[GorillaLayer alloc] initAsHuman:YES];
+        NSString *name = @"Player";
+        if(humans > 1)
+            name = [NSString stringWithFormat:@"Player %d", i + 1];
         
-        if(humans == 1)
-            [gorilla setName:@"Player"];
-        else
-            [gorilla setName:[NSString stringWithFormat:@"Player %d", i + 1]];
-        
+        GorillaLayer *gorilla = [[GorillaLayer alloc] initWithName:name isHuman:YES];
         [gorillas addObject:gorilla];
         [gorilla release];
     }
     
     // Add AIs to the game.
     for (NSUInteger i = 0; i < ais; ++i) {
-        GorillaLayer *gorilla = [[GorillaLayer alloc] initAsHuman:NO];
+        NSString *name = @"Phone";
+        if(ais > 1)
+            name = [NSString stringWithFormat:@"Chip %d", i + 1];
         
-        if(ais == 1)
-            [gorilla setName:@"Phone"];
-        else
-            [gorilla setName:[NSString stringWithFormat:@"Chip %d", i + 1]];
-        
+        GorillaLayer *gorilla = [[GorillaLayer alloc] initWithName:name isHuman:NO];
         [gorillas addObject:gorilla];
         [gorilla release];
     }
