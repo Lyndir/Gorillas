@@ -57,7 +57,7 @@
     [super onEnter];
     
     [self do:[Sequence actions:
-              [EaseQuadOut actionWithAction:
+              [EaseSineOut actionWithAction:
                [MoveTo actionWithDuration:[GorillasConfig get].transitionDuration position:cpvzero]],
               [CallFunc actionWithTarget:self selector:@selector(ready)],
               nil]];
@@ -78,7 +78,7 @@
     
     CGSize winSize = [Director sharedDirector].winSize;
     [self do:[Sequence actions:
-              [EaseQuadIn actionWithAction:
+              [EaseSineIn actionWithAction:
                [MoveTo actionWithDuration:[GorillasConfig get].transitionDuration
                                  position:cpv((pushed? -1: 1) * winSize.width, 0)]],
               [CallFunc actionWithTarget:self selector:@selector(gone)],

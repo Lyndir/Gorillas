@@ -267,7 +267,7 @@
     cpVect halfWin = cpv(winSize.width / 2, winSize.height / 2);
     cpVect p = cpv(location.y, location.x);
     for(CocosNode *n = self; n; n = [n parent]) {
-        cpFloat rot = (cpFloat)DEGREES_TO_RADIANS(n.rotation);
+        cpFloat rot = CC_DEGREES_TO_RADIANS(n.rotation);
         p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
         p = cpvmult(p, 1 / n.scale);
     }
@@ -300,7 +300,7 @@
     cpVect halfWin = cpv(winSize.width / 2, winSize.height / 2);
     cpVect p = cpv(location.y, location.x);
     for(CocosNode *n = self; n; n = [n parent]) {
-        cpFloat rot = (cpFloat)DEGREES_TO_RADIANS(n.rotation);
+        cpFloat rot = CC_DEGREES_TO_RADIANS(n.rotation);
         p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
         p = cpvmult(p, 1 / n.scale);
     }
@@ -335,7 +335,7 @@
     cpVect halfWin = cpv(winSize.width / 2, winSize.height / 2);
     cpVect p = cpv(location.y, location.x);
     for(CocosNode *n = self; n; n = [n parent]) {
-        cpFloat rot = (cpFloat)DEGREES_TO_RADIANS(n.rotation);
+        cpFloat rot = CC_DEGREES_TO_RADIANS(n.rotation);
         p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
         p = cpvmult(p, 1 / n.scale);
     }
