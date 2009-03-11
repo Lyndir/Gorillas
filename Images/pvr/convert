@@ -6,12 +6,15 @@ source bashlib
 srcs=(
     fire
     smoke
+    hole
 )
 weightings=(
     linear
     linear
+    linear
 )
 bpps=(
+    2
     2
     2
 )

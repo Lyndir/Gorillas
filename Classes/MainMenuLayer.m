@@ -53,8 +53,8 @@
 -(void) reset {
 
     if(menu) {
-        [menu removeAndStopAll];
-        [self removeAndStop:menu];
+        [menu removeAllChildrenWithCleanup:YES];
+        [self removeChild:menu cleanup:YES];
         [menu release];
         menu = nil;
     }
@@ -86,7 +86,7 @@
     }
     
     [menu alignItemsVertically];
-    [self add:menu];
+    [self addChild:menu];
 }
 
 

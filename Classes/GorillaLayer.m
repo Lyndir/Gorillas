@@ -77,12 +77,12 @@ static NSUInteger _teamIndex, _globalIndex;
     bobber  = [[Sprite alloc] initWithFile:@"bobber.png"];
     [bobber setPosition:cpv([self contentSize].width / 2,
                             [self contentSize].height + [bobber contentSize].height / 2 + 15)];
-    [bobber do:[RepeatForever actionWithAction:[Sequence actions:
-                                                [EaseSineInOut actionWithAction:[MoveBy actionWithDuration:0.7f position:cpv(0, 15)]],
-                                                [EaseSineInOut actionWithAction:[MoveBy actionWithDuration:0.7f position:cpv(0, -15)]],
-                                                nil]]];
+    [bobber runAction:[RepeatForever actionWithAction:[Sequence actions:
+                                                       [EaseSineInOut actionWithAction:[MoveBy actionWithDuration:0.7f position:cpv(0, 15)]],
+                                                       [EaseSineInOut actionWithAction:[MoveBy actionWithDuration:0.7f position:cpv(0, -15)]],
+                                                       nil]]];
     [bobber setVisible:NO];
-    [self add:bobber];
+    [self addChild:bobber];
     [self setScale:[[GorillasConfig get] cityScale]];
 
     // By default, a gorilla has 1 life, unless features say otherwise.
@@ -113,32 +113,32 @@ static NSUInteger _teamIndex, _globalIndex;
 
 -(void) cheer {
     
-    [self do:[Sequence actions:
-              [CallFunc actionWithTarget:self selector:@selector(uu)],
-              [DelayTime actionWithDuration:0.4f],
-              [CallFunc actionWithTarget:self selector:@selector(dd)],
-              [DelayTime actionWithDuration:0.2f],
-              [CallFunc actionWithTarget:self selector:@selector(uu)],
-              [DelayTime actionWithDuration:1],
-              [CallFunc actionWithTarget:self selector:@selector(dd)],
-              nil]];
+    [self runAction:[Sequence actions:
+                     [CallFunc actionWithTarget:self selector:@selector(uu)],
+                     [DelayTime actionWithDuration:0.4f],
+                     [CallFunc actionWithTarget:self selector:@selector(dd)],
+                     [DelayTime actionWithDuration:0.2f],
+                     [CallFunc actionWithTarget:self selector:@selector(uu)],
+                     [DelayTime actionWithDuration:1],
+                     [CallFunc actionWithTarget:self selector:@selector(dd)],
+                     nil]];
 }
 
 
 -(void) dance {
     
-    [self do:[Sequence actions:
-              [Repeat actionWithAction:[Sequence actions:
-                                        [CallFunc actionWithTarget:self selector:@selector(ud)],
-                                        [DelayTime actionWithDuration:0.2f],
-                                        [CallFunc actionWithTarget:self selector:@selector(du)],
-                                        [DelayTime actionWithDuration:0.2f],
-                                        nil]
-                                 times:7],
-              [CallFunc actionWithTarget:self selector:@selector(uu)],
-              [DelayTime actionWithDuration:0.5f],
-              [CallFunc actionWithTarget:self selector:@selector(dd)],
-              nil]];
+    [self runAction:[Sequence actions:
+                     [Repeat actionWithAction:[Sequence actions:
+                                               [CallFunc actionWithTarget:self selector:@selector(ud)],
+                                               [DelayTime actionWithDuration:0.2f],
+                                               [CallFunc actionWithTarget:self selector:@selector(du)],
+                                               [DelayTime actionWithDuration:0.2f],
+                                               nil]
+                                        times:7],
+                     [CallFunc actionWithTarget:self selector:@selector(uu)],
+                     [DelayTime actionWithDuration:0.5f],
+                     [CallFunc actionWithTarget:self selector:@selector(dd)],
+                     nil]];
 }
 
 
@@ -149,10 +149,10 @@ static NSUInteger _teamIndex, _globalIndex;
     else
         [self du];
     
-    [self do:[Sequence actions:
-              [DelayTime actionWithDuration:0.5f],
-              [CallFunc actionWithTarget:self selector:@selector(dd)],
-              nil]];
+    [self runAction:[Sequence actions:
+                     [DelayTime actionWithDuration:0.5f],
+                     [CallFunc actionWithTarget:self selector:@selector(dd)],
+                     nil]];
 }
 
 
@@ -187,15 +187,15 @@ static NSUInteger _teamIndex, _globalIndex;
 
     if(lives == 0) {
         [self stopAllActions];
-        [self do:[Sequence actions:
-                  [FadeTo actionWithDuration:0.5f opacity:0x00],
-                  [Remove action],
-                  nil]];
+        [self runAction:[Sequence actions:
+                         [FadeTo actionWithDuration:0.5f opacity:0x00],
+                         [Remove action],
+                         nil]];
     } else
-        [self do:[Sequence actions:
-                  [ShadeTo actionWithDuration:0.5f color:0xFF0000FF],
-                  [ShadeTo actionWithDuration:0.5f color:0xFFFFFFFF],
-                  nil]];
+        [self runAction:[Sequence actions:
+                         [ShadeTo actionWithDuration:0.5f color:0xFF0000FF],
+                         [ShadeTo actionWithDuration:0.5f color:0xFFFFFFFF],
+                         nil]];
 
     [[GorillasAppDelegate get].hudLayer updateHudWithScore:0 skill:0];
 }
@@ -214,7 +214,7 @@ static NSUInteger _teamIndex, _globalIndex;
     lives = 1;
     
     [self stopAllActions];
-    [self do:[FadeTo actionWithDuration:0.5f opacity:0xFF]];
+    [self runAction:[FadeTo actionWithDuration:0.5f opacity:0xFF]];
 }
 
 

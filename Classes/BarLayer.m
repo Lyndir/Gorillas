@@ -43,7 +43,7 @@
 -(void) setButtonString:(NSString *)_string callback:(id)target :(SEL)selector {
 
     if(menuMenu) {
-        [self remove:menuMenu];
+        [self removeChild:menuMenu cleanup:NO];
         [menuMenu release];
         [menuButton release];
         menuMenu    = nil;
@@ -63,7 +63,7 @@
 
     
     [menuMenu alignItemsHorizontally];
-    [self add:menuMenu];
+    [self addChild:menuMenu];
 }
 
 
@@ -76,10 +76,10 @@
     [self stopAllActions];
     
     if([messageLabel parent])
-        [self removeAndStop:messageLabel];
+        [self removeChild:messageLabel cleanup:NO];
     
     self.position = self.hidePosition;
-    [self do:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+    [self runAction:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                position:showPosition]];
 }
 
@@ -116,24 +116,24 @@
     }
     
     if([messageLabel parent])
-        [self removeAndStop:messageLabel];
+        [self removeChild:messageLabel cleanup:YES];
     
     [messageLabel setPosition:cpv((winSize.width - [messageLabel contentSize].width * messageLabel.scale) / 2,
                                   (height - [messageLabel contentSize].height * messageLabel.scale) / 2)];
-    [self add:messageLabel];
+    [self addChild:messageLabel];
     
     if(_duration)
-        [messageLabel do:[Sequence actions:
-                          [DelayTime actionWithDuration:_duration],
-                          [CallFunc actionWithTarget:self selector:@selector(dismissMessage)],
-                          nil]];
+        [messageLabel runAction:[Sequence actions:
+                                 [DelayTime actionWithDuration:_duration],
+                                 [CallFunc actionWithTarget:self selector:@selector(dismissMessage)],
+                                 nil]];
 }
 
 
 -(void) dismissMessage {
     
     [messageLabel stopAllActions];
-    [self remove:messageLabel];
+    [self removeChild:messageLabel cleanup:NO];
     
     renderFromColor = fromColor;
     renderToColor   = toColor;
@@ -151,7 +151,7 @@
     [self stopAllActions];
     
     self.position = showPosition;
-    [self do:[Sequence actions:
+    [self runAction:[Sequence actions:
               [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                 position:self.hidePosition],
               [Remove action],

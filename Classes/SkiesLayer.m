@@ -50,12 +50,12 @@
         [skies addObject: sky];
         
         [sky setPosition: cpv(x, 0)];
-        [self add: sky z:1];
+        [self addChild: sky z:1];
 
         x += [sky contentSize].width;
     }
     
-    [self do:[PanAction actionWithSubNodes:skies duration:[[GorillasConfig get] starSpeed] padding:0]];
+    [self runAction:[PanAction actionWithSubNodes:skies duration:[[GorillasConfig get] starSpeed] padding:0]];
     
     return self;
 }

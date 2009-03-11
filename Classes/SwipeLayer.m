@@ -130,8 +130,8 @@
         [self stopAction:swipeAction];
         [swipeAction release];
     }
-    [self do:swipeAction = [[MoveTo alloc] initWithDuration:swipeActionDuration
-                                                   position:cpv(swipePoint.x - swipeStart.x, 0)]];
+    [self runAction:swipeAction = [[MoveTo alloc] initWithDuration:swipeActionDuration
+                                                          position:cpv(swipePoint.x - swipeStart.x, 0)]];
     
     return kEventHandled;
 }
@@ -148,8 +148,8 @@
         swipeAction = nil;
     }
     
-    [self do:[MoveTo actionWithDuration:0.1f
-                               position:cpvzero]];
+    [self runAction:[MoveTo actionWithDuration:0.1f
+                                      position:cpvzero]];
     swipeStart = cpv(-1, -1);
     
     return kEventHandled;
@@ -176,12 +176,12 @@
     }
     
     if(swiped)
-        [self do:swipeAction = [[Sequence alloc] initOne:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                                                           position:swipeTarget]
-                                                     two:[CallFunc actionWithTarget:self selector:@selector(swipeDone:)]]];
+        [self runAction:swipeAction = [[Sequence alloc] initOne:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                                                                  position:swipeTarget]
+                                                            two:[CallFunc actionWithTarget:self selector:@selector(swipeDone:)]]];
     else
-        [self do:swipeAction = [[MoveTo alloc] initWithDuration:0.1f
-                                                       position:cpvzero]];
+        [self runAction:swipeAction = [[MoveTo alloc] initWithDuration:0.1f
+                                                              position:cpvzero]];
             
     swipeStart = cpv(-1, -1);
     

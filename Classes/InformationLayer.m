@@ -56,7 +56,7 @@
     
     menu = [[Menu menuWithItems:ver, guide, stats, nil] retain];
     [menu alignItemsVertically];
-    [self add:menu];
+    [self addChild:menu];
 
     
     // Back.
@@ -69,7 +69,7 @@
     backMenu = [[Menu menuWithItems:back, nil] retain];
     [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
-    [self add:backMenu];
+    [self addChild:backMenu];
 
     
     return self;

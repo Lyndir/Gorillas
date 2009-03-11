@@ -51,7 +51,7 @@
     menu = [[Menu menuWithItems:back, nil] retain];
     [menu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [menu alignItemsHorizontally];
-    [self add:menu];
+    [self addChild:menu];
     
     return self;
 }
@@ -97,7 +97,7 @@
                                                 fontName:[[GorillasConfig get] fixedFontName]
                                                 fontSize:[[GorillasConfig get] smallFontSize]];
     [topScoreLabel setPosition:cpv(contentSize.width / 2, contentSize.height - padding + [[GorillasConfig get] smallFontSize])];
-    [self add:topScoreLabel];
+    [self addChild:topScoreLabel];
     [topScoreLabel release];
     
     // Iterate over sorted data and add them as Labels.
@@ -150,25 +150,25 @@
         [dateLabel setPosition:cpv([scoreTower contentSize].width / 2,
                                    -[dateLabel contentSize].height)];
         
-        [scoreTower do:[Sequence actions:
-                        [Sequence actionWithDuration:0.1f * i],
-                        [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                          position:cpv(x, padding)],
-                        nil]];
-        [scoreLabel do:[Sequence actions:
-                        [Sequence actionWithDuration:0.1f * i],
-                        [FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]],
-                        nil]];
-        [dateLabel do:[Sequence actions:
-                       [Sequence actionWithDuration:0.1f * i],
-                       [FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]],
-                       nil]];
+        [scoreTower runAction:[Sequence actions:
+                               [Sequence actionWithDuration:0.1f * i],
+                               [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                                 position:cpv(x, padding)],
+                               nil]];
+        [scoreLabel runAction:[Sequence actions:
+                               [Sequence actionWithDuration:0.1f * i],
+                               [FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]],
+                               nil]];
+        [dateLabel runAction:[Sequence actions:
+                              [Sequence actionWithDuration:0.1f * i],
+                              [FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]],
+                              nil]];
         
         [scoreTower setPosition:cpv(x, -[scoreTower contentSize].height - [scoreLabel contentSize].height)];
-        [scoreTower add:scoreLabel];
-        [scoreTower add:dateLabel];
+        [scoreTower addChild:scoreLabel];
+        [scoreTower addChild:dateLabel];
         [scoreTowers addObject:scoreTower];
-        [self add:scoreTower];
+        [self addChild:scoreTower];
         
         ++i;
         x += [scoreTower contentSize].width + 1;
@@ -193,11 +193,11 @@
     
     int i = 0;
     for(BuildingLayer *scoreTower in scoreTowers)
-        [scoreTower do:[Sequence actions:
-                        [Sequence actionWithDuration:(([[GorillasConfig get] transitionDuration] / 2) / [scoreTowers count]) * i++],
-                        [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] / 2
-                                          position:cpv([scoreTower position].x, -[scoreTower contentSize].height - [[GorillasConfig get] fontSize] * 2)],
-                        nil]];
+        [scoreTower runAction:[Sequence actions:
+                               [Sequence actionWithDuration:(([[GorillasConfig get] transitionDuration] / 2) / [scoreTowers count]) * i++],
+                               [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] / 2
+                                                 position:cpv([scoreTower position].x, -[scoreTower contentSize].height - [[GorillasConfig get] fontSize] * 2)],
+                               nil]];
 }
 
 
@@ -206,7 +206,7 @@
     [super onExit];
     
     for(BuildingLayer *scoreTower in scoreTowers)
-        [self removeAndStop:scoreTower];
+        [self removeChild:scoreTower cleanup:YES];
     [scoreTowers removeAllObjects];
 }
 

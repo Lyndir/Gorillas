@@ -37,7 +37,7 @@
 		return self;
 
     FancyLayer *fancy = [FancyLayer node];
-    [self add:fancy];
+    [self addChild:fancy];
     
     return self;
 }

@@ -51,7 +51,7 @@
     infoLabel = [[LabelAtlas alloc] initWithString:@""
                                        charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
     [infoLabel setPosition:cpvzero];
-    [self add:infoLabel];
+    [self addChild:infoLabel];
     
     // Lives.
     livesLayer = [[Layer alloc] init];
@@ -59,8 +59,8 @@
     infiniteLives = [Sprite spriteWithFile:@"infinite-shape.png"];
     [infiniteLives setPosition:cpv([infiniteLives contentSize].width / 2, height / 2)];
     [infiniteLives setVisible:NO];
-    [self add:livesLayer];
-    [livesLayer add:infiniteLives];
+    [self addChild:livesLayer];
+    [livesLayer addChild:infiniteLives];
     
     return self;
 }
@@ -77,7 +77,7 @@
         Sprite *life = [Sprite spriteWithFile:@"gorilla-shape.png"];
         [life setPosition:cpv(l++ * [life contentSize].width + [life contentSize].width / 2, height / 2)];
         
-        [livesLayer add:life];
+        [livesLayer addChild:life];
     }
     
     // Toggle the visibility of the lives depending on how many are left.
@@ -140,10 +140,10 @@
         else if(score < 0)
             scoreColor = 0xFF9999ff;
         
-        [infoLabel do:[Sequence actions:
-                       [ShadeTo actionWithDuration:0.5f color:scoreColor],
-                       [ShadeTo actionWithDuration:0.5f color:0xFFFFFFff],
-                       nil]];
+        [infoLabel runAction:[Sequence actions:
+                              [ShadeTo actionWithDuration:0.5f color:scoreColor],
+                              [ShadeTo actionWithDuration:0.5f color:0xFFFFFFff],
+                              nil]];
     }
 }
 
@@ -159,18 +159,18 @@
     // Proxy to messageBar
     
     if([messageBar parent] && [messageBar dismissed])
-        [self removeAndStop:messageBar];
+        [self removeChild:messageBar cleanup:YES];
 
     if(![messageBar parent])
-        [self add:messageBar z:-1];
+        [self addChild:messageBar z:-1];
     
     [messageBar message:msg duration:0 isImportant:important];
     
     if(_duration)
-        [self do:[Sequence actions:
-                  [DelayTime actionWithDuration:_duration],
-                  [CallFunc actionWithTarget:self selector:@selector(dismissMessage)],
-                  nil]];
+        [self runAction:[Sequence actions:
+                         [DelayTime actionWithDuration:_duration],
+                         [CallFunc actionWithTarget:self selector:@selector(dismissMessage)],
+                         nil]];
 }
 
 
@@ -181,7 +181,7 @@
     [messageBar setButtonString:nil callback:nil :nil];
     
     if(![menuMenu parent])
-        [self add:menuMenu];
+        [self addChild:menuMenu];
 }
 
 
@@ -189,7 +189,7 @@
     // Proxy to messageBar
 
     [messageBar setButtonString:_string callback:target :selector];
-    [self remove:menuMenu];
+    [self removeChild:menuMenu cleanup:NO];
 }
 
 
@@ -198,7 +198,7 @@
     [super onEnter];
     
     if([messageBar parent])
-        [self removeAndStop:messageBar];
+        [self removeChild:messageBar cleanup:YES];
     
     [self updateHudWithScore:0 skill:0];
 }

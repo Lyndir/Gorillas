@@ -56,7 +56,7 @@
 
     [throwAction release];
     [banana setPosition:r0];
-    [banana do:[throwAction = [Throw actionWithVelocity:v startPos:r0] retain]];
+    [banana runAction:[throwAction = [Throw actionWithVelocity:v startPos:r0] retain]];
 }
 
 
@@ -64,7 +64,7 @@
     
     [super onEnter];
     
-    [self add:banana];
+    [self addChild:banana];
 }
 
 
@@ -75,7 +75,7 @@
     [throwAction release];
     throwAction = nil;
     
-    [self removeAndStop:banana];
+    [self removeChild:banana cleanup:YES];
 }
 
 

@@ -62,16 +62,16 @@
         [self unschedule:@selector(switchScene:)];
 
         Scene *gameScene = [[Scene alloc] init];
-        [gameScene add: [[GorillasAppDelegate get] uiLayer]];
+        [gameScene addChild:[[GorillasAppDelegate get] uiLayer]];
         
         // Build a transition scene from the splash scene to the game scene.
         TransitionScene *transitionScene = [[ZoomFlipYTransition alloc] initWithDuration:[[GorillasConfig get] transitionDuration]
                                                                                    scene:gameScene
                                                                              orientation:kOrientationDownOver];
-        [gameScene do:[Sequence actions:
-                       [DelayTime actionWithDuration:0.5f],
-                       [CallFunc actionWithTarget:[GorillasAppDelegate get] selector:@selector(showMainMenu)],
-                       nil]];
+        [gameScene runAction:[Sequence actions:
+                              [DelayTime actionWithDuration:0.5f],
+                              [CallFunc actionWithTarget:[GorillasAppDelegate get] selector:@selector(showMainMenu)],
+                              nil]];
         [gameScene release];
         
         // Start the scene and bring up the menu.

@@ -56,11 +56,11 @@
 
     [super onEnter];
     
-    [self do:[Sequence actions:
-              [EaseSineOut actionWithAction:
-               [MoveTo actionWithDuration:[GorillasConfig get].transitionDuration position:cpvzero]],
-              [CallFunc actionWithTarget:self selector:@selector(ready)],
-              nil]];
+    [self runAction:[Sequence actions:
+                     [EaseSineOut actionWithAction:
+                      [MoveTo actionWithDuration:[GorillasConfig get].transitionDuration position:cpvzero]],
+                     [CallFunc actionWithTarget:self selector:@selector(ready)],
+                     nil]];
 }
 
 
@@ -77,13 +77,13 @@
     pushed = _pushed;
     
     CGSize winSize = [Director sharedDirector].winSize;
-    [self do:[Sequence actions:
-              [EaseSineIn actionWithAction:
-               [MoveTo actionWithDuration:[GorillasConfig get].transitionDuration
-                                 position:cpv((pushed? -1: 1) * winSize.width, 0)]],
-              [CallFunc actionWithTarget:self selector:@selector(gone)],
-              [Remove action],
-              nil]];
+    [self runAction:[Sequence actions:
+                     [EaseSineIn actionWithAction:
+                      [MoveTo actionWithDuration:[GorillasConfig get].transitionDuration
+                                        position:cpv((pushed? -1: 1) * winSize.width, 0)]],
+                     [CallFunc actionWithTarget:self selector:@selector(gone)],
+                     [Remove action],
+                     nil]];
 }
 
 

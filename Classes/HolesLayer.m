@@ -35,7 +35,7 @@
     if(!(self = [super init]))
         return self;
     
-	texture     = [[[TextureMgr sharedTextureMgr] addImage: @"hole.png"] retain];
+	texture     = [[[TextureMgr sharedTextureMgr] addImage: @"hole.pvr"] retain];
     holes       = nil;
     holeCount   = 0;
     
@@ -108,7 +108,7 @@
 -(void) dealloc {
     
     glDeleteBuffers(1, &holeVertexBuffer);
-
+    
     [super dealloc];
 }
 

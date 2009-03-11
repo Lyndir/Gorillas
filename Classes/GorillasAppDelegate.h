@@ -61,6 +61,7 @@
     HUDLayer                    *hudLayer;
     AudioController             *audioController;
     NSString                    *nextTrack;
+    BOOL                        resigned;
     
     NSMutableArray              *menuLayers;
 }

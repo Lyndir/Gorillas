@@ -52,8 +52,8 @@
             [scaleAction release];
         }
         
-        [self do:scaleAction = [[ScaleTo alloc] initWithDuration:[[GorillasConfig get] transitionDuration]
-                                                           scale:1]];
+        [self runAction:scaleAction = [[ScaleTo alloc] initWithDuration:[[GorillasConfig get] transitionDuration]
+                                                                  scale:1]];
     }
 }
 
@@ -136,8 +136,8 @@
         [self stopAction:scaleAction];
     }
     [scaleAction release];
-    [self do:scaleAction = [[ScaleTo alloc] initWithDuration:duration
-                                                       scale:newScale]];
+    [self runAction:scaleAction = [[ScaleTo alloc] initWithDuration:duration
+                                                              scale:newScale]];
 }
 
 
@@ -178,8 +178,8 @@
     
     // Scroll to current point should take initial duration minus what has already elapsed to scroll to approach previous points.
     if(scrollActionElapsed < [[GorillasConfig get] gameScrollDuration])
-        [self do:(scrollAction = [[MoveTo alloc] initWithDuration:[[GorillasConfig get] gameScrollDuration] - scrollActionElapsed
-                                                         position:g])];
+        [self runAction:(scrollAction = [[MoveTo alloc] initWithDuration:[[GorillasConfig get] gameScrollDuration] - scrollActionElapsed
+                                                                position:g])];
     else {
         scrollAction = nil;
         self.position = g;

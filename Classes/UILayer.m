@@ -55,7 +55,7 @@
         [messageQueue insertObject:msg atIndex:0];
         [callbackQueue insertObject:callback? callback: (id)[NSNull null] atIndex:0];
         
-        if(![self isScheduled:@selector(popMessageQueue:)])
+        //if(![self isScheduled:@selector(popMessageQueue:)])
             [self schedule:@selector(popMessageQueue:)];
     }
 }
@@ -80,10 +80,10 @@
     [callbackQueue removeLastObject];
     
     [self resetMessage:msg];
-    [messageLabel do:[Sequence actions:
-                  [MoveBy actionWithDuration:1 position:cpv(0, -([[GorillasConfig get] fontSize] * 2))],
-                  [FadeTo actionWithDuration:2 opacity:0x00],
-                  nil]];
+    [messageLabel runAction:[Sequence actions:
+                             [MoveBy actionWithDuration:1 position:cpv(0, -([[GorillasConfig get] fontSize] * 2))],
+                             [FadeTo actionWithDuration:2 opacity:0x00],
+                             nil]];
     
     if(callback != (id)[NSNull null]) {
         [callback invoke];
@@ -101,19 +101,19 @@
         // Detach existing label & create a new message label for the next message.
         if(messageLabel) {
             [messageLabel stopAllActions];
-            [messageLabel do:[Sequence actions:
-                              [MoveTo actionWithDuration:1
-                                                position:cpv(-[messageLabel contentSize].width / 2, [messageLabel position].y)],
-                              [FadeOut actionWithDuration:1],
-                              [Remove action],
-                              nil]];
+            [messageLabel runAction:[Sequence actions:
+                                     [MoveTo actionWithDuration:1
+                                                       position:cpv(-[messageLabel contentSize].width / 2, [messageLabel position].y)],
+                                     [FadeOut actionWithDuration:1],
+                                     [Remove action],
+                                     nil]];
             [messageLabel release];
         }
         
         messageLabel = [[Label alloc] initWithString:msg
                                             fontName:[[GorillasConfig get] fixedFontName]
                                             fontSize: [[GorillasConfig get] fontSize]];
-        [self add: messageLabel z:1];
+        [self addChild: messageLabel z:1];
     }
     else
         [messageLabel setString:msg];

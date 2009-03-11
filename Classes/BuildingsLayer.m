@@ -102,20 +102,20 @@
     [self setPosition:cpvzero];
     
     if(holes) {
-        [self removeAndStop:holes];
+        [self removeChild:holes cleanup:YES];
         [holes release];
     }
     if(explosions) {
-        [self removeAndStop:explosions];
+        [self removeChild:explosions cleanup:YES];
         [explosions release];
     }
     holes = [[HolesLayer alloc] init];
-    [self add:holes z:-1];
+    [self addChild:holes z:-1];
     explosions = [[ExplosionsLayer alloc] init];
-    [self add:explosions z:4];
+    [self addChild:explosions z:4];
 
     for (BuildingLayer *building in buildings)
-        [self removeAndStop:building];
+        [self removeChild:building cleanup:YES];
     [buildings removeAllObjects];
     
     for (NSUInteger i = 0; i < [[GorillasConfig get] buildingAmount] * 2; ++i) {
@@ -126,7 +126,7 @@
         [buildings addObject: building];
         
         [building setPosition: cpv(x, 0)];
-        [self add:building z:1];
+        [self addChild:building z:1];
 
         [building release];
     }
@@ -148,7 +148,7 @@
                                         fontName:[[GorillasConfig get] fixedFontName]
                                         fontSize:[[GorillasConfig get] fontSize]];
     
-        [self add:msgLabel z:9];
+        [self addChild:msgLabel z:9];
     }
     
     [msgLabel setString:msg];
@@ -177,13 +177,13 @@
         [msgLabel setRGB:0xFF :0xFF :0xFF];
     
     // Animate the label to fade out.
-    [msgLabel do:[Spawn actions:
-                  [FadeOut actionWithDuration:3],
-                  [Sequence actions:
-                   [DelayTime actionWithDuration:1],
-                   [MoveBy actionWithDuration:2 position:cpv(0, [[GorillasConfig get] fontSize] * 2)],
-                   nil],
-                  nil]];
+    [msgLabel runAction:[Spawn actions:
+                         [FadeOut actionWithDuration:3],
+                         [Sequence actions:
+                          [DelayTime actionWithDuration:1],
+                          [MoveBy actionWithDuration:2 position:cpv(0, [[GorillasConfig get] fontSize] * 2)],
+                          nil],
+                         nil]];
 }
 
 
@@ -450,8 +450,8 @@
     // Flip to the active gorilla's orientation.
     // Rotate normal for even and upside-down for odd humanIndex.
     if ([GorillasAppDelegate get].gameLayer.activeGorilla.human && [GorillasConfig get].multiplayerFlip)
-        [[GorillasAppDelegate get].uiLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                                                     angle:(180 * [GorillasAppDelegate get].gameLayer.activeGorilla.teamIndex) % 360]];
+        [[GorillasAppDelegate get].uiLayer runAction:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                                                            angle:(180 * [GorillasAppDelegate get].gameLayer.activeGorilla.teamIndex) % 360]];
     
     if([GorillasAppDelegate get].gameLayer.activeGorilla.alive && ![GorillasAppDelegate get].gameLayer.activeGorilla.human) {
         // Active gorilla is a live AI.
@@ -509,11 +509,11 @@
 
             [hint setOpacity:0];
             [hint setPosition:cpvadd([GorillasAppDelegate get].gameLayer.activeGorilla.position, v)];
-            [hint do:[RepeatForever actionWithAction:[Sequence actions:
-                                                      [DelayTime actionWithDuration:5],
-                                                      [FadeTo actionWithDuration:3 opacity:0x55],
-                                                      [FadeTo actionWithDuration:3 opacity:0x00],
-                                                      nil]]];
+            [hint runAction:[RepeatForever actionWithAction:[Sequence actions:
+                                                             [DelayTime actionWithDuration:5],
+                                                             [FadeTo actionWithDuration:3 opacity:0x55],
+                                                             [FadeTo actionWithDuration:3 opacity:0x00],
+                                                             nil]]];
         }
     }
 }
@@ -525,7 +525,7 @@
     for(Sprite *hint in throwHints)
         if([hint visible]) {
             [hint stopAllActions];
-            [hint do:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration] opacity:0x00]];
+            [hint runAction:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration] opacity:0x00]];
         }
     
     // Record throw history & start the actual throw.
@@ -653,7 +653,7 @@
         if([throwHints count] < [gorillas count]) {
             Sprite *hint = [Sprite spriteWithFile:@"fire.png"];
             [throwHints addObject:hint];
-            [self add:hint];
+            [self addChild:hint];
         }
         
         else
@@ -691,8 +691,8 @@
         GorillaLayer *gorilla = [gorillas objectAtIndex:i];
         
         [gorilla setPosition:cpv([building position].x + [building contentSize].width / 2, [building contentSize].height + [gorilla contentSize].height / 2)];
-        [gorilla do:[FadeIn actionWithDuration:1]];
-        [self add:gorilla z:3];
+        [gorilla runAction:[FadeIn actionWithDuration:1]];
+        [self addChild:gorilla z:3];
     }
     [gorillaIndexes release];
     
@@ -703,12 +703,12 @@
                                      userInfo:nil];
     }
     bananaLayer = [[BananaLayer alloc] init];
-    [self add:bananaLayer z:2];
+    [self addChild:bananaLayer z:2];
     
-    [self do:[Sequence actions:
-              [DelayTime actionWithDuration:1],
-              [CallFunc actionWithTarget:self selector:@selector(nextGorilla)],
-              nil]];
+    [self runAction:[Sequence actions:
+                     [DelayTime actionWithDuration:1],
+                     [CallFunc actionWithTarget:self selector:@selector(nextGorilla)],
+                     nil]];
     
     [[[GorillasAppDelegate get] gameLayer] started];
 }
@@ -720,7 +720,7 @@
     hitGorilla = nil;
     
     if(bananaLayer) {
-        [self removeAndStop:bananaLayer];
+        [self removeChild:bananaLayer cleanup:YES];
         [bananaLayer release];
         bananaLayer = nil;
     }
@@ -733,7 +733,7 @@
     if(runningActions) {
         [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:[GorillasAppDelegate get].gameLayer.activeGorilla.position
                                                               horizontal:YES];
-        [self do:[Sequence actions:
+        [self runAction:[Sequence actions:
                   [DelayTime actionWithDuration:1],
                   [CallFunc actionWithTarget:self selector:@selector(stopGameCallback)],
                   nil]];
@@ -765,7 +765,7 @@
     [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:0.7f];
     
     panAction = [[PanAction alloc] initWithSubNodes:buildings duration:[[GorillasConfig get] buildingSpeed] padding:1];
-    [self do: panAction];
+    [self runAction:panAction];
 }
 
 

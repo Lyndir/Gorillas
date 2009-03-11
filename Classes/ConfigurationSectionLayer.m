@@ -34,11 +34,11 @@
 -(void) reset {
     
     if(menu) {
-        [self removeAndStop:menu];
+        [self removeChild:menu cleanup:YES];
         [menu release];
         menu = nil;
         
-        [self removeAndStop:backMenu];
+        [self removeChild:backMenu cleanup:YES];
         [backMenu release];
         backMenu = nil;
     }
@@ -55,7 +55,7 @@
     
     menu = [[Menu menuWithItems:game, av, nil] retain];
     [menu alignItemsVertically];
-    [self add:menu];
+    [self addChild:menu];
     
     
     // Back.
@@ -68,7 +68,7 @@
     backMenu = [[Menu menuWithItems:back, nil] retain];
     [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
-    [self add:backMenu];
+    [self addChild:backMenu];
 }
 
 

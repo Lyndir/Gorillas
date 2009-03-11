@@ -48,13 +48,18 @@
 	[window setUserInteractionEnabled:YES];
 	[window setMultipleTouchEnabled:YES];
     [window makeKeyAndVisible];
+    resigned = NO;
 
 	// Director and OpenGL Setup.
     [Director useFastDirector];
-	[[Director sharedDirector] attachInWindow:window];
-	[[Director sharedDirector] setDisplayFPS:NO];
-	[[Director sharedDirector] setDepthTest:NO];
+#if TARGET_IPHONE_SIMULATOR
+    [[Director sharedDirector] setPixelFormat:kRGBA8];
+#else
+    [[Director sharedDirector] setDisplayFPS:YES];
+#endif
 	[[Director sharedDirector] setLandscape:YES];
+	[[Director sharedDirector] attachInWindow:window];
+	[[Director sharedDirector] setDepthTest:NO];
 	//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
     glEnable(GL_POINT_SMOOTH);
     //glEnable(GL_LINE_SMOOTH);
@@ -70,12 +75,12 @@
 	// Build the splash scene.
     Scene *splashScene = [Scene node];
     Sprite *splash = [Splash node];
-    [splashScene add:splash];
+    [splashScene addChild:splash];
     
     // Build the game scene.
 	gameLayer = [[GameLayer alloc] init];
     uiLayer = [[UILayer alloc] init];
-    [uiLayer add:gameLayer];
+    [uiLayer addChild:gameLayer];
 	
     // Start the background music.
     [self playTrack:[[GorillasConfig get] currentTrack]];
@@ -102,10 +107,10 @@
     
         if([hudLayer parent])
             // Already showing and being dismissed.
-            [gameLayer removeAndStop:hudLayer];
+            [gameLayer removeChild:hudLayer cleanup:YES];
     }
 
-    [gameLayer add:[self hudLayer]];
+    [gameLayer addChild:[self hudLayer]];
 }
 
 
@@ -155,7 +160,7 @@
     [(ShadeLayer *) [menuLayers lastObject] dismissAsPush:NO];
     [menuLayers removeLastObject];
     if([menuLayers count])
-        [uiLayer add:[menuLayers lastObject]];
+        [uiLayer addChild:[menuLayers lastObject]];
 }
 
 
@@ -178,7 +183,7 @@
     if([layer parent]) {
         if (![menuLayers containsObject:layer])
             // Layer is showing but shouldn't have been; probably being dismissed.
-            [uiLayer removeAndStop:layer];
+            [uiLayer removeChild:layer cleanup:YES];
         
         else {
             // Layer is already showing.
@@ -191,7 +196,7 @@
 
     [(ShadeLayer *) [menuLayers lastObject] dismissAsPush:YES];
     [menuLayers addObject:layer];
-    [uiLayer add:layer];
+    [uiLayer addChild:layer];
 }
 
 
@@ -341,12 +346,17 @@
 -(void) applicationWillResignActive:(UIApplication *)application {
     
     [[Director sharedDirector] pause];
+
+    [gameLayer setPaused:resigned = YES];
 }
 
 
 -(void) applicationDidBecomeActive:(UIApplication *)application {
     
     [[Director sharedDirector] resume];
+    
+    if(resigned)
+        [gameLayer setPaused:resigned = NO];
 }
 
 

@@ -33,7 +33,7 @@
 -(void) start {
 
 	[super start];
-	[[target parent] remove:target];
+	[[target parent] removeChild:target cleanup:NO];
 }
 
 

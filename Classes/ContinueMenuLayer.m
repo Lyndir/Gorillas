@@ -46,7 +46,7 @@
                         stopGame,
                         nil] retain];
     [menu alignItemsVertically];
-    [self add:menu];
+    [self addChild:menu];
 
     return self;
 }

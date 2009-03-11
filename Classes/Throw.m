@@ -100,7 +100,7 @@
         [spinAction release];
     }
     
-    [target do:
+    [target runAction:
      [spinAction = [Repeat actionWithAction:[RotateBy actionWithDuration:1
                                                                    angle:360]
                                       times:(int)duration + 1] retain]];
@@ -115,7 +115,7 @@
         [smoke setSize:15.0f * [target scale]];
         [smoke setSizeVar:5.0f * [target scale]];
         if(![smoke parent])
-            [target.parent add:smoke];
+            [target.parent addChild:smoke];
         else
             [smoke resetSystem];
     }
@@ -241,10 +241,10 @@
             [self throwEnded];
 
         else
-            [buildingsLayer do:[Sequence actions:
-                                [DelayTime actionWithDuration:1],
-                                [CallFunc actionWithTarget:self selector:@selector(throwEnded)],
-                                nil]];
+            [buildingsLayer runAction:[Sequence actions:
+                                       [DelayTime actionWithDuration:1],
+                                       [CallFunc actionWithTarget:self selector:@selector(throwEnded)],
+                                       nil]];
     }
 }
 

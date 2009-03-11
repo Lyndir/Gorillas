@@ -47,11 +47,11 @@
 -(void) reset {
     
     if(menu) {
-        [self removeAndStop:menu];
+        [self removeChild:menu cleanup:YES];
         [menu release];
         menu = nil;
         
-        [self removeAndStop:backMenu];
+        [self removeChild:backMenu cleanup:YES];
         [backMenu release];
         backMenu = nil;
     }
@@ -119,7 +119,7 @@
      [NSNumber numberWithUnsignedInteger:1],
      [NSNumber numberWithUnsignedInteger:1],
      nil];
-    [self add:menu];
+    [self addChild:menu];
     
     
     // Back.
@@ -132,7 +132,7 @@
     backMenu = [[Menu menuWithItems:back, nil] retain];
     [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
-    [self add:backMenu];
+    [self addChild:backMenu];
 }
 
 

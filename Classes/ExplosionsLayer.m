@@ -73,7 +73,7 @@ static ParticleSystem **flameTypes = nil;
             
             if(!explosion.particleCount && !explosion.active) {
                 [explosions removeObjectAtIndex:0];
-                [self remove:explosion];
+                [self removeChild:explosion cleanup:YES];
                 stuffToClean = YES;
             }
         }
@@ -122,12 +122,12 @@ static ParticleSystem **flameTypes = nil;
                               [self size] * 0.2f);
     explosion.tag       = (hitsGorilla? GorillasExplosionHitGorilla  : 0) |
                           (heavy?       GorillasExplosionHeavy       : 0);
-    [explosion do:[Sequence actions:
-                   [DelayTime actionWithDuration:heavy? 0.6f: 0.2f],
-                   [CallFuncN actionWithTarget:self selector:@selector(stop:)],
-                   nil]];
+    [explosion runAction:[Sequence actions:
+                          [DelayTime actionWithDuration:heavy? 0.6f: 0.2f],
+                          [CallFuncN actionWithTarget:self selector:@selector(stop:)],
+                          nil]];
     
-    [self add:explosion z:1];
+    [self addChild:explosion z:1];
     [explosions addObject:explosion];
     [explosion release];
 }
@@ -160,13 +160,13 @@ static ParticleSystem **flameTypes = nil;
     
     for (ParticleSystem *explosion in explosions) {
         [[GorillasAppDelegate get].gameLayer.windLayer unregisterSystem:explosion];
-        [self remove:explosion];
+        [self removeChild:explosion cleanup:YES];
     }
     [explosions removeAllObjects];
     
     for (ParticleSystem *flame in flames) {
         [[GorillasAppDelegate get].gameLayer.windLayer unregisterSystem:flame];
-        [self remove:flame];
+        [self removeChild:flame cleanup:YES];
     }
     [flames removeAllObjects];
 }

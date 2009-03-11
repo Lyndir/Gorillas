@@ -93,14 +93,14 @@
         if(running)
             [self scaleTimeTo:0 duration:0.5f];
         [[GorillasAppDelegate get] hideHud];
-        [windLayer do:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                         opacity:0x00]];
+        [windLayer runAction:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                                opacity:0x00]];
     } else {
         [self scaleTimeTo:1 duration:1];
         [[GorillasAppDelegate get] popAllLayers];
         [[GorillasAppDelegate get] revealHud];
-        [windLayer do:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                         opacity:0xFF]];
+        [windLayer runAction:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                                opacity:0xFF]];
     }
 }
 
@@ -123,15 +123,15 @@
     [windLayer reset];
     
     if ([[GorillasAppDelegate get].uiLayer rotation])
-        [[GorillasAppDelegate get].uiLayer do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                                                     angle:0]];
+        [[GorillasAppDelegate get].uiLayer runAction:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                                                            angle:0]];
 }
 
 -(void) shake {
     
     [AudioController vibrate];
     
-    [buildingsLayer do:shakeAction];
+    [buildingsLayer runAction:shakeAction];
 }
 
 
@@ -454,13 +454,13 @@
     
     panningLayer = [[PanningLayer alloc] init];
     [panningLayer setTransformAnchor:cpvzero];
-    [panningLayer add:buildingsLayer z:0];
-    [panningLayer add:skiesLayer z:-5 parallaxRatio:cpv(0.3f, 0.8f)];
-    [self add:panningLayer];
+    [panningLayer addChild:buildingsLayer z:0];
+    [panningLayer addChild:skiesLayer z:-5 parallaxRatio:cpv(0.3f, 0.8f)];
+    [self addChild:panningLayer];
     
     windLayer = [[WindLayer alloc] init];
     [windLayer setColor:0xffffff00];
-    [self add:windLayer z:5];
+    [self addChild:windLayer z:5];
 
     // Make sure we're paused, hide HUD and show status bar.
     [self setPausedSilently:YES];
@@ -503,7 +503,7 @@
             
             // Remove & release it.
             [windLayer unregisterSystem:weather];
-            [[weather parent] removeAndStop:weather];
+            [[weather parent] removeChild:weather cleanup:YES];
             [weather release];
             weather = nil;
             
@@ -529,7 +529,7 @@
                 
                 [weather setPosVar:cpv([weather posVar].x * 2.5f, [weather posVar].y)];
                 [weather setPosition:cpv([weather position].x, [weather position].y * 2)]; // Space above screen.
-                [buildingsLayer add:weather z:-3 parallaxRatio:cpv(1.3f, 1.8f)];
+                [buildingsLayer addChild:weather z:-3 parallaxRatio:cpv(1.3f, 1.8f)];
 
                 [windLayer registerSystem:weather affectAngle:YES];
             }
@@ -567,11 +567,11 @@
     activeGorilla = nil;
     
     if([self rotation])
-        [self do:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                        angle:0]];
+        [self runAction:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                               angle:0]];
     if([panningLayer position].x != 0 || [panningLayer position].y != 0)
-        [panningLayer do:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                           position:cpvzero]];
+        [panningLayer runAction:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+                                                  position:cpvzero]];
     
     if(mode)
         [[GorillasAppDelegate get] showContinueMenu];
