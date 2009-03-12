@@ -80,6 +80,7 @@
 
 -(void) draw {
 
+    glEnable(GL_POINT_SMOOTH);
     glEnableClientState(GL_COLOR_ARRAY);
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
@@ -95,6 +96,7 @@
     glDisableClientState(GL_POINT_SIZE_ARRAY_OES);
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
+    glDisable(GL_POINT_SMOOTH);
 }
 
 

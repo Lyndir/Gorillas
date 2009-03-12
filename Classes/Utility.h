@@ -27,11 +27,34 @@
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
 
-typedef struct _Vertex {
-	cpVect p;
-    ccColorB c;
-} Vertex;
 
+// Fixed Type Vector
+typedef struct iVect{
+	GLfixed x,y;
+} iVect;
+
+static inline GLfixed
+ftoi(const GLfloat f)
+{
+	return (GLfixed)f * 65536;
+}
+
+static inline iVect
+cpvtoiv(const cpVect cpv)
+{
+	iVect v = { ftoi(cpv.x), ftoi(cpv.y) };
+	return v;
+}
+
+static inline iVect
+iv(const GLfixed x, const GLfixed y)
+{
+	iVect v = {x * 65536, y * 65536};
+	return v;
+}
+
+
+// Color Struct
 static inline ccColorB
 ccc(const long c)
 {
@@ -39,6 +62,32 @@ ccc(const long c)
 	ccColorB cc = { components[3], components[2], components[1], components[0] };
 	return cc;
 }
+
+
+// Vertex: Position & Color 
+typedef struct _Vertex {
+	cpVect p;
+    ccColorB c;
+} Vertex;
+
+static inline Vertex
+ivc(const cpVect p, const long c)
+{
+    Vertex v;
+    v.p = p; //cpvtoiv(p);
+    v.c = ccc(c);
+	return v;
+}
+
+static inline Vertex
+ivcf(const cpFloat x, const cpFloat y, const long c)
+{
+    Vertex v;
+    v.p = cpv(x, y);
+    v.c = ccc(c);
+	return v;
+}
+
 
 NSString* rpad(NSString* string, NSUInteger l);
 NSString* lpad(NSString* string, NSUInteger l);

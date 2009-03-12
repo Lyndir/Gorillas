@@ -60,9 +60,6 @@
 	[[Director sharedDirector] setLandscape:YES];
 	[[Director sharedDirector] attachInWindow:window];
 	[[Director sharedDirector] setDepthTest:NO];
-	//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-    glEnable(GL_POINT_SMOOTH);
-    //glEnable(GL_LINE_SMOOTH);
     
     // Random seed with timestamp.
     srandom(time(nil));

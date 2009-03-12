@@ -1176,8 +1176,6 @@
 		DA2282260EE1A30300BA53D2 /* Video */ = {
 			isa = PBXGroup;
 			children = (
-				DA126C8D0EDDF19100EADDE2 /* Utility.h */,
-				DA126C8E0EDDF19100EADDE2 /* Utility.m */,
 				DA2282240EE1A2B000BA53D2 /* Sprites */,
 				DACA4E220EB3A8E90096F970 /* Views */,
 			);
@@ -1435,6 +1433,8 @@
 		DACC1BBF0F63D5C70078A0D8 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				DA126C8D0EDDF19100EADDE2 /* Utility.h */,
+				DA126C8E0EDDF19100EADDE2 /* Utility.m */,
 				DA0087670F5FB7A9009C1053 /* BarLayer.h */,
 				DA0087680F5FB7A9009C1053 /* BarLayer.m */,
 				DA16C3250EEBDE7900E46246 /* Resettable.h */,
