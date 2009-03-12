@@ -24,8 +24,6 @@
 //  Copyright, lhunath (Maarten Billemont) 2008. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "cocos2d.h"
 #import "Resettable.h"
 
 @interface PanningLayer : Layer <Resettable> {

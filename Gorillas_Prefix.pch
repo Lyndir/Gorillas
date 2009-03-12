@@ -16,38 +16,79 @@
  *  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import <UIKit/UIKit.h>
-#endif
+//#define DEBUG 0
+//#undefine _DEBUG_
 
+
+/**
+ * Gorillas Node Tags.
+ */
 typedef enum {
-    GorillasTagBananaFlying,        // Banana is on the field.
-    GorillasTagBananaNotFlying,     // No banana is on the field.
+    /** Banana is on the field.     */
+    GorillasTagBananaFlying,
+    
+    /** No banana is on the field.  */
+    GorillasTagBananaNotFlying,
 } GorillasTag;
 
+
+/**
+ * Gorillas Game Features.
+ */
 typedef enum {
+    /** Keep Player Score.          */
     GorillasFeatureScore    = 2 << 0,
+
+    /** Keep Player Skill.          */
     GorillasFeatureSkill    = 2 << 1,
+    
+    /** Adapt AI Difficulty.        */
     GorillasFeatureLevel    = 2 << 2,
+    
+    /** Humans have multiple lives. */
     GorillasFeatureLivesPl  = 2 << 3,
+    
+    /** AIs have multiple lives.    */
     GorillasFeatureLivesAi  = 2 << 4,
+    
+    /** Humans and AIs are teamed.  */
     GorillasFeatureTeam     = 2 << 5,
+    
+    /** Enable game cheats.         */
     GorillasFeatureCheat    = 2 << 6,
 } GorillasFeature;
 
+
+/**
+ * Gorillas Game Modes.
+ *
+ * Configure which features to enable for each mode.
+ */
 typedef enum {
-    // Boot Camp:
+    /** Boot Camp.                  */
     GorillasModeBootCamp    = GorillasFeatureCheat,
-    // Quick Game:
+    
+    /** Classic Game.               */
     GorillasModeClassic     = GorillasFeatureScore      | GorillasFeatureLevel,
-    // Dynamic Game:
+    
+    /** Dynamic Game.               */
     GorillasModeDynamic     = GorillasFeatureSkill      | GorillasFeatureScore  | GorillasFeatureLevel,
-    // Dynamic Game:
+    
+    /** Team Game.                  */
     GorillasModeTeam        = GorillasFeatureScore      | GorillasFeatureTeam,
-    // Last Man Standing:
+    
+    /** Last Man Standing.          */
     GorillasModeLMS         = GorillasFeatureLivesPl    | GorillasFeatureLivesAi,
 } GorillasMode;
 
-//#define DEBUG 0
-//#undefine _DEBUG_
+
+/**
+ * Global Dependencies.
+ */
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+    #import "cocos2d.h"
+    #import "Utility.h"
+    #import "GorillasConfig.h"
+#endif

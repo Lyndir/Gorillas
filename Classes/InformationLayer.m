@@ -25,7 +25,6 @@
 //
 
 #import "InformationLayer.h"
-#import "GorillasConfig.h"
 #import "GorillasAppDelegate.h"
 
 

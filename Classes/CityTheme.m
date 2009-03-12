@@ -25,7 +25,6 @@
 //
 
 #import "CityTheme.h"
-#import "GorillasConfig.h"
 
 
 @implementation CityTheme

@@ -45,7 +45,6 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 */
 
 
-#import <UIKit/UIKit.h>
 #include <AudioToolbox/AudioToolbox.h>
 
 #define kNumberAudioDataBuffers	3

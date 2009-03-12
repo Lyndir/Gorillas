@@ -6,7 +6,6 @@
 //  Copyright 2009 lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "cocos2d.h"
 
 @interface UILayer : Layer {
     

@@ -25,7 +25,6 @@
 //
 
 #import "Throw.h"
-#import "GorillasConfig.h"
 #import "GorillasAppDelegate.h"
 #define maxDiff 4
 #define recapTime 3

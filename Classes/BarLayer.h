@@ -6,8 +6,6 @@
 //  Copyright 2009 lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "cocos2d.h"
 
 
 @interface BarLayer : Layer {

@@ -25,9 +25,7 @@
 //
 
 
-#import <UIKit/UIKit.h>
 #import "Resettable.h"
-#import "GorillasConfig.h"
 
 
 @interface BuildingLayer : Layer <CocosNodeSize, Resettable> {

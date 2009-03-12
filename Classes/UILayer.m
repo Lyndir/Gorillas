@@ -7,7 +7,6 @@
 //
 
 #import "UILayer.h"
-#import "GorillasConfig.h"
 #import "Remove.h"
 
 

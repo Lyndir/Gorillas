@@ -25,8 +25,6 @@
 //
 
 #import "WindLayer.h"
-#import "Utility.h"
-#import "GorillasConfig.h"
 #import "GorillasAppDelegate.h"
 
 

@@ -27,7 +27,6 @@
 #import "SkiesLayer.h"
 #import "SkyLayer.h"
 #import "PanAction.h"
-#import "Utility.h"
 
 
 @implementation SkiesLayer

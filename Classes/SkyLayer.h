@@ -24,9 +24,7 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "Resettable.h"
-#import "GorillasConfig.h"
 
 typedef struct _Star {
     cpVect p;

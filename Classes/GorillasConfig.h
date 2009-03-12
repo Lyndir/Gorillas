@@ -27,7 +27,6 @@
 #ifndef _GORILLACONFIG
 #define _GORILLACONFIG
 
-#import "cocos2d.h"
 #import "GameConfiguration.h"
 
 

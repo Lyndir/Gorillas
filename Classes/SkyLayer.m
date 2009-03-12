@@ -25,7 +25,6 @@
 //
 
 #import "SkyLayer.h"
-#import "Utility.h"
 #define maxStarSize 2
 
 

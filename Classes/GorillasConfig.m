@@ -24,9 +24,7 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "GorillasConfig.h"
 #import "CityTheme.h"
-#import "cocos2d.h"
 #import "GorillasAppDelegate.h"
 
 #define dFontSize           @"v1.0.fontSize"

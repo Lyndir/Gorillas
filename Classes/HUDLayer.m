@@ -26,7 +26,6 @@
 
 #import "HUDLayer.h"
 #import "GorillasAppDelegate.h"
-#import "GorillasConfig.h"
 #import "ShadeTo.h"
 
 @interface HUDLayer (Private)

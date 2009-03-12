@@ -46,7 +46,6 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 */
 
 
-#import <UIKit/UIKit.h>
 
 #define kSecondsPerBuffer	0.5
 

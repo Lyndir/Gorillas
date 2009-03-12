@@ -28,7 +28,6 @@
 #import "BuildingLayer.h"
 #import "ExplosionsLayer.h"
 #import "GorillasAppDelegate.h"
-#import "Utility.h"
 #import "ShadeTo.h"
 #import "Remove.h"
 

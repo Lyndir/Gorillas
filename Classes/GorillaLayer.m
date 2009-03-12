@@ -25,8 +25,6 @@
 //
 
 #import "GorillaLayer.h"
-#import "GorillasConfig.h"
-#import "Utility.h"
 #import "GorillasAppDelegate.h"
 #import "ShadeTo.h"
 #import "Remove.h"

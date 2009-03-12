@@ -24,8 +24,6 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "cocos2d.h"
 
 
 @interface ShadeTo : IntervalAction {

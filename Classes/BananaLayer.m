@@ -25,7 +25,6 @@
 //
 
 #import "BananaLayer.h"
-#import "GorillasConfig.h"
 #import "GorillasAppDelegate.h"
 
 

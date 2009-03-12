@@ -26,7 +26,6 @@
 
 #import "StatisticsLayer.h"
 #import "GorillasAppDelegate.h"
-#import "Utility.h"
 #import "BuildingLayer.h"
 #define gBarSize 25
 

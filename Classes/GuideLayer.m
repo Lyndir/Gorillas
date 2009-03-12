@@ -25,7 +25,6 @@
 //
 
 #import "GuideLayer.h"
-#import "GorillasConfig.h"
 #import "GorillasAppDelegate.h"
 
 

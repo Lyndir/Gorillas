@@ -25,7 +25,6 @@
 //
 
 #import "MenuItemSpacer.h"
-#import "GorillasConfig.h"
 
 
 @implementation MenuItemSpacer

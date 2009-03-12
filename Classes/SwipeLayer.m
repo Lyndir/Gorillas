@@ -25,8 +25,6 @@
 //
 
 #import "SwipeLayer.h"
-#import "GorillasConfig.h"
-#import "Utility.h"
 
 #define gSwipeMinHorizontal 50
 #define gSwipeMaxVertical 100

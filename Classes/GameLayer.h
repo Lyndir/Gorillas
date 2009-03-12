@@ -25,10 +25,7 @@
 //
 
 
-#import <UIKit/UIKit.h>
-#import "cocos2d.h"
 #import "PanningLayer.h"
-#import "GorillasConfig.h"
 #import "SkiesLayer.h"
 #import "BuildingsLayer.h"
 #import "WindLayer.h"

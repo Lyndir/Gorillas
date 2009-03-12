@@ -24,7 +24,6 @@
 //  Copyright, lhunath (Maarten Billemont) 2008. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
 #import "NewGameLayer.h"

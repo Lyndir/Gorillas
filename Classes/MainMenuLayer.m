@@ -25,7 +25,6 @@
 //
 
 #import "MainMenuLayer.h"
-#import "GorillasConfig.h"
 #import "GorillasAppDelegate.h"
 #import "MenuItemSpacer.h"
 

@@ -25,7 +25,6 @@
 //
 
 #import "BuildingLayer.h"
-#import "Utility.h"
 
 @implementation BuildingLayer
 

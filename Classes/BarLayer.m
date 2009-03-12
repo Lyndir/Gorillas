@@ -7,9 +7,7 @@
 //
 
 #import "BarLayer.h"
-#import "GorillasConfig.h"
 #import "Remove.h"
-#import "Utility.h"
 
 
 @implementation BarLayer

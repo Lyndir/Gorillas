@@ -47,7 +47,6 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 */
 
 
-#import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "AudioController.h"
 
