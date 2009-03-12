@@ -11,7 +11,12 @@
     
     Label                                   *messageLabel;
     NSMutableArray                          *messageQueue, *callbackQueue;
+    
+    RotateTo                                *rotateAction;
+    UIAccelerationValue                     accelX, accelY, accelZ;
 }
+
+-(void) rotateTo:(float)aRotation;
 
 -(void) message:(NSString *)msg;
 -(void) message:(NSString *)msg callback:(id)target :(SEL)selector;

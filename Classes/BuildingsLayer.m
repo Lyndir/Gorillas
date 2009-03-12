@@ -446,12 +446,7 @@
     // Scale to the active gorilla's saved scale.
     [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:[GorillasAppDelegate get].gameLayer.activeGorilla.zoom];
 
-    // Flip to the active gorilla's orientation.
-    // Rotate normal for even and upside-down for odd humanIndex.
-    if ([GorillasAppDelegate get].gameLayer.activeGorilla.human && [GorillasConfig get].multiplayerFlip)
-        [[GorillasAppDelegate get].uiLayer runAction:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                                                            angle:(180 * [GorillasAppDelegate get].gameLayer.activeGorilla.teamIndex) % 360]];
-    
+    // AI throw.
     if([GorillasAppDelegate get].gameLayer.activeGorilla.alive && ![GorillasAppDelegate get].gameLayer.activeGorilla.human) {
         // Active gorilla is a live AI.
         NSMutableArray *enemies = [[GorillasAppDelegate get].gameLayer.gorillas mutableCopy];

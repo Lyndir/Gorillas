@@ -121,10 +121,6 @@
     [panningLayer reset];
     [buildingsLayer reset];
     [windLayer reset];
-    
-    if ([[GorillasAppDelegate get].uiLayer rotation])
-        [[GorillasAppDelegate get].uiLayer runAction:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                                                            angle:0]];
 }
 
 -(void) shake {
@@ -566,9 +562,6 @@
     [activeGorilla release];
     activeGorilla = nil;
     
-    if([self rotation])
-        [self runAction:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                               angle:0]];
     if([panningLayer position].x != 0 || [panningLayer position].y != 0)
         [panningLayer runAction:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                                   position:cpvzero]];

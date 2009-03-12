@@ -25,9 +25,9 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>105</string>
+	<string>106</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1b5</string>
+	<string>1.1b6</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>© 2009, Maarten Billemont</string>
 	<key>LSRequiresIPhoneOS</key>

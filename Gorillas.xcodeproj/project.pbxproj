@@ -120,6 +120,11 @@
 		DA37A0140F0965A600541EF4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75482B0EAB77450083EC7C /* OpenGLES.framework */; };
 		DA37A0150F0965A600541EF4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75496C0EAB77970083EC7C /* QuartzCore.framework */; };
 		DA37A0160F0965A600541EF4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */; };
+		DA3B01490F69CE90009B4A85 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = DA3B01480F69CE90009B4A85 /* icon.icns */; };
+		DA3B014A0F69CE90009B4A85 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = DA3B01480F69CE90009B4A85 /* icon.icns */; };
+		DA3B014B0F69CE90009B4A85 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = DA3B01480F69CE90009B4A85 /* icon.icns */; };
+		DA3B014C0F69CE90009B4A85 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = DA3B01480F69CE90009B4A85 /* icon.icns */; };
+		DA3B014D0F69CE90009B4A85 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = DA3B01480F69CE90009B4A85 /* icon.icns */; };
 		DA3E5BDF0F3F20EB00D83943 /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = DA3E5BC40F3F20EB00D83943 /* chipmunk.c */; };
 		DA3E5BE00F3F20EB00D83943 /* cpArbiter.c in Sources */ = {isa = PBXBuildFile; fileRef = DA3E5BC60F3F20EB00D83943 /* cpArbiter.c */; };
 		DA3E5BE10F3F20EB00D83943 /* cpArray.c in Sources */ = {isa = PBXBuildFile; fileRef = DA3E5BC80F3F20EB00D83943 /* cpArray.c */; };
@@ -740,6 +745,7 @@
 		DA379EBC0F0964BA00541EF4 /* Gorillas-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA379FA60F09654A00541EF4 /* Gorillas-Dieter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas-Dieter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA37A01B0F0965A600541EF4 /* Gorillas-Mario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas-Mario.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA3B01480F69CE90009B4A85 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = raw/icon.icns; sourceTree = "<group>"; };
 		DA3E5BC40F3F20EB00D83943 /* chipmunk.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = chipmunk.c; sourceTree = "<group>"; };
 		DA3E5BC50F3F20EB00D83943 /* chipmunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk.h; sourceTree = "<group>"; };
 		DA3E5BC60F3F20EB00D83943 /* cpArbiter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cpArbiter.c; sourceTree = "<group>"; };
@@ -1235,6 +1241,7 @@
 		DA5F1BD30EE74CE80041691E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DA3B01480F69CE90009B4A85 /* icon.icns */,
 				DACF1CCA0F687839001EF5F9 /* hole.pvr */,
 				DACF1CCB0F687839001EF5F9 /* smoke.pvr */,
 				DACC16010F61F3300078A0D8 /* fire.png */,
@@ -1606,6 +1613,7 @@
 				DACC160C0F61F3300078A0D8 /* smoke.png in Resources */,
 				DACF1CD00F687839001EF5F9 /* hole.pvr in Resources */,
 				DACF1CD10F687839001EF5F9 /* smoke.pvr in Resources */,
+				DA3B014B0F69CE90009B4A85 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1650,6 +1658,7 @@
 				DACC16040F61F3300078A0D8 /* smoke.png in Resources */,
 				DACF1CCC0F687839001EF5F9 /* hole.pvr in Resources */,
 				DACF1CCD0F687839001EF5F9 /* smoke.pvr in Resources */,
+				DA3B01490F69CE90009B4A85 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1694,6 +1703,7 @@
 				DACC16080F61F3300078A0D8 /* smoke.png in Resources */,
 				DACF1CD20F687839001EF5F9 /* hole.pvr in Resources */,
 				DACF1CD30F687839001EF5F9 /* smoke.pvr in Resources */,
+				DA3B014C0F69CE90009B4A85 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1738,6 +1748,7 @@
 				DACC16060F61F3300078A0D8 /* smoke.png in Resources */,
 				DACF1CD40F687839001EF5F9 /* hole.pvr in Resources */,
 				DACF1CD50F687839001EF5F9 /* smoke.pvr in Resources */,
+				DA3B014D0F69CE90009B4A85 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1782,6 +1793,7 @@
 				DACC160A0F61F3300078A0D8 /* smoke.png in Resources */,
 				DACF1CCE0F687839001EF5F9 /* hole.pvr in Resources */,
 				DACF1CCF0F687839001EF5F9 /* smoke.pvr in Resources */,
+				DA3B014A0F69CE90009B4A85 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

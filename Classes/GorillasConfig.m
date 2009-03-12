@@ -75,7 +75,6 @@
 
 #define dReplay             @"v1.1.replay"
 #define dFollowThrow        @"v1.1.followThrow"
-#define dMultiplayerFlip    @"v1.1.multiplayerFlip"
 
 #define dTracks             @"v1.1.tracks"
 #define dTrackNames         @"v1.1.trackNames"
@@ -206,7 +205,6 @@
                                 
                                 [NSNumber numberWithBool:    YES],                          dReplay,
                                 [NSNumber numberWithBool:    YES],                          dFollowThrow,
-                                [NSNumber numberWithBool:    NO],                           dMultiplayerFlip,
                                 
                                 [NSArray arrayWithObjects:
                                  @"blockdropper3.wav",
@@ -625,15 +623,6 @@
 -(void) setFollowThrow: (BOOL)nFollowThrow {
     
     [defaults setBool:nFollowThrow forKey: dFollowThrow];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(BOOL) multiplayerFlip {
-    
-    return [defaults boolForKey: dMultiplayerFlip];
-}
--(void) setMultiplayerFlip: (BOOL)nMultiplayerFlip {
-    
-    [defaults setBool:nMultiplayerFlip forKey: dMultiplayerFlip];
     [[GorillasAppDelegate get] updateConfig];
 }
 

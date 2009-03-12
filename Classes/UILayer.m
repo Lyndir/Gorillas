@@ -8,6 +8,8 @@
 
 #import "UILayer.h"
 #import "Remove.h"
+#define kFilteringFactor            0.4f
+#define kAccelerometerFrequency     50 //Hz
 
 
 @interface UILayer (Private)
@@ -29,8 +31,69 @@
     messageQueue = [[NSMutableArray alloc] initWithCapacity:3];
     callbackQueue = [[NSMutableArray alloc] initWithCapacity:3];
     messageLabel = nil;
+    
+    //UIAccelerometer*  theAccelerometer = [UIAccelerometer sharedAccelerometer];
+    //theAccelerometer.updateInterval = 1 / kAccelerometerFrequency;
+
+    isAccelerometerEnabled = YES;
 
     return self;
+}
+
+
+-(void) setRotation:(float)aRotation {
+    
+    [super setRotation:aRotation];
+    
+    NSUInteger barSide = (int)self.rotation / 90;
+    if([[Director sharedDirector] landscape]) {
+#ifdef LANDSCAPE_LEFT
+        ++barSide;
+#else
+        --barSide;
+#endif
+    }
+    
+    switch (barSide % 4) {
+        case 0:
+            //[[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:YES];
+            //break;
+        case 1:
+            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:YES];
+            break;
+        case 2:
+            //[[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortraitUpsideDown animated:YES];
+            //break;
+        case 3:
+            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:YES];
+            break;
+    }
+}
+
+
+-(void) accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
+    
+    // Use a basic low-pass filter to keep only the gravity component of each axis.
+    accelX = (acceleration.x * kFilteringFactor) + (accelX * (1.0f - kFilteringFactor));
+    accelY = (acceleration.y * kFilteringFactor) + (accelY * (1.0f - kFilteringFactor));
+    accelZ = (acceleration.z * kFilteringFactor) + (accelZ * (1.0f - kFilteringFactor));
+    
+    // Use the acceleration data.
+    if(accelX > 0.5)
+        [self rotateTo:180];
+    else if(accelX < -0.5)
+        [self rotateTo:0];
+}
+
+
+-(void) rotateTo:(float)aRotation {
+    
+    if(rotateAction) {
+        [self stopAction:rotateAction];
+        [rotateAction release];
+    }
+    
+    [self runAction:rotateAction = [[RotateTo alloc] initWithDuration:0.2f angle:aRotation]];
 }
 
 
@@ -125,6 +188,9 @@
 
 
 -(void) dealloc {
+    
+    [rotateAction release];
+    rotateAction = nil;
     
     [messageQueue release];
     messageQueue = nil;

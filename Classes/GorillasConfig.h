@@ -110,7 +110,6 @@
 
 @property (readwrite) BOOL                  replay;
 @property (readwrite) BOOL                  followThrow;
-@property (readwrite) BOOL                  multiplayerFlip;
 
 @property (readonly) NSString               *offMessage;
 @property (readonly) NSString               *hitMessage;

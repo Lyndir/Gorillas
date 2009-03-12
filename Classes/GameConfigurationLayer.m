@@ -115,21 +115,10 @@
                                              selector:@selector(followThrow:)];
     
     
-    // Multiplayer Flip.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *flipT  = [MenuItemFont itemFromString:@"Multiplayer Flipping"];
-    [flipT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *flipI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%@", [[GorillasConfig get] multiplayerFlip]? @"On": @"Off"]
-                                             target:self
-                                           selector:@selector(multiplayerFlip:)];
-    
-    menu = [[Menu menuWithItems:themeT, gravityT, themeI, gravityI, levelT, replayT, levelI, replayI, followT, flipT, followI, flipI, nil] retain];
+    menu = [[Menu menuWithItems:themeT, themeI, gravityT, levelT, gravityI, levelI, replayT, followT, replayI, followI, nil] retain];
     [menu alignItemsInColumns:
-     [NSNumber numberWithUnsignedInteger:2],
-     [NSNumber numberWithUnsignedInteger:2],
+     [NSNumber numberWithUnsignedInteger:1],
+     [NSNumber numberWithUnsignedInteger:1],
      [NSNumber numberWithUnsignedInteger:2],
      [NSNumber numberWithUnsignedInteger:2],
      [NSNumber numberWithUnsignedInteger:2],
@@ -212,18 +201,6 @@
     
     [[GorillasAppDelegate get] clickEffect];
     [[GorillasConfig get] setFollowThrow:![[GorillasConfig get] followThrow]];
-}
-
-
--(void) multiplayerFlip: (id) sender {
-    
-    [[GorillasAppDelegate get] clickEffect];
-    [[GorillasConfig get] setMultiplayerFlip:![[GorillasConfig get] multiplayerFlip]];
-    
-    if(![[GorillasConfig get] multiplayerFlip])
-        if([[GorillasAppDelegate get].uiLayer rotation])
-            [[GorillasAppDelegate get].uiLayer runAction:[RotateTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                                                                angle:0]];
 }
 
 
