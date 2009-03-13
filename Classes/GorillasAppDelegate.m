@@ -48,14 +48,13 @@
 	[window setUserInteractionEnabled:YES];
 	[window setMultipleTouchEnabled:YES];
     [window makeKeyAndVisible];
-    resigned = NO;
 
 	// Director and OpenGL Setup.
     [Director useFastDirector];
 #if TARGET_IPHONE_SIMULATOR
     [[Director sharedDirector] setPixelFormat:kRGBA8];
 #else
-    [[Director sharedDirector] setDisplayFPS:YES];
+    //[[Director sharedDirector] setDisplayFPS:YES];
 #endif
 	[[Director sharedDirector] setLandscape:YES];
 	[[Director sharedDirector] attachInWindow:window];
@@ -89,6 +88,8 @@
             [[Director sharedDirector] startAnimation];
         }
         @catch (NSException * e) {
+            NSLog(@"=== Exception Occurred! ===");
+            NSLog(@"Name: %@; Reason: %@; Context: %@.\n", [e name], [e reason], [e userInfo]);
             [hudLayer message:[e reason] duration:3 isImportant:YES];
         }
     } while ([[Director sharedDirector] runningScene]);
@@ -344,16 +345,14 @@
     
     [[Director sharedDirector] pause];
 
-    [gameLayer setPaused:resigned = YES];
+    if(!gameLayer.paused)
+        [self showMainMenu];
 }
 
 
 -(void) applicationDidBecomeActive:(UIApplication *)application {
-    
+
     [[Director sharedDirector] resume];
-    
-    if(resigned)
-        [gameLayer setPaused:resigned = NO];
 }
 
 

@@ -50,17 +50,17 @@
     Action                                  *shakeAction;
 }
 
-@property (readwrite) BOOL                  paused;
-@property (readonly) BOOL                   singlePlayer;
+@property (nonatomic, readwrite) BOOL                  paused;
+@property (nonatomic, readonly) BOOL                   singlePlayer;
 
-@property (readonly) NSMutableArray         *gorillas;
-@property (readwrite, retain) GorillaLayer  *activeGorilla;
+@property (nonatomic, readonly) NSMutableArray         *gorillas;
+@property (nonatomic, readwrite, retain) GorillaLayer  *activeGorilla;
 
-@property (readonly) SkiesLayer             *skiesLayer;
-@property (readonly) PanningLayer           *panningLayer;
-@property (readonly) BuildingsLayer         *buildingsLayer;
-@property (readonly) ParticleSystem         *weather;
-@property (readonly) WindLayer              *windLayer;
+@property (nonatomic, readonly) SkiesLayer             *skiesLayer;
+@property (nonatomic, readonly) PanningLayer           *panningLayer;
+@property (nonatomic, readonly) BuildingsLayer         *buildingsLayer;
+@property (nonatomic, readonly) ParticleSystem         *weather;
+@property (nonatomic, readonly) WindLayer              *windLayer;
 
 -(void) shake;
 -(BOOL) isEnabled:(GorillasFeature)feature;

@@ -65,11 +65,6 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 	startingPacketNumber += inNumPackets;
 }
 
-- (void) setNotificationDelegate: (id) inDelegate {
-
-    notificationDelegate = inDelegate;
-}
-
 - (BOOL) isRunning {
 
 	UInt32		isRunning;

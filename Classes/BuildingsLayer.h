@@ -81,7 +81,7 @@
 -(cpFloat) left;
 -(cpFloat) right;
 
-@property (readonly) BananaLayer *bananaLayer;
-@property (readonly) GorillaLayer *hitGorilla;
+@property (nonatomic, readonly) BananaLayer *bananaLayer;
+@property (nonatomic, readonly) GorillaLayer *hitGorilla;
 
 @end

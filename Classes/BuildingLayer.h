@@ -42,7 +42,7 @@
     GLuint      windowsIndicesBuffer;
 }
 
-@property (readonly) CGSize contentSize;
+@property (nonatomic, readonly) CGSize contentSize;
 
 - (id) initWithWidth:(float)w heightRatio:(float)h;
 -(void) reset;

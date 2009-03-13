@@ -90,7 +90,7 @@
 
 @implementation GorillasConfig
 
-@synthesize modes, offMessage, hitMessage;
+@synthesize modes;
 
 
 #pragma mark Internal

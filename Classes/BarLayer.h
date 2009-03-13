@@ -32,6 +32,6 @@
 -(void) message:(NSString *)msg duration:(ccTime)_duration isImportant:(BOOL)important;
 -(void) dismissMessage;
 
-@property (readonly) BOOL dismissed;
+@property (nonatomic, readonly) BOOL dismissed;
 
 @end

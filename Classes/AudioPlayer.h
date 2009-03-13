@@ -63,11 +63,11 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 	BOOL							audioPlayerShouldStopImmediately;
 }
 
-@property (readwrite) UInt32						numPacketsToRead;
-@property (readwrite) BOOL							donePlayingFile;
-@property (readwrite) BOOL							audioPlayerShouldStopImmediately;
-@property (readwrite) UInt32						bufferByteSize;
-@property (readwrite) Float32						gain;			// the gain (relative audio level) for the playback audio queue
+@property (nonatomic, readwrite) UInt32                         numPacketsToRead;
+@property (nonatomic, readwrite) BOOL							donePlayingFile;
+@property (nonatomic, readwrite) BOOL							audioPlayerShouldStopImmediately;
+@property (nonatomic, readwrite) UInt32                         bufferByteSize;
+@property (nonatomic, readwrite) Float32						gain;			// the gain (relative audio level) for the playback audio queue
 
 - (id) initWithURL: (CFURLRef) fileURL;
 - (void) copyMagicCookieToQueue: (AudioQueueRef) queue fromFile: (AudioFileID) playbackFileID;

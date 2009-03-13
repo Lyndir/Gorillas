@@ -44,6 +44,6 @@
 +(Throw *) actionWithVelocity: (cpVect)velocity startPos: (cpVect)startPos;
 -(Throw *) initWithVelocity: (cpVect)velocity startPos: (cpVect)startPos;
 
-@property (readwrite) ccTime recap;
+@property (nonatomic, readwrite) ccTime recap;
 
 @end

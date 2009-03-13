@@ -45,21 +45,21 @@
     int     gravity;
 }
 
-@property (readonly) int                fixedFloors;
-@property (readonly) float              buildingMax;
-@property (readonly) int                buildingAmount;
-@property (readonly, assign) NSArray    *buildingColors;
+@property (nonatomic, readonly) int                fixedFloors;
+@property (nonatomic, readonly) float              buildingMax;
+@property (nonatomic, readonly) int                buildingAmount;
+@property (nonatomic, readonly, assign) NSArray    *buildingColors;
 
-@property (readonly) int                windowAmount;
-@property (readonly) long               windowColorOn;
-@property (readonly) long               windowColorOff;
+@property (nonatomic, readonly) int                windowAmount;
+@property (nonatomic, readonly) long               windowColorOn;
+@property (nonatomic, readonly) long               windowColorOff;
 
-@property (readonly) long               skyColor;
-@property (readonly) long               starColor;
-@property (readonly) int                starAmount;
+@property (nonatomic, readonly) long               skyColor;
+@property (nonatomic, readonly) long               starColor;
+@property (nonatomic, readonly) int                starAmount;
 
-@property (readonly) float              windModifier;
-@property (readonly) int                gravity;
+@property (nonatomic, readonly) float              windModifier;
+@property (nonatomic, readonly) int                gravity;
 
 -(void) apply;
 

@@ -101,7 +101,6 @@
 
     // Make sure message fits on screen.
     [messageLabel setScale:fminf(1, winSize.width / ([msg length] * 13))];
-    NSLog(@"scale: %f", fminf(1, winSize.width / ([msg length] * 13)));
     
     if(important) {
         renderFromColor = 0x993333FF;

@@ -27,12 +27,12 @@
            sHumans:(NSUInteger)_sHumans mHumans:(NSUInteger)_mHumans
               sAis:(NSUInteger)_sAis mAis:(NSUInteger)_mAis;
 
-@property (readonly) NSString   *name;
-@property (readonly) NSString   *description;
-@property (readonly) NSUInteger mode;
-@property (readonly) NSUInteger sHumans;
-@property (readonly) NSUInteger mHumans;
-@property (readonly) NSUInteger sAis;
-@property (readonly) NSUInteger mAis;
+@property (nonatomic, readonly) NSString       *name;
+@property (nonatomic, readonly) NSString       *description;
+@property (nonatomic, readonly) GorillasMode   mode;
+@property (nonatomic, readonly) NSUInteger     sHumans;
+@property (nonatomic, readonly) NSUInteger     mHumans;
+@property (nonatomic, readonly) NSUInteger     sAis;
+@property (nonatomic, readonly) NSUInteger     mAis;
 
 @end

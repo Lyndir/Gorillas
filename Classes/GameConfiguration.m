@@ -34,16 +34,29 @@
     if(!(self = [super init]))
         return self;
     
-    name        = _name;
-    description = _description;
+    name        = [_name copy];
+    description = [_description copy];
     
     mode        = _mode;
-    sHumans      = _sHumans;
-    mHumans      = _mHumans;
-    sAis         = _sAis;
-    mAis         = _mAis;
+    sHumans     = _sHumans;
+    mHumans     = _mHumans;
+    sAis        = _sAis;
+    mAis        = _mAis;
     
     return self;
 }
+
+
+-(void) dealloc {
+    
+    [name release];
+    name = nil;
+    
+    [description release];
+    description = nil;
+    
+    [super dealloc];
+}
+
 
 @end

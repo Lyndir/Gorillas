@@ -39,80 +39,80 @@
 }
 
 
-@property (readwrite) int                   fontSize;
-@property (readwrite) int                   largeFontSize;
-@property (readwrite) int                   smallFontSize;
-@property (readwrite, assign) NSString      *fontName;
-@property (readwrite, assign) NSString      *fixedFontName;
+@property (nonatomic, readwrite) int                   fontSize;
+@property (nonatomic, readwrite) int                   largeFontSize;
+@property (nonatomic, readwrite) int                   smallFontSize;
+@property (nonatomic, readwrite, assign) NSString      *fontName;
+@property (nonatomic, readwrite, assign) NSString      *fixedFontName;
 
-@property (readwrite, assign) NSString      *cityTheme;
+@property (nonatomic, readwrite, assign) NSString      *cityTheme;
 
-@property (readwrite) NSUInteger            fixedFloors;
-@property (readonly) float                  cityScale;
-@property (readwrite) float                 buildingMax;
-@property (readonly) float                  buildingWidth;
-@property (readwrite) NSUInteger            buildingAmount;
-@property (readwrite) int                   buildingSpeed;
-@property (readwrite, assign) NSArray       *buildingColors;
+@property (nonatomic, readwrite) NSUInteger            fixedFloors;
+@property (nonatomic, readonly) float                  cityScale;
+@property (nonatomic, readwrite) float                 buildingMax;
+@property (nonatomic, readonly) float                  buildingWidth;
+@property (nonatomic, readwrite) NSUInteger            buildingAmount;
+@property (nonatomic, readwrite) int                   buildingSpeed;
+@property (nonatomic, readwrite, assign) NSArray       *buildingColors;
 
-@property (readonly) float                  windowWidth;
-@property (readonly) float                  windowHeight;
-@property (readwrite) NSUInteger            windowAmount;
-@property (readonly) float                  windowPadding;
-@property (readwrite) long                  windowColorOn;
-@property (readwrite) long                  windowColorOff;
+@property (nonatomic, readonly) float                  windowWidth;
+@property (nonatomic, readonly) float                  windowHeight;
+@property (nonatomic, readwrite) NSUInteger            windowAmount;
+@property (nonatomic, readonly) float                  windowPadding;
+@property (nonatomic, readwrite) long                  windowColorOn;
+@property (nonatomic, readwrite) long                  windowColorOff;
 
-@property (readwrite) long                  skyColor;
-@property (readwrite) long                  starColor;
-@property (readwrite) int                   starSpeed;
-@property (readwrite) NSUInteger            starAmount;
+@property (nonatomic, readwrite) long                  skyColor;
+@property (nonatomic, readwrite) long                  starColor;
+@property (nonatomic, readwrite) int                   starSpeed;
+@property (nonatomic, readwrite) NSUInteger            starAmount;
 
-@property (readwrite) int                   lives;
-@property (readwrite) float                 windModifier;
-@property (readwrite) NSUInteger            gravity;
-@property (readwrite) NSUInteger            minGravity;
-@property (readwrite) NSUInteger            maxGravity;
+@property (nonatomic, readwrite) int                   lives;
+@property (nonatomic, readwrite) float                 windModifier;
+@property (nonatomic, readwrite) NSUInteger            gravity;
+@property (nonatomic, readwrite) NSUInteger            minGravity;
+@property (nonatomic, readwrite) NSUInteger            maxGravity;
 
-@property (readwrite) long                  shadeColor;
-@property (readwrite) ccTime                transitionDuration;
-@property (readwrite) ccTime                gameScrollDuration;
+@property (nonatomic, readwrite) long                  shadeColor;
+@property (nonatomic, readwrite) ccTime                transitionDuration;
+@property (nonatomic, readwrite) ccTime                gameScrollDuration;
 
-@property (readwrite) float                 level;
-@property (readonly) NSString               *levelName;
-@property (readwrite, assign) NSArray       *levelNames;
-@property (readwrite) float                 levelProgress;
+@property (nonatomic, readwrite) float                 level;
+@property (nonatomic, readonly) NSString               *levelName;
+@property (nonatomic, readwrite, assign) NSArray       *levelNames;
+@property (nonatomic, readwrite) float                 levelProgress;
 
-@property (readonly) GameConfiguration      *gameConfiguration;
-@property (readwrite) NSUInteger            activeGameConfigurationIndex;
-@property (readwrite) NSUInteger            mode;
-@property (readonly) NSArray                *modes;
-@property (readonly) NSString               *modeString;
-@property (readwrite) int                   score;
-@property (readwrite) float                 skill;
-@property (readwrite, assign) NSDictionary  *topScoreHistory;
-@property (readwrite) int                   missScore;
-@property (readwrite) int                   killScore;
-@property (readwrite) float                 bonusOneShot;
-@property (readwrite) float                 bonusSkill;
-@property (readwrite) int                   deathScoreRatio;
-@property (readonly) int                    deathScore;
+@property (nonatomic, readonly) GameConfiguration      *gameConfiguration;
+@property (nonatomic, readwrite) NSUInteger            activeGameConfigurationIndex;
+@property (nonatomic, readwrite) NSUInteger            mode;
+@property (nonatomic, readonly) NSArray                *modes;
+@property (nonatomic, readonly) NSString               *modeString;
+@property (nonatomic, readwrite) int                   score;
+@property (nonatomic, readwrite) float                 skill;
+@property (nonatomic, readwrite, assign) NSDictionary  *topScoreHistory;
+@property (nonatomic, readwrite) int                   missScore;
+@property (nonatomic, readwrite) int                   killScore;
+@property (nonatomic, readwrite) float                 bonusOneShot;
+@property (nonatomic, readwrite) float                 bonusSkill;
+@property (nonatomic, readwrite) int                   deathScoreRatio;
+@property (nonatomic, readonly) int                    deathScore;
 
-@property (readwrite, assign) NSArray       *tracks;
-@property (readwrite, assign) NSArray       *trackNames;
-@property (readonly) NSString               *randomTrack;
-@property (readwrite, assign) NSString      *currentTrack;
-@property (readonly, assign) NSString       *currentTrackName;
+@property (nonatomic, readwrite, assign) NSArray       *tracks;
+@property (nonatomic, readwrite, assign) NSArray       *trackNames;
+@property (nonatomic, readonly) NSString               *randomTrack;
+@property (nonatomic, readwrite, assign) NSString      *currentTrack;
+@property (nonatomic, readonly, assign) NSString       *currentTrackName;
 
-@property (readwrite) BOOL                  weather;
-@property (readwrite) BOOL                  soundFx;
-@property (readwrite) BOOL                  vibration;
-@property (readwrite) BOOL                  visualFx;
+@property (nonatomic, readwrite) BOOL                  weather;
+@property (nonatomic, readwrite) BOOL                  soundFx;
+@property (nonatomic, readwrite) BOOL                  vibration;
+@property (nonatomic, readwrite) BOOL                  visualFx;
 
-@property (readwrite) BOOL                  replay;
-@property (readwrite) BOOL                  followThrow;
+@property (nonatomic, readwrite) BOOL                  replay;
+@property (nonatomic, readwrite) BOOL                  followThrow;
 
-@property (readonly) NSString               *offMessage;
-@property (readonly) NSString               *hitMessage;
+@property (nonatomic, readonly) NSString               *offMessage;
+@property (nonatomic, readonly) NSString               *hitMessage;
 
 -(long)                                     buildingColor;
 

@@ -61,14 +61,14 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 	id								notificationDelegate;
 }
 
-@property (readwrite)			AudioQueueRef				queueObject;
-@property (readwrite)			AudioFileID					audioFileID;
-@property (readwrite)			CFURLRef					audioFileURL;
-@property (readwrite)           Float64                     hardwareSampleRate;
-@property (readwrite)			AudioStreamBasicDescription	audioFormat;
-@property (readwrite)			AudioQueueLevelMeterState	*audioLevels;
-@property (readwrite)			SInt64						startingPacketNumber;
-@property (nonatomic, retain)	id							notificationDelegate;
+@property (nonatomic, readwrite)			AudioQueueRef				queueObject;
+@property (nonatomic, readwrite)			AudioFileID					audioFileID;
+@property (nonatomic, readwrite)			CFURLRef					audioFileURL;
+@property (nonatomic, readwrite)            Float64                     hardwareSampleRate;
+@property (nonatomic, readwrite)			AudioStreamBasicDescription	audioFormat;
+@property (nonatomic, readwrite)			AudioQueueLevelMeterState	*audioLevels;
+@property (nonatomic, readwrite)			SInt64						startingPacketNumber;
+@property (nonatomic, assign)               id							notificationDelegate;
 
 
 - (void) incrementStartingPacketNumberBy:  (UInt32) inNumPackets;

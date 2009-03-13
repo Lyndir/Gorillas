@@ -53,15 +53,15 @@
 -(void) killDead;
 -(void) revive;
 
-@property (readonly) NSString           *name;
-@property (readonly) NSUInteger         teamIndex;
-@property (readonly) NSUInteger         globalIndex;
-@property (readonly) BOOL               human;
+@property (nonatomic, readonly) NSString           *name;
+@property (nonatomic, readonly) NSUInteger         teamIndex;
+@property (nonatomic, readonly) NSUInteger         globalIndex;
+@property (nonatomic, readonly) BOOL               human;
 
-@property (readonly) int                lives;
-@property (readonly) BOOL               alive;
-@property (readwrite) BOOL              active;
-@property (readwrite) NSUInteger        turns;
-@property (readwrite) float             zoom;
+@property (nonatomic, readonly) int                lives;
+@property (nonatomic, readonly) BOOL               alive;
+@property (nonatomic, readwrite) BOOL              active;
+@property (nonatomic, readwrite) NSUInteger        turns;
+@property (nonatomic, readwrite) float             zoom;
 
 @end

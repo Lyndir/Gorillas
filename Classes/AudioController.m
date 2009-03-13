@@ -151,17 +151,14 @@ void interruptionListenerCallback (
 			&sessionCategory
 		);
 			
-		AudioPlayer *thePlayer = [[AudioPlayer alloc] initWithURL: self.soundFileURL];
+		audioPlayer = [[AudioPlayer alloc] initWithURL: self.soundFileURL];
 		
-		if (thePlayer) {
-			self.audioPlayer = thePlayer;
-			[thePlayer release];                                // decrements the retain count for the thePlayer object
-			
-			[self.audioPlayer setNotificationDelegate: self];	// sets up the playback object to receive property change notifications from the playback audio queue object
+		if (audioPlayer) {
+			[audioPlayer setNotificationDelegate: self];	// sets up the playback object to receive property change notifications from the playback audio queue object
             
 			// activate the audio session immmediately before playback starts
 			AudioSessionSetActive(YES);
-			[self.audioPlayer play];
+			[audioPlayer play];
 		}
 	}
 }
@@ -224,7 +221,7 @@ void interruptionListenerCallback (
     // Create a system sound object representing the sound file
     SystemSoundID soundFileObject;
     AudioServicesCreateSystemSoundID(soundFileURLRef, &soundFileObject);
-    //CFRelease(soundFileURLRef);
+    CFRelease(soundFileURLRef);
     
     return soundFileObject;
 }

@@ -41,7 +41,7 @@ typedef struct _Star {
     NSUInteger  starCount;
 }
 
-@property (readonly) CGSize contentSize;
+@property (nonatomic, readonly) CGSize contentSize;
 
 
 @end

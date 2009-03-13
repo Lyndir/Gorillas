@@ -60,16 +60,15 @@
     HUDLayer                    *hudLayer;
     AudioController             *audioController;
     NSString                    *nextTrack;
-    BOOL                        resigned;
     
     NSMutableArray              *menuLayers;
 }
 
-@property (readonly) UILayer                    *uiLayer;
-@property (readonly) NewGameLayer               *newGameLayer;
-@property (readonly) CustomGameLayer            *customGameLayer;
-@property (readonly) GameLayer                  *gameLayer;
-@property (readonly) HUDLayer                   *hudLayer;
+@property (nonatomic, readonly) UILayer                    *uiLayer;
+@property (nonatomic, readonly) NewGameLayer               *newGameLayer;
+@property (nonatomic, readonly) CustomGameLayer            *customGameLayer;
+@property (nonatomic, readonly) GameLayer                  *gameLayer;
+@property (nonatomic, readonly) HUDLayer                   *hudLayer;
 
 -(void) updateConfig;
 -(void) clickEffect;

@@ -38,8 +38,8 @@
 -(void) throwFrom: (cpVect)r0 withVelocity: (cpVect)v;
 -(BOOL) throwing;
 
-@property (readwrite) BOOL clearedGorilla;
-@property (readonly) Sprite *banana;
-@property (readonly) Throw *throwAction;
+@property (nonatomic, readwrite) BOOL   clearedGorilla;
+@property (nonatomic, readonly) Sprite  *banana;
+@property (nonatomic, readonly) Throw   *throwAction;
 
 @end
