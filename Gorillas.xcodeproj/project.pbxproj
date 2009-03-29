@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		1D3623260D0F684500981E51 /* GorillasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* GorillasAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		DA0087690F5FB7A9009C1053 /* BarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0087680F5FB7A9009C1053 /* BarLayer.m */; };
 		DA00876A0F5FB7A9009C1053 /* BarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0087680F5FB7A9009C1053 /* BarLayer.m */; };
 		DA00876B0F5FB7A9009C1053 /* BarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0087680F5FB7A9009C1053 /* BarLayer.m */; };
@@ -69,12 +66,6 @@
 		DA379F980F09654A00541EF4 /* TestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C10EFAEA06007D203B /* TestLayer.m */; };
 		DA379F990F09654A00541EF4 /* FancyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C40EFAEAD0007D203B /* FancyLayer.m */; };
 		DA379F9A0F09654A00541EF4 /* WindLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83F0BA0F00527B00305C9F /* WindLayer.m */; };
-		DA379F9C0F09654A00541EF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		DA379F9D0F09654A00541EF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		DA379F9E0F09654A00541EF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		DA379F9F0F09654A00541EF4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75482B0EAB77450083EC7C /* OpenGLES.framework */; };
-		DA379FA00F09654A00541EF4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75496C0EAB77970083EC7C /* QuartzCore.framework */; };
-		DA379FA10F09654A00541EF4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */; };
 		DA379FAA0F0965A600541EF4 /* veritech.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAAC33230EC5E26800816338 /* veritech.wav */; };
 		DA379FBD0F0965A600541EF4 /* blockdropper3.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059B0EFD12D100797E7A /* blockdropper3.wav */; };
 		DA379FBE0F0965A600541EF4 /* fighting_gorillas.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */; };
@@ -108,12 +99,6 @@
 		DA37A00D0F0965A600541EF4 /* TestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C10EFAEA06007D203B /* TestLayer.m */; };
 		DA37A00E0F0965A600541EF4 /* FancyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C40EFAEAD0007D203B /* FancyLayer.m */; };
 		DA37A00F0F0965A600541EF4 /* WindLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83F0BA0F00527B00305C9F /* WindLayer.m */; };
-		DA37A0110F0965A600541EF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		DA37A0120F0965A600541EF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		DA37A0130F0965A600541EF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		DA37A0140F0965A600541EF4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75482B0EAB77450083EC7C /* OpenGLES.framework */; };
-		DA37A0150F0965A600541EF4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75496C0EAB77970083EC7C /* QuartzCore.framework */; };
-		DA37A0160F0965A600541EF4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */; };
 		DA3B01490F69CE90009B4A85 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = DA3B01480F69CE90009B4A85 /* icon.icns */; };
 		DA3B014A0F69CE90009B4A85 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = DA3B01480F69CE90009B4A85 /* icon.icns */; };
 		DA3B014B0F69CE90009B4A85 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = DA3B01480F69CE90009B4A85 /* icon.icns */; };
@@ -179,6 +164,46 @@
 		DA3E5D5B0F3F938300D83943 /* explosion2.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA3E5D530F3F938300D83943 /* explosion2.wav */; };
 		DA3E5D5C0F3F938300D83943 /* explosion1.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA3E5D520F3F938300D83943 /* explosion1.wav */; };
 		DA3E5D5D0F3F938300D83943 /* explosion2.wav in Resources */ = {isa = PBXBuildFile; fileRef = DA3E5D530F3F938300D83943 /* explosion2.wav */; };
+		DA4E5CC20F7FE1D6007BE3B9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBB0F7FE1D6007BE3B9 /* AudioToolbox.framework */; };
+		DA4E5CC30F7FE1D6007BE3B9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBC0F7FE1D6007BE3B9 /* AVFoundation.framework */; };
+		DA4E5CC40F7FE1D6007BE3B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBD0F7FE1D6007BE3B9 /* CoreGraphics.framework */; };
+		DA4E5CC50F7FE1D6007BE3B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBE0F7FE1D6007BE3B9 /* Foundation.framework */; };
+		DA4E5CC60F7FE1D6007BE3B9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBF0F7FE1D6007BE3B9 /* OpenGLES.framework */; };
+		DA4E5CC70F7FE1D6007BE3B9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CC00F7FE1D6007BE3B9 /* QuartzCore.framework */; };
+		DA4E5CC80F7FE1D6007BE3B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CC10F7FE1D6007BE3B9 /* UIKit.framework */; };
+		DA4E5CC90F7FE1D6007BE3B9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBB0F7FE1D6007BE3B9 /* AudioToolbox.framework */; };
+		DA4E5CCA0F7FE1D6007BE3B9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBC0F7FE1D6007BE3B9 /* AVFoundation.framework */; };
+		DA4E5CCB0F7FE1D6007BE3B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBD0F7FE1D6007BE3B9 /* CoreGraphics.framework */; };
+		DA4E5CCC0F7FE1D6007BE3B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBE0F7FE1D6007BE3B9 /* Foundation.framework */; };
+		DA4E5CCD0F7FE1D6007BE3B9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBF0F7FE1D6007BE3B9 /* OpenGLES.framework */; };
+		DA4E5CCE0F7FE1D6007BE3B9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CC00F7FE1D6007BE3B9 /* QuartzCore.framework */; };
+		DA4E5CCF0F7FE1D6007BE3B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CC10F7FE1D6007BE3B9 /* UIKit.framework */; };
+		DA4E5CD00F7FE1D6007BE3B9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBB0F7FE1D6007BE3B9 /* AudioToolbox.framework */; };
+		DA4E5CD10F7FE1D6007BE3B9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBC0F7FE1D6007BE3B9 /* AVFoundation.framework */; };
+		DA4E5CD20F7FE1D6007BE3B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBD0F7FE1D6007BE3B9 /* CoreGraphics.framework */; };
+		DA4E5CD30F7FE1D6007BE3B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBE0F7FE1D6007BE3B9 /* Foundation.framework */; };
+		DA4E5CD40F7FE1D6007BE3B9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBF0F7FE1D6007BE3B9 /* OpenGLES.framework */; };
+		DA4E5CD50F7FE1D6007BE3B9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CC00F7FE1D6007BE3B9 /* QuartzCore.framework */; };
+		DA4E5CD60F7FE1D6007BE3B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CC10F7FE1D6007BE3B9 /* UIKit.framework */; };
+		DA4E5CD70F7FE1D6007BE3B9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBB0F7FE1D6007BE3B9 /* AudioToolbox.framework */; };
+		DA4E5CD80F7FE1D6007BE3B9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBC0F7FE1D6007BE3B9 /* AVFoundation.framework */; };
+		DA4E5CD90F7FE1D6007BE3B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBD0F7FE1D6007BE3B9 /* CoreGraphics.framework */; };
+		DA4E5CDA0F7FE1D6007BE3B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBE0F7FE1D6007BE3B9 /* Foundation.framework */; };
+		DA4E5CDB0F7FE1D6007BE3B9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBF0F7FE1D6007BE3B9 /* OpenGLES.framework */; };
+		DA4E5CDC0F7FE1D6007BE3B9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CC00F7FE1D6007BE3B9 /* QuartzCore.framework */; };
+		DA4E5CDD0F7FE1D6007BE3B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CC10F7FE1D6007BE3B9 /* UIKit.framework */; };
+		DA4E5CDE0F7FE1D6007BE3B9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBB0F7FE1D6007BE3B9 /* AudioToolbox.framework */; };
+		DA4E5CDF0F7FE1D6007BE3B9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBC0F7FE1D6007BE3B9 /* AVFoundation.framework */; };
+		DA4E5CE00F7FE1D6007BE3B9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBD0F7FE1D6007BE3B9 /* CoreGraphics.framework */; };
+		DA4E5CE10F7FE1D6007BE3B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBE0F7FE1D6007BE3B9 /* Foundation.framework */; };
+		DA4E5CE20F7FE1D6007BE3B9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CBF0F7FE1D6007BE3B9 /* OpenGLES.framework */; };
+		DA4E5CE30F7FE1D6007BE3B9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CC00F7FE1D6007BE3B9 /* QuartzCore.framework */; };
+		DA4E5CE40F7FE1D6007BE3B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA4E5CC10F7FE1D6007BE3B9 /* UIKit.framework */; };
+		DA4E5D090F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
+		DA4E5D0A0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
+		DA4E5D0B0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
+		DA4E5D0C0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
+		DA4E5D0D0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
 		DA4F49F90EF3243C0062E0E8 /* InformationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F49F80EF3243C0062E0E8 /* InformationLayer.m */; };
 		DA4F4A260EF327A30062E0E8 /* GuideLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4A250EF327A30062E0E8 /* GuideLayer.m */; };
 		DA5A256D0F16D63900975E5A /* Splash.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5A256C0F16D63900975E5A /* Splash.m */; };
@@ -395,8 +420,6 @@
 		DA6FB24D0F6724750061F790 /* TileMapAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6FB1890F6724750061F790 /* TileMapAtlas.m */; };
 		DA6FB24E0F6724750061F790 /* Transition.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6FB18B0F6724750061F790 /* Transition.m */; };
 		DA7547F80EAB66D40083EC7C /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
-		DA75482C0EAB77450083EC7C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75482B0EAB77450083EC7C /* OpenGLES.framework */; };
-		DA75496D0EAB77970083EC7C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75496C0EAB77970083EC7C /* QuartzCore.framework */; };
 		DA79D73C0F59425500D36C7C /* NewGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D73B0F59425500D36C7C /* NewGameLayer.m */; };
 		DA79D73D0F59425500D36C7C /* NewGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D73B0F59425500D36C7C /* NewGameLayer.m */; };
 		DA79D73E0F59425500D36C7C /* NewGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D73B0F59425500D36C7C /* NewGameLayer.m */; };
@@ -420,7 +443,6 @@
 		DA83F0BB0F00527B00305C9F /* WindLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83F0BA0F00527B00305C9F /* WindLayer.m */; };
 		DA859C500EC4F3950036B7C0 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DA859E700EC598E10036B7C0 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
-		DA859F210EC5BB0E0036B7C0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */; };
 		DA8B76B30F44EC6600DD88BF /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
 		DA8B76B40F44EC7200DD88BF /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = DABD67A80F18BC1700EE213D /* iTunesArtwork */; };
 		DA8B770C0F46120600DD88BF /* veritech.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAAC33230EC5E26800816338 /* veritech.wav */; };
@@ -479,12 +501,6 @@
 		DA8B77810F46120600DD88BF /* cpSpace.c in Sources */ = {isa = PBXBuildFile; fileRef = DA3E5BD80F3F20EB00D83943 /* cpSpace.c */; };
 		DA8B77820F46120600DD88BF /* cpSpaceHash.c in Sources */ = {isa = PBXBuildFile; fileRef = DA3E5BDA0F3F20EB00D83943 /* cpSpaceHash.c */; };
 		DA8B77830F46120600DD88BF /* cpVect.c in Sources */ = {isa = PBXBuildFile; fileRef = DA3E5BDC0F3F20EB00D83943 /* cpVect.c */; };
-		DA8B778D0F46120600DD88BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		DA8B778E0F46120600DD88BF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		DA8B778F0F46120600DD88BF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		DA8B77900F46120600DD88BF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75482B0EAB77450083EC7C /* OpenGLES.framework */; };
-		DA8B77910F46120600DD88BF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75496C0EAB77970083EC7C /* QuartzCore.framework */; };
-		DA8B77920F46120600DD88BF /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */; };
 		DA9A63B70F573A530031988E /* CustomGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9A63B60F573A530031988E /* CustomGameLayer.m */; };
 		DA9A63B80F573A530031988E /* CustomGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9A63B60F573A530031988E /* CustomGameLayer.m */; };
 		DA9A63B90F573A530031988E /* CustomGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9A63B60F573A530031988E /* CustomGameLayer.m */; };
@@ -545,12 +561,6 @@
 		DABD68490F190D4D00EE213D /* AVConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816460F0E24D80064F470 /* AVConfigurationLayer.m */; };
 		DABD684A0F190D4D00EE213D /* HolesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA31251C0F10F74C00F1032D /* HolesLayer.m */; };
 		DABD684B0F190D4D00EE213D /* Splash.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5A256C0F16D63900975E5A /* Splash.m */; };
-		DABD684D0F190D4D00EE213D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		DABD684E0F190D4D00EE213D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		DABD684F0F190D4D00EE213D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		DABD68500F190D4D00EE213D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75482B0EAB77450083EC7C /* OpenGLES.framework */; };
-		DABD68510F190D4D00EE213D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA75496C0EAB77970083EC7C /* QuartzCore.framework */; };
-		DABD68520F190D4D00EE213D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */; };
 		DACA4E6E0EB3AEA40096F970 /* BuildingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */; };
 		DACA4E8D0EB3B0E10096F970 /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
 		DACC15910F61F2FB0078A0D8 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = DACC157E0F61F2FB0078A0D8 /* banana.png */; };
@@ -690,11 +700,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* GorillasAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillasAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* GorillasAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillasAppDelegate.m; sourceTree = "<group>"; };
-		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Gorillas_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gorillas_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -727,9 +734,9 @@
 		DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadeLayer.m; sourceTree = "<group>"; };
 		DA34FFA80EB4EEF300B68C06 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
 		DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
-		DA379EBC0F0964BA00541EF4 /* Gorillas-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA379FA60F09654A00541EF4 /* Gorillas-Dieter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas-Dieter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA37A01B0F0965A600541EF4 /* Gorillas-Mario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas-Mario.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA379EBC0F0964BA00541EF4 /* GorillasDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorillasDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA379FA60F09654A00541EF4 /* GorillasDieter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorillasDieter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA37A01B0F0965A600541EF4 /* GorillasMario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorillasMario.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3B01480F69CE90009B4A85 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = raw/icon.icns; sourceTree = "<group>"; };
 		DA3E5BC40F3F20EB00D83943 /* chipmunk.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = chipmunk.c; sourceTree = "<group>"; };
 		DA3E5BC50F3F20EB00D83943 /* chipmunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk.h; sourceTree = "<group>"; };
@@ -760,6 +767,15 @@
 		DA3E5BDE0F3F20EB00D83943 /* prime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = prime.h; sourceTree = "<group>"; };
 		DA3E5D520F3F938300D83943 /* explosion1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion1.wav; sourceTree = "<group>"; };
 		DA3E5D530F3F938300D83943 /* explosion2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion2.wav; sourceTree = "<group>"; };
+		DA4E5CBB0F7FE1D6007BE3B9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		DA4E5CBC0F7FE1D6007BE3B9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DA4E5CBD0F7FE1D6007BE3B9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DA4E5CBE0F7FE1D6007BE3B9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DA4E5CBF0F7FE1D6007BE3B9 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		DA4E5CC00F7FE1D6007BE3B9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DA4E5CC10F7FE1D6007BE3B9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DA4E5D070F7FE5B9007BE3B9 /* GorillasAudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillasAudioController.h; sourceTree = "<group>"; };
+		DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillasAudioController.m; sourceTree = "<group>"; };
 		DA4F49F70EF3243C0062E0E8 /* InformationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationLayer.h; sourceTree = "<group>"; };
 		DA4F49F80EF3243C0062E0E8 /* InformationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationLayer.m; sourceTree = "<group>"; };
 		DA4F4A240EF327A30062E0E8 /* GuideLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideLayer.h; sourceTree = "<group>"; };
@@ -861,8 +877,6 @@
 		DA6FB18B0F6724750061F790 /* Transition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transition.m; sourceTree = "<group>"; };
 		DA7547F40EAB66D40083EC7C /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
 		DA7547F50EAB66D40083EC7C /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
-		DA75482B0EAB77450083EC7C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		DA75496C0EAB77970083EC7C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DA79D73A0F59425500D36C7C /* NewGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGameLayer.h; sourceTree = "<group>"; };
 		DA79D73B0F59425500D36C7C /* NewGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGameLayer.m; sourceTree = "<group>"; };
 		DA79D79E0F59531000D36C7C /* GameConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConfiguration.h; sourceTree = "<group>"; };
@@ -878,8 +892,7 @@
 		DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillaLayer.m; sourceTree = "<group>"; };
 		DA859E6E0EC598E10036B7C0 /* BananaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaLayer.h; sourceTree = "<group>"; };
 		DA859E6F0EC598E10036B7C0 /* BananaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BananaLayer.m; sourceTree = "<group>"; };
-		DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		DA8B77990F46120600DD88BF /* Gorillas-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA8B77990F46120600DD88BF /* GorillasBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorillasBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9A63B50F573A530031988E /* CustomGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGameLayer.h; sourceTree = "<group>"; };
 		DA9A63B60F573A530031988E /* CustomGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGameLayer.m; sourceTree = "<group>"; };
 		DAAC33230EC5E26800816338 /* veritech.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = veritech.wav; sourceTree = "<group>"; };
@@ -937,12 +950,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
-				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
-				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
-				DA75482C0EAB77450083EC7C /* OpenGLES.framework in Frameworks */,
-				DA75496D0EAB77970083EC7C /* QuartzCore.framework in Frameworks */,
-				DA859F210EC5BB0E0036B7C0 /* AudioToolbox.framework in Frameworks */,
+				DA4E5CD00F7FE1D6007BE3B9 /* AudioToolbox.framework in Frameworks */,
+				DA4E5CD10F7FE1D6007BE3B9 /* AVFoundation.framework in Frameworks */,
+				DA4E5CD20F7FE1D6007BE3B9 /* CoreGraphics.framework in Frameworks */,
+				DA4E5CD30F7FE1D6007BE3B9 /* Foundation.framework in Frameworks */,
+				DA4E5CD40F7FE1D6007BE3B9 /* OpenGLES.framework in Frameworks */,
+				DA4E5CD50F7FE1D6007BE3B9 /* QuartzCore.framework in Frameworks */,
+				DA4E5CD60F7FE1D6007BE3B9 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -950,12 +964,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA379F9C0F09654A00541EF4 /* Foundation.framework in Frameworks */,
-				DA379F9D0F09654A00541EF4 /* UIKit.framework in Frameworks */,
-				DA379F9E0F09654A00541EF4 /* CoreGraphics.framework in Frameworks */,
-				DA379F9F0F09654A00541EF4 /* OpenGLES.framework in Frameworks */,
-				DA379FA00F09654A00541EF4 /* QuartzCore.framework in Frameworks */,
-				DA379FA10F09654A00541EF4 /* AudioToolbox.framework in Frameworks */,
+				DA4E5CC20F7FE1D6007BE3B9 /* AudioToolbox.framework in Frameworks */,
+				DA4E5CC30F7FE1D6007BE3B9 /* AVFoundation.framework in Frameworks */,
+				DA4E5CC40F7FE1D6007BE3B9 /* CoreGraphics.framework in Frameworks */,
+				DA4E5CC50F7FE1D6007BE3B9 /* Foundation.framework in Frameworks */,
+				DA4E5CC60F7FE1D6007BE3B9 /* OpenGLES.framework in Frameworks */,
+				DA4E5CC70F7FE1D6007BE3B9 /* QuartzCore.framework in Frameworks */,
+				DA4E5CC80F7FE1D6007BE3B9 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -963,12 +978,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA37A0110F0965A600541EF4 /* Foundation.framework in Frameworks */,
-				DA37A0120F0965A600541EF4 /* UIKit.framework in Frameworks */,
-				DA37A0130F0965A600541EF4 /* CoreGraphics.framework in Frameworks */,
-				DA37A0140F0965A600541EF4 /* OpenGLES.framework in Frameworks */,
-				DA37A0150F0965A600541EF4 /* QuartzCore.framework in Frameworks */,
-				DA37A0160F0965A600541EF4 /* AudioToolbox.framework in Frameworks */,
+				DA4E5CD70F7FE1D6007BE3B9 /* AudioToolbox.framework in Frameworks */,
+				DA4E5CD80F7FE1D6007BE3B9 /* AVFoundation.framework in Frameworks */,
+				DA4E5CD90F7FE1D6007BE3B9 /* CoreGraphics.framework in Frameworks */,
+				DA4E5CDA0F7FE1D6007BE3B9 /* Foundation.framework in Frameworks */,
+				DA4E5CDB0F7FE1D6007BE3B9 /* OpenGLES.framework in Frameworks */,
+				DA4E5CDC0F7FE1D6007BE3B9 /* QuartzCore.framework in Frameworks */,
+				DA4E5CDD0F7FE1D6007BE3B9 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,12 +992,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA8B778D0F46120600DD88BF /* Foundation.framework in Frameworks */,
-				DA8B778E0F46120600DD88BF /* UIKit.framework in Frameworks */,
-				DA8B778F0F46120600DD88BF /* CoreGraphics.framework in Frameworks */,
-				DA8B77900F46120600DD88BF /* OpenGLES.framework in Frameworks */,
-				DA8B77910F46120600DD88BF /* QuartzCore.framework in Frameworks */,
-				DA8B77920F46120600DD88BF /* AudioToolbox.framework in Frameworks */,
+				DA4E5CDE0F7FE1D6007BE3B9 /* AudioToolbox.framework in Frameworks */,
+				DA4E5CDF0F7FE1D6007BE3B9 /* AVFoundation.framework in Frameworks */,
+				DA4E5CE00F7FE1D6007BE3B9 /* CoreGraphics.framework in Frameworks */,
+				DA4E5CE10F7FE1D6007BE3B9 /* Foundation.framework in Frameworks */,
+				DA4E5CE20F7FE1D6007BE3B9 /* OpenGLES.framework in Frameworks */,
+				DA4E5CE30F7FE1D6007BE3B9 /* QuartzCore.framework in Frameworks */,
+				DA4E5CE40F7FE1D6007BE3B9 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -989,12 +1006,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DABD684D0F190D4D00EE213D /* Foundation.framework in Frameworks */,
-				DABD684E0F190D4D00EE213D /* UIKit.framework in Frameworks */,
-				DABD684F0F190D4D00EE213D /* CoreGraphics.framework in Frameworks */,
-				DABD68500F190D4D00EE213D /* OpenGLES.framework in Frameworks */,
-				DABD68510F190D4D00EE213D /* QuartzCore.framework in Frameworks */,
-				DABD68520F190D4D00EE213D /* AudioToolbox.framework in Frameworks */,
+				DA4E5CC90F7FE1D6007BE3B9 /* AudioToolbox.framework in Frameworks */,
+				DA4E5CCA0F7FE1D6007BE3B9 /* AVFoundation.framework in Frameworks */,
+				DA4E5CCB0F7FE1D6007BE3B9 /* CoreGraphics.framework in Frameworks */,
+				DA4E5CCC0F7FE1D6007BE3B9 /* Foundation.framework in Frameworks */,
+				DA4E5CCD0F7FE1D6007BE3B9 /* OpenGLES.framework in Frameworks */,
+				DA4E5CCE0F7FE1D6007BE3B9 /* QuartzCore.framework in Frameworks */,
+				DA4E5CCF0F7FE1D6007BE3B9 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1014,11 +1032,11 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA379EBC0F0964BA00541EF4 /* Gorillas-Dev.app */,
-				DA379FA60F09654A00541EF4 /* Gorillas-Dieter.app */,
-				DA37A01B0F0965A600541EF4 /* Gorillas-Mario.app */,
+				DA379EBC0F0964BA00541EF4 /* GorillasDev.app */,
+				DA379FA60F09654A00541EF4 /* GorillasDieter.app */,
+				DA37A01B0F0965A600541EF4 /* GorillasMario.app */,
 				DABD68580F190D4D00EE213D /* Gorillas.app */,
-				DA8B77990F46120600DD88BF /* Gorillas-Beta.app */,
+				DA8B77990F46120600DD88BF /* GorillasBeta.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1061,12 +1079,13 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */,
-				DA75496C0EAB77970083EC7C /* QuartzCore.framework */,
-				DA75482B0EAB77450083EC7C /* OpenGLES.framework */,
-				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
-				1D30AB110D05D00D00671497 /* Foundation.framework */,
-				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+				DA4E5CBB0F7FE1D6007BE3B9 /* AudioToolbox.framework */,
+				DA4E5CBC0F7FE1D6007BE3B9 /* AVFoundation.framework */,
+				DA4E5CBD0F7FE1D6007BE3B9 /* CoreGraphics.framework */,
+				DA4E5CBE0F7FE1D6007BE3B9 /* Foundation.framework */,
+				DA4E5CBF0F7FE1D6007BE3B9 /* OpenGLES.framework */,
+				DA4E5CC00F7FE1D6007BE3B9 /* QuartzCore.framework */,
+				DA4E5CC10F7FE1D6007BE3B9 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1170,6 +1189,8 @@
 			children = (
 				1D3623240D0F684500981E51 /* GorillasAppDelegate.h */,
 				1D3623250D0F684500981E51 /* GorillasAppDelegate.m */,
+				DA4E5D070F7FE5B9007BE3B9 /* GorillasAudioController.h */,
+				DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */,
 				DACA4E8B0EB3B0E10096F970 /* GorillasConfig.h */,
 				DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */,
 				DACFEC1F0EE96AA300A0D08E /* CityTheme.h */,
@@ -1436,7 +1457,7 @@
 			);
 			name = "Gorillas - Lhunath Development";
 			productName = Gorillas;
-			productReference = DA379EBC0F0964BA00541EF4 /* Gorillas-Dev.app */;
+			productReference = DA379EBC0F0964BA00541EF4 /* GorillasDev.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DA379F330F09654A00541EF4 /* Gorillas - Tester Dieter */ = {
@@ -1454,7 +1475,7 @@
 			);
 			name = "Gorillas - Tester Dieter";
 			productName = Gorillas;
-			productReference = DA379FA60F09654A00541EF4 /* Gorillas-Dieter.app */;
+			productReference = DA379FA60F09654A00541EF4 /* GorillasDieter.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DA379FA80F0965A600541EF4 /* Gorillas - Tester Mario */ = {
@@ -1472,7 +1493,7 @@
 			);
 			name = "Gorillas - Tester Mario";
 			productName = Gorillas;
-			productReference = DA37A01B0F0965A600541EF4 /* Gorillas-Mario.app */;
+			productReference = DA37A01B0F0965A600541EF4 /* GorillasMario.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DA8B770A0F46120600DD88BF /* Gorillas - iBetaTest */ = {
@@ -1490,7 +1511,7 @@
 			);
 			name = "Gorillas - iBetaTest";
 			productName = Gorillas;
-			productReference = DA8B77990F46120600DD88BF /* Gorillas-Beta.app */;
+			productReference = DA8B77990F46120600DD88BF /* GorillasBeta.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DABD67E10F190D4D00EE213D /* Gorillas - App Store */ = {
@@ -1918,6 +1939,7 @@
 				DA6FB1FE0F6724750061F790 /* TiledGridAction.m in Sources */,
 				DA6FB1FF0F6724750061F790 /* TileMapAtlas.m in Sources */,
 				DA6FB2000F6724750061F790 /* Transition.m in Sources */,
+				DA4E5D0C0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2017,6 +2039,7 @@
 				DA6FB1B00F6724750061F790 /* TiledGridAction.m in Sources */,
 				DA6FB1B10F6724750061F790 /* TileMapAtlas.m in Sources */,
 				DA6FB1B20F6724750061F790 /* Transition.m in Sources */,
+				DA4E5D0B0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2116,6 +2139,7 @@
 				DA6FB24C0F6724750061F790 /* TiledGridAction.m in Sources */,
 				DA6FB24D0F6724750061F790 /* TileMapAtlas.m in Sources */,
 				DA6FB24E0F6724750061F790 /* Transition.m in Sources */,
+				DA4E5D0D0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2215,6 +2239,7 @@
 				DA6FB2250F6724750061F790 /* TiledGridAction.m in Sources */,
 				DA6FB2260F6724750061F790 /* TileMapAtlas.m in Sources */,
 				DA6FB2270F6724750061F790 /* Transition.m in Sources */,
+				DA4E5D090F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2314,6 +2339,7 @@
 				DA6FB1D70F6724750061F790 /* TiledGridAction.m in Sources */,
 				DA6FB1D80F6724750061F790 /* TileMapAtlas.m in Sources */,
 				DA6FB1D90F6724750061F790 /* Transition.m in Sources */,
+				DA4E5D0A0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2324,7 +2350,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = "Gorillas-Dev";
+				PRODUCT_NAME = GorillasDev;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
 			};
 			name = Debug;
@@ -2333,7 +2359,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = "Gorillas-Dev";
+				PRODUCT_NAME = GorillasDev;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
 			};
 			name = Release;
@@ -2382,7 +2408,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-falign-loops=16";
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator2.0;
+				SDKROOT = iphoneos2.2;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VERSION_INFO_BUILDER = lhunath;
 				ZERO_LINK = NO;
@@ -2427,7 +2453,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator2.0;
+				SDKROOT = iphoneos2.2;
 				VERSION_INFO_BUILDER = lhunath;
 				ZERO_LINK = NO;
 			};
@@ -2474,7 +2500,7 @@
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6B238D14-146F-435A-970D-1FAEDF00DCC2";
-				SDKROOT = iphonesimulator2.0;
+				SDKROOT = iphoneos2.2;
 				VERSION_INFO_BUILDER = lhunath;
 				ZERO_LINK = NO;
 			};
@@ -2483,7 +2509,7 @@
 		DA16C3760EEC575C00E46246 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "Gorillas-Dev";
+				PRODUCT_NAME = GorillasDev;
 			};
 			name = Distribution;
 		};
@@ -2529,7 +2555,7 @@
 				INFOPLIST_FILE = Info.plist;
 				OTHER_CFLAGS = "-falign-loops=16";
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator2.0;
+				SDKROOT = iphoneos2.2;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VERSION_INFO_BUILDER = lhunath;
 				ZERO_LINK = NO;
@@ -2540,7 +2566,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = "Gorillas-Dev";
+				PRODUCT_NAME = GorillasDev;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
 			};
 			name = "Release Debugging";
@@ -2549,7 +2575,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = "Gorillas-Dieter";
+				PRODUCT_NAME = GorillasDieter;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
 			};
 			name = "Release Debugging";
@@ -2558,7 +2584,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = "Gorillas-Mario";
+				PRODUCT_NAME = GorillasMario;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E1BA51F-F37E-4B2D-A766-F9100F74B11B";
 			};
 			name = "Release Debugging";
@@ -2567,7 +2593,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = "Gorillas-Dieter";
+				PRODUCT_NAME = GorillasDieter;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
 			};
 			name = Debug;
@@ -2576,7 +2602,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = "Gorillas-Dieter";
+				PRODUCT_NAME = GorillasDieter;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB38D18B-8C89-4EF6-AB28-E3B7AD7704EF";
 			};
 			name = Release;
@@ -2584,7 +2610,7 @@
 		DA379FA50F09654A00541EF4 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "Gorillas-Dieter";
+				PRODUCT_NAME = GorillasDieter;
 			};
 			name = Distribution;
 		};
@@ -2592,7 +2618,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = "Gorillas-Mario";
+				PRODUCT_NAME = GorillasMario;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E1BA51F-F37E-4B2D-A766-F9100F74B11B";
 			};
 			name = Debug;
@@ -2601,7 +2627,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = "Gorillas-Mario";
+				PRODUCT_NAME = GorillasMario;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7E1BA51F-F37E-4B2D-A766-F9100F74B11B";
 			};
 			name = Release;
@@ -2609,7 +2635,7 @@
 		DA37A01A0F0965A600541EF4 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = "Gorillas-Mario";
+				PRODUCT_NAME = GorillasMario;
 			};
 			name = Distribution;
 		};
@@ -2617,7 +2643,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = "Gorillas-Beta";
+				PRODUCT_NAME = GorillasBeta;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "354E5F83-E4CE-4292-BAB0-AAB1FBD8F5CB";
 			};
 			name = Debug;
@@ -2626,7 +2652,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = "Gorillas-Beta";
+				PRODUCT_NAME = GorillasBeta;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "354E5F83-E4CE-4292-BAB0-AAB1FBD8F5CB";
 			};
 			name = Release;
@@ -2635,7 +2661,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = "Gorillas-Beta";
+				PRODUCT_NAME = GorillasBeta;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "354E5F83-E4CE-4292-BAB0-AAB1FBD8F5CB";
 			};
 			name = "Release Debugging";
@@ -2644,7 +2670,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
-				PRODUCT_NAME = "Gorillas-Beta";
+				PRODUCT_NAME = GorillasBeta;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB042B7C-E184-477E-9D8C-41169B2C4FC8";
 			};
 			name = Distribution;

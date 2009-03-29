@@ -215,7 +215,7 @@
 
 -(void) menuButton: (id) caller {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showMainMenu];
 }
 

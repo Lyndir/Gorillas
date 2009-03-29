@@ -166,7 +166,7 @@
 
 -(void) next: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     page = (page + 1) % [guidePages count];
     [self flipPage];
 }
@@ -174,7 +174,7 @@
 
 -(void) skip: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     page = (page + 2) % [guidePages count];
     [self flipPage];
 }
@@ -182,7 +182,7 @@
 
 -(void) back: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] popLayer];
 }
 

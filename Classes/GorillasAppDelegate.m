@@ -79,7 +79,7 @@
     [uiLayer addChild:gameLayer];
 	
     // Start the background music.
-    [self playTrack:[[GorillasConfig get] currentTrack]];
+    [[GorillasAudioController get] playTrack:[[GorillasConfig get] currentTrack]];
 
     // Show the splash screen, this starts the main loop in the current thread.
     [[Director sharedDirector] replaceScene:splashScene];
@@ -132,24 +132,6 @@
     [configLayer reset];
     [gameConfigLayer reset];
     [avConfigLayer reset];
-}
-
-
--(void) clickEffect {
-    
-    static SystemSoundID clicky = 0;
-    
-    if([[GorillasConfig get] soundFx]) {
-        if(clicky == 0)
-            clicky = [GorillasAppDelegate loadEffectWithName:@"click.wav"];
-        
-        [GorillasAppDelegate playEffect:clicky];
-    }
-    
-    else {
-        [GorillasAppDelegate disposeEffect:clicky];
-        clicky = 0;
-    }
 }
 
 
@@ -288,58 +270,6 @@
 }
 
 
--(void) playTrack:(NSString *)track {
-
-    NSLog(@"playtrack: %@", track);
-    if(![track length])
-        track = nil;
-    
-    nextTrack = track;
-    [self startNextTrack];
-}
-
-
--(void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)success {
-    
-    if(player != audioPlayer)
-        return;
-    
-    NSLog(@"audio stopped. (next is %@)", nextTrack);
-    if(nextTrack == nil)
-        [[GorillasConfig get] setCurrentTrack:nil];
-    
-    [self startNextTrack];
-}
-
--(void) startNextTrack {
-    
-    NSLog(@"start next.");
-    if([audioPlayer isPlaying]) {
-            NSLog(@"stopping ac.");
-            [audioPlayer stop];
-    } else if(nextTrack) {
-        NSString *track = nextTrack;
-        if([track isEqualToString:@"random"])
-            track = [GorillasConfig get].randomTrack;
-        NSLog(@"starting: %@ (next was %@)", track, nextTrack);
-        NSURL *nextUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:track ofType:nil]];
-        
-        if(audioPlayer != nil && ![audioPlayer.url isEqual:nextUrl]) {
-            [audioPlayer release];
-            audioPlayer = nil;
-        }
-        
-        if(audioPlayer == nil)
-            audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:nextUrl];
-            
-        [audioPlayer setDelegate:self];
-        [audioPlayer play];
-
-        [[GorillasConfig get] setCurrentTrack:nextTrack];
-    }
-}
-
-
 -(void) applicationWillResignActive:(UIApplication *)application {
     
     [[Director sharedDirector] pause];
@@ -421,7 +351,7 @@
         statsLayer = nil;
     }
     
-    [self playTrack:nil];
+    [[GorillasAudioController get] playTrack:nil];
 }
 
 
@@ -469,12 +399,6 @@
     [hudLayer release];
     hudLayer = nil;
     
-    [audioPlayer release];
-    audioPlayer = nil;
-    
-    [nextTrack release];
-    nextTrack = nil;
-    
     [window release];
     window = nil;
     
@@ -485,39 +409,6 @@
 +(GorillasAppDelegate *) get {
     
     return (GorillasAppDelegate *) [[UIApplication sharedApplication] delegate];
-}
-
-
-+ (void)vibrate {
-    
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-}
-
-
-+ (void)playEffect:(SystemSoundID)soundFileObject {
-    
-    AudioServicesPlaySystemSound(soundFileObject);
-}
-
-
-+ (SystemSoundID)loadEffectWithName:(NSString *)bundleRef {
-    
-    // Get the URL to the sound file to play
-    CFBundleRef mainBundle = CFBundleGetMainBundle();
-    CFURLRef soundFileURLRef = CFBundleCopyResourceURL(mainBundle, (CFStringRef) bundleRef, NULL, NULL);
-    
-    // Create a system sound object representing the sound file
-    SystemSoundID soundFileObject;
-    AudioServicesCreateSystemSoundID(soundFileURLRef, &soundFileObject);
-    CFRelease(soundFileURLRef);
-    
-    return soundFileObject;
-}
-
-
-+ (void)disposeEffect:(SystemSoundID)soundFileObject {
-    
-    AudioServicesDisposeSystemSoundID(soundFileObject);
 }
 
 

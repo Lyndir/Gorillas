@@ -149,7 +149,7 @@
 
 -(void) audioTrack: (id) sender {
 
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
 
     NSArray *tracks = [GorillasConfig get].tracks;
     NSString *newTrack = [tracks objectAtIndex:0];
@@ -168,43 +168,43 @@
     if(![newTrack length])
         newTrack = nil;
     
-    [[GorillasAppDelegate get] playTrack:newTrack];
+    [[GorillasAudioController get] playTrack:newTrack];
 }
 
 
 -(void) soundFx: (id) sender {
     
     [[GorillasConfig get] setSoundFx:![[GorillasConfig get] soundFx]];
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
 }
 
 
 -(void) vibration: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasConfig get] setVibration:![[GorillasConfig get] vibration]];
     if([[GorillasConfig get] vibration])
-        [GorillasAppDelegate vibrate];
+        [GorillasAudioController vibrate];
 }
 
 
 -(void) visualFx: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasConfig get] setVisualFx:![[GorillasConfig get] visualFx]];
 }
 
 
 -(void) weather: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasConfig get] setWeather:![[GorillasConfig get] weather]];
 }
 
 
 -(void) back: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] popLayer];
 }
 

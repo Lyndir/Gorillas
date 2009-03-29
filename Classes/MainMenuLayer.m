@@ -91,35 +91,35 @@
 
 -(void) newGame: (id)sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showNewGame];
 }
 
 
 -(void) continueGame: (id)sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[[GorillasAppDelegate get] gameLayer] setPaused:NO];
 }
 
 
 -(void) stopGame: (id)sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[[GorillasAppDelegate get] gameLayer] stopGame];
 }
 
 
 -(void) information: (id)sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showInformation];
 }
 
 
 -(void) options: (id)sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showConfiguration];
 }
 

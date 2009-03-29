@@ -151,7 +151,7 @@
 
 -(void) level: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
 
     NSUInteger curLevelInd = [[[GorillasConfig get] levelNames] indexOfObject:[[GorillasConfig get] levelName]];
     [[GorillasConfig get] setLevel:(float) ((curLevelInd + 1) % [[[GorillasConfig get] levelNames] count]) / [[[GorillasConfig get] levelNames] count]];
@@ -160,14 +160,14 @@
 
 -(void) gravity: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasConfig get] setGravity:([[GorillasConfig get] gravity] + 10) % ([[GorillasConfig get] maxGravity] + 1)];
 }
 
 
 -(void) cityTheme: (id) sender {
 
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
 
     NSArray *themes = [[CityTheme getThemes] allKeys];
     NSString *newTheme = [themes objectAtIndex:0];
@@ -192,21 +192,21 @@
 
 -(void) replay: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasConfig get] setReplay:![[GorillasConfig get] replay]];
 }
 
 
 -(void) followThrow: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasConfig get] setFollowThrow:![[GorillasConfig get] followThrow]];
 }
 
 
 -(void) back: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] popLayer];
 }
 

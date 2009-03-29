@@ -77,21 +77,21 @@
 
 -(void) guide: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showGuide];
 }
 
 
 -(void) stats: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showStatistics];
 }
 
 
 -(void) back: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] popLayer];
 }
 

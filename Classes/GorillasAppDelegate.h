@@ -24,9 +24,7 @@
 //  Copyright, lhunath (Maarten Billemont) 2008. All rights reserved.
 //
 
-#import <AVFoundation/AVAudioPlayer.h>
-#import <AudioToolbox/AudioToolbox.h>
-
+#import "GorillasAudioController.h"
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
 #import "NewGameLayer.h"
@@ -59,8 +57,6 @@
     GuideLayer                  *guideLayer;
     StatisticsLayer             *statsLayer;
     HUDLayer                    *hudLayer;
-    AVAudioPlayer               *audioPlayer;
-    NSString                    *nextTrack;
     
     NSMutableArray              *menuLayers;
 }
@@ -72,7 +68,6 @@
 @property (nonatomic, readonly) HUDLayer                   *hudLayer;
 
 -(void) updateConfig;
--(void) clickEffect;
 -(void) popAllLayers;
 -(void) popLayer;
 -(void) cleanup;
@@ -89,14 +84,6 @@
 -(void) showStatistics;
 -(void) revealHud;
 -(void) hideHud;
-
--(void) playTrack:(NSString *)track;
--(void) startNextTrack;
-
-+ (SystemSoundID)loadEffectWithName:(NSString *)bundleRef;
-+ (void)vibrate;
-+ (void)playEffect:(SystemSoundID)soundFileObject;
-+ (void)disposeEffect:(SystemSoundID)soundFileObject;
 
 +(GorillasAppDelegate *) get;
 

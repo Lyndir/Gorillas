@@ -82,21 +82,21 @@
 
 -(void) game: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showGameConfiguration];
 }
 
 
 -(void) av: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showAVConfiguration];
 }
 
 
 -(void) back: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] popLayer];
 }
 

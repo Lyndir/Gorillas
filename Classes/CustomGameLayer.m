@@ -146,7 +146,7 @@
 
 -(void) gameMode: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
 
     NSArray *modes = [[GorillasConfig get] modes];
     NSUInteger curModeIndex = [modes indexOfObject:[NSNumber numberWithUnsignedInt:[[GorillasConfig get] mode]]];
@@ -157,7 +157,7 @@
 
 -(void) humans: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     humans = (humans + 1) % 4;
     
     [self reset];
@@ -166,7 +166,7 @@
 
 -(void) ais: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     ais = (ais + 1) % 4;
 
     [self reset];
@@ -175,7 +175,7 @@
 
 -(void) startGame: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:[[GorillasConfig get] mode]
                                                           humans:humans ais:ais];
     [[[GorillasAppDelegate get] gameLayer] startGame];
@@ -184,7 +184,7 @@
 
 -(void) back: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] popLayer];
 }
 

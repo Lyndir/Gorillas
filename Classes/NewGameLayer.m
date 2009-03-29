@@ -110,7 +110,7 @@
 
 -(void) gameConfiguration:(id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
 
     ++[GorillasConfig get].activeGameConfigurationIndex;
 }
@@ -118,7 +118,7 @@
 
 -(void) startSingle: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     
     [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:[GorillasConfig get].gameConfiguration.mode
                                                           humans:[GorillasConfig get].gameConfiguration.sHumans
@@ -129,7 +129,7 @@
 
 -(void) startMulti: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     
     [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:[GorillasConfig get].gameConfiguration.mode
                                                           humans:[GorillasConfig get].gameConfiguration.mHumans
@@ -140,14 +140,14 @@
 
 -(void) custom: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showCustomGame];
 }
 
 
 -(void) back: (id) sender {
     
-    [[GorillasAppDelegate get] clickEffect];
+    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] popLayer];
 }
 

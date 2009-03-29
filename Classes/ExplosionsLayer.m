@@ -101,7 +101,7 @@ static ParticleSystem **flameTypes = nil;
     BOOL heavy = hitsGorilla || (random() % 100 > 90);
 
     if([[GorillasConfig get] soundFx])
-        [GorillasAppDelegate playEffect:[ExplosionsLayer explosionEffect:heavy]];
+        [GorillasAudioController playEffect:[ExplosionsLayer explosionEffect:heavy]];
 
     if([[GorillasConfig get] vibration])
         [[GorillasAppDelegate get].gameLayer shake];
@@ -235,7 +235,7 @@ static ParticleSystem **flameTypes = nil;
         explosionEffect = malloc(sizeof(SystemSoundID) * explosionEffects);
         
         for(NSUInteger i = 0; i < explosionEffects; ++i)
-            explosionEffect[i] = [GorillasAppDelegate loadEffectWithName:[NSString stringWithFormat:@"explosion%d.wav", i]];
+            explosionEffect[i] = [GorillasAudioController loadEffectWithName:[NSString stringWithFormat:@"explosion%d.wav", i]];
     }
 
     // Pick a random effect.
