@@ -24,7 +24,7 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "AudioController.h"
+#import "GorillasAppDelegate.h"
 
 
 @interface ExplosionsLayer : Layer {

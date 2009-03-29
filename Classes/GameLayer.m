@@ -125,7 +125,7 @@
 
 -(void) shake {
     
-    [AudioController vibrate];
+    [GorillasAppDelegate vibrate];
     
     [buildingsLayer runAction:shakeAction];
 }

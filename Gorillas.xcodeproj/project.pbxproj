@@ -58,9 +58,6 @@
 		DA379F5F0F09654A00541EF4 /* ExplosionsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C17CD0EC0F698006D43BD /* ExplosionsLayer.m */; };
 		DA379F600F09654A00541EF4 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DA379F610F09654A00541EF4 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
-		DA379F620F09654A00541EF4 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC30EC5B2510036B7C0 /* AudioPlayer.m */; };
-		DA379F630F09654A00541EF4 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC60EC5B2630036B7C0 /* AudioController.m */; };
-		DA379F640F09654A00541EF4 /* AudioQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC80EC5B2630036B7C0 /* AudioQueueObject.m */; };
 		DA379F650F09654A00541EF4 /* HUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB46AA80EC85E7400F17B3F /* HUDLayer.m */; };
 		DA379F660F09654A00541EF4 /* Throw.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* Throw.m */; };
 		DA379F670F09654A00541EF4 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = DA126C8E0EDDF19100EADDE2 /* Utility.m */; };
@@ -100,9 +97,6 @@
 		DA379FD40F0965A600541EF4 /* ExplosionsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C17CD0EC0F698006D43BD /* ExplosionsLayer.m */; };
 		DA379FD50F0965A600541EF4 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DA379FD60F0965A600541EF4 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
-		DA379FD70F0965A600541EF4 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC30EC5B2510036B7C0 /* AudioPlayer.m */; };
-		DA379FD80F0965A600541EF4 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC60EC5B2630036B7C0 /* AudioController.m */; };
-		DA379FD90F0965A600541EF4 /* AudioQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC80EC5B2630036B7C0 /* AudioQueueObject.m */; };
 		DA379FDA0F0965A600541EF4 /* HUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB46AA80EC85E7400F17B3F /* HUDLayer.m */; };
 		DA379FDB0F0965A600541EF4 /* Throw.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* Throw.m */; };
 		DA379FDC0F0965A600541EF4 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = DA126C8E0EDDF19100EADDE2 /* Utility.m */; };
@@ -426,9 +420,6 @@
 		DA83F0BB0F00527B00305C9F /* WindLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83F0BA0F00527B00305C9F /* WindLayer.m */; };
 		DA859C500EC4F3950036B7C0 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DA859E700EC598E10036B7C0 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
-		DA859EC40EC5B2510036B7C0 /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC30EC5B2510036B7C0 /* AudioPlayer.m */; };
-		DA859EC90EC5B2630036B7C0 /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC60EC5B2630036B7C0 /* AudioController.m */; };
-		DA859ECA0EC5B2630036B7C0 /* AudioQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC80EC5B2630036B7C0 /* AudioQueueObject.m */; };
 		DA859F210EC5BB0E0036B7C0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */; };
 		DA8B76B30F44EC6600DD88BF /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
 		DA8B76B40F44EC7200DD88BF /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = DABD67A80F18BC1700EE213D /* iTunesArtwork */; };
@@ -460,9 +451,6 @@
 		DA8B773A0F46120600DD88BF /* ExplosionsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C17CD0EC0F698006D43BD /* ExplosionsLayer.m */; };
 		DA8B773B0F46120600DD88BF /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DA8B773C0F46120600DD88BF /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
-		DA8B773D0F46120600DD88BF /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC30EC5B2510036B7C0 /* AudioPlayer.m */; };
-		DA8B773E0F46120600DD88BF /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC60EC5B2630036B7C0 /* AudioController.m */; };
-		DA8B773F0F46120600DD88BF /* AudioQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC80EC5B2630036B7C0 /* AudioQueueObject.m */; };
 		DA8B77400F46120600DD88BF /* HUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB46AA80EC85E7400F17B3F /* HUDLayer.m */; };
 		DA8B77410F46120600DD88BF /* Throw.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* Throw.m */; };
 		DA8B77420F46120600DD88BF /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = DA126C8E0EDDF19100EADDE2 /* Utility.m */; };
@@ -542,9 +530,6 @@
 		DABD680D0F190D4D00EE213D /* ExplosionsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C17CD0EC0F698006D43BD /* ExplosionsLayer.m */; };
 		DABD680E0F190D4D00EE213D /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DABD680F0F190D4D00EE213D /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
-		DABD68100F190D4D00EE213D /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC30EC5B2510036B7C0 /* AudioPlayer.m */; };
-		DABD68110F190D4D00EE213D /* AudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC60EC5B2630036B7C0 /* AudioController.m */; };
-		DABD68120F190D4D00EE213D /* AudioQueueObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859EC80EC5B2630036B7C0 /* AudioQueueObject.m */; };
 		DABD68130F190D4D00EE213D /* HUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB46AA80EC85E7400F17B3F /* HUDLayer.m */; };
 		DABD68140F190D4D00EE213D /* Throw.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* Throw.m */; };
 		DABD68150F190D4D00EE213D /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = DA126C8E0EDDF19100EADDE2 /* Utility.m */; };
@@ -893,12 +878,6 @@
 		DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillaLayer.m; sourceTree = "<group>"; };
 		DA859E6E0EC598E10036B7C0 /* BananaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaLayer.h; sourceTree = "<group>"; };
 		DA859E6F0EC598E10036B7C0 /* BananaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BananaLayer.m; sourceTree = "<group>"; };
-		DA859EC20EC5B2510036B7C0 /* AudioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
-		DA859EC30EC5B2510036B7C0 /* AudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
-		DA859EC50EC5B2630036B7C0 /* AudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
-		DA859EC60EC5B2630036B7C0 /* AudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioController.m; sourceTree = "<group>"; };
-		DA859EC70EC5B2630036B7C0 /* AudioQueueObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioQueueObject.h; sourceTree = "<group>"; };
-		DA859EC80EC5B2630036B7C0 /* AudioQueueObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioQueueObject.m; sourceTree = "<group>"; };
 		DA859F200EC5BB0E0036B7C0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DA8B77990F46120600DD88BF /* Gorillas-Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas-Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9A63B50F573A530031988E /* CustomGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGameLayer.h; sourceTree = "<group>"; };
@@ -948,7 +927,6 @@
 		DACFEC200EE96AA300A0D08E /* CityTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityTheme.m; sourceTree = "<group>"; };
 		DAF9059B0EFD12D100797E7A /* blockdropper3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blockdropper3.wav; sourceTree = "<group>"; };
 		DAF9059C0EFD12D100797E7A /* fighting_gorillas.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fighting_gorillas.wav; sourceTree = "<group>"; };
-		DAF905A10EFD17BF00797E7A /* AudioControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioControllerDelegate.h; sourceTree = "<group>"; };
 		DAFEF9710ED847D40019F7E5 /* Throw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Throw.h; sourceTree = "<group>"; };
 		DAFEF9720ED847D40019F7E5 /* Throw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Throw.m; sourceTree = "<group>"; };
 		DAFFF2830F4B3304004D9B34 /* guide.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = guide.txt; sourceTree = "<group>"; };
@@ -1029,7 +1007,6 @@
 				DA2282270EE1A38A00BA53D2 /* Backend */,
 				DA2282250EE1A2F100BA53D2 /* Actions */,
 				DA2282260EE1A30300BA53D2 /* Video */,
-				DA859EB70EC5B2420036B7C0 /* Audio */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1374,20 +1351,6 @@
 				DAFFF2830F4B3304004D9B34 /* guide.txt */,
 			);
 			name = Guide;
-			sourceTree = "<group>";
-		};
-		DA859EB70EC5B2420036B7C0 /* Audio */ = {
-			isa = PBXGroup;
-			children = (
-				DA859EC50EC5B2630036B7C0 /* AudioController.h */,
-				DA859EC60EC5B2630036B7C0 /* AudioController.m */,
-				DA859EC70EC5B2630036B7C0 /* AudioQueueObject.h */,
-				DA859EC80EC5B2630036B7C0 /* AudioQueueObject.m */,
-				DA859EC20EC5B2510036B7C0 /* AudioPlayer.h */,
-				DA859EC30EC5B2510036B7C0 /* AudioPlayer.m */,
-				DAF905A10EFD17BF00797E7A /* AudioControllerDelegate.h */,
-			);
-			name = Audio;
 			sourceTree = "<group>";
 		};
 		DA859ECB0EC5B7030036B7C0 /* Audio */ = {
@@ -1879,9 +1842,6 @@
 				DA6C17CE0EC0F698006D43BD /* ExplosionsLayer.m in Sources */,
 				DA859C500EC4F3950036B7C0 /* GorillaLayer.m in Sources */,
 				DA859E700EC598E10036B7C0 /* BananaLayer.m in Sources */,
-				DA859EC40EC5B2510036B7C0 /* AudioPlayer.m in Sources */,
-				DA859EC90EC5B2630036B7C0 /* AudioController.m in Sources */,
-				DA859ECA0EC5B2630036B7C0 /* AudioQueueObject.m in Sources */,
 				DAB46AA90EC85E7400F17B3F /* HUDLayer.m in Sources */,
 				DAFEF9730ED847D40019F7E5 /* Throw.m in Sources */,
 				DA126C8F0EDDF19100EADDE2 /* Utility.m in Sources */,
@@ -1981,9 +1941,6 @@
 				DA379F5F0F09654A00541EF4 /* ExplosionsLayer.m in Sources */,
 				DA379F600F09654A00541EF4 /* GorillaLayer.m in Sources */,
 				DA379F610F09654A00541EF4 /* BananaLayer.m in Sources */,
-				DA379F620F09654A00541EF4 /* AudioPlayer.m in Sources */,
-				DA379F630F09654A00541EF4 /* AudioController.m in Sources */,
-				DA379F640F09654A00541EF4 /* AudioQueueObject.m in Sources */,
 				DA379F650F09654A00541EF4 /* HUDLayer.m in Sources */,
 				DA379F660F09654A00541EF4 /* Throw.m in Sources */,
 				DA379F670F09654A00541EF4 /* Utility.m in Sources */,
@@ -2083,9 +2040,6 @@
 				DA379FD40F0965A600541EF4 /* ExplosionsLayer.m in Sources */,
 				DA379FD50F0965A600541EF4 /* GorillaLayer.m in Sources */,
 				DA379FD60F0965A600541EF4 /* BananaLayer.m in Sources */,
-				DA379FD70F0965A600541EF4 /* AudioPlayer.m in Sources */,
-				DA379FD80F0965A600541EF4 /* AudioController.m in Sources */,
-				DA379FD90F0965A600541EF4 /* AudioQueueObject.m in Sources */,
 				DA379FDA0F0965A600541EF4 /* HUDLayer.m in Sources */,
 				DA379FDB0F0965A600541EF4 /* Throw.m in Sources */,
 				DA379FDC0F0965A600541EF4 /* Utility.m in Sources */,
@@ -2186,9 +2140,6 @@
 				DA8B773A0F46120600DD88BF /* ExplosionsLayer.m in Sources */,
 				DA8B773B0F46120600DD88BF /* GorillaLayer.m in Sources */,
 				DA8B773C0F46120600DD88BF /* BananaLayer.m in Sources */,
-				DA8B773D0F46120600DD88BF /* AudioPlayer.m in Sources */,
-				DA8B773E0F46120600DD88BF /* AudioController.m in Sources */,
-				DA8B773F0F46120600DD88BF /* AudioQueueObject.m in Sources */,
 				DA8B77400F46120600DD88BF /* HUDLayer.m in Sources */,
 				DA8B77410F46120600DD88BF /* Throw.m in Sources */,
 				DA8B77420F46120600DD88BF /* Utility.m in Sources */,
@@ -2287,9 +2238,6 @@
 				DABD680D0F190D4D00EE213D /* ExplosionsLayer.m in Sources */,
 				DABD680E0F190D4D00EE213D /* GorillaLayer.m in Sources */,
 				DABD680F0F190D4D00EE213D /* BananaLayer.m in Sources */,
-				DABD68100F190D4D00EE213D /* AudioPlayer.m in Sources */,
-				DABD68110F190D4D00EE213D /* AudioController.m in Sources */,
-				DABD68120F190D4D00EE213D /* AudioQueueObject.m in Sources */,
 				DABD68130F190D4D00EE213D /* HUDLayer.m in Sources */,
 				DABD68140F190D4D00EE213D /* Throw.m in Sources */,
 				DABD68150F190D4D00EE213D /* Utility.m in Sources */,

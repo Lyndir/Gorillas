@@ -141,13 +141,13 @@
     
     if([[GorillasConfig get] soundFx]) {
         if(clicky == 0)
-            clicky = [AudioController loadEffectWithName:@"click.wav"];
+            clicky = [GorillasAppDelegate loadEffectWithName:@"click.wav"];
         
-        [AudioController playEffect:clicky];
+        [GorillasAppDelegate playEffect:clicky];
     }
     
     else {
-        [AudioController disposeEffect:clicky];
+        [GorillasAppDelegate disposeEffect:clicky];
         clicky = 0;
     }
 }
@@ -290,6 +290,7 @@
 
 -(void) playTrack:(NSString *)track {
 
+    NSLog(@"playtrack: %@", track);
     if(![track length])
         track = nil;
     
@@ -298,45 +299,43 @@
 }
 
 
--(void) audioStarted:(AudioPlayer *)player {
-
-    NSString *track = [audioController soundFile];
-    if([nextTrack isEqualToString:@"random"])
-        track = nextTrack;
+-(void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)success {
     
-    [[GorillasConfig get] setCurrentTrack:track];
-}
-
-
--(void) audioStopped:(AudioPlayer *)player {
+    if(player != audioPlayer)
+        return;
     
+    NSLog(@"audio stopped. (next is %@)", nextTrack);
     if(nextTrack == nil)
         [[GorillasConfig get] setCurrentTrack:nil];
-    
-    [audioController release];
-    audioController = nil;
     
     [self startNextTrack];
 }
 
-
 -(void) startNextTrack {
     
-    if(audioController) {
-        if([[audioController audioPlayer] isRunning])
-            [audioController stop];
-        else
-            [self audioStopped:[audioController audioPlayer]];
-    }
-
-    else if(nextTrack) {
+    NSLog(@"start next.");
+    if([audioPlayer isPlaying]) {
+            NSLog(@"stopping ac.");
+            [audioPlayer stop];
+    } else if(nextTrack) {
         NSString *track = nextTrack;
         if([track isEqualToString:@"random"])
             track = [GorillasConfig get].randomTrack;
+        NSLog(@"starting: %@ (next was %@)", track, nextTrack);
+        NSURL *nextUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:track ofType:nil]];
         
-        audioController = [[AudioController alloc] initWithFile:track];
-        [audioController play];
-        [audioController setDelegate:self];
+        if(audioPlayer != nil && ![audioPlayer.url isEqual:nextUrl]) {
+            [audioPlayer release];
+            audioPlayer = nil;
+        }
+        
+        if(audioPlayer == nil)
+            audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:nextUrl];
+            
+        [audioPlayer setDelegate:self];
+        [audioPlayer play];
+
+        [[GorillasConfig get] setCurrentTrack:nextTrack];
     }
 }
 
@@ -426,12 +425,6 @@
 }
 
 
-+(GorillasAppDelegate *) get {
-    
-    return (GorillasAppDelegate *) [[UIApplication sharedApplication] delegate];
-}
-
-
 - (void)dealloc {
     
     [gameLayer release];
@@ -476,8 +469,8 @@
     [hudLayer release];
     hudLayer = nil;
     
-    [audioController release];
-    audioController = nil;
+    [audioPlayer release];
+    audioPlayer = nil;
     
     [nextTrack release];
     nextTrack = nil;
@@ -486,6 +479,45 @@
     window = nil;
     
     [super dealloc];
+}
+
+
++(GorillasAppDelegate *) get {
+    
+    return (GorillasAppDelegate *) [[UIApplication sharedApplication] delegate];
+}
+
+
++ (void)vibrate {
+    
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+}
+
+
++ (void)playEffect:(SystemSoundID)soundFileObject {
+    
+    AudioServicesPlaySystemSound(soundFileObject);
+}
+
+
++ (SystemSoundID)loadEffectWithName:(NSString *)bundleRef {
+    
+    // Get the URL to the sound file to play
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    CFURLRef soundFileURLRef = CFBundleCopyResourceURL(mainBundle, (CFStringRef) bundleRef, NULL, NULL);
+    
+    // Create a system sound object representing the sound file
+    SystemSoundID soundFileObject;
+    AudioServicesCreateSystemSoundID(soundFileURLRef, &soundFileObject);
+    CFRelease(soundFileURLRef);
+    
+    return soundFileObject;
+}
+
+
++ (void)disposeEffect:(SystemSoundID)soundFileObject {
+    
+    AudioServicesDisposeSystemSoundID(soundFileObject);
 }
 
 

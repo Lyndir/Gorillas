@@ -184,7 +184,7 @@
     [[GorillasAppDelegate get] clickEffect];
     [[GorillasConfig get] setVibration:![[GorillasConfig get] vibration]];
     if([[GorillasConfig get] vibration])
-        [AudioController vibrate];
+        [GorillasAppDelegate vibrate];
 }
 
 

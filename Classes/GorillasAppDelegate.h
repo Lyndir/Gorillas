@@ -24,6 +24,9 @@
 //  Copyright, lhunath (Maarten Billemont) 2008. All rights reserved.
 //
 
+#import <AVFoundation/AVAudioPlayer.h>
+#import <AudioToolbox/AudioToolbox.h>
+
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
 #import "NewGameLayer.h"
@@ -36,12 +39,10 @@
 #import "GuideLayer.h"
 #import "StatisticsLayer.h"
 #import "HUDLayer.h"
-#import "AudioController.h"
-#import "AudioControllerDelegate.h"
 #import "UILayer.h"
 
 
-@interface GorillasAppDelegate : NSObject <UIApplicationDelegate, AudioControllerDelegate> {
+@interface GorillasAppDelegate : NSObject <UIApplicationDelegate> {
     
     UIWindow                    *window;
     
@@ -58,7 +59,7 @@
     GuideLayer                  *guideLayer;
     StatisticsLayer             *statsLayer;
     HUDLayer                    *hudLayer;
-    AudioController             *audioController;
+    AVAudioPlayer               *audioPlayer;
     NSString                    *nextTrack;
     
     NSMutableArray              *menuLayers;
@@ -91,6 +92,11 @@
 
 -(void) playTrack:(NSString *)track;
 -(void) startNextTrack;
+
++ (SystemSoundID)loadEffectWithName:(NSString *)bundleRef;
++ (void)vibrate;
++ (void)playEffect:(SystemSoundID)soundFileObject;
++ (void)disposeEffect:(SystemSoundID)soundFileObject;
 
 +(GorillasAppDelegate *) get;
 
