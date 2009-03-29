@@ -221,10 +221,10 @@
                                  @"Fighting Gorillas",
                                  @"Pride of the Pacific",
                                  @"Fork Bomb",
-                                 @"[Shuffle]",
-                                 @"[Off]",
+                                 @"Shuffle",
+                                 @"Off",
                                  nil],                                                      dTrackNames,
-                                @"fighting_gorillas.wav",                                   dCurrentTrack,
+                                @"random",                                                  dCurrentTrack,
                                 
                                 [NSNumber numberWithInteger:    1],                         dGameConfiguration,
                                 [NSNumber numberWithInteger:    GorillasModeBootCamp],      dMode,

@@ -17,26 +17,32 @@
  */
 
 //
-//  UILayer.h
+//  GorillasAudioController.h
 //  Gorillas
 //
-//  Created by Maarten Billemont on 08/03/09.
+//  Created by Maarten Billemont on 29/03/09.
 //  Copyright 2009 lhunath (Maarten Billemont). All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
-@interface UILayer : Layer {
+
+@interface GorillasAudioController : NSObject <AVAudioPlayerDelegate> {
     
-    Label                                   *messageLabel;
-    NSMutableArray                          *messageQueue, *callbackQueue;
-    
-    RotateTo                                *rotateAction;
-    UIAccelerationValue                     accelX, accelY, accelZ;
+    AVAudioPlayer               *audioPlayer;
+    NSString                    *nextTrack;
 }
 
--(void) rotateTo:(float)aRotation;
+-(void) clickEffect;
+-(void) playTrack:(NSString *)track;
+-(void) startNextTrack;
 
--(void) message:(NSString *)msg;
--(void) message:(NSString *)msg callback:(id)target :(SEL)selector;
++(SystemSoundID) loadEffectWithName:(NSString *)bundleRef;
++(void) vibrate;
++(void) playEffect:(SystemSoundID)soundFileObject;
++(void) disposeEffect:(SystemSoundID)soundFileObject;
+
++(GorillasAudioController *) get;
 
 @end
