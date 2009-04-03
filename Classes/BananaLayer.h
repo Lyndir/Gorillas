@@ -27,19 +27,35 @@
 #import "Throw.h"
 
 
+/**
+ * Projectile Models.
+ */
+typedef enum {
+    /** A Banana.           */
+    GorillasProjectileModelBanana,
+    
+    /** An Easter Egg.      */
+    GorillasProjectileModelEasterEgg,
+} GorillasProjectileModel;
+
+
 @interface BananaLayer : Layer {
 
-    BOOL clearedGorilla;
+    BOOL                    clearedGorilla, focussed;
+    
+    GorillasProjectileModel model;
 
-    Sprite *banana;
-    Throw *throwAction;
+    Sprite                  *banana;
+    Throw                   *throwAction;
 }
 
 -(void) throwFrom: (cpVect)r0 withVelocity: (cpVect)v;
 -(BOOL) throwing;
 
-@property (nonatomic, readwrite) BOOL   clearedGorilla;
-@property (nonatomic, readonly) Sprite  *banana;
-@property (nonatomic, readonly) Throw   *throwAction;
+@property (nonatomic, readwrite) BOOL                       clearedGorilla;
+@property (nonatomic, readwrite) BOOL                       focussed;
+@property (nonatomic, readwrite) GorillasProjectileModel    model;
+@property (nonatomic, readonly) Sprite                      *banana;
+@property (nonatomic, readonly) Throw                       *throwAction;
 
 @end

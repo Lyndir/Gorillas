@@ -46,6 +46,10 @@
     
     
     // Game Configuration.
+    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
+    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    MenuItem *styleT    = [MenuItemFont itemFromString:@"Choose a game style:"];
+    [styleT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *configurationI    = [MenuItemFont itemFromString:[[GorillasConfig get] gameConfiguration].name
@@ -78,7 +82,7 @@
     
     
     menu = [[Menu menuWithItems:
-             configurationI, descriptionT, [MenuItemSpacer small],
+             styleT, configurationI, descriptionT, [MenuItemSpacer small],
              singlePlayerI, multiPlayerI, [MenuItemSpacer small],
              customI,
              nil] retain];

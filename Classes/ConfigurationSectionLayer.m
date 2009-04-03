@@ -46,14 +46,17 @@
     // Section menus.
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *game  = [MenuItemFont itemFromString:@"Gameplay"
-                                            target:self
-                                          selector:@selector(game:)];
-    MenuItem *av    = [MenuItemFont itemFromString:@"Audio / Video"
-                                            target:self
-                                          selector:@selector(av:)];
+    MenuItem *game      = [MenuItemFont itemFromString:@"Gameplay"
+                                                target:self
+                                              selector:@selector(game:)];
+    MenuItem *av        = [MenuItemFont itemFromString:@"Audio / Video"
+                                                target:self
+                                              selector:@selector(av:)];
+    MenuItem *models    = [MenuItemFont itemFromString:@"Models"
+                                                target:self
+                                              selector:@selector(models:)];
     
-    menu = [[Menu menuWithItems:game, av, nil] retain];
+    menu = [[Menu menuWithItems:game, av, models, nil] retain];
     [menu alignItemsVertically];
     [self addChild:menu];
     
@@ -91,6 +94,13 @@
     
     [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showAVConfiguration];
+}
+
+
+-(void) models: (id) sender {
+    
+    [[GorillasAudioController get] clickEffect];
+    [[GorillasAppDelegate get] showModelsConfiguration];
 }
 
 

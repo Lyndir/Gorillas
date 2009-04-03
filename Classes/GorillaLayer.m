@@ -37,13 +37,15 @@
 -(void) du;
 -(void) uu;
 
+-(NSString *) modelFileWithArmsUpLeft:(BOOL)left right:(BOOL)right;
+
 @end
 
 static NSUInteger _teamIndex, _globalIndex;
 
 @implementation GorillaLayer
 
-@synthesize human, name, turns, lives, active, zoom, teamIndex, globalIndex;
+@synthesize human, name, turns, lives, active, zoom, teamIndex, globalIndex, model;
 
 
 +(void) prepareCreation {
@@ -53,11 +55,12 @@ static NSUInteger _teamIndex, _globalIndex;
 }
 
 
--(id) initWithName:(NSString *)_name isHuman:(BOOL)_human {
+-(id) initWithName:(NSString *)_name type:(GorillasPlayerType)_type {
     
-    type    = _human? @"brown": @"silver";
+    model   = [GorillasConfig get].playerModel;
+    type    = _type;
     
-    if(!(self = [super initWithFile:[NSString stringWithFormat:@"gorilla-%@-DD.png", type]]))
+    if(!(self = [super initWithFile:[self modelFileWithArmsUpLeft:NO right:NO]]))
         return self;
     
     name        = [_name retain];
@@ -65,13 +68,7 @@ static NSUInteger _teamIndex, _globalIndex;
     globalIndex = _globalIndex++;
 
     zoom    = 1;
-    
-    dd      = [texture retain];
-    ud      = [[[TextureMgr sharedTextureMgr] addImage:[NSString stringWithFormat:@"gorilla-%@-UD.png", type]] retain];
-    du      = [[[TextureMgr sharedTextureMgr] addImage:[NSString stringWithFormat:@"gorilla-%@-DU.png", type]] retain];
-    uu      = [[[TextureMgr sharedTextureMgr] addImage:[NSString stringWithFormat:@"gorilla-%@-UU.png", type]] retain];
-    
-    human   = _human;
+
     bobber  = [[Sprite alloc] initWithFile:@"bobber.png"];
     [bobber setPosition:cpv([self contentSize].width / 2,
                             [self contentSize].height + [bobber contentSize].height / 2 + 15)];
@@ -85,10 +82,10 @@ static NSUInteger _teamIndex, _globalIndex;
 
     // By default, a gorilla has 1 life, unless features say otherwise.
     initialLives = 1;
-    if(human && [[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesPl])
+    if(self.human && [[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesPl])
         // Human gorillas with lives enabled.
         initialLives = [[GorillasConfig get] lives];
-    else if(!human) {
+    else if(!self.human) {
         if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesAi])
             // AI gorillas with lives enabled.
             initialLives = [[GorillasConfig get] lives];
@@ -102,10 +99,23 @@ static NSUInteger _teamIndex, _globalIndex;
 }
 
 
+-(void)setModel:(GorillasPlayerModel)_model {
+    
+    model = _model;
+    [self setTexture:[[TextureMgr sharedTextureMgr] addImage:[self modelFileWithArmsUpLeft:NO right:NO]]];
+}
+
+
 -(BOOL) alive {
     
     // More than (or less than!) zero means gorilla is alive.
     return lives != 0;
+}
+
+
+-(BOOL) human {
+    
+    return type == GorillasPlayerTypeHuman;
 }
 
 
@@ -132,7 +142,7 @@ static NSUInteger _teamIndex, _globalIndex;
                                                [CallFunc actionWithTarget:self selector:@selector(du)],
                                                [DelayTime actionWithDuration:0.2f],
                                                nil]
-                                        times:7],
+                                        times:8],
                      [CallFunc actionWithTarget:self selector:@selector(uu)],
                      [DelayTime actionWithDuration:0.5f],
                      [CallFunc actionWithTarget:self selector:@selector(dd)],
@@ -156,25 +166,71 @@ static NSUInteger _teamIndex, _globalIndex;
 
 -(void) dd {
     
-    [self setTexture:dd];
+    [self setTexture:[[TextureMgr sharedTextureMgr] addImage:[self modelFileWithArmsUpLeft:NO right:NO]]];
 }
 
 
 -(void) ud {
     
-    [self setTexture:ud];
+    [self setTexture:[[TextureMgr sharedTextureMgr] addImage:[self modelFileWithArmsUpLeft:YES right:NO]]];
 }
 
 
 -(void) du {
     
-    [self setTexture:du];
+    [self setTexture:[[TextureMgr sharedTextureMgr] addImage:[self modelFileWithArmsUpLeft:NO right:YES]]];
 }
 
 
 -(void) uu {
     
-    [self setTexture:uu];
+    [self setTexture:[[TextureMgr sharedTextureMgr] addImage:[self modelFileWithArmsUpLeft:YES right:YES]]];
+}
+
+
+-(NSString *) modelFileWithArmsUpLeft:(BOOL)left right:(BOOL)right {
+    
+    NSString *modelName, *typeName;
+    switch (model) {
+        case GorillasPlayerModelGorilla:
+            modelName = @"gorilla";
+            break;
+        case GorillasPlayerModelEasterBunny:
+            modelName = @"bunny";
+            break;
+        default:
+            @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                           reason:@"Active gorilla model not implemented." userInfo:nil];
+    }
+    switch (type) {
+        case GorillasPlayerTypeAI:
+            typeName = @"ai";
+            break;
+        case GorillasPlayerTypeHuman:
+            typeName = @"human";
+            break;
+        default:
+            @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                           reason:@"Active gorilla type not implemented." userInfo:nil];
+    }
+    
+    return [NSString stringWithFormat:@"%@-%@-%c%c.png", modelName, typeName, left? 'U': 'D', right? 'U': 'D'];
+}
+
+
+-(GorillasProjectileModel) projectileModel {
+
+    switch (model) {
+        case GorillasPlayerModelGorilla:
+            return GorillasProjectileModelBanana;
+
+        case GorillasPlayerModelEasterBunny:
+            return GorillasProjectileModelEasterEgg;
+
+        default:
+            @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                           reason:@"Active gorilla model not implemented." userInfo:nil];
+    }
 }
 
 
@@ -250,10 +306,10 @@ static NSUInteger _teamIndex, _globalIndex;
     if(lives <= 0)
         return;
     
-    if(human && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesPl])
+    if(self.human && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesPl])
        return;
 
-    if(!human && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesAi])
+    if(!self.human && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesAi])
        return;
     
     cpFloat barX = [self contentSize].width / 2;

@@ -24,13 +24,37 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
+#import "BananaLayer.h"
+
+
+/**
+ * Gorilla Models.
+ */
+typedef enum {
+    /** A Gorilla.          */
+    GorillasPlayerModelGorilla,
+    
+    /** An Easter Bunny.    */
+    GorillasPlayerModelEasterBunny,
+} GorillasPlayerModel;
+
+
+/**
+ * Gorilla Types.
+ */
+typedef enum {
+    /** An AI.              */
+    GorillasPlayerTypeAI,
+    
+    /** A Human.            */
+    GorillasPlayerTypeHuman,
+} GorillasPlayerType;
 
 
 @interface GorillaLayer : Sprite {
 
     NSString            *name;
     NSUInteger          teamIndex, globalIndex;
-    BOOL                human;
     
     int                 initialLives, lives;
     BOOL                active;
@@ -38,12 +62,13 @@
     float               zoom;
     
     Sprite              *bobber;
-    NSString            *type;
-    Texture2D           *dd, *ud, *du, *uu;
+    
+    GorillasPlayerModel model;
+    GorillasPlayerType  type;
 }
 
 +(void) prepareCreation;
--(id) initWithName:(NSString *)name isHuman:(BOOL)_human;
+-(id) initWithName:(NSString *)_name type:(GorillasPlayerType)_type;
 
 -(BOOL) hitsGorilla: (cpVect)pos;
 -(void) cheer;
@@ -53,15 +78,17 @@
 -(void) killDead;
 -(void) revive;
 
-@property (nonatomic, readonly) NSString           *name;
-@property (nonatomic, readonly) NSUInteger         teamIndex;
-@property (nonatomic, readonly) NSUInteger         globalIndex;
-@property (nonatomic, readonly) BOOL               human;
+@property (nonatomic, readonly) NSString                *name;
+@property (nonatomic, readonly) NSUInteger              teamIndex;
+@property (nonatomic, readonly) NSUInteger              globalIndex;
+@property (nonatomic, readonly) BOOL                    human;
 
-@property (nonatomic, readonly) int                lives;
-@property (nonatomic, readonly) BOOL               alive;
-@property (nonatomic, readwrite) BOOL              active;
-@property (nonatomic, readwrite) NSUInteger        turns;
-@property (nonatomic, readwrite) float             zoom;
+@property (nonatomic, readonly) int                     lives;
+@property (nonatomic, readonly) BOOL                    alive;
+@property (nonatomic, readwrite) BOOL                   active;
+@property (nonatomic, readwrite) NSUInteger             turns;
+@property (nonatomic, readwrite) float                  zoom;
+@property (nonatomic, readwrite) GorillasPlayerModel    model;
+@property (nonatomic, readonly) GorillasProjectileModel projectileModel;
 
 @end

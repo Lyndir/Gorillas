@@ -25,6 +25,7 @@
 //
 
 #import "Throw.h"
+#import "ThrowController.h"
 #import "GorillasAppDelegate.h"
 #define maxDiff 4
 #define recapTime 3
@@ -32,14 +33,14 @@
 
 @interface Throw (Private)
 
--(void) nextTurn;
 -(void) throwEnded;
 
 @end
 
+
 @implementation Throw
 
-@synthesize recap;
+@synthesize recap, focussed;
 
 
 +(Throw *) actionWithVelocity: (cpVect)velocity startPos: (cpVect)startPos {
@@ -58,8 +59,6 @@
 
     if(!(self = [super initWithDuration:t]))
         return self;
-    
-    endCount = [[[GorillasAppDelegate get] gameLayer] singlePlayer]? -1: 3;
     
     recap = 0;
     
@@ -165,7 +164,7 @@
             
             // Figure out whether banana went off screen or hit something.
             offScreen   = rTest.x < min || rTest.x > max
-            || rTest.y < 0 || rTest.y > top;
+                       || rTest.y < 0 || rTest.y > top;
             hitGorilla  = [buildingsLayer hitsGorilla:rTest];
             hitBuilding = [buildingsLayer hitsBuilding:rTest];
         } while(++step < stepCount && !(hitBuilding || hitGorilla || offScreen));
@@ -178,10 +177,10 @@
         }
     
     // If it reached the floor, went off screen, or hit something; stop the banana.
-    if([self isDone] || offScreen || hitBuilding || hitGorilla) {
+    if(offScreen || hitBuilding || hitGorilla) {
         r = rTest;
         
-        if ([gameLayer checkGameStillOn] || recap || ![GorillasConfig get].replay) {
+        if ([gameLayer checkGameStillOn] || recap || ![GorillasConfig get].replay || !focussed) {
             
             // Hitting something causes an explosion.
             if(hitBuilding || hitGorilla)
@@ -197,6 +196,15 @@
             
             // Update game state.
             [gameLayer updateStateHitGorilla:hitGorilla hitBuilding:hitBuilding offScreen:offScreen throwSkill:throwSkill];
+            
+            if(skipped)
+                [self throwEnded];
+            
+            else
+                [buildingsLayer runAction:[Sequence actions:
+                                           [DelayTime actionWithDuration:1],
+                                           [CallFunc actionWithTarget:self selector:@selector(throwEnded)],
+                                           nil]];
         }
         
         else {
@@ -213,12 +221,14 @@
         }
     }
     
-    if(recap && elapsed > recap) {
-        [[GorillasAppDelegate get].gameLayer scaleTimeTo:0.5f duration:0.5f];
-        [gameLayer.panningLayer scaleTo:1.5f];
-        [gameLayer.panningLayer scrollToCenter:r horizontal:YES];
-    } else
-        [gameLayer.panningLayer scrollToCenter:r horizontal:[GorillasConfig get].followThrow];
+    if(focussed) {
+        if(recap && elapsed > recap) {
+            [[GorillasAppDelegate get].gameLayer scaleTimeTo:0.5f duration:0.5f];
+            [gameLayer.panningLayer scaleTo:1.5f];
+            [gameLayer.panningLayer scrollToCenter:r horizontal:YES];
+        } else
+            [gameLayer.panningLayer scrollToCenter:r horizontal:[GorillasConfig get].followThrow];
+    }
 
     [target setPosition:r];
     if([[GorillasConfig get] visualFx]) {
@@ -235,15 +245,6 @@
             throwSkill = elapsed / 10;
             [[[GorillasAppDelegate get] hudLayer] updateHudWithScore:0 skill:throwSkill];
         }
-    } else {
-        if(skipped)
-            [self throwEnded];
-
-        else
-            [buildingsLayer runAction:[Sequence actions:
-                                       [DelayTime actionWithDuration:1],
-                                       [CallFunc actionWithTarget:self selector:@selector(throwEnded)],
-                                       nil]];
     }
 }
 
@@ -253,34 +254,13 @@
     [[[[GorillasAppDelegate get] gameLayer] windLayer] unregisterSystem:smoke];
     [target stopAction:spinAction];
     
-    // End of the throw.
-    [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:cpvzero horizontal:NO];
-    [[GorillasAppDelegate get].gameLayer scaleTimeTo:1 duration:0.5f];
+    if(focussed) {
+        [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:cpvzero horizontal:NO];
+        [[GorillasAppDelegate get].gameLayer scaleTimeTo:1 duration:0.5f];
+    }
 
-    NSUInteger liveHumans = 0;
-    for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
-        if(gorilla.human && gorilla.alive)
-            ++liveHumans;
-    
-    if([GorillasAppDelegate get].gameLayer.activeGorilla.human && liveHumans > 1)
-        if(endCount) {
-            [[GorillasAppDelegate get].uiLayer message:@"Next player .."];
-            [[GorillasAppDelegate get].uiLayer message:@"Go .." callback:self :@selector(nextTurn)];
-            return;
-        }
-    
-    [self nextTurn];
-}
-
-
--(void) nextTurn {
-
-    if(recap)
-        [[GorillasAppDelegate get].hudLayer dismissMessage];
-    
-    [target setTag:GorillasTagBananaNotFlying];
-    [[GorillasAppDelegate get].gameLayer.buildingsLayer nextGorilla];
-}
+    [[ThrowController get] throwEnded];
+}    
 
 
 -(void) skip: (id) caller {
@@ -294,6 +274,7 @@
 
     duration = 0;
     running = NO;
+    [target setTag:GorillasTagBananaNotFlying];
 }
 
 

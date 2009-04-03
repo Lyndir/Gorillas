@@ -87,6 +87,7 @@
 @property (nonatomic, readwrite) NSUInteger            mode;
 @property (nonatomic, readonly) NSArray                *modes;
 @property (nonatomic, readonly) NSString               *modeString;
+@property (nonatomic, readwrite) NSUInteger            playerModel;
 @property (nonatomic, readwrite) int                   score;
 @property (nonatomic, readwrite) float                 skill;
 @property (nonatomic, readwrite, assign) NSDictionary  *topScoreHistory;

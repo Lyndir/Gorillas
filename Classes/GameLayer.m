@@ -158,18 +158,18 @@
         if(humans > 1)
             name = [NSString stringWithFormat:@"Player %d", i + 1];
         
-        GorillaLayer *gorilla = [[GorillaLayer alloc] initWithName:name isHuman:YES];
+        GorillaLayer *gorilla = [[GorillaLayer alloc] initWithName:name type:GorillasPlayerTypeHuman];
         [gorillas addObject:gorilla];
         [gorilla release];
     }
     
     // Add AIs to the game.
     for (NSUInteger i = 0; i < ais; ++i) {
-        NSString *name = @"Phone";
+        NSString *name = @"Chip";
         if(ais > 1)
             name = [NSString stringWithFormat:@"Chip %d", i + 1];
         
-        GorillaLayer *gorilla = [[GorillaLayer alloc] initWithName:name isHuman:NO];
+        GorillaLayer *gorilla = [[GorillaLayer alloc] initWithName:name type:GorillasPlayerTypeAI];
         [gorillas addObject:gorilla];
         [gorilla release];
     }
@@ -201,7 +201,7 @@
 
 
 -(void) updateStateHitGorilla:(BOOL)hitGorilla hitBuilding:(BOOL)hitBuilding offScreen:(BOOL)offScreen throwSkill:(float)throwSkill {
-
+    
     if (offScreen)
         [[[GorillasAppDelegate get] hudLayer] message:[GorillasConfig get].offMessage
                                              duration:2 isImportant:NO];
@@ -471,6 +471,7 @@
     
     if ([[GorillasConfig get] weather])
         [self schedule:@selector(updateWeather:) interval:1];
+    [self schedule:@selector(randomEncounter:) interval:1];
 }
 
 
@@ -479,6 +480,7 @@
     [super onExit];
     
     [self unschedule:@selector(updateWeather:)];
+    [self unschedule:@selector(randomEncounter:)];
 }
 
 
@@ -537,13 +539,33 @@
         float rate = [weather emissionRate] + (random() % 40 - 15) / 10.0f;
         float max = [weather isKindOfClass:[ParticleRain class]]? 100: 50;
         rate = fminf(fmaxf(0, rate), max);
-
+        
         if(random() % 100 == 0)
             // 1% chance for a full stop.
             rate = 0;
     
         [weather setEmissionRate:rate];
     }
+}
+
+
+-(void) randomEncounter:(ccTime)dt {
+
+    if(!running)
+        return;
+
+    // Need to refactor some bad logic about setting projectile as cleared before this'll work.
+    //    if(random() % 1 == 0) {
+    //        BananaLayer *egg = [[BananaLayer alloc] init];
+    //        [egg setModel:GorillasProjectileModelEasterEgg];
+    //
+    //        CGSize winSize = [[Director sharedDirector] winSize];
+    //        [egg throwFrom:cpv(winSize.width / 2 - buildingsLayer.position.x, winSize.height * 2)
+    //          withVelocity:cpv(0, 0)];
+    //        
+    //        [buildingsLayer addChild:egg z:2];
+    //        [egg release];
+    //    }
 }
 
 

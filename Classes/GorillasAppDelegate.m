@@ -243,6 +243,15 @@
 }
 
 
+-(void) showModelsConfiguration {
+    
+    if(!modelsConfigLayer)
+        modelsConfigLayer = [[ModelsConfigurationLayer alloc] init];
+    
+    [self pushLayer:modelsConfigLayer];
+}
+
+
 -(void) showInformation {
     
     if(!infoLayer)
@@ -335,6 +344,11 @@
         [avConfigLayer release];
         avConfigLayer = nil;
     }
+    if(modelsConfigLayer && ![modelsConfigLayer parent]) {
+        [modelsConfigLayer stopAllActions];
+        [modelsConfigLayer release];
+        modelsConfigLayer = nil;
+    }
     if(infoLayer && ![infoLayer parent]) {
         [infoLayer stopAllActions];
         [infoLayer release];
@@ -387,6 +401,9 @@
     [avConfigLayer release];
     avConfigLayer = nil;
 
+    [modelsConfigLayer release];
+    modelsConfigLayer = nil;
+    
     [infoLayer release];
     infoLayer = nil;
 

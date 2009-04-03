@@ -28,9 +28,15 @@
 #import "GorillasAppDelegate.h"
 
 
+@interface BananaLayer (Private)
+
+-(NSString *) modelFile;
+
+@end
+
 @implementation BananaLayer
 
-@synthesize clearedGorilla, banana, throwAction;
+@synthesize clearedGorilla, banana, throwAction, model, focussed;
 
 
 -(id) init {
@@ -38,14 +44,24 @@
     if(!(self = [super init]))
         return self;
     
-    banana = [[Sprite alloc] initWithFile:@"banana.png"];
+    model           = GorillasProjectileModelEasterEgg;
+    
+    banana          = [[Sprite alloc] initWithFile:[self modelFile]];
     [banana setScale:[[GorillasConfig get] cityScale]];
     [banana setVisible:NO];
     [banana setTag:GorillasTagBananaNotFlying];
     
-    throwAction = nil;
+    throwAction     = nil;
+    focussed        = NO;
 
     return self;
+}
+
+
+-(void)setModel:(GorillasProjectileModel)_model {
+    
+    model = _model;
+    [banana setTexture:[[TextureMgr sharedTextureMgr] addImage:[self modelFile]]];
 }
 
 
@@ -56,6 +72,7 @@
     [throwAction release];
     [banana setPosition:r0];
     [banana runAction:[throwAction = [Throw actionWithVelocity:v startPos:r0] retain]];
+    [throwAction setFocussed:focussed];
 }
 
 
@@ -81,6 +98,25 @@
 -(BOOL) throwing {
     
     return [banana tag] == GorillasTagBananaFlying;
+}
+
+
+-(NSString *) modelFile {
+
+    NSString *modelName;
+    switch (model) {
+        case GorillasProjectileModelBanana:
+            modelName = @"banana";
+            break;
+        case GorillasProjectileModelEasterEgg:
+            modelName = @"egg";
+            break;
+        default:
+            @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                           reason:@"Active banana model not implemented." userInfo:nil];
+    }
+    
+    return [NSString stringWithFormat:@"%@.png", modelName];
 }
 
 

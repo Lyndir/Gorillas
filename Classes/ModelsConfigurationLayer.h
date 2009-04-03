@@ -17,34 +17,32 @@
  */
 
 //
-//  Throw.h
+//  ModelsConfigurationLayer.h
 //  Gorillas
 //
-//  Created by Maarten Billemont on 22/11/08.
+//  Created by Maarten Billemont on 31/03/08.
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
+#import "ShadeLayer.h"
+#import "SwipeLayer.h"
+#import "GorillaLayer.h"
 
+@interface ModelsConfigurationLayer : ShadeLayer {
 
-@interface Throw : IntervalAction {
-
-    BOOL            running;
-    BOOL            skipped;
-    BOOL            focussed;
-    ccTime          recap;
-    cpVect          recapr;
-    cpVect          v;
-    cpVect          r0;
-    float           throwSkill;
+    Menu *modelMenu, *backMenu, *nextMenu;
+    MenuItemFont *modelCurr, *modelNext;
     
-    IntervalAction  *spinAction;
-    ParticleSystem  *smoke;
+    SwipeLayer *swipeLayer;
+    
+    GorillaLayer *prevModelSprite, *currModelSprite, *nextModelSprite;
+    NSMutableArray *modelSprites, *modelTitles;
+    NSUInteger model;
 }
 
-+(Throw *) actionWithVelocity: (cpVect)velocity startPos: (cpVect)startPos;
--(Throw *) initWithVelocity: (cpVect)velocity startPos: (cpVect)startPos;
+-(void) flipPage;
+-(void) next: (id)sender;
+-(void) back: (id)sender;
 
-@property (nonatomic, readwrite) ccTime recap;
-@property (nonatomic, readwrite) BOOL   focussed;
 
 @end

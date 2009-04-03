@@ -80,6 +80,7 @@
 #define dTrackNames         @"v1.1.trackNames"
 #define dCurrentTrack       @"v1.0.currentTrack"
 
+#define dPlayerModel        @"v1.2.playerModel"
 #define dScore              @"v1.0.score"
 #define dSkill              @"v1.1.skill"
 #define dTopScoreHistory    @"v1.0.topScoreHistory"
@@ -194,7 +195,7 @@
                                 [NSNumber numberWithInteger:    30],                        dMinGravity,
                                 [NSNumber numberWithInteger:    150],                       dMaxGravity,
                                 
-                                [NSNumber numberWithLong:       0x000000dd],                dShadeColor,
+                                [NSNumber numberWithLong:       0x332222cc],                dShadeColor,
                                 [NSNumber numberWithFloat:      0.5f],                      dTransitionDuration,
                                 [NSNumber numberWithFloat:      0.5f],                      dGameScrollDuration,
                                 
@@ -234,6 +235,7 @@
                                 [NSNumber numberWithFloat:      50],                        dBonusSkill,
                                 [NSNumber numberWithInteger:    5],                         dDeathScoreRatio,
                                 
+                                [NSNumber numberWithUnsignedInt:GorillasPlayerModelGorilla],dPlayerModel,
                                 [NSNumber numberWithInteger:    0],                         dScore,
                                 [NSNumber numberWithInteger:    0],                         dSkill,
                                 [NSMutableDictionary dictionary/*WithObjectsAndKeys:
@@ -781,6 +783,14 @@
 
 #pragma mark User Status
 
+-(NSUInteger) playerModel {
+    
+    return [defaults integerForKey: dPlayerModel];
+}
+-(void) setPlayerModel: (NSUInteger)nPlayerModel {
+    
+    [defaults setInteger:nPlayerModel forKey:dPlayerModel];
+}
 -(int) score {
     
     return [defaults integerForKey: dScore];

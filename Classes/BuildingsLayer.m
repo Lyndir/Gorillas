@@ -524,7 +524,9 @@
     
     // Record throw history & start the actual throw.
     throwHistory[[[GorillasAppDelegate get].gameLayer.gorillas indexOfObject:gorilla]] = v;
-    [[GorillasAppDelegate get].gameLayer.activeGorilla threw:v];
+    [gorilla threw:v];
+
+    [bananaLayer setModel:[gorilla projectileModel]];
     [bananaLayer throwFrom:[gorilla position] withVelocity:v];
 }
 
@@ -697,6 +699,7 @@
                                      userInfo:nil];
     }
     bananaLayer = [[BananaLayer alloc] init];
+    [bananaLayer setFocussed:YES];
     [self addChild:bananaLayer z:2];
     
     [self runAction:[Sequence actions:
