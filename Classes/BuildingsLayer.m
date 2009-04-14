@@ -357,7 +357,7 @@
 
 -(BOOL) mayThrow {
 
-    return ![bananaLayer throwing] && [[GorillasAppDelegate get].gameLayer.activeGorilla alive] && [[GorillasAppDelegate get].gameLayer.activeGorilla human]
+    return ![bananaLayer throwing] && [[GorillasAppDelegate get].gameLayer.activeGorilla active] && [[GorillasAppDelegate get].gameLayer.activeGorilla alive] && [[GorillasAppDelegate get].gameLayer.activeGorilla human]
             && ![GorillasAppDelegate get].gameLayer.paused;
 }
 

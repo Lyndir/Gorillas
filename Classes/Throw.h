@@ -30,7 +30,7 @@
 
     BOOL            running;
     BOOL            skipped;
-    BOOL            focussed;
+    //BOOL            focussed;
     ccTime          recap;
     cpVect          recapr;
     cpVect          v;
@@ -45,6 +45,6 @@
 -(Throw *) initWithVelocity: (cpVect)velocity startPos: (cpVect)startPos;
 
 @property (nonatomic, readwrite) ccTime recap;
-@property (nonatomic, readwrite) BOOL   focussed;
+//@property (nonatomic, readwrite) BOOL   focussed;
 
 @end

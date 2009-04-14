@@ -40,7 +40,7 @@
 
 @implementation Throw
 
-@synthesize recap, focussed;
+@synthesize recap;//, focussed;
 
 
 +(Throw *) actionWithVelocity: (cpVect)velocity startPos: (cpVect)startPos {
@@ -177,10 +177,10 @@
         }
     
     // If it reached the floor, went off screen, or hit something; stop the banana.
-    if(offScreen || hitBuilding || hitGorilla) {
+    if([self isDone] || offScreen || hitBuilding || hitGorilla) {
         r = rTest;
         
-        if ([gameLayer checkGameStillOn] || recap || ![GorillasConfig get].replay || !focussed) {
+        if ([gameLayer checkGameStillOn] || recap || ![GorillasConfig get].replay/* || !focussed*/) {
             
             // Hitting something causes an explosion.
             if(hitBuilding || hitGorilla)
@@ -221,14 +221,14 @@
         }
     }
     
-    if(focussed) {
+    //if(focussed) {
         if(recap && elapsed > recap) {
             [[GorillasAppDelegate get].gameLayer scaleTimeTo:0.5f duration:0.5f];
             [gameLayer.panningLayer scaleTo:1.5f];
             [gameLayer.panningLayer scrollToCenter:r horizontal:YES];
         } else
             [gameLayer.panningLayer scrollToCenter:r horizontal:[GorillasConfig get].followThrow];
-    }
+    //}
 
     [target setPosition:r];
     if([[GorillasConfig get] visualFx]) {
@@ -254,10 +254,10 @@
     [[[[GorillasAppDelegate get] gameLayer] windLayer] unregisterSystem:smoke];
     [target stopAction:spinAction];
     
-    if(focussed) {
+    //if(focussed) {
         [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:cpvzero horizontal:NO];
         [[GorillasAppDelegate get].gameLayer scaleTimeTo:1 duration:0.5f];
-    }
+    //}
 
     [[ThrowController get] throwEnded];
 }    
@@ -274,6 +274,8 @@
 
     duration = 0;
     running = NO;
+    
+    [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:NO];
     [target setTag:GorillasTagBananaNotFlying];
 }
 

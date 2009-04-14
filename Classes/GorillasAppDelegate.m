@@ -84,14 +84,14 @@
     // Show the splash screen, this starts the main loop in the current thread.
     [[Director sharedDirector] replaceScene:splashScene];
     do {
-        @try {
+        //@try {
             [[Director sharedDirector] startAnimation];
-        }
-        @catch (NSException * e) {
+        //}
+        /*@catch (NSException * e) {
             NSLog(@"=== Exception Occurred! ===");
             NSLog(@"Name: %@; Reason: %@; Context: %@.\n", [e name], [e reason], [e userInfo]);
             [hudLayer message:[e reason] duration:3 isImportant:YES];
-        }
+        }*/
     } while ([[Director sharedDirector] runningScene]);
 }
 

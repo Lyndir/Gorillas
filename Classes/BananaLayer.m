@@ -58,7 +58,7 @@
 }
 
 
--(void)setModel:(GorillasProjectileModel)_model {
+-(void) setModel:(GorillasProjectileModel)_model {
     
     model = _model;
     [banana setTexture:[[TextureMgr sharedTextureMgr] addImage:[self modelFile]]];
@@ -72,7 +72,7 @@
     [throwAction release];
     [banana setPosition:r0];
     [banana runAction:[throwAction = [Throw actionWithVelocity:v startPos:r0] retain]];
-    [throwAction setFocussed:focussed];
+    //[throwAction setFocussed:focussed];
 }
 
 
