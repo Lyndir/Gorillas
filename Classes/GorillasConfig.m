@@ -158,7 +158,7 @@
     hitMessages         = [[NSArray alloc] initWithObjects:
                            @"%2$@ ate %1$@'s banana.",
                            @"%2$@ didn't dodge %1$@'s banana.",
-                           @"%1$@ burried %2$@.",
+                           @"%1$@ buried %2$@.",
                            @"%1$@ incinerated %2$@.",
                            nil];
     

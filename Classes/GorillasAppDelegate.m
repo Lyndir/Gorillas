@@ -50,7 +50,7 @@
     [window makeKeyAndVisible];
 
 	// Director and OpenGL Setup.
-    [Director useFastDirector];
+    //[Director useFastDirector];
 #if TARGET_IPHONE_SIMULATOR
     [[Director sharedDirector] setPixelFormat:kRGBA8];
 #else
