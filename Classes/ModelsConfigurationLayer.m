@@ -41,10 +41,10 @@
     modelTitles = [[NSMutableArray alloc] initWithCapacity:2];
 
     [modelSprites addObject:[NSNumber numberWithUnsignedInt:GorillasPlayerModelGorilla]];
-    [modelTitles addObject:@"Gorilla"];
+    [modelTitles addObject:NSLocalizedString(@"model.gorilla", @"Gorilla")];
 
     [modelSprites addObject:[NSNumber numberWithUnsignedInt:GorillasPlayerModelEasterBunny]];
-    [modelTitles addObject:@"Easter Bunny"];
+    [modelTitles addObject:NSLocalizedString(@"model.bunny", @"Easter Bunny")];
     
     
     // Controls.

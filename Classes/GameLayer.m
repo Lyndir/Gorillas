@@ -76,9 +76,9 @@
     
     if(running) {
         if(paused)
-            [[GorillasAppDelegate get].uiLayer message:@"Paused"];
+            [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.paused", @"Paused")];
         else
-            [[GorillasAppDelegate get].uiLayer message:@"Unpaused"];
+            [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.unpaused", @"Unpaused")];
     }
 }
 
@@ -154,9 +154,9 @@
     
     // Add humans to the game.
     for (NSUInteger i = 0; i < humans; ++i) {
-        NSString *name = @"Player";
+        NSString *name = NSLocalizedString(@"names.player", @"Player");
         if(humans > 1)
-            name = [NSString stringWithFormat:@"Player %d", i + 1];
+            name = [NSString stringWithFormat:NSLocalizedString(@"names.player.n", @"Player %d"), i + 1];
         
         GorillaLayer *gorilla = [[GorillaLayer alloc] initWithName:name type:GorillasPlayerTypeHuman];
         [gorillas addObject:gorilla];
@@ -165,9 +165,9 @@
     
     // Add AIs to the game.
     for (NSUInteger i = 0; i < ais; ++i) {
-        NSString *name = @"Chip";
+        NSString *name = NSLocalizedString(@"names.chip", @"Chip");
         if(ais > 1)
-            name = [NSString stringWithFormat:@"Chip %d", i + 1];
+            name = [NSString stringWithFormat:NSLocalizedString(@"names.chip.n", @"Chip %d"), i + 1];
         
         GorillaLayer *gorilla = [[GorillaLayer alloc] initWithName:name type:GorillasPlayerTypeAI];
         [gorillas addObject:gorilla];
@@ -266,7 +266,7 @@
             
             // Apply oneshot bonus.
             if(activeGorilla.turns == 0) {
-                [[GorillasAppDelegate get].uiLayer message:@"Oneshot!"];
+                [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.oneshot", @"Oneshot!")];
                 skill *= [[GorillasConfig get] bonusOneShot];
             }
             
@@ -287,9 +287,9 @@
             // Message in case we level up.
             if(![oldLevel isEqualToString:[[GorillasConfig get] levelName]]) {
                 if(score > 0)
-                    [[GorillasAppDelegate get].uiLayer message:@"Level Up!"];
+                    [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.level.up", @"Level Up!")];
                 else
-                    [[GorillasAppDelegate get].uiLayer message:@"Level Down"];
+                    [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.level.down", @"Level Down")];
             }
         }
         
@@ -321,9 +321,10 @@
         // If 0 or 1 gorillas left; show who won and stop the game.
         if(liveGorillaCount < 2) {
             if(liveGorillaCount == 1)
-                [[[GorillasAppDelegate get] hudLayer] message:[NSString stringWithFormat:@"%@ wins!", [liveGorilla name]] duration:2 isImportant:NO];
+                [[[GorillasAppDelegate get] hudLayer] message:[NSString stringWithFormat:NSLocalizedString(@"messages.wins", @"%@ wins!"),
+                                                               [liveGorilla name]] duration:2 isImportant:NO];
             else
-                [[[GorillasAppDelegate get] hudLayer] message:@"Tie!" duration:2 isImportant:NO];
+                [[[GorillasAppDelegate get] hudLayer] message:NSLocalizedString(@"messages.tie", @"Tie!") duration:2 isImportant:NO];
         }
         
         // Reset the wind.

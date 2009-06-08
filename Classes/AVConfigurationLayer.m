@@ -57,7 +57,7 @@
     // Audio Track.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *audioT    = [MenuItemFont itemFromString:@"Audio Track"];
+    MenuItem *audioT    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.track", @"Audio Track")];
     [audioT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
@@ -69,11 +69,12 @@
     // Sound Effects.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *soundFxT  = [MenuItemFont itemFromString:@"Sound Effects"];
+    MenuItem *soundFxT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.sound", @"Sound Effects")];
     [soundFxT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *soundFxI  = [MenuItemFont itemFromString:[[GorillasConfig get] soundFx]? @"On": @"Off"
+    MenuItem *soundFxI  = [MenuItemFont itemFromString:[[GorillasConfig get] soundFx]?
+                           NSLocalizedString(@"entries.on", @"On"): NSLocalizedString(@"entries.off", @"Off")
                                                 target:self
                                               selector:@selector(soundFx:)];
     
@@ -81,11 +82,12 @@
     // Vibration.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *vibrationT  = [MenuItemFont itemFromString:@"Vibration"];
+    MenuItem *vibrationT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.vibration", @"Vibration")];
     [vibrationT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *vibrationI  = [MenuItemFont itemFromString:[[GorillasConfig get] vibration]? @"On": @"Off"
+    MenuItem *vibrationI  = [MenuItemFont itemFromString:[[GorillasConfig get] vibration]?
+                             NSLocalizedString(@"entries.on", @"On"): NSLocalizedString(@"entries.off", @"Off")
                                                 target:self
                                               selector:@selector(vibration:)];
     
@@ -93,22 +95,24 @@
     // Visual Effects.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *visualFxT  = [MenuItemFont itemFromString:@"Visual Effects"];
+    MenuItem *visualFxT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.visual", @"Visual Effects")];
     [visualFxT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *visualFxI  = [MenuItemFont itemFromString:[[GorillasConfig get] visualFx]? @"On": @"Off"
+    MenuItem *visualFxI  = [MenuItemFont itemFromString:[[GorillasConfig get] visualFx]?
+                            NSLocalizedString(@"entries.on", @"On"): NSLocalizedString(@"entries.off", @"Off")
                                                  target:self
-
                                                selector:@selector(visualFx:)];
+    
     // Weather.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *weatherT  = [MenuItemFont itemFromString:@"Weather"];
+    MenuItem *weatherT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.weather", @"Weather")];
     [weatherT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *weatherI  = [MenuItemFont itemFromString:[[GorillasConfig get] weather]? @"On": @"Off"
+    MenuItem *weatherI  = [MenuItemFont itemFromString:[[GorillasConfig get] weather]?
+                           NSLocalizedString(@"entries.on", @"On"): NSLocalizedString(@"entries.off", @"Off")
                                                 target:self
                                               selector:@selector(weather:)];
     

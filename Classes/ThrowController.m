@@ -23,8 +23,8 @@
                 ++liveHumans;
         
         if([GorillasAppDelegate get].gameLayer.activeGorilla.human && liveHumans > 1) {
-            [[GorillasAppDelegate get].uiLayer message:@"Next player .."];
-            [[GorillasAppDelegate get].uiLayer message:@"Go .." callback:self :@selector(nextTurn)];
+            [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"message.nextplayer", @"Next player ..")];
+            [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"message.nextplayer.go", @"Go ..") callback:self :@selector(nextTurn)];
             return;
         }
         

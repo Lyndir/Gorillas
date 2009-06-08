@@ -51,13 +51,13 @@ NSString* lpad(NSString* string, NSUInteger l) {
 
 NSString* appendOrdinalPrefix(int number, NSString* prefix) {
     
-    NSString *suffix = @"th";
+    NSString *suffix = NSLocalizedString(@"time.day.suffix", @"th");
     if(number % 10 == 1 && number != 11)
-        suffix = @"st";
+        suffix = NSLocalizedString(@"time.day.suffix.one", @"st");
     else if(number % 10 == 2 && number != 12)
-        suffix = @"nd";
+        suffix = NSLocalizedString(@"time.day.suffix.two", @"nd");
     else if(number % 10 == 3 && number != 13)
-        suffix = @"rd";
+        suffix = NSLocalizedString(@"time.day.suffix.three", @"rd");
     
     return [NSString stringWithFormat:@"%@%@", prefix, suffix];
 }

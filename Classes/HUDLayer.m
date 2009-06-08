@@ -42,7 +42,7 @@
     if(!(self = [super initWithColorFrom:0x000000FF to:0x666666FF position:cpvzero]))
         return self;
 
-    [super setButtonString:@"Menu"
+    [super setButtonString:NSLocalizedString(@"entries.menu", @"Menu")
                   callback:self :@selector(menuButton:)];
     messageBar          = [[BarLayer alloc] initWithColorFrom:0x666666FF to:0x000000FF position:cpv(0, height)];
     
@@ -89,7 +89,7 @@
         if([infoString length])
             [infoString appendString:@"  "];
         
-        [infoString appendString:@"Boot Camp"];
+        [infoString appendString:NSLocalizedString(@"config.gametype.bootcamp", @"Boot Camp")];
         [infoLabel setRGB:0xff :0xff :0x99];
     }
     
@@ -98,7 +98,7 @@
         if([infoString length])
             [infoString appendString:@"  "];
         
-        [infoString appendFormat:@"Score:%03d", [[GorillasConfig get] score]];
+        [infoString appendFormat:NSLocalizedString(@"bar.score", @"Score:%03d"), [[GorillasConfig get] score]];
     }
 
     // Put skill on HUD.
@@ -110,7 +110,7 @@
         if(throwSkill)
             skill = [[GorillasConfig get] skill] / 2 + throwSkill;
         
-        [infoString appendFormat:@"Skill:%02d%%", (int) (fminf(0.99f, skill) * 100)];
+        [infoString appendFormat:NSLocalizedString(@"bar.skill", @"Skill:%02d%%"), (int) (fminf(0.99f, skill) * 100)];
     }
     
     // Put name and lives on HUD.

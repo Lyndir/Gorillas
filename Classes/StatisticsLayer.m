@@ -90,7 +90,7 @@
     free(tScores);
     
     // Top score label.
-    Label *topScoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"Top Score: %04d", topScore]
+    Label *topScoreLabel = [[Label alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"entries.score.top", @"Top Score: %04d"), topScore]
                                               dimensions:CGSizeMake(200, [[GorillasConfig get] fontSize])
                                                alignment:UITextAlignmentCenter
                                                 fontName:[[GorillasConfig get] fixedFontName]

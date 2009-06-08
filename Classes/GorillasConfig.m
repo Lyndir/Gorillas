@@ -104,39 +104,39 @@
     defaults = [[NSUserDefaults standardUserDefaults] retain];
 
     NSArray *levelNames = [NSArray arrayWithObjects:
-                           @"Junior",
-                           @"Trainee",
-                           @"Adept",
-                           @"Skilled",
-                           @"Masterful",
-                           @"Sniper",
-                           @"Deadly",
-                           @"Impossible",
+                           NSLocalizedString(@"config.level.one",   @"Junior"),
+                           NSLocalizedString(@"config.level.two",   @"Trainee"),
+                           NSLocalizedString(@"config.level.three", @"Adept"),
+                           NSLocalizedString(@"config.level.four",  @"Skilled"),
+                           NSLocalizedString(@"config.level.five",  @"Masterful"),
+                           NSLocalizedString(@"config.level.six",   @"Sniper"),
+                           NSLocalizedString(@"config.level.seven", @"Deadly"),
+                           NSLocalizedString(@"config.level.eight", @"Impossible"),
                            nil];
     
     gameConfigurations  = [[NSArray alloc] initWithObjects:
-                           [GameConfiguration configurationWithName:@"Boot Camp"
-                                                        description:@"Practice your aim with some helpful hints."
+                           [GameConfiguration configurationWithName:NSLocalizedString(@"config.gametype.bootcamp", @"Boot Camp")
+                                                        description:NSLocalizedString(@"config.gametype.bootcamp.desc", @"Practice your aim with some helpful hints.")
                                                                mode:GorillasModeBootCamp
                                                             sHumans:1 mHumans:0
                                                                sAis:1    mAis:0],
-                           [GameConfiguration configurationWithName:@"Classic"
-                                                        description:@"Quick and simple one-on-one battle."
+                           [GameConfiguration configurationWithName:NSLocalizedString(@"config.gametype.classic", @"Classic")
+                                                        description:NSLocalizedString(@"config.gametype.classic.desc", @"Quick and simple one-on-one battle.")
                                                                mode:GorillasModeClassic
                                                             sHumans:1 mHumans:2
                                                                sAis:1    mAis:0],
-                           [GameConfiguration configurationWithName:@"Dynamic"
-                                                        description:@"One-on-one battle with adapting skill and difficulty."
+                           [GameConfiguration configurationWithName:NSLocalizedString(@"config.gametype.dynamic", @"Dynamic")
+                                                        description:NSLocalizedString(@"config.gametype.dynamic.desc", @"One-on-one battle with adapting skill and difficulty.")
                                                                mode:GorillasModeDynamic
                                                             sHumans:1 mHumans:0
                                                                sAis:1    mAis:0],
-                           [GameConfiguration configurationWithName:@"Team Battle"
-                                                        description:@"Face the AIs with a little help from your friends."
+                           [GameConfiguration configurationWithName:NSLocalizedString(@"config.gametype.team", @"Team Battle")
+                                                        description:NSLocalizedString(@"config.gametype.team.desc", @"Face the AIs with a little help from your friends.")
                                                                mode:GorillasModeTeam
                                                             sHumans:0 mHumans:2
                                                                sAis:0    mAis:2],
-                           [GameConfiguration configurationWithName:@"Last Man Standing"
-                                                        description:@"Gorillas have lives; be the last left standing!"
+                           [GameConfiguration configurationWithName:NSLocalizedString(@"config.gametype.lms", @"Last Man Standing")
+                                                        description:NSLocalizedString(@"config.gametype.lms.desc", @"Gorillas have lives; be the last left standing!")
                                                                mode:GorillasModeLMS
                                                             sHumans:1 mHumans:2
                                                                sAis:3    mAis:3],
@@ -151,15 +151,15 @@
                            nil];
     
     offMessages         = [[NSArray alloc] initWithObjects:
-                           @"Way out.",
-                           @"Just a little too far.",
+                           NSLocalizedString(@"config.message.off.1", @"Way out."),
+                           NSLocalizedString(@"config.message.off.2", @"Just a little too far."),
                            nil];
     
     hitMessages         = [[NSArray alloc] initWithObjects:
-                           @"%2$@ ate %1$@'s banana.",
-                           @"%2$@ didn't dodge %1$@'s banana.",
-                           @"%1$@ buried %2$@.",
-                           @"%1$@ incinerated %2$@.",
+                           NSLocalizedString(@"config.message.hit.1", @"%2$@ ate %1$@'s banana."),
+                           NSLocalizedString(@"config.message.hit.2", @"%2$@ didn't dodge %1$@'s banana."),
+                           NSLocalizedString(@"config.message.hit.3", @"%1$@ buried %2$@."),
+                           NSLocalizedString(@"config.message.hit.4", @"%1$@ incinerated %2$@."),
                            nil];
     
     NSDictionary *themes = [CityTheme getThemes];
@@ -217,13 +217,13 @@
                                  @"",
                                  nil],                                                      dTracks,
                                 [NSArray arrayWithObjects:
-                                 @"Sky High",
-                                 @"Veritech",
-                                 @"Fighting Gorillas",
-                                 @"Pride of the Pacific",
-                                 @"Fork Bomb",
-                                 @"Shuffle",
-                                 @"Off",
+                                 NSLocalizedString(@"config.song.blockdropper", @"Sky High"),
+                                 NSLocalizedString(@"config.song.veritech", @"Veritech"),
+                                 NSLocalizedString(@"config.song.fighting_gorillas", @"Fighting Gorillas"),
+                                 NSLocalizedString(@"config.song.prideofthepacific", @"Pride of the Pacific"),
+                                 NSLocalizedString(@"config.song.forkbomb", @"Fork Bomb"),
+                                 NSLocalizedString(@"config.song.random", @"Shuffle"),
+                                 NSLocalizedString(@"config.song.off", @"Off"),
                                  nil],                                                      dTrackNames,
                                 @"random",                                                  dCurrentTrack,
                                 
@@ -710,19 +710,19 @@
     
     switch ([self mode]) {
         case GorillasModeBootCamp:
-            return @"Boot Camp";
+            return NSLocalizedString(@"config.gametype.bootcamp", @"Boot Camp");
             
         case GorillasModeClassic:
-            return @"Classic Game";
+            return NSLocalizedString(@"config.gametype.classic", @"Classic Game");
             
         case GorillasModeDynamic:
-            return @"Dynamic Game";
+            return NSLocalizedString(@"config.gametype.dynamic", @"Dynamic Game");
             
         case GorillasModeTeam:
-            return @"Teamed Game";
+            return NSLocalizedString(@"config.gametype.team", @"Teamed Game");
             
         case GorillasModeLMS:
-            return @"Last Man Standing";
+            return NSLocalizedString(@"config.gametype.lms", @"Last Man Standing");
             
         default:
             @throw [NSException exceptionWithName:NSInternalInconsistencyException

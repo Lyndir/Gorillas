@@ -46,13 +46,13 @@
     // Section menus.
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *game      = [MenuItemFont itemFromString:@"Gameplay"
+    MenuItem *game      = [MenuItemFont itemFromString:NSLocalizedString(@"entries.gameplay", @"Gameplay")
                                                 target:self
                                               selector:@selector(game:)];
-    MenuItem *av        = [MenuItemFont itemFromString:@"Audio / Video"
+    MenuItem *av        = [MenuItemFont itemFromString:NSLocalizedString(@"entries.av", @"Audio / Video")
                                                 target:self
                                               selector:@selector(av:)];
-    MenuItem *models    = [MenuItemFont itemFromString:@"Models"
+    MenuItem *models    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.models", @"Models")
                                                 target:self
                                               selector:@selector(models:)];
     

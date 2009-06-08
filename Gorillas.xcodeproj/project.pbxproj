@@ -359,11 +359,6 @@
 		DA0DD7750F95369B00E5607E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD7720F95369B00E5607E /* OpenGLES.framework */; };
 		DA0DD7760F95369B00E5607E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD7720F95369B00E5607E /* OpenGLES.framework */; };
 		DA0DD7770F95369B00E5607E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD7720F95369B00E5607E /* OpenGLES.framework */; };
-		DA0DD7820F9536C000E5607E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD7810F9536C000E5607E /* AVFoundation.framework */; };
-		DA0DD7830F9536C000E5607E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD7810F9536C000E5607E /* AVFoundation.framework */; };
-		DA0DD7840F9536C000E5607E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD7810F9536C000E5607E /* AVFoundation.framework */; };
-		DA0DD7850F9536C000E5607E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD7810F9536C000E5607E /* AVFoundation.framework */; };
-		DA0DD7860F9536C000E5607E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD7810F9536C000E5607E /* AVFoundation.framework */; };
 		DA0DD78E0F9536D800E5607E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD78D0F9536D800E5607E /* AudioToolbox.framework */; };
 		DA0DD78F0F9536D800E5607E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD78D0F9536D800E5607E /* AudioToolbox.framework */; };
 		DA0DD7900F9536D800E5607E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD78D0F9536D800E5607E /* AudioToolbox.framework */; };
@@ -656,6 +651,16 @@
 		DA9A63B90F573A530031988E /* CustomGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9A63B60F573A530031988E /* CustomGameLayer.m */; };
 		DA9A63BA0F573A530031988E /* CustomGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9A63B60F573A530031988E /* CustomGameLayer.m */; };
 		DA9A63BB0F573A530031988E /* CustomGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9A63B60F573A530031988E /* CustomGameLayer.m */; };
+		DAA120930FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA120920FDD26F700AA1E28 /* AVFoundation.framework */; };
+		DAA120940FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA120920FDD26F700AA1E28 /* AVFoundation.framework */; };
+		DAA120950FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA120920FDD26F700AA1E28 /* AVFoundation.framework */; };
+		DAA120960FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA120920FDD26F700AA1E28 /* AVFoundation.framework */; };
+		DAA120970FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA120920FDD26F700AA1E28 /* AVFoundation.framework */; };
+		DAA1210F0FDD41CF00AA1E28 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA1210D0FDD41CF00AA1E28 /* Localizable.strings */; };
+		DAA121100FDD41CF00AA1E28 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA1210D0FDD41CF00AA1E28 /* Localizable.strings */; };
+		DAA121110FDD41CF00AA1E28 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA1210D0FDD41CF00AA1E28 /* Localizable.strings */; };
+		DAA121120FDD41CF00AA1E28 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA1210D0FDD41CF00AA1E28 /* Localizable.strings */; };
+		DAA121130FDD41CF00AA1E28 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA1210D0FDD41CF00AA1E28 /* Localizable.strings */; };
 		DAAC33240EC5E26800816338 /* veritech.wav in Resources */ = {isa = PBXBuildFile; fileRef = DAAC33230EC5E26800816338 /* veritech.wav */; };
 		DAB308CE0F48B17600694C77 /* SwipeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB308CD0F48B17600694C77 /* SwipeLayer.m */; };
 		DAB308CF0F48B17600694C77 /* SwipeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB308CD0F48B17600694C77 /* SwipeLayer.m */; };
@@ -955,7 +960,6 @@
 		DA0DD6620F95368600E5607E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DA0DD6630F95368600E5607E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		DA0DD7720F95369B00E5607E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		DA0DD7810F9536C000E5607E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		DA0DD78D0F9536D800E5607E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DA0DD7A00F9536E600E5607E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DA126C8D0EDDF19100EADDE2 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
@@ -1048,6 +1052,9 @@
 		DA8B77990F46120600DD88BF /* GorillasBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorillasBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9A63B50F573A530031988E /* CustomGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGameLayer.h; sourceTree = "<group>"; };
 		DA9A63B60F573A530031988E /* CustomGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGameLayer.m; sourceTree = "<group>"; };
+		DAA120920FDD26F700AA1E28 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DAA1210E0FDD41CF00AA1E28 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		DAA1211B0FDD43EB00AA1E28 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		DAAC33230EC5E26800816338 /* veritech.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = veritech.wav; sourceTree = "<group>"; };
 		DAB308CC0F48B17600694C77 /* SwipeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeLayer.h; sourceTree = "<group>"; };
 		DAB308CD0F48B17600694C77 /* SwipeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeLayer.m; sourceTree = "<group>"; };
@@ -1099,9 +1106,9 @@
 				DA0DD66B0F95368600E5607E /* Foundation.framework in Frameworks */,
 				DA0DD66C0F95368600E5607E /* CoreGraphics.framework in Frameworks */,
 				DA0DD7750F95369B00E5607E /* OpenGLES.framework in Frameworks */,
-				DA0DD7840F9536C000E5607E /* AVFoundation.framework in Frameworks */,
 				DA0DD7900F9536D800E5607E /* AudioToolbox.framework in Frameworks */,
 				DA0DD7A30F9536E600E5607E /* QuartzCore.framework in Frameworks */,
+				DAA120930FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1113,9 +1120,9 @@
 				DA0DD6680F95368600E5607E /* Foundation.framework in Frameworks */,
 				DA0DD6690F95368600E5607E /* CoreGraphics.framework in Frameworks */,
 				DA0DD7740F95369B00E5607E /* OpenGLES.framework in Frameworks */,
-				DA0DD7830F9536C000E5607E /* AVFoundation.framework in Frameworks */,
 				DA0DD78F0F9536D800E5607E /* AudioToolbox.framework in Frameworks */,
 				DA0DD7A20F9536E600E5607E /* QuartzCore.framework in Frameworks */,
+				DAA120940FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1127,9 +1134,9 @@
 				DA0DD6710F95368600E5607E /* Foundation.framework in Frameworks */,
 				DA0DD6720F95368600E5607E /* CoreGraphics.framework in Frameworks */,
 				DA0DD7770F95369B00E5607E /* OpenGLES.framework in Frameworks */,
-				DA0DD7860F9536C000E5607E /* AVFoundation.framework in Frameworks */,
 				DA0DD7920F9536D800E5607E /* AudioToolbox.framework in Frameworks */,
 				DA0DD7A50F9536E600E5607E /* QuartzCore.framework in Frameworks */,
+				DAA120950FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1141,9 +1148,9 @@
 				DA0DD6650F95368600E5607E /* Foundation.framework in Frameworks */,
 				DA0DD6660F95368600E5607E /* CoreGraphics.framework in Frameworks */,
 				DA0DD7730F95369B00E5607E /* OpenGLES.framework in Frameworks */,
-				DA0DD7820F9536C000E5607E /* AVFoundation.framework in Frameworks */,
 				DA0DD78E0F9536D800E5607E /* AudioToolbox.framework in Frameworks */,
 				DA0DD7A10F9536E600E5607E /* QuartzCore.framework in Frameworks */,
+				DAA120970FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1155,9 +1162,9 @@
 				DA0DD66E0F95368600E5607E /* Foundation.framework in Frameworks */,
 				DA0DD66F0F95368600E5607E /* CoreGraphics.framework in Frameworks */,
 				DA0DD7760F95369B00E5607E /* OpenGLES.framework in Frameworks */,
-				DA0DD7850F9536C000E5607E /* AVFoundation.framework in Frameworks */,
 				DA0DD7910F9536D800E5607E /* AudioToolbox.framework in Frameworks */,
 				DA0DD7A40F9536E600E5607E /* QuartzCore.framework in Frameworks */,
+				DAA120960FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1202,6 +1209,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				DAA1210D0FDD41CF00AA1E28 /* Localizable.strings */,
 				32CA4F630368D1EE00C91783 /* Gorillas_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -1224,9 +1232,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DAA120920FDD26F700AA1E28 /* AVFoundation.framework */,
 				DA0DD7A00F9536E600E5607E /* QuartzCore.framework */,
 				DA0DD78D0F9536D800E5607E /* AudioToolbox.framework */,
-				DA0DD7810F9536C000E5607E /* AVFoundation.framework */,
 				DA0DD7720F95369B00E5607E /* OpenGLES.framework */,
 				DA0DD6610F95368600E5607E /* UIKit.framework */,
 				DA0DD6620F95368600E5607E /* Foundation.framework */,
@@ -1800,6 +1808,14 @@
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Gorillas" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+				nl,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1865,6 +1881,7 @@
 				DA5C1F700F829FFD007B1085 /* bunny-human-UD.png in Resources */,
 				DA5C1F710F829FFD007B1085 /* bunny-human-UU.png in Resources */,
 				DA021DA40F840B12007CED57 /* egg.png in Resources */,
+				DAA121110FDD41CF00AA1E28 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1919,6 +1936,7 @@
 				DA5C1F680F829FFD007B1085 /* bunny-human-UD.png in Resources */,
 				DA5C1F690F829FFD007B1085 /* bunny-human-UU.png in Resources */,
 				DA021DA30F840B12007CED57 /* egg.png in Resources */,
+				DAA121100FDD41CF00AA1E28 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1973,6 +1991,7 @@
 				DA5C1F780F829FFD007B1085 /* bunny-human-UD.png in Resources */,
 				DA5C1F790F829FFD007B1085 /* bunny-human-UU.png in Resources */,
 				DA021DA50F840B12007CED57 /* egg.png in Resources */,
+				DAA1210F0FDD41CF00AA1E28 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2027,6 +2046,7 @@
 				DA5C1F580F829FFD007B1085 /* bunny-human-UD.png in Resources */,
 				DA5C1F590F829FFD007B1085 /* bunny-human-UU.png in Resources */,
 				DA021DA10F840B12007CED57 /* egg.png in Resources */,
+				DAA121120FDD41CF00AA1E28 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2081,6 +2101,7 @@
 				DA5C1F600F829FFD007B1085 /* bunny-human-UD.png in Resources */,
 				DA5C1F610F829FFD007B1085 /* bunny-human-UU.png in Resources */,
 				DA021DA20F840B12007CED57 /* egg.png in Resources */,
+				DAA121130FDD41CF00AA1E28 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2712,6 +2733,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DAA1210D0FDD41CF00AA1E28 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAA1210E0FDD41CF00AA1E28 /* en */,
+				DAA1211B0FDD43EB00AA1E28 /* nl */,
+			);
+			name = Localizable.strings;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {

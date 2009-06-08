@@ -150,7 +150,7 @@
                     
                                       windModifier:20
                                            gravity:100
-                   ], @"Classic",
+                   ], NSLocalizedString(@"theme.classic", @"Classic"),
 
                    [CityTheme themeWithFixedFloors:4
                                        buildingMax:0.5f
@@ -171,7 +171,7 @@
                     
                                       windModifier:30
                                            gravity:60
-                    ], @"Alien Retro",
+                    ], NSLocalizedString(@"theme.aliengreen", @"Alien Retro"),
                    
                    [CityTheme themeWithFixedFloors:6
                                        buildingMax:0.8f
@@ -192,7 +192,7 @@
                     
                                       windModifier:10
                                            gravity:40
-                    ], @"Alien Skies",
+                    ], NSLocalizedString(@"theme.classic.aliendark", @"Alien Skies"),
                   
                   [CityTheme themeWithFixedFloors:7
                                       buildingMax:0.4f
@@ -213,7 +213,7 @@
                    
                                      windModifier:40
                                           gravity:140
-                   ], @"Metropolis",
+                   ], NSLocalizedString(@"theme.classiclarge", @"Metropolis"),
                   
                   [CityTheme themeWithFixedFloors:3
                                       buildingMax:0.6f
@@ -234,7 +234,7 @@
                    
                                      windModifier:15
                                           gravity:80
-                   ], @"Summer",
+                   ], NSLocalizedString(@"theme.warm", @"Summer"),
                    
                    nil];
     }
@@ -254,7 +254,7 @@
 
 +(NSString *) defaultThemeName {
     
-    return @"Classic";
+    return NSLocalizedString(@"theme.classic", @"Classic");
 }
 
 

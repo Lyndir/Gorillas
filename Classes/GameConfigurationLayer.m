@@ -57,7 +57,7 @@
     // City Theme.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *themeT    = [MenuItemFont itemFromString:@"City Theme"];
+    MenuItem *themeT    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.theme", @"City Theme")];
     [themeT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
@@ -70,7 +70,7 @@
     // Gravity.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *gravityT  = [MenuItemFont itemFromString:@"Gravity"];
+    MenuItem *gravityT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.gravity", @"Gravity")];
     [gravityT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
@@ -82,7 +82,7 @@
     // Difficulity Level.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *levelT    = [MenuItemFont itemFromString:@"Level"];
+    MenuItem *levelT    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.level", @"Level")];
     [levelT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
@@ -94,11 +94,12 @@
     // Killshot Replays.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *replayT  = [MenuItemFont itemFromString:@"Replays"];
+    MenuItem *replayT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.replays", @"Replays")];
     [replayT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *replayI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%@", [[GorillasConfig get] replay]? @"On": @"Off"]
+    MenuItem *replayI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%@", [[GorillasConfig get] replay]?
+                                                       NSLocalizedString(@"entries.on", @"On"): NSLocalizedString(@"entries.off", @"Off")]
                                                target:self
                                              selector:@selector(replay:)];
     
@@ -106,11 +107,12 @@
     // Follow Throw.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *followT  = [MenuItemFont itemFromString:@"Follow Throw"];
+    MenuItem *followT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.follow", @"Follow Throw")];
     [followT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *followI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%@", [[GorillasConfig get] followThrow]? @"On": @"Off"]
+    MenuItem *followI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%@", [[GorillasConfig get] followThrow]?
+                                                       NSLocalizedString(@"entries.on", @"On"): NSLocalizedString(@"entries.off", @"Off")]
                                                target:self
                                              selector:@selector(followThrow:)];
     

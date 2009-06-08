@@ -46,12 +46,10 @@
     // Information menus.
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *guide = [MenuItemFont itemFromString:@"Game Guide"
-                                            target:self
-                                          selector:@selector(guide:)];
-    MenuItem *stats = [MenuItemFont itemFromString:@"Statistics"
-                                            target:self
-                                          selector:@selector(stats:)];
+    MenuItem *guide = [MenuItemFont itemFromString:NSLocalizedString(@"entries.guide", @"Game Guide")
+                                            target:self selector:@selector(guide:)];
+    MenuItem *stats = [MenuItemFont itemFromString:NSLocalizedString(@"entries.stats", @"Statistics")
+                                            target:self selector:@selector(stats:)];
     
     menu = [[Menu menuWithItems:ver, guide, stats, nil] retain];
     [menu alignItemsVertically];

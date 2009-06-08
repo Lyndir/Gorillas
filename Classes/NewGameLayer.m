@@ -48,7 +48,7 @@
     // Game Configuration.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *styleT    = [MenuItemFont itemFromString:@"Choose a game style:"];
+    MenuItem *styleT    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.style", @"Choose a game style:")];
     [styleT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
@@ -64,19 +64,19 @@
     // Type (Single / Multi).
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *singlePlayerI    = [MenuItemFont itemFromString:@"Single Player"
+    MenuItem *singlePlayerI    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.player.single", @"Single Player")
                                                     target:self
                                                   selector:@selector(startSingle:)];
     [singlePlayerI setIsEnabled:[[GorillasConfig get] gameConfiguration].sHumans + [[GorillasConfig get] gameConfiguration].sAis > 0];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *multiPlayerI    = [MenuItemFont itemFromString:@"Multi Player"
+    MenuItem *multiPlayerI    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.player.multi", @"Multi Player")
                                                        target:self
                                                      selector:@selector(startMulti:)];
     [multiPlayerI setIsEnabled:[[GorillasConfig get] gameConfiguration].mHumans + [[GorillasConfig get] gameConfiguration].mAis > 0];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *customI    = [MenuItemFont itemFromString:@"Custom Game..."
+    MenuItem *customI    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.custom", @"Custom Game...")
                                                       target:self
                                                     selector:@selector(custom:)];
     

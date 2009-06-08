@@ -37,8 +37,10 @@
     if(!(self = [super init]))
         return self;
     
-    continueGame    = [[MenuItemFont itemFromString:@"Continue"     target:self selector:@selector(continueGame:)] retain];
-    stopGame        = [[MenuItemFont itemFromString:@"Main Menu"    target:self selector:@selector(stopGame:)] retain];
+    continueGame    = [[MenuItemFont itemFromString:NSLocalizedString(@"entries.continue", @"Continue")
+                                             target:self selector:@selector(continueGame:)] retain];
+    stopGame        = [[MenuItemFont itemFromString:NSLocalizedString(@"entries.stop", @"Main Menu")
+                                             target:self selector:@selector(stopGame:)] retain];
     
     menu            = [[Menu menuWithItems:
                         continueGame, [MenuItemSpacer small],

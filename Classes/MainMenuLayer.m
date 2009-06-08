@@ -58,15 +58,15 @@
         menu = nil;
     }
 
-    MenuItemFont *info              = [MenuItemFont itemFromString:@"Information"
+    MenuItemFont *info              = [MenuItemFont itemFromString:NSLocalizedString(@"entries.information", @"Information")
                                                             target:self selector:@selector(information:)];
-    MenuItemFont *config            = [MenuItemFont itemFromString:@"Configuration"
+    MenuItemFont *config            = [MenuItemFont itemFromString:NSLocalizedString(@"entries.configuration", @"Configuration")
                                                             target:self selector:@selector(options:)];
     
     if([[[GorillasAppDelegate get] gameLayer] checkGameStillOn]) {
-        MenuItemFont *continueGame  = [MenuItemFont itemFromString:@"Continue Game"
+        MenuItemFont *continueGame  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.continue.game", @"Continue Game")
                                                             target:self selector:@selector(continueGame:)];
-        MenuItemFont *stopGame      = [MenuItemFont itemFromString:@"End Game"
+        MenuItemFont *stopGame      = [MenuItemFont itemFromString:NSLocalizedString(@"entries.end", @"End Game")
                                                             target:self selector:@selector(stopGame:)];
         
         menu = [[Menu menuWithItems:
@@ -75,7 +75,7 @@
                  nil] retain];
     }
     else {
-        MenuItemFont *newGame       = [MenuItemFont itemFromString:@"New Game"
+        MenuItemFont *newGame       = [MenuItemFont itemFromString:NSLocalizedString(@"entries.new", @"New Game")
                                                             target:self selector:@selector(newGame:)];
         
         menu = [[Menu menuWithItems:
