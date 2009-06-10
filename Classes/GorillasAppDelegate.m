@@ -279,6 +279,15 @@
 }
 
 
+-(void) showFullGame {
+    
+    if(!fullLayer)
+        fullLayer = [[FullGameLayer alloc] init];
+    
+    [self pushLayer:fullLayer];
+}
+
+
 -(void) applicationWillResignActive:(UIApplication *)application {
     
     [[Director sharedDirector] pause];
@@ -364,6 +373,11 @@
         [statsLayer release];
         statsLayer = nil;
     }
+    if(fullLayer && ![fullLayer parent]) {
+        [fullLayer stopAllActions];
+        [fullLayer release];
+        fullLayer = nil;
+    }
     
     [[GorillasAudioController get] playTrack:nil];
 }
@@ -412,6 +426,9 @@
 
     [statsLayer release];
     statsLayer = nil;
+    
+    [fullLayer release];
+    fullLayer = nil;
     
     [hudLayer release];
     hudLayer = nil;

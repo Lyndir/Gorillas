@@ -133,6 +133,11 @@
 
 -(void) startGame {
 
+    if(!mode)
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"Tried to start a game without configuring it first."
+                                     userInfo:nil];
+    
     if(running)
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:@"Tried to start a game while one's still running."

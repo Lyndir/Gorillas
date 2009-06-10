@@ -68,10 +68,16 @@
         TransitionScene *transitionScene = [[ZoomFlipYTransition alloc] initWithDuration:[[GorillasConfig get] transitionDuration]
                                                                                    scene:gameScene
                                                                              orientation:kOrientationDownOver];
+        
+#ifdef LITE
+        [[GorillasAppDelegate get].gameLayer configureGameWithMode:GorillasModeClassic humans:1 ais:1];
+        [[GorillasAppDelegate get].gameLayer startGame];
+#else
         [gameScene runAction:[Sequence actions:
                               [DelayTime actionWithDuration:0.5f],
                               [CallFunc actionWithTarget:[GorillasAppDelegate get] selector:@selector(showMainMenu)],
                               nil]];
+#endif
         [gameScene release];
         
         // Start the scene and bring up the menu.

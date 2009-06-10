@@ -1,0 +1,113 @@
+// Bar
+"bar.score"                             = "Score:%03d";
+"bar.skill"                             = "Skill:%02d%%";
+
+// Game Logic
+"config.gametype.bootcamp"              = "Training";
+"config.gametype.bootcamp.desc"         = "Leer mikken en oefen het spel met enkele hints.";
+"config.gametype.classic"               = "Klassiek Spel";
+"config.gametype.classic.desc"          = "Snel en eenvoudig spel.";
+"config.gametype.dynamic"               = "Dynamisch Spel";
+"config.gametype.dynamic.desc"          = "Eén tegen één met aanpassende moeilijkheid.";
+"config.gametype.lms"                   = "Overleving";
+"config.gametype.lms.desc"              = "Gorillas hebben meerdere levens; blijf de laatste levend!";
+"config.gametype.team"                  = "Team Gevecht";
+"config.gametype.team.desc"             = "Schakel de AI uit met je vrienden.";
+"config.level.one"                      = "Junior";
+"config.level.two"                      = "Kadet";
+"config.level.three"                    = "Strijdklaar";
+"config.level.four"                     = "Kundig";
+"config.level.five"                     = "Meesterlijk";
+"config.level.six"                      = "Scherpshutter";
+"config.level.seven"                    = "Dodelijk";
+"config.level.eight"                    = "Onmogelijk";
+"config.message.off.1"                  = "Veel te ver.";
+"config.message.off.2"                  = "Ietsje te hard.";
+"config.message.hit.1"                  = "%2$@ at %1$@ zijn banana.";
+"config.message.hit.2"                  = "%2$@ zag %1$@'s banana niet komen.";
+"config.message.hit.3"                  = "%1$@ begraafde %2$@.";
+"config.message.hit.4"                  = "%1$@ vaagde %2$@ weg.";
+"config.song.blockdropper"              = "Torenhoog";
+"config.song.fighting_gorillas"         = "Vechtende Gorillas";
+"config.song.forkbomb"                  = "Vork Bom";
+"config.song.prideofthepacific"         = "Trots van de Oceaan";
+"config.song.veritech"                  = "Veritech";
+"config.song.random"                    = "Mixen";
+"config.song.off"                       = "Uit";
+
+// Menu Entries
+"entries.ai.count"                      = "%d AI%@";
+"entries.av"                            = "Audio / Video";
+"entries.choose.custom"                 = "Aangepast...";
+"entries.choose.follow"                 = "Volg Worpen";
+"entries.choose.fx.sound"               = "Geluidseffecten";
+"entries.choose.fx.vibration"           = "Vibratie";
+"entries.choose.fx.visual"              = "Visuele effecten";
+"entries.choose.fx.weather"             = "Weerseffecten";
+"entries.choose.gravity"                = "Zwaartekracht";
+"entries.choose.level"                  = "Level";
+"entries.choose.mode"                   = "Spel Modus";
+"entries.choose.replays"                = "Herspelen";
+"entries.choose.style"                  = "Kies een stijl:";
+"entries.choose.theme"                  = "Stadsthema";
+"entries.choose.track"                  = "Muziek";
+"entries.configuration"                 = "Configuratie";
+"entries.continue"                      = "Volgend Spel";
+"entries.continue.game"                 = "Voort Doen";
+"entries.end"                           = "Stop Spel";
+"entries.fullgame"                      = "Volledig Spel";
+"entries.gameplay"                      = "Spel";
+"entries.guide"                         = "Spel Gids";
+"entries.information"                   = "Informatie";
+"entries.menu"                          = "Menu";
+"entries.models"                        = "Modellen";
+"entries.new"                           = "Nieuw Spel";
+"entries.off"                           = "Uit";
+"entries.on"                            = "Aan";
+"entries.player.count"                  = "%d Speler%@";
+"entries.player.multi"                  = "Meerdere Spelers";
+"entries.player.single"                 = "Eén Speler";
+"entries.score.top"                     = "Top Score: %04d";
+"entries.select.ais"                    = "AIs";
+"entries.select.humans"                 = "Mensen";
+"entries.start"                         = "Start!";
+"entries.stats"                         = "Statistieken";
+"entries.stop"                          = "Hoofdmenu";
+
+// Game Messages
+"message.killreplay"                    = "Overwinningsschot";
+"message.nextplayer"                    = "Volgende Speler ..";
+"message.nextplayer.go"                 = "Begin ..";
+"message.skip"                          = "Overslaan";
+"messages.level.up"                     = "Level Omhoog!";
+"messages.level.down"                   = "Level Omlaag";
+"messages.oneshot"                      = "Direct Raak!";
+"messages.paused"                       = "Gepauseerd";
+"messages.unpaused"                     = "Spel Hervat";
+"messages.plural.suffix"                = "s";
+"messages.tie"                          = "Gelijkstand!";
+"messages.wins"                         = "%@ wint!";
+
+// Model Names
+"model.bunny"                           = "Paashaas";
+"model.gorilla"                         = "Gorilla";
+
+// Player Names
+"names.chip"                            = "Chip";
+"names.chip.n"                          = "Chip %d";
+"names.player"                          = "Speler";
+"names.player.n"                        = "Speler %d";
+
+// Theme Names
+"theme.aliengreen"                      = "Buitenaards Retro";
+"theme.classic"                         = "Klassiek";
+"theme.classic.aliendark"               = "Verre Ruimte";
+"theme.classiclarge"                    = "Metropolis";
+"theme.warm"                            = "Zomers";
+
+// Time Localization
+"time.day.suffix"                       = "de";
+"time.day.suffix.one"                   = "ste";
+"time.day.suffix.two"                   = "de";
+"time.day.suffix.three"                 = "de";
+

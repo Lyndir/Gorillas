@@ -78,8 +78,6 @@
 -(void) onEnter {
     
     [super onEnter];
-    
-    [self startPanning];
 }
 
 

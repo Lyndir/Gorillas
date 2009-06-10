@@ -26,6 +26,7 @@
 
 #import "InformationLayer.h"
 #import "GorillasAppDelegate.h"
+#import "MenuItemSpacer.h"
 
 
 @implementation InformationLayer
@@ -50,8 +51,10 @@
                                             target:self selector:@selector(guide:)];
     MenuItem *stats = [MenuItemFont itemFromString:NSLocalizedString(@"entries.stats", @"Statistics")
                                             target:self selector:@selector(stats:)];
+    MenuItem *full  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.fullgame", @"Full Game")
+                                            target:self selector:@selector(full:)];
     
-    menu = [[Menu menuWithItems:ver, guide, stats, nil] retain];
+    menu = [[Menu menuWithItems:ver, guide, stats, [MenuItemSpacer small], full, nil] retain];
     [menu alignItemsVertically];
     [self addChild:menu];
 
@@ -84,6 +87,13 @@
     
     [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showStatistics];
+}
+
+
+-(void) full: (id) sender {
+    
+    [[GorillasAudioController get] clickEffect];
+    [[GorillasAppDelegate get] showFullGame];
 }
 
 

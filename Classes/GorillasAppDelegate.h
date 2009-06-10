@@ -37,6 +37,7 @@
 #import "InformationLayer.h"
 #import "GuideLayer.h"
 #import "StatisticsLayer.h"
+#import "FullGameLayer.h"
 #import "HUDLayer.h"
 #import "UILayer.h"
 
@@ -54,8 +55,9 @@
     ConfigurationSectionLayer   *configLayer;
     GameConfigurationLayer      *gameConfigLayer;
     AVConfigurationLayer        *avConfigLayer;
-    ModelsConfigurationLayer                  *modelsConfigLayer;
+    ModelsConfigurationLayer    *modelsConfigLayer;
     InformationLayer            *infoLayer;
+    FullGameLayer               *fullLayer;
     GuideLayer                  *guideLayer;
     StatisticsLayer             *statsLayer;
     HUDLayer                    *hudLayer;
@@ -85,6 +87,7 @@
 -(void) showInformation;
 -(void) showGuide;
 -(void) showStatistics;
+-(void) showFullGame;
 -(void) revealHud;
 -(void) hideHud;
 

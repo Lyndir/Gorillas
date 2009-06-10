@@ -1,0 +1,8 @@
+De volledige versie van Gorillas biedt de volgende set fantastische features:
+
+    - Vecht tegen vrienden en AIs.
+    - Training, Dynamisch, Team Spel en
+      Overlevingsmodus!
+    - Verschillende werelden met aparte omgevingen.
+    - Kies een feestelijk getint spelersmodel.
+    - Volledig configureerbaar.

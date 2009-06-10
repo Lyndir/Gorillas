@@ -62,6 +62,9 @@
                                                             target:self selector:@selector(information:)];
     MenuItemFont *config            = [MenuItemFont itemFromString:NSLocalizedString(@"entries.configuration", @"Configuration")
                                                             target:self selector:@selector(options:)];
+#ifdef LITE
+    [config setIsEnabled:NO];
+#endif
     
     if([[[GorillasAppDelegate get] gameLayer] checkGameStillOn]) {
         MenuItemFont *continueGame  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.continue.game", @"Continue Game")
@@ -92,7 +95,12 @@
 -(void) newGame: (id)sender {
     
     [[GorillasAudioController get] clickEffect];
+#ifdef LITE
+    [[GorillasAppDelegate get].gameLayer configureGameWithMode:GorillasModeClassic humans:1 ais:1];
+    [[GorillasAppDelegate get].gameLayer startGame];
+#else
     [[GorillasAppDelegate get] showNewGame];
+#endif    
 }
 
 
