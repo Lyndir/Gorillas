@@ -168,11 +168,16 @@
     
     [defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
                                 [CityTheme defaultThemeName],                               dCityTheme,
-                                [NSNumber numberWithInteger:    34],                        dFontSize,
-                                [NSNumber numberWithInteger:    48],                        dLargeFontSize,
-                                [NSNumber numberWithInteger:    18],                        dSmallFontSize,
-                                @"Marker Felt",                                             dFontName,
-                                @"American Typewriter",                                     dFixedFontName,
+                                [NSNumber numberWithInteger:
+                                 [NSLocalizedString(@"font.size.normal", @"34") intValue]], dFontSize,
+                                [NSNumber numberWithInteger:
+                                 [NSLocalizedString(@"font.size.large", @"48") intValue]],  dLargeFontSize,
+                                [NSNumber numberWithInteger:
+                                 [NSLocalizedString(@"font.size.small", @"18") intValue]],  dSmallFontSize,
+                                NSLocalizedString(@"font.family.default",
+                                                  @"Marker Felt"),                          dFontName,
+                                NSLocalizedString(@"font.family.fixed",
+                                                  @"American Typewriter"),                  dFixedFontName,
      
                                 [NSNumber numberWithInteger:    [theme fixedFloors]],       dFixedFloors,
                                 [NSNumber numberWithFloat:      [theme buildingMax]],       dBuildingMax,

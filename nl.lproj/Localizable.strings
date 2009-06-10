@@ -1,3 +1,10 @@
+// Fonts
+"font.size.small"                       = "18";
+"font.size.normal"                      = "34";
+"font.size.large"                       = "48";
+"font.family.default"                   = "Marker Felt";
+"font.family.fixed"                     = "American Typewriter";
+
 // Bar
 "bar.score"                             = "Score:%03d";
 "bar.skill"                             = "Skill:%02d%%";
