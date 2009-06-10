@@ -67,7 +67,7 @@
 #endif
     
     if([[[GorillasAppDelegate get] gameLayer] checkGameStillOn]) {
-        MenuItemFont *continueGame  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.continue.game", @"Continue Game")
+        MenuItemFont *continueGame  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.continue.unpause", @"Continue Game")
                                                             target:self selector:@selector(continueGame:)];
         MenuItemFont *stopGame      = [MenuItemFont itemFromString:NSLocalizedString(@"entries.end", @"End Game")
                                                             target:self selector:@selector(stopGame:)];

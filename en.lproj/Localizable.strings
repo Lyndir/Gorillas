@@ -1,4 +1,4 @@
-// Bar
+// Bottom Score Bar
 "bar.score"                             = "Score:%03d";
 "bar.skill"                             = "Skill:%02d%%";
 
@@ -52,8 +52,8 @@
 "entries.choose.theme"                  = "City Theme";
 "entries.choose.track"                  = "Audio Track";
 "entries.configuration"                 = "Configuration";
-"entries.continue"                      = "Continue";
-"entries.continue.game"                 = "Continue Game";
+"entries.continue.nextmatch"            = "Continue";
+"entries.continue.unpause"              = "Continue Game";
 "entries.end"                           = "End Game";
 "entries.fullgame"                      = "Full Game";
 "entries.gameplay"                      = "Gameplay";
