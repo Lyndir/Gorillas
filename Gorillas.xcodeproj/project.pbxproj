@@ -818,6 +818,9 @@
 		DA1816250F0E227C0064F470 /* ConfigurationSectionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationSectionLayer.m; sourceTree = "<group>"; };
 		DA1816450F0E24D80064F470 /* AVConfigurationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVConfigurationLayer.h; sourceTree = "<group>"; };
 		DA1816460F0E24D80064F470 /* AVConfigurationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVConfigurationLayer.m; sourceTree = "<group>"; };
+		DA1DD1B70FDFAFB6007BEEB0 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text; name = ar; path = ar.lproj/fullGame.txt; sourceTree = "<group>"; };
+		DA1DD1B80FDFAFB6007BEEB0 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text; name = ar; path = ar.lproj/guide.txt; sourceTree = "<group>"; };
+		DA1DD1B90FDFAFB6007BEEB0 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA31251B0F10F74C00F1032D /* HolesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HolesLayer.h; sourceTree = "<group>"; };
 		DA31251C0F10F74C00F1032D /* HolesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HolesLayer.m; sourceTree = "<group>"; };
 		DA34006B0EB516D800B68C06 /* StatisticsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsLayer.h; sourceTree = "<group>"; };
@@ -1636,6 +1639,7 @@
 				German,
 				en,
 				nl,
+				ar,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -2386,6 +2390,7 @@
 			children = (
 				DAF7265B0FDEFF1000CFFB32 /* en */,
 				DAF726680FDEFF2500CFFB32 /* nl */,
+				DA1DD1B70FDFAFB6007BEEB0 /* ar */,
 			);
 			name = fullGame.txt;
 			sourceTree = "<group>";
@@ -2395,6 +2400,7 @@
 			children = (
 				DAF7265D0FDEFF1000CFFB32 /* en */,
 				DAF726690FDEFF2500CFFB32 /* nl */,
+				DA1DD1B80FDFAFB6007BEEB0 /* ar */,
 			);
 			name = guide.txt;
 			sourceTree = "<group>";
@@ -2404,6 +2410,7 @@
 			children = (
 				DAF7266B0FDEFF6F00CFFB32 /* en */,
 				DAF726700FDEFF7B00CFFB32 /* nl */,
+				DA1DD1B90FDFAFB6007BEEB0 /* ar */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
