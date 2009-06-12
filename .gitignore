@@ -1,7 +1,21 @@
-/.DS_Store
-/build
+# Compiled objects.
+/Web/target
+
+# OS-Specific junk.
+.DS_Store
+
+# Eclipse IDE
+/Web/.classpath
+/Web/.project
+/Web/.settings
+/Web/eclipse
+
+# Xcode IDE
 /*.xcodeproj/*
 !/*.xcodeproj/*.pbxproj
-/Web/trac
-/Web/cocos2d-iphone-*-gorillas.tbz2
+/build
+
+# Gorillas Stuff
+/Web*/trac
+/Web*/cocos2d-iphone-*-gorillas.tbz2
 /promocodes
