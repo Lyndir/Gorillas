@@ -104,7 +104,12 @@
         if(throwSkill)
             skill = [GorillasConfig get].skill / 2 + throwSkill;
         
-        [skillCount setString:[NSString stringWithFormat:@"%02d%%", (int) (fminf(0.99f, skill) * 100)]];
+        NSString *prefix = @"", *suffix = @"%";
+        if ([NSLocalizedString(@"config.direction", "ltr") isEqualToString:@"rtl"]) {
+            prefix = @"%";
+            suffix = @"";
+        }
+        [skillCount setString:[NSString stringWithFormat:@"%@%02d%@", prefix, (int) (fminf(0.99f, skill) * 100), suffix]];
         [skillCount setVisible:YES];
         [skillSprite setVisible:YES];
     } else {

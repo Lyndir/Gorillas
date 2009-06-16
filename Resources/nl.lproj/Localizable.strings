@@ -5,11 +5,8 @@
 "font.family.default"                   = "Marker Felt";
 "font.family.fixed"                     = "American Typewriter";
 
-// Bar
-"bar.score"                             = "Score:%03d";
-"bar.skill"                             = "Skill:%02d%%";
-
 // Game Logic
+"config.direction"                      = "ltr";
 "config.gametype.bootcamp"              = "Training";
 "config.gametype.bootcamp.desc"         = "Leer mikken en oefen het spel met enkele hints.";
 "config.gametype.classic"               = "Klassiek Spel";
@@ -66,7 +63,6 @@
 "entries.gameplay"                      = "Spel";
 "entries.guide"                         = "Spel Gids";
 "entries.information"                   = "Informatie";
-"entries.menu"                          = "Menu";
 "entries.models"                        = "Modellen";
 "entries.new"                           = "Nieuw Spel";
 "entries.off"                           = "Uit";
@@ -85,7 +81,6 @@
 "message.killreplay"                    = "Overwinningsschot";
 "message.nextplayer"                    = "Volgende Speler ..";
 "message.nextplayer.go"                 = "Begin ..";
-"message.skip"                          = "Overslaan";
 "messages.level.up"                     = "Level Omhoog!";
 "messages.level.down"                   = "Level Omlaag";
 "messages.oneshot"                      = "Direct Raak!";

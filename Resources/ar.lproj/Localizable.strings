@@ -5,11 +5,8 @@
 "font.family.default"                   = "Marker Felt";
 "font.family.fixed"                     = "American Typewriter";
 
-// Bottom Score Bar
-"bar.score"                             = "Score:%03d";
-"bar.skill"                             = "Skill:%02d%%";
-
 // Game Logic
+"config.direction"                      = "rtl";
 "config.gametype.bootcamp"              = "Boot Camp";
 "config.gametype.bootcamp.desc"         = "Practice your aim with some helpful hints.";
 "config.gametype.classic"               = "Classic Game";
@@ -28,7 +25,7 @@
 "config.level.six"                      = "Sniper";
 "config.level.seven"                    = "Deadly";
 "config.level.eight"                    = "Impossible";
-"config.message.off.1"                  = "Way out.";
+"config.message.off.1"                  = ".بعيدة جدا";
 "config.message.off.2"                  = "Just a little too far.";
 "config.message.hit.1"                  = "%2$@ ate %1$@'s banana.";
 "config.message.hit.2"                  = "%2$@ didn't dodge %1$@'s banana.";
@@ -66,7 +63,6 @@
 "entries.gameplay"                      = "Gameplay";
 "entries.guide"                         = "Game Guide";
 "entries.information"                   = "Information";
-"entries.menu"                          = "Menu";
 "entries.models"                        = "Models";
 "entries.new"                           = "New Game";
 "entries.off"                           = "Off";
@@ -85,7 +81,6 @@
 "message.killreplay"                    = "Kill Shot Replay";
 "message.nextplayer"                    = "Next player ..";
 "message.nextplayer.go"                 = "Go ..";
-"message.skip"                          = "Skip";
 "messages.level.up"                     = "Level Up!";
 "messages.level.down"                   = "Level Down";
 "messages.oneshot"                      = "Oneshot!";
