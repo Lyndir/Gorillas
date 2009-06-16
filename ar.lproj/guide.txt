@@ -1,4 +1,4 @@
-The Goal
+-The Goal
 
     Sling your deadly bananas over the roof tops toward your opponent to blow him out of town.
 
@@ -6,7 +6,7 @@ The Goal
 
 
 ===== NEXT PAGE =====
-Hitting and Missing
+-Hitting and Missing
 
     With some luck, you'll send your banana flying on a collision course with your opponent.
 
@@ -16,7 +16,7 @@ Hitting and Missing
 
 
 ===== NEXT PAGE =====
-Controls
+-Controls
 
     You throw by tapping onto or dragging toward the location you want to aim at with one finger.
 
@@ -26,7 +26,7 @@ Controls
 
 
 ===== NEXT PAGE =====
-Game Modes
++Game Modes
 
     There are several game styles from which you can choose.  Most of them can be played either as single or multi player.
 
@@ -34,7 +34,7 @@ Game Modes
 
 
 ===== NEXT PAGE =====
-Boot Camp
++Boot Camp
 
     To get the hang of the game and train your aiming, try playing a few Boot Camp games.
 
@@ -43,7 +43,7 @@ Boot Camp
 
 
 ===== NEXT PAGE =====
-Classic Game
++Classic Game
 
     The quickest way to play a game of Gorillas is the Classic game.
 
@@ -53,7 +53,7 @@ Classic Game
 
 
 ===== NEXT PAGE =====
-Dynamic Game
++Dynamic Game
 
     For a more sophisticated gameplay, start a Dynamic game.
 
@@ -63,7 +63,7 @@ Dynamic Game
 
 
 ===== NEXT PAGE =====
-Team Game
++Team Game
 
     Team games are excellent for when you're in company of friends.
     
@@ -73,7 +73,7 @@ Team Game
 
 
 ===== NEXT PAGE =====
-Last Man Standing
++Last Man Standing
 
     Finally, there's Last Man Standing.  Here you play a completely different game style where the object is simply to stay alive.
 
@@ -81,7 +81,7 @@ Last Man Standing
 
 
 ===== NEXT PAGE =====
-Configuration
++Configuration
 
     You can change the AI's difficulty level if you're interested in a real challenge.
 
@@ -91,7 +91,7 @@ Configuration
 
 
 ===== NEXT PAGE =====
-Tactical 1
+-Tactical 1
 
     The key to avoiding buildings is to throw more vertical and with more velocity.  This makes aiming quite a bit harder, though!
 
@@ -99,7 +99,7 @@ Tactical 1
 
 
 ===== NEXT PAGE =====
-Tactical 2
+-Tactical 2
 
     Zoom out to get a wider aiming range.  That's especially handy for those long throws.
     
@@ -108,7 +108,7 @@ Tactical 2
 
 
 ===== NEXT PAGE =====
-Statistics
+-Statistics
 
     As your score evolves, your daily and global top scores are remembered.
     
@@ -116,7 +116,7 @@ Statistics
 
 
 ===== NEXT PAGE =====
-Technical
+-Technical
 
     Your aim represents the vector of your throw's initial velocity.
     The current wind velocity will affect your banana's direction every step of the way.
@@ -124,7 +124,7 @@ Technical
 
 
 ===== NEXT PAGE =====
-Thanks
+-Thanks
 
     Gorillas has been designed and written by Maarten Billemont. (http://lhunath.lyndir.com)
     Thanks to Emmett for the excellent retro-sounding music.
@@ -133,7 +133,7 @@ Thanks
 
 
 ===== NEXT PAGE =====
-Open Source
+-Open Source
 
     The Gorillas source code is freely available and licensed to anyone under the terms of the General Public License, version 2 (GPLv2).
 

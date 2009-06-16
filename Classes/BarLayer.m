@@ -33,20 +33,14 @@
 @synthesize dismissed;
 
 
--(id) initWithColorFrom:(long)_fromColor to:(long)_toColor position:(cpVect)_showPosition {
+-(id) initWithColor:(long)aColor position:(cpVect)_showPosition {
     
-    if(!(self = [super init]))
+    if(!(self = [super initWithFile:@"bar.png"]))
         return self;
-    
-    CGSize winSize = [[Director sharedDirector] winSize];
-    
-    fromColor       = _fromColor;
-    toColor         = _toColor;
-    renderFromColor = fromColor;
-    renderToColor   = toColor;
-    width           = winSize.width;
-    height          =[[GorillasConfig get] smallFontSize] + 10;
-    showPosition    = _showPosition;
+        
+    color           = aColor;
+    renderColor     = aColor;
+    showPosition    = cpvadd(_showPosition, cpv(self.contentSize.width / 2, self.contentSize.height / 2));
     dismissed       = YES;
 
     menuButton      = nil;
@@ -56,7 +50,7 @@
 }
 
 
--(void) setButtonString:(NSString *)_string callback:(id)target :(SEL)selector {
+-(void) setButtonImage:(NSString *)aFile callback:(id)target :(SEL)selector {
 
     if(menuMenu) {
         [self removeChild:menuMenu cleanup:NO];
@@ -66,16 +60,14 @@
         menuButton  = nil;
     }
     
-    if(!_string)
+    if(!aFile)
         // No string means no button.
         return;
         
-    menuButton          = [[MenuItemAtlasFont itemFromString:[NSString stringWithFormat:@"%@ ", _string]
-                                         charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '
-                                              target:target selector:selector] retain];
+    menuButton          = [[MenuItemImage itemFromNormalImage:aFile selectedImage:aFile
+                                                       target:target selector:selector] retain];
     menuMenu            = [[Menu menuWithItems:menuButton, nil] retain];
-    menuMenu.position   = cpv(width - [menuButton contentSize].width / 2,
-                              [menuButton contentSize].height / 2);
+    menuMenu.position   = cpv(self.contentSize.width - menuButton.contentSize.width / 2, 16);
 
     
     [menuMenu alignItemsHorizontally];
@@ -108,33 +100,24 @@
 
 -(void) message:(NSString *)msg duration:(ccTime)_duration isImportant:(BOOL)important {
     
-    CGSize winSize = [Director sharedDirector].winSize;
-    msg = [NSString stringWithFormat:@" %@ ", msg];
+    if (messageLabel) {
+        [self removeChild:messageLabel cleanup:YES];
+        [messageLabel release];
+    }
     
-    if (!messageLabel)
-        messageLabel = [[LabelAtlas alloc] initWithString:msg
-                                              charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
-    else
-        [messageLabel setString:msg];
+    CGFloat fontSize = [GorillasConfig get].smallFontSize;
+    messageLabel = [[Label alloc] initWithString:msg dimensions:self.contentSize alignment:UITextAlignmentCenter
+                                        fontName:[GorillasConfig get].fixedFontName fontSize:fontSize];
 
-    // Make sure message fits on screen.
-    [messageLabel setScale:fminf(1, winSize.width / ([msg length] * 13))];
-    
     if(important) {
-        renderFromColor = 0x993333FF;
-        renderToColor   = 0x330000FF;
+        renderColor = 0x993333FF;
         [messageLabel setRGB:0xCC :0x33 :0x33];
     } else {
-        renderFromColor = fromColor;
-        renderToColor   = toColor;
+        renderColor = color;
         [messageLabel setRGB:0xFF :0xFF :0xFF];
     }
     
-    if([messageLabel parent])
-        [self removeChild:messageLabel cleanup:YES];
-    
-    [messageLabel setPosition:cpv((winSize.width - [messageLabel contentSize].width * messageLabel.scale) / 2,
-                                  (height - [messageLabel contentSize].height * messageLabel.scale) / 2)];
+    [messageLabel setPosition:cpv(self.contentSize.width / 2, fontSize / 2 + 2)];
     [self addChild:messageLabel];
     
     if(_duration)
@@ -150,8 +133,7 @@
     [messageLabel stopAllActions];
     [self removeChild:messageLabel cleanup:NO];
     
-    renderFromColor = fromColor;
-    renderToColor   = toColor;
+    renderColor = color;
 }
 
 
@@ -176,15 +158,16 @@
 
 -(cpVect) hidePosition {
     
-    return cpvadd(showPosition, cpv(0, -height));
+    return cpvadd(showPosition, cpv(0, -self.contentSize.height));
 }
 
 
 -(void) draw {
+
+    [super draw];
     
-    cpVect to = cpv(width, height);
-    drawBoxFrom(cpvzero, to, renderFromColor, renderToColor);
-    drawLinesTo(cpv(0, height), &to, 1, 0x999999FF, 1);
+    cpVect to = cpv(self.contentSize.width, self.contentSize.height);
+    drawLinesTo(cpv(0, self.contentSize.height), &to, 1, 0xFFFFFFFF, 1);
 }
 
 -(void) dealloc {

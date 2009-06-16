@@ -17,7 +17,7 @@
 "config.gametype.dynamic"               = "Dynamisch Spel";
 "config.gametype.dynamic.desc"          = "Eén tegen één met aanpassende moeilijkheid.";
 "config.gametype.lms"                   = "Overleving";
-"config.gametype.lms.desc"              = "Gorillas hebben meerdere levens; blijf de laatste levend!";
+"config.gametype.lms.desc"              = "Gorillas hebben drie levens; overleef tot de laatste!";
 "config.gametype.team"                  = "Team Gevecht";
 "config.gametype.team.desc"             = "Schakel de AI uit met je vrienden.";
 "config.level.one"                      = "Junior";
@@ -59,8 +59,8 @@
 "entries.choose.theme"                  = "Stadsthema";
 "entries.choose.track"                  = "Muziek";
 "entries.configuration"                 = "Configuratie";
-"entries.continue"                      = "Volgend Spel";
-"entries.continue.game"                 = "Voort Doen";
+"entries.continue.nextmatch"            = "Volgend Spel";
+"entries.continue.unpause"              = "Voort Doen";
 "entries.end"                           = "Stop Spel";
 "entries.fullgame"                      = "Volledig Spel";
 "entries.gameplay"                      = "Spel";

@@ -83,6 +83,9 @@ static ParticleSystem **flameTypes = nil;
 
 -(void) step:(ccTime)dt {
     
+    for(CocosNode *node = self; node; node = node.parent)
+        dt *= node.timeScale;
+
     if(flameTypes) {
         for (NSUInteger type = 0; type < flameVariantion * 2; ++type)
             [(id)flameTypes[type] step:dt];

@@ -212,7 +212,7 @@
             [gameLayer.buildingsLayer.bananaLayer setClearedGorilla:NO];
             [gameLayer.buildingsLayer.hitGorilla revive];
             [[GorillasAppDelegate get].hudLayer message:NSLocalizedString(@"message.killreplay", @"Kill Shot Replay") isImportant:YES];
-            [[GorillasAppDelegate get].hudLayer setButtonString:NSLocalizedString(@"message.skip", @"Skip") callback:self :@selector(skip:)];
+            [[GorillasAppDelegate get].hudLayer setButtonImage:@"skip.png" callback:self :@selector(skip:)];
             recapr = r;
             recap = elapsed - recapTime;
             r = r0;

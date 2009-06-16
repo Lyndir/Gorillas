@@ -413,6 +413,26 @@
 		DA4E5D0C0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
 		DA4F49F90EF3243C0062E0E8 /* InformationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F49F80EF3243C0062E0E8 /* InformationLayer.m */; };
 		DA4F4A260EF327A30062E0E8 /* GuideLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4F4A250EF327A30062E0E8 /* GuideLayer.m */; };
+		DA4F73F80FE6BF9D00D8BC31 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F73F70FE6BF9D00D8BC31 /* bar.png */; };
+		DA4F73F90FE6BF9D00D8BC31 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F73F70FE6BF9D00D8BC31 /* bar.png */; };
+		DA4F73FA0FE6BF9D00D8BC31 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F73F70FE6BF9D00D8BC31 /* bar.png */; };
+		DA4F73FB0FE6BF9D00D8BC31 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F73F70FE6BF9D00D8BC31 /* bar.png */; };
+		DA4F74550FE6DC9200D8BC31 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74520FE6DC9200D8BC31 /* menu.png */; };
+		DA4F74560FE6DC9200D8BC31 /* score.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74530FE6DC9200D8BC31 /* score.png */; };
+		DA4F74570FE6DC9200D8BC31 /* skill.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74540FE6DC9200D8BC31 /* skill.png */; };
+		DA4F74580FE6DC9200D8BC31 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74520FE6DC9200D8BC31 /* menu.png */; };
+		DA4F74590FE6DC9200D8BC31 /* score.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74530FE6DC9200D8BC31 /* score.png */; };
+		DA4F745A0FE6DC9200D8BC31 /* skill.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74540FE6DC9200D8BC31 /* skill.png */; };
+		DA4F745B0FE6DC9200D8BC31 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74520FE6DC9200D8BC31 /* menu.png */; };
+		DA4F745C0FE6DC9200D8BC31 /* score.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74530FE6DC9200D8BC31 /* score.png */; };
+		DA4F745D0FE6DC9200D8BC31 /* skill.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74540FE6DC9200D8BC31 /* skill.png */; };
+		DA4F745E0FE6DC9200D8BC31 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74520FE6DC9200D8BC31 /* menu.png */; };
+		DA4F745F0FE6DC9200D8BC31 /* score.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74530FE6DC9200D8BC31 /* score.png */; };
+		DA4F74600FE6DC9200D8BC31 /* skill.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74540FE6DC9200D8BC31 /* skill.png */; };
+		DA4F74870FE6E17900D8BC31 /* skip.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74860FE6E17900D8BC31 /* skip.png */; };
+		DA4F74880FE6E17900D8BC31 /* skip.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74860FE6E17900D8BC31 /* skip.png */; };
+		DA4F74890FE6E17900D8BC31 /* skip.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74860FE6E17900D8BC31 /* skip.png */; };
+		DA4F748A0FE6E17900D8BC31 /* skip.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F74860FE6E17900D8BC31 /* skip.png */; };
 		DA5A256D0F16D63900975E5A /* Splash.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5A256C0F16D63900975E5A /* Splash.m */; };
 		DA5C1F220F829FDE007B1085 /* gorilla-ai-DD.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5C1F1A0F829FDE007B1085 /* gorilla-ai-DD.png */; };
 		DA5C1F230F829FDE007B1085 /* gorilla-ai-DU.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5C1F1B0F829FDE007B1085 /* gorilla-ai-DU.png */; };
@@ -839,11 +859,11 @@
 		DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadeLayer.m; sourceTree = "<group>"; };
 		DA34FFA80EB4EEF300B68C06 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
 		DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuLayer.m; sourceTree = "<group>"; };
-		DA379EBC0F0964BA00541EF4 /* GorillasDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorillasDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA379EBC0F0964BA00541EF4 /* Gorillas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gorillas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3B01480F69CE90009B4A85 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = raw/icon.icns; sourceTree = "<group>"; };
 		DA3E5D520F3F938300D83943 /* explosion1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion1.wav; sourceTree = "<group>"; };
 		DA3E5D530F3F938300D83943 /* explosion2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion2.wav; sourceTree = "<group>"; };
-		DA4769F80FDD7334002E74F8 /* GorillasLiteDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorillasLiteDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA4769F80FDD7334002E74F8 /* GorillasLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorillasLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA476A2A0FDD8002002E74F8 /* FullGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullGameLayer.h; sourceTree = "<group>"; };
 		DA476A2B0FDD8002002E74F8 /* FullGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullGameLayer.m; sourceTree = "<group>"; };
 		DA4E5D070F7FE5B9007BE3B9 /* GorillasAudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillasAudioController.h; sourceTree = "<group>"; };
@@ -852,6 +872,11 @@
 		DA4F49F80EF3243C0062E0E8 /* InformationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationLayer.m; sourceTree = "<group>"; };
 		DA4F4A240EF327A30062E0E8 /* GuideLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideLayer.h; sourceTree = "<group>"; };
 		DA4F4A250EF327A30062E0E8 /* GuideLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideLayer.m; sourceTree = "<group>"; };
+		DA4F73F70FE6BF9D00D8BC31 /* bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bar.png; path = png/bar.png; sourceTree = "<group>"; };
+		DA4F74520FE6DC9200D8BC31 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu.png; path = png/menu.png; sourceTree = "<group>"; };
+		DA4F74530FE6DC9200D8BC31 /* score.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = score.png; path = png/score.png; sourceTree = "<group>"; };
+		DA4F74540FE6DC9200D8BC31 /* skill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = skill.png; path = png/skill.png; sourceTree = "<group>"; };
+		DA4F74860FE6E17900D8BC31 /* skip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = skip.png; path = png/skip.png; sourceTree = "<group>"; };
 		DA5A256B0F16D63900975E5A /* Splash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Splash.h; sourceTree = "<group>"; };
 		DA5A256C0F16D63900975E5A /* Splash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Splash.m; sourceTree = "<group>"; };
 		DA5C1F1A0F829FDE007B1085 /* gorilla-ai-DD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gorilla-ai-DD.png"; path = "png/gorilla-ai-DD.png"; sourceTree = "<group>"; };
@@ -900,7 +925,7 @@
 		DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillaLayer.m; sourceTree = "<group>"; };
 		DA859E6E0EC598E10036B7C0 /* BananaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaLayer.h; sourceTree = "<group>"; };
 		DA859E6F0EC598E10036B7C0 /* BananaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BananaLayer.m; sourceTree = "<group>"; };
-		DA8B77990F46120600DD88BF /* GorillasBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorillasBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA8B77990F46120600DD88BF /* Gorillas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gorillas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9A63B50F573A530031988E /* CustomGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGameLayer.h; sourceTree = "<group>"; };
 		DA9A63B60F573A530031988E /* CustomGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGameLayer.m; sourceTree = "<group>"; };
 		DAA120920FDD26F700AA1E28 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1024,10 +1049,10 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA379EBC0F0964BA00541EF4 /* GorillasDev.app */,
+				DA379EBC0F0964BA00541EF4 /* Gorillas.app */,
 				DABD68580F190D4D00EE213D /* Gorillas.app */,
-				DA8B77990F46120600DD88BF /* GorillasBeta.app */,
-				DA4769F80FDD7334002E74F8 /* GorillasLiteDev.app */,
+				DA8B77990F46120600DD88BF /* Gorillas.app */,
+				DA4769F80FDD7334002E74F8 /* GorillasLite.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1430,6 +1455,11 @@
 		DA5F1BD30EE74CE80041691E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DA4F74860FE6E17900D8BC31 /* skip.png */,
+				DA4F74520FE6DC9200D8BC31 /* menu.png */,
+				DA4F74530FE6DC9200D8BC31 /* score.png */,
+				DA4F74540FE6DC9200D8BC31 /* skill.png */,
+				DA4F73F70FE6BF9D00D8BC31 /* bar.png */,
 				DA021DA00F840B12007CED57 /* egg.png */,
 				DA5C1F4A0F829FFD007B1085 /* bunny-ai-DD.png */,
 				DA5C1F4B0F829FFD007B1085 /* bunny-ai-DU.png */,
@@ -1550,9 +1580,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* Gorillas - Lhunath Development */ = {
+		1D6058900D05DD3D006BFB54 /* Gorillas - Signed: Lhunath */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Gorillas - Lhunath Development" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Gorillas - Signed: Lhunath" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -1563,14 +1593,14 @@
 			);
 			dependencies = (
 			);
-			name = "Gorillas - Lhunath Development";
+			name = "Gorillas - Signed: Lhunath";
 			productName = Gorillas;
-			productReference = DA379EBC0F0964BA00541EF4 /* GorillasDev.app */;
+			productReference = DA379EBC0F0964BA00541EF4 /* Gorillas.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DA47694D0FDD7334002E74F8 /* Gorillas Lite - Lhunath Development */ = {
+		DA47694D0FDD7334002E74F8 /* Gorillas Lite - Signed: Lhunath */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA4769F30FDD7334002E74F8 /* Build configuration list for PBXNativeTarget "Gorillas Lite - Lhunath Development" */;
+			buildConfigurationList = DA4769F30FDD7334002E74F8 /* Build configuration list for PBXNativeTarget "Gorillas Lite - Signed: Lhunath" */;
 			buildPhases = (
 				DA47694E0FDD7334002E74F8 /* Resources */,
 				DA47697F0FDD7334002E74F8 /* Sources */,
@@ -1581,14 +1611,14 @@
 			);
 			dependencies = (
 			);
-			name = "Gorillas Lite - Lhunath Development";
+			name = "Gorillas Lite - Signed: Lhunath";
 			productName = Gorillas;
-			productReference = DA4769F80FDD7334002E74F8 /* GorillasLiteDev.app */;
+			productReference = DA4769F80FDD7334002E74F8 /* GorillasLite.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DA8B770A0F46120600DD88BF /* Gorillas - iBetaTest */ = {
+		DA8B770A0F46120600DD88BF /* Gorillas - Signed: iBetaTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA8B77940F46120600DD88BF /* Build configuration list for PBXNativeTarget "Gorillas - iBetaTest" */;
+			buildConfigurationList = DA8B77940F46120600DD88BF /* Build configuration list for PBXNativeTarget "Gorillas - Signed: iBetaTest" */;
 			buildPhases = (
 				DA8B770B0F46120600DD88BF /* Resources */,
 				DA8B772C0F46120600DD88BF /* Sources */,
@@ -1599,14 +1629,14 @@
 			);
 			dependencies = (
 			);
-			name = "Gorillas - iBetaTest";
+			name = "Gorillas - Signed: iBetaTest";
 			productName = Gorillas;
-			productReference = DA8B77990F46120600DD88BF /* GorillasBeta.app */;
+			productReference = DA8B77990F46120600DD88BF /* Gorillas.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DABD67E10F190D4D00EE213D /* Gorillas - App Store */ = {
+		DABD67E10F190D4D00EE213D /* Gorillas - Signed: App Store */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DABD68530F190D4D00EE213D /* Build configuration list for PBXNativeTarget "Gorillas - App Store" */;
+			buildConfigurationList = DABD68530F190D4D00EE213D /* Build configuration list for PBXNativeTarget "Gorillas - Signed: App Store" */;
 			buildPhases = (
 				DABD67E20F190D4D00EE213D /* Resources */,
 				DABD67FF0F190D4D00EE213D /* Sources */,
@@ -1616,7 +1646,7 @@
 			);
 			dependencies = (
 			);
-			name = "Gorillas - App Store";
+			name = "Gorillas - Signed: App Store";
 			productName = Gorillas;
 			productReference = DABD68580F190D4D00EE213D /* Gorillas.app */;
 			productType = "com.apple.product-type.application";
@@ -1645,10 +1675,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* Gorillas - Lhunath Development */,
-				DABD67E10F190D4D00EE213D /* Gorillas - App Store */,
-				DA8B770A0F46120600DD88BF /* Gorillas - iBetaTest */,
-				DA47694D0FDD7334002E74F8 /* Gorillas Lite - Lhunath Development */,
+				1D6058900D05DD3D006BFB54 /* Gorillas - Signed: Lhunath */,
+				DABD67E10F190D4D00EE213D /* Gorillas - Signed: App Store */,
+				DA8B770A0F46120600DD88BF /* Gorillas - Signed: iBetaTest */,
+				DA47694D0FDD7334002E74F8 /* Gorillas Lite - Signed: Lhunath */,
 			);
 		};
 /* End PBXProject section */
@@ -1707,6 +1737,11 @@
 				DAF7265E0FDEFF1000CFFB32 /* fullGame.txt in Resources */,
 				DAF7265F0FDEFF1000CFFB32 /* guide.txt in Resources */,
 				DAF7266C0FDEFF6F00CFFB32 /* Localizable.strings in Resources */,
+				DA4F73F80FE6BF9D00D8BC31 /* bar.png in Resources */,
+				DA4F74550FE6DC9200D8BC31 /* menu.png in Resources */,
+				DA4F74560FE6DC9200D8BC31 /* score.png in Resources */,
+				DA4F74570FE6DC9200D8BC31 /* skill.png in Resources */,
+				DA4F74870FE6E17900D8BC31 /* skip.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1763,6 +1798,11 @@
 				DAF726640FDEFF1000CFFB32 /* fullGame.txt in Resources */,
 				DAF726650FDEFF1000CFFB32 /* guide.txt in Resources */,
 				DAF7266F0FDEFF6F00CFFB32 /* Localizable.strings in Resources */,
+				DA4F73FB0FE6BF9D00D8BC31 /* bar.png in Resources */,
+				DA4F745E0FE6DC9200D8BC31 /* menu.png in Resources */,
+				DA4F745F0FE6DC9200D8BC31 /* score.png in Resources */,
+				DA4F74600FE6DC9200D8BC31 /* skill.png in Resources */,
+				DA4F748A0FE6E17900D8BC31 /* skip.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1819,6 +1859,11 @@
 				DAF726600FDEFF1000CFFB32 /* fullGame.txt in Resources */,
 				DAF726610FDEFF1000CFFB32 /* guide.txt in Resources */,
 				DAF7266D0FDEFF6F00CFFB32 /* Localizable.strings in Resources */,
+				DA4F73F90FE6BF9D00D8BC31 /* bar.png in Resources */,
+				DA4F74580FE6DC9200D8BC31 /* menu.png in Resources */,
+				DA4F74590FE6DC9200D8BC31 /* score.png in Resources */,
+				DA4F745A0FE6DC9200D8BC31 /* skill.png in Resources */,
+				DA4F74880FE6E17900D8BC31 /* skip.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1875,6 +1920,11 @@
 				DAF726620FDEFF1000CFFB32 /* fullGame.txt in Resources */,
 				DAF726630FDEFF1000CFFB32 /* guide.txt in Resources */,
 				DAF7266E0FDEFF6F00CFFB32 /* Localizable.strings in Resources */,
+				DA4F73FA0FE6BF9D00D8BC31 /* bar.png in Resources */,
+				DA4F745B0FE6DC9200D8BC31 /* menu.png in Resources */,
+				DA4F745C0FE6DC9200D8BC31 /* score.png in Resources */,
+				DA4F745D0FE6DC9200D8BC31 /* skill.png in Resources */,
+				DA4F74890FE6E17900D8BC31 /* skip.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2421,18 +2471,16 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = GorillasDev;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = Debug;
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = GorillasDev;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = Release;
 		};
@@ -2441,6 +2489,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -2481,7 +2530,9 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-falign-loops=16";
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator2.1;
+				PRODUCT_NAME = Gorillas;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos2.2;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VERSION_INFO_BUILDER = lhunath;
 				ZERO_LINK = NO;
@@ -2493,6 +2544,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = YES;
@@ -2527,7 +2579,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator2.2;
+				PRODUCT_NAME = Gorillas;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos2.2;
 				VERSION_INFO_BUILDER = lhunath;
 				ZERO_LINK = NO;
 			};
@@ -2539,7 +2593,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = YES;
@@ -2574,8 +2628,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Info.plist;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6B238D14-146F-435A-970D-1FAEDF00DCC2";
-				SDKROOT = iphonesimulator2.2;
+				PRODUCT_NAME = Gorillas;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos2.2;
 				VERSION_INFO_BUILDER = lhunath;
 				ZERO_LINK = NO;
 			};
@@ -2584,7 +2639,8 @@
 		DA16C3760EEC575C00E46246 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = GorillasDev;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = Distribution;
 		};
@@ -2593,6 +2649,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DEPLOYMENT_POSTPROCESSING = NO;
@@ -2631,7 +2688,9 @@
 				INFOPLIST_FILE = Info.plist;
 				OTHER_CFLAGS = "-falign-loops=16";
 				PREBINDING = NO;
-				SDKROOT = iphonesimulator2.2;
+				PRODUCT_NAME = Gorillas;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos2.2;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VERSION_INFO_BUILDER = lhunath;
 				ZERO_LINK = NO;
@@ -2641,47 +2700,49 @@
 		DA312A400F12B91A00F1032D /* Release Debugging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = GorillasDev;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = "Release Debugging";
 		};
 		DA4769F40FDD7334002E74F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = LITE;
-				PRODUCT_NAME = GorillasLiteDev;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
+				PRODUCT_NAME = GorillasLite;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos2.2;
 			};
 			name = Debug;
 		};
 		DA4769F50FDD7334002E74F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				INFOPLIST_FILE = "/Users/lhunath/Documents/workspace/lyndir/Gorillas/Info copy.plist";
-				PRODUCT_NAME = GorillasDev;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				PRODUCT_NAME = GorillasLite;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos2.2;
 			};
 			name = Release;
 		};
 		DA4769F60FDD7334002E74F8 /* Release Debugging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				INFOPLIST_FILE = "/Users/lhunath/Documents/workspace/lyndir/Gorillas/Info copy.plist";
-				PRODUCT_NAME = GorillasDev;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3F99D2BF-D20F-4363-AB0E-74CE17713124";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				PRODUCT_NAME = GorillasLite;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos2.2;
 			};
 			name = "Release Debugging";
 		};
 		DA4769F70FDD7334002E74F8 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = "/Users/lhunath/Documents/workspace/lyndir/Gorillas/Info copy.plist";
-				PRODUCT_NAME = GorillasDev;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				PRODUCT_NAME = GorillasLite;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos2.2;
 			};
 			name = Distribution;
 		};
@@ -2689,7 +2750,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = GorillasBeta;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "354E5F83-E4CE-4292-BAB0-AAB1FBD8F5CB";
 			};
 			name = Debug;
@@ -2698,7 +2758,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = GorillasBeta;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "354E5F83-E4CE-4292-BAB0-AAB1FBD8F5CB";
 			};
 			name = Release;
@@ -2707,7 +2766,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont";
-				PRODUCT_NAME = GorillasBeta;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "354E5F83-E4CE-4292-BAB0-AAB1FBD8F5CB";
 			};
 			name = "Release Debugging";
@@ -2716,7 +2774,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
-				PRODUCT_NAME = GorillasBeta;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AB042B7C-E184-477E-9D8C-41169B2C4FC8";
 			};
 			name = Distribution;
@@ -2724,21 +2781,18 @@
 		DABD68540F190D4D00EE213D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = Gorillas;
 			};
 			name = Debug;
 		};
 		DABD68550F190D4D00EE213D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = Gorillas;
 			};
 			name = Release;
 		};
 		DABD68560F190D4D00EE213D /* Release Debugging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				PRODUCT_NAME = Gorillas;
 			};
 			name = "Release Debugging";
 		};
@@ -2747,7 +2801,6 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
-				PRODUCT_NAME = Gorillas;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "058ED07C-A0FD-418C-A51F-57CB42F18416";
 			};
 			name = Distribution;
@@ -2755,7 +2808,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Gorillas - Lhunath Development" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Gorillas - Signed: Lhunath" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -2777,7 +2830,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA4769F30FDD7334002E74F8 /* Build configuration list for PBXNativeTarget "Gorillas Lite - Lhunath Development" */ = {
+		DA4769F30FDD7334002E74F8 /* Build configuration list for PBXNativeTarget "Gorillas Lite - Signed: Lhunath" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA4769F40FDD7334002E74F8 /* Debug */,
@@ -2788,7 +2841,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA8B77940F46120600DD88BF /* Build configuration list for PBXNativeTarget "Gorillas - iBetaTest" */ = {
+		DA8B77940F46120600DD88BF /* Build configuration list for PBXNativeTarget "Gorillas - Signed: iBetaTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA8B77950F46120600DD88BF /* Debug */,
@@ -2799,7 +2852,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DABD68530F190D4D00EE213D /* Build configuration list for PBXNativeTarget "Gorillas - App Store" */ = {
+		DABD68530F190D4D00EE213D /* Build configuration list for PBXNativeTarget "Gorillas - Signed: App Store" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DABD68540F190D4D00EE213D /* Debug */,

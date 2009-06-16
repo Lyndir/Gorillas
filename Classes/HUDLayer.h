@@ -29,7 +29,8 @@
 
 @interface HUDLayer : BarLayer {
 
-    LabelAtlas          *infoLabel;
+    Sprite              *scoreSprite, *skillSprite;
+    LabelAtlas          *scoreCount, *skillCount;
     Layer               *livesLayer;
     Sprite              *infiniteLives;
     BarLayer            *messageBar;

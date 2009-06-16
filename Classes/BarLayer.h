@@ -26,23 +26,21 @@
 
 
 
-@interface BarLayer : Layer {
+@interface BarLayer : Sprite {
     
     MenuItemFont        *menuButton;
     Menu                *menuMenu;
-    LabelAtlas          *messageLabel;
+    Label               *messageLabel;
     
-    long                fromColor, toColor, renderFromColor, renderToColor;
-    float               width;
-    float               height;
+    long                color, renderColor;
     cpVect              showPosition;
     
     BOOL                dismissed;
 }
 
--(id) initWithColorFrom:(long)_fromColor to:(long)_toColor position:(cpVect)_showPosition;
+-(id) initWithColor:(long)aColor position:(cpVect)_showPosition;
 
--(void) setButtonString:(NSString *)_string callback:(id)target :(SEL)selector;
+-(void) setButtonImage:(NSString *)aFile callback:(id)target :(SEL)selector;
 -(cpVect) hidePosition;
 -(void) dismiss;
 

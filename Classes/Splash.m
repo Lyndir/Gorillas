@@ -28,6 +28,39 @@
 #import "GorillasAppDelegate.h"
 
 
+@interface SplashTransition : ZoomFlipYTransition
+
+@end
+
+@implementation SplashTransition
+
+- (id)initWithGameScene:(Scene *)gameScene {
+
+    if (!(self = [super initWithDuration:[[GorillasConfig get] transitionDuration]
+                                   scene:gameScene
+                             orientation:kOrientationDownOver]))
+        return nil;
+    
+    return self;
+}
+
+- (void)finish {
+    
+    [super finish];
+    
+#ifdef LITE
+    [[GorillasAppDelegate get].gameLayer configureGameWithMode:GorillasModeClassic humans:1 ais:1];
+    [[GorillasAppDelegate get].gameLayer startGame];
+#else
+    [[GorillasAppDelegate get] showMainMenu];
+    [[GorillasAppDelegate get].gameLayer.buildingsLayer startPanning];
+#endif
+}
+
+@end
+
+
+
 @implementation Splash
 
 
@@ -65,19 +98,8 @@
         [gameScene addChild:[[GorillasAppDelegate get] uiLayer]];
         
         // Build a transition scene from the splash scene to the game scene.
-        TransitionScene *transitionScene = [[ZoomFlipYTransition alloc] initWithDuration:[[GorillasConfig get] transitionDuration]
-                                                                                   scene:gameScene
-                                                                             orientation:kOrientationDownOver];
+        TransitionScene *transitionScene = [[SplashTransition alloc] initWithGameScene:gameScene];
         
-#ifdef LITE
-        [[GorillasAppDelegate get].gameLayer configureGameWithMode:GorillasModeClassic humans:1 ais:1];
-        [[GorillasAppDelegate get].gameLayer startGame];
-#else
-        [gameScene runAction:[Sequence actions:
-                              [DelayTime actionWithDuration:0.5f],
-                              [CallFunc actionWithTarget:[GorillasAppDelegate get] selector:@selector(showMainMenu)],
-                              nil]];
-#endif
         [gameScene release];
         
         // Start the scene and bring up the menu.

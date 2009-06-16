@@ -1,4 +1,4 @@
-De Doelstelling
+-De Doelstelling
 
     Gooi dodelijke bananen over wolkenkrabbers om uw vijand de stad uit te blazen.
 
@@ -6,7 +6,7 @@ De Doelstelling
 
 
 ===== NEXT PAGE =====
-Raken en Missen
+-Raken en Missen
 
     Met wat geluk stuur je een banaan door de lucht op koers in aanvaring met je tegenstander.
 
@@ -16,7 +16,7 @@ Raken en Missen
 
 
 ===== NEXT PAGE =====
-Besturing
+-Besturing
 
     Gooien gebeurt door het scherm aan te raken of te slepen naar waar je wilt mikken.
 
@@ -26,7 +26,7 @@ Besturing
 
 
 ===== NEXT PAGE =====
-Spel Modussen
++Spel Modussen
 
     Er zijn verschillende stijlen van spelen waartussen je kan kiezen; met een of meerdere spelers.
 
@@ -34,7 +34,7 @@ Spel Modussen
 
 
 ===== NEXT PAGE =====
-Training
++Training
 
     Om dat mikken wat beter handig te maken speel je best enkele Training spelletjes.
 
@@ -43,7 +43,7 @@ Training
 
 
 ===== NEXT PAGE =====
-Klassiek Spel
++Klassiek Spel
 
     De snelste manier om een spelletje Gorillas te spelen is het Klassiek spel.
 
@@ -53,7 +53,7 @@ Klassiek Spel
 
 
 ===== NEXT PAGE =====
-Dynamisch Spel
++Dynamisch Spel
 
     Voor een wat geraffineerder spel, start een Dynamisch spel.
 
@@ -63,7 +63,7 @@ Dynamisch Spel
 
 
 ===== NEXT PAGE =====
-Team Spel
++Team Spel
 
     Spelen in team is perfect wanneer je tussen vrienden bent.
     
@@ -73,7 +73,7 @@ Team Spel
 
 
 ===== NEXT PAGE =====
-Overlevingsmodus
++Overlevingsmodus
 
     Ten laatste is er de Overlevingsmodus.  Dit is een compleet andere stijl waar het doel is als laatste in leven te blijven.
 
@@ -81,7 +81,7 @@ Overlevingsmodus
 
 
 ===== NEXT PAGE =====
-Configuratie
++Configuratie
 
     Je kan de moeilijkheidsgraad van de AIs instellen als je een echte uitdaging wilt aangaan.
 
@@ -91,7 +91,7 @@ Configuratie
 
 
 ===== NEXT PAGE =====
-Tactiek 1
+-Tactiek 1
 
     Om gebouwen vermijden met je worpen gooi je best zo verticaal mogelijk en met meer snelheid.  Niet zo gemakkelijk!
 
@@ -99,7 +99,7 @@ Tactiek 1
 
 
 ===== NEXT PAGE =====
-Tactiek 2
+-Tactiek 2
 
     Het zichtsveld vergroten is zeer handig voor lange afstandsschoten.
     
@@ -108,7 +108,7 @@ Tactiek 2
 
 
 ===== NEXT PAGE =====
-Statistieken
+-Statistieken
 
     Je top- en dagelijkse score worden bijgehouden voor statistieken.
     
@@ -116,7 +116,7 @@ Statistieken
 
 
 ===== NEXT PAGE =====
-Technisch
+-Technisch
 
     Mikken geeft de vector van de beginsnelheid van je worp aan.
     De windsnelheid zal een impact hebben op de koers van je projectielen.
@@ -124,7 +124,7 @@ Technisch
 
 
 ===== NEXT PAGE =====
-Dank
+-Dank
 
     Gorillas is ontworpen en geschreven door Maarten Billemont.  (http://www.lhunath.com)
     Veel dank aan Emmett voor zeer goede retro-muziek.
@@ -133,7 +133,7 @@ Dank
 
 
 ===== NEXT PAGE =====
-Open Source
+-Open Source
 
     The Gorillas source code is freely available and licensed to anyone under the terms of the General Public License, version 2 (GPLv2).
     De broncode van Gorillas is volledig open en gratis beschikbaar onder de voorwaarden van de General Public License, versie 2 (GPLv2).

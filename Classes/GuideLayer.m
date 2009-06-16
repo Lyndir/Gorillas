@@ -41,14 +41,24 @@
                            [[NSBundle mainBundle] pathForResource:@"guide"
                                                            ofType:@"txt"]];
     NSArray *pages = [guideData componentsSeparatedByString:@"\n\n===== NEXT PAGE =====\n"];
+
+#ifdef LITE
+    BOOL isLite = YES;
+#else
+    BOOL isLite = NO;
+#endif
     
     guidePages = [[NSMutableArray alloc] initWithCapacity:[pages count]];
     guideTitles = [[NSMutableArray alloc] initWithCapacity:[pages count]];
     for(NSString *guidePage in pages) {
-        NSUInteger firstLineEnd = [guidePage rangeOfString:@"\n"].location;
+        unichar pageType = [guidePage characterAtIndex:0];
+        guidePage = [guidePage substringFromIndex:1];
         
-        [guideTitles addObject:[guidePage substringToIndex:firstLineEnd]];
-        [guidePages addObject:[guidePage substringFromIndex:firstLineEnd + 1]];
+        if (!(isLite && pageType == '+')) {
+            NSUInteger firstLineEnd = [guidePage rangeOfString:@"\n"].location;
+            [guideTitles addObject:[guidePage substringToIndex:firstLineEnd]];
+            [guidePages addObject:[guidePage substringFromIndex:firstLineEnd + 1]];
+        }
     }
     
     

@@ -75,20 +75,6 @@
 }
 
 
--(void) onEnter {
-    
-    [super onEnter];
-}
-
-
--(void) onExit {
-    
-    [super onExit];
-    
-    [self stopPanning];
-}
-
-
 -(void) reset {
     
     BOOL wasPanning = panAction != nil;
