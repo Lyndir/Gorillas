@@ -88,24 +88,29 @@
     
     cpVect s = cpv(contentSize.width - padding, contentSize.height - [[GorillasConfig get] fontSize] - padding);
     
+    UITextAlignment alignment = UITextAlignmentLeft;
+    if ([NSLocalizedString(@"config.direction", "ltr") isEqualToString:@"rtl"]) {
+        alignment = UITextAlignmentRight;
+    }
+    
     CGSize winSize = [[Director sharedDirector] winSize];
     prevPageLabel = [[Label alloc] initWithString:@""
                              dimensions:CGSizeMake(s.x, s.y)
-                              alignment:UITextAlignmentLeft
+                              alignment:alignment
                                fontName:[[GorillasConfig get] fixedFontName]
                                fontSize:[[GorillasConfig get] smallFontSize]];
     [prevPageLabel setPosition:cpv(contentSize.width / 2 - winSize.width, contentSize.height / 2)];
     [prevPageLabel runAction:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
     currPageLabel = [[Label alloc] initWithString:@""
                                    dimensions:CGSizeMake(s.x, s.y)
-                                    alignment:UITextAlignmentLeft
+                                    alignment:alignment
                                      fontName:[[GorillasConfig get] fixedFontName]
                                      fontSize:[[GorillasConfig get] smallFontSize]];
     [currPageLabel setPosition:cpv(contentSize.width / 2, contentSize.height / 2)];
     [currPageLabel runAction:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
     nextPageLabel = [[Label alloc] initWithString:@""
                                    dimensions:CGSizeMake(s.x, s.y)
-                                    alignment:UITextAlignmentLeft
+                                    alignment:alignment
                                      fontName:[[GorillasConfig get] fixedFontName]
                                      fontSize:[[GorillasConfig get] smallFontSize]];
     [nextPageLabel setPosition:cpv(contentSize.width / 2 + winSize.width, contentSize.height / 2)];

@@ -40,9 +40,14 @@
                               [[NSBundle mainBundle] pathForResource:@"fullGame"
                                                               ofType:@"txt"]];
 
+    UITextAlignment alignment = UITextAlignmentLeft;
+    if ([NSLocalizedString(@"config.direction", "ltr") isEqualToString:@"rtl"]) {
+        alignment = UITextAlignmentRight;
+    }
+    
     Label *pageLabel = [[Label alloc] initWithString:fullGameData
                                        dimensions:CGSizeMake(contentSize.width - padding, contentSize.height - padding)
-                                        alignment:UITextAlignmentLeft
+                                        alignment:alignment
                                          fontName:[[GorillasConfig get] fixedFontName]
                                          fontSize:[[GorillasConfig get] smallFontSize]];
     [pageLabel setPosition:cpv(contentSize.width / 2, contentSize.height / 2)];

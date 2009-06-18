@@ -63,7 +63,7 @@
     [humansT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *humansI  = [MenuItemFont itemFromString:[NSString stringWithFormat:NSLocalizedString(@"entries.player.count", @"%d Player%@"),
+    MenuItem *humansI  = [MenuItemFont itemFromString:[NSString stringWithFormat:NSLocalizedString(@"entries.player.count", @"%$1d Player%$2@"),
                                                        humans, humans == 1? @"": NSLocalizedString(@"messages.plural.suffix", @"s")]
                                                    target:self
                                                  selector:@selector(humans:)];
@@ -88,7 +88,7 @@
     [aisT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *aisI  = [MenuItemFont itemFromString:[NSString stringWithFormat:NSLocalizedString(@"entries.ai.count", @"%d AI%@"),
+    MenuItem *aisI  = [MenuItemFont itemFromString:[NSString stringWithFormat:NSLocalizedString(@"entries.ai.count", @"%$1d AI%$2@"),
                                                     ais, ais == 1? @"": NSLocalizedString(@"messages.plural.suffix", @"s")]
                                                      target:self
                                                    selector:@selector(ais:)];
