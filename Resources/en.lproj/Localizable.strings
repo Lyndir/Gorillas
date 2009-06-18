@@ -40,7 +40,10 @@
 "config.song.off"                       = "Off";
 
 // Menu Entries
-"entries.ai.count"                      = "%d AI%@";
+"entries.ai.count.0"                    = "None";
+"entries.ai.count.1"                    = "1 AI";
+"entries.ai.count.2"                    = "2 AIs";
+"entries.ai.count.3+"                   = "%d AIs";
 "entries.av"                            = "Audio / Video";
 "entries.choose.custom"                 = "Custom Game...";
 "entries.choose.follow"                 = "Follow Throw";
@@ -67,7 +70,10 @@
 "entries.new"                           = "New Game";
 "entries.off"                           = "Off";
 "entries.on"                            = "On";
-"entries.player.count"                  = "%d Player%@";
+"entries.player.count.0"                = "None";
+"entries.player.count.1"                = "1 Player";
+"entries.player.count.2"                = "2 Players";
+"entries.player.count.3+"               = "%d Players";
 "entries.player.multi"                  = "Multi Player";
 "entries.player.single"                 = "Single Player";
 "entries.score.top"                     = "Top Score: %04d";
@@ -85,7 +91,6 @@
 "messages.level.down"                   = "Level Down";
 "messages.oneshot"                      = "Oneshot!";
 "messages.paused"                       = "Paused";
-"messages.plural.suffix"                = "s";
 "messages.tie"                          = "Tie!";
 "messages.unpaused"                     = "Unpaused";
 "messages.wins"                         = "%@ wins!";

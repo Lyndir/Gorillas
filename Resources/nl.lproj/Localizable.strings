@@ -40,7 +40,10 @@
 "config.song.off"                       = "Uit";
 
 // Menu Entries
-"entries.ai.count"                      = "%d AI%@";
+"entries.ai.count.0"                    = "Geen";
+"entries.ai.count.1"                    = "1 AI";
+"entries.ai.count.2"                    = "2 AIs";
+"entries.ai.count.3+"                   = "%d AIs";
 "entries.av"                            = "Audio / Video";
 "entries.choose.custom"                 = "Aangepast...";
 "entries.choose.follow"                 = "Volg Worpen";
@@ -67,7 +70,10 @@
 "entries.new"                           = "Nieuw Spel";
 "entries.off"                           = "Uit";
 "entries.on"                            = "Aan";
-"entries.player.count"                  = "%d Speler%@";
+"entries.player.count.0"                = "Geen";
+"entries.player.count.1"                = "1 Speler";
+"entries.player.count.2"                = "2 Spelers";
+"entries.player.count.3+"               = "%d Spelers";
 "entries.player.multi"                  = "Meerdere Spelers";
 "entries.player.single"                 = "Eén Speler";
 "entries.score.top"                     = "Top Score: %04d";
@@ -86,7 +92,6 @@
 "messages.oneshot"                      = "Direct Raak!";
 "messages.paused"                       = "Gepauseerd";
 "messages.unpaused"                     = "Spel Hervat";
-"messages.plural.suffix"                = "s";
 "messages.tie"                          = "Gelijkstand!";
 "messages.wins"                         = "%@ wint!";
 

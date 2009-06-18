@@ -41,7 +41,10 @@
 "config.song.off"                       = "ايقاف";
 
 // Menu Entries
-"entries.ai.count"                      = "%2$@ خصم آلي %1$d";
+"entries.ai.count.0"                    = "None";
+"entries.ai.count.1"                    = "1 AI";
+"entries.ai.count.2"                    = "2 AIs";
+"entries.ai.count.3+"                   = "%d AIs";
 "entries.av"                            = "صوت / صورة";
 "entries.choose.custom"                 = "... لعبة معدلة";
 "entries.choose.follow"                 = "تتبّع الرمية";
@@ -69,10 +72,13 @@
 "entries.new"                           = "((بدء اللعب))";
 "entries.off"                           = "ايقاف";
 "entries.on"                            = "تشغيل";
-"entries.player.count"                  = "%2$@ لاعب %1$d";
+"entries.player.count.0"                = "None";
+"entries.player.count.1"                = "1 Player";
+"entries.player.count.2"                = "2 Players";
+"entries.player.count.3+"               = "%d Players";
 "entries.player.multi"                  = "لعب جماعي";
 "entries.player.single"                 = "لعب فردي";
-"entries.score.top"                    = "%04d :أعلى نتيجة";
+"entries.score.top"                     = "%04d :أعلى نتيجة";
 "entries.select.ais"                    = "الذكاء الاصطناعي";
 "entries.select.humans"                 = "البشر";
 "entries.start"                         = "!!إبدأ";
@@ -88,7 +94,6 @@
 "messages.level.down"                   = "تدني المستوى";
 "messages.oneshot"                      = "!ضربة واحدة";
 "messages.paused"                       = "إيقاف";
-"messages.plural.suffix"                = "";
 "messages.tie"                          = "!!تعادل";
 "messages.unpaused"                     = "إكمال";
 "messages.wins"                         = "%@ فاز";

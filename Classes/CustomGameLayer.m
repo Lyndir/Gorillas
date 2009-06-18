@@ -56,6 +56,37 @@
         backMenu = nil;
     }
     
+    NSString *humansIString;
+    switch (humans) {
+        case 0:
+            humansIString = NSLocalizedString(@"entries.player.count.0", @"None");
+            break;
+        case 1:
+            humansIString = NSLocalizedString(@"entries.player.count.1", @"1 Player");
+            break;
+        case 2:
+            humansIString = NSLocalizedString(@"entries.player.count.2", @"2 Players");
+            break;
+        default:
+            humansIString = NSLocalizedString(@"entries.player.count.3+", @"%d Player");
+            break;
+    }
+    NSString *aisIString;
+    switch (ais) {
+        case 0:
+            aisIString = NSLocalizedString(@"entries.ai.count.0", @"None");
+            break;
+        case 1:
+            aisIString = NSLocalizedString(@"entries.ai.count.1", @"1 Player");
+            break;
+        case 2:
+            aisIString = NSLocalizedString(@"entries.ai.count.2", @"2 Players");
+            break;
+        default:
+            aisIString = NSLocalizedString(@"entries.ai.count.3+", @"%d Player");
+            break;
+    }
+
     // Humans.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
@@ -63,8 +94,7 @@
     [humansT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *humansI  = [MenuItemFont itemFromString:[NSString stringWithFormat:NSLocalizedString(@"entries.player.count", @"%$1d Player%$2@"),
-                                                       humans, humans == 1? @"": NSLocalizedString(@"messages.plural.suffix", @"s")]
+    MenuItem *humansI  = [MenuItemFont itemFromString:[NSString stringWithFormat:humansIString, humans]
                                                    target:self
                                                  selector:@selector(humans:)];
     
@@ -88,8 +118,7 @@
     [aisT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *aisI  = [MenuItemFont itemFromString:[NSString stringWithFormat:NSLocalizedString(@"entries.ai.count", @"%$1d AI%$2@"),
-                                                    ais, ais == 1? @"": NSLocalizedString(@"messages.plural.suffix", @"s")]
+    MenuItem *aisI  = [MenuItemFont itemFromString:[NSString stringWithFormat:aisIString, ais]
                                                      target:self
                                                    selector:@selector(ais:)];
     
