@@ -37,9 +37,16 @@
         return self;
 
     // Guide Content.
+    id error;
     NSString *guideData = [NSString stringWithContentsOfFile:
                            [[NSBundle mainBundle] pathForResource:@"guide"
-                                                           ofType:@"txt"]];
+                                                           ofType:@"txt"]
+                                                    encoding:NSUTF8StringEncoding
+                                                       error:error];
+    if(error != nil)
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:[NSString stringWithFormat:@"Guide text could not be read: %@", error] userInfo:nil];
+    
     NSArray *pages = [guideData componentsSeparatedByString:@"\n\n===== NEXT PAGE =====\n"];
 
 #ifdef LITE
