@@ -37,12 +37,12 @@
         return self;
 
     // Guide Content.
-    id error;
+    id error = nil;
     NSString *guideData = [NSString stringWithContentsOfFile:
                            [[NSBundle mainBundle] pathForResource:@"guide"
                                                            ofType:@"txt"]
                                                     encoding:NSUTF8StringEncoding
-                                                       error:error];
+                                                       error:&error];
     if(error != nil)
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:[NSString stringWithFormat:@"Guide text could not be read: %@", error] userInfo:nil];
