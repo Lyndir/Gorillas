@@ -31,11 +31,11 @@
 "config.message.hit.2"                  = "%2$@ zag %1$@'s banana niet komen.";
 "config.message.hit.3"                  = "%1$@ begraafde %2$@.";
 "config.message.hit.4"                  = "%1$@ vaagde %2$@ weg.";
-"config.song.blockdropper"              = "Torenhoog";
-"config.song.fighting_gorillas"         = "Vechtende Gorillas";
-"config.song.forkbomb"                  = "Vork Bom";
-"config.song.prideofthepacific"         = "Trots van de Oceaan";
-"config.song.veritech"                  = "Veritech";
+"config.song.fighting_gorillas"         = "Fighting Gorillas";
+"config.song.flow_square"               = "Flow Square";
+"config.song.happy_fun_ball"            = "Happy Fun Ball";
+"config.song.man_or_machine"            = "Man Or Machine";
+"config.song.rc_car"                    = "RC Car";
 "config.song.random"                    = "Mixen";
 "config.song.off"                       = "Uit";
 
@@ -96,8 +96,9 @@
 "messages.wins"                         = "%@ wint!";
 
 // Model Names
+"model.gorilla"                         = "Gemene Gorilla";
 "model.bunny"                           = "Paashaas";
-"model.gorilla"                         = "Gorilla";
+"model.banana"                          = "Wraaklustige Banaan";
 
 // Player Names
 "names.chip"                            = "Chip";

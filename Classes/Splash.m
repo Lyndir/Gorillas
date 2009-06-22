@@ -81,18 +81,16 @@
     
     [super onEnter];
     
-    [self schedule:@selector(switchScene:)];
+    [self performSelector:@selector(switchScene) withObject:nil afterDelay:2];
 }
 
 
--(void) switchScene: (ccTime)dt {
+-(void) switchScene {
     
     @synchronized(self) {
         if(switching)
             return;
-        
         switching = YES;
-        [self unschedule:@selector(switchScene:)];
 
         Scene *gameScene = [[Scene alloc] init];
         [gameScene addChild:[[GorillasAppDelegate get] uiLayer]];

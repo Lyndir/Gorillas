@@ -83,6 +83,48 @@ typedef enum {
 
 
 /**
+ * Gorilla Models.
+ */
+typedef enum {
+    /** A Gorilla.          */
+    GorillasPlayerModelGorilla,
+    
+    /** An Easter Bunny.    */
+    GorillasPlayerModelEasterBunny,
+    
+    /** An Banana.    */
+    GorillasPlayerModelBanana,
+} GorillasPlayerModel;
+
+
+/**
+ * Gorilla Types.
+ */
+typedef enum {
+    /** An AI.              */
+    GorillasPlayerTypeAI,
+    
+    /** A Human.            */
+    GorillasPlayerTypeHuman,
+} GorillasPlayerType;
+
+
+/**
+ * Projectile Models.
+ */
+typedef enum {
+    /** A Banana.           */
+    GorillasProjectileModelBanana,
+    
+    /** An Easter Egg.      */
+    GorillasProjectileModelEasterEgg,
+    
+    /** A Gorilla.      */
+    GorillasProjectileModelGorilla,
+} GorillasProjectileModel;
+
+
+/**
  * Global Dependencies.
  */
 #ifdef __OBJC__

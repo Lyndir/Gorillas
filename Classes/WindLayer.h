@@ -29,12 +29,13 @@
 
 @interface WindLayer : Layer <CocosNodeOpacity, Resettable> {
 
-    long        color;
-    float       wind;
-    float       windIncrement;
-    ccTime      elapsed, incrementDuration;
+    long            color;
+    float           wind, bar;
+    float           windIncrement;
+    ccTime          elapsed, incrementDuration;
     
-    NSMutableArray *systems, *affectAngles;
+    NSMutableArray  *systems, *affectAngles;
+    Sprite          *head, *body, *tail;
 }
 
 -(void) registerSystem:(ParticleSystem *)system affectAngle:(BOOL)affectAngle;

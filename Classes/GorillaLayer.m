@@ -45,7 +45,7 @@ static NSUInteger _teamIndex, _globalIndex;
 
 @implementation GorillaLayer
 
-@synthesize human, name, turns, lives, active, zoom, teamIndex, globalIndex, model;
+@synthesize human, name, turns, lives, active, zoom, teamIndex, globalIndex, model, type;
 
 
 +(void) prepareCreation {
@@ -198,6 +198,9 @@ static NSUInteger _teamIndex, _globalIndex;
         case GorillasPlayerModelEasterBunny:
             modelName = @"bunny";
             break;
+        case GorillasPlayerModelBanana:
+            modelName = @"banana";
+            break;
         default:
             @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                            reason:@"Active gorilla model not implemented." userInfo:nil];
@@ -227,6 +230,9 @@ static NSUInteger _teamIndex, _globalIndex;
         case GorillasPlayerModelEasterBunny:
             return GorillasProjectileModelEasterEgg;
 
+        case GorillasPlayerModelBanana:
+            return GorillasProjectileModelGorilla;
+            
         default:
             @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                            reason:@"Active gorilla model not implemented." userInfo:nil];

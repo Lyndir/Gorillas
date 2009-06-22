@@ -463,6 +463,7 @@
     windLayer = [[WindLayer alloc] init];
     [windLayer setColor:0xffffff00];
     [self addChild:windLayer z:5];
+    [windLayer setPosition:cpv(winSize.width / 2, winSize.height - 15)];
 
     // Make sure we're paused, hide HUD and show status bar.
     [self setPausedSilently:YES];

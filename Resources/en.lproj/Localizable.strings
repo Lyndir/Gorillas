@@ -31,11 +31,11 @@
 "config.message.hit.2"                  = "%2$@ didn't dodge %1$@'s banana.";
 "config.message.hit.3"                  = "%1$@ buried %2$@.";
 "config.message.hit.4"                  = "%1$@ incinerated %2$@.";
-"config.song.blockdropper"              = "Sky High";
 "config.song.fighting_gorillas"         = "Fighting Gorillas";
-"config.song.forkbomb"                  = "Fork Bomb";
-"config.song.prideofthepacific"         = "Pride of the Pacific";
-"config.song.veritech"                  = "Veritech";
+"config.song.flow_square"               = "Flow Square";
+"config.song.happy_fun_ball"            = "Happy Fun Ball";
+"config.song.man_or_machine"            = "Man Or Machine";
+"config.song.rc_car"                    = "RC Car";
 "config.song.random"                    = "Shuffle";
 "config.song.off"                       = "Off";
 
@@ -96,8 +96,9 @@
 "messages.wins"                         = "%@ wins!";
 
 // Model Names
+"model.gorilla"                         = "Mean Gorilla";
 "model.bunny"                           = "Easter Bunny";
-"model.gorilla"                         = "Gorilla";
+"model.banana"                          = "Vengeful Banana";
 
 // Player Names
 "names.chip"                            = "Chip";

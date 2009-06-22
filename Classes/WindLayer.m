@@ -47,6 +47,14 @@
     systems = [[NSMutableArray alloc] init];
     affectAngles = [[NSMutableArray alloc] init];
     
+    head = [[Sprite alloc] initWithFile:@"arrow.head.png"];
+    body = [[Sprite alloc] initWithFile:@"arrow.body.png"];
+    //tail = [[Sprite alloc] initWithFile:@"arrow.tail.png"];
+    
+    [self addChild:head z:1];
+    [self addChild:body z:0];
+    //[self addChild:tail z:1];
+    
     [self reset];
     
     // Dynamic wind.
@@ -85,6 +93,13 @@
 
 -(void) updateSystems {
     
+    float windRange = (3 * [[GorillasConfig get] windModifier]);
+    head.position   = cpv(wind * windRange, 0);
+    body.position   = cpv(0, 0);
+    tail.position   = cpv(-wind * windRange, 0);
+    body.scaleX     = wind * windRange * 2 / body.contentSize.width;
+    head.rotation   = wind > 0? 180: 0;
+    
     for(uint i = 0; i < [systems count]; ++i) {
         ParticleSystem *system = [systems objectAtIndex:i];
         
@@ -119,7 +134,7 @@
 }
 
 
--(void) draw {
+/*-(void) draw {
 
     float windRange = (5 * [[GorillasConfig get] windModifier]);
     CGSize winSize = [[Director sharedDirector] winSize];
@@ -134,7 +149,7 @@
         prev = cpvadd(prev, cpv((wind < 0? -1: 1) * 3,      +3    )),
     };
     drawLinesTo(from, by, 4, color, 2);
-}
+}*/
 
 
 -(GLubyte) opacity {
@@ -146,12 +161,32 @@
 
 -(void) setOpacity:(GLubyte)opacity {
     
+    head.opacity = opacity;
+    body.opacity = opacity;
+    tail.opacity = opacity;
+    
     color = (color & 0xffffff00) | opacity;
+}
+
+
+-(void) setPosition:(cpVect)v {
+    
+    self.transformAnchor = v;
+    super.position = v;
 }
 
 
 -(void) dealloc {
     
+    [head release];
+    head = nil;
+    
+    [body release];
+    body = nil;
+    
+    [tail release];
+    tail = nil;
+
     [systems release];
     systems = nil;
     

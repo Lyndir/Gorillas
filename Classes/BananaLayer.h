@@ -27,23 +27,12 @@
 #import "Throw.h"
 
 
-/**
- * Projectile Models.
- */
-typedef enum {
-    /** A Banana.           */
-    GorillasProjectileModelBanana,
-    
-    /** An Easter Egg.      */
-    GorillasProjectileModelEasterEgg,
-} GorillasProjectileModel;
-
-
 @interface BananaLayer : Layer {
 
     BOOL                    clearedGorilla, focussed;
     
     GorillasProjectileModel model;
+    GorillasPlayerType      type;
 
     Sprite                  *banana;
     Throw                   *throwAction;
@@ -52,9 +41,11 @@ typedef enum {
 -(void) throwFrom: (cpVect)r0 withVelocity: (cpVect)v;
 -(BOOL) throwing;
 
+-(void) setModel:(GorillasProjectileModel)aModel type:(GorillasPlayerType)aType;
+
 @property (nonatomic, readwrite) BOOL                       clearedGorilla;
 @property (nonatomic, readwrite) BOOL                       focussed;
-@property (nonatomic, readwrite) GorillasProjectileModel    model;
+@property (nonatomic, readonly) GorillasProjectileModel     model;
 @property (nonatomic, readonly) Sprite                      *banana;
 @property (nonatomic, readonly) Throw                       *throwAction;
 

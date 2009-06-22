@@ -27,30 +27,6 @@
 #import "BananaLayer.h"
 
 
-/**
- * Gorilla Models.
- */
-typedef enum {
-    /** A Gorilla.          */
-    GorillasPlayerModelGorilla,
-    
-    /** An Easter Bunny.    */
-    GorillasPlayerModelEasterBunny,
-} GorillasPlayerModel;
-
-
-/**
- * Gorilla Types.
- */
-typedef enum {
-    /** An AI.              */
-    GorillasPlayerTypeAI,
-    
-    /** A Human.            */
-    GorillasPlayerTypeHuman,
-} GorillasPlayerType;
-
-
 @interface GorillaLayer : Sprite {
 
     NSString            *name;
@@ -89,6 +65,7 @@ typedef enum {
 @property (nonatomic, readwrite) NSUInteger             turns;
 @property (nonatomic, readwrite) float                  zoom;
 @property (nonatomic, readwrite) GorillasPlayerModel    model;
+@property (nonatomic, readwrite) GorillasPlayerType     type;
 @property (nonatomic, readonly) GorillasProjectileModel projectileModel;
 
 @end

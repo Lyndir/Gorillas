@@ -35,7 +35,7 @@
     
     if([[GorillasConfig get] soundFx]) {
         if(clicky == 0)
-            clicky = [GorillasAudioController loadEffectWithName:@"click.wav"];
+            clicky = [GorillasAudioController loadEffectWithName:@"snapclick.caf"];
         
         [GorillasAudioController playEffect:clicky];
     }
@@ -77,6 +77,7 @@
         NSString *track = nextTrack;
         if([track isEqualToString:@"random"])
             track = [GorillasConfig get].randomTrack;
+        NSLog(@"%@", track);
         NSURL *nextUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:track ofType:nil]];
         
         if(audioPlayer != nil && ![audioPlayer.url isEqual:nextUrl]) {

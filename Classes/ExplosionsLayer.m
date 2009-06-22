@@ -238,7 +238,7 @@ static ParticleSystem **flameTypes = nil;
         explosionEffect = malloc(sizeof(SystemSoundID) * explosionEffects);
         
         for(NSUInteger i = 0; i < explosionEffects; ++i)
-            explosionEffect[i] = [GorillasAudioController loadEffectWithName:[NSString stringWithFormat:@"explosion%d.wav", i]];
+            explosionEffect[i] = [GorillasAudioController loadEffectWithName:[NSString stringWithFormat:@"explosion%d.caf", i]];
     }
 
     // Pick a random effect.

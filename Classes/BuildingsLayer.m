@@ -510,7 +510,7 @@
     throwHistory[[[GorillasAppDelegate get].gameLayer.gorillas indexOfObject:gorilla]] = v;
     [gorilla threw:v];
 
-    [bananaLayer setModel:[gorilla projectileModel]];
+    [bananaLayer setModel:gorilla.projectileModel type:gorilla.type];
     [bananaLayer throwFrom:[gorilla position] withVelocity:v];
 }
 
@@ -649,23 +649,43 @@
     }
     
     // Position our gorillas.
+    // Find indexA: The left boundary of allowed gorilla indexes.
     NSUInteger indexA = 0;
     for(BuildingLayer *building in buildings)
         if(position.x + [building position].x >= 0) {
-            indexA = [buildings indexOfObject:building] + 1;
+            indexA = [buildings indexOfObject:building];
             break;
         }
-    NSUInteger indexB = indexA + [[GorillasConfig get] buildingAmount] - 3;
+    // Find indexB: The right boundary of allowed gorilla indexes.
+    NSUInteger indexB = indexA + [[GorillasConfig get] buildingAmount];
+    // Less than or 3 gorillas, leave one building padding on the sides.
+    if([gorillas count] <= 3) {
+        indexA += 1;
+        indexB -= 2;
+    }
+    // Distribute gorillas.
     NSUInteger delta = indexB - indexA;
-    float increment = delta / ([gorillas count] - 1);
-    if (increment < 0)
+    if ([gorillas count] > delta)
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:@"Tried to start a game with more gorillas than there's room in the field." userInfo:nil];
-    
+
+    NSMutableArray *gorillasQueue = [gorillas mutableCopy];
     NSMutableArray *gorillaIndexes = [[NSMutableArray alloc] initWithCapacity: [gorillas count]];
-    for(NSUInteger i = 0; i < [gorillas count]; ++i)
-        [gorillaIndexes addObject:[NSNumber numberWithLong:indexA + lroundf(i * increment)]];
-    
+    while ([gorillasQueue count]) {
+        NSUInteger index = indexA + random() % delta;
+        BOOL indexIsInUse = NO;
+        
+        for (NSNumber *gorillasIndex in gorillaIndexes)
+            if ([gorillasIndex unsignedIntegerValue] == index) {
+                indexIsInUse = YES;
+                break;
+            }
+        
+        if (!indexIsInUse) {
+            [gorillaIndexes addObject:[NSNumber numberWithUnsignedInt:index]];
+            [gorillasQueue removeLastObject];
+        }
+    }
     for(NSUInteger i = 0; i < [gorillas count]; ++i) {
         BuildingLayer *building = [buildings objectAtIndex:[(NSNumber *) [gorillaIndexes objectAtIndex:i] unsignedIntegerValue]];
         GorillaLayer *gorilla = [gorillas objectAtIndex:i];

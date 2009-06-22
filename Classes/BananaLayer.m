@@ -44,7 +44,7 @@
     if(!(self = [super init]))
         return self;
     
-    model           = GorillasProjectileModelEasterEgg;
+    model           = GorillasProjectileModelBanana;
     
     banana          = [[Sprite alloc] initWithFile:[self modelFile]];
     [banana setScale:[[GorillasConfig get] cityScale]];
@@ -58,9 +58,10 @@
 }
 
 
--(void) setModel:(GorillasProjectileModel)_model {
+-(void) setModel:(GorillasProjectileModel)aModel type:(GorillasPlayerType)aType {
     
-    model = _model;
+    model = aModel;
+    type = aType;
     [banana setTexture:[[TextureMgr sharedTextureMgr] addImage:[self modelFile]]];
 }
 
@@ -103,7 +104,7 @@
 
 -(NSString *) modelFile {
 
-    NSString *modelName;
+    NSString *modelName, *typeName;
     switch (model) {
         case GorillasProjectileModelBanana:
             modelName = @"banana";
@@ -111,12 +112,26 @@
         case GorillasProjectileModelEasterEgg:
             modelName = @"egg";
             break;
+        case GorillasProjectileModelGorilla:
+            modelName = @"gorilla";
+            break;
         default:
             @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                            reason:@"Active banana model not implemented." userInfo:nil];
     }
+    switch (type) {
+        case GorillasPlayerTypeAI:
+            typeName = @"ai";
+            break;
+        case GorillasPlayerTypeHuman:
+            typeName = @"human";
+            break;
+        default:
+            @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                           reason:@"Active gorilla type not implemented." userInfo:nil];
+    }
     
-    return [NSString stringWithFormat:@"%@.png", modelName];
+    return [NSString stringWithFormat:@"%@-%@.png", modelName, typeName];
 }
 
 

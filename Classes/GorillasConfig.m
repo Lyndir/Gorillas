@@ -77,8 +77,8 @@
 #define dFollowThrow        @"v1.1.followThrow"
 
 #define dTracks             @"v1.1.tracks"
-#define dTrackNames         @"v1.1.trackNames"
-#define dCurrentTrack       @"v1.0.currentTrack"
+#define dTrackNames         @"v1.3.trackNames"
+#define dCurrentTrack       @"v1.3.currentTrack"
 
 #define dPlayerModel        @"v1.2.playerModel"
 #define dScore              @"v1.0.score"
@@ -213,20 +213,20 @@
                                 [NSNumber numberWithBool:    YES],                          dFollowThrow,
                                 
                                 [NSArray arrayWithObjects:
-                                 @"blockdropper3.wav",
-                                 @"veritech.wav",
-                                 @"fighting_gorillas.wav",
-                                 @"prideofthepacific.wav",
-                                 @"forkbomb.wav",
+                                 @"Fighting_Gorillas.mp3",
+                                 @"Flow_Square.mp3",
+                                 @"Happy_Fun_Ball.mp3",
+                                 @"Man_Or_Machine_Gorillas.mp3",
+                                 @"RC_Car.mp3",
                                  @"random",
                                  @"",
                                  nil],                                                      dTracks,
                                 [NSArray arrayWithObjects:
-                                 NSLocalizedString(@"config.song.blockdropper", @"Sky High"),
-                                 NSLocalizedString(@"config.song.veritech", @"Veritech"),
                                  NSLocalizedString(@"config.song.fighting_gorillas", @"Fighting Gorillas"),
-                                 NSLocalizedString(@"config.song.prideofthepacific", @"Pride of the Pacific"),
-                                 NSLocalizedString(@"config.song.forkbomb", @"Fork Bomb"),
+                                 NSLocalizedString(@"config.song.flow_square", @"Flow Square"),
+                                 NSLocalizedString(@"config.song.happy_fun_ball", @"Happy Fun Ball"),
+                                 NSLocalizedString(@"config.song.man_or_machine", @"Man Or Machine"),
+                                 NSLocalizedString(@"config.song.rc_car", @"RC Car"),
                                  NSLocalizedString(@"config.song.random", @"Shuffle"),
                                  NSLocalizedString(@"config.song.off", @"Off"),
                                  nil],                                                      dTrackNames,

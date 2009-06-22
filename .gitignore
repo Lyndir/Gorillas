@@ -1,6 +1,9 @@
 # Compiled objects.
 /Web/target
 
+# Encoded audio.
+/Resources/Audio/*/*flac
+
 # OS-Specific junk.
 .DS_Store
 
