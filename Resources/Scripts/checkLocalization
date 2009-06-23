@@ -8,6 +8,8 @@ isIn() {
     do [[ $value = "$key" ]] && return; done
 }
 
+cd "${0%/*}/../../"
+
 emit "Enumerating localization keys"
 code=$(find Classes -type f -exec grep -o 'NSLocalizedString(@"[^"]*"' {} + | sed -n 's/.*\("[^"]*"\).*/\1/p' | sort -u)
 for l in Resources/*.lproj/Localizable.strings; do
