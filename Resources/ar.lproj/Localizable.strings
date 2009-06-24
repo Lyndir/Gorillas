@@ -1,4 +1,4 @@
-// Fonts
+﻿// Fonts
 "font.size.small"                       = "18";
 "font.size.normal"                      = "34";
 "font.size.large"                       = "56";
@@ -29,22 +29,21 @@
 "config.message.off.2"                  = ".لو كانت اقرب";
 "config.message.hit.1"                  = "%1$@ أكل موزة %2$@";
 "config.message.hit.2"                  = "%1$@ لم يتفادى موزة %2$@";
-"config.message.hit.3"                  = "%1$@ buried %2$@";
 "config.message.hit.3"                  = "%2$@ قضى على %1$@";
 "config.message.hit.4"                  = "%2$@ حرق %1$@";
-"config.song.fighting_gorillas"         = "Fighting Gorillas";
-"config.song.flow_square"               = "Flow Square";
-"config.song.happy_fun_ball"            = "Happy Fun Ball";
-"config.song.man_or_machine"            = "Man Or Machine";
-"config.song.rc_car"                    = "RC Car";
+"config.song.fighting_gorillas"         = "قتال الغوريلا";
+"config.song.flow_square"               = "حرب اللآلات";
+"config.song.happy_fun_ball"            = "الكرة السعيدة";
+"config.song.man_or_machine"            = "الرجل والآلة";
+"config.song.rc_car"                    = "شيكاغو";
 "config.song.random"                    = "تشغيل عشوائي";
 "config.song.off"                       = "ايقاف";
 
 // Menu Entries
 "entries.ai.count.0"                    = "بدون";
-"entries.ai.count.1"                    = " شخص آلي";
-"entries.ai.count.2"                    = "شخصين آليّين";
-"entries.ai.count.3+"                   = "%d أشخاص آليين";
+"entries.ai.count.1"                    = "خصم آلي";
+"entries.ai.count.2"                    = "خصمين آليّين";
+"entries.ai.count.3+"                   = "%d خصوم آلية";
 "entries.av"                            = "صوت / صورة";
 "entries.choose.custom"                 = "لعبة معدلة...";
 "entries.choose.follow"                 = "تتبّع الرمية";
@@ -99,7 +98,7 @@
 // Model Names
 "model.bunny"                           = "الأرنب العملاق";
 "model.gorilla"                         = "غـــــوريــــــلا";
-"model.banana"                          = "Vengeful Banana";
+"model.banana"                          = "رجل الموز المنتقم";
 
 // Player Names
 "names.chip"                            = "الغوريلا الآلي";
