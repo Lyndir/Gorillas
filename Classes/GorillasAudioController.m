@@ -95,6 +95,22 @@
     }
 }
 
+
+- (void)playEffectNamed:(NSString *)bundleName {
+    
+    SystemSoundID effect = [(NSNumber *) [effects objectForKey:bundleName] unsignedIntValue];
+    if (effect == 0) {
+        effect = [GorillasAudioController loadEffectWithName:[NSString stringWithFormat:@"%@.caf", bundleName]];
+        if (effect == 0)
+            return;
+        
+        [effects setObject:[NSNumber numberWithUnsignedInt:effect] forKey:bundleName];
+    }
+    
+    [GorillasAudioController playEffect:effect];
+}
+
+
 -(void) dealloc {
     
     [audioPlayer release];
@@ -129,6 +145,7 @@
     SystemSoundID soundFileObject;
     AudioServicesCreateSystemSoundID(soundFileURLRef, &soundFileObject);
     CFRelease(soundFileURLRef);
+    NSLog(@"loaded %@ into %d", bundleRef, soundFileObject);
     
     return soundFileObject;
 }

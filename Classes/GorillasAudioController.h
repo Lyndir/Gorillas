@@ -32,11 +32,14 @@
     
     AVAudioPlayer               *audioPlayer;
     NSString                    *nextTrack;
+    
+    NSMutableDictionary         *effects;
 }
 
 -(void) clickEffect;
 -(void) playTrack:(NSString *)track;
 -(void) startNextTrack;
+- (void)playEffectNamed:(NSString *)bundleName;
 
 +(SystemSoundID) loadEffectWithName:(NSString *)bundleRef;
 +(void) vibrate;

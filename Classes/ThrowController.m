@@ -23,6 +23,7 @@
                 ++liveHumans;
         
         if([GorillasAppDelegate get].gameLayer.activeGorilla.human && liveHumans > 1) {
+            [[GorillasAudioController get] playEffectNamed:@"Next_Player"];
             [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"message.nextplayer", @"Next player ..")];
             [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"message.nextplayer.go", @"Go ..") callback:self :@selector(nextTurn)];
             return;

@@ -392,7 +392,6 @@
                     // First run.
                     if(reachedCurrent && [gorilla alive]) {
                         [GorillasAppDelegate get].gameLayer.activeGorilla = gorilla;
-                        [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:YES];
                         foundNextGorilla = YES;
                         break;
                     }
@@ -405,7 +404,6 @@
                     
                     else if([gorilla alive]) {
                         [GorillasAppDelegate get].gameLayer.activeGorilla = gorilla;
-                        [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:YES];
                         foundNextGorilla = YES;
                         break;
                     }
@@ -429,6 +427,7 @@
     
     // Scale to the active gorilla's saved scale.
     [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:[GorillasAppDelegate get].gameLayer.activeGorilla.zoom];
+    [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:YES];
 
     // AI throw.
     if([GorillasAppDelegate get].gameLayer.activeGorilla.alive && ![GorillasAppDelegate get].gameLayer.activeGorilla.human) {

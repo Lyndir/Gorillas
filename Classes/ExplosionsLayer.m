@@ -243,20 +243,18 @@ static ParticleSystem **flameTypes = nil;
 
     // Pick a random effect.
     NSUInteger chosenEffect;
-    if(heavy) {
+    if(heavy) 
         // Effect 0 is reserved for heavy explosions.
         chosenEffect = 0;
-        lastEffect = -1;
-    }
     
-    else {
+    else
         // Pick an effect that is not 0 (see above) and not the same as the last effect.
         do {
             chosenEffect = random() % explosionEffects;
         } while(chosenEffect == lastEffect || chosenEffect == 0);
-        lastEffect = chosenEffect;
-    }
     
+    NSLog(@"explosion: %d, id: %d", chosenEffect, explosionEffect[chosenEffect]);
+    lastEffect = chosenEffect;
     return explosionEffect[chosenEffect];
 }
 

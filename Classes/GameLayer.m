@@ -77,8 +77,10 @@
     if(running) {
         if(paused)
             [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.paused", @"Paused")];
-        else
+        else {
             [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.unpaused", @"Unpaused")];
+            [[GorillasAudioController get] playEffectNamed:@"Go"];
+        }
     }
 }
 
@@ -291,10 +293,13 @@
             
             // Message in case we level up.
             if(![oldLevel isEqualToString:[[GorillasConfig get] levelName]]) {
-                if(score > 0)
+                if(score > 0) {
                     [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.level.up", @"Level Up!")];
-                else
+                    [[GorillasAudioController get] playEffectNamed:@"Level_Up"];
+                } else {
                     [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.level.down", @"Level Down")];
+                    [[GorillasAudioController get] playEffectNamed:@"Level_Down"];
+                }
             }
         }
         
@@ -581,6 +586,7 @@
     running = YES;
 
     [self setPausedSilently:NO];
+    [[GorillasAudioController get] playEffectNamed:@"Go"];
 }
 
 

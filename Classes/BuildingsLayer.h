@@ -48,6 +48,8 @@
     cpVect              *throwHistory;
     NSMutableArray      *throwHints;
     
+    SystemSoundID       goEffect;
+    
 #ifdef _DEBUG_
     NSUInteger          dbgTraceStep;
     NSUInteger          dbgPathMaxInd;
