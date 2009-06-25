@@ -20,18 +20,6 @@
        |     |     |     |     |     |     |     |     |     |     |
        |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|
 
-indexA  = 1
-indexB  = 8
-
-spots   = 8 = indexB - indexA + 1
-
-    gorillas        min space           (x-2)(x-1)/2
-        2               3               (2-2)(2-1)/2 = 0
-        3               1               (3-2)(3-1)/2 = 1
-        4               0               (4-2)(4-1)/2 = 3
-
-space   = spots / gorillas
-
 
 1.2.3
  .  Can level up/down when not in dynamic?
@@ -41,7 +29,7 @@ space   = spots / gorillas
  x  Add toggle option for vocals.
  .  Star motion is unreal.
  .  Give banana model arms?
- .  Use a minimum space inbetween players depending on total player count.
+ x  Use a minimum space inbetween players depending on total player count.
  .  Give gorillas lives in Team Game?
  .  Make gorilla projectiles smaller
  .  Make sure ar.lproj/guide.txt mentions JRL instead of GPL

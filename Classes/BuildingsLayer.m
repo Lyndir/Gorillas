@@ -661,7 +661,10 @@
         indexB -= 2;
     }
     // Distribute gorillas.
-    NSUInteger delta = indexB - indexA;
+    NSUInteger delta    = indexB - indexA;
+    NSInteger minSpace  = (delta - 1) / 2 - ([gorillas count] - 2) * 2;
+    if(minSpace < 0)
+        minSpace = 0;
     if ([gorillas count] > delta)
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:@"Tried to start a game with more gorillas than there's room in the field." userInfo:nil];
@@ -669,16 +672,19 @@
     NSMutableArray *gorillasQueue = [gorillas mutableCopy];
     NSMutableArray *gorillaIndexes = [[NSMutableArray alloc] initWithCapacity: [gorillas count]];
     while ([gorillasQueue count]) {
-        NSUInteger index = indexA + random() % delta;
-        BOOL indexIsInUse = NO;
+        NSUInteger index = indexA + random() % (delta + 1);
+        BOOL validIndex = YES;
+        
+        if (index - minSpace <= indexA && index + minSpace >= indexB)
+            validIndex = NO;
         
         for (NSNumber *gorillasIndex in gorillaIndexes)
-            if ([gorillasIndex unsignedIntegerValue] == index) {
-                indexIsInUse = YES;
+            if (abs([gorillasIndex unsignedIntegerValue] - index) <= minSpace) {
+                validIndex = NO;
                 break;
             }
         
-        if (!indexIsInUse) {
+        if (validIndex) {
             [gorillaIndexes addObject:[NSNumber numberWithUnsignedInt:index]];
             [gorillasQueue removeLastObject];
         }
