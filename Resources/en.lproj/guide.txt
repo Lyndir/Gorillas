@@ -135,6 +135,6 @@
 ===== NEXT PAGE =====
 -Open Source
 
-    The Gorillas source code is freely available and licensed to anyone under the terms of the General Public License, version 2 (GPLv2).
+    The Gorillas source code is freely available and licensed to anyone under the terms of the Java Research License.
 
-    For more information or to report problems, visit http://gorillas.lyndir.com/.
+    For more information or to report problems, visit http://gorillas.lhunath.com/.
