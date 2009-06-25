@@ -72,10 +72,10 @@ typedef enum {
     GorillasModeClassic     = GorillasFeatureScore      | GorillasFeatureLevel,
     
     /** Dynamic Game.               */
-    GorillasModeDynamic     = GorillasFeatureSkill      | GorillasFeatureScore  | GorillasFeatureLevel,
+    GorillasModeDynamic     = GorillasFeatureSkill      | GorillasFeatureScore      | GorillasFeatureLevel,
     
     /** Team Game.                  */
-    GorillasModeTeam        = GorillasFeatureScore      | GorillasFeatureTeam,
+    GorillasModeTeam        = GorillasFeatureLivesPl    | GorillasFeatureLivesAi    | GorillasFeatureTeam,
     
     /** Last Man Standing.          */
     GorillasModeLMS         = GorillasFeatureLivesPl    | GorillasFeatureLivesAi,

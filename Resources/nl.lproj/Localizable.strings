@@ -48,6 +48,7 @@
 "entries.choose.custom"                 = "Aangepast...";
 "entries.choose.follow"                 = "Volg Worpen";
 "entries.choose.fx.sound"               = "Geluidseffecten";
+"entries.choose.fx.voice"               = "Vocale Effecten";
 "entries.choose.fx.vibration"           = "Vibratie";
 "entries.choose.fx.visual"              = "Visuele effecten";
 "entries.choose.fx.weather"             = "Weerseffecten";

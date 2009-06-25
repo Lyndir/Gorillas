@@ -48,6 +48,7 @@
 "entries.choose.custom"                 = "Custom Game...";
 "entries.choose.follow"                 = "Follow Throw";
 "entries.choose.fx.sound"               = "Sound Effects";
+"entries.choose.fx.voice"               = "Voice Effects";
 "entries.choose.fx.vibration"           = "Vibration";
 "entries.choose.fx.visual"              = "Visual Effects";
 "entries.choose.fx.weather"             = "Weather";

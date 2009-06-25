@@ -79,7 +79,8 @@
             [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.paused", @"Paused")];
         else {
             [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.unpaused", @"Unpaused")];
-            [[GorillasAudioController get] playEffectNamed:@"Go"];
+            if ([GorillasConfig get].voice)
+                [[GorillasAudioController get] playEffectNamed:@"Go"];
         }
     }
 }
@@ -295,10 +296,12 @@
             if(![oldLevel isEqualToString:[[GorillasConfig get] levelName]]) {
                 if(score > 0) {
                     [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.level.up", @"Level Up!")];
-                    [[GorillasAudioController get] playEffectNamed:@"Level_Up"];
+                    if ([GorillasConfig get].voice)
+                        [[GorillasAudioController get] playEffectNamed:@"Level_Up"];
                 } else {
                     [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.level.down", @"Level Down")];
-                    [[GorillasAudioController get] playEffectNamed:@"Level_Down"];
+                    if ([GorillasConfig get].voice)
+                        [[GorillasAudioController get] playEffectNamed:@"Level_Down"];
                 }
             }
         }
@@ -481,7 +484,7 @@
     
     [super onEnter];
     
-    if ([[GorillasConfig get] weather])
+    if ([[GorillasConfig get] visualFx])
         [self schedule:@selector(updateWeather:) interval:1];
     [self schedule:@selector(randomEncounter:) interval:1];
 }
@@ -498,7 +501,7 @@
 
 -(void) updateWeather:(ccTime)dt {
     
-    if (![[GorillasConfig get] weather] && [weather active])
+    if (![[GorillasConfig get] visualFx] && [weather active])
         [weather stopSystem];
     
     if (![weather emissionRate]) {
@@ -517,7 +520,7 @@
             [weather release];
             weather = nil;
             
-            if ([[GorillasConfig get] weather] && random() % 10 == 0) {
+            if ([[GorillasConfig get] visualFx] && random() % 10 == 0) {
                 // 10% chance to start snow/rain when weather is enabled.
             
                 switch (random() % 2) {
@@ -586,7 +589,9 @@
     running = YES;
 
     [self setPausedSilently:NO];
-    [[GorillasAudioController get] playEffectNamed:@"Go"];
+
+    if ([GorillasConfig get].voice)
+        [[GorillasAudioController get] playEffectNamed:@"Go"];
 }
 
 

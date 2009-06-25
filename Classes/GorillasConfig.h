@@ -104,8 +104,8 @@
 @property (nonatomic, readwrite, assign) NSString      *currentTrack;
 @property (nonatomic, readonly, assign) NSString       *currentTrackName;
 
-@property (nonatomic, readwrite) BOOL                  weather;
 @property (nonatomic, readwrite) BOOL                  soundFx;
+@property (nonatomic, readwrite) BOOL                  voice;
 @property (nonatomic, readwrite) BOOL                  vibration;
 @property (nonatomic, readwrite) BOOL                  visualFx;
 

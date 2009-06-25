@@ -68,8 +68,8 @@
 #define dBonusSkill         @"v1.1.bonusSkill"
 #define dDeathScoreRatio    @"v1.0.deathScoreRatio"
 
-#define dWeather            @"v1.0.weather"
 #define dSoundFx            @"v1.1.soundFx"
+#define dVoice              @"v1.3.voice"
 #define dVibration          @"v1.1.vibration"
 #define dVisualFx           @"v1.1.visualFx"
 
@@ -204,8 +204,8 @@
                                 [NSNumber numberWithFloat:      0.5f],                      dTransitionDuration,
                                 [NSNumber numberWithFloat:      0.5f],                      dGameScrollDuration,
                                 
-                                [NSNumber numberWithBool:    YES],                          dWeather,
                                 [NSNumber numberWithBool:    YES],                          dSoundFx,
+                                [NSNumber numberWithBool:    YES],                          dVoice,
                                 [NSNumber numberWithBool:    YES],                          dVibration,
                                 [NSNumber numberWithBool:    YES],                          dVisualFx,
                                 
@@ -575,15 +575,6 @@
 
 #pragma mark Global Configuration
 
--(BOOL) weather {
-    
-    return [defaults boolForKey: dWeather];
-}
--(void) setWeather: (BOOL)nWeather {
-    
-    [defaults setBool:nWeather forKey: dWeather];
-    [[GorillasAppDelegate get] updateConfig];
-}
 -(BOOL) soundFx {
     
     return [defaults boolForKey: dSoundFx];
@@ -591,6 +582,15 @@
 -(void) setSoundFx: (BOOL)nSoundFx {
     
     [defaults setBool:nSoundFx forKey: dSoundFx];
+    [[GorillasAppDelegate get] updateConfig];
+}
+-(BOOL) voice {
+    
+    return [defaults boolForKey: dVoice];
+}
+-(void) setVoice: (BOOL)nVoice {
+    
+    [defaults setBool:nVoice forKey: dVoice];
     [[GorillasAppDelegate get] updateConfig];
 }
 -(BOOL) vibration {

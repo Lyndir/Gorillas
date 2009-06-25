@@ -1,8 +1,10 @@
+
+1.2.3
  .  Can level up/down when not in dynamic?
  .  Explosion #2 is mute.
- .  Hide "Go" in multiplayer or say "Go" on it too.
- .  Merge Weather into Visual Effects.
- .  Add toggle option for vocals.
+ x  Hide "Go" in multiplayer or say "Go" on it too.
+ x  Merge Weather into Visual Effects.
+ x  Add toggle option for vocals.
  .  Star motion is unreal.
  .  Give banana model arms?
  .  Use a minimum space inbetween players depending on total player count.

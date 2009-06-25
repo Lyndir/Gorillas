@@ -78,18 +78,17 @@
                                                 target:self
                                               selector:@selector(soundFx:)];
     
-    
-    // Vibration.
+    // Voice.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *vibrationT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.vibration", @"Vibration")];
-    [vibrationT setIsEnabled:NO];
+    MenuItem *voiceT = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.voice", @"Voice Effects")];
+    [voiceT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *vibrationI  = [MenuItemFont itemFromString:[[GorillasConfig get] vibration]?
-                             NSLocalizedString(@"entries.on", @"On"): NSLocalizedString(@"entries.off", @"Off")
+    MenuItem *voiceI  = [MenuItemFont itemFromString:[[GorillasConfig get] voice]?
+                           NSLocalizedString(@"entries.on", @"On"): NSLocalizedString(@"entries.off", @"Off")
                                                 target:self
-                                              selector:@selector(vibration:)];
+                                              selector:@selector(voice:)];
     
     
     // Visual Effects.
@@ -104,20 +103,21 @@
                                                  target:self
                                                selector:@selector(visualFx:)];
     
-    // Weather.
+    
+    // Vibration.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *weatherT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.weather", @"Weather")];
-    [weatherT setIsEnabled:NO];
+    MenuItem *vibrationT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.vibration", @"Vibration")];
+    [vibrationT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *weatherI  = [MenuItemFont itemFromString:[[GorillasConfig get] weather]?
-                           NSLocalizedString(@"entries.on", @"On"): NSLocalizedString(@"entries.off", @"Off")
-                                                target:self
-                                              selector:@selector(weather:)];
+    MenuItem *vibrationI  = [MenuItemFont itemFromString:[[GorillasConfig get] vibration]?
+                             NSLocalizedString(@"entries.on", @"On"): NSLocalizedString(@"entries.off", @"Off")
+                                                  target:self
+                                                selector:@selector(vibration:)];
     
     
-    menu = [[Menu menuWithItems:audioT, audioI, soundFxT, vibrationT, soundFxI, vibrationI, visualFxT, weatherT, visualFxI, weatherI, nil] retain];
+    menu = [[Menu menuWithItems:audioT, audioI, soundFxT, voiceT, soundFxI, voiceI, visualFxT, vibrationT, visualFxI, vibrationI, nil] retain];
     [menu alignItemsInColumns:
      [NSNumber numberWithUnsignedInteger:1],
      [NSNumber numberWithUnsignedInteger:1],
@@ -199,10 +199,10 @@
 }
 
 
--(void) weather: (id) sender {
+-(void) voice: (id) sender {
     
     [[GorillasAudioController get] clickEffect];
-    [[GorillasConfig get] setWeather:![[GorillasConfig get] weather]];
+    [[GorillasConfig get] setVoice:![[GorillasConfig get] voice]];
 }
 
 

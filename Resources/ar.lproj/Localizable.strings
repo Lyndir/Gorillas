@@ -48,6 +48,7 @@
 "entries.choose.custom"                 = "لعبة معدلة...";
 "entries.choose.follow"                 = "تتبّع الرمية";
 "entries.choose.fx.sound"               = "مؤثرات صوتية";
+"entries.choose.fx.voice"               = "Voice Effects";
 "entries.choose.fx.vibration"           = "الهزاز";
 "entries.choose.fx.visual"              = "مؤثرات مرئية";
 "entries.choose.fx.weather"             = "الطقس";
