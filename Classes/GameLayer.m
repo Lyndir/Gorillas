@@ -471,9 +471,8 @@
     [self addChild:windLayer z:5];
     [windLayer setPosition:cpv(winSize.width / 2, winSize.height - 15)];
 
-    // Make sure we're paused, hide HUD and show status bar.
-    [self setPausedSilently:YES];
-
+    paused = YES;
+    
     return self;
 }
 
@@ -481,6 +480,8 @@
 -(void) onEnter {
     
     [super onEnter];
+    
+    [self setPausedSilently:YES];
     
     if ([[GorillasConfig get] visualFx])
         [self schedule:@selector(updateWeather:) interval:1];
@@ -491,6 +492,8 @@
 -(void) onExit {
 
     [super onExit];
+    
+    [self setPausedSilently:YES];
     
     [self unschedule:@selector(updateWeather:)];
     [self unschedule:@selector(randomEncounter:)];

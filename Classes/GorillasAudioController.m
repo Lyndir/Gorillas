@@ -75,7 +75,6 @@
         NSString *track = nextTrack;
         if([track isEqualToString:@"random"])
             track = [GorillasConfig get].randomTrack;
-        NSLog(@"%@", track);
         NSURL *nextUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:track ofType:nil]];
         
         if(audioPlayer != nil && ![audioPlayer.url isEqual:nextUrl]) {
@@ -143,7 +142,6 @@
     SystemSoundID soundFileObject;
     AudioServicesCreateSystemSoundID(soundFileURLRef, &soundFileObject);
     CFRelease(soundFileURLRef);
-    NSLog(@"loaded %@ into %d", bundleRef, soundFileObject);
     
     return soundFileObject;
 }

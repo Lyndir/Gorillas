@@ -251,7 +251,6 @@ static ParticleSystem **flameTypes = nil;
             chosenEffect = random() % explosionEffects;
         } while(chosenEffect == lastEffect || chosenEffect == 0);
     
-    NSLog(@"explosion: %d, id: %d", chosenEffect, explosionEffect[chosenEffect]);
     lastEffect = chosenEffect;
     return explosionEffect[chosenEffect];
 }
