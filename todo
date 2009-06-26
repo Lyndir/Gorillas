@@ -27,9 +27,9 @@
  x  Hide "Go" in multiplayer or say "Go" on it too.
  x  Merge Weather into Visual Effects.
  x  Add toggle option for vocals.
- .  Star motion is unreal.
+ x  Make star motion more realistic.
  .  Give banana model arms?
  x  Use a minimum space inbetween players depending on total player count.
- .  Give gorillas lives in Team Game?
+ x  Give gorillas lives in Team Game?
  .  Make gorilla projectiles smaller
  .  Make sure ar.lproj/guide.txt mentions JRL instead of GPL

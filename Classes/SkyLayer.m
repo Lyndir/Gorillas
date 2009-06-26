@@ -23,7 +23,7 @@
 //
 
 #import "SkyLayer.h"
-#define maxStarSize 2
+#define maxStarSize 3
 
 
 @implementation SkyLayer
@@ -31,13 +31,14 @@
 @synthesize contentSize;
 
 
--(id) init {
+-(id) initWidthDepth:(float)aDepth {
     
 	if (!(self = [super init]))
         return self;
     
     starVertexBuffer    = 0;
     starCount           = -1;
+    depth               = aDepth;
     
     [self reset];
     
@@ -60,11 +61,11 @@
         starVertices[s].p   = cpv(random() % (long) contentSize.width,
                                   random() % (long) contentSize.height);
         starVertices[s].c   = ccc([GorillasConfig get].starColor);
-        starVertices[s].c.a = fminf(0xff, (random() % (int) (starVertices[s].c.a * 256)) / 256.0f);
-        starVertices[s].s   = (random() % (maxStarSize * 10)) / 10.0f + 0.5f;
+        //starVertices[s].c.a *= depth;
+        starVertices[s].s   = fmaxf(1.0f, maxStarSize * powf(depth, 3));
     }
     
-    // Push our window data into VBOs.
+    // Push our window data into the VBO.
     glDeleteBuffers(1, &starVertexBuffer);
     glGenBuffers(1, &starVertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);

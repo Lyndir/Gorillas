@@ -38,7 +38,7 @@
 -(PanAction *) initWithSubNodes: (NSMutableArray *)nSubNodes duration: (ccTime)nDuration padding: (int)nPadding {
 
     CocosNode<CocosNodeSize> *firstNode = [nSubNodes objectAtIndex:0];
-    if(!(self = [super initWithDuration:nDuration position:cpv(-[firstNode contentSize].width - nPadding, 0)]))
+    if(!(self = [super initWithDuration:nDuration position:cpv(-([firstNode contentSize].width + nPadding), 0)]))
         return self;
     
     subNodes = [nSubNodes retain];

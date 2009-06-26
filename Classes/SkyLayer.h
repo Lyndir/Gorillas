@@ -33,7 +33,9 @@ typedef struct _Star {
 
 @interface SkyLayer : Layer <CocosNodeSize, Resettable> {
 
+@private
     CGSize      contentSize;
+    float       depth;
     
     GLuint      starVertexBuffer;
     NSUInteger  starCount;
@@ -41,5 +43,10 @@ typedef struct _Star {
 
 @property (nonatomic, readonly) CGSize contentSize;
 
+
+#pragma mark ###############################
+#pragma mark Lifecycle
+
+-(id) initWidthDepth:(float)aDepth;
 
 @end

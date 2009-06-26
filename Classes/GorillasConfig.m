@@ -45,7 +45,7 @@
 
 #define dSkyColor           @"v1.0.skyColor"
 #define dStarColor          @"v1.0.starColor"
-#define dStarSpeed          @"v1.0.starSpeed"
+#define dStarSpeed          @"v1.3.starSpeed"
 #define dStarAmount         @"v1.0.starAmount"
 
 #define dLives              @"v1.1.lives"
@@ -189,7 +189,7 @@
      
                                 [NSNumber numberWithLong:       [theme skyColor]],          dSkyColor,
                                 [NSNumber numberWithLong:       [theme starColor]],         dStarColor,
-                                [NSNumber numberWithInteger:    30],                        dStarSpeed,
+                                [NSNumber numberWithInteger:    150],                       dStarSpeed,
                                 [NSNumber numberWithInteger:    [theme starAmount]],        dStarAmount,
                                 
                                 [NSNumber numberWithInteger:    3],                         dLives,
@@ -202,13 +202,13 @@
                                 [NSNumber numberWithFloat:      0.5f],                      dTransitionDuration,
                                 [NSNumber numberWithFloat:      0.5f],                      dGameScrollDuration,
                                 
-                                [NSNumber numberWithBool:    YES],                          dSoundFx,
-                                [NSNumber numberWithBool:    YES],                          dVoice,
-                                [NSNumber numberWithBool:    YES],                          dVibration,
-                                [NSNumber numberWithBool:    YES],                          dVisualFx,
+                                [NSNumber numberWithBool:       YES],                       dSoundFx,
+                                [NSNumber numberWithBool:       YES],                       dVoice,
+                                [NSNumber numberWithBool:       YES],                       dVibration,
+                                [NSNumber numberWithBool:       YES],                       dVisualFx,
                                 
-                                [NSNumber numberWithBool:    YES],                          dReplay,
-                                [NSNumber numberWithBool:    YES],                          dFollowThrow,
+                                [NSNumber numberWithBool:       YES],                       dReplay,
+                                [NSNumber numberWithBool:       YES],                       dFollowThrow,
                                 
                                 [NSArray arrayWithObjects:
                                  @"Fighting_Gorillas.mp3",

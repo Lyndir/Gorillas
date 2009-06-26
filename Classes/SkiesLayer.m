@@ -35,21 +35,31 @@
     if (!(self = [super init]))
 		return self;
     
-    float x = 0;
+    float x = -[[Director sharedDirector] winSize].width;
     
     skyColor = [[GorillasConfig get] skyColor];
     fancySky = [[GorillasConfig get] visualFx];
     
     skies = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < 3; ++i) {
+        NSInteger step = 0;
         
-        const SkyLayer *sky =  [SkyLayer node];
-        [skies addObject: sky];
+        for (int j = 0; j < 4; ++j) {
+            float depth = j / 8.0f + 0.5f;
+            
+            const SkyLayer *sky =  [[SkyLayer alloc] initWidthDepth:depth];
+            [skies addObject: sky];
+            
+            [sky setPosition: cpv(x, 0)];
+            float px = 1 + powf(depth, 20);
+            NSLog(@"depth: %f, px: %f", depth, px);
+            [self addChild: sky z:1 parallaxRatio:cpv(px, 1)];
+            
+            step = [sky contentSize].width;
+            [sky release];
+        }
         
-        [sky setPosition: cpv(x, 0)];
-        [self addChild: sky z:1];
-
-        x += [sky contentSize].width;
+        x += step;
     }
     
     [self runAction:[PanAction actionWithSubNodes:skies duration:[[GorillasConfig get] starSpeed] padding:0]];

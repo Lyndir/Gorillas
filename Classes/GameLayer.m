@@ -463,7 +463,7 @@
     panningLayer = [[PanningLayer alloc] init];
     [panningLayer setTransformAnchor:cpvzero];
     [panningLayer addChild:buildingsLayer z:0];
-    [panningLayer addChild:skiesLayer z:-5 parallaxRatio:cpv(0.3f, 0.8f)];
+    [panningLayer addChild:skiesLayer z:-5/* parallaxRatio:cpv(0.3f, 0.8f)*/];
     [self addChild:panningLayer];
     
     windLayer = [[WindLayer alloc] init];
