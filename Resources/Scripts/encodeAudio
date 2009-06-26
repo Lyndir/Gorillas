@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+set -e
+
+target=$1; shift
+
+for file; do
+    case $target in
+        mp3) sox "$file" -S -r 22k -c 1 -L "${file%.*}.mp3" ;;
+        caf) afconvert -d 'ima4' -f 'caff' "${file%.*}.mp3" "${file%.*}.caf" ;;
+    esac
+done

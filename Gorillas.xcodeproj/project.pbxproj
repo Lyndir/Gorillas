@@ -231,22 +231,6 @@
 		DA12970E0FF23232000A8051 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = DA1297080FF23232000A8051 /* iTunesArtwork.png */; };
 		DA12970F0FF23232000A8051 /* iTunesArtwork-lite.png in Resources */ = {isa = PBXBuildFile; fileRef = DA1297070FF23232000A8051 /* iTunesArtwork-lite.png */; };
 		DA1297100FF23232000A8051 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = DA1297080FF23232000A8051 /* iTunesArtwork.png */; };
-		DA12977F0FF2ADA8000A8051 /* Go.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977B0FF2ADA8000A8051 /* Go.caf */; };
-		DA1297800FF2ADA8000A8051 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977C0FF2ADA8000A8051 /* Level_Down.caf */; };
-		DA1297810FF2ADA8000A8051 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977D0FF2ADA8000A8051 /* Level_Up.caf */; };
-		DA1297820FF2ADA8000A8051 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977E0FF2ADA8000A8051 /* Next_Player.caf */; };
-		DA1297830FF2ADA8000A8051 /* Go.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977B0FF2ADA8000A8051 /* Go.caf */; };
-		DA1297840FF2ADA8000A8051 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977C0FF2ADA8000A8051 /* Level_Down.caf */; };
-		DA1297850FF2ADA8000A8051 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977D0FF2ADA8000A8051 /* Level_Up.caf */; };
-		DA1297860FF2ADA8000A8051 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977E0FF2ADA8000A8051 /* Next_Player.caf */; };
-		DA1297870FF2ADA8000A8051 /* Go.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977B0FF2ADA8000A8051 /* Go.caf */; };
-		DA1297880FF2ADA8000A8051 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977C0FF2ADA8000A8051 /* Level_Down.caf */; };
-		DA1297890FF2ADA8000A8051 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977D0FF2ADA8000A8051 /* Level_Up.caf */; };
-		DA12978A0FF2ADA8000A8051 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977E0FF2ADA8000A8051 /* Next_Player.caf */; };
-		DA12978B0FF2ADA8000A8051 /* Go.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977B0FF2ADA8000A8051 /* Go.caf */; };
-		DA12978C0FF2ADA8000A8051 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977C0FF2ADA8000A8051 /* Level_Down.caf */; };
-		DA12978D0FF2ADA8000A8051 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977D0FF2ADA8000A8051 /* Level_Up.caf */; };
-		DA12978E0FF2ADA8000A8051 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA12977E0FF2ADA8000A8051 /* Next_Player.caf */; };
 		DA16C5190EEC856200E46246 /* ShadeTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DA16C5180EEC856200E46246 /* ShadeTo.m */; };
 		DA1816260F0E227C0064F470 /* ConfigurationSectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816250F0E227C0064F470 /* ConfigurationSectionLayer.m */; };
 		DA1816470F0E24D80064F470 /* AVConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816460F0E24D80064F470 /* AVConfigurationLayer.m */; };
@@ -434,6 +418,22 @@
 		DA476A2D0FDD8002002E74F8 /* FullGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA476A2B0FDD8002002E74F8 /* FullGameLayer.m */; };
 		DA476A2E0FDD8002002E74F8 /* FullGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA476A2B0FDD8002002E74F8 /* FullGameLayer.m */; };
 		DA476A2F0FDD8002002E74F8 /* FullGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA476A2B0FDD8002002E74F8 /* FullGameLayer.m */; };
+		DA487C750FF5778700EEE2E9 /* Go.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C6D0FF5778700EEE2E9 /* Go.caf */; };
+		DA487C760FF5778700EEE2E9 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C6F0FF5778700EEE2E9 /* Level_Down.caf */; };
+		DA487C770FF5778700EEE2E9 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C710FF5778700EEE2E9 /* Level_Up.caf */; };
+		DA487C780FF5778700EEE2E9 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C730FF5778700EEE2E9 /* Next_Player.caf */; };
+		DA487C790FF5778700EEE2E9 /* Go.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C6D0FF5778700EEE2E9 /* Go.caf */; };
+		DA487C7A0FF5778700EEE2E9 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C6F0FF5778700EEE2E9 /* Level_Down.caf */; };
+		DA487C7B0FF5778700EEE2E9 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C710FF5778700EEE2E9 /* Level_Up.caf */; };
+		DA487C7C0FF5778700EEE2E9 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C730FF5778700EEE2E9 /* Next_Player.caf */; };
+		DA487C7D0FF5778700EEE2E9 /* Go.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C6D0FF5778700EEE2E9 /* Go.caf */; };
+		DA487C7E0FF5778700EEE2E9 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C6F0FF5778700EEE2E9 /* Level_Down.caf */; };
+		DA487C7F0FF5778700EEE2E9 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C710FF5778700EEE2E9 /* Level_Up.caf */; };
+		DA487C800FF5778700EEE2E9 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C730FF5778700EEE2E9 /* Next_Player.caf */; };
+		DA487C810FF5778700EEE2E9 /* Go.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C6D0FF5778700EEE2E9 /* Go.caf */; };
+		DA487C820FF5778700EEE2E9 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C6F0FF5778700EEE2E9 /* Level_Down.caf */; };
+		DA487C830FF5778700EEE2E9 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C710FF5778700EEE2E9 /* Level_Up.caf */; };
+		DA487C840FF5778700EEE2E9 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C730FF5778700EEE2E9 /* Next_Player.caf */; };
 		DA4E5D090F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
 		DA4E5D0A0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
 		DA4E5D0C0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
@@ -919,10 +919,6 @@
 		DA126C8E0EDDF19100EADDE2 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
 		DA1297070FF23232000A8051 /* iTunesArtwork-lite.png */ = {isa = PBXFileReference; explicitFileType = file; path = "iTunesArtwork-lite.png"; sourceTree = "<group>"; };
 		DA1297080FF23232000A8051 /* iTunesArtwork.png */ = {isa = PBXFileReference; explicitFileType = file; path = iTunesArtwork.png; sourceTree = "<group>"; };
-		DA12977B0FF2ADA8000A8051 /* Go.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Go.caf; sourceTree = "<group>"; };
-		DA12977C0FF2ADA8000A8051 /* Level_Down.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Level_Down.caf; sourceTree = "<group>"; };
-		DA12977D0FF2ADA8000A8051 /* Level_Up.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Level_Up.caf; sourceTree = "<group>"; };
-		DA12977E0FF2ADA8000A8051 /* Next_Player.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Next_Player.caf; sourceTree = "<group>"; };
 		DA16C3250EEBDE7900E46246 /* Resettable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resettable.h; sourceTree = "<group>"; };
 		DA16C5170EEC855900E46246 /* ShadeTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadeTo.h; sourceTree = "<group>"; };
 		DA16C5180EEC856200E46246 /* ShadeTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadeTo.m; sourceTree = "<group>"; };
@@ -970,6 +966,14 @@
 		DA4769F80FDD7334002E74F8 /* Gorillas Lite Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas Lite Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA476A2A0FDD8002002E74F8 /* FullGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullGameLayer.h; sourceTree = "<group>"; };
 		DA476A2B0FDD8002002E74F8 /* FullGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullGameLayer.m; sourceTree = "<group>"; };
+		DA487C6E0FF5778700EEE2E9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = file; name = ar; path = Resources/ar.lproj/Go.caf; sourceTree = SOURCE_ROOT; };
+		DA487C700FF5778700EEE2E9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = file; name = ar; path = Resources/ar.lproj/Level_Down.caf; sourceTree = SOURCE_ROOT; };
+		DA487C720FF5778700EEE2E9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = file; name = ar; path = Resources/ar.lproj/Level_Up.caf; sourceTree = SOURCE_ROOT; };
+		DA487C740FF5778700EEE2E9 /* ar */ = {isa = PBXFileReference; lastKnownFileType = file; name = ar; path = Resources/ar.lproj/Next_Player.caf; sourceTree = SOURCE_ROOT; };
+		DA487C850FF5779500EEE2E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = Resources/en.lproj/Go.caf; sourceTree = SOURCE_ROOT; };
+		DA487C860FF5779500EEE2E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = Resources/en.lproj/Level_Down.caf; sourceTree = SOURCE_ROOT; };
+		DA487C870FF5779500EEE2E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = Resources/en.lproj/Level_Up.caf; sourceTree = SOURCE_ROOT; };
+		DA487C880FF5779500EEE2E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = Resources/en.lproj/Next_Player.caf; sourceTree = SOURCE_ROOT; };
 		DA4E5D070F7FE5B9007BE3B9 /* GorillasAudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillasAudioController.h; sourceTree = "<group>"; };
 		DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillasAudioController.m; sourceTree = "<group>"; };
 		DA4F49F70EF3243C0062E0E8 /* InformationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationLayer.h; sourceTree = "<group>"; };
@@ -1464,10 +1468,10 @@
 		DA1297750FF2AD2E000A8051 /* Voice */ = {
 			isa = PBXGroup;
 			children = (
-				DA12977B0FF2ADA8000A8051 /* Go.caf */,
-				DA12977C0FF2ADA8000A8051 /* Level_Down.caf */,
-				DA12977D0FF2ADA8000A8051 /* Level_Up.caf */,
-				DA12977E0FF2ADA8000A8051 /* Next_Player.caf */,
+				DA487C6D0FF5778700EEE2E9 /* Go.caf */,
+				DA487C6F0FF5778700EEE2E9 /* Level_Down.caf */,
+				DA487C710FF5778700EEE2E9 /* Level_Up.caf */,
+				DA487C730FF5778700EEE2E9 /* Next_Player.caf */,
 			);
 			path = Voice;
 			sourceTree = "<group>";
@@ -1934,10 +1938,10 @@
 				DAE489F20FEEEDDA00E9017C /* InfoPlist.strings in Resources */,
 				DA12970B0FF23232000A8051 /* iTunesArtwork-lite.png in Resources */,
 				DA12970C0FF23232000A8051 /* iTunesArtwork.png in Resources */,
-				DA1297830FF2ADA8000A8051 /* Go.caf in Resources */,
-				DA1297840FF2ADA8000A8051 /* Level_Down.caf in Resources */,
-				DA1297850FF2ADA8000A8051 /* Level_Up.caf in Resources */,
-				DA1297860FF2ADA8000A8051 /* Next_Player.caf in Resources */,
+				DA487C790FF5778700EEE2E9 /* Go.caf in Resources */,
+				DA487C7A0FF5778700EEE2E9 /* Level_Down.caf in Resources */,
+				DA487C7B0FF5778700EEE2E9 /* Level_Up.caf in Resources */,
+				DA487C7C0FF5778700EEE2E9 /* Next_Player.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2017,10 +2021,10 @@
 				DAE489F40FEEEDDA00E9017C /* InfoPlist.strings in Resources */,
 				DA12970F0FF23232000A8051 /* iTunesArtwork-lite.png in Resources */,
 				DA1297100FF23232000A8051 /* iTunesArtwork.png in Resources */,
-				DA12978B0FF2ADA8000A8051 /* Go.caf in Resources */,
-				DA12978C0FF2ADA8000A8051 /* Level_Down.caf in Resources */,
-				DA12978D0FF2ADA8000A8051 /* Level_Up.caf in Resources */,
-				DA12978E0FF2ADA8000A8051 /* Next_Player.caf in Resources */,
+				DA487C810FF5778700EEE2E9 /* Go.caf in Resources */,
+				DA487C820FF5778700EEE2E9 /* Level_Down.caf in Resources */,
+				DA487C830FF5778700EEE2E9 /* Level_Up.caf in Resources */,
+				DA487C840FF5778700EEE2E9 /* Next_Player.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2100,10 +2104,10 @@
 				DAE489F10FEEEDDA00E9017C /* InfoPlist.strings in Resources */,
 				DA1297090FF23232000A8051 /* iTunesArtwork-lite.png in Resources */,
 				DA12970A0FF23232000A8051 /* iTunesArtwork.png in Resources */,
-				DA12977F0FF2ADA8000A8051 /* Go.caf in Resources */,
-				DA1297800FF2ADA8000A8051 /* Level_Down.caf in Resources */,
-				DA1297810FF2ADA8000A8051 /* Level_Up.caf in Resources */,
-				DA1297820FF2ADA8000A8051 /* Next_Player.caf in Resources */,
+				DA487C750FF5778700EEE2E9 /* Go.caf in Resources */,
+				DA487C760FF5778700EEE2E9 /* Level_Down.caf in Resources */,
+				DA487C770FF5778700EEE2E9 /* Level_Up.caf in Resources */,
+				DA487C780FF5778700EEE2E9 /* Next_Player.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2183,10 +2187,10 @@
 				DAE489F30FEEEDDA00E9017C /* InfoPlist.strings in Resources */,
 				DA12970D0FF23232000A8051 /* iTunesArtwork-lite.png in Resources */,
 				DA12970E0FF23232000A8051 /* iTunesArtwork.png in Resources */,
-				DA1297870FF2ADA8000A8051 /* Go.caf in Resources */,
-				DA1297880FF2ADA8000A8051 /* Level_Down.caf in Resources */,
-				DA1297890FF2ADA8000A8051 /* Level_Up.caf in Resources */,
-				DA12978A0FF2ADA8000A8051 /* Next_Player.caf in Resources */,
+				DA487C7D0FF5778700EEE2E9 /* Go.caf in Resources */,
+				DA487C7E0FF5778700EEE2E9 /* Level_Down.caf in Resources */,
+				DA487C7F0FF5778700EEE2E9 /* Level_Up.caf in Resources */,
+				DA487C800FF5778700EEE2E9 /* Next_Player.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2748,6 +2752,42 @@
 				DA36A2250FE82F4300691DB7 /* ar */,
 			);
 			name = skip.png;
+			sourceTree = "<group>";
+		};
+		DA487C6D0FF5778700EEE2E9 /* Go.caf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA487C850FF5779500EEE2E9 /* en */,
+				DA487C6E0FF5778700EEE2E9 /* ar */,
+			);
+			name = Go.caf;
+			sourceTree = "<group>";
+		};
+		DA487C6F0FF5778700EEE2E9 /* Level_Down.caf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA487C860FF5779500EEE2E9 /* en */,
+				DA487C700FF5778700EEE2E9 /* ar */,
+			);
+			name = Level_Down.caf;
+			sourceTree = "<group>";
+		};
+		DA487C710FF5778700EEE2E9 /* Level_Up.caf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA487C870FF5779500EEE2E9 /* en */,
+				DA487C720FF5778700EEE2E9 /* ar */,
+			);
+			name = Level_Up.caf;
+			sourceTree = "<group>";
+		};
+		DA487C730FF5778700EEE2E9 /* Next_Player.caf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA487C880FF5779500EEE2E9 /* en */,
+				DA487C740FF5778700EEE2E9 /* ar */,
+			);
+			name = Next_Player.caf;
 			sourceTree = "<group>";
 		};
 		DAE489EF0FEEEDDA00E9017C /* InfoPlist.strings */ = {

@@ -1,8 +1,0 @@
-#! /usr/bin/env bash
-set -e
-
-cd "${0%/*}/../Audio"
-for file in */*flac; do
-    sox "$file" -S -r 22k -c 1 -L "${file%flac}mp3"
-    afconvert -d 'ima4' -f 'caff' "${file%flac}mp3" "${file%flac}caf"
-done
