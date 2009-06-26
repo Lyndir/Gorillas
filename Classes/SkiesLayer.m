@@ -51,7 +51,7 @@
             [skies addObject: sky];
             
             [sky setPosition: cpv(x, 0)];
-            float px = 1 + powf(depth, 20);
+            float px = 1 + powf(depth, 25);
             NSLog(@"depth: %f, px: %f", depth, px);
             [self addChild: sky z:1 parallaxRatio:cpv(px, 1)];
             

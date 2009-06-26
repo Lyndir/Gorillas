@@ -203,7 +203,7 @@
                                 [NSNumber numberWithFloat:      0.5f],                      dGameScrollDuration,
                                 
                                 [NSNumber numberWithBool:       YES],                       dSoundFx,
-                                [NSNumber numberWithBool:       YES],                       dVoice,
+                                [NSNumber numberWithBool:       NO],                        dVoice,
                                 [NSNumber numberWithBool:       YES],                       dVibration,
                                 [NSNumber numberWithBool:       YES],                       dVisualFx,
                                 

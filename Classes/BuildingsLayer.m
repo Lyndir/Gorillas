@@ -654,18 +654,18 @@
             break;
         }
     // Find indexB: The right boundary of allowed gorilla indexes.
-    NSUInteger indexB = indexA + [[GorillasConfig get] buildingAmount];
+    NSUInteger indexB = indexA + [GorillasConfig get].buildingAmount - 1;
     // Less than or 3 gorillas, leave one building padding on the sides.
     if([gorillas count] <= 3) {
         indexA += 1;
-        indexB -= 2;
+        indexB -= 1;
     }
     // Distribute gorillas.
     NSUInteger delta    = indexB - indexA;
     NSInteger minSpace  = (delta - 1) / 2 - ([gorillas count] - 2) * 2;
     if(minSpace < 0)
         minSpace = 0;
-    if ([gorillas count] > delta)
+    if (minSpace * ([gorillas count] - 1) > delta)
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:@"Tried to start a game with more gorillas than there's room in the field." userInfo:nil];
 

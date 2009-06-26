@@ -965,9 +965,9 @@
 		DA36A2270FE82F5D00691DB7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text; name = ar; path = ar.lproj/fullGame.txt; sourceTree = "<group>"; };
 		DA36A2280FE82F5D00691DB7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text; name = ar; path = ar.lproj/guide.txt; sourceTree = "<group>"; };
 		DA36A2290FE82F5D00691DB7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DA379EBC0F0964BA00541EF4 /* GorillasDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorillasDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA379EBC0F0964BA00541EF4 /* Gorillas Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3B01480F69CE90009B4A85 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = raw/icon.icns; sourceTree = "<group>"; };
-		DA4769F80FDD7334002E74F8 /* GorillasLiteDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorillasLiteDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA4769F80FDD7334002E74F8 /* Gorillas Lite Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas Lite Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA476A2A0FDD8002002E74F8 /* FullGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullGameLayer.h; sourceTree = "<group>"; };
 		DA476A2B0FDD8002002E74F8 /* FullGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullGameLayer.m; sourceTree = "<group>"; };
 		DA4E5D070F7FE5B9007BE3B9 /* GorillasAudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillasAudioController.h; sourceTree = "<group>"; };
@@ -1020,7 +1020,7 @@
 		DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillaLayer.m; sourceTree = "<group>"; };
 		DA859E6E0EC598E10036B7C0 /* BananaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaLayer.h; sourceTree = "<group>"; };
 		DA859E6F0EC598E10036B7C0 /* BananaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BananaLayer.m; sourceTree = "<group>"; };
-		DA8B77990F46120600DD88BF /* GorillasBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorillasBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA8B77990F46120600DD88BF /* Gorillas Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9A63B50F573A530031988E /* CustomGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGameLayer.h; sourceTree = "<group>"; };
 		DA9A63B60F573A530031988E /* CustomGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGameLayer.m; sourceTree = "<group>"; };
 		DAA120920FDD26F700AA1E28 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1173,10 +1173,10 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA379EBC0F0964BA00541EF4 /* GorillasDev.app */,
+				DA379EBC0F0964BA00541EF4 /* Gorillas Dev.app */,
 				DABD68580F190D4D00EE213D /* Gorillas.app */,
-				DA8B77990F46120600DD88BF /* GorillasBeta.app */,
-				DA4769F80FDD7334002E74F8 /* GorillasLiteDev.app */,
+				DA8B77990F46120600DD88BF /* Gorillas Beta.app */,
+				DA4769F80FDD7334002E74F8 /* Gorillas Lite Dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1765,7 +1765,7 @@
 			);
 			name = "Gorillas - Signed: Lhunath";
 			productName = Gorillas;
-			productReference = DA379EBC0F0964BA00541EF4 /* GorillasDev.app */;
+			productReference = DA379EBC0F0964BA00541EF4 /* Gorillas Dev.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DA47694D0FDD7334002E74F8 /* Gorillas Lite - Signed: Lhunath */ = {
@@ -1783,7 +1783,7 @@
 			);
 			name = "Gorillas Lite - Signed: Lhunath";
 			productName = Gorillas;
-			productReference = DA4769F80FDD7334002E74F8 /* GorillasLiteDev.app */;
+			productReference = DA4769F80FDD7334002E74F8 /* Gorillas Lite Dev.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DA8B770A0F46120600DD88BF /* Gorillas - Signed: iBetaTest */ = {
@@ -1801,7 +1801,7 @@
 			);
 			name = "Gorillas - Signed: iBetaTest";
 			productName = Gorillas;
-			productReference = DA8B77990F46120600DD88BF /* GorillasBeta.app */;
+			productReference = DA8B77990F46120600DD88BF /* Gorillas Beta.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DABD67E10F190D4D00EE213D /* Gorillas - Signed: App Store */ = {
@@ -2817,7 +2817,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				PRODUCT_NAME = GorillasDev;
+				PRODUCT_NAME = "Gorillas Dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = Debug;
@@ -2826,7 +2826,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				PRODUCT_NAME = GorillasDev;
+				PRODUCT_NAME = "Gorillas Dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = Release;
@@ -3049,7 +3049,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				PRODUCT_NAME = GorillasDev;
+				PRODUCT_NAME = "Gorillas Dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = "Release Debugging";

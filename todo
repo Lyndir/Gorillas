@@ -6,30 +6,30 @@
                                                                     
                                                                     
                                                                     
-                                        X                           
-                                        X           X               
-                X           X        |-----|        X               
-                X  |-----|  X  |-----|     |     |-----|            
-             |-----|     |-----|     |     |     |     |            
-       |-----|     |     |     |     |     |-----|     |     |-----|
-       |     |     |     |     |     |     |     |     |     |     |
-       |     |     |     |     |     |     |     |     |-----|     |
-       |     |     |     |     |     |     |     |     |     |     |
-       |     |     |     |     |     |     |     |     |     |     |
-       |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |
-       |     |     |     |     |     |     |     |     |     |     |
-       |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|
+                                                                    
+                                  X     1                           
+                      2           X  |-----|        3               
+                3  |-----|  1  |-----|     |     |-----|                 |-----|
+             |-----|     |-----|     |     |  2  |     |                 |     |
+       |-----|     |     |     |     |     |-----|     |  X  |-----|     |     |
+       |     |     |     |     |     |     |     |     |  X  |     |     |     |
+       |     |     |     |     |     |     |     |     |-----|     |     |     |
+       |     |     |     |     |     |     |     |     |     |     |-----|     |
+       |     |     |     |     |     |     |     |     |     |     |     |     |
+       |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  10 |  11 |
+       |     |     |     |     |     |     |     |     |     |     |     |     |
+       |_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|
 
 
 1.2.3
- .  Can level up/down when not in dynamic?
+ x  Can level up/down when not in dynamic?
  .  Explosion #2 is mute.
- x  Hide "Go" in multiplayer or say "Go" on it too.
- x  Merge Weather into Visual Effects.
- x  Add toggle option for vocals.
- x  Make star motion more realistic.
- .  Give banana model arms?
- x  Use a minimum space inbetween players depending on total player count.
- x  Give gorillas lives in Team Game?
- .  Make gorilla projectiles smaller
+ v  Hide "Go" in multiplayer or say "Go" on it too.
+ v  Merge Weather into Visual Effects.
+ v  Add toggle option for vocals.
+ v  Make star motion more realistic.
+ x  Give banana model arms?
+ v  Use a minimum space inbetween players depending on total player count.
+ v  Give gorillas lives in Team Game?
+ x  Make gorilla projectiles smaller
  .  Make sure ar.lproj/guide.txt mentions JRL instead of GPL
