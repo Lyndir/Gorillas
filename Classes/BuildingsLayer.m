@@ -32,6 +32,7 @@
 
 @interface BuildingsLayer (Private)
 
+- (void)showAim;
 -(void) stopGameCallback;
 
 @end
@@ -67,9 +68,33 @@
     holes           = nil;
     explosions      = nil;
     
+    leftInfoLabel   = [[Label alloc] initWithString:@"l" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
+                                           fontName:[GorillasConfig get].fixedFontName fontSize:[GorillasConfig get].smallFontSize];
+    rightInfoLabel  = [[Label alloc] initWithString:@"r" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentRight
+                                           fontName:[GorillasConfig get].fixedFontName fontSize:[GorillasConfig get].smallFontSize];
+    CGSize winSize  = [Director sharedDirector].winSize;
+    
+    leftInfoLabel.position  = cpv(leftInfoLabel.contentSize.width / 2 + 5,
+                                  winSize.height - (leftInfoLabel.contentSize.height / 2 + 5));
+    rightInfoLabel.position = cpv(winSize.width - rightInfoLabel.contentSize.width / 2 - 5,
+                                  winSize.height - (leftInfoLabel.contentSize.height / 2 + 5));
+    leftInfoLabel.visible = NO;
+    rightInfoLabel.visible = NO;
+    
     [self reset];
     
     return self;
+}
+
+
+-(void) onEnter {
+
+    [super onEnter];
+    
+    if (!leftInfoLabel.parent && self.parent)
+        [[GorillasAppDelegate get].uiLayer addChild:leftInfoLabel z:9];
+    if (!rightInfoLabel.parent && self.parent)
+        [[GorillasAppDelegate get].uiLayer addChild:rightInfoLabel z:9];
 }
 
 
@@ -242,16 +267,7 @@
         // State doesn't allow throwing right now.
         return kEventIgnored;
     
-    UITouch *touch = [[event allTouches] anyObject];
-	CGPoint location = [touch locationInView: [touch view]];
-    CGSize winSize = [[Director sharedDirector] winSize];
-    cpVect halfWin = cpv(winSize.width / 2, winSize.height / 2);
-    cpVect p = cpv(location.y, location.x);
-    for(CocosNode *n = self; n; n = [n parent]) {
-        cpFloat rot = CC_DEGREES_TO_RADIANS(n.rotation);
-        p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
-        p = cpvmult(p, 1 / n.scale);
-    }
+    cpVect p = [self convertTouchToNodeSpaceVect:[[event allTouches] anyObject]];
     
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:p])
         // Ignore when moving/clicking over/on HUD.
@@ -262,6 +278,8 @@
         return kEventIgnored;
         
     aim = cpvsub(p, [self position]);
+    [self showAim];
+
     return kEventHandled;
 }
 
@@ -275,22 +293,15 @@
         // Hasn't yet began.
         return kEventIgnored;
     
-    UITouch *touch = [[event allTouches] anyObject];
-	CGPoint location = [touch locationInView: [touch view]];
-    CGSize winSize = [[Director sharedDirector] winSize];
-    cpVect halfWin = cpv(winSize.width / 2, winSize.height / 2);
-    cpVect p = cpv(location.y, location.x);
-    for(CocosNode *n = self; n; n = [n parent]) {
-        cpFloat rot = CC_DEGREES_TO_RADIANS(n.rotation);
-        p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
-        p = cpvmult(p, 1 / n.scale);
-    }
-    
+    cpVect p = [self convertTouchToNodeSpaceVect:[[event allTouches] anyObject]];
+
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:p])
         // Ignore when moving/clicking over/on HUD.
         return kEventIgnored;
         
     aim = cpvsub(p, [self position]);
+    [self showAim];
+    
     return kEventHandled;
 }
 
@@ -301,6 +312,8 @@
         return kEventIgnored;
     
     aim = cpv(-1, -1);
+    [self showAim];
+
     return kEventHandled;
 }
 
@@ -310,16 +323,7 @@
     if([[event allTouches] count] != 1)
         return [self ccTouchesCancelled:touches withEvent:event];
     
-	UITouch *touch = [[event allTouches] anyObject];
-	CGPoint location = [touch locationInView: [touch view]];
-    CGSize winSize = [[Director sharedDirector] winSize];
-    cpVect halfWin = cpv(winSize.width / 2, winSize.height / 2);
-    cpVect p = cpv(location.y, location.x);
-    for(CocosNode *n = self; n; n = [n parent]) {
-        cpFloat rot = CC_DEGREES_TO_RADIANS(n.rotation);
-        p = cpvadd(cpvrotate(cpvsub(p, halfWin), cpv(cosf(rot), sinf(rot))), halfWin);
-        p = cpvmult(p, 1 / n.scale);
-    }
+    cpVect p = [self convertTouchToNodeSpaceVect:[[event allTouches] anyObject]];
     
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:p]
         || aim.x <= 0
@@ -330,12 +334,38 @@
     cpVect r0 = [[GorillasAppDelegate get].gameLayer.activeGorilla position];
     cpVect v = cpvsub(aim, r0);
     
-    aim = cpv(-1.0f, -1.0f);
+    aim = cpv(-1, -1);
+    [self showAim];
+
     [self throwFrom:[GorillasAppDelegate get].gameLayer.activeGorilla withVelocity:v];
     
     return kEventHandled;
 }
+
+
+- (void)showAim {
     
+    leftInfoLabel.visible = NO;
+    rightInfoLabel.visible = NO;
+    
+    if (aim.x < 0 && aim.y < 0)
+        return;
+    
+    cpVect relAim = cpvsub(aim, [GorillasAppDelegate get].gameLayer.activeGorilla.position);
+    cpVect worldAim = [self convertToWorldSpaceVect:CGPointMake(relAim.x, relAim.y)];
+
+    CGSize winSize = [Director sharedDirector].winSize;
+    if (aim.x > winSize.width / 2) {
+        [leftInfoLabel setString:[NSString stringWithFormat:@"∡ %0.0f°\n⊿ %0.0f",
+                                  CC_RADIANS_TO_DEGREES(cpvtoangle(worldAim)), cpvlength(worldAim)]];
+        leftInfoLabel.visible = YES;
+    } else {
+        [rightInfoLabel setString:[NSString stringWithFormat:@"%0.0f° ∡\n%0.0f ⊿",
+                                  CC_RADIANS_TO_DEGREES(cpvtoangle(worldAim)), cpvlength(worldAim)]];
+        rightInfoLabel.visible = YES;
+    }
+}
+
 
 -(BOOL) mayThrow {
 

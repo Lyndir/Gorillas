@@ -33,7 +33,7 @@
 @interface BuildingsLayer : Layer <Resettable> {
 
     PanAction           *panAction;
-    Label               *msgLabel;
+    Label               *msgLabel, *leftInfoLabel, *rightInfoLabel;
     
     NSMutableArray      *buildings;
     HolesLayer          *holes;

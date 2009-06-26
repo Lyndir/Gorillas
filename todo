@@ -31,5 +31,7 @@
  x  Give banana model arms?
  v  Use a minimum space inbetween players depending on total player count.
  v  Give gorillas lives in Team Game?
- x  Make gorilla projectiles smaller
- .  Make sure ar.lproj/guide.txt mentions JRL instead of GPL
+ x  Make gorilla projectiles smaller.
+ .  Make sure ar.lproj/guide.txt mentions JRL instead of GPL.
+ v  "Go" appears too often.
+ v  Add angle & power numbers while aiming.

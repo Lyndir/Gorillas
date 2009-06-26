@@ -59,7 +59,7 @@
     
     [[GorillasAppDelegate get].gameLayer.buildingsLayer nextGorilla];
 
-    if ([[GorillasAppDelegate get].gameLayer.activeGorilla human]) {
+    if ([[GorillasAppDelegate get].gameLayer.activeGorilla human] && ![GorillasAppDelegate get].gameLayer.singlePlayer) {
         [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"message.nextplayer.go", @"Go ..")];
         
         if ([GorillasConfig get].voice)
