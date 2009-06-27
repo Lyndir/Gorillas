@@ -32,7 +32,6 @@
 @interface GameLayer (Private)
 
 -(void) setPausedSilently:(BOOL)_paused;
--(void) shuffleGorillas;
 
 @end
 
@@ -180,9 +179,6 @@
         [gorilla release];
     }
     
-    // Shuffle the order of the gorillas.
-    [self shuffleGorillas];
-    
     // When there are AIs in the game, show their difficulity.
     if (ais)
         [[GorillasAppDelegate get].uiLayer message:[[GorillasConfig get] levelName]];
@@ -191,18 +187,6 @@
     [buildingsLayer stopPanning];
     [self reset];
     [buildingsLayer startGame];
-}
-
-
-- (void)shuffleGorillas {
-    
-    NSUInteger count = [gorillas count];
-    for (NSUInteger i = 0; i < count; ++i) {
-        // Select a random element between i and end of array to swap with.
-        int nElements = count - i;
-        int n = (random() % nElements) + i;
-        [gorillas exchangeObjectAtIndex:i withObjectAtIndex:n];
-    }
 }
 
 
