@@ -51,7 +51,7 @@
             [skies addObject: sky];
             
             [sky setPosition: cpv(x, 0)];
-            float px = 1 + powf(depth, 25);
+            float px = 1 + powf(depth, 22);
             [self addChild: sky z:1 parallaxRatio:cpv(px, 1)];
             
             step = [sky contentSize].width;

@@ -35,7 +35,7 @@
     if (bundleTailReference)
         tail = [[[TextureMgr sharedTextureMgr] addImage:bundleTailReference] retain];
     
-    [self schedule:@selector(updateBodyFrame:) interval:0.05f];
+    [self schedule:@selector(updateBodyFrame:) interval:0.02f];
     
     return self;
 }
