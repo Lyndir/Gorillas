@@ -17,6 +17,8 @@
     
     cpVect              halfToHead;
     cpFloat             halfLength;
+    
+    CGSize              textureSize;
 }
 
 
@@ -30,5 +32,7 @@
 #pragma mark Behaviors
 
 - (void)updateWithOrigin:(cpVect)o target:(cpVect)t;
+
+@property (readwrite) CGSize    textureSize;
 
 @end

@@ -69,6 +69,7 @@
     explosions      = nil;
     
     aimSprite       = [[BarSprite alloc] initWithHead:@"aim.head.png" body:@"aim.body.%d.png" withFrames:16 tail:@"aim.tail.png"];
+    aimSprite.textureSize = CGSizeMake(aimSprite.textureSize.width / 2, aimSprite.textureSize.height / 2);
     [self addChild:aimSprite z:2];
     
     leftInfoLabel   = [[Label alloc] initWithString:@"l" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft

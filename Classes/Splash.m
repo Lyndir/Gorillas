@@ -71,7 +71,7 @@
     
     BarSprite *loadingBar = [[BarSprite alloc] initWithHead:@"aim.head.png" body:@"aim.body.%d.png" withFrames:16 tail:@"aim.tail.png"];
     [loadingBar updateWithOrigin:cpv(-50, 0) target:cpv(50, 0)];
-    loadingBar.position = cpv(self.contentSize.width / 2, self.contentSize.height / 2 - 100);
+    loadingBar.position = cpv(self.contentSize.width / 2, 40);
     [self addChild:loadingBar];
     [loadingBar release];
     
@@ -85,7 +85,7 @@
     
     [super onEnter];
     
-    [self performSelector:@selector(switchScene) withObject:nil afterDelay:2];
+    [self performSelector:@selector(switchScene) withObject:nil afterDelay:1];
 }
 
 
