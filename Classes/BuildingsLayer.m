@@ -68,6 +68,9 @@
     holes           = nil;
     explosions      = nil;
     
+    aimSprite       = [[BarSprite alloc] initWithHead:@"aim.head.png" body:@"aim.body.%d.png" withFrames:16 tail:@"aim.tail.png"];
+    [self addChild:aimSprite z:2];
+    
     leftInfoLabel   = [[Label alloc] initWithString:@"l" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
                                            fontName:[GorillasConfig get].fixedFontName fontSize:[GorillasConfig get].smallFontSize];
     rightInfoLabel  = [[Label alloc] initWithString:@"r" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentRight
@@ -241,7 +244,7 @@
         }
     }
     
-    if([GorillasAppDelegate get].gameLayer.activeGorilla && aim.x > 0) {
+    /*if([GorillasAppDelegate get].gameLayer.activeGorilla && aim.x > 0) {
         // Only draw aim when aiming and gorillas are set.
 
         const cpVect points[] = {
@@ -254,7 +257,7 @@
         };
         
         drawLines(points, colors, 2, 3);
-    }
+    }*/
 }
 
 
@@ -345,13 +348,19 @@
 
 - (void)showAim {
     
-    leftInfoLabel.visible = NO;
-    rightInfoLabel.visible = NO;
+    leftInfoLabel.visible   = NO;
+    rightInfoLabel.visible  = NO;
+    aimSprite.visible       = NO;
+    
+    cpVect gorillaPosition = [GorillasAppDelegate get].gameLayer.activeGorilla.position;
     
     if (aim.x < 0 && aim.y < 0)
         return;
     
-    cpVect relAim = cpvsub(aim, [GorillasAppDelegate get].gameLayer.activeGorilla.position);
+    [aimSprite updateWithOrigin:gorillaPosition target:aim];
+    aimSprite.visible       = YES;
+    
+    cpVect relAim = cpvsub(aim, gorillaPosition);
     cpVect worldAim = [self convertToWorldSpaceVect:CGPointMake(relAim.x, relAim.y)];
 
     CGSize winSize = [Director sharedDirector].winSize;

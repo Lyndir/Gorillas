@@ -48,7 +48,7 @@
     
 #ifdef LITE
     [[GorillasAppDelegate get].gameLayer configureGameWithMode:GorillasModeClassic humans:1 ais:1];
-    [[GorillasAppDelegate get].gameLayer startGame];
+    [[GorillasAppDelegate get].gameLayer performSelector:@selector(startGame) withObject:nil afterDelay:1];
 #else
     [[GorillasAppDelegate get] showMainMenu];
     [[GorillasAppDelegate get].gameLayer.buildingsLayer startPanning];
@@ -68,6 +68,12 @@
         return self;
     
     [self setPosition:cpv([self contentSize].width / 2, [self contentSize].height / 2)];
+    
+    BarSprite *loadingBar = [[BarSprite alloc] initWithHead:@"aim.head.png" body:@"aim.body.%d.png" withFrames:16 tail:@"aim.tail.png"];
+    [loadingBar updateWithOrigin:cpv(-50, 0) target:cpv(50, 0)];
+    loadingBar.position = cpv(self.contentSize.width / 2, self.contentSize.height / 2 - 100);
+    [self addChild:loadingBar];
+    [loadingBar release];
     
     switching = NO;
     

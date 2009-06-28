@@ -41,6 +41,7 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
 	// Init the window.
+    [Texture2D setAntiAliasTexParameters];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	[window setUserInteractionEnabled:YES];
@@ -88,7 +89,7 @@
         @catch (NSException * e) {
             NSLog(@"=== Exception Occurred! ===");
             NSLog(@"Name: %@; Reason: %@; Context: %@.\n", [e name], [e reason], [e userInfo]);
-            [hudLayer message:[e reason] duration:3 isImportant:YES];
+            [hudLayer message:[e reason] duration:5 isImportant:YES];
         }
     } while ([[Director sharedDirector] runningScene]);
 }

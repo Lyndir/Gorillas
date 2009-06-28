@@ -28,12 +28,14 @@
 #import "Resettable.h"
 #import "ExplosionsLayer.h"
 #import "HolesLayer.h"
+#import "BarSprite.h"
 //#define _DEBUG_
 
 @interface BuildingsLayer : Layer <Resettable> {
 
     PanAction           *panAction;
     Label               *msgLabel, *leftInfoLabel, *rightInfoLabel;
+    BarSprite           *aimSprite;
     
     NSMutableArray      *buildings;
     HolesLayer          *holes;

@@ -194,11 +194,11 @@
     
     if (offScreen)
         [[[GorillasAppDelegate get] hudLayer] message:[GorillasConfig get].offMessage
-                                             duration:2 isImportant:NO];
+                                             duration:4 isImportant:NO];
     else if(hitGorilla && !buildingsLayer.hitGorilla.alive)
         [[[GorillasAppDelegate get] hudLayer] message:[NSString stringWithFormat:[GorillasConfig get].hitMessage,
                                                        activeGorilla.name, buildingsLayer.hitGorilla.name]
-                                             duration:2 isImportant:NO];
+                                             duration:4 isImportant:NO];
 
     if (hitGorilla) {
         // Gorilla hit a gorilla.
@@ -317,9 +317,9 @@
         if(liveGorillaCount < 2) {
             if(liveGorillaCount == 1)
                 [[[GorillasAppDelegate get] hudLayer] message:[NSString stringWithFormat:NSLocalizedString(@"messages.wins", @"%@ wins!"),
-                                                               [liveGorilla name]] duration:2 isImportant:NO];
+                                                               [liveGorilla name]] duration:4 isImportant:NO];
             else
-                [[[GorillasAppDelegate get] hudLayer] message:NSLocalizedString(@"messages.tie", @"Tie!") duration:2 isImportant:NO];
+                [[[GorillasAppDelegate get] hudLayer] message:NSLocalizedString(@"messages.tie", @"Tie!") duration:4 isImportant:NO];
         }
         
         // Reset the wind.
