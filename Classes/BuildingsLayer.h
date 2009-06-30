@@ -41,11 +41,11 @@
     HolesLayer          *holes;
     ExplosionsLayer     *explosions;
 
-    cpVect              aim;
+    CGPoint             aim;
     BananaLayer         *bananaLayer;
     GorillaLayer        *hitGorilla;
     
-    cpVect              *throwHistory;
+    CGPoint             *throwHistory;
     NSMutableArray      *throwHints;
     
     SystemSoundID       goEffect;
@@ -54,11 +54,11 @@
     NSUInteger          dbgTraceStep;
     NSUInteger          dbgPathMaxInd;
     NSUInteger          dbgPathCurInd;
-    cpVect              *dbgPath;
+    CGPoint              *dbgPath;
     NSUInteger          dbgAIMaxInd;
     NSUInteger          dbgAICurInd;
     GorillaLayer        **dbgAI;
-    cpVect              *dbgAIVect;
+    CGPoint              *dbgAIVect;
 #endif
 }
 
@@ -71,18 +71,19 @@
 -(BOOL) mayThrow;
 
 -(void) miss;
--(BOOL) hitsGorilla: (cpVect)pos;
--(BOOL) hitsBuilding: (cpVect)pos;
--(void) explodeAt: (cpVect)point isGorilla:(BOOL)isGorilla;
--(void) throwFrom:(GorillaLayer *)gorilla withVelocity:(cpVect)v;
+-(BOOL) hitsGorilla: (CGPoint)pos;
+-(BOOL) hitsBuilding: (CGPoint)pos;
+-(void) explodeAt: (CGPoint)point isGorilla:(BOOL)isGorilla;
+-(void) throwFrom:(GorillaLayer *)gorilla withVelocity:(CGPoint)v;
 -(void) nextGorilla;
 
--(void) message: (NSString *)msg on: (CocosNode<CocosNodeSize> *)node;
--(cpVect) calculateThrowFrom:(cpVect)r0 to:(cpVect)rt errorLevel:(cpFloat)l;
+-(void) message: (NSString *)msg on: (CocosNode *)node;
+-(CGPoint) calculateThrowFrom:(CGPoint)r0 to:(CGPoint)rt errorLevel:(CGFloat)l;
 
--(cpFloat) left;
--(cpFloat) right;
+-(CGFloat) left;
+-(CGFloat) right;
 
+@property (nonatomic, readwrite) CGPoint aim;
 @property (nonatomic, readonly) BananaLayer *bananaLayer;
 @property (nonatomic, readonly) GorillaLayer *hitGorilla;
 

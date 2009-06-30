@@ -68,11 +68,11 @@ static NSUInteger _teamIndex, _globalIndex;
     zoom    = 1;
 
     bobber  = [[Sprite alloc] initWithFile:@"bobber.png"];
-    [bobber setPosition:cpv([self contentSize].width / 2,
+    [bobber setPosition:ccp([self contentSize].width / 2,
                             [self contentSize].height + [bobber contentSize].height / 2 + 15)];
     [bobber runAction:[RepeatForever actionWithAction:[Sequence actions:
-                                                       [EaseSineInOut actionWithAction:[MoveBy actionWithDuration:0.7f position:cpv(0, 15)]],
-                                                       [EaseSineInOut actionWithAction:[MoveBy actionWithDuration:0.7f position:cpv(0, -15)]],
+                                                       [EaseSineInOut actionWithAction:[MoveBy actionWithDuration:0.7f position:ccp(0, 15)]],
+                                                       [EaseSineInOut actionWithAction:[MoveBy actionWithDuration:0.7f position:ccp(0, -15)]],
                                                        nil]]];
     [bobber setVisible:NO];
     [self addChild:bobber];
@@ -148,7 +148,7 @@ static NSUInteger _teamIndex, _globalIndex;
 }
 
 
--(void) threw:(cpVect)aim {
+-(void) threw:(CGPoint)aim {
 
     if(aim.x > 0)
         [self ud];
@@ -285,15 +285,15 @@ static NSUInteger _teamIndex, _globalIndex;
 }
 
 
--(BOOL) hitsGorilla: (cpVect)pos {
+-(BOOL) hitsGorilla: (CGPoint)pos {
     
     if(![self alive])
         return NO;
     
-    return  pos.x >= position.x - [self contentSize].width  / 2 &&
-            pos.y >= position.y - [self contentSize].height / 2 &&
-            pos.x <= position.x + [self contentSize].width  / 2 &&
-            pos.y <= position.y + [self contentSize].height / 2;
+    return  pos.x >= self.position.x - self.contentSize.width  / 2 &&
+            pos.y >= self.position.y - self.contentSize.height / 2 &&
+            pos.x <= self.position.x + self.contentSize.width  / 2 &&
+            pos.y <= self.position.y + self.contentSize.height / 2;
 }
 
 
@@ -316,14 +316,14 @@ static NSUInteger _teamIndex, _globalIndex;
     if(!self.human && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesAi])
        return;
     
-    cpFloat barX = [self contentSize].width / 2;
-    cpFloat barY = [self contentSize].height + 10;
-    cpFloat barW = 40;
-    cpVect lines[4] = {
-        cpv(barX - barW / 2, barY),
-        cpv(barX - barW / 2 + barW * lives / initialLives, barY),
-        cpv(barX - barW / 2 + barW * lives / initialLives, barY),
-        cpv(barX - barW / 2 + barW, barY),
+    CGFloat barX = [self contentSize].width / 2;
+    CGFloat barY = [self contentSize].height + 10;
+    CGFloat barW = 40;
+    CGPoint lines[4] = {
+        ccp(barX - barW / 2, barY),
+        ccp(barX - barW / 2 + barW * lives / initialLives, barY),
+        ccp(barX - barW / 2 + barW * lives / initialLives, barY),
+        ccp(barX - barW / 2 + barW, barY),
     };
     long colors[4] = {
         0xFF33CC33,
@@ -335,13 +335,13 @@ static NSUInteger _teamIndex, _globalIndex;
     GLubyte o = active? 0xFF: 0x33;
     
     if ([[GorillasConfig get] visualFx]) {
-        drawBoxFrom(cpvadd(lines[0], cpv(0, -3)), cpvadd(lines[1], cpv(0, 3)), 0xCCFFCC00 | o, 0x33CC3300 | o);
-        drawBoxFrom(cpvadd(lines[2], cpv(0, -3)), cpvadd(lines[3], cpv(0, 3)), 0xFFCCCC00 | o, 0xCC333300 | o);
+        drawBoxFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[1], ccp(0, 3)), 0xCCFFCC00 | o, 0x33CC3300 | o);
+        drawBoxFrom(ccpAdd(lines[2], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), 0xFFCCCC00 | o, 0xCC333300 | o);
     }
     else
         drawLines(lines, colors, 4, 6);
     
-    drawBorderFrom(cpvadd(lines[0], cpv(0, -3)), cpvadd(lines[3], cpv(0, 3)), 0xCCCC3300 | (o - 0x33), 1);
+    drawBorderFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), 0xCCCC3300 | (o - 0x33), 1);
 }
 
 

@@ -61,7 +61,7 @@ NSString* appendOrdinalPrefix(int number, NSString* prefix) {
 }
 
 
-void drawPointsAt(const cpVect* points, int n, long color) {
+void drawPointsAt(const CGPoint* points, int n, long color) {
     
     // Define vertices and pass to GL.
     glVertexPointer(2, GL_FLOAT, 0, points);
@@ -82,9 +82,9 @@ void drawPointsAt(const cpVect* points, int n, long color) {
 }
 
 
-void drawLinesTo(cpVect from, const cpVect* to, int n, long color, float width) {
+void drawLinesTo(CGPoint from, const CGPoint* to, int n, long color, float width) {
     
-    cpVect *points = malloc(sizeof(cpVect) * (n + 1));
+    CGPoint *points = malloc(sizeof(CGPoint) * (n + 1));
     points[0] = from;
     for(int i = 0; i < n; ++i)
         points[i + 1] = to[i];
@@ -97,7 +97,7 @@ void drawLinesTo(cpVect from, const cpVect* to, int n, long color, float width) 
 }
     
 
-void drawLines(const cpVect* points, const long* longColors, int n, float width) {
+void drawLines(const CGPoint* points, const long* longColors, int n, float width) {
     
     // Define vertices and pass to GL.
 	glVertexPointer(2, GL_FLOAT, 0, points);
@@ -130,7 +130,7 @@ void drawLines(const cpVect* points, const long* longColors, int n, float width)
 }
 
 
-void drawBoxFrom(cpVect from, cpVect to, long fromColor, long toColor) {
+void drawBoxFrom(CGPoint from, CGPoint to, long fromColor, long toColor) {
     
     // Define vertices and pass to GL.
     const GLfloat vertices[4 * 2] = {
@@ -174,7 +174,7 @@ void drawBoxFrom(cpVect from, cpVect to, long fromColor, long toColor) {
 }
 
 
-void drawBorderFrom(cpVect from, cpVect to, long color, float width) {
+void drawBorderFrom(CGPoint from, CGPoint to, long color, float width) {
     
     // Define vertices and pass to GL.
     const GLfloat vertices[4 * 2] = {

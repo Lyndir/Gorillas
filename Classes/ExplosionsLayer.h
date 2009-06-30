@@ -27,12 +27,12 @@
 
 @interface ExplosionsLayer : Layer {
     
-    cpVect          *positions;
+    CGPoint          *positions;
     NSMutableArray  *explosions;
     NSMutableArray  *flames;
 }
 
--(void) addExplosionAt:(cpVect)pos hitsGorilla:(BOOL)gorillaHit;
+-(void) addExplosionAt:(CGPoint)pos hitsGorilla:(BOOL)gorillaHit;
 
 +(SystemSoundID) explosionEffect: (BOOL)heavy;
 

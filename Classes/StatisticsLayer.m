@@ -46,7 +46,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
     menu = [[Menu menuWithItems:back, nil] retain];
-    [menu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
+    [menu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [menu alignItemsHorizontally];
     [self addChild:menu];
     
@@ -93,7 +93,7 @@
                                                alignment:UITextAlignmentCenter
                                                 fontName:[[GorillasConfig get] fixedFontName]
                                                 fontSize:[[GorillasConfig get] smallFontSize]];
-    [topScoreLabel setPosition:cpv(contentSize.width / 2, contentSize.height - padding + [[GorillasConfig get] smallFontSize])];
+    [topScoreLabel setPosition:ccp(contentSize.width / 2, contentSize.height - padding + [[GorillasConfig get] smallFontSize])];
     [self addChild:topScoreLabel];
     [topScoreLabel release];
     
@@ -134,7 +134,7 @@
                                                 alignment:UITextAlignmentCenter
                                                  fontName:[[GorillasConfig get] fixedFontName]
                                                  fontSize:[[GorillasConfig get] smallFontSize] / 2];
-        [scoreLabel setPosition:cpv([scoreTower contentSize].width / 2,
+        [scoreLabel setPosition:ccp([scoreTower contentSize].width / 2,
                                     [scoreTower contentSize].height + [scoreLabel contentSize].height)];
         
         // Score's date label.
@@ -144,13 +144,13 @@
                                                alignment:UITextAlignmentCenter
                                                 fontName:[[GorillasConfig get] fixedFontName]
                                                 fontSize:[[GorillasConfig get] smallFontSize] / 2];
-        [dateLabel setPosition:cpv([scoreTower contentSize].width / 2,
+        [dateLabel setPosition:ccp([scoreTower contentSize].width / 2,
                                    -[dateLabel contentSize].height)];
         
         [scoreTower runAction:[Sequence actions:
                                [Sequence actionWithDuration:0.1f * i],
                                [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                                 position:cpv(x, padding)],
+                                                 position:ccp(x, padding)],
                                nil]];
         [scoreLabel runAction:[Sequence actions:
                                [Sequence actionWithDuration:0.1f * i],
@@ -161,7 +161,7 @@
                               [FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]],
                               nil]];
         
-        [scoreTower setPosition:cpv(x, -[scoreTower contentSize].height - [scoreLabel contentSize].height)];
+        [scoreTower setPosition:ccp(x, -[scoreTower contentSize].height - [scoreLabel contentSize].height)];
         [scoreTower addChild:scoreLabel];
         [scoreTower addChild:dateLabel];
         [scoreTowers addObject:scoreTower];
@@ -193,7 +193,7 @@
         [scoreTower runAction:[Sequence actions:
                                [Sequence actionWithDuration:(([[GorillasConfig get] transitionDuration] / 2) / [scoreTowers count]) * i++],
                                [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] / 2
-                                                 position:cpv([scoreTower position].x, -[scoreTower contentSize].height - [[GorillasConfig get] fontSize] * 2)],
+                                                 position:ccp([scoreTower position].x, -[scoreTower contentSize].height - [[GorillasConfig get] fontSize] * 2)],
                                nil]];
 }
 

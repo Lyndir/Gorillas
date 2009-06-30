@@ -67,7 +67,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
     backMenu = [[Menu menuWithItems:back, nil] retain];
-    [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
+    [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
 }

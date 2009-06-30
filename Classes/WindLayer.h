@@ -25,9 +25,8 @@
 #import "Resettable.h"
 
 
-@interface WindLayer : Layer <CocosNodeOpacity, Resettable> {
+@interface WindLayer : Layer <CocosNodeRGBA, Resettable> {
 
-    long            color;
     float           wind, bar;
     float           windIncrement;
     ccTime          elapsed, incrementDuration;
@@ -40,7 +39,5 @@
 -(void) unregisterSystem:(ParticleSystem *)system;
 
 @property (nonatomic, readonly) float wind;
-@property (nonatomic, readwrite) long color;
-@property (nonatomic, readwrite) GLubyte opacity;
 
 @end

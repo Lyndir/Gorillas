@@ -24,14 +24,13 @@
 
 
 
-@interface FancyLayer : Layer <CocosNodeOpacity, CocosNodeSize> {
+@interface FancyLayer : Layer <CocosNodeRGBA> {
 
-    GLubyte opacity;
     CGSize  contentSize;
     float   outerPadding;
     float   padding;
     float   innerRatio;
-    long    color;
+    ccColor4B color;
     
     GLuint vertexBuffer;
     GLuint colorBuffer;
@@ -39,11 +38,9 @@
 
 -(void) update;
 
-@property (nonatomic, readwrite) GLubyte   opacity;
 @property (nonatomic, readonly) CGSize     contentSize;
 @property (nonatomic, readwrite) float     outerPadding;
 @property (nonatomic, readwrite) float     padding;
 @property (nonatomic, readwrite) float     innerRatio;
-@property (nonatomic, readwrite) long      color;
 
 @end

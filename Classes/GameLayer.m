@@ -91,12 +91,12 @@
     
     if(paused) {
         if(running)
-            [self scaleTimeTo:0 duration:0.5f];
+            //[self scaleTimeTo:0 duration:0.5f];
         [[GorillasAppDelegate get] hideHud];
         [windLayer runAction:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                                 opacity:0x00]];
     } else {
-        [self scaleTimeTo:1 duration:1];
+        //[self scaleTimeTo:1 duration:1];
         [[GorillasAppDelegate get] popAllLayers];
         [[GorillasAppDelegate get] revealHud];
         [windLayer runAction:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
@@ -429,31 +429,30 @@
 
     running = NO;
     
-    IntervalAction *l = [MoveBy actionWithDuration:.05f position:cpv(-3, 0)];
-    IntervalAction *r = [MoveBy actionWithDuration:.05f position:cpv(6, 0)];
+    IntervalAction *l = [MoveBy actionWithDuration:.05f position:ccp(-3, 0)];
+    IntervalAction *r = [MoveBy actionWithDuration:.05f position:ccp(6, 0)];
     shakeAction = [[Sequence actions:l, r, l, l, r, l, nil] retain];
     
     // Set up our own layer.
     CGSize winSize = [[Director sharedDirector] winSize];
-    [self setTransformAnchor:cpv(winSize.width / 2, winSize.height / 2)];
+    [self setAnchorPoint:ccp(0.5f, 0.5f)];
     
     // Sky, buildings and wind.
     buildingsLayer = [[BuildingsLayer alloc] init];
-    [buildingsLayer setTransformAnchor:cpvzero];
+    [buildingsLayer setAnchorPoint:CGPointZero];
 
     skiesLayer = [[SkiesLayer alloc] init];
-    [skiesLayer setTransformAnchor:cpvzero];
+    [skiesLayer setAnchorPoint:CGPointZero];
     
     panningLayer = [[PanningLayer alloc] init];
-    [panningLayer setTransformAnchor:cpvzero];
+    [panningLayer setAnchorPoint:CGPointZero];
     [panningLayer addChild:buildingsLayer z:0];
-    [panningLayer addChild:skiesLayer z:-5/* parallaxRatio:cpv(0.3f, 0.8f)*/];
+    [panningLayer addChild:skiesLayer z:-5/* parallaxRatio:ccp(0.3f, 0.8f)*/];
     [self addChild:panningLayer];
     
     windLayer = [[WindLayer alloc] init];
-    [windLayer setColor:0xffffff00];
     [self addChild:windLayer z:5];
-    [windLayer setPosition:cpv(winSize.width / 2, winSize.height - 15)];
+    [windLayer setPosition:ccp(winSize.width / 2, winSize.height - 15)];
 
     paused = YES;
     
@@ -512,22 +511,22 @@
                     case 0:
                         weather = [[ParticleRain alloc] init];
                         [weather setEmissionRate:60];
-                        [weather setSizeVar:1.5f];
-                        [weather setSize:3];
+                        [weather setStartSizeVar:1.5f];
+                        [weather setStartSize:3];
                         break;
                     
                     case 1:
                         weather = [[ParticleSnow alloc] init];
                         [weather setSpeed:10];
                         [weather setEmissionRate:3];
-                        [weather setSizeVar:3];
-                        [weather setSize:4];
+                        [weather setStartSizeVar:3];
+                        [weather setStartSize:4];
                         break;
                 }
                 
-                [weather setPosVar:cpv([weather posVar].x * 2.5f, [weather posVar].y)];
-                [weather setPosition:cpv([weather position].x, [weather position].y * 2)]; // Space above screen.
-                [buildingsLayer addChild:weather z:-3 parallaxRatio:cpv(1.3f, 1.8f)];
+                [weather setPosVar:ccp([weather posVar].x * 2.5f, [weather posVar].y)];
+                [weather setPosition:ccp([weather position].x, [weather position].y * 2)]; // Space above screen.
+                [buildingsLayer addChild:weather z:-3 /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:CGPointZero*/];
 
                 [windLayer registerSystem:weather affectAngle:YES];
             }
@@ -560,8 +559,8 @@
     //        [egg setModel:GorillasProjectileModelEasterEgg];
     //
     //        CGSize winSize = [[Director sharedDirector] winSize];
-    //        [egg throwFrom:cpv(winSize.width / 2 - buildingsLayer.position.x, winSize.height * 2)
-    //          withVelocity:cpv(0, 0)];
+    //        [egg throwFrom:ccp(winSize.width / 2 - buildingsLayer.position.x, winSize.height * 2)
+    //          withVelocity:ccp(0, 0)];
     //        
     //        [buildingsLayer addChild:egg z:2];
     //        [egg release];
@@ -589,7 +588,7 @@
     
     if([panningLayer position].x != 0 || [panningLayer position].y != 0)
         [panningLayer runAction:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
-                                                  position:cpvzero]];
+                                                  position:CGPointZero]];
     
     if(mode)
         [[GorillasAppDelegate get] showContinueMenu];

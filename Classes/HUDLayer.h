@@ -36,6 +36,6 @@
 
 -(void) updateHudWithScore:(int)score skill: (float)throwSkill;
 
--(BOOL) hitsHud: (cpVect)pos;
+-(BOOL) hitsHud: (CGPoint)pos;
 
 @end

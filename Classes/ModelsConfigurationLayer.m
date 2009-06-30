@@ -56,7 +56,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
     backMenu = [[Menu menuWithItems:back, nil] retain];
-    [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
+    [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
     
@@ -67,7 +67,7 @@
     [modelCurr setIsEnabled:NO];
     modelMenu = [[Menu menuWithItems:modelCurr, modelNext, nil] retain];
     [modelMenu alignItemsHorizontally];
-    [modelMenu setPosition:cpv(modelMenu.position.x, contentSize.height - padding + 10)];
+    [modelMenu setPosition:ccp(modelMenu.position.x, contentSize.height - padding + 10)];
     [self addChild:modelMenu];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
@@ -75,17 +75,17 @@
     prevModelSprite = [[GorillaLayer alloc] initWithName:@"" type:GorillasPlayerTypeHuman];
     currModelSprite = [[GorillaLayer alloc] initWithName:@"" type:GorillasPlayerTypeHuman];
     nextModelSprite = [[GorillaLayer alloc] initWithName:@"" type:GorillasPlayerTypeHuman];
-    [prevModelSprite setPosition:cpv(winSize.width / 2 - winSize.width, winSize.height / 2)];
-    [currModelSprite setPosition:cpv(winSize.width / 2, winSize.height / 2)];
-    [nextModelSprite setPosition:cpv(winSize.width / 2 + winSize.width, winSize.height / 2)];
+    [prevModelSprite setPosition:ccp(winSize.width / 2 - winSize.width, winSize.height / 2)];
+    [currModelSprite setPosition:ccp(winSize.width / 2, winSize.height / 2)];
+    [nextModelSprite setPosition:ccp(winSize.width / 2 + winSize.width, winSize.height / 2)];
 
     swipeLayer = [[SwipeLayer alloc] initWithTarget:self selector:@selector(swiped:)];
     [self addChild:swipeLayer];
     [swipeLayer addChild:prevModelSprite];
     [swipeLayer addChild:currModelSprite];
     [swipeLayer addChild:nextModelSprite];
-    [swipeLayer setSwipeAreaFrom:cpv(50, [GorillasConfig get].fontSize * 2)
-                              to:cpv(winSize.width - 50, winSize.height - [GorillasConfig get].fontSize * 2)];
+    [swipeLayer setSwipeAreaFrom:ccp(50, [GorillasConfig get].fontSize * 2)
+                              to:ccp(winSize.width - 50, winSize.height - [GorillasConfig get].fontSize * 2)];
     
     return self;
 }
@@ -119,7 +119,7 @@
     NSUInteger currModel = model;
     NSUInteger nextModel = (model + 1) % count;
 
-    [swipeLayer setPosition:cpvzero];
+    [swipeLayer setPosition:CGPointZero];
     
     [prevModelSprite setModel:[[modelSprites objectAtIndex:prevModel] unsignedIntValue]];
     [currModelSprite setModel:[[modelSprites objectAtIndex:currModel] unsignedIntValue]];

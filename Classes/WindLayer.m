@@ -34,7 +34,7 @@
 
 @implementation WindLayer
 
-@synthesize color, wind;
+@synthesize wind;
 
 
 - (id) init {
@@ -92,9 +92,9 @@
 -(void) updateSystems {
     
     float windRange = (3 * [[GorillasConfig get] windModifier]);
-    head.position   = cpv(wind * windRange, 0);
-    body.position   = cpv(0, 0);
-    tail.position   = cpv(-wind * windRange, 0);
+    head.position   = ccp(wind * windRange, 0);
+    body.position   = ccp(0, 0);
+    tail.position   = ccp(-wind * windRange, 0);
     body.scaleX     = wind * windRange * 2 / body.contentSize.width;
     head.rotation   = wind > 0? 180: 0;
     
@@ -104,7 +104,7 @@
         if([[affectAngles objectAtIndex:i] boolValue])
             [system setAngle:270 + 45 * wind];
         
-        [system setGravity:cpv(wind * 100 / [system life], [system gravity].y)];
+        [system setGravity:ccp(wind * 100 / [system life], [system gravity].y)];
     }
 }
 
@@ -119,7 +119,7 @@
     
     if(affectAngle)
         [system setAngle:270 + 45 * wind];
-    [system setGravity:cpv(wind * 100 / [system life], [system gravity].y)];
+    [system setGravity:ccp(wind * 100 / [system life], [system gravity].y)];
 }
 
 
@@ -132,46 +132,62 @@
 }
 
 
+- (GLubyte)r {
+    
+    return head.r;
+}
+
+
+- (GLubyte)g {
+    
+    return head.g;
+}
+
+
+- (GLubyte)b {
+    
+    return head.b;
+}
+
+
+- (GLubyte)opacity {
+    
+    return head.opacity;
+}
+
+
+- (void)setRGB:(GLubyte)r :(GLubyte)g :(GLubyte)b {
+    
+    [head setRGB:r :g :b];
+    [body setRGB:r :g :b];
+    [tail setRGB:r :g :b];
+}
+
+
+- (void)setOpacity: (GLubyte)anOpacity {
+
+    head.opacity = anOpacity;
+    body.opacity = anOpacity;
+    tail.opacity = anOpacity;
+}
+
+
 /*-(void) draw {
 
     float windRange = (5 * [[GorillasConfig get] windModifier]);
     CGSize winSize = [[Director sharedDirector] winSize];
     
-    const cpVect from = cpv(winSize.width / 2, winSize.height - [[GorillasConfig get] smallFontSize]);
-    cpVect prev = from;
+    const CGPoint from = ccp(winSize.width / 2, winSize.height - [[GorillasConfig get] smallFontSize]);
+    CGPoint prev = from;
     
-    const cpVect by[] = {
-        prev = cpvadd(prev, cpv(windRange * wind,           0     )),
-        prev = cpvadd(prev, cpv((wind < 0? 1: -1) * 3,      +3    )),
-        prev = cpvadd(prev, cpv(0,                          -3 * 2)),
-        prev = cpvadd(prev, cpv((wind < 0? -1: 1) * 3,      +3    )),
+    const CGPoint by[] = {
+        prev = ccpAdd(prev, ccp(windRange * wind,           0     )),
+        prev = ccpAdd(prev, ccp((wind < 0? 1: -1) * 3,      +3    )),
+        prev = ccpAdd(prev, ccp(0,                          -3 * 2)),
+        prev = ccpAdd(prev, ccp((wind < 0? -1: 1) * 3,      +3    )),
     };
     drawLinesTo(from, by, 4, color, 2);
 }*/
-
-
--(GLubyte) opacity {
-    
-    const GLubyte *colorBytes = (GLubyte *)&color;
-    return colorBytes[0];
-}
-
-
--(void) setOpacity:(GLubyte)opacity {
-    
-    head.opacity = opacity;
-    body.opacity = opacity;
-    tail.opacity = opacity;
-    
-    color = (color & 0xffffff00) | opacity;
-}
-
-
--(void) setPosition:(cpVect)v {
-    
-    self.transformAnchor = v;
-    super.position = v;
-}
 
 
 -(void) dealloc {

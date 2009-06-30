@@ -87,9 +87,9 @@
     CGPoint pFrom = [from locationInView: [from view]];
     CGPoint pTo = [to locationInView: [to view]];
 
-    cpFloat newDist = fabsf(pFrom.y - pTo.y);
-    cpFloat newScale = initialScale * (newDist / initialDist);
-    cpFloat limitedScale = fmaxf(fminf(newScale, 1.1f), 0.8f);
+    CGFloat newDist = fabsf(pFrom.y - pTo.y);
+    CGFloat newScale = initialScale * (newDist / initialDist);
+    CGFloat limitedScale = fmaxf(fminf(newScale, 1.1f), 0.8f);
     if(limitedScale != newScale) {
         newScale = limitedScale;
         initialDist = newDist;
@@ -125,9 +125,9 @@
 }
 
 
--(void) scaleTo:(cpFloat)newScale {
+-(void) scaleTo:(CGFloat)newScale {
     
-    cpFloat duration = [GorillasConfig get].transitionDuration;
+    CGFloat duration = [GorillasConfig get].transitionDuration;
     if(scaleAction != nil && ![scaleAction isDone]) {
         duration -= [scaleAction elapsed];
         [self stopAction:scaleAction];
@@ -138,7 +138,7 @@
 }
 
 
--(void) scrollToCenter:(cpVect)r horizontal:(BOOL)horizontal {
+-(void) scrollToCenter:(CGPoint)r horizontal:(BOOL)horizontal {
     
     CGSize winSize = [Director sharedDirector].winSize;
     
@@ -147,14 +147,14 @@
     float min = [[GorillasAppDelegate get].gameLayer.buildingsLayer left];
     float max = [[GorillasAppDelegate get].gameLayer.buildingsLayer right];
     float top = winSize.height * 2;
-    cpFloat _scale = self.scale;
-    r = cpvmult(r, _scale);
+    CGFloat _scale = self.scale;
+    r = ccpMult(r, _scale);
     min *= _scale;
     max *= _scale;
     top *= _scale;
     
     if(horizontal) {
-        r = cpv(fmaxf(fminf(r.x, max - winSize.width / 2), min + winSize.width / 2),
+        r = ccp(fmaxf(fminf(r.x, max - winSize.width / 2), min + winSize.width / 2),
                 fmaxf(fminf(r.y, top - winSize.height / 2), winSize.height / 2));
     }
     
@@ -171,7 +171,7 @@
     [scrollAction release];
     
     // Start a new scroll with an updated destination point.
-    cpVect g = cpv(winSize.width / 2 - r.x, winSize.height / 2 - r.y);
+    CGPoint g = ccp(winSize.width / 2 - r.x, winSize.height / 2 - r.y);
     
     // Scroll to current point should take initial duration minus what has already elapsed to scroll to approach previous points.
     if(scrollActionElapsed < [[GorillasConfig get] gameScrollDuration])

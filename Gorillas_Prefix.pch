@@ -131,4 +131,13 @@ typedef enum {
     #import "cocos2d.h"
     #import "Utility.h"
     #import "GorillasConfig.h"
+
+    /**
+    * GL types
+    */
+    typedef struct _glPoint {
+        CGPoint p;
+        GLfloat s;
+        ccColor4B c;
+    } glPoint;
 #endif

@@ -30,17 +30,17 @@
     BOOL            skipped;
     //BOOL            focussed;
     ccTime          recap;
-    cpVect          recapr;
-    cpVect          v;
-    cpVect          r0;
+    CGPoint          recapr;
+    CGPoint          v;
+    CGPoint          r0;
     float           throwSkill;
     
     IntervalAction  *spinAction;
     ParticleSystem  *smoke;
 }
 
-+(Throw *) actionWithVelocity: (cpVect)velocity startPos: (cpVect)startPos;
--(Throw *) initWithVelocity: (cpVect)velocity startPos: (cpVect)startPos;
++(Throw *) actionWithVelocity: (CGPoint)velocity startPos: (CGPoint)startPos;
+-(Throw *) initWithVelocity: (CGPoint)velocity startPos: (CGPoint)startPos;
 
 @property (nonatomic, readwrite) ccTime recap;
 //@property (nonatomic, readwrite) BOOL   focussed;

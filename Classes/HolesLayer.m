@@ -43,24 +43,26 @@
 }
 
 
--(BOOL) hitsHole: (cpVect)pos {
+-(BOOL) hitsHole: (CGPoint)pos {
     
     for(NSUInteger h = 0; h < holeCount; ++h)
-        if(((holes[h].x - pos.x) * (holes[h].x - pos.x) +
-            (holes[h].y - pos.y) * (holes[h].y - pos.y) ) < powf(texture.pixelsWide, 2) / 9)
+        if(((holes[h].p.x - pos.x) * (holes[h].p.x - pos.x) +
+            (holes[h].p.y - pos.y) * (holes[h].p.y - pos.y) ) < powf(texture.pixelsWide, 2) / 9)
             return YES;
     
     return NO;
 }
 
 
--(void) addHoleAt:(cpVect)pos {
+-(void) addHoleAt:(CGPoint)pos {
     
-    holes = realloc(holes, sizeof(cpVect) * ++holeCount);
-    holes[holeCount - 1] = pos;
+    holes = realloc(holes, sizeof(glPoint) * ++holeCount);
+    holes[holeCount - 1].p = pos;
+    holes[holeCount - 1].c = ccc(0xffffffff);
+    holes[holeCount - 1].s = texture.pixelsWide;
     
 	glBindBuffer(GL_ARRAY_BUFFER, holeVertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cpVect) * holeCount, holes, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glPoint) * holeCount, holes, GL_DYNAMIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
@@ -71,22 +73,21 @@
     glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
     glBlendFunc(GL_ZERO, GL_SRC_ALPHA);
     
+	glEnable(GL_POINT_SPRITE_OES);
+	glTexEnvx(GL_POINT_SPRITE_OES, GL_COORD_REPLACE_OES, GL_TRUE);
+	
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture.name);
 	
-	glEnable(GL_POINT_SPRITE_OES);
-	glTexEnvi(GL_POINT_SPRITE_OES, GL_COORD_REPLACE_OES, GL_TRUE);
-	
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glBindBuffer(GL_ARRAY_BUFFER, holeVertexBuffer);
-	glVertexPointer(2, GL_FLOAT, sizeof(cpVect), 0);
-	
-    GLfloat width = texture.pixelsWide;
-    for(CocosNode *node = self; [node parent]; node = [node parent])
-        width *= node.scale;
+    glEnableClientState(GL_COLOR_ARRAY);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
     
-    glPointSize(width);
-	
+	glBindBuffer(GL_ARRAY_BUFFER, holeVertexBuffer);
+    glVertexPointer(2, GL_FLOAT, sizeof(glPoint), 0);
+    glPointSizePointerOES(GL_FLOAT, sizeof(glPoint), (GLvoid *) sizeof(CGPoint));
+    glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(glPoint), (GLvoid *) (sizeof(CGPoint) + sizeof(GLfloat)));
+
 	glDrawArrays(GL_POINTS, 0, holeCount);
 	
 	// unbind VBO buffer
@@ -95,9 +96,11 @@
     // Reset blend & data source.
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glPointSize(1);
-	
-	glDisableClientState(GL_VERTEX_ARRAY);
+    
+    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_POINT_SIZE_ARRAY_OES);
+    
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_POINT_SPRITE_OES);
 }

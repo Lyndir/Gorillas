@@ -67,11 +67,11 @@
     if(!(self = [super initWithFile:@"splash.png"]))
         return self;
     
-    [self setPosition:cpv([self contentSize].width / 2, [self contentSize].height / 2)];
+    [self setPosition:ccp([self contentSize].width / 2, [self contentSize].height / 2)];
     
     BarSprite *loadingBar = [[BarSprite alloc] initWithHead:@"aim.head.png" body:@"aim.body.%d.png" withFrames:16 tail:@"aim.tail.png"];
-    [loadingBar updateWithOrigin:cpv(-50, 0) target:cpv(50, 0)];
-    loadingBar.position = cpv(self.contentSize.width / 2, 40);
+    [loadingBar updateWithOrigin:ccp(-50, 0) target:ccp(50, 0)];
+    loadingBar.position = ccp(self.contentSize.width / 2, 40);
     [self addChild:loadingBar];
     [loadingBar release];
     

@@ -64,9 +64,9 @@
     float wPad = [[GorillasConfig get] windowPadding];
     float wWidth = [[GorillasConfig get] windowWidth];
     float wHeight = [[GorillasConfig get] windowHeight];
-    ccColorB wColor0 = ccc([[GorillasConfig get] windowColorOff]);
-    ccColorB wColor1 = ccc([[GorillasConfig get] windowColorOn]);
-    ccColorB wColor10 = { (wColor0.r + wColor1.r) / 2, (wColor0.g + wColor1.g) / 2, (wColor0.b + wColor1.b) / 2, (wColor0.a + wColor1.a) / 2 };
+    ccColor4B wColor0 = ccc([[GorillasConfig get] windowColorOff]);
+    ccColor4B wColor1 = ccc([[GorillasConfig get] windowColorOn]);
+    ccColor4B wColor10 = { (wColor0.r + wColor1.r) / 2, (wColor0.g + wColor1.g) / 2, (wColor0.b + wColor1.b) / 2, (wColor0.a + wColor1.a) / 2 };
 
     // Remember the window on and off colors in an array.
     /*memcpy(&wColors, (GLubyte *)&wColor0, sizeof(long));
@@ -107,10 +107,10 @@
             windowVertices[i + 2].c = windowVertices[i + 3].c
                 = isOff? wColor0: wColor1;
             
-            windowVertices[i + 0].p = cpv(x         , y);
-            windowVertices[i + 1].p = cpv(x + wWidth, y);
-            windowVertices[i + 2].p = cpv(x         , y + wHeight);
-            windowVertices[i + 3].p = cpv(x + wWidth, y + wHeight);
+            windowVertices[i + 0].p = ccp(x         , y);
+            windowVertices[i + 1].p = ccp(x + wWidth, y);
+            windowVertices[i + 2].p = ccp(x         , y + wHeight);
+            windowVertices[i + 3].p = ccp(x + wWidth, y + wHeight);
             
             windowIndices[j + 0] = i + 0;
             windowIndices[j + 1] = i + 1;
@@ -151,7 +151,7 @@
     // == DRAW BUILDING ==
     // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
     glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
-    drawBoxFrom(cpvzero, cpv(contentSize.width, contentSize.height), buildingColor, buildingColor);
+    drawBoxFrom(CGPointZero, ccp(contentSize.width, contentSize.height), buildingColor, buildingColor);
     
     // == DRAW WINDOWS ==
     // Bind our VBOs & colors.
@@ -159,7 +159,7 @@
     glVertexPointer(2, GL_FLOAT, sizeof(Vertex), 0);
     
     glEnableClientState(GL_COLOR_ARRAY);
-    glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(Vertex), (GLvoid *) sizeof(cpVect));
+    glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(Vertex), (GLvoid *) sizeof(CGPoint));
     //glColor4ub(0xFF, 0x00, 0x00, 0xFF);
     
     // == DRAW FRONT WINDOWS ==
@@ -184,7 +184,7 @@
     // == DRAW BUILDING BACK ==
     // Draw back of building where DST opacity is < 1.
     glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA);
-    drawBoxFrom(cpvzero, cpv(contentSize.width, contentSize.height), backBuildingColor, backBuildingColor);
+    drawBoxFrom(CGPointZero, ccp(contentSize.width, contentSize.height), backBuildingColor, backBuildingColor);
     
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glDisableClientState(GL_VERTEX_ARRAY);

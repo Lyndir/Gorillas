@@ -48,15 +48,13 @@
 
 -(void) start {
     
-    if(![target conformsToProtocol:@protocol(CocosNodeRGB)])
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"ShadeTo action target does not cinform to CocosNodeRGB" userInfo:nil];
-    if(![target conformsToProtocol:@protocol(CocosNodeOpacity)])
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"ShadeTo action target does not conform to CocosNodeOpacity" userInfo:nil];
+    if(![target conformsToProtocol:@protocol(CocosNodeRGBA)])
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"ShadeTo action target does not conform to CocosNodeRGBA" userInfo:nil];
     
-    startCol    = [(CocosNode< CocosNodeRGB> *)     target r] << 24
-                | [(CocosNode< CocosNodeRGB> *)     target g] << 16
-                | [(CocosNode< CocosNodeRGB> *)     target b] << 8
-                | [(CocosNode< CocosNodeOpacity> *) target opacity];
+    startCol    = [(CocosNode< CocosNodeRGBA> *) target r] << 24
+                | [(CocosNode< CocosNodeRGBA> *) target g] << 16
+                | [(CocosNode< CocosNodeRGBA> *) target b] << 8
+                | [(CocosNode< CocosNodeRGBA> *) target opacity];
     
     [super start];
 }
@@ -69,7 +67,7 @@
     [(id)target setRGB: (int) (s[3] * (1 - dt)) + (int) (e[3] * dt)
                       : (int) (s[2] * (1 - dt)) + (int) (e[2] * dt)
                       : (int) (s[1] * (1 - dt)) + (int) (e[1] * dt)];
-    [(id<CocosNodeOpacity>)target setOpacity: (int) (s[0] * (1 - dt)) + (int) (e[0] * dt)];
+    [(id<CocosNodeRGBA>)target setOpacity: (int) (s[0] * (1 - dt)) + (int) (e[0] * dt)];
 }
 
 

@@ -44,10 +44,10 @@
 +(void) prepareCreation;
 -(id) initWithName:(NSString *)_name type:(GorillasPlayerType)_type;
 
--(BOOL) hitsGorilla: (cpVect)pos;
+-(BOOL) hitsGorilla: (CGPoint)pos;
 -(void) cheer;
 -(void) dance;
--(void) threw:(cpVect)aim;
+-(void) threw:(CGPoint)aim;
 -(void) kill;
 -(void) killDead;
 -(void) revive;

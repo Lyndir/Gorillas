@@ -28,12 +28,12 @@
 
     Texture2D   *texture;
     NSUInteger  holeCount;
-    cpVect      *holes;
+    glPoint     *holes;
     
     GLuint      holeVertexBuffer;
 }
 
--(BOOL) hitsHole:(cpVect)pos;
--(void) addHoleAt:(cpVect)pos;
+-(BOOL) hitsHole:(CGPoint)pos;
+-(void) addHoleAt:(CGPoint)pos;
 
 @end

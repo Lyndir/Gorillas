@@ -31,14 +31,14 @@
 @synthesize dismissed;
 
 
--(id) initWithColor:(long)aColor position:(cpVect)_showPosition {
+-(id) initWithColor:(long)aColor position:(CGPoint)_showPosition {
     
     if(!(self = [super initWithFile:@"bar.png"]))
         return self;
         
     color           = aColor;
     renderColor     = aColor;
-    showPosition    = cpvadd(_showPosition, cpv(self.contentSize.width / 2, self.contentSize.height / 2));
+    showPosition    = ccpAdd(_showPosition, ccp(self.contentSize.width / 2, self.contentSize.height / 2));
     dismissed       = YES;
 
     menuButton      = nil;
@@ -65,7 +65,7 @@
     menuButton          = [[MenuItemImage itemFromNormalImage:aFile selectedImage:aFile
                                                        target:target selector:selector] retain];
     menuMenu            = [[Menu menuWithItems:menuButton, nil] retain];
-    menuMenu.position   = cpv(self.contentSize.width - menuButton.contentSize.width / 2, 16);
+    menuMenu.position   = ccp(self.contentSize.width - menuButton.contentSize.width / 2, 16);
 
     
     [menuMenu alignItemsHorizontally];
@@ -115,7 +115,7 @@
         [messageLabel setRGB:0xFF :0xFF :0xFF];
     }
     
-    [messageLabel setPosition:cpv(self.contentSize.width / 2, fontSize / 2 + 2)];
+    [messageLabel setPosition:ccp(self.contentSize.width / 2, fontSize / 2 + 2)];
     [self addChild:messageLabel];
     
     if(_duration)
@@ -154,9 +154,9 @@
 }
 
 
--(cpVect) hidePosition {
+-(CGPoint) hidePosition {
     
-    return cpvadd(showPosition, cpv(0, -self.contentSize.height));
+    return ccpAdd(showPosition, ccp(0, -self.contentSize.height));
 }
 
 
@@ -164,8 +164,8 @@
 
     [super draw];
     
-    cpVect to = cpv(self.contentSize.width, self.contentSize.height);
-    drawLinesTo(cpv(0, self.contentSize.height), &to, 1, 0xFFFFFFFF, 1);
+    CGPoint to = ccp(self.contentSize.width, self.contentSize.height);
+    drawLinesTo(ccp(0, self.contentSize.height), &to, 1, 0xFFFFFFFF, 1);
 }
 
 -(void) dealloc {

@@ -64,7 +64,7 @@
 }
 
 
--(void) throwFrom: (cpVect)r0 withVelocity: (cpVect)v {
+-(void) throwFrom: (CGPoint)r0 withVelocity: (CGPoint)v {
     
     [self setClearedGorilla:NO];
 

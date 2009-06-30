@@ -26,7 +26,7 @@
 
 @interface MenuItemSpacer : MenuItem {
 
-    cpFloat height;
+    CGFloat height;
 }
 
 +(id) small;
@@ -37,6 +37,6 @@
 -(id) initNormal;
 -(id) initLarge;
 
--(id) initWithHeight:(cpFloat)_height;
+-(id) initWithHeight:(CGFloat)_height;
 
 @end

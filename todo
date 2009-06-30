@@ -36,3 +36,11 @@
  v  "Go" appears too often.
  v  Add angle & power numbers while aiming.
  .  Arabic voices
+ .  Health bar location when gorillas are scaled.
+ .  Crappy performance.
+
+Refact
+ .  Make sure aim is used as a property.
+ .  Get rid of needless CGPointMake's.
+ .  Fix time scaling.
+ .  HUD doens't disappear.

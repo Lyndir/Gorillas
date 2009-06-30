@@ -24,14 +24,7 @@
 
 #import "Resettable.h"
 
-typedef struct _Star {
-    cpVect p;
-    GLfloat s;
-    ccColorB c;
-} Star;
-
-
-@interface SkyLayer : Layer <CocosNodeSize, Resettable> {
+@interface SkyLayer : Layer <Resettable> {
 
 @private
     CGSize      contentSize;

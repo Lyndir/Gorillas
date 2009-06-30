@@ -31,12 +31,12 @@
 
 -(id) init {
     
-    if(!(self = [super initWithColor:0xFFFFFFFF position:cpvzero]))
+    if(!(self = [super initWithColor:0xFFFFFFFF position:CGPointZero]))
         return self;
 
     [super setButtonImage:@"menu.png"
                  callback:self :@selector(menuButton:)];
-    messageBar          = [[BarLayer alloc] initWithColor:0xAAAAAAFF position:cpv(0, self.contentSize.height)];
+    messageBar          = [[BarLayer alloc] initWithColor:0xAAAAAAFF position:ccp(0, self.contentSize.height)];
     
     // Score.
     scoreSprite = [[Sprite alloc] initWithFile:@"score.png"];
@@ -45,10 +45,10 @@
                                         charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
     skillCount = [[LabelAtlas alloc] initWithString:@""
                                         charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
-    [scoreSprite setPosition:cpv(self.contentSize.width / 2, self.contentSize.height / 2)];
-    [skillSprite setPosition:cpv(self.contentSize.width / 2, self.contentSize.height / 2)];
-    [scoreCount setPosition:cpv(90, 0)];
-    [skillCount setPosition:cpv(230, 0)];
+    [scoreSprite setPosition:ccp(self.contentSize.width / 2, self.contentSize.height / 2)];
+    [skillSprite setPosition:ccp(self.contentSize.width / 2, self.contentSize.height / 2)];
+    [scoreCount setPosition:ccp(90, 0)];
+    [skillCount setPosition:ccp(230, 0)];
     [self addChild:scoreSprite];
     [self addChild:skillSprite];
     [self addChild:scoreCount];
@@ -58,9 +58,9 @@
     livesLayer = [[Layer alloc] init];
     [livesLayer setVisible:NO];
     infiniteLives = [Sprite spriteWithFile:@"infinite-shape.png"];
-    [infiniteLives setPosition:cpv([infiniteLives contentSize].width / 2, self.contentSize.height / 2)];
+    [infiniteLives setPosition:ccp([infiniteLives contentSize].width / 2, self.contentSize.height / 2)];
     [infiniteLives setVisible:NO];
-    [livesLayer setPosition:cpv(20, 0)];
+    [livesLayer setPosition:ccp(20, 0)];
     [self addChild:livesLayer];
     [livesLayer addChild:infiniteLives];
     
@@ -76,7 +76,7 @@
     NSUInteger l = [[livesLayer children] count] - 1;
     while((int)[[livesLayer children] count] - 1 < lives) {
         Sprite *life = [Sprite spriteWithFile:@"gorilla-shape.png"];
-        [life setPosition:cpv(l++ * [life contentSize].width + [life contentSize].width / 2, self.contentSize.height / 2)];
+        [life setPosition:ccp(l++ * [life contentSize].width + [life contentSize].width / 2, self.contentSize.height / 2)];
         
         [livesLayer addChild:life];
     }
@@ -204,12 +204,12 @@
 }
 
 
--(BOOL) hitsHud: (cpVect)pos {
+-(BOOL) hitsHud: (CGPoint)pos {
     
-    return  pos.x >= position.x         &&
-            pos.y >= position.y         &&
-            pos.x <= position.x + self.contentSize.width &&
-            pos.y <= position.y + self.contentSize.height;
+    return  pos.x >= self.position.x         &&
+            pos.y >= self.position.y         &&
+            pos.x <= self.position.x + self.contentSize.width &&
+            pos.y <= self.position.y + self.contentSize.height;
 }
 
 

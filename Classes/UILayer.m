@@ -62,13 +62,10 @@
     [super setRotation:aRotation];
     
     NSUInteger barSide = (int)self.rotation / 90;
-    if([[Director sharedDirector] landscape]) {
-#ifdef LANDSCAPE_LEFT
+    if([Director sharedDirector].deviceOrientation == CCDeviceOrientationLandscapeLeft)
         ++barSide;
-#else
+    else if([Director sharedDirector].deviceOrientation == CCDeviceOrientationLandscapeRight)
         --barSide;
-#endif
-    }
     
     switch (barSide % 4) {
         case 0:
@@ -159,7 +156,7 @@
     
     [self resetMessage:msg];
     [messageLabel runAction:[Sequence actions:
-                             [MoveBy actionWithDuration:1 position:cpv(0, -([[GorillasConfig get] fontSize] * 2))],
+                             [MoveBy actionWithDuration:1 position:ccp(0, -([[GorillasConfig get] fontSize] * 2))],
                              [FadeTo actionWithDuration:2 opacity:0x00],
                              nil]];
     
@@ -181,7 +178,7 @@
             [messageLabel stopAllActions];
             [messageLabel runAction:[Sequence actions:
                                      [MoveTo actionWithDuration:1
-                                                       position:cpv(-[messageLabel contentSize].width / 2, [messageLabel position].y)],
+                                                       position:ccp(-[messageLabel contentSize].width / 2, [messageLabel position].y)],
                                      [FadeOut actionWithDuration:1],
                                      [Remove action],
                                      nil]];
@@ -197,7 +194,7 @@
         [messageLabel setString:msg];
     
     CGSize winSize = [[Director sharedDirector] winSize];
-    [messageLabel setPosition:cpv([messageLabel contentSize].width / 2 + [[GorillasConfig get] fontSize],
+    [messageLabel setPosition:ccp([messageLabel contentSize].width / 2 + [[GorillasConfig get] fontSize],
                                   winSize.height + [[GorillasConfig get] fontSize])];
     [messageLabel setOpacity:0xff];
 }

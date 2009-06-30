@@ -29,9 +29,9 @@
     NSInvocation    *invocation;
     
     IntervalAction  *swipeAction;
-    cpVect          swipeFrom;
-    cpVect          swipeTo;
-    cpVect          swipeStart;
+    CGPoint          swipeFrom;
+    CGPoint          swipeTo;
+    CGPoint          swipeStart;
     BOOL            swipeForward;
     BOOL            swiped;
 }
@@ -40,7 +40,7 @@
 
 -(id) initWithTarget:(id)t selector:(SEL)s;
 
--(void) setSwipeAreaFrom:(cpVect)f to:(cpVect)t;
+-(void) setSwipeAreaFrom:(CGPoint)f to:(CGPoint)t;
 -(void) setTarget:(id)t selector:(SEL)s;
 -(void) swipeDone:(id)sender;
 

@@ -26,13 +26,13 @@
 
 @interface PanningLayer : Layer <Resettable> {
 
-    cpFloat initialScale;
-    cpFloat initialDist;
+    CGFloat initialScale;
+    CGFloat initialDist;
     ScaleTo *scaleAction;
     MoveTo *scrollAction;
 }
 
--(void) scaleTo:(cpFloat)newScale;
--(void) scrollToCenter:(cpVect)r horizontal:(BOOL)horizontal;
+-(void) scaleTo:(CGFloat)newScale;
+-(void) scrollToCenter:(CGPoint)r horizontal:(BOOL)horizontal;
 
 @end

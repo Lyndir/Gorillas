@@ -44,15 +44,15 @@
     for (int i = 0; i < 3; ++i) {
         NSInteger step = 0;
         
-        for (int j = 0; j < 4; ++j) {
-            float depth = j / 8.0f + 0.5f;
+        for (int j = 0; j < 2; ++j) {
+            float depth = j / 4.0f + 0.5f;
             
             const SkyLayer *sky =  [[SkyLayer alloc] initWidthDepth:depth];
             [skies addObject: sky];
             
-            [sky setPosition: cpv(x, 0)];
-            float px = 1 + powf(depth, 22);
-            [self addChild: sky z:1 parallaxRatio:cpv(px, 1)];
+            [sky setPosition: ccp(x, 0)];
+            //float px = 1 + powf(depth, 22);
+            [self addChild: sky z:1 /*parallaxRatio:ccp(px, 1) positionOffset:CGPointZero*/];
             
             step = [sky contentSize].width;
             [sky release];
@@ -80,10 +80,10 @@
 -(void) draw {
     
     CGSize winSize = [[Director sharedDirector] winSize];
-    cpVect from = cpv(-position.x - winSize.width, 0);
+    CGPoint from = ccp(-self.position.x - winSize.width, 0);
     
     if(fancySky)
-        drawBoxFrom(from, cpv(from.x + winSize.width * 3, winSize.height * 1.5f), skyColor, 0x000000ff);
+        drawBoxFrom(from, ccp(from.x + winSize.width * 3, winSize.height * 1.5f), skyColor, 0x000000ff);
     
     else {
         GLubyte *colorBytes = (GLubyte *) &skyColor;

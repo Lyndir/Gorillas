@@ -41,7 +41,6 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
 	// Init the window.
-    [Texture2D setAntiAliasTexParameters];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	[window setUserInteractionEnabled:YES];
@@ -53,9 +52,9 @@
 #if TARGET_IPHONE_SIMULATOR
     [[Director sharedDirector] setPixelFormat:kRGBA8];
 #else
-    //[[Director sharedDirector] setDisplayFPS:YES];
+    [[Director sharedDirector] setDisplayFPS:YES];
 #endif
-	[[Director sharedDirector] setLandscape:YES];
+	[[Director sharedDirector] setDeviceOrientation:CCDeviceOrientationLandscapeLeft];
 	[[Director sharedDirector] attachInWindow:window];
 	[[Director sharedDirector] setDepthTest:NO];
     
@@ -81,16 +80,20 @@
     [[GorillasAudioController get] playTrack:[[GorillasConfig get] currentTrack]];
 
     // Show the splash screen, this starts the main loop in the current thread.
-    [[Director sharedDirector] replaceScene:splashScene];
+    [[Director sharedDirector] pushScene:splashScene];
     do {
+#if ! TARGET_IPHONE_SIMULATOR
         @try {
+#endif
             [[Director sharedDirector] startAnimation];
+#if ! TARGET_IPHONE_SIMULATOR
         }
         @catch (NSException * e) {
             NSLog(@"=== Exception Occurred! ===");
             NSLog(@"Name: %@; Reason: %@; Context: %@.\n", [e name], [e reason], [e userInfo]);
             [hudLayer message:[e reason] duration:5 isImportant:YES];
         }
+#endif
     } while ([[Director sharedDirector] runningScene]);
 }
 

@@ -41,13 +41,13 @@
 @synthesize recap;//, focussed;
 
 
-+(Throw *) actionWithVelocity: (cpVect)velocity startPos: (cpVect)startPos {
++(Throw *) actionWithVelocity: (CGPoint)velocity startPos: (CGPoint)startPos {
     
     return [[[Throw alloc] initWithVelocity: velocity startPos: startPos] autorelease];
 }
 
 
--(Throw *) initWithVelocity: (cpVect)velocity startPos: (cpVect)startPos {
+-(Throw *) initWithVelocity: (CGPoint)velocity startPos: (CGPoint)startPos {
     
     v = velocity;
     r0 = startPos;
@@ -61,20 +61,20 @@
     recap = 0;
     
     smoke = [[ParticleMeteor alloc] init];
-    [smoke setGravity:cpvzero];
-    [smoke setPosition:cpvzero];
+    [smoke setGravity:CGPointZero];
+    [smoke setPosition:CGPointZero];
     [smoke setSpeed:5];
     [smoke setAngle:-90];
     [smoke setAngleVar:10];
     [smoke setLife:3];
     [smoke setEmissionRate:0];
-    ccColorF startColor;
+    ccColor4F startColor;
 	startColor.r = 0.1f;
 	startColor.g = 0.2f;
 	startColor.b = 0.3f;
     startColor.a = 0.5f;
     [smoke setStartColor:startColor];
-    ccColorF endColor;
+    ccColor4F endColor;
 	endColor.r = 0.0f;
 	endColor.g = 0.0f;
 	endColor.b = 0.0f;
@@ -108,8 +108,8 @@
     
     if([[GorillasConfig get] visualFx]) {
         [smoke setEmissionRate:30];
-        [smoke setSize:15.0f * [target scale]];
-        [smoke setSizeVar:5.0f * [target scale]];
+        [smoke setStartSize:15.0f * target.scale];
+        [smoke setStartSizeVar:5.0f * target.scale];
         if(![smoke parent])
             [target.parent addChild:smoke];
         else
@@ -134,28 +134,28 @@
     // Calculate banana position.
     float g = [[GorillasConfig get] gravity];
     ccTime t = elapsed;
-    cpVect r = cpv((v.x + w * t * [[GorillasConfig get] windModifier]) * t + r0.x,
+    CGPoint r = ccp((v.x + w * t * [[GorillasConfig get] windModifier]) * t + r0.x,
                    v.y * t - t * t * g / 2 + r0.y);
 
     // Calculate the step size.
-    cpVect rTest = [target position];
-    cpVect dr = cpvsub(r, rTest);
-    float drLen = cpvlength(dr);
+    CGPoint rTest = [target position];
+    CGPoint dr = ccpSub(r, rTest);
+    float drLen = ccpLength(dr);
     int step = 0, stepCount = drLen <= maxDiff? 1: (int) (drLen / maxDiff) + 1;
-    cpVect rStep = stepCount == 1? dr: cpvmult(dr, 1.0f / stepCount);
+    CGPoint rStep = stepCount == 1? dr: ccpMult(dr, 1.0f / stepCount);
     BOOL offScreen = NO, hitGorilla = NO, hitBuilding = NO;
     
     if(!recap)
         // Only calculate when not recapping.
         do {
             // Increment rTest toward r.
-            rTest = cpvadd(rTest, rStep);
+            rTest = ccpAdd(rTest, rStep);
             
             float min = [buildingsLayer left];
             float max = [buildingsLayer right];
             float top = winSize.height * 2;
             if([gameLayer.panningLayer position].x == 0) {
-                cpFloat scale = [gameLayer.panningLayer scale];
+                CGFloat scale = [gameLayer.panningLayer scale];
                 min = 0;
                 max = winSize.width / scale;
             }
@@ -221,7 +221,7 @@
     
     //if(focussed) {
         if(recap && elapsed > recap) {
-            [[GorillasAppDelegate get].gameLayer scaleTimeTo:0.5f duration:0.5f];
+            //[[GorillasAppDelegate get].gameLayer scaleTimeTo:0.5f duration:0.5f];
             [gameLayer.panningLayer scaleTo:1.5f];
             [gameLayer.panningLayer scrollToCenter:r horizontal:YES];
         } else
@@ -253,8 +253,8 @@
     [target stopAction:spinAction];
     
     //if(focussed) {
-        [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:cpvzero horizontal:NO];
-        [[GorillasAppDelegate get].gameLayer scaleTimeTo:1 duration:0.5f];
+        [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:CGPointZero horizontal:NO];
+        //[[GorillasAppDelegate get].gameLayer scaleTimeTo:1 duration:0.5f];
     //}
 
     [[ThrowController get] throwEnded];

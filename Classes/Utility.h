@@ -23,51 +23,24 @@
 //
 
 
-
-// Fixed Type Vector
-typedef struct iVect{
-	GLfixed x,y;
-} iVect;
-
-static inline GLfixed
-ftoi(const GLfloat f)
-{
-	return (GLfixed)f * 65536;
-}
-
-static inline iVect
-cpvtoiv(const cpVect cpv)
-{
-	iVect v = { ftoi(cpv.x), ftoi(cpv.y) };
-	return v;
-}
-
-static inline iVect
-iv(const GLfixed x, const GLfixed y)
-{
-	iVect v = {x * 65536, y * 65536};
-	return v;
-}
-
-
 // Color Struct
-static inline ccColorB
+static inline ccColor4B
 ccc(const long c)
 {
     GLubyte *components = (GLubyte *)&c;
-	ccColorB cc = { components[3], components[2], components[1], components[0] };
+	ccColor4B cc = { components[3], components[2], components[1], components[0] };
 	return cc;
 }
 
 
 // Vertex: Position & Color 
 typedef struct _Vertex {
-	cpVect p;
-    ccColorB c;
+	CGPoint p;
+    ccColor4B c;
 } Vertex;
 
 static inline Vertex
-ivc(const cpVect p, const long c)
+ivc(const CGPoint p, const long c)
 {
     Vertex v;
     v.p = p; //cpvtoiv(p);
@@ -76,10 +49,10 @@ ivc(const cpVect p, const long c)
 }
 
 static inline Vertex
-ivcf(const cpFloat x, const cpFloat y, const long c)
+ivcf(const CGFloat x, const CGFloat y, const long c)
 {
     Vertex v;
-    v.p = cpv(x, y);
+    v.p = ccp(x, y);
     v.c = ccc(c);
 	return v;
 }
@@ -89,11 +62,11 @@ NSString* rpad(NSString* string, NSUInteger l);
 NSString* lpad(NSString* string, NSUInteger l);
 NSString* appendOrdinalPrefix(int number, NSString* prefix);
 
-void drawPointsAt(const cpVect* points, int count, long color);
+void drawPointsAt(const CGPoint* points, int count, long color);
 
-void drawLinesTo(cpVect from, const cpVect* to, int count, long color, float width);
-void drawLines(const cpVect* points, const long* colors, int n, float width);
+void drawLinesTo(CGPoint from, const CGPoint* to, int count, long color, float width);
+void drawLines(const CGPoint* points, const long* colors, int n, float width);
 
-void drawBoxFrom(cpVect from, cpVect to, long fromColor, long toColor);
+void drawBoxFrom(CGPoint from, CGPoint to, long fromColor, long toColor);
 
-void drawBorderFrom(cpVect from, cpVect to, long color, float width);
+void drawBorderFrom(CGPoint from, CGPoint to, long color, float width);

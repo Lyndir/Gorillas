@@ -26,7 +26,7 @@
 #import "Resettable.h"
 
 
-@interface BuildingLayer : Layer <CocosNodeSize, Resettable> {
+@interface BuildingLayer : Layer <Resettable> {
     
     long        buildingColor;
     long        backBuildingColor;

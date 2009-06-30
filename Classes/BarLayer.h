@@ -31,15 +31,15 @@
     Label               *messageLabel;
     
     long                color, renderColor;
-    cpVect              showPosition;
+    CGPoint              showPosition;
     
     BOOL                dismissed;
 }
 
--(id) initWithColor:(long)aColor position:(cpVect)_showPosition;
+-(id) initWithColor:(long)aColor position:(CGPoint)_showPosition;
 
 -(void) setButtonImage:(NSString *)aFile callback:(id)target :(SEL)selector;
--(cpVect) hidePosition;
+-(CGPoint) hidePosition;
 -(void) dismiss;
 
 -(void) message:(NSString *)msg isImportant:(BOOL)important;

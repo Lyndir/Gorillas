@@ -27,7 +27,7 @@
 
 @implementation FancyLayer
 
-@synthesize opacity, contentSize, outerPadding, padding, innerRatio, color;
+@synthesize contentSize, outerPadding, padding, innerRatio;
 
 
 - (id)init {
@@ -37,8 +37,7 @@
     
     outerPadding    = 5.0f;
     padding         = 50.0f;
-    color           = 0x000000dd;
-    opacity         = color & 0x000000ff;
+    color           = ccc(0x000000dd);
     innerRatio      = 1.0f / padding;
     
     vertexBuffer    = 0;
@@ -62,7 +61,8 @@
     
     int barHeight       = 0;
     if(![[UIApplication sharedApplication] isStatusBarHidden]) {
-        if([[Director sharedDirector] landscape])
+        if([Director sharedDirector].deviceOrientation == CCDeviceOrientationLandscapeLeft
+           || [Director sharedDirector].deviceOrientation == CCDeviceOrientationLandscapeRight)
             barHeight   = [[UIApplication sharedApplication] statusBarFrame].size.width;
         else
             barHeight   = [[UIApplication sharedApplication] statusBarFrame].size.height;
@@ -116,13 +116,9 @@
     vertices[18]    = outerPadding + inner;                         // 10
     vertices[19]    = outerPadding;
 
-    const GLubyte *colorBytes = (GLubyte *)&color;
-    GLubyte *colors = malloc(sizeof(GLubyte) * 10 * 4);
+    ccColor4B *colors = malloc(sizeof(ccColor4B) * 10);
     for(int i = 0; i < 10; ++i) {
-        colors[i * 4 + 0] = colorBytes[3];
-        colors[i * 4 + 1] = colorBytes[2];
-        colors[i * 4 + 2] = colorBytes[1];
-        colors[i * 4 + 3] = colorBytes[0];
+        colors[i] = color;
     }
     
     // Push our window data into VBOs.
@@ -163,21 +159,43 @@
 }
 
 
-- (void)setColor: (long)_color {
+- (GLubyte)r {
     
-    color = _color;
+    return color.r;
+}
+
+
+- (GLubyte)g {
     
-    const GLubyte *colorBytes = (GLubyte *)&color;
-    opacity = colorBytes[0];
+    return color.g;
+}
+
+
+- (GLubyte)b {
+    
+    return color.b;
+}
+
+
+- (GLubyte)opacity {
+    
+    return color.a;
+}
+
+
+- (void)setRGB:(GLubyte)r :(GLubyte)g :(GLubyte)b {
+    
+    color.r = r;
+    color.g = g;
+    color.b = b;
     
     [self update];
 }
 
 
-- (void)setOpacity: (GLubyte)_opacity {
+- (void)setOpacity: (GLubyte)anOpacity {
     
-    opacity = _opacity;
-    color = (color & 0xffffff00) | opacity;
+    color.a = anOpacity;
     
     [self update];
 }

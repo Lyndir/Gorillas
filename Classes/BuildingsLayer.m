@@ -40,7 +40,7 @@
 
 @implementation BuildingsLayer
 
-@synthesize bananaLayer, hitGorilla;
+@synthesize aim, bananaLayer, hitGorilla;
 
 
 -(id) init {
@@ -52,18 +52,18 @@
     dbgTraceStep    = 2;
     dbgPathMaxInd   = 50;
     dbgPathCurInd   = 0;
-    dbgPath         = malloc(sizeof(cpVect) * dbgPathMaxInd);
+    dbgPath         = malloc(sizeof(CGPoint) * dbgPathMaxInd);
     dbgAIMaxInd   = 1;
     dbgAICurInd   = 0;
     dbgAI           = malloc(sizeof(GorillaLayer *) * dbgAIMaxInd);
-    dbgAIVect       = malloc(sizeof(cpVect) * dbgAIMaxInd);
+    dbgAIVect       = malloc(sizeof(CGPoint) * dbgAIMaxInd);
 #endif
     
-    throwHints      = [[NSMutableArray alloc] initWithCapacity:2];
-    
     isTouchEnabled  = YES;
+    
+    throwHints      = [[NSMutableArray alloc] initWithCapacity:2];
 
-    aim             = cpv(-1, -1);
+    aim             = ccp(-1, -1);
     buildings       = [[NSMutableArray alloc] init];
     holes           = nil;
     explosions      = nil;
@@ -78,9 +78,9 @@
                                            fontName:[GorillasConfig get].fixedFontName fontSize:[GorillasConfig get].smallFontSize];
     CGSize winSize  = [Director sharedDirector].winSize;
     
-    leftInfoLabel.position  = cpv(leftInfoLabel.contentSize.width / 2 + 5,
+    leftInfoLabel.position  = ccp(leftInfoLabel.contentSize.width / 2 + 5,
                                   winSize.height - (leftInfoLabel.contentSize.height / 2 + 5));
-    rightInfoLabel.position = cpv(winSize.width - rightInfoLabel.contentSize.width / 2 - 5,
+    rightInfoLabel.position = ccp(winSize.width - rightInfoLabel.contentSize.width / 2 - 5,
                                   winSize.height - (leftInfoLabel.contentSize.height / 2 + 5));
     leftInfoLabel.visible = NO;
     rightInfoLabel.visible = NO;
@@ -93,13 +93,20 @@
 
 -(void) onEnter {
 
-    [super onEnter];
-    
     if (!leftInfoLabel.parent && self.parent)
         [[GorillasAppDelegate get].uiLayer addChild:leftInfoLabel z:9];
     if (!rightInfoLabel.parent && self.parent)
         [[GorillasAppDelegate get].uiLayer addChild:rightInfoLabel z:9];
+    
+    [super onEnter];
 }
+
+
+-(void) registerWithTouchDispatcher {
+    
+	[[TouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+}
+
 
 
 -(void) reset {
@@ -109,7 +116,7 @@
     panAction = nil;
     
     [self stopAllActions];
-    [self setPosition:cpvzero];
+    [self setPosition:CGPointZero];
     
     if(holes) {
         [self removeChild:holes cleanup:YES];
@@ -135,7 +142,8 @@
         BuildingLayer *building = [[BuildingLayer alloc] init];
         [buildings addObject: building];
         
-        [building setPosition: cpv(x, 0)];
+        [building setPosition: ccp(x, 0)];
+        NSLog(@"adding building at: %f, %f", building.position.x, building.position.y);
         [self addChild:building z:1];
 
         [building release];
@@ -146,7 +154,7 @@
 }
 
 
--(void) message:(NSString *)msg on:(CocosNode<CocosNodeSize> *)node {
+-(void) message:(NSString *)msg on:(CocosNode *)node {
     
     if(msgLabel)
         [msgLabel stopAllActions];
@@ -162,20 +170,20 @@
     }
     
     [msgLabel setString:msg];
-    [msgLabel setPosition:cpv([node position].x,
+    [msgLabel setPosition:ccp([node position].x,
                               [node position].y + [node contentSize].height)];
     
     // Make sure label remains on screen.
     CGSize winSize = [[Director sharedDirector] winSize];
     if(![[GorillasConfig get] followThrow]) {
         if([msgLabel position].x < [[GorillasConfig get] fontSize] / 2)                 // Left edge
-            [msgLabel setPosition:cpv([[GorillasConfig get] fontSize] / 2, [msgLabel position].y)];
+            [msgLabel setPosition:ccp([[GorillasConfig get] fontSize] / 2, [msgLabel position].y)];
         if([msgLabel position].x > winSize.width - [[GorillasConfig get] fontSize] / 2) // Right edge
-            [msgLabel setPosition:cpv(winSize.width - [[GorillasConfig get] fontSize] / 2, [msgLabel position].y)];
+            [msgLabel setPosition:ccp(winSize.width - [[GorillasConfig get] fontSize] / 2, [msgLabel position].y)];
         if([msgLabel position].y < [[GorillasConfig get] fontSize] / 2)                 // Bottom edge
-            [msgLabel setPosition:cpv([msgLabel position].x, [[GorillasConfig get] fontSize] / 2)];
+            [msgLabel setPosition:ccp([msgLabel position].x, [[GorillasConfig get] fontSize] / 2)];
         if([msgLabel position].y > winSize.width - [[GorillasConfig get] fontSize] * 2) // Top edge
-            [msgLabel setPosition:cpv([msgLabel position].x, winSize.height - [[GorillasConfig get] fontSize] * 2)];
+            [msgLabel setPosition:ccp([msgLabel position].x, winSize.height - [[GorillasConfig get] fontSize] * 2)];
     }
     
     // Color depending on whether message starts with -, + or neither.
@@ -191,7 +199,7 @@
                          [FadeOut actionWithDuration:3],
                          [Sequence actions:
                           [DelayTime actionWithDuration:1],
-                          [MoveBy actionWithDuration:2 position:cpv(0, [[GorillasConfig get] fontSize] * 2)],
+                          [MoveBy actionWithDuration:2 position:ccp(0, [[GorillasConfig get] fontSize] * 2)],
                           nil],
                          nil]];
 }
@@ -203,13 +211,13 @@
     BuildingLayer *fb = [buildings objectAtIndex:0], *lb = [buildings lastObject];
     int pCount = (([lb position].x - [fb position].x) / dbgTraceStep + 1)
                 * ([[Director sharedDirector] winSize].height / dbgTraceStep + 1);
-    cpVect *hgp = malloc(sizeof(cpVect) * pCount);
-    cpVect *hep = malloc(sizeof(cpVect) * pCount);
+    CGPoint *hgp = malloc(sizeof(CGPoint) * pCount);
+    CGPoint *hep = malloc(sizeof(CGPoint) * pCount);
     int hgc = 0, hec = 0;
     
     for(float x = [fb position].x; x < [lb position].x; x += dbgTraceStep)
         for(float y = 0; y < [[Director sharedDirector] winSize].height; y += dbgTraceStep) {
-            cpVect pos = cpv(x, y);
+            CGPoint pos = ccp(x, y);
 
             BOOL hg = NO, he = NO;
             he = [holes hitsHole:pos];
@@ -237,8 +245,8 @@
             if(![gorilla alive])
                 continue;
             
-            cpVect from = [gorilla position];
-            cpVect to   = cpvadd(from, throwHistory[i]);
+            CGPoint from = [gorilla position];
+            CGPoint to   = ccpAdd(from, throwHistory[i]);
             
             if(to.x && to.y)
                 drawLinesTo(from, &to, 1, [[GorillasConfig get] windowColorOff] & 0xffffff33, 3);
@@ -248,7 +256,7 @@
     /*if([GorillasAppDelegate get].gameLayer.activeGorilla && aim.x > 0) {
         // Only draw aim when aiming and gorillas are set.
 
-        const cpVect points[] = {
+        const CGPoint points[] = {
             [[GorillasAppDelegate get].gameLayer.activeGorilla position],
             aim,
         };
@@ -262,98 +270,91 @@
 }
 
 
--(BOOL) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+
     if([[event allTouches] count] != 1)
-        return [self ccTouchesCancelled:touches withEvent:event];
+        // Ignore: multiple fingers on the screen.
+        return NO;
     
     if(![self mayThrow])
         // State doesn't allow throwing right now.
-        return kEventIgnored;
+        return NO;
     
-    cpVect p = [self convertTouchToNodeSpaceVect:[[event allTouches] anyObject]];
+    CGPoint p = [self convertTouchToNodeSpace:[[event allTouches] anyObject]];
     
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:p])
         // Ignore when moving/clicking over/on HUD.
-        return kEventIgnored;
+        return NO;
     
     if(aim.x != -1 || aim.y != -1)
         // Has already began.
-        return kEventIgnored;
+        return NO;
         
-    aim = cpvsub(p, [self position]);
-    [self showAim];
+    self.aim = ccpSub(p, self.position);
 
-    return kEventHandled;
+    return YES;
 }
 
 
--(BOOL) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
     
-    if([[event allTouches] count] != 1)
-        return [self ccTouchesCancelled:touches withEvent:event];
+    if([[event allTouches] count] != 1) {
+        // Cancel when: multiple fingers hit the screen.
+        self.aim = ccp(-1, -1);
+        return;
+    }
     
-    if(aim.x == -1 && aim.y == -1)
-        // Hasn't yet began.
-        return kEventIgnored;
-    
-    cpVect p = [self convertTouchToNodeSpaceVect:[[event allTouches] anyObject]];
+    CGPoint p = [self convertTouchToNodeSpace:[[event allTouches] anyObject]];
 
-    if([[[GorillasAppDelegate get] hudLayer] hitsHud:p])
+    if([[[GorillasAppDelegate get] hudLayer] hitsHud:p]) {
         // Ignore when moving/clicking over/on HUD.
-        return kEventIgnored;
+        return;
+    }
         
-    aim = cpvsub(p, [self position]);
-    [self showAim];
-    
-    return kEventHandled;
+    self.aim = ccpSub(p, [self position]);
 }
 
 
--(BOOL) ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
     
-    if(aim.x == -1 && aim.y == -1)
-        return kEventIgnored;
-    
-    aim = cpv(-1, -1);
-    [self showAim];
-
-    return kEventHandled;
+    self.aim = ccp(-1, -1);
 }
 
 
--(BOOL) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
 
-    if([[event allTouches] count] != 1)
-        return [self ccTouchesCancelled:touches withEvent:event];
+    if([[event allTouches] count] != 1) {
+        // Cancel when: multiple fingers hit the screen.
+        self.aim = ccp(-1, -1);
+        return;
+    }
     
-    cpVect p = [self convertTouchToNodeSpaceVect:[[event allTouches] anyObject]];
+    CGPoint p = [self convertTouchToNodeSpace:[[event allTouches] anyObject]];
     
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:p]
-        || aim.x <= 0
-        || ![self mayThrow])
+        || aim.x <= 0 || ![self mayThrow]) {
         // Cancel when: released over HUD, no aim vector, state doesn't allow throwing.
-        return [self ccTouchesCancelled:touches withEvent:event];
+        self.aim = ccp(-1, -1);
+        return;
+    }
     
-    cpVect r0 = [[GorillasAppDelegate get].gameLayer.activeGorilla position];
-    cpVect v = cpvsub(aim, r0);
+    CGPoint r0 = [[GorillasAppDelegate get].gameLayer.activeGorilla position];
+    CGPoint v = ccpSub(aim, r0);
+    self.aim = ccp(-1, -1);
     
-    aim = cpv(-1, -1);
-    [self showAim];
-
     [self throwFrom:[GorillasAppDelegate get].gameLayer.activeGorilla withVelocity:v];
-    
-    return kEventHandled;
 }
 
 
-- (void)showAim {
+- (void)setAim:(CGPoint)anAim {
+    
+    aim                     = anAim;
     
     leftInfoLabel.visible   = NO;
     rightInfoLabel.visible  = NO;
     aimSprite.visible       = NO;
     
-    cpVect gorillaPosition = [GorillasAppDelegate get].gameLayer.activeGorilla.position;
+    CGPoint gorillaPosition = [GorillasAppDelegate get].gameLayer.activeGorilla.position;
     
     if (aim.x < 0 && aim.y < 0)
         return;
@@ -361,17 +362,17 @@
     [aimSprite updateWithOrigin:gorillaPosition target:aim];
     aimSprite.visible       = YES;
     
-    cpVect relAim = cpvsub(aim, gorillaPosition);
-    cpVect worldAim = [self convertToWorldSpaceVect:CGPointMake(relAim.x, relAim.y)];
+    CGPoint relAim = ccpSub(aim, gorillaPosition);
+    CGPoint worldAim = [self convertToWorldSpace:relAim];
 
     CGSize winSize = [Director sharedDirector].winSize;
     if (aim.x > winSize.width / 2) {
         [leftInfoLabel setString:[NSString stringWithFormat:@"∡ %0.0f°\n⊿ %0.0f",
-                                  CC_RADIANS_TO_DEGREES(cpvtoangle(worldAim)), cpvlength(worldAim)]];
+                                  CC_RADIANS_TO_DEGREES(ccpToAngle(worldAim)), ccpLength(worldAim)]];
         leftInfoLabel.visible = YES;
     } else {
         [rightInfoLabel setString:[NSString stringWithFormat:@"%0.0f° ∡\n%0.0f ⊿",
-                                  CC_RADIANS_TO_DEGREES(cpvtoangle(worldAim)), cpvlength(worldAim)]];
+                                  CC_RADIANS_TO_DEGREES(ccpToAngle(worldAim)), ccpLength(worldAim)]];
         rightInfoLabel.visible = YES;
     }
 }
@@ -486,8 +487,8 @@
         [enemies release];
         
         // Aim at the target.
-        cpVect r0 = [GorillasAppDelegate get].gameLayer.activeGorilla.position;
-        cpVect v = [self calculateThrowFrom:r0
+        CGPoint r0 = [GorillasAppDelegate get].gameLayer.activeGorilla.position;
+        CGPoint v = [self calculateThrowFrom:r0
                                          to:[target position]
                                  errorLevel:[[GorillasConfig get] level]];
         [target release];
@@ -519,11 +520,11 @@
         [hint stopAllActions];
         
         if(hintGorilla) {
-            cpVect v = [self calculateThrowFrom:[[GorillasAppDelegate get].gameLayer.activeGorilla position]
+            CGPoint v = [self calculateThrowFrom:[[GorillasAppDelegate get].gameLayer.activeGorilla position]
                                              to:[gorilla position] errorLevel:0.9f];
 
             [hint setOpacity:0];
-            [hint setPosition:cpvadd([GorillasAppDelegate get].gameLayer.activeGorilla.position, v)];
+            [hint setPosition:ccpAdd([GorillasAppDelegate get].gameLayer.activeGorilla.position, v)];
             [hint runAction:[RepeatForever actionWithAction:[Sequence actions:
                                                              [DelayTime actionWithDuration:5],
                                                              [FadeTo actionWithDuration:3 opacity:0x55],
@@ -534,7 +535,7 @@
 }
 
 
--(void) throwFrom:(GorillaLayer *)gorilla withVelocity:(cpVect)v {
+-(void) throwFrom:(GorillaLayer *)gorilla withVelocity:(CGPoint)v {
     
     // Hide all hints.
     for(Sprite *hint in throwHints)
@@ -552,18 +553,18 @@
 }
 
 
--(cpVect) calculateThrowFrom:(cpVect)r0 to:(cpVect)rt errorLevel:(cpFloat)l {
+-(CGPoint) calculateThrowFrom:(CGPoint)r0 to:(CGPoint)rt errorLevel:(CGFloat)l {
 
     float g = [[GorillasConfig get] gravity];
     float w = [[[[GorillasAppDelegate get] gameLayer] windLayer] wind];
     ccTime t = 5 * 100 / g;
 
     // Level-based error.
-    rt = cpv(rt.x + random() % (int) ((1 - l) * 100), rt.y + random() % (int) (100 * (1 - l)));
+    rt = ccp(rt.x + random() % (int) ((1 - l) * 100), rt.y + random() % (int) (100 * (1 - l)));
     t = (random() % (int) ((t / 2) * l * 10)) / 10.0f + (t / 2);
 
     // Velocity vector to hit rt in t seconds.
-    cpVect v = cpv((rt.x - r0.x) / t,
+    CGPoint v = ccp((rt.x - r0.x) / t,
                    (g * t * t - 2 * r0.y + 2 * rt.y) / (2 * t));
 
     // Wind-based modifier.
@@ -604,7 +605,7 @@
 }
 
 
--(BOOL) hitsGorilla:(cpVect)pos {
+-(BOOL) hitsGorilla:(CGPoint)pos {
 
 #ifdef _DEBUG_
     dbgPath[dbgPathCurInd] = pos;
@@ -638,7 +639,7 @@
 }
 
 
--(BOOL) hitsBuilding:(cpVect)pos {
+-(BOOL) hitsBuilding:(CGPoint)pos {
     
     // Figure out if a building was hit.
     for(BuildingLayer *building in buildings)
@@ -679,9 +680,9 @@
 
     // Reset throw history & throw hints.
     free(throwHistory);
-    throwHistory = malloc(sizeof(cpVect) * [gorillas count]);
+    throwHistory = malloc(sizeof(CGPoint) * [gorillas count]);
     for(NSUInteger i = 0; i < [gorillas count]; ++i) {
-        throwHistory[i] = cpv(-1, -1);
+        throwHistory[i] = ccp(-1, -1);
         [[throwHints objectAtIndex:i] setVisible:NO];
     }
     
@@ -689,7 +690,7 @@
     // Find indexA: The left boundary of allowed gorilla indexes.
     NSUInteger indexA = 0;
     for(BuildingLayer *building in buildings)
-        if(position.x + [building position].x >= 0) {
+        if(self.position.x + building.position.x >= 0) {
             indexA = [buildings indexOfObject:building];
             break;
         }
@@ -733,7 +734,7 @@
         BuildingLayer *building = [buildings objectAtIndex:[(NSNumber *) [gorillaIndexes objectAtIndex:i] unsignedIntegerValue]];
         GorillaLayer *gorilla = [gorillas objectAtIndex:i];
         
-        [gorilla setPosition:cpv([building position].x + [building contentSize].width / 2, [building contentSize].height + [gorilla contentSize].height / 2)];
+        [gorilla setPosition:ccp([building position].x + [building contentSize].width / 2, [building contentSize].height + [gorilla contentSize].height / 2)];
         [gorilla runAction:[FadeIn actionWithDuration:1]];
         [self addChild:gorilla z:3];
     }
@@ -823,21 +824,21 @@
 }
 
 
--(void) explodeAt: (cpVect)point isGorilla:(BOOL)isGorilla {
+-(void) explodeAt: (CGPoint)point isGorilla:(BOOL)isGorilla {
     
     [holes addHoleAt:point];
     [explosions addExplosionAt:point hitsGorilla:isGorilla];
 }
 
 
--(cpFloat) left {
+-(CGFloat) left {
     
     BuildingLayer *firstBuilding = [buildings objectAtIndex:1];
     return [firstBuilding position].x;
 }
 
 
--(cpFloat) right {
+-(CGFloat) right {
     
     BuildingLayer *lastBuilding = [buildings lastObject];
     return [lastBuilding position].x + [lastBuilding contentSize].width;

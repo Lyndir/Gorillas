@@ -58,7 +58,7 @@
 }
 
 
--(id) initWithHeight:(cpFloat)_height {
+-(id) initWithHeight:(CGFloat)_height {
     
     if(!(self = [super initWithTarget:nil selector:nil]))
         return self;
@@ -72,7 +72,7 @@
 
 -(CGRect) rect {
     
-	return CGRectMake(position.x, position.y - height / 2, position.x, position.y + height / 2);
+	return CGRectMake(self.position.x, self.position.y - height / 2, self.position.x, self.position.y + height / 2);
 }
 
 

@@ -25,7 +25,7 @@
 #import "Resettable.h"
 
 
-@interface SkiesLayer : Layer <Resettable> {
+@interface SkiesLayer : CocosNode <Resettable> {
 
     long skyColor;
     BOOL fancySky;

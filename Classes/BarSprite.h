@@ -15,8 +15,8 @@
     Texture2D           *head, **body, *tail;
     NSUInteger          bodyFrame, bodyFrames;
     
-    cpVect              halfToHead;
-    cpFloat             halfLength;
+    CGPoint              halfToHead;
+    CGFloat             halfLength;
     
     CGSize              textureSize;
 }
@@ -31,7 +31,7 @@
 #pragma mark ###############################
 #pragma mark Behaviors
 
-- (void)updateWithOrigin:(cpVect)o target:(cpVect)t;
+- (void)updateWithOrigin:(CGPoint)o target:(CGPoint)t;
 
 @property (readwrite) CGSize    textureSize;
 

@@ -47,14 +47,14 @@
 }
 
 
-- (void)updateWithOrigin:(cpVect)o target:(cpVect)t {
+- (void)updateWithOrigin:(CGPoint)o target:(CGPoint)t {
 
-    halfToHead = cpvmult(cpvsub(t, o), 0.5f);
-    halfLength = cpvlength(halfToHead);
+    halfToHead = ccpMult(ccpSub(t, o), 0.5f);
+    halfLength = ccpLength(halfToHead);
     
-    self.position = cpvadd(o, halfToHead);
-    self.transformAnchor = cpvzero;
-    self.rotation = CC_RADIANS_TO_DEGREES(cpvtoangle(cpv(halfToHead.x, -halfToHead.y)));
+    self.position = ccpAdd(o, halfToHead);
+    self.anchorPoint = CGPointZero;
+    self.rotation = CC_RADIANS_TO_DEGREES(ccpToAngle(ccp(halfToHead.x, -halfToHead.y)));
 }
 
 
@@ -130,7 +130,7 @@
     glTexCoordPointer(2, GL_FLOAT, 0, coordinates[2]);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     
-    /*cpFloat x, step = body[bodyFrame].pixelsWide / 2 + 2;
+    /*CGFloat x, step = body[bodyFrame].pixelsWide / 2 + 2;
     for (x = -halfLength + tail.pixelsWide / 2; x < halfLength - head.pixelsWide / 2; x += step)
         [body[bodyFrame] drawAtPoint:CGPointMake(x, 0)];
     [body[bodyFrame] drawInRect:CGRectMake(x, body[bodyFrame].pixelsHigh / -2, halfLength - head.pixelsWide / 2, body[bodyFrame].pixelsHigh / 2)];*/

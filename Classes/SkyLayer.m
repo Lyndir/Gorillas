@@ -23,7 +23,7 @@
 //
 
 #import "SkyLayer.h"
-#define maxStarSize 3
+#define maxStarSize 4
 
 
 @implementation SkyLayer
@@ -55,21 +55,21 @@
     contentSize = CGSizeMake(winSize.width * 2, winSize.height * 2);
     starCount = [[GorillasConfig get] starAmount];
     
-    Star *starVertices = malloc(sizeof(Star) * starCount * 4);
+    glPoint *starVertices = malloc(sizeof(glPoint) * starCount * 4);
     
     for (NSUInteger s = 0; s < starCount * 4; ++s) {
-        starVertices[s].p   = cpv(random() % (long) contentSize.width,
+        starVertices[s].p   = ccp(random() % (long) contentSize.width,
                                   random() % (long) contentSize.height);
         starVertices[s].c   = ccc([GorillasConfig get].starColor);
         //starVertices[s].c.a *= depth;
-        starVertices[s].s   = fmaxf(1.0f, maxStarSize * powf(depth, 3));
+        starVertices[s].s   = fmaxf(1.0f, roundf(maxStarSize * powf(depth, 3)));
     }
     
     // Push our window data into the VBO.
     glDeleteBuffers(1, &starVertexBuffer);
     glGenBuffers(1, &starVertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Star) * starCount * 4, starVertices, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(glPoint) * starCount * 4, starVertices, GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     free(starVertices);
@@ -85,9 +85,9 @@
     
     // Stars.
     glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
-    glVertexPointer(2, GL_FLOAT, sizeof(Star), 0);
-    glPointSizePointerOES(GL_FLOAT, sizeof(Star), (GLvoid *) sizeof(cpVect));
-    glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(Star), (GLvoid *) (sizeof(cpVect) + sizeof(GLfloat)));
+    glVertexPointer(2, GL_FLOAT, sizeof(glPoint), 0);
+    glPointSizePointerOES(GL_FLOAT, sizeof(glPoint), (GLvoid *) sizeof(CGPoint));
+    glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(glPoint), (GLvoid *) (sizeof(CGPoint) + sizeof(GLfloat)));
     
     glDrawArrays(GL_POINTS, 0, starCount * 4);
     

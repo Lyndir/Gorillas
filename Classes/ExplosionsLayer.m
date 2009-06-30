@@ -34,8 +34,8 @@ typedef enum {
 
 @interface ExplosionsLayer (Private)
 
--(cpFloat) size;
-+(ParticleSystem *) flameWithRadius:(cpFloat)radius heavy:(BOOL)heavy;
+-(CGFloat) size;
++(ParticleSystem *) flameWithRadius:(CGFloat)radius heavy:(BOOL)heavy;
 
 @end
 
@@ -81,8 +81,8 @@ static ParticleSystem **flameTypes = nil;
 
 -(void) step:(ccTime)dt {
     
-    for(CocosNode *node = self; node; node = node.parent)
-        dt *= node.timeScale;
+    //for(CocosNode *node = self; node; node = node.parent)
+    //    dt *= node.timeScale;
 
     if(flameTypes) {
         for (NSUInteger type = 0; type < flameVariantion * 2; ++type)
@@ -91,13 +91,13 @@ static ParticleSystem **flameTypes = nil;
 }
 
 
--(cpFloat) size {
+-(CGFloat) size {
     
     return 32;
 }
 
 
--(void) addExplosionAt:(cpVect)pos hitsGorilla:(BOOL) hitsGorilla {
+-(void) addExplosionAt:(CGPoint)pos hitsGorilla:(BOOL) hitsGorilla {
     
     BOOL heavy = hitsGorilla || (random() % 100 > 90);
 
@@ -114,15 +114,15 @@ static ParticleSystem **flameTypes = nil;
     ParticleSystem *explosion = [[ParticleSun alloc] initWithTotalParticles:explosionParticles];
     [[GorillasAppDelegate get].gameLayer.windLayer registerSystem:explosion affectAngle:NO];
     
-    explosion.position  = cpvzero;
-    explosion.source    = pos;
-    explosion.size      = (heavy? 20: 15) * self.scale;
-    explosion.sizeVar   = 5 * self.scale;
-    explosion.speed     = 10;
-    explosion.posVar    = cpv([self size] * 0.2f,
-                              [self size] * 0.2f);
-    explosion.tag       = (hitsGorilla? GorillasExplosionHitGorilla  : 0) |
-                          (heavy?       GorillasExplosionHeavy       : 0);
+    explosion.position      = CGPointZero;
+    explosion.source        = pos;
+    explosion.startSize     = (heavy? 20: 15) * self.scale;
+    explosion.startSizeVar  = 5 * self.scale;
+    explosion.speed         = 10;
+    explosion.posVar        = ccp([self size] * 0.2f,
+                                  [self size] * 0.2f);
+    explosion.tag           = (hitsGorilla? GorillasExplosionHitGorilla  : 0) |
+                              (heavy?       GorillasExplosionHeavy       : 0);
     [explosion runAction:[Sequence actions:
                           [DelayTime actionWithDuration:heavy? 0.6f: 0.2f],
                           [CallFuncN actionWithTarget:self selector:@selector(stop:)],
@@ -138,9 +138,9 @@ static ParticleSystem **flameTypes = nil;
 
     if(positions) {
         NSUInteger f = 0;
-        cpVect prevFlamePos = cpvzero;
+        CGPoint prevFlamePos = CGPointZero;
         for(ParticleSystem *flame in flames) {
-            cpVect translate = cpvsub(positions[f], prevFlamePos);
+            CGPoint translate = ccpSub(positions[f], prevFlamePos);
             prevFlamePos = positions[f];
             
             glTranslatef(translate.x, translate.y, 0);
@@ -181,7 +181,7 @@ static ParticleSystem **flameTypes = nil;
     if(!hitsGorilla && [GorillasConfig get].visualFx) {
         ParticleSystem *flame = [ExplosionsLayer flameWithRadius:[self size] / 2 heavy:heavy];
 
-        positions = realloc(positions, sizeof(cpVect) * (flames.count + 1));
+        positions = realloc(positions, sizeof(CGPoint) * (flames.count + 1));
         positions[flames.count] = explosion.source;
         [flames addObject:flame];
     }
@@ -190,7 +190,7 @@ static ParticleSystem **flameTypes = nil;
 }
 
 
-+(ParticleSystem *) flameWithRadius:(cpFloat)radius heavy:(BOOL)heavy {
++(ParticleSystem *) flameWithRadius:(CGFloat)radius heavy:(BOOL)heavy {
     
     if(!flameTypes) {
         flameTypes = malloc(sizeof(ParticleSystem *) * 2 * flameVariantion);
@@ -201,17 +201,17 @@ static ParticleSystem **flameTypes = nil;
             
             ParticleSystem *flame   = [[ParticleFire alloc] initWithTotalParticles:flameParticles];
             
-            flame.position          = cpvzero;
+            flame.position          = CGPointZero;
             //flames.angleVar       = 90;
-            flame.size              = typeIsHeavy? 10: 4;
-            flame.sizeVar           = 5;
-            flame.posVar            = cpv(radius / 2, radius / 2);
+            flame.startSize         = typeIsHeavy? 10: 4;
+            flame.startSizeVar      = 5;
+            flame.posVar            = ccp(radius / 2, radius / 2);
             flame.speed             = 8;
             flame.speedVar          = 10;
             flame.life              = typeIsHeavy? 2: 1;
-            ccColorF startColor     = { 0.9f, 0.5f, 0.0f, 1.0f };
+            ccColor4F startColor     = { 0.9f, 0.5f, 0.0f, 1.0f };
             flame.startColor        = startColor;
-            ccColorF startColorVar  = { 0.1f, 0.2f, 0.0f, 0.1f };
+            ccColor4F startColorVar  = { 0.1f, 0.2f, 0.0f, 0.1f };
             flame.startColorVar     = startColorVar;
             flame.emissionRate     *= 1.5f;
             

@@ -36,7 +36,7 @@
     Throw                   *throwAction;
 }
 
--(void) throwFrom: (cpVect)r0 withVelocity: (cpVect)v;
+-(void) throwFrom: (CGPoint)r0 withVelocity: (CGPoint)v;
 -(BOOL) throwing;
 
 -(void) setModel:(GorillasProjectileModel)aModel type:(GorillasPlayerType)aType;

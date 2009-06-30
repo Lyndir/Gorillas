@@ -48,7 +48,7 @@
                                         alignment:alignment
                                          fontName:[[GorillasConfig get] fixedFontName]
                                          fontSize:[[GorillasConfig get] smallFontSize]];
-    [pageLabel setPosition:cpv(contentSize.width / 2, contentSize.height / 2)];
+    [pageLabel setPosition:ccp(contentSize.width / 2, contentSize.height / 2)];
     [pageLabel runAction:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
     [self addChild:pageLabel];
 
@@ -60,7 +60,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
     backMenu = [[Menu menuWithItems:back, nil] retain];
-    [backMenu setPosition:cpv([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
+    [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
 
@@ -71,7 +71,7 @@
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
     Menu *buyMenu = [[Menu menuWithItems:upgrade, nil] retain];
-    [buyMenu setPosition:cpv(contentSize.width - [[GorillasConfig get] fontSize] * 2.5f, [[GorillasConfig get] fontSize])];
+    [buyMenu setPosition:ccp(contentSize.width - [[GorillasConfig get] fontSize] * 2.5f, [[GorillasConfig get] fontSize])];
     [buyMenu alignItemsHorizontally];
     [self addChild: buyMenu];
     
