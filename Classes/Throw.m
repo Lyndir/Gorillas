@@ -221,7 +221,7 @@
     
     //if(focussed) {
         if(recap && elapsed > recap) {
-            //[[GorillasAppDelegate get].gameLayer scaleTimeTo:0.5f duration:0.5f];
+            [[GorillasAppDelegate get].gameLayer scaleTimeTo:0.5f duration:0.5f];
             [gameLayer.panningLayer scaleTo:1.5f];
             [gameLayer.panningLayer scrollToCenter:r horizontal:YES];
         } else
@@ -254,7 +254,7 @@
     
     //if(focussed) {
         [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:CGPointZero horizontal:NO];
-        //[[GorillasAppDelegate get].gameLayer scaleTimeTo:1 duration:0.5f];
+        [[GorillasAppDelegate get].gameLayer scaleTimeTo:1.0f duration:0.5f];
     //}
 
     [[ThrowController get] throwEnded];

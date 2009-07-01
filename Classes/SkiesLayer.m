@@ -23,7 +23,7 @@
 //
 
 #import "SkiesLayer.h"
-#import "SkyLayer.h"
+#import "StarLayer.h"
 #import "PanAction.h"
 
 
@@ -35,33 +35,22 @@
     if (!(self = [super init]))
 		return self;
     
-    float x = -[[Director sharedDirector] winSize].width;
-    
     skyColor = [[GorillasConfig get] skyColor];
     fancySky = [[GorillasConfig get] visualFx];
     
     skies = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 3; ++i) {
-        NSInteger step = 0;
+    for (int j = 0; j < 2; ++j) {
+        float depth = j / 4.0f + 0.5f;
         
-        for (int j = 0; j < 2; ++j) {
-            float depth = j / 4.0f + 0.5f;
-            
-            const SkyLayer *sky =  [[SkyLayer alloc] initWidthDepth:depth];
-            [skies addObject: sky];
-            
-            [sky setPosition: ccp(x, 0)];
-            //float px = 1 + powf(depth, 22);
-            [self addChild: sky z:1 /*parallaxRatio:ccp(px, 1) positionOffset:CGPointZero*/];
-            
-            step = [sky contentSize].width;
-            [sky release];
-        }
+        const StarLayer *sky =  [[StarLayer alloc] initWidthDepth:depth];
+        [skies addObject: sky];
         
-        x += step;
+        [sky setPosition: CGPointZero];
+        //float px = 1 + powf(depth, 22);
+        [self addChild:sky z:1 /*parallaxRatio:ccp(px, 1) positionOffset:CGPointZero*/];
+        
+        [sky release];
     }
-    
-    [self runAction:[PanAction actionWithSubNodes:skies duration:[[GorillasConfig get] starSpeed] padding:0]];
     
     return self;
 }
@@ -72,7 +61,7 @@
     skyColor = [[GorillasConfig get] skyColor];
     fancySky = [[GorillasConfig get] visualFx];
     
-    for(SkyLayer *sky in skies)
+    for(StarLayer *sky in skies)
         [sky reset];
 }
 

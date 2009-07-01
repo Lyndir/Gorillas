@@ -37,10 +37,14 @@
  v  Add angle & power numbers while aiming.
  .  Arabic voices
  .  Health bar location when gorillas are scaled.
- .  Crappy performance.
+ v  Crappy performance.
+ .  Hide vibration on iPod touch.
 
 Refact
- .  Make sure aim is used as a property.
- .  Get rid of needless CGPointMake's.
- .  Fix time scaling.
+ v  Make sure aim is used as a property.
+ v  Fix time scaling.
+ .  Fix parallax scrolling.
+ .  Fix hole size scaling when zooming.
  .  HUD doens't disappear.
+ v  Optimize Skylayer star rendering by combining.
+ .  Memory issues (esp. when switching city themes).

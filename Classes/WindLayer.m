@@ -98,7 +98,7 @@
     body.scaleX     = wind * windRange * 2 / body.contentSize.width;
     head.rotation   = wind > 0? 180: 0;
     
-    for(uint i = 0; i < [systems count]; ++i) {
+    for(NSUInteger i = 0; i < [systems count]; ++i) {
         ParticleSystem *system = [systems objectAtIndex:i];
         
         if([[affectAngles objectAtIndex:i] boolValue])

@@ -189,7 +189,7 @@
      
                                 [NSNumber numberWithLong:       [theme skyColor]],          dSkyColor,
                                 [NSNumber numberWithLong:       [theme starColor]],         dStarColor,
-                                [NSNumber numberWithInteger:    150],                       dStarSpeed,
+                                [NSNumber numberWithInteger:    10],                        dStarSpeed,
                                 [NSNumber numberWithInteger:    [theme starAmount]],        dStarAmount,
                                 
                                 [NSNumber numberWithInteger:    3],                         dLives,

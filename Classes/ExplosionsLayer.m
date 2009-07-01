@@ -104,8 +104,7 @@ static ParticleSystem **flameTypes = nil;
     if([[GorillasConfig get] soundFx])
         [GorillasAudioController playEffect:[ExplosionsLayer explosionEffect:heavy]];
 
-    if([[GorillasConfig get] vibration])
-        [[GorillasAppDelegate get].gameLayer shake];
+    [[GorillasAppDelegate get].gameLayer shake];
     
     int explosionParticles = random() % 50 + 300;
     if(heavy)

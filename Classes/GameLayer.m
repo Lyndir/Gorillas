@@ -43,6 +43,7 @@
 @synthesize paused;
 @synthesize gorillas, activeGorilla;
 @synthesize skiesLayer, panningLayer, buildingsLayer, windLayer, weather;
+@synthesize scaleTimeAction;
 
 -(BOOL) singlePlayer {
 
@@ -91,17 +92,28 @@
     
     if(paused) {
         if(running)
-            //[self scaleTimeTo:0 duration:0.5f];
+            [self scaleTimeTo:0 duration:0.5f];
         [[GorillasAppDelegate get] hideHud];
         [windLayer runAction:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                                 opacity:0x00]];
     } else {
-        //[self scaleTimeTo:1 duration:1];
+        [self scaleTimeTo:1.0f duration:1.0f];
         [[GorillasAppDelegate get] popAllLayers];
         [[GorillasAppDelegate get] revealHud];
         [windLayer runAction:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
                                                 opacity:0xFF]];
     }
+}
+
+
+- (void)scaleTimeTo:(float)aTimeScale duration:(ccTime)aDuration {
+
+    if (scaleTimeAction)
+        [self stopAction:scaleTimeAction];
+    [scaleTimeAction release];
+    
+    scaleTimeAction = [[ScaleTime actionWithTimeScaleTarget:aTimeScale duration:aDuration] retain];
+    [self runAction:scaleTimeAction scaleTime:NO];
 }
 
 
@@ -125,7 +137,8 @@
 
 -(void) shake {
     
-    [GorillasAudioController vibrate];
+    if ([GorillasConfig get].vibration)
+        [GorillasAudioController vibrate];
     
     [buildingsLayer runAction:shakeAction];
 }

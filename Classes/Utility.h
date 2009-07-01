@@ -62,6 +62,9 @@ NSString* rpad(NSString* string, NSUInteger l);
 NSString* lpad(NSString* string, NSUInteger l);
 NSString* appendOrdinalPrefix(int number, NSString* prefix);
 
+BOOL IsIPod();
+BOOL IsIPhone();
+
 void drawPointsAt(const CGPoint* points, int count, long color);
 
 void drawLinesTo(CGPoint from, const CGPoint* to, int count, long color, float width);

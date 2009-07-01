@@ -117,9 +117,8 @@
     vertices[19]    = outerPadding;
 
     ccColor4B *colors = malloc(sizeof(ccColor4B) * 10);
-    for(int i = 0; i < 10; ++i) {
+    for(int i = 0; i < 10; ++i)
         colors[i] = color;
-    }
     
     // Push our window data into VBOs.
     glDeleteBuffers(1, &vertexBuffer);
@@ -129,7 +128,7 @@
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat *) * 10 * 2, vertices, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLubyte *) * 10 * 4, colors, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(ccColor4B) * 10, colors, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     
     // Free the clientside window data.

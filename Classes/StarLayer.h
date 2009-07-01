@@ -24,12 +24,13 @@
 
 #import "Resettable.h"
 
-@interface SkyLayer : Layer <Resettable> {
+@interface StarLayer : Layer <Resettable> {
 
 @private
     CGSize      contentSize;
     float       depth;
     
+    glPoint *   starVertices;
     GLuint      starVertexBuffer;
     NSUInteger  starCount;
 }

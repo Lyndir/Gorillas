@@ -139,7 +139,7 @@
 		DA256F0A0FF94199004EDC3A /* TouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256ED90FF94199004EDC3A /* TouchHandler.m */; };
 		DA256F0B0FF94199004EDC3A /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDB0FF94199004EDC3A /* cocos2d.m */; };
 		DA256F0C0FF94199004EDC3A /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDD0FF94199004EDC3A /* TextureAtlas.m */; };
-		DA256F0D0FF94199004EDC3A /* Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDF0FF94199004EDC3A /* Scheduler.m */; };
+		DA256F0D0FF94199004EDC3A /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDF0FF94199004EDC3A /* Schedule.m */; };
 		DA256F0E0FF94199004EDC3A /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE10FF94199004EDC3A /* Primitives.m */; };
 		DA256F0F0FF94199004EDC3A /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE30FF94199004EDC3A /* Camera.m */; };
 		DA256F100FF94199004EDC3A /* Director.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE50FF94199004EDC3A /* Director.m */; };
@@ -178,7 +178,7 @@
 		DA256F310FF94199004EDC3A /* TouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256ED90FF94199004EDC3A /* TouchHandler.m */; };
 		DA256F320FF94199004EDC3A /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDB0FF94199004EDC3A /* cocos2d.m */; };
 		DA256F330FF94199004EDC3A /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDD0FF94199004EDC3A /* TextureAtlas.m */; };
-		DA256F340FF94199004EDC3A /* Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDF0FF94199004EDC3A /* Scheduler.m */; };
+		DA256F340FF94199004EDC3A /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDF0FF94199004EDC3A /* Schedule.m */; };
 		DA256F350FF94199004EDC3A /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE10FF94199004EDC3A /* Primitives.m */; };
 		DA256F360FF94199004EDC3A /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE30FF94199004EDC3A /* Camera.m */; };
 		DA256F370FF94199004EDC3A /* Director.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE50FF94199004EDC3A /* Director.m */; };
@@ -217,7 +217,7 @@
 		DA256F580FF94199004EDC3A /* TouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256ED90FF94199004EDC3A /* TouchHandler.m */; };
 		DA256F590FF94199004EDC3A /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDB0FF94199004EDC3A /* cocos2d.m */; };
 		DA256F5A0FF94199004EDC3A /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDD0FF94199004EDC3A /* TextureAtlas.m */; };
-		DA256F5B0FF94199004EDC3A /* Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDF0FF94199004EDC3A /* Scheduler.m */; };
+		DA256F5B0FF94199004EDC3A /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDF0FF94199004EDC3A /* Schedule.m */; };
 		DA256F5C0FF94199004EDC3A /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE10FF94199004EDC3A /* Primitives.m */; };
 		DA256F5D0FF94199004EDC3A /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE30FF94199004EDC3A /* Camera.m */; };
 		DA256F5E0FF94199004EDC3A /* Director.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE50FF94199004EDC3A /* Director.m */; };
@@ -256,7 +256,7 @@
 		DA256F7F0FF94199004EDC3A /* TouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256ED90FF94199004EDC3A /* TouchHandler.m */; };
 		DA256F800FF94199004EDC3A /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDB0FF94199004EDC3A /* cocos2d.m */; };
 		DA256F810FF94199004EDC3A /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDD0FF94199004EDC3A /* TextureAtlas.m */; };
-		DA256F820FF94199004EDC3A /* Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDF0FF94199004EDC3A /* Scheduler.m */; };
+		DA256F820FF94199004EDC3A /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDF0FF94199004EDC3A /* Schedule.m */; };
 		DA256F830FF94199004EDC3A /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE10FF94199004EDC3A /* Primitives.m */; };
 		DA256F840FF94199004EDC3A /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE30FF94199004EDC3A /* Camera.m */; };
 		DA256F850FF94199004EDC3A /* Director.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE50FF94199004EDC3A /* Director.m */; };
@@ -302,7 +302,7 @@
 		DA3400700EB516F400B68C06 /* GameConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006F0EB516F400B68C06 /* GameConfigurationLayer.m */; };
 		DA34FD100EB4851E00B68C06 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
 		DA34FD7D0EB49F4000B68C06 /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */; };
-		DA34FD800EB49FFB00B68C06 /* SkyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* SkyLayer.m */; };
+		DA34FD800EB49FFB00B68C06 /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
 		DA34FE1C0EB4AE5400B68C06 /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
 		DA34FF6C0EB4E48E00B68C06 /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
 		DA34FFAA0EB4EEF300B68C06 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
@@ -363,7 +363,7 @@
 		DA4769840FDD7334002E74F8 /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
 		DA4769850FDD7334002E74F8 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
 		DA4769860FDD7334002E74F8 /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */; };
-		DA4769870FDD7334002E74F8 /* SkyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* SkyLayer.m */; };
+		DA4769870FDD7334002E74F8 /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
 		DA4769880FDD7334002E74F8 /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
 		DA4769890FDD7334002E74F8 /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
 		DA47698A0FDD7334002E74F8 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
@@ -515,7 +515,7 @@
 		DA8B77310F46120600DD88BF /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
 		DA8B77320F46120600DD88BF /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
 		DA8B77330F46120600DD88BF /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */; };
-		DA8B77340F46120600DD88BF /* SkyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* SkyLayer.m */; };
+		DA8B77340F46120600DD88BF /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
 		DA8B77350F46120600DD88BF /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
 		DA8B77360F46120600DD88BF /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
 		DA8B77370F46120600DD88BF /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
@@ -637,7 +637,7 @@
 		DABD68040F190D4D00EE213D /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
 		DABD68050F190D4D00EE213D /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
 		DABD68060F190D4D00EE213D /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */; };
-		DABD68070F190D4D00EE213D /* SkyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* SkyLayer.m */; };
+		DABD68070F190D4D00EE213D /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
 		DABD68080F190D4D00EE213D /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
 		DABD68090F190D4D00EE213D /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
 		DABD680A0F190D4D00EE213D /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
@@ -961,8 +961,8 @@
 		DA256EDB0FF94199004EDC3A /* cocos2d.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocos2d.m; sourceTree = "<group>"; };
 		DA256EDC0FF94199004EDC3A /* TextureAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureAtlas.h; sourceTree = "<group>"; };
 		DA256EDD0FF94199004EDC3A /* TextureAtlas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureAtlas.m; sourceTree = "<group>"; };
-		DA256EDE0FF94199004EDC3A /* Scheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scheduler.h; sourceTree = "<group>"; };
-		DA256EDF0FF94199004EDC3A /* Scheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scheduler.m; sourceTree = "<group>"; };
+		DA256EDE0FF94199004EDC3A /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
+		DA256EDF0FF94199004EDC3A /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
 		DA256EE00FF94199004EDC3A /* Primitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Primitives.h; sourceTree = "<group>"; };
 		DA256EE10FF94199004EDC3A /* Primitives.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Primitives.m; sourceTree = "<group>"; };
 		DA256EE20FF94199004EDC3A /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
@@ -1004,8 +1004,8 @@
 		DA34FD0F0EB4851D00B68C06 /* PanAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanAction.m; sourceTree = "<group>"; };
 		DA34FD7B0EB49F4000B68C06 /* BuildingsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingsLayer.h; sourceTree = "<group>"; };
 		DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingsLayer.m; sourceTree = "<group>"; };
-		DA34FD7E0EB49FFB00B68C06 /* SkyLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkyLayer.h; sourceTree = "<group>"; };
-		DA34FD7F0EB49FFB00B68C06 /* SkyLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkyLayer.m; sourceTree = "<group>"; };
+		DA34FD7E0EB49FFB00B68C06 /* StarLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarLayer.h; sourceTree = "<group>"; };
+		DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarLayer.m; sourceTree = "<group>"; };
 		DA34FE1A0EB4AE5400B68C06 /* SkiesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkiesLayer.h; sourceTree = "<group>"; };
 		DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkiesLayer.m; sourceTree = "<group>"; };
 		DA34FF6A0EB4E48E00B68C06 /* ShadeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadeLayer.h; sourceTree = "<group>"; };
@@ -1387,8 +1387,8 @@
 			children = (
 				DA34FE1A0EB4AE5400B68C06 /* SkiesLayer.h */,
 				DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */,
-				DA34FD7E0EB49FFB00B68C06 /* SkyLayer.h */,
-				DA34FD7F0EB49FFB00B68C06 /* SkyLayer.m */,
+				DA34FD7E0EB49FFB00B68C06 /* StarLayer.h */,
+				DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */,
 				DA34FD7B0EB49F4000B68C06 /* BuildingsLayer.h */,
 				DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */,
 				DACA4E6C0EB3AEA40096F970 /* BuildingLayer.h */,
@@ -1494,8 +1494,8 @@
 				DA256EDB0FF94199004EDC3A /* cocos2d.m */,
 				DA256EDC0FF94199004EDC3A /* TextureAtlas.h */,
 				DA256EDD0FF94199004EDC3A /* TextureAtlas.m */,
-				DA256EDE0FF94199004EDC3A /* Scheduler.h */,
-				DA256EDF0FF94199004EDC3A /* Scheduler.m */,
+				DA256EDE0FF94199004EDC3A /* Schedule.h */,
+				DA256EDF0FF94199004EDC3A /* Schedule.m */,
 				DA256EE00FF94199004EDC3A /* Primitives.h */,
 				DA256EE10FF94199004EDC3A /* Primitives.m */,
 				DA256EE20FF94199004EDC3A /* Camera.h */,
@@ -1888,9 +1888,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1D6058900D05DD3D006BFB54 /* Gorillas - Signed: Lhunath */ = {
+		1D6058900D05DD3D006BFB54 /* Gorillas - Development */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Gorillas - Signed: Lhunath" */;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Gorillas - Development" */;
 			buildPhases = (
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
@@ -1901,14 +1901,14 @@
 			);
 			dependencies = (
 			);
-			name = "Gorillas - Signed: Lhunath";
+			name = "Gorillas - Development";
 			productName = Gorillas;
 			productReference = DA379EBC0F0964BA00541EF4 /* Gorillas Dev.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DA47694D0FDD7334002E74F8 /* Gorillas Lite - Signed: Lhunath */ = {
+		DA47694D0FDD7334002E74F8 /* Gorillas Lite - Development */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA4769F30FDD7334002E74F8 /* Build configuration list for PBXNativeTarget "Gorillas Lite - Signed: Lhunath" */;
+			buildConfigurationList = DA4769F30FDD7334002E74F8 /* Build configuration list for PBXNativeTarget "Gorillas Lite - Development" */;
 			buildPhases = (
 				DA47694E0FDD7334002E74F8 /* Resources */,
 				DA47697F0FDD7334002E74F8 /* Sources */,
@@ -1919,14 +1919,14 @@
 			);
 			dependencies = (
 			);
-			name = "Gorillas Lite - Signed: Lhunath";
+			name = "Gorillas Lite - Development";
 			productName = Gorillas;
 			productReference = DA4769F80FDD7334002E74F8 /* Gorillas Lite Dev.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DA8B770A0F46120600DD88BF /* Gorillas - Signed: iBetaTest */ = {
+		DA8B770A0F46120600DD88BF /* Gorillas - iBetaTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA8B77940F46120600DD88BF /* Build configuration list for PBXNativeTarget "Gorillas - Signed: iBetaTest" */;
+			buildConfigurationList = DA8B77940F46120600DD88BF /* Build configuration list for PBXNativeTarget "Gorillas - iBetaTest" */;
 			buildPhases = (
 				DA8B770B0F46120600DD88BF /* Resources */,
 				DA8B772C0F46120600DD88BF /* Sources */,
@@ -1937,14 +1937,14 @@
 			);
 			dependencies = (
 			);
-			name = "Gorillas - Signed: iBetaTest";
+			name = "Gorillas - iBetaTest";
 			productName = Gorillas;
 			productReference = DA8B77990F46120600DD88BF /* Gorillas Beta.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DABD67E10F190D4D00EE213D /* Gorillas - Signed: App Store */ = {
+		DABD67E10F190D4D00EE213D /* Gorillas - App Store */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DABD68530F190D4D00EE213D /* Build configuration list for PBXNativeTarget "Gorillas - Signed: App Store" */;
+			buildConfigurationList = DABD68530F190D4D00EE213D /* Build configuration list for PBXNativeTarget "Gorillas - App Store" */;
 			buildPhases = (
 				DABD67E20F190D4D00EE213D /* Resources */,
 				DABD67FF0F190D4D00EE213D /* Sources */,
@@ -1955,7 +1955,7 @@
 			);
 			dependencies = (
 			);
-			name = "Gorillas - Signed: App Store";
+			name = "Gorillas - App Store";
 			productName = Gorillas;
 			productReference = DABD68580F190D4D00EE213D /* Gorillas.app */;
 			productType = "com.apple.product-type.application";
@@ -1987,10 +1987,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1D6058900D05DD3D006BFB54 /* Gorillas - Signed: Lhunath */,
-				DABD67E10F190D4D00EE213D /* Gorillas - Signed: App Store */,
-				DA8B770A0F46120600DD88BF /* Gorillas - Signed: iBetaTest */,
-				DA47694D0FDD7334002E74F8 /* Gorillas Lite - Signed: Lhunath */,
+				1D6058900D05DD3D006BFB54 /* Gorillas - Development */,
+				DABD67E10F190D4D00EE213D /* Gorillas - App Store */,
+				DA8B770A0F46120600DD88BF /* Gorillas - iBetaTest */,
+				DA47694D0FDD7334002E74F8 /* Gorillas Lite - Development */,
 			);
 		};
 /* End PBXProject section */
@@ -2472,7 +2472,7 @@
 				DACA4E8D0EB3B0E10096F970 /* GorillasConfig.m in Sources */,
 				DA34FD100EB4851E00B68C06 /* PanAction.m in Sources */,
 				DA34FD7D0EB49F4000B68C06 /* BuildingsLayer.m in Sources */,
-				DA34FD800EB49FFB00B68C06 /* SkyLayer.m in Sources */,
+				DA34FD800EB49FFB00B68C06 /* StarLayer.m in Sources */,
 				DA34FE1C0EB4AE5400B68C06 /* SkiesLayer.m in Sources */,
 				DA34FF6C0EB4E48E00B68C06 /* ShadeLayer.m in Sources */,
 				DA34FFAA0EB4EEF300B68C06 /* MainMenuLayer.m in Sources */,
@@ -2557,7 +2557,7 @@
 				DA256F310FF94199004EDC3A /* TouchHandler.m in Sources */,
 				DA256F320FF94199004EDC3A /* cocos2d.m in Sources */,
 				DA256F330FF94199004EDC3A /* TextureAtlas.m in Sources */,
-				DA256F340FF94199004EDC3A /* Scheduler.m in Sources */,
+				DA256F340FF94199004EDC3A /* Schedule.m in Sources */,
 				DA256F350FF94199004EDC3A /* Primitives.m in Sources */,
 				DA256F360FF94199004EDC3A /* Camera.m in Sources */,
 				DA256F370FF94199004EDC3A /* Director.m in Sources */,
@@ -2585,7 +2585,7 @@
 				DA4769840FDD7334002E74F8 /* GorillasConfig.m in Sources */,
 				DA4769850FDD7334002E74F8 /* PanAction.m in Sources */,
 				DA4769860FDD7334002E74F8 /* BuildingsLayer.m in Sources */,
-				DA4769870FDD7334002E74F8 /* SkyLayer.m in Sources */,
+				DA4769870FDD7334002E74F8 /* StarLayer.m in Sources */,
 				DA4769880FDD7334002E74F8 /* SkiesLayer.m in Sources */,
 				DA4769890FDD7334002E74F8 /* ShadeLayer.m in Sources */,
 				DA47698A0FDD7334002E74F8 /* MainMenuLayer.m in Sources */,
@@ -2670,7 +2670,7 @@
 				DA256F580FF94199004EDC3A /* TouchHandler.m in Sources */,
 				DA256F590FF94199004EDC3A /* cocos2d.m in Sources */,
 				DA256F5A0FF94199004EDC3A /* TextureAtlas.m in Sources */,
-				DA256F5B0FF94199004EDC3A /* Scheduler.m in Sources */,
+				DA256F5B0FF94199004EDC3A /* Schedule.m in Sources */,
 				DA256F5C0FF94199004EDC3A /* Primitives.m in Sources */,
 				DA256F5D0FF94199004EDC3A /* Camera.m in Sources */,
 				DA256F5E0FF94199004EDC3A /* Director.m in Sources */,
@@ -2699,7 +2699,7 @@
 				DA8B77310F46120600DD88BF /* GorillasConfig.m in Sources */,
 				DA8B77320F46120600DD88BF /* PanAction.m in Sources */,
 				DA8B77330F46120600DD88BF /* BuildingsLayer.m in Sources */,
-				DA8B77340F46120600DD88BF /* SkyLayer.m in Sources */,
+				DA8B77340F46120600DD88BF /* StarLayer.m in Sources */,
 				DA8B77350F46120600DD88BF /* SkiesLayer.m in Sources */,
 				DA8B77360F46120600DD88BF /* ShadeLayer.m in Sources */,
 				DA8B77370F46120600DD88BF /* MainMenuLayer.m in Sources */,
@@ -2783,7 +2783,7 @@
 				DA256F0A0FF94199004EDC3A /* TouchHandler.m in Sources */,
 				DA256F0B0FF94199004EDC3A /* cocos2d.m in Sources */,
 				DA256F0C0FF94199004EDC3A /* TextureAtlas.m in Sources */,
-				DA256F0D0FF94199004EDC3A /* Scheduler.m in Sources */,
+				DA256F0D0FF94199004EDC3A /* Schedule.m in Sources */,
 				DA256F0E0FF94199004EDC3A /* Primitives.m in Sources */,
 				DA256F0F0FF94199004EDC3A /* Camera.m in Sources */,
 				DA256F100FF94199004EDC3A /* Director.m in Sources */,
@@ -2811,7 +2811,7 @@
 				DABD68040F190D4D00EE213D /* GorillasConfig.m in Sources */,
 				DABD68050F190D4D00EE213D /* PanAction.m in Sources */,
 				DABD68060F190D4D00EE213D /* BuildingsLayer.m in Sources */,
-				DABD68070F190D4D00EE213D /* SkyLayer.m in Sources */,
+				DABD68070F190D4D00EE213D /* StarLayer.m in Sources */,
 				DABD68080F190D4D00EE213D /* SkiesLayer.m in Sources */,
 				DABD68090F190D4D00EE213D /* ShadeLayer.m in Sources */,
 				DABD680A0F190D4D00EE213D /* MainMenuLayer.m in Sources */,
@@ -2896,7 +2896,7 @@
 				DA256F7F0FF94199004EDC3A /* TouchHandler.m in Sources */,
 				DA256F800FF94199004EDC3A /* cocos2d.m in Sources */,
 				DA256F810FF94199004EDC3A /* TextureAtlas.m in Sources */,
-				DA256F820FF94199004EDC3A /* Scheduler.m in Sources */,
+				DA256F820FF94199004EDC3A /* Schedule.m in Sources */,
 				DA256F830FF94199004EDC3A /* Primitives.m in Sources */,
 				DA256F840FF94199004EDC3A /* Camera.m in Sources */,
 				DA256F850FF94199004EDC3A /* Director.m in Sources */,
@@ -3089,7 +3089,6 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Gorillas_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_STRICT_ALIASING = NO;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -3408,7 +3407,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Gorillas - Signed: Lhunath" */ = {
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Gorillas - Development" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
@@ -3430,7 +3429,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA4769F30FDD7334002E74F8 /* Build configuration list for PBXNativeTarget "Gorillas Lite - Signed: Lhunath" */ = {
+		DA4769F30FDD7334002E74F8 /* Build configuration list for PBXNativeTarget "Gorillas Lite - Development" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA4769F40FDD7334002E74F8 /* Debug */,
@@ -3441,7 +3440,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA8B77940F46120600DD88BF /* Build configuration list for PBXNativeTarget "Gorillas - Signed: iBetaTest" */ = {
+		DA8B77940F46120600DD88BF /* Build configuration list for PBXNativeTarget "Gorillas - iBetaTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA8B77950F46120600DD88BF /* Debug */,
@@ -3452,7 +3451,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DABD68530F190D4D00EE213D /* Build configuration list for PBXNativeTarget "Gorillas - Signed: App Store" */ = {
+		DABD68530F190D4D00EE213D /* Build configuration list for PBXNativeTarget "Gorillas - App Store" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DABD68540F190D4D00EE213D /* Debug */,

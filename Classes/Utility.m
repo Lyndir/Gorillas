@@ -61,6 +61,18 @@ NSString* appendOrdinalPrefix(int number, NSString* prefix) {
 }
 
 
+BOOL IsIPod() {
+    
+    return [[[UIDevice currentDevice] model] hasPrefix:@"iPod Touch"];
+}
+
+
+BOOL IsIPhone() {
+    
+    return [[[UIDevice currentDevice] model] hasPrefix:@"iPhone"];
+}
+
+
 void drawPointsAt(const CGPoint* points, int n, long color) {
     
     // Define vertices and pass to GL.

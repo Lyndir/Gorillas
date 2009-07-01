@@ -25,6 +25,7 @@
 #import "GameConfigurationLayer.h"
 #import "GorillasAppDelegate.h"
 #import "CityTheme.h"
+#import "Utility.h"
 
 
 @implementation AVConfigurationLayer
@@ -109,10 +110,12 @@
     [vibrationT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *vibrationI  = [MenuItemFont itemFromString:[[GorillasConfig get] vibration]?
+    MenuItem *vibrationI  = [MenuItemFont itemFromString:[GorillasConfig get].vibration && !IsIPod()?
                              NSLocalizedString(@"entries.on", @"On"): NSLocalizedString(@"entries.off", @"Off")
                                                   target:self
                                                 selector:@selector(vibration:)];
+    if (IsIPod())
+        [vibrationI setIsEnabled:NO];
     
     
     menu = [[Menu menuWithItems:audioT, audioI, soundFxT, voiceT, soundFxI, voiceI, visualFxT, vibrationT, visualFxI, vibrationI, nil] retain];
@@ -184,8 +187,8 @@
 -(void) vibration: (id) sender {
     
     [[GorillasAudioController get] clickEffect];
-    [[GorillasConfig get] setVibration:![[GorillasConfig get] vibration]];
-    if([[GorillasConfig get] vibration])
+    [GorillasConfig get].vibration = ![GorillasConfig get].vibration;
+    if([GorillasConfig get].vibration)
         [GorillasAudioController vibrate];
 }
 

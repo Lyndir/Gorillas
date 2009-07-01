@@ -31,38 +31,42 @@
 
 @interface GameLayer : Layer <Resettable> {
 
-    BOOL                                    paused;
-    BOOL                                    running;
-    GorillasMode                            mode;
-    NSUInteger                              humans;
-    NSUInteger                              ais;
+    BOOL                                                paused;
+    BOOL                                                running;
+    GorillasMode                                        mode;
+    NSUInteger                                          humans;
+    NSUInteger                                          ais;
     
-    NSMutableArray                          *gorillas;
-    GorillaLayer                            *activeGorilla;
+    NSMutableArray                                      *gorillas;
+    GorillaLayer                                        *activeGorilla;
 
-    SkiesLayer                              *skiesLayer;
-    PanningLayer                            *panningLayer;
-    BuildingsLayer                          *buildingsLayer;
-    ParticleSystem                          *weather;
-    WindLayer                               *windLayer;
-    Action                                  *shakeAction;
+    SkiesLayer                                          *skiesLayer;
+    PanningLayer                                        *panningLayer;
+    BuildingsLayer                                      *buildingsLayer;
+    ParticleSystem                                      *weather;
+    WindLayer                                           *windLayer;
+    Action                                              *shakeAction;
+    ScaleTime                                           *scaleTimeAction;
 }
 
-@property (nonatomic, readwrite) BOOL                  paused;
-@property (nonatomic, readonly) BOOL                   singlePlayer;
+@property (nonatomic, readwrite) BOOL                   paused;
+@property (nonatomic, readonly) BOOL                    singlePlayer;
 
-@property (nonatomic, readonly) NSMutableArray         *gorillas;
-@property (nonatomic, readwrite, retain) GorillaLayer  *activeGorilla;
+@property (nonatomic, readonly) NSMutableArray          *gorillas;
+@property (nonatomic, readwrite, retain) GorillaLayer   *activeGorilla;
 
-@property (nonatomic, readonly) SkiesLayer             *skiesLayer;
-@property (nonatomic, readonly) PanningLayer           *panningLayer;
-@property (nonatomic, readonly) BuildingsLayer         *buildingsLayer;
-@property (nonatomic, readonly) ParticleSystem         *weather;
-@property (nonatomic, readonly) WindLayer              *windLayer;
+@property (nonatomic, readonly) SkiesLayer              *skiesLayer;
+@property (nonatomic, readonly) PanningLayer            *panningLayer;
+@property (nonatomic, readonly) BuildingsLayer          *buildingsLayer;
+@property (nonatomic, readonly) ParticleSystem          *weather;
+@property (nonatomic, readonly) WindLayer               *windLayer;
+
+@property (nonatomic, readonly) ScaleTime               *scaleTimeAction;
 
 -(void) shake;
 -(BOOL) isEnabled:(GorillasFeature)feature;
 -(void) configureGameWithMode:(GorillasMode)nMode humans:(NSUInteger)humans ais:(NSUInteger)ais;
+- (void)scaleTimeTo:(float)aTimeScale duration:(ccTime)aDuration;
 
 -(void) updateStateHitGorilla:(BOOL)hitGorilla hitBuilding:(BOOL)hitBuilding offScreen:(BOOL)offScreen throwSkill:(float)throwSkill;
 -(BOOL) checkGameStillOn;

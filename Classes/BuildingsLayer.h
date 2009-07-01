@@ -34,7 +34,8 @@
 @interface BuildingsLayer : Layer <Resettable> {
 
     PanAction           *panAction;
-    Label               *msgLabel, *leftInfoLabel, *rightInfoLabel;
+    LabelAtlas          *angleLabel, *strengthLabel;
+    Label               *msgLabel, *infoLabel;
     BarSprite           *aimSprite;
     
     NSMutableArray      *buildings;

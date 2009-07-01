@@ -63,7 +63,7 @@
     
     throwHints      = [[NSMutableArray alloc] initWithCapacity:2];
 
-    aim             = ccp(-1, -1);
+    self.aim        = ccp(-1, -1);
     buildings       = [[NSMutableArray alloc] init];
     holes           = nil;
     explosions      = nil;
@@ -72,33 +72,28 @@
     aimSprite.textureSize = CGSizeMake(aimSprite.textureSize.width / 2, aimSprite.textureSize.height / 2);
     [self addChild:aimSprite z:2];
     
-    leftInfoLabel   = [[Label alloc] initWithString:@"l" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
+    angleLabel      = [[LabelAtlas alloc] initWithString:[NSString stringWithFormat:@"%0.0f", 99.99f]
+                                             charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
+    strengthLabel   = [[LabelAtlas alloc] initWithString:[NSString stringWithFormat:@"%0.0f", 99.99f]
+                                             charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
+    infoLabel       = [[Label alloc] initWithString:@"∡\n⊿" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
                                            fontName:[GorillasConfig get].fixedFontName fontSize:[GorillasConfig get].smallFontSize];
-    rightInfoLabel  = [[Label alloc] initWithString:@"r" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentRight
-                                           fontName:[GorillasConfig get].fixedFontName fontSize:[GorillasConfig get].smallFontSize];
-    CGSize winSize  = [Director sharedDirector].winSize;
+    [infoLabel addChild:angleLabel];
+    [infoLabel addChild:strengthLabel];
+    [self addChild:infoLabel z:9];
     
-    leftInfoLabel.position  = ccp(leftInfoLabel.contentSize.width / 2 + 5,
-                                  winSize.height - (leftInfoLabel.contentSize.height / 2 + 5));
-    rightInfoLabel.position = ccp(winSize.width - rightInfoLabel.contentSize.width / 2 - 5,
-                                  winSize.height - (leftInfoLabel.contentSize.height / 2 + 5));
-    leftInfoLabel.visible = NO;
-    rightInfoLabel.visible = NO;
+    CGSize winSize  = [Director sharedDirector].winSize;
+    angleLabel.position     = ccp(15, 60);
+    strengthLabel.position  = ccp(15, 85);
+    angleLabel.scale        = 0.5f;
+    strengthLabel.scale     = 0.5f;
+    infoLabel.position      = ccp(5 + infoLabel.contentSize.width / 2,
+                                  winSize.height - infoLabel.contentSize.height / 2 - 5);
+    infoLabel.visible = NO;
     
     [self reset];
     
     return self;
-}
-
-
--(void) onEnter {
-
-    if (!leftInfoLabel.parent && self.parent)
-        [[GorillasAppDelegate get].uiLayer addChild:leftInfoLabel z:9];
-    if (!rightInfoLabel.parent && self.parent)
-        [[GorillasAppDelegate get].uiLayer addChild:rightInfoLabel z:9];
-    
-    [super onEnter];
 }
 
 
@@ -143,7 +138,6 @@
         [buildings addObject: building];
         
         [building setPosition: ccp(x, 0)];
-        NSLog(@"adding building at: %f, %f", building.position.x, building.position.y);
         [self addChild:building z:1];
 
         [building release];
@@ -252,21 +246,6 @@
                 drawLinesTo(from, &to, 1, [[GorillasConfig get] windowColorOff] & 0xffffff33, 3);
         }
     }
-    
-    /*if([GorillasAppDelegate get].gameLayer.activeGorilla && aim.x > 0) {
-        // Only draw aim when aiming and gorillas are set.
-
-        const CGPoint points[] = {
-            [[GorillasAppDelegate get].gameLayer.activeGorilla position],
-            aim,
-        };
-        const long colors[] = {
-            [[GorillasConfig get] windowColorOff]   & 0xffffff00,
-            [[GorillasConfig get] windowColorOn]    | 0x000000ff,
-        };
-        
-        drawLines(points, colors, 2, 3);
-    }*/
 }
 
 
@@ -350,8 +329,7 @@
     
     aim                     = anAim;
     
-    leftInfoLabel.visible   = NO;
-    rightInfoLabel.visible  = NO;
+    infoLabel.visible   = NO;
     aimSprite.visible       = NO;
     
     CGPoint gorillaPosition = [GorillasAppDelegate get].gameLayer.activeGorilla.position;
@@ -365,16 +343,9 @@
     CGPoint relAim = ccpSub(aim, gorillaPosition);
     CGPoint worldAim = [self convertToWorldSpace:relAim];
 
-    CGSize winSize = [Director sharedDirector].winSize;
-    if (aim.x > winSize.width / 2) {
-        [leftInfoLabel setString:[NSString stringWithFormat:@"∡ %0.0f°\n⊿ %0.0f",
-                                  CC_RADIANS_TO_DEGREES(ccpToAngle(worldAim)), ccpLength(worldAim)]];
-        leftInfoLabel.visible = YES;
-    } else {
-        [rightInfoLabel setString:[NSString stringWithFormat:@"%0.0f° ∡\n%0.0f ⊿",
-                                  CC_RADIANS_TO_DEGREES(ccpToAngle(worldAim)), ccpLength(worldAim)]];
-        rightInfoLabel.visible = YES;
-    }
+    [angleLabel setString:[NSString stringWithFormat:@"%0.0f", CC_RADIANS_TO_DEGREES(ccpToAngle(worldAim))]];
+    [strengthLabel setString:[NSString stringWithFormat:@"%0.0f", ccpLength(worldAim)]];
+    infoLabel.visible = YES;
 }
 
 
