@@ -107,10 +107,10 @@
     
         if([hudLayer parent])
             // Already showing and being dismissed.
-            [gameLayer removeChild:hudLayer cleanup:YES];
+            [uiLayer removeChild:hudLayer cleanup:YES];
     }
 
-    [gameLayer addChild:[self hudLayer]];
+    [uiLayer addChild:[self hudLayer]];
 }
 
 

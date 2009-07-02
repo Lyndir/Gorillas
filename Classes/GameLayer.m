@@ -517,8 +517,8 @@
             [weather release];
             weather = nil;
             
-            if ([[GorillasConfig get] visualFx] && random() % 10 == 0) {
-                // 10% chance to start snow/rain when weather is enabled.
+            if ([[GorillasConfig get] visualFx] && random() % 100 == 0) {
+                // 1% chance to start snow/rain when weather is enabled.
             
                 switch (random() % 2) {
                     case 0:

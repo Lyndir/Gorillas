@@ -36,15 +36,15 @@
  v  "Go" appears too often.
  v  Add angle & power numbers while aiming.
  .  Arabic voices
- .  Health bar location when gorillas are scaled.
+ v  Health bar location when gorillas are scaled.
  v  Crappy performance.
- .  Hide vibration on iPod touch.
+ v  Hide vibration on iPod touch.
 
 Refact
  v  Make sure aim is used as a property.
  v  Fix time scaling.
  .  Fix parallax scrolling.
  .  Fix hole size scaling when zooming.
- .  HUD doens't disappear.
+ v  HUD doens't disappear.
  v  Optimize Skylayer star rendering by combining.
  .  Memory issues (esp. when switching city themes).

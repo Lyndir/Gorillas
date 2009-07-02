@@ -316,8 +316,8 @@ static NSUInteger _teamIndex, _globalIndex;
     if(!self.human && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesAi])
        return;
     
-    CGFloat barX = [self contentSize].width / 2;
-    CGFloat barY = [self contentSize].height + 10;
+    CGFloat barX = self.contentSize.width / self.scale / 2;
+    CGFloat barY = self.contentSize.height / self.scale + 10;
     CGFloat barW = 40;
     CGPoint lines[4] = {
         ccp(barX - barW / 2, barY),

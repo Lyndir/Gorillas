@@ -33,6 +33,7 @@
 }
 
 -(void) scaleTo:(CGFloat)newScale;
+-(void) scaleTo:(CGFloat)newScale limited:(BOOL)limited;
 -(void) scrollToCenter:(CGPoint)r horizontal:(BOOL)horizontal;
 
 @end

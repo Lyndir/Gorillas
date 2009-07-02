@@ -80,11 +80,10 @@
                                            fontName:[GorillasConfig get].fixedFontName fontSize:[GorillasConfig get].smallFontSize];
     [infoLabel addChild:angleLabel];
     [infoLabel addChild:strengthLabel];
-    [self addChild:infoLabel z:9];
     
     CGSize winSize  = [Director sharedDirector].winSize;
-    angleLabel.position     = ccp(15, 60);
-    strengthLabel.position  = ccp(15, 85);
+    angleLabel.position     = ccp(15, 80);
+    strengthLabel.position  = ccp(15, 58);
     angleLabel.scale        = 0.5f;
     strengthLabel.scale     = 0.5f;
     infoLabel.position      = ccp(5 + infoLabel.contentSize.width / 2,
@@ -94,6 +93,14 @@
     [self reset];
     
     return self;
+}
+
+-(void) onEnter {
+
+    [super onEnter];
+    
+    if (!infoLabel.parent)
+        [[GorillasAppDelegate get].uiLayer addChild:infoLabel z:9];
 }
 
 
@@ -282,14 +289,20 @@
         self.aim = ccp(-1, -1);
         return;
     }
-    
-    CGPoint p = [self convertTouchToNodeSpace:[[event allTouches] anyObject]];
 
+    CGPoint p = [self convertTouchToNodeSpace:[[event allTouches] anyObject]];
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:p]) {
         // Ignore when moving/clicking over/on HUD.
         return;
     }
-        
+
+    CGPoint wp = [self convertToWorldSpace:p];
+    NSLog(@"%f", fabsf(wp.y - [Director sharedDirector].winSize.height));
+    if (fabsf(wp.y - [Director sharedDirector].winSize.height) < 20)
+        [self performSelector:@selector(zoomOut) withObject:nil afterDelay:2];
+    else
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(zoomOut) object:nil];
+    
     self.aim = ccpSub(p, [self position]);
 }
 
@@ -346,6 +359,13 @@
     [angleLabel setString:[NSString stringWithFormat:@"%0.0f", CC_RADIANS_TO_DEGREES(ccpToAngle(worldAim))]];
     [strengthLabel setString:[NSString stringWithFormat:@"%0.0f", ccpLength(worldAim)]];
     infoLabel.visible = YES;
+}
+
+
+-(void) zoomOut {
+
+    PanningLayer *panningLayer = [GorillasAppDelegate get].gameLayer.panningLayer;
+    [panningLayer scaleTo:panningLayer.scale * 0.9f limited:YES];
 }
 
 
@@ -436,7 +456,7 @@
     }
     
     // Scale to the active gorilla's saved scale.
-    [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:[GorillasAppDelegate get].gameLayer.activeGorilla.zoom];
+    [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:[GorillasAppDelegate get].gameLayer.activeGorilla.zoom limited:YES];
     [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:YES];
 
     // AI throw.

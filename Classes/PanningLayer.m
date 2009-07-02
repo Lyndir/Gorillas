@@ -96,7 +96,7 @@
         initialScale = newScale;
     }
 
-    [self scaleTo:newScale];
+    [self scaleTo:newScale limited:YES];
     
     return kEventHandled;
 }
@@ -126,7 +126,16 @@
 
 
 -(void) scaleTo:(CGFloat)newScale {
-    
+
+    [self scaleTo:newScale limited:NO];
+}
+
+
+-(void) scaleTo:(CGFloat)newScale limited:(BOOL)limited {
+
+    if (limited)
+        newScale = fmaxf(fminf(newScale, 1.1f), 0.8f);
+
     CGFloat duration = [GorillasConfig get].transitionDuration;
     if(scaleAction != nil && ![scaleAction isDone]) {
         duration -= [scaleAction elapsed];

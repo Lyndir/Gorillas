@@ -62,8 +62,8 @@ NSString* appendOrdinalPrefix(int number, NSString* prefix) {
 
 
 BOOL IsIPod() {
-    
-    return [[[UIDevice currentDevice] model] hasPrefix:@"iPod Touch"];
+
+    return [[[UIDevice currentDevice] model] hasPrefix:@"iPod touch"];
 }
 
 
