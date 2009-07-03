@@ -535,6 +535,10 @@
                         [weather setStartSizeVar:3];
                         [weather setStartSize:4];
                         break;
+                        
+                    default:
+                        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                                       reason:@"Unsupported weather type selected." userInfo:nil];
                 }
                 
                 [weather setPosVar:ccp([weather posVar].x * 2.5f, [weather posVar].y)];

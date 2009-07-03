@@ -44,13 +44,14 @@
     }
     
     Label *pageLabel = [[Label alloc] initWithString:fullGameData
-                                       dimensions:CGSizeMake(contentSize.width - padding, contentSize.height - padding)
-                                        alignment:alignment
-                                         fontName:[[GorillasConfig get] fixedFontName]
-                                         fontSize:[[GorillasConfig get] smallFontSize]];
+                                          dimensions:CGSizeMake(contentSize.width - padding, contentSize.height - padding)
+                                           alignment:alignment
+                                            fontName:[GorillasConfig get].fixedFontName
+                                            fontSize:[GorillasConfig get].smallFontSize];
     [pageLabel setPosition:ccp(contentSize.width / 2, contentSize.height / 2)];
     [pageLabel runAction:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
     [self addChild:pageLabel];
+    [pageLabel release];
 
     // Back.
     [MenuItemFont setFontSize:[[GorillasConfig get] largeFontSize]];
@@ -70,7 +71,7 @@
                                              selector:@selector(upgrade:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
-    Menu *buyMenu = [[Menu menuWithItems:upgrade, nil] retain];
+    Menu *buyMenu = [Menu menuWithItems:upgrade, nil];
     [buyMenu setPosition:ccp(contentSize.width - [[GorillasConfig get] fontSize] * 2.5f, [[GorillasConfig get] fontSize])];
     [buyMenu alignItemsHorizontally];
     [self addChild: buyMenu];

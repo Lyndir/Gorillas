@@ -721,6 +721,7 @@
             [gorillasQueue removeLastObject];
         }
     }
+    [gorillasQueue release];
     for(NSUInteger i = 0; i < [gorillas count]; ++i) {
         BuildingLayer *building = [buildings objectAtIndex:[(NSNumber *) [gorillaIndexes objectAtIndex:i] unsignedIntegerValue]];
         GorillaLayer *gorilla = [gorillas objectAtIndex:i];

@@ -263,7 +263,7 @@
                                  [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:-(3600*24*19)] description],
                                  nil//*/],                                                  dTopScoreHistory,
                                 [NSNumber numberWithFloat:      0.4f],                      dLevel,
-                                [levelNames retain],                                        dLevelNames,
+                                levelNames,                                                 dLevelNames,
                                 [NSNumber numberWithFloat:      0.03f],                     dLevelProgress,
                                 
                                 nil]];
@@ -274,7 +274,7 @@
 
 -(void) dealloc {
     
-    [[CityTheme getThemes] release];
+    [CityTheme forgetThemes];
     [defaults release];
     defaults = nil;
     
@@ -694,7 +694,7 @@
 -(void) setActiveGameConfigurationIndex:(NSUInteger)_activeGameConfigurationIndex {
     
     [defaults setInteger:_activeGameConfigurationIndex % [gameConfigurations count] forKey:dGameConfiguration];
-    [[[GorillasAppDelegate get] newGameLayer] reset];
+    [[GorillasAppDelegate get].newGameLayer reset];
 }
 -(GameConfiguration *) gameConfiguration {
     

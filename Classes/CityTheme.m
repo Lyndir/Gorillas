@@ -25,6 +25,8 @@
 #import "CityTheme.h"
 
 
+static NSDictionary *themes = nil;
+
 @implementation CityTheme
 
 @synthesize fixedFloors, buildingMax, buildingAmount, buildingColors;
@@ -126,7 +128,6 @@
 
 +(NSDictionary *) getThemes {
     
-    static NSDictionary *themes = nil;
     if(!themes) {
         themes = [[NSDictionary alloc] initWithObjectsAndKeys:
                    [CityTheme themeWithFixedFloors:4
@@ -238,6 +239,12 @@
     }
     
     return themes;
+}
+
++ (void)forgetThemes {
+    
+    [themes release];
+    themes = nil;
 }
 
 

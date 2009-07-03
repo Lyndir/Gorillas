@@ -66,13 +66,12 @@
 
 - (void)setTarget:(id)t selector:(SEL)s {
     
-    [[invocation target] release];
     [invocation release];
     invocation = nil;
     
     NSMethodSignature *sig = [[t class] instanceMethodSignatureForSelector:s];
     invocation = [[NSInvocation invocationWithMethodSignature:sig] retain];
-    [invocation setTarget:[t retain]];
+    [invocation setTarget:t];
     [invocation setSelector:s];
 }
 
@@ -194,7 +193,6 @@
 
 -(void) dealloc {
     
-    [[invocation target] release];
     [invocation release];
     invocation = nil;
     

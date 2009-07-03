@@ -43,6 +43,7 @@
         return self;
     
     systems = [[NSMutableArray alloc] init];
+    NSLog(@"0x%x", systems);
     affectAngles = [[NSMutableArray alloc] init];
     
     head = [[Sprite alloc] initWithFile:@"arrow.head.png"];
@@ -98,24 +99,30 @@
     body.scaleX     = wind * windRange * 2 / body.contentSize.width;
     head.rotation   = wind > 0? 180: 0;
     
-    for(NSUInteger i = 0; i < [systems count]; ++i) {
-        ParticleSystem *system = [systems objectAtIndex:i];
-        
-        if([[affectAngles objectAtIndex:i] boolValue])
-            [system setAngle:270 + 45 * wind];
-        
-        [system setGravity:ccp(wind * 100 / [system life], [system gravity].y)];
+    @synchronized(self) {
+        NSLog(@"0x%x", systems);
+        for(NSUInteger i = 0; i < [systems count]; ++i) {
+            ParticleSystem *system = [systems objectAtIndex:i];
+            
+            if([[affectAngles objectAtIndex:i] boolValue])
+                [system setAngle:270 + 45 * wind];
+            
+            [system setGravity:ccp(wind * 100 / [system life], [system gravity].y)];
+            NSLog(@"0x%x", systems);
+        }
     }
 }
 
 
 -(void) registerSystem:(ParticleSystem *)system affectAngle:(BOOL)affectAngle {
     
-    if(!system || [systems containsObject:system])
-        return;
+    @synchronized(self) {
+        if(!system || [systems containsObject:system])
+            return;
     
-    [systems addObject:system];
-    [affectAngles addObject:[NSNumber numberWithBool:affectAngle]];
+        [systems addObject:system];
+        [affectAngles addObject:[NSNumber numberWithBool:affectAngle]];
+    }
     
     if(affectAngle)
         [system setAngle:270 + 45 * wind];
@@ -128,7 +135,9 @@
     if(!system)
         return;
     
-    [systems removeObject:system];
+    @synchronized(self) {
+        [systems removeObject:system];
+    }
 }
 
 
@@ -201,11 +210,13 @@
     [tail release];
     tail = nil;
 
-    [systems release];
-    systems = nil;
-    
-    [affectAngles release];
-    affectAngles = nil;
+    @synchronized(self) {
+        [systems release];
+        systems = nil;
+        
+        [affectAngles release];
+        affectAngles = nil;
+    }
     
     [super dealloc];
 }

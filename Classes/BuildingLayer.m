@@ -31,7 +31,10 @@
 
 - (id) init {
 
-	return self = [self initWithWidth:0 heightRatio:0];
+    if (!(self = [self initWithWidth:0 heightRatio:0]))
+        return nil;
+    
+	return self;
 }
 
 

@@ -122,7 +122,7 @@
     if(target) {
         NSMethodSignature *signature = [[target class] instanceMethodSignatureForSelector:selector];
         callback = [NSInvocation invocationWithMethodSignature:signature];
-        [callback setTarget:[target retain]];
+        [callback setTarget:target];
         [callback setSelector:selector];
     }
     
@@ -160,13 +160,11 @@
                              [FadeTo actionWithDuration:2 opacity:0x00],
                              nil]];
     
-    if(callback != (id)[NSNull null]) {
+    if(callback != (id)[NSNull null])
         [callback invoke];
-        [[callback target] release];
-    }
     
-    [msg release];
     [callback release];
+    [msg release];
 }
 
 
