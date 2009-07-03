@@ -137,7 +137,7 @@
         [self removeChild:building cleanup:YES];
     [buildings removeAllObjects];
     
-    for (NSUInteger i = 0; i < [[GorillasConfig get] buildingAmount] * 2; ++i) {
+    for (NSUInteger i = 0; i < [[GorillasConfig get] buildingAmount] * 3; ++i) {
         float x = i * ([[GorillasConfig get] buildingWidth] + 1)
                 - ([[GorillasConfig get] buildingWidth] + 1) * [[GorillasConfig get] buildingAmount] / 2;
         
@@ -299,7 +299,7 @@
     CGPoint wp = [self convertToWorldSpace:p];
     NSLog(@"%f", fabsf(wp.y - [Director sharedDirector].winSize.height));
     if (fabsf(wp.y - [Director sharedDirector].winSize.height) < 20)
-        [self performSelector:@selector(zoomOut) withObject:nil afterDelay:2];
+        [self performSelector:@selector(zoomOut) withObject:nil afterDelay:3];
     else
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(zoomOut) object:nil];
     
@@ -309,12 +309,16 @@
 
 - (void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
     
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(zoomOut) object:nil];
+
     self.aim = ccp(-1, -1);
 }
 
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
 
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(zoomOut) object:nil];
+    
     if([[event allTouches] count] != 1) {
         // Cancel when: multiple fingers hit the screen.
         self.aim = ccp(-1, -1);

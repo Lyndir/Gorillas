@@ -35,22 +35,6 @@
     if(!(self = [super init]))
         return self;
     
-    return self;
-}
-
-
--(void) reset {
-    
-    if(menu) {
-        [self removeChild:menu cleanup:YES];
-        [menu release];
-        menu = nil;
-        
-        [self removeChild:backMenu cleanup:YES];
-        [backMenu release];
-        backMenu = nil;
-    }
-    
     
     // City Theme.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
@@ -59,10 +43,13 @@
     [themeT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *themeI    = [MenuItemFont itemFromString:[[GorillasConfig get] cityTheme]
-                                                target:self
-                                              selector:@selector(cityTheme:)];
-    [themeI setIsEnabled:![[[GorillasAppDelegate get] gameLayer] checkGameStillOn]];
+    themeI    = [MenuItemToggle itemWithTarget:self selector:@selector(cityTheme:)];
+    NSMutableArray *themeMenuItems = [NSMutableArray arrayWithCapacity:[[CityTheme getThemes] count]];
+    for (NSString *themeName in [[CityTheme getThemes] allKeys])
+        [themeMenuItems addObject:[MenuItemFont itemFromString:themeName]];
+    themeI.subItems = themeMenuItems;
+    themeI.isEnabled = ![[GorillasAppDelegate get].gameLayer checkGameStillOn];
+    [themeI setSelectedIndex:1];
     
     
     // Gravity.
@@ -72,10 +59,9 @@
     [gravityT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *gravityI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%d", [[GorillasConfig get] gravity]]
-                                                target:self
-                                              selector:@selector(gravity:)];
-    
+    gravityI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%d", [GorillasConfig get].gravity]
+                                      target:self selector:@selector(gravity:)];
+
     
     // Difficulity Level.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
@@ -84,9 +70,12 @@
     [levelT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *levelI    = [MenuItemFont itemFromString:[[GorillasConfig get] levelName]
-                                                target:self
-                                              selector:@selector(level:)];
+    levelI    = [MenuItemToggle itemWithTarget:self selector:@selector(level:)];
+    NSMutableArray *levelMenuItems = [NSMutableArray arrayWithCapacity:[[CityTheme getThemes] count]];
+    for (NSString *levelName in [GorillasConfig get].levelNames)
+        [levelMenuItems addObject:[MenuItemFont itemFromString:levelName]];
+    levelI.subItems = levelMenuItems;
+    [levelI setSelectedIndex:1];
     
     
     // Killshot Replays.
@@ -96,10 +85,10 @@
     [replayT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *replayI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%@", [[GorillasConfig get] replay]?
-                                                       NSLocalizedString(@"entries.on", @"On"): NSLocalizedString(@"entries.off", @"Off")]
-                                               target:self
-                                             selector:@selector(replay:)];
+    replayI  = [MenuItemToggle itemWithTarget:self selector:@selector(replay:) items:
+                [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
+                [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
+                nil];
     
     
     // Follow Throw.
@@ -109,10 +98,10 @@
     [followT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *followI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%@", [[GorillasConfig get] followThrow]?
-                                                       NSLocalizedString(@"entries.on", @"On"): NSLocalizedString(@"entries.off", @"Off")]
-                                               target:self
-                                             selector:@selector(followThrow:)];
+    followI  = [MenuItemToggle itemWithTarget:self selector:@selector(followThrow:) items:
+                [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
+                [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
+                nil];
     
     
     menu = [[Menu menuWithItems:themeT, themeI, gravityT, levelT, gravityI, levelI, replayT, followT, replayI, followI, nil] retain];
@@ -130,14 +119,27 @@
     // Back.
     [MenuItemFont setFontSize:[[GorillasConfig get] largeFontSize]];
     MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
-                                                target:self
-                                              selector:@selector(back:)];
+                                               target:self
+                                             selector:@selector(back:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
     backMenu = [[Menu menuWithItems:back, nil] retain];
     [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
+    
+    return self;
+}
+
+
+-(void) reset {
+    
+    [themeI setSelectedIndex:[[[CityTheme getThemes] allKeys] indexOfObject:[GorillasConfig get].cityTheme]];
+    gravityI.label = [Label labelWithString:[NSString stringWithFormat:@"%d", [GorillasConfig get].gravity]
+                                   fontName:[GorillasConfig get].fontName fontSize:[GorillasConfig get].fontSize];
+    [levelI setSelectedIndex:[[GorillasConfig get].levelNames indexOfObject:[GorillasConfig get].levelName]];
+    [replayI setSelectedIndex:[GorillasConfig get].replay? 1: 0];
+    [followI setSelectedIndex:[GorillasConfig get].followThrow? 1: 0];
 }
 
 

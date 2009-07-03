@@ -139,7 +139,6 @@
 		DA256F0A0FF94199004EDC3A /* TouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256ED90FF94199004EDC3A /* TouchHandler.m */; };
 		DA256F0B0FF94199004EDC3A /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDB0FF94199004EDC3A /* cocos2d.m */; };
 		DA256F0C0FF94199004EDC3A /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDD0FF94199004EDC3A /* TextureAtlas.m */; };
-		DA256F0D0FF94199004EDC3A /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDF0FF94199004EDC3A /* Schedule.m */; };
 		DA256F0E0FF94199004EDC3A /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE10FF94199004EDC3A /* Primitives.m */; };
 		DA256F0F0FF94199004EDC3A /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE30FF94199004EDC3A /* Camera.m */; };
 		DA256F100FF94199004EDC3A /* Director.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE50FF94199004EDC3A /* Director.m */; };
@@ -178,7 +177,6 @@
 		DA256F310FF94199004EDC3A /* TouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256ED90FF94199004EDC3A /* TouchHandler.m */; };
 		DA256F320FF94199004EDC3A /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDB0FF94199004EDC3A /* cocos2d.m */; };
 		DA256F330FF94199004EDC3A /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDD0FF94199004EDC3A /* TextureAtlas.m */; };
-		DA256F340FF94199004EDC3A /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDF0FF94199004EDC3A /* Schedule.m */; };
 		DA256F350FF94199004EDC3A /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE10FF94199004EDC3A /* Primitives.m */; };
 		DA256F360FF94199004EDC3A /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE30FF94199004EDC3A /* Camera.m */; };
 		DA256F370FF94199004EDC3A /* Director.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE50FF94199004EDC3A /* Director.m */; };
@@ -217,7 +215,6 @@
 		DA256F580FF94199004EDC3A /* TouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256ED90FF94199004EDC3A /* TouchHandler.m */; };
 		DA256F590FF94199004EDC3A /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDB0FF94199004EDC3A /* cocos2d.m */; };
 		DA256F5A0FF94199004EDC3A /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDD0FF94199004EDC3A /* TextureAtlas.m */; };
-		DA256F5B0FF94199004EDC3A /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDF0FF94199004EDC3A /* Schedule.m */; };
 		DA256F5C0FF94199004EDC3A /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE10FF94199004EDC3A /* Primitives.m */; };
 		DA256F5D0FF94199004EDC3A /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE30FF94199004EDC3A /* Camera.m */; };
 		DA256F5E0FF94199004EDC3A /* Director.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE50FF94199004EDC3A /* Director.m */; };
@@ -256,7 +253,6 @@
 		DA256F7F0FF94199004EDC3A /* TouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256ED90FF94199004EDC3A /* TouchHandler.m */; };
 		DA256F800FF94199004EDC3A /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDB0FF94199004EDC3A /* cocos2d.m */; };
 		DA256F810FF94199004EDC3A /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDD0FF94199004EDC3A /* TextureAtlas.m */; };
-		DA256F820FF94199004EDC3A /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDF0FF94199004EDC3A /* Schedule.m */; };
 		DA256F830FF94199004EDC3A /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE10FF94199004EDC3A /* Primitives.m */; };
 		DA256F840FF94199004EDC3A /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE30FF94199004EDC3A /* Camera.m */; };
 		DA256F850FF94199004EDC3A /* Director.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE50FF94199004EDC3A /* Director.m */; };
@@ -297,6 +293,11 @@
 		DA256FBF0FF941A6004EDC3A /* TGAlib.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256F970FF941A6004EDC3A /* TGAlib.m */; };
 		DA256FC00FF941A6004EDC3A /* CGPointExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256F9A0FF941A6004EDC3A /* CGPointExtension.m */; };
 		DA256FC10FF941A6004EDC3A /* FileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256F9D0FF941A6004EDC3A /* FileUtils.m */; };
+		DA2CC61E0FFEBDC000344C58 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2CC61D0FFEBDC000344C58 /* Schedule.m */; };
+		DA2CC61F0FFEBDC000344C58 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2CC61D0FFEBDC000344C58 /* Schedule.m */; };
+		DA2CC6200FFEBDC000344C58 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2CC61D0FFEBDC000344C58 /* Schedule.m */; };
+		DA2CC6210FFEBDC000344C58 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2CC61D0FFEBDC000344C58 /* Schedule.m */; };
+		DA2CC6220FFEBDC000344C58 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2CC61D0FFEBDC000344C58 /* Schedule.m */; };
 		DA31251D0F10F74C00F1032D /* HolesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA31251C0F10F74C00F1032D /* HolesLayer.m */; };
 		DA34006D0EB516D800B68C06 /* StatisticsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006C0EB516D800B68C06 /* StatisticsLayer.m */; };
 		DA3400700EB516F400B68C06 /* GameConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006F0EB516F400B68C06 /* GameConfigurationLayer.m */; };
@@ -1008,7 +1009,6 @@
 		DAE9199B0FFD53D300BF4B89 /* TouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256ED90FF94199004EDC3A /* TouchHandler.m */; };
 		DAE9199C0FFD53D300BF4B89 /* cocos2d.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDB0FF94199004EDC3A /* cocos2d.m */; };
 		DAE9199D0FFD53D300BF4B89 /* TextureAtlas.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDD0FF94199004EDC3A /* TextureAtlas.m */; };
-		DAE9199E0FFD53D300BF4B89 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EDF0FF94199004EDC3A /* Schedule.m */; };
 		DAE9199F0FFD53D300BF4B89 /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE10FF94199004EDC3A /* Primitives.m */; };
 		DAE919A00FFD53D300BF4B89 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE30FF94199004EDC3A /* Camera.m */; };
 		DAE919A10FFD53D300BF4B89 /* Director.m in Sources */ = {isa = PBXBuildFile; fileRef = DA256EE50FF94199004EDC3A /* Director.m */; };
@@ -1168,8 +1168,6 @@
 		DA256EDB0FF94199004EDC3A /* cocos2d.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cocos2d.m; sourceTree = "<group>"; };
 		DA256EDC0FF94199004EDC3A /* TextureAtlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureAtlas.h; sourceTree = "<group>"; };
 		DA256EDD0FF94199004EDC3A /* TextureAtlas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureAtlas.m; sourceTree = "<group>"; };
-		DA256EDE0FF94199004EDC3A /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
-		DA256EDF0FF94199004EDC3A /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
 		DA256EE00FF94199004EDC3A /* Primitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Primitives.h; sourceTree = "<group>"; };
 		DA256EE10FF94199004EDC3A /* Primitives.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Primitives.m; sourceTree = "<group>"; };
 		DA256EE20FF94199004EDC3A /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
@@ -1201,6 +1199,8 @@
 		DA256F9B0FF941A6004EDC3A /* ccArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ccArray.h; sourceTree = "<group>"; };
 		DA256F9C0FF941A6004EDC3A /* FileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUtils.h; sourceTree = "<group>"; };
 		DA256F9D0FF941A6004EDC3A /* FileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUtils.m; sourceTree = "<group>"; };
+		DA2CC61C0FFEBDC000344C58 /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
+		DA2CC61D0FFEBDC000344C58 /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
 		DA31251B0F10F74C00F1032D /* HolesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HolesLayer.h; sourceTree = "<group>"; };
 		DA31251C0F10F74C00F1032D /* HolesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HolesLayer.m; sourceTree = "<group>"; };
 		DA34006B0EB516D800B68C06 /* StatisticsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsLayer.h; sourceTree = "<group>"; };
@@ -1386,7 +1386,6 @@
 		DAE8B5110FEC4A5700629D84 /* nl */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nl; path = Resources/nl.lproj/Default.png; sourceTree = SOURCE_ROOT; };
 		DAE8B5120FEC4A5700629D84 /* nl */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nl; path = Resources/nl.lproj/splash.png; sourceTree = SOURCE_ROOT; };
 		DAE919BA0FFD53D300BF4B89 /* Gorillas Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DAE919BC0FFD53D400BF4B89 /* Info copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info copy.plist"; sourceTree = "<group>"; };
 		DAEE79DD0FF14077002AAB54 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DAEE79DE0FF14086002AAB54 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DAF7265B0FDEFF1000CFFB32 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = en; path = en.lproj/fullGame.txt; sourceTree = "<group>"; };
@@ -1528,7 +1527,6 @@
 				DAE489EF0FEEEDDA00E9017C /* InfoPlist.strings */,
 				DAE489B30FEEEC4D00E9017C /* Info.plist */,
 				DA83EC190EFEE93100305C9F /* Entitlements.plist */,
-				DAE919BC0FFD53D400BF4B89 /* Info copy.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1715,12 +1713,12 @@
 		DA256E8F0FF94198004EDC3A /* cocos2d */ = {
 			isa = PBXGroup;
 			children = (
+				DA2CC61C0FFEBDC000344C58 /* Schedule.h */,
+				DA2CC61D0FFEBDC000344C58 /* Schedule.m */,
 				DA256EDA0FF94199004EDC3A /* cocos2d.h */,
 				DA256EDB0FF94199004EDC3A /* cocos2d.m */,
 				DA256EDC0FF94199004EDC3A /* TextureAtlas.h */,
 				DA256EDD0FF94199004EDC3A /* TextureAtlas.m */,
-				DA256EDE0FF94199004EDC3A /* Schedule.h */,
-				DA256EDF0FF94199004EDC3A /* Schedule.m */,
 				DA256EE00FF94199004EDC3A /* Primitives.h */,
 				DA256EE10FF94199004EDC3A /* Primitives.m */,
 				DA256EE20FF94199004EDC3A /* Camera.h */,
@@ -2916,7 +2914,6 @@
 				DA256F310FF94199004EDC3A /* TouchHandler.m in Sources */,
 				DA256F320FF94199004EDC3A /* cocos2d.m in Sources */,
 				DA256F330FF94199004EDC3A /* TextureAtlas.m in Sources */,
-				DA256F340FF94199004EDC3A /* Schedule.m in Sources */,
 				DA256F350FF94199004EDC3A /* Primitives.m in Sources */,
 				DA256F360FF94199004EDC3A /* Camera.m in Sources */,
 				DA256F370FF94199004EDC3A /* Director.m in Sources */,
@@ -2930,6 +2927,7 @@
 				DA256FAD0FF941A6004EDC3A /* TGAlib.m in Sources */,
 				DA256FAE0FF941A6004EDC3A /* CGPointExtension.m in Sources */,
 				DA256FAF0FF941A6004EDC3A /* FileUtils.m in Sources */,
+				DA2CC61F0FFEBDC000344C58 /* Schedule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3029,7 +3027,6 @@
 				DA256F580FF94199004EDC3A /* TouchHandler.m in Sources */,
 				DA256F590FF94199004EDC3A /* cocos2d.m in Sources */,
 				DA256F5A0FF94199004EDC3A /* TextureAtlas.m in Sources */,
-				DA256F5B0FF94199004EDC3A /* Schedule.m in Sources */,
 				DA256F5C0FF94199004EDC3A /* Primitives.m in Sources */,
 				DA256F5D0FF94199004EDC3A /* Camera.m in Sources */,
 				DA256F5E0FF94199004EDC3A /* Director.m in Sources */,
@@ -3043,6 +3040,7 @@
 				DA256FB60FF941A6004EDC3A /* TGAlib.m in Sources */,
 				DA256FB70FF941A6004EDC3A /* CGPointExtension.m in Sources */,
 				DA256FB80FF941A6004EDC3A /* FileUtils.m in Sources */,
+				DA2CC6200FFEBDC000344C58 /* Schedule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3142,7 +3140,6 @@
 				DA256F0A0FF94199004EDC3A /* TouchHandler.m in Sources */,
 				DA256F0B0FF94199004EDC3A /* cocos2d.m in Sources */,
 				DA256F0C0FF94199004EDC3A /* TextureAtlas.m in Sources */,
-				DA256F0D0FF94199004EDC3A /* Schedule.m in Sources */,
 				DA256F0E0FF94199004EDC3A /* Primitives.m in Sources */,
 				DA256F0F0FF94199004EDC3A /* Camera.m in Sources */,
 				DA256F100FF94199004EDC3A /* Director.m in Sources */,
@@ -3156,6 +3153,7 @@
 				DA256FA40FF941A6004EDC3A /* TGAlib.m in Sources */,
 				DA256FA50FF941A6004EDC3A /* CGPointExtension.m in Sources */,
 				DA256FA60FF941A6004EDC3A /* FileUtils.m in Sources */,
+				DA2CC61E0FFEBDC000344C58 /* Schedule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3255,7 +3253,6 @@
 				DA256F7F0FF94199004EDC3A /* TouchHandler.m in Sources */,
 				DA256F800FF94199004EDC3A /* cocos2d.m in Sources */,
 				DA256F810FF94199004EDC3A /* TextureAtlas.m in Sources */,
-				DA256F820FF94199004EDC3A /* Schedule.m in Sources */,
 				DA256F830FF94199004EDC3A /* Primitives.m in Sources */,
 				DA256F840FF94199004EDC3A /* Camera.m in Sources */,
 				DA256F850FF94199004EDC3A /* Director.m in Sources */,
@@ -3269,6 +3266,7 @@
 				DA256FBF0FF941A6004EDC3A /* TGAlib.m in Sources */,
 				DA256FC00FF941A6004EDC3A /* CGPointExtension.m in Sources */,
 				DA256FC10FF941A6004EDC3A /* FileUtils.m in Sources */,
+				DA2CC6210FFEBDC000344C58 /* Schedule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3368,7 +3366,6 @@
 				DAE9199B0FFD53D300BF4B89 /* TouchHandler.m in Sources */,
 				DAE9199C0FFD53D300BF4B89 /* cocos2d.m in Sources */,
 				DAE9199D0FFD53D300BF4B89 /* TextureAtlas.m in Sources */,
-				DAE9199E0FFD53D300BF4B89 /* Schedule.m in Sources */,
 				DAE9199F0FFD53D300BF4B89 /* Primitives.m in Sources */,
 				DAE919A00FFD53D300BF4B89 /* Camera.m in Sources */,
 				DAE919A10FFD53D300BF4B89 /* Director.m in Sources */,
@@ -3382,6 +3379,7 @@
 				DAE919A90FFD53D300BF4B89 /* TGAlib.m in Sources */,
 				DAE919AA0FFD53D300BF4B89 /* CGPointExtension.m in Sources */,
 				DAE919AB0FFD53D300BF4B89 /* FileUtils.m in Sources */,
+				DA2CC6220FFEBDC000344C58 /* Schedule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3881,7 +3879,6 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
-				INFOPLIST_FILE = "/Users/lhunath/Documents/workspace/lyndir/Gorillas/Resources/Info copy.plist";
 				PRODUCT_NAME = "Gorillas Dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
@@ -3892,7 +3889,6 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
-				INFOPLIST_FILE = "/Users/lhunath/Documents/workspace/lyndir/Gorillas/Resources/Info copy.plist";
 				PRODUCT_NAME = "Gorillas Dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
@@ -3903,7 +3899,6 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
-				INFOPLIST_FILE = "/Users/lhunath/Documents/workspace/lyndir/Gorillas/Resources/Info copy.plist";
 				PRODUCT_NAME = "Gorillas Dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
@@ -3914,7 +3909,6 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
-				INFOPLIST_FILE = "/Users/lhunath/Documents/workspace/lyndir/Gorillas/Resources/Info copy.plist";
 				PRODUCT_NAME = "Gorillas Dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};

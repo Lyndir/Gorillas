@@ -64,6 +64,7 @@ NSString* appendOrdinalPrefix(int number, NSString* prefix);
 
 BOOL IsIPod();
 BOOL IsIPhone();
+BOOL IsSimulator();
 
 void drawPointsAt(const CGPoint* points, int count, long color);
 

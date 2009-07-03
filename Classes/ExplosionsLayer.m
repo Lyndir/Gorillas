@@ -113,15 +113,15 @@ static ParticleSystem **flameTypes = nil;
     ParticleSystem *explosion = [[ParticleSun alloc] initWithTotalParticles:explosionParticles];
     [[GorillasAppDelegate get].gameLayer.windLayer registerSystem:explosion affectAngle:NO];
     
-    explosion.position      = CGPointZero;
-    explosion.source        = pos;
-    explosion.startSize     = (heavy? 20: 15) * self.scale;
-    explosion.startSizeVar  = 5 * self.scale;
-    explosion.speed         = 10;
-    explosion.posVar        = ccp([self size] * 0.2f,
-                                  [self size] * 0.2f);
-    explosion.tag           = (hitsGorilla? GorillasExplosionHitGorilla  : 0) |
-                              (heavy?       GorillasExplosionHeavy       : 0);
+    explosion.position          = CGPointZero;
+    explosion.centerOfGravity   = pos;
+    explosion.startSize         = (heavy? 20: 15) * self.scale;
+    explosion.startSizeVar      = 5 * self.scale;
+    explosion.speed             = 10;
+    explosion.posVar            = ccp([self size] * 0.2f,
+                                      [self size] * 0.2f);
+    explosion.tag               = (hitsGorilla? GorillasExplosionHitGorilla  : 0) |
+                                  (heavy?       GorillasExplosionHeavy       : 0);
     [explosion runAction:[Sequence actions:
                           [DelayTime actionWithDuration:heavy? 0.6f: 0.2f],
                           [CallFuncN actionWithTarget:self selector:@selector(stop:)],
@@ -181,7 +181,7 @@ static ParticleSystem **flameTypes = nil;
         ParticleSystem *flame = [ExplosionsLayer flameWithRadius:[self size] / 2 heavy:heavy];
 
         positions = realloc(positions, sizeof(CGPoint) * (flames.count + 1));
-        positions[flames.count] = explosion.source;
+        positions[flames.count] = explosion.centerOfGravity;
         [flames addObject:flame];
     }
     

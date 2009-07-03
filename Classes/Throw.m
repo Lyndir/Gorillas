@@ -178,7 +178,7 @@
     if([self isDone] || offScreen || hitBuilding || hitGorilla) {
         r = rTest;
         
-        if ([gameLayer checkGameStillOn] || recap || ![GorillasConfig get].replay/* || !focussed*/) {
+        if ([gameLayer checkGameStillOn] || recap || ![GorillasConfig get].replay || !gameLayer.activeGorilla.human /*|| !focussed*/) {
             
             // Hitting something causes an explosion.
             if(hitBuilding || hitGorilla)
@@ -230,10 +230,10 @@
 
     [target setPosition:r];
     if([[GorillasConfig get] visualFx]) {
-        [smoke setAngle:atan2f([smoke source].y - r.y,
-                               [smoke source].x - r.x)
-                                / (float)M_PI * 180.0f];
-        [smoke setSource:r];
+        smoke.angle             = atan2f(smoke.centerOfGravity.y - r.y,
+                                         smoke.centerOfGravity.x - r.x)
+                                / (float)M_PI * 180.0f;
+        smoke.centerOfGravity   = r;
     } else if([smoke emissionRate])
         [smoke setEmissionRate:0];
     

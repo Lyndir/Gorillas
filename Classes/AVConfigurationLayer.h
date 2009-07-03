@@ -29,6 +29,8 @@
 @interface AVConfigurationLayer : ShadeLayer <Resettable> {
     
     Menu *menu, *backMenu;
+    
+    MenuItemToggle *audioI, *soundFxI, *voiceI, *visualFxI, *vibrationI;
 }
 
 @end
