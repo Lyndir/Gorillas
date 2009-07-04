@@ -24,7 +24,7 @@
 
 #import "StatisticsLayer.h"
 #import "GorillasAppDelegate.h"
-#import "BuildingLayer.h"
+#import "BuildingsLayer.h"
 #define gBarSize 25
 
 
@@ -125,7 +125,7 @@
             scoreRatio = 0.001f;
         
         // Score tower.
-        BuildingLayer *scoreTower = [[BuildingLayer alloc] initWithWidth:gBarSize
+        BuildingsLayer *scoreTower = [[BuildingsLayer alloc] initWithWidth:gBarSize
                                                              heightRatio:scoreRatio];
         
         // Score label.
@@ -189,7 +189,7 @@
     [super dismissAsPush:_pushed];
     
     int i = 0;
-    for(BuildingLayer *scoreTower in scoreTowers)
+    for(BuildingsLayer *scoreTower in scoreTowers)
         [scoreTower runAction:[Sequence actions:
                                [Sequence actionWithDuration:(([[GorillasConfig get] transitionDuration] / 2) / [scoreTowers count]) * i++],
                                [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration] / 2
@@ -202,7 +202,7 @@
     
     [super onExit];
     
-    for(BuildingLayer *scoreTower in scoreTowers)
+    for(BuildingsLayer *scoreTower in scoreTowers)
         [self removeChild:scoreTower cleanup:YES];
     [scoreTowers removeAllObjects];
 }

@@ -302,7 +302,7 @@
 		DA34006D0EB516D800B68C06 /* StatisticsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006C0EB516D800B68C06 /* StatisticsLayer.m */; };
 		DA3400700EB516F400B68C06 /* GameConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006F0EB516F400B68C06 /* GameConfigurationLayer.m */; };
 		DA34FD100EB4851E00B68C06 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
-		DA34FD7D0EB49F4000B68C06 /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */; };
+		DA34FD7D0EB49F4000B68C06 /* CityLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* CityLayer.m */; };
 		DA34FD800EB49FFB00B68C06 /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
 		DA34FE1C0EB4AE5400B68C06 /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
 		DA34FF6C0EB4E48E00B68C06 /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
@@ -360,10 +360,10 @@
 		DA4769800FDD7334002E74F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		DA4769810FDD7334002E74F8 /* GorillasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* GorillasAppDelegate.m */; };
 		DA4769820FDD7334002E74F8 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
-		DA4769830FDD7334002E74F8 /* BuildingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */; };
+		DA4769830FDD7334002E74F8 /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingsLayer.m */; };
 		DA4769840FDD7334002E74F8 /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
 		DA4769850FDD7334002E74F8 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
-		DA4769860FDD7334002E74F8 /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */; };
+		DA4769860FDD7334002E74F8 /* CityLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* CityLayer.m */; };
 		DA4769870FDD7334002E74F8 /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
 		DA4769880FDD7334002E74F8 /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
 		DA4769890FDD7334002E74F8 /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
@@ -512,10 +512,10 @@
 		DA8B772D0F46120600DD88BF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		DA8B772E0F46120600DD88BF /* GorillasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* GorillasAppDelegate.m */; };
 		DA8B772F0F46120600DD88BF /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
-		DA8B77300F46120600DD88BF /* BuildingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */; };
+		DA8B77300F46120600DD88BF /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingsLayer.m */; };
 		DA8B77310F46120600DD88BF /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
 		DA8B77320F46120600DD88BF /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
-		DA8B77330F46120600DD88BF /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */; };
+		DA8B77330F46120600DD88BF /* CityLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* CityLayer.m */; };
 		DA8B77340F46120600DD88BF /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
 		DA8B77350F46120600DD88BF /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
 		DA8B77360F46120600DD88BF /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
@@ -634,10 +634,10 @@
 		DABD68000F190D4D00EE213D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		DABD68010F190D4D00EE213D /* GorillasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* GorillasAppDelegate.m */; };
 		DABD68020F190D4D00EE213D /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
-		DABD68030F190D4D00EE213D /* BuildingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */; };
+		DABD68030F190D4D00EE213D /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingsLayer.m */; };
 		DABD68040F190D4D00EE213D /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
 		DABD68050F190D4D00EE213D /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
-		DABD68060F190D4D00EE213D /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */; };
+		DABD68060F190D4D00EE213D /* CityLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* CityLayer.m */; };
 		DABD68070F190D4D00EE213D /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
 		DABD68080F190D4D00EE213D /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
 		DABD68090F190D4D00EE213D /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
@@ -662,7 +662,7 @@
 		DABD68490F190D4D00EE213D /* AVConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816460F0E24D80064F470 /* AVConfigurationLayer.m */; };
 		DABD684A0F190D4D00EE213D /* HolesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA31251C0F10F74C00F1032D /* HolesLayer.m */; };
 		DABD684B0F190D4D00EE213D /* Splash.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5A256C0F16D63900975E5A /* Splash.m */; };
-		DACA4E6E0EB3AEA40096F970 /* BuildingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */; };
+		DACA4E6E0EB3AEA40096F970 /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingsLayer.m */; };
 		DACA4E8D0EB3B0E10096F970 /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
 		DACC15A50F61F2FB0078A0D8 /* bobber.png in Resources */ = {isa = PBXBuildFile; fileRef = DACC157F0F61F2FB0078A0D8 /* bobber.png */; };
 		DACC15A60F61F2FB0078A0D8 /* bonk.png in Resources */ = {isa = PBXBuildFile; fileRef = DACC15800F61F2FB0078A0D8 /* bonk.png */; };
@@ -920,10 +920,10 @@
 		DAE919420FFD53D300BF4B89 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		DAE919430FFD53D300BF4B89 /* GorillasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* GorillasAppDelegate.m */; };
 		DAE919440FFD53D300BF4B89 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
-		DAE919450FFD53D300BF4B89 /* BuildingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */; };
+		DAE919450FFD53D300BF4B89 /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingsLayer.m */; };
 		DAE919460FFD53D300BF4B89 /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
 		DAE919470FFD53D300BF4B89 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
-		DAE919480FFD53D300BF4B89 /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */; };
+		DAE919480FFD53D300BF4B89 /* CityLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* CityLayer.m */; };
 		DAE919490FFD53D300BF4B89 /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
 		DAE9194A0FFD53D300BF4B89 /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
 		DAE9194B0FFD53D300BF4B89 /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
@@ -1209,8 +1209,8 @@
 		DA34006F0EB516F400B68C06 /* GameConfigurationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameConfigurationLayer.m; sourceTree = "<group>"; };
 		DA34FD0E0EB4851D00B68C06 /* PanAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanAction.h; sourceTree = "<group>"; };
 		DA34FD0F0EB4851D00B68C06 /* PanAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanAction.m; sourceTree = "<group>"; };
-		DA34FD7B0EB49F4000B68C06 /* BuildingsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingsLayer.h; sourceTree = "<group>"; };
-		DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingsLayer.m; sourceTree = "<group>"; };
+		DA34FD7B0EB49F4000B68C06 /* CityLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityLayer.h; sourceTree = "<group>"; };
+		DA34FD7C0EB49F4000B68C06 /* CityLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityLayer.m; sourceTree = "<group>"; };
 		DA34FD7E0EB49FFB00B68C06 /* StarLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarLayer.h; sourceTree = "<group>"; };
 		DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarLayer.m; sourceTree = "<group>"; };
 		DA34FE1A0EB4AE5400B68C06 /* SkiesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkiesLayer.h; sourceTree = "<group>"; };
@@ -1330,8 +1330,8 @@
 		DABD572E0FF792C50034FDB1 /* aim.body.14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = aim.body.14.png; path = png/aim.body.14.png; sourceTree = "<group>"; };
 		DABD572F0FF792C50034FDB1 /* aim.body.15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = aim.body.15.png; path = png/aim.body.15.png; sourceTree = "<group>"; };
 		DABD68580F190D4D00EE213D /* Gorillas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gorillas.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		DACA4E6C0EB3AEA40096F970 /* BuildingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingLayer.h; sourceTree = "<group>"; };
-		DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingLayer.m; sourceTree = "<group>"; };
+		DACA4E6C0EB3AEA40096F970 /* BuildingsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingsLayer.h; sourceTree = "<group>"; };
+		DACA4E6D0EB3AEA40096F970 /* BuildingsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingsLayer.m; sourceTree = "<group>"; };
 		DACA4E8B0EB3B0E10096F970 /* GorillasConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillasConfig.h; sourceTree = "<group>"; };
 		DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillasConfig.m; sourceTree = "<group>"; };
 		DACC157F0F61F2FB0078A0D8 /* bobber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bobber.png; path = png/bobber.png; sourceTree = "<group>"; };
@@ -1612,10 +1612,10 @@
 				DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */,
 				DA34FD7E0EB49FFB00B68C06 /* StarLayer.h */,
 				DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */,
-				DA34FD7B0EB49F4000B68C06 /* BuildingsLayer.h */,
-				DA34FD7C0EB49F4000B68C06 /* BuildingsLayer.m */,
-				DACA4E6C0EB3AEA40096F970 /* BuildingLayer.h */,
-				DACA4E6D0EB3AEA40096F970 /* BuildingLayer.m */,
+				DA34FD7B0EB49F4000B68C06 /* CityLayer.h */,
+				DA34FD7C0EB49F4000B68C06 /* CityLayer.m */,
+				DACA4E6C0EB3AEA40096F970 /* BuildingsLayer.h */,
+				DACA4E6D0EB3AEA40096F970 /* BuildingsLayer.m */,
 				DA859C4E0EC4F3950036B7C0 /* GorillaLayer.h */,
 				DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */,
 				DA859E6E0EC598E10036B7C0 /* BananaLayer.h */,
@@ -2825,10 +2825,10 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* GorillasAppDelegate.m in Sources */,
 				DA7547F80EAB66D40083EC7C /* GameLayer.m in Sources */,
-				DACA4E6E0EB3AEA40096F970 /* BuildingLayer.m in Sources */,
+				DACA4E6E0EB3AEA40096F970 /* BuildingsLayer.m in Sources */,
 				DACA4E8D0EB3B0E10096F970 /* GorillasConfig.m in Sources */,
 				DA34FD100EB4851E00B68C06 /* PanAction.m in Sources */,
-				DA34FD7D0EB49F4000B68C06 /* BuildingsLayer.m in Sources */,
+				DA34FD7D0EB49F4000B68C06 /* CityLayer.m in Sources */,
 				DA34FD800EB49FFB00B68C06 /* StarLayer.m in Sources */,
 				DA34FE1C0EB4AE5400B68C06 /* SkiesLayer.m in Sources */,
 				DA34FF6C0EB4E48E00B68C06 /* ShadeLayer.m in Sources */,
@@ -2938,10 +2938,10 @@
 				DA4769800FDD7334002E74F8 /* main.m in Sources */,
 				DA4769810FDD7334002E74F8 /* GorillasAppDelegate.m in Sources */,
 				DA4769820FDD7334002E74F8 /* GameLayer.m in Sources */,
-				DA4769830FDD7334002E74F8 /* BuildingLayer.m in Sources */,
+				DA4769830FDD7334002E74F8 /* BuildingsLayer.m in Sources */,
 				DA4769840FDD7334002E74F8 /* GorillasConfig.m in Sources */,
 				DA4769850FDD7334002E74F8 /* PanAction.m in Sources */,
-				DA4769860FDD7334002E74F8 /* BuildingsLayer.m in Sources */,
+				DA4769860FDD7334002E74F8 /* CityLayer.m in Sources */,
 				DA4769870FDD7334002E74F8 /* StarLayer.m in Sources */,
 				DA4769880FDD7334002E74F8 /* SkiesLayer.m in Sources */,
 				DA4769890FDD7334002E74F8 /* ShadeLayer.m in Sources */,
@@ -3052,10 +3052,10 @@
 				DA8B772D0F46120600DD88BF /* main.m in Sources */,
 				DA8B772E0F46120600DD88BF /* GorillasAppDelegate.m in Sources */,
 				DA8B772F0F46120600DD88BF /* GameLayer.m in Sources */,
-				DA8B77300F46120600DD88BF /* BuildingLayer.m in Sources */,
+				DA8B77300F46120600DD88BF /* BuildingsLayer.m in Sources */,
 				DA8B77310F46120600DD88BF /* GorillasConfig.m in Sources */,
 				DA8B77320F46120600DD88BF /* PanAction.m in Sources */,
-				DA8B77330F46120600DD88BF /* BuildingsLayer.m in Sources */,
+				DA8B77330F46120600DD88BF /* CityLayer.m in Sources */,
 				DA8B77340F46120600DD88BF /* StarLayer.m in Sources */,
 				DA8B77350F46120600DD88BF /* SkiesLayer.m in Sources */,
 				DA8B77360F46120600DD88BF /* ShadeLayer.m in Sources */,
@@ -3164,10 +3164,10 @@
 				DABD68000F190D4D00EE213D /* main.m in Sources */,
 				DABD68010F190D4D00EE213D /* GorillasAppDelegate.m in Sources */,
 				DABD68020F190D4D00EE213D /* GameLayer.m in Sources */,
-				DABD68030F190D4D00EE213D /* BuildingLayer.m in Sources */,
+				DABD68030F190D4D00EE213D /* BuildingsLayer.m in Sources */,
 				DABD68040F190D4D00EE213D /* GorillasConfig.m in Sources */,
 				DABD68050F190D4D00EE213D /* PanAction.m in Sources */,
-				DABD68060F190D4D00EE213D /* BuildingsLayer.m in Sources */,
+				DABD68060F190D4D00EE213D /* CityLayer.m in Sources */,
 				DABD68070F190D4D00EE213D /* StarLayer.m in Sources */,
 				DABD68080F190D4D00EE213D /* SkiesLayer.m in Sources */,
 				DABD68090F190D4D00EE213D /* ShadeLayer.m in Sources */,
@@ -3277,10 +3277,10 @@
 				DAE919420FFD53D300BF4B89 /* main.m in Sources */,
 				DAE919430FFD53D300BF4B89 /* GorillasAppDelegate.m in Sources */,
 				DAE919440FFD53D300BF4B89 /* GameLayer.m in Sources */,
-				DAE919450FFD53D300BF4B89 /* BuildingLayer.m in Sources */,
+				DAE919450FFD53D300BF4B89 /* BuildingsLayer.m in Sources */,
 				DAE919460FFD53D300BF4B89 /* GorillasConfig.m in Sources */,
 				DAE919470FFD53D300BF4B89 /* PanAction.m in Sources */,
-				DAE919480FFD53D300BF4B89 /* BuildingsLayer.m in Sources */,
+				DAE919480FFD53D300BF4B89 /* CityLayer.m in Sources */,
 				DAE919490FFD53D300BF4B89 /* StarLayer.m in Sources */,
 				DAE9194A0FFD53D300BF4B89 /* SkiesLayer.m in Sources */,
 				DAE9194B0FFD53D300BF4B89 /* ShadeLayer.m in Sources */,

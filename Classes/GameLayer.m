@@ -451,7 +451,7 @@
     [self setAnchorPoint:ccp(0.5f, 0.5f)];
     
     // Sky, buildings and wind.
-    buildingsLayer = [[BuildingsLayer alloc] init];
+    buildingsLayer = [[CityLayer alloc] init];
     [buildingsLayer setAnchorPoint:CGPointZero];
 
     skiesLayer = [[SkiesLayer alloc] init];

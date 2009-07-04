@@ -125,7 +125,7 @@
         return;
 
     GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
-    BuildingsLayer *buildingsLayer = [gameLayer buildingsLayer];
+    CityLayer *buildingsLayer = [gameLayer buildingsLayer];
     CGSize winSize = [[Director sharedDirector] winSize];
     
     // Wind influence.

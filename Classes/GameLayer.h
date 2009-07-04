@@ -25,7 +25,7 @@
 
 #import "PanningLayer.h"
 #import "SkiesLayer.h"
-#import "BuildingsLayer.h"
+#import "CityLayer.h"
 #import "WindLayer.h"
 
 
@@ -42,7 +42,7 @@
 
     SkiesLayer                                          *skiesLayer;
     PanningLayer                                        *panningLayer;
-    BuildingsLayer                                      *buildingsLayer;
+    CityLayer                                      *buildingsLayer;
     ParticleSystem                                      *weather;
     WindLayer                                           *windLayer;
     Action                                              *shakeAction;
@@ -57,7 +57,7 @@
 
 @property (nonatomic, readonly) SkiesLayer              *skiesLayer;
 @property (nonatomic, readonly) PanningLayer            *panningLayer;
-@property (nonatomic, readonly) BuildingsLayer          *buildingsLayer;
+@property (nonatomic, readonly) CityLayer          *buildingsLayer;
 @property (nonatomic, readonly) ParticleSystem          *weather;
 @property (nonatomic, readonly) WindLayer               *windLayer;
 

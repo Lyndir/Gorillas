@@ -47,4 +47,5 @@ Refact
  .  Fix hole size scaling when zooming.
  v  HUD doens't disappear.
  v  Optimize Skylayer star rendering by combining.
- .  Memory issues (esp. when switching city themes).
+ v  Memory issues (esp. when switching city themes).
+ .  Merge buildings into one like was done with stars.
