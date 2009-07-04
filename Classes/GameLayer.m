@@ -42,7 +42,7 @@
 
 @synthesize paused;
 @synthesize gorillas, activeGorilla;
-@synthesize skiesLayer, panningLayer, buildingsLayer, windLayer, weather;
+@synthesize skyLayer, panningLayer, cityLayer, windLayer, weather;
 @synthesize scaleTimeAction;
 
 -(BOOL) singlePlayer {
@@ -129,9 +129,9 @@
 
 -(void) reset {
     
-    [skiesLayer reset];
+    [skyLayer reset];
     [panningLayer reset];
-    [buildingsLayer reset];
+    [cityLayer reset];
     [windLayer reset];
 }
 
@@ -140,7 +140,7 @@
     if ([GorillasConfig get].vibration)
         [GorillasAudioController vibrate];
     
-    [buildingsLayer runAction:shakeAction];
+    [cityLayer runAction:shakeAction];
 }
 
 
@@ -199,7 +199,7 @@
     // Reset the game field and start the game.
     //[buildingsLayer stopPanning];
     [self reset];
-    [buildingsLayer startGame];
+    [cityLayer startGame];
 }
 
 
@@ -208,9 +208,9 @@
     if (offScreen)
         [[[GorillasAppDelegate get] hudLayer] message:[GorillasConfig get].offMessage
                                              duration:4 isImportant:NO];
-    else if(hitGorilla && !buildingsLayer.hitGorilla.alive)
+    else if(hitGorilla && !cityLayer.hitGorilla.alive)
         [[[GorillasAppDelegate get] hudLayer] message:[NSString stringWithFormat:[GorillasConfig get].hitMessage,
-                                                       activeGorilla.name, buildingsLayer.hitGorilla.name]
+                                                       activeGorilla.name, cityLayer.hitGorilla.name]
                                              duration:4 isImportant:NO];
 
     if (hitGorilla) {
@@ -221,10 +221,10 @@
         if([activeGorilla human]) {
             // Human hits ...
             
-            if([buildingsLayer.hitGorilla human]) {
+            if([cityLayer.hitGorilla human]) {
                 // ... Human.
                 if([self isEnabled:GorillasFeatureTeam]
-                   || buildingsLayer.hitGorilla == activeGorilla)
+                   || cityLayer.hitGorilla == activeGorilla)
                     // In team mode or when suiciding, deduct score.
                     score = [[GorillasConfig get] deathScore];
                 else
@@ -239,7 +239,7 @@
         } else {
             // AI hits ...
             
-            if([buildingsLayer.hitGorilla human]) {
+            if([cityLayer.hitGorilla human]) {
                 // ... Human.
                 if(![self isEnabled:GorillasFeatureTeam])
                     // In team mode, deduct score.
@@ -249,7 +249,7 @@
             } else {
                 // ... AI.
                 if(![self isEnabled:GorillasFeatureTeam]
-                   && buildingsLayer.hitGorilla != activeGorilla)
+                   && cityLayer.hitGorilla != activeGorilla)
                     // Not in team and not suiciding.
                     cheer = YES;
             }
@@ -306,12 +306,12 @@
             [GorillasConfig get].score += score;
             
             [[[GorillasAppDelegate get] hudLayer] updateHudWithScore:score skill:0];
-            [buildingsLayer message:[NSString stringWithFormat:@"%+d", score] on:buildingsLayer.hitGorilla];
+            [cityLayer message:[NSString stringWithFormat:@"%+d", score] on:cityLayer.hitGorilla];
         }
         
         // If gorilla did something benefitial: cheer or dance.
         if(cheer) {
-            if ([buildingsLayer.hitGorilla alive])
+            if ([cityLayer.hitGorilla alive])
                 [activeGorilla cheer];
             else
                 [activeGorilla dance];
@@ -369,7 +369,7 @@
             [[[GorillasAppDelegate get] hudLayer] updateHudWithScore:score skill:0];
             
             if(score)
-                [buildingsLayer message:[NSString stringWithFormat:@"%+d", score] on:buildingsLayer.bananaLayer.banana];
+                [cityLayer message:[NSString stringWithFormat:@"%+d", score] on:cityLayer.bananaLayer.banana];
         }
     }
 }
@@ -429,7 +429,7 @@
 -(void) endGameFix:(ccTime)dt {
     
     [self unschedule:@selector(endGameFix:)];
-    [buildingsLayer stopGame];
+    [cityLayer stopGame];
 }
 
 
@@ -451,16 +451,16 @@
     [self setAnchorPoint:ccp(0.5f, 0.5f)];
     
     // Sky, buildings and wind.
-    buildingsLayer = [[CityLayer alloc] init];
-    [buildingsLayer setAnchorPoint:CGPointZero];
+    cityLayer = [[CityLayer alloc] init];
+    [cityLayer setAnchorPoint:CGPointZero];
 
-    skiesLayer = [[SkyLayer alloc] init];
-    [skiesLayer setAnchorPoint:CGPointZero];
+    skyLayer = [[SkyLayer alloc] init];
+    skyLayer.anchorPoint = CGPointZero;
     
     panningLayer = [[PanningLayer alloc] init];
     [panningLayer setAnchorPoint:CGPointZero];
-    [panningLayer addChild:buildingsLayer z:0];
-    [panningLayer addChild:skiesLayer z:-5/* parallaxRatio:ccp(0.3f, 0.8f)*/];
+    [panningLayer addChild:cityLayer z:0];
+    [panningLayer addChild:skyLayer z:-5];
     [self addChild:panningLayer];
     
     windLayer = [[WindLayer alloc] init];
@@ -543,7 +543,8 @@
                 
                 [weather setPosVar:ccp([weather posVar].x * 2.5f, [weather posVar].y)];
                 [weather setPosition:ccp([weather position].x, [weather position].y * 2)]; // Space above screen.
-                [buildingsLayer addChild:weather z:-3 /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:CGPointZero*/];
+                [cityLayer addChild:weather z:-3 /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:ccp(self.contentSize.width / 2,
+                                                                                                       self.contentSize.height / 2)*/];
 
                 [windLayer registerSystem:weather affectAngle:YES];
             }
@@ -620,11 +621,11 @@
     [shakeAction release];
     shakeAction = nil;
     
-    [skiesLayer release];
-    skiesLayer = nil;
+    [skyLayer release];
+    skyLayer = nil;
     
-    [buildingsLayer release];
-    buildingsLayer = nil;
+    [cityLayer release];
+    cityLayer = nil;
     
     [weather release];
     weather = nil;

@@ -153,8 +153,8 @@
     
     // Figure out where the buildings start and end.
     // Use that for camera limits, take scaling into account.
-    float min = [[GorillasAppDelegate get].gameLayer.buildingsLayer left];
-    float max = [[GorillasAppDelegate get].gameLayer.buildingsLayer right];
+    float min = [[GorillasAppDelegate get].gameLayer.cityLayer left];
+    float max = [[GorillasAppDelegate get].gameLayer.cityLayer right];
     float top = winSize.height * 2;
     CGFloat _scale = self.scale;
     r = ccpMult(r, _scale);

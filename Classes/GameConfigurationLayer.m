@@ -48,7 +48,6 @@
     for (NSString *themeName in [[CityTheme getThemes] allKeys])
         [themeMenuItems addObject:[MenuItemFont itemFromString:themeName]];
     themeI.subItems = themeMenuItems;
-    themeI.isEnabled = ![[GorillasAppDelegate get].gameLayer checkGameStillOn];
     [themeI setSelectedIndex:1];
     
     
@@ -140,6 +139,8 @@
     [levelI setSelectedIndex:[[GorillasConfig get].levelNames indexOfObject:[GorillasConfig get].levelName]];
     [replayI setSelectedIndex:[GorillasConfig get].replay? 1: 0];
     [followI setSelectedIndex:[GorillasConfig get].followThrow? 1: 0];
+
+    themeI.isEnabled = ![[GorillasAppDelegate get].gameLayer checkGameStillOn];
 }
 
 

@@ -608,7 +608,7 @@
     
     [defaults setBool:nVisualFx forKey: dVisualFx];
     [[GorillasAppDelegate get] updateConfig];
-    [[[[GorillasAppDelegate get] gameLayer] skiesLayer] reset];
+    [[GorillasAppDelegate get].gameLayer.skyLayer reset];
 }
 
 

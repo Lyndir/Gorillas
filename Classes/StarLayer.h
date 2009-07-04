@@ -30,7 +30,7 @@
     CGSize      contentSize;
     float       depth;
     
-    glPoint *   starVertices;
+    glPoint     *starVertices;
     GLuint      starVertexBuffer;
     NSUInteger  starCount;
 }

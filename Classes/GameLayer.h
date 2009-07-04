@@ -40,9 +40,9 @@
     NSMutableArray                                      *gorillas;
     GorillaLayer                                        *activeGorilla;
 
-    SkyLayer                                          *skiesLayer;
+    SkyLayer                                            *skyLayer;
     PanningLayer                                        *panningLayer;
-    CityLayer                                      *buildingsLayer;
+    CityLayer                                           *cityLayer;
     ParticleSystem                                      *weather;
     WindLayer                                           *windLayer;
     Action                                              *shakeAction;
@@ -55,9 +55,9 @@
 @property (nonatomic, readonly) NSMutableArray          *gorillas;
 @property (nonatomic, readwrite, retain) GorillaLayer   *activeGorilla;
 
-@property (nonatomic, readonly) SkyLayer              *skiesLayer;
+@property (nonatomic, readonly) SkyLayer                *skyLayer;
 @property (nonatomic, readonly) PanningLayer            *panningLayer;
-@property (nonatomic, readonly) CityLayer          *buildingsLayer;
+@property (nonatomic, readonly) CityLayer               *cityLayer;
 @property (nonatomic, readonly) ParticleSystem          *weather;
 @property (nonatomic, readonly) WindLayer               *windLayer;
 

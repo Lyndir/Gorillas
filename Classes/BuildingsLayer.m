@@ -120,18 +120,18 @@
     }
         
     // Build vertex arrays.
-    Vertex *buildingVertices        = malloc(sizeof(Vertex)                             /* size of a vertex */
-                                             * 4                                        /* amount of vertices per building */
-                                             * buildingCount                            /* amount of buildings */);
-    GLushort *buildingIndices       = malloc(sizeof(GLushort)                           /* size of an index */
-                                             * 6                                        /* amount of indexes per window */
-                                             * buildingCount                            /* amount of windows in all buildings */);
-    Vertex *windowVertices          = malloc(sizeof(Vertex)                             /* size of a vertex */
-                                             * 4                                        /* amount of vertices per window */
-                                             * windowCount                              /* amount of windows in all buildings */);
-    GLushort *windowIndices         = malloc(sizeof(GLushort)                           /* size of an index */
-                                             * 6                                        /* amount of indexes per window */
-                                             * windowCount                              /* amount of windows in all buildings */);
+    BuildingVertex *buildingVertices        = malloc(sizeof(BuildingVertex)     /* size of a vertex */
+                                                     * 4                        /* amount of vertices per building */
+                                                     * buildingCount            /* amount of buildings */);
+    GLushort *buildingIndices               = malloc(sizeof(GLushort)           /* size of an index */
+                                                     * 6                        /* amount of indexes per window */
+                                                     * buildingCount            /* amount of windows in all buildings */);
+    Vertex *windowVertices                  = malloc(sizeof(Vertex)             /* size of a vertex */
+                                                     * 4                        /* amount of vertices per window */
+                                                     * windowCount              /* amount of windows in all buildings */);
+    GLushort *windowIndices                 = malloc(sizeof(GLushort)           /* size of an index */
+                                                     * 6                        /* amount of indexes per window */
+                                                     * windowCount              /* amount of windows in all buildings */);
     NSInteger bx = 0;
     NSUInteger w = 0;
     for (NSUInteger b = 0; b < buildingCount; ++b) {
@@ -139,13 +139,15 @@
         NSUInteger bv                       = b * 4;
         NSUInteger bi                       = b * 6;
 
-        buildingVertices[bv + 0].c          = buildingVertices[bv + 1].c = buildings[b].backColor;
-        buildingVertices[bv + 2].c          = buildingVertices[bv + 3].c = buildings[b].frontColor;
+        buildingVertices[bv + 0].front.c    = buildingVertices[bv + 1].front.c      = buildings[b].backColor;
+        buildingVertices[bv + 2].front.c    = buildingVertices[bv + 3].front.c      = buildings[b].frontColor;
+        buildingVertices[bv + 0].backColor  = buildingVertices[bv + 1].backColor    = buildings[b].backColor;
+        buildingVertices[bv + 2].backColor  = buildingVertices[bv + 3].backColor    = buildings[b].backColor;
         
-        buildingVertices[bv + 0].p          = ccp(bx                          , 0);
-        buildingVertices[bv + 1].p          = ccp(bx + buildings[b].size.width, 0);
-        buildingVertices[bv + 2].p          = ccp(bx                          , 0 + buildings[b].size.height);
-        buildingVertices[bv + 3].p          = ccp(bx + buildings[b].size.width, 0 + buildings[b].size.height);
+        buildingVertices[bv + 0].front.p    = ccp(bx                          , 0);
+        buildingVertices[bv + 1].front.p    = ccp(bx + buildings[b].size.width, 0);
+        buildingVertices[bv + 2].front.p    = ccp(bx                          , 0 + buildings[b].size.height);
+        buildingVertices[bv + 3].front.p    = ccp(bx + buildings[b].size.width, 0 + buildings[b].size.height);
         
         buildingIndices[bi + 0]             = bv + 0;
         buildingIndices[bi + 1]             = bv + 1;
@@ -203,7 +205,7 @@
     glGenBuffers(1, &windowsVertexBuffer);
     glGenBuffers(1, &windowsIndicesBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * buildingCount * 4, buildingVertices, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(BuildingVertex) * buildingCount * 4, buildingVertices, GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, windowsVertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * windowCount * 4, windowVertices, GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -229,8 +231,8 @@
     // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
     glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer);
-    glVertexPointer(2, GL_FLOAT, sizeof(Vertex), 0);
-    glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(Vertex), (GLvoid *) sizeof(CGPoint));
+    glVertexPointer(2, GL_FLOAT, sizeof(BuildingVertex), 0);
+    glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(BuildingVertex), (GLvoid *) sizeof(CGPoint));
 
     glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
     glDrawElements(GL_TRIANGLES, buildingCount * 6, GL_UNSIGNED_SHORT, 0);
@@ -259,9 +261,8 @@
     // Draw back of building where DST opacity is < 1.
     glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer);
-    glVertexPointer(2, GL_FLOAT, sizeof(Vertex), 0);
-    //glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(Vertex), (GLvoid *) sizeof(CGPoint));
-    glColor4ub(buildings[0].backColor.r, buildings[0].backColor.g, buildings[0].backColor.b, buildings[0].backColor.a);
+    glVertexPointer(2, GL_FLOAT, sizeof(BuildingVertex), 0);
+    glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(BuildingVertex), (GLvoid *) sizeof(Vertex));
     
     glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA);
     glDrawElements(GL_TRIANGLES, buildingCount * 6, GL_UNSIGNED_SHORT, 0);

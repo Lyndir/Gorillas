@@ -60,12 +60,10 @@
 
 - (void) draw
 {
-    glEnableClientState( GL_VERTEX_ARRAY);
-    glEnableClientState( GL_TEXTURE_COORD_ARRAY );
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     
-    glEnable( GL_TEXTURE_2D);
-    
-    glColor4ub( 255, 255, 255, 255);
+    glEnable(GL_TEXTURE_2D);
     
     //GLfloat width = (GLfloat)body[bodyFrame].pixelsWide * body[bodyFrame].maxS;
     //GLfloat height = (GLfloat)body[bodyFrame].pixelsHigh * body[bodyFrame].maxT;

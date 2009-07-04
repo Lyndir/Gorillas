@@ -137,6 +137,7 @@
     [voiceI setSelectedIndex:[GorillasConfig get].voice? 1: 0];
     [visualFxI setSelectedIndex:[GorillasConfig get].visualFx? 1: 0];
     [vibrationI setSelectedIndex:([GorillasConfig get].vibration && IsIPhone())? 1: 0];
+
     vibrationI.isEnabled = IsIPhone();
 }
 

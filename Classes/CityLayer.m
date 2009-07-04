@@ -233,7 +233,7 @@
             CGPoint to   = ccpAdd(from, throwHistory[i]);
             
             if(to.x && to.y)
-                drawLinesTo(from, &to, 1, [[GorillasConfig get] windowColorOff] & 0xffffff33, 3);
+                drawLinesTo(from, &to, 1, ccc([GorillasConfig get].windowColorOff & 0xffffff33), 3);
         }
     }
 }
@@ -279,7 +279,7 @@
         return;
     }
 
-    CGPoint wp = [self convertToWorldSpace:p];
+    CGPoint wp = [[GorillasAppDelegate get].gameLayer convertTouchToNodeSpace:[[event allTouches] anyObject]];
     if (fabsf(wp.y - [Director sharedDirector].winSize.height) < 20)
         [self performSelector:@selector(zoomOut) withObject:nil afterDelay:3];
     else

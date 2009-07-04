@@ -58,19 +58,19 @@ ivcf(const CGFloat x, const CGFloat y, const long c)
 }
 
 
-NSString* rpad(NSString* string, NSUInteger l);
-NSString* lpad(NSString* string, NSUInteger l);
-NSString* appendOrdinalPrefix(int number, NSString* prefix);
+NSString* rpad(const NSString* string, NSUInteger l);
+NSString* lpad(const NSString* string, NSUInteger l);
+NSString* appendOrdinalPrefix(const NSInteger number, const NSString* prefix);
 
 BOOL IsIPod();
 BOOL IsIPhone();
 BOOL IsSimulator();
 
-void drawPointsAt(const CGPoint* points, int count, long color);
+void drawPointsAt(const CGPoint* points, const NSUInteger count, const ccColor4B color);
 
-void drawLinesTo(CGPoint from, const CGPoint* to, int count, long color, float width);
-void drawLines(const CGPoint* points, const long* colors, int n, float width);
+void drawLinesTo(const CGPoint from, const CGPoint* to, const NSUInteger count, const ccColor4B color, const CGFloat width);
+void drawLines(const CGPoint* points, const ccColor4B* colors, const NSUInteger n, const CGFloat width);
 
-void drawBoxFrom(CGPoint from, CGPoint to, long fromColor, long toColor);
+void drawBoxFrom(const CGPoint from, const CGPoint to, const ccColor4B fromColor, const ccColor4B toColor);
 
-void drawBorderFrom(CGPoint from, CGPoint to, long color, float width);
+void drawBorderFrom(const CGPoint from, const CGPoint to, const ccColor4B color, const CGFloat width);

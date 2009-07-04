@@ -124,21 +124,21 @@
         // We were stopped.
         return;
 
-    GameLayer *gameLayer = [[GorillasAppDelegate get] gameLayer];
-    CityLayer *buildingsLayer = [gameLayer buildingsLayer];
+    GameLayer *gameLayer = [GorillasAppDelegate get].gameLayer;
+    CityLayer *cityLayer = gameLayer.cityLayer;
     CGSize winSize = [[Director sharedDirector] winSize];
     
     // Wind influence.
-    float w = [[gameLayer windLayer] wind];
+    float w = gameLayer.windLayer.wind;
     
     // Calculate banana position.
-    float g = [[GorillasConfig get] gravity];
+    float g = [GorillasConfig get].gravity;
     ccTime t = elapsed;
-    CGPoint r = ccp((v.x + w * t * [[GorillasConfig get] windModifier]) * t + r0.x,
+    CGPoint r = ccp((v.x + w * t * [GorillasConfig get].windModifier) * t + r0.x,
                    v.y * t - t * t * g / 2 + r0.y);
 
     // Calculate the step size.
-    CGPoint rTest = [target position];
+    CGPoint rTest = target.position;
     CGPoint dr = ccpSub(r, rTest);
     float drLen = ccpLength(dr);
     int step = 0, stepCount = drLen <= maxDiff? 1: (int) (drLen / maxDiff) + 1;
@@ -151,11 +151,11 @@
             // Increment rTest toward r.
             rTest = ccpAdd(rTest, rStep);
             
-            float min = [buildingsLayer left];
-            float max = [buildingsLayer right];
+            float min = [cityLayer left];
+            float max = [cityLayer right];
             float top = winSize.height * 2;
-            if([gameLayer.panningLayer position].x == 0) {
-                CGFloat scale = [gameLayer.panningLayer scale];
+            if(gameLayer.panningLayer.position.x == 0) {
+                CGFloat scale = gameLayer.panningLayer.scale;
                 min = 0;
                 max = winSize.width / scale;
             }
@@ -163,8 +163,8 @@
             // Figure out whether banana went off screen or hit something.
             offScreen   = rTest.x < min || rTest.x > max
                        || rTest.y < 0 || rTest.y > top;
-            hitGorilla  = [buildingsLayer hitsGorilla:rTest];
-            hitBuilding = [buildingsLayer hitsBuilding:rTest];
+            hitGorilla  = [cityLayer hitsGorilla:rTest];
+            hitBuilding = [cityLayer hitsBuilding:rTest];
         } while(++step < stepCount && !(hitBuilding || hitGorilla || offScreen));
 
     else
@@ -182,11 +182,11 @@
             
             // Hitting something causes an explosion.
             if(hitBuilding || hitGorilla)
-                [buildingsLayer explodeAt:r isGorilla:hitGorilla];
+                [cityLayer explodeAt:r isGorilla:hitGorilla];
 
             if(recap)
                 // Gorilla was revived; kill it again.
-                [gameLayer.buildingsLayer.hitGorilla killDead];
+                [gameLayer.cityLayer.hitGorilla killDead];
             [[gameLayer windLayer] unregisterSystem:smoke];
             [smoke setEmissionRate:0];
             [target setVisible:NO];
@@ -199,16 +199,16 @@
                 [self throwEnded];
             
             else
-                [buildingsLayer runAction:[Sequence actions:
-                                           [DelayTime actionWithDuration:1],
-                                           [CallFunc actionWithTarget:self selector:@selector(throwEnded)],
-                                           nil]];
+                [cityLayer runAction:[Sequence actions:
+                                      [DelayTime actionWithDuration:1],
+                                      [CallFunc actionWithTarget:self selector:@selector(throwEnded)],
+                                      nil]];
         }
         
         else {
             // Game is over but no recap done yet, start a recap.
-            [gameLayer.buildingsLayer.bananaLayer setClearedGorilla:NO];
-            [gameLayer.buildingsLayer.hitGorilla revive];
+            [gameLayer.cityLayer.bananaLayer setClearedGorilla:NO];
+            [gameLayer.cityLayer.hitGorilla revive];
             [[GorillasAppDelegate get].hudLayer message:NSLocalizedString(@"message.killreplay", @"Kill Shot Replay") isImportant:YES];
             [[GorillasAppDelegate get].hudLayer setButtonImage:@"skip.png" callback:self :@selector(skip:)];
             recapr = r;

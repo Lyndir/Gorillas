@@ -93,6 +93,10 @@ static NSUInteger _teamIndex, _globalIndex;
     }
     lives = initialLives;
     
+    healthColors    = malloc(sizeof(ccColor4B) * 4);
+    healthColors[0] = healthColors[1] = ccc(0xFF33CC33);
+    healthColors[2] = healthColors[3] = ccc(0xFF3333CC);
+    
     return self;
 }
 
@@ -325,23 +329,17 @@ static NSUInteger _teamIndex, _globalIndex;
         ccp(barX - barW / 2 + barW * lives / initialLives, barY),
         ccp(barX - barW / 2 + barW, barY),
     };
-    long colors[4] = {
-        0xFF33CC33,
-        0xFF33CC33,
-        0xFF3333CC,
-        0xFF3333CC,
-    };
     
     GLubyte o = active? 0xFF: 0x33;
     
-    if ([[GorillasConfig get] visualFx]) {
-        drawBoxFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[1], ccp(0, 3)), 0xCCFFCC00 | o, 0x33CC3300 | o);
-        drawBoxFrom(ccpAdd(lines[2], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), 0xFFCCCC00 | o, 0xCC333300 | o);
+    if ([GorillasConfig get].visualFx) {
+        drawBoxFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[1], ccp(0, 3)), ccc(0xCCFFCC00 | o), ccc(0x33CC3300 | o));
+        drawBoxFrom(ccpAdd(lines[2], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc(0xFFCCCC00 | o), ccc(0xCC333300 | o));
     }
     else
-        drawLines(lines, colors, 4, 6);
+        drawLines(lines, healthColors, 4, 6);
     
-    drawBorderFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), 0xCCCC3300 | (o - 0x33), 1);
+    drawBorderFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc(0xCCCC3300 | (o - 0x33)), 1);
 }
 
 
@@ -349,6 +347,9 @@ static NSUInteger _teamIndex, _globalIndex;
     
     [name release];
     name = nil;
+    
+    free(healthColors);
+    healthColors = nil;
     
     [super dealloc];
 }

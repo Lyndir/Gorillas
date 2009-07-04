@@ -36,6 +36,7 @@
     float               zoom;
     
     Sprite              *bobber;
+    ccColor4B           *healthColors;
     
     GorillasPlayerModel model;
     GorillasPlayerType  type;

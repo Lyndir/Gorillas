@@ -39,11 +39,12 @@
  v  Health bar location when gorillas are scaled.
  v  Crappy performance.
  v  Hide vibration on iPod touch.
+ v  Fix autoscale when field is flipped.
 
 Refact
  v  Make sure aim is used as a property.
  v  Fix time scaling.
- .  Fix parallax scrolling.
+ v  Fix parallax scrolling.
  .  Fix hole size scaling when zooming.
  v  HUD doens't disappear.
  v  Optimize Skylayer star rendering by combining.

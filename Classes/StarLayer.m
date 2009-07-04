@@ -23,7 +23,7 @@
 //
 
 #import "StarLayer.h"
-#define maxStarSize 4
+#define maxStarSize 2
 
 
 @implementation StarLayer
@@ -50,13 +50,13 @@
 
 -(void) reset {
     
-    if (starCount == [[GorillasConfig get] starAmount])
+    if (starCount == [GorillasConfig get].starAmount)
         return;
     
-    CGSize winSize = [[Director sharedDirector] winSize];
+    CGSize winSize = [Director sharedDirector].winSize;
     contentSize = CGSizeMake(winSize.width * 2, winSize.height * 2);
     CGFloat startX = winSize.width / 2 - contentSize.width / 2;
-    starCount = [[GorillasConfig get] starAmount];
+    starCount = [GorillasConfig get].starAmount;
     
     free(starVertices);
     starVertices = malloc(sizeof(glPoint) * starCount);
@@ -65,8 +65,10 @@
         starVertices[s].p   = ccp(random() % (long) contentSize.width + startX,
                                   random() % (long) contentSize.height);
         starVertices[s].c   = ccc([GorillasConfig get].starColor);
-        //starVertices[s].c.a *= depth;
-        starVertices[s].s   = fmaxf(1.0f, roundf(maxStarSize * powf(depth, 3)));
+        starVertices[s].c.r *= depth;
+        starVertices[s].c.g *= depth;
+        starVertices[s].c.b *= depth;
+        starVertices[s].s   = fmaxf(1.0f, maxStarSize * depth);
     }
     
     // Push our window data into the VBO.

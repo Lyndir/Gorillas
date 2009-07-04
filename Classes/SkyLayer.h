@@ -25,12 +25,12 @@
 #import "Resettable.h"
 
 
-@interface SkyLayer : CocosNode <Resettable> {
+@interface SkyLayer : ParallaxNode <Resettable> {
 
-    long skyColor;
-    BOOL fancySky;
+    ccColor4B               skyColor;
+    BOOL                    fancySky;
     
-    NSMutableArray *skies;
+    NSMutableArray          *stars;
 }
 
 @end

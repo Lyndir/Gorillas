@@ -34,6 +34,11 @@ typedef struct Building {
     ccColor4B   backColor;
 } Building;
 
+typedef struct BuildingVertex {
+    Vertex      front;
+    ccColor4B   backColor;
+} BuildingVertex;
+
 @interface BuildingsLayer : Layer <Resettable> {
 
     CGFloat                                         buildingWidthFixed, buildingHeightRatio;
