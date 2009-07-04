@@ -304,7 +304,7 @@
 		DA34FD100EB4851E00B68C06 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
 		DA34FD7D0EB49F4000B68C06 /* CityLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* CityLayer.m */; };
 		DA34FD800EB49FFB00B68C06 /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
-		DA34FE1C0EB4AE5400B68C06 /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
+		DA34FE1C0EB4AE5400B68C06 /* SkyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkyLayer.m */; };
 		DA34FF6C0EB4E48E00B68C06 /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
 		DA34FFAA0EB4EEF300B68C06 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
 		DA36A1C40FE825F500691DB7 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = DA36A1BC0FE825F500691DB7 /* menu.png */; };
@@ -365,7 +365,7 @@
 		DA4769850FDD7334002E74F8 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
 		DA4769860FDD7334002E74F8 /* CityLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* CityLayer.m */; };
 		DA4769870FDD7334002E74F8 /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
-		DA4769880FDD7334002E74F8 /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
+		DA4769880FDD7334002E74F8 /* SkyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkyLayer.m */; };
 		DA4769890FDD7334002E74F8 /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
 		DA47698A0FDD7334002E74F8 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
 		DA47698B0FDD7334002E74F8 /* StatisticsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006C0EB516D800B68C06 /* StatisticsLayer.m */; };
@@ -517,7 +517,7 @@
 		DA8B77320F46120600DD88BF /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
 		DA8B77330F46120600DD88BF /* CityLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* CityLayer.m */; };
 		DA8B77340F46120600DD88BF /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
-		DA8B77350F46120600DD88BF /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
+		DA8B77350F46120600DD88BF /* SkyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkyLayer.m */; };
 		DA8B77360F46120600DD88BF /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
 		DA8B77370F46120600DD88BF /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
 		DA8B77380F46120600DD88BF /* StatisticsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006C0EB516D800B68C06 /* StatisticsLayer.m */; };
@@ -639,7 +639,7 @@
 		DABD68050F190D4D00EE213D /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
 		DABD68060F190D4D00EE213D /* CityLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* CityLayer.m */; };
 		DABD68070F190D4D00EE213D /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
-		DABD68080F190D4D00EE213D /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
+		DABD68080F190D4D00EE213D /* SkyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkyLayer.m */; };
 		DABD68090F190D4D00EE213D /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
 		DABD680A0F190D4D00EE213D /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
 		DABD680B0F190D4D00EE213D /* StatisticsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006C0EB516D800B68C06 /* StatisticsLayer.m */; };
@@ -925,7 +925,7 @@
 		DAE919470FFD53D300BF4B89 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
 		DAE919480FFD53D300BF4B89 /* CityLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* CityLayer.m */; };
 		DAE919490FFD53D300BF4B89 /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
-		DAE9194A0FFD53D300BF4B89 /* SkiesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */; };
+		DAE9194A0FFD53D300BF4B89 /* SkyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkyLayer.m */; };
 		DAE9194B0FFD53D300BF4B89 /* ShadeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */; };
 		DAE9194C0FFD53D300BF4B89 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
 		DAE9194D0FFD53D300BF4B89 /* StatisticsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006C0EB516D800B68C06 /* StatisticsLayer.m */; };
@@ -1213,8 +1213,8 @@
 		DA34FD7C0EB49F4000B68C06 /* CityLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityLayer.m; sourceTree = "<group>"; };
 		DA34FD7E0EB49FFB00B68C06 /* StarLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarLayer.h; sourceTree = "<group>"; };
 		DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarLayer.m; sourceTree = "<group>"; };
-		DA34FE1A0EB4AE5400B68C06 /* SkiesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkiesLayer.h; sourceTree = "<group>"; };
-		DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkiesLayer.m; sourceTree = "<group>"; };
+		DA34FE1A0EB4AE5400B68C06 /* SkyLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkyLayer.h; sourceTree = "<group>"; };
+		DA34FE1B0EB4AE5400B68C06 /* SkyLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkyLayer.m; sourceTree = "<group>"; };
 		DA34FF6A0EB4E48E00B68C06 /* ShadeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadeLayer.h; sourceTree = "<group>"; };
 		DA34FF6B0EB4E48E00B68C06 /* ShadeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadeLayer.m; sourceTree = "<group>"; };
 		DA34FFA80EB4EEF300B68C06 /* MainMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuLayer.h; sourceTree = "<group>"; };
@@ -1608,8 +1608,8 @@
 		DA2282240EE1A2B000BA53D2 /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
-				DA34FE1A0EB4AE5400B68C06 /* SkiesLayer.h */,
-				DA34FE1B0EB4AE5400B68C06 /* SkiesLayer.m */,
+				DA34FE1A0EB4AE5400B68C06 /* SkyLayer.h */,
+				DA34FE1B0EB4AE5400B68C06 /* SkyLayer.m */,
 				DA34FD7E0EB49FFB00B68C06 /* StarLayer.h */,
 				DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */,
 				DA34FD7B0EB49F4000B68C06 /* CityLayer.h */,
@@ -2830,7 +2830,7 @@
 				DA34FD100EB4851E00B68C06 /* PanAction.m in Sources */,
 				DA34FD7D0EB49F4000B68C06 /* CityLayer.m in Sources */,
 				DA34FD800EB49FFB00B68C06 /* StarLayer.m in Sources */,
-				DA34FE1C0EB4AE5400B68C06 /* SkiesLayer.m in Sources */,
+				DA34FE1C0EB4AE5400B68C06 /* SkyLayer.m in Sources */,
 				DA34FF6C0EB4E48E00B68C06 /* ShadeLayer.m in Sources */,
 				DA34FFAA0EB4EEF300B68C06 /* MainMenuLayer.m in Sources */,
 				DA34006D0EB516D800B68C06 /* StatisticsLayer.m in Sources */,
@@ -2943,7 +2943,7 @@
 				DA4769850FDD7334002E74F8 /* PanAction.m in Sources */,
 				DA4769860FDD7334002E74F8 /* CityLayer.m in Sources */,
 				DA4769870FDD7334002E74F8 /* StarLayer.m in Sources */,
-				DA4769880FDD7334002E74F8 /* SkiesLayer.m in Sources */,
+				DA4769880FDD7334002E74F8 /* SkyLayer.m in Sources */,
 				DA4769890FDD7334002E74F8 /* ShadeLayer.m in Sources */,
 				DA47698A0FDD7334002E74F8 /* MainMenuLayer.m in Sources */,
 				DA47698B0FDD7334002E74F8 /* StatisticsLayer.m in Sources */,
@@ -3057,7 +3057,7 @@
 				DA8B77320F46120600DD88BF /* PanAction.m in Sources */,
 				DA8B77330F46120600DD88BF /* CityLayer.m in Sources */,
 				DA8B77340F46120600DD88BF /* StarLayer.m in Sources */,
-				DA8B77350F46120600DD88BF /* SkiesLayer.m in Sources */,
+				DA8B77350F46120600DD88BF /* SkyLayer.m in Sources */,
 				DA8B77360F46120600DD88BF /* ShadeLayer.m in Sources */,
 				DA8B77370F46120600DD88BF /* MainMenuLayer.m in Sources */,
 				DA8B77380F46120600DD88BF /* StatisticsLayer.m in Sources */,
@@ -3169,7 +3169,7 @@
 				DABD68050F190D4D00EE213D /* PanAction.m in Sources */,
 				DABD68060F190D4D00EE213D /* CityLayer.m in Sources */,
 				DABD68070F190D4D00EE213D /* StarLayer.m in Sources */,
-				DABD68080F190D4D00EE213D /* SkiesLayer.m in Sources */,
+				DABD68080F190D4D00EE213D /* SkyLayer.m in Sources */,
 				DABD68090F190D4D00EE213D /* ShadeLayer.m in Sources */,
 				DABD680A0F190D4D00EE213D /* MainMenuLayer.m in Sources */,
 				DABD680B0F190D4D00EE213D /* StatisticsLayer.m in Sources */,
@@ -3282,7 +3282,7 @@
 				DAE919470FFD53D300BF4B89 /* PanAction.m in Sources */,
 				DAE919480FFD53D300BF4B89 /* CityLayer.m in Sources */,
 				DAE919490FFD53D300BF4B89 /* StarLayer.m in Sources */,
-				DAE9194A0FFD53D300BF4B89 /* SkiesLayer.m in Sources */,
+				DAE9194A0FFD53D300BF4B89 /* SkyLayer.m in Sources */,
 				DAE9194B0FFD53D300BF4B89 /* ShadeLayer.m in Sources */,
 				DAE9194C0FFD53D300BF4B89 /* MainMenuLayer.m in Sources */,
 				DAE9194D0FFD53D300BF4B89 /* StatisticsLayer.m in Sources */,

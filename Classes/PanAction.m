@@ -23,7 +23,7 @@
 //
 
 #import "PanAction.h"
-#import "BuildingLayer.h"
+#import "Resettable.h"
 
 
 @implementation PanAction

@@ -29,6 +29,7 @@
 #import "ExplosionsLayer.h"
 #import "HolesLayer.h"
 #import "BarSprite.h"
+#import "BuildingsLayer.h"
 //#define _DEBUG_
 
 @interface CityLayer : Layer <Resettable> {
@@ -38,7 +39,7 @@
     Label               *msgLabel, *infoLabel;
     BarSprite           *aimSprite;
     
-    NSMutableArray      *buildings;
+    BuildingsLayer      *buildings;
     HolesLayer          *holes;
     ExplosionsLayer     *explosions;
 
@@ -65,9 +66,6 @@
 
 -(void) startGame;
 -(void) stopGame;
-
--(void) startPanning;
--(void) stopPanning;
 
 -(BOOL) mayThrow;
 

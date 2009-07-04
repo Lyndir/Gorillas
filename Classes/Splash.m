@@ -51,7 +51,7 @@
     [[GorillasAppDelegate get].gameLayer performSelector:@selector(startGame) withObject:nil afterDelay:1];
 #else
     [[GorillasAppDelegate get] showMainMenu];
-    [[GorillasAppDelegate get].gameLayer.buildingsLayer startPanning];
+    //[[GorillasAppDelegate get].gameLayer.buildingsLayer startPanning];
 #endif
 }
 

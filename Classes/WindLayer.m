@@ -43,7 +43,6 @@
         return self;
     
     systems = [[NSMutableArray alloc] init];
-    NSLog(@"0x%x", systems);
     affectAngles = [[NSMutableArray alloc] init];
     
     head = [[Sprite alloc] initWithFile:@"arrow.head.png"];
@@ -100,7 +99,6 @@
     head.rotation   = wind > 0? 180: 0;
     
     @synchronized(self) {
-        NSLog(@"0x%x", systems);
         for(NSUInteger i = 0; i < [systems count]; ++i) {
             ParticleSystem *system = [systems objectAtIndex:i];
             
@@ -108,7 +106,6 @@
                 [system setAngle:270 + 45 * wind];
             
             [system setGravity:ccp(wind * 100 / [system life], [system gravity].y)];
-            NSLog(@"0x%x", systems);
         }
     }
 }

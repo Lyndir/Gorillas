@@ -15,19 +15,19 @@
  */
 
 //
-//  SkiesLayer.m
+//  SkyLayer.m
 //  Gorillas
 //
 //  Created by Maarten Billemont on 26/10/08.
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "SkiesLayer.h"
+#import "SkyLayer.h"
 #import "StarLayer.h"
 #import "PanAction.h"
 
 
-@implementation SkiesLayer
+@implementation SkyLayer
 
 
 -(id) init {

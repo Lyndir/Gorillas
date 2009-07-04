@@ -26,23 +26,31 @@
 #import "Resettable.h"
 
 
-@interface BuildingsLayer : Layer <Resettable> {
-    
-    long        buildingColor;
-    long        backBuildingColor;
-    float       heightRatio;
-    float       width;
-
-    CGSize      contentSize;
-    
+typedef struct Building {
+    CGFloat     x;
+    CGSize      size;
     NSUInteger  windowCount;
-    GLuint      windowsVertexBuffer;
-    GLuint      windowsIndicesBuffer;
+    ccColor4B   frontColor;
+    ccColor4B   backColor;
+} Building;
+
+@interface BuildingsLayer : Layer <Resettable> {
+
+    CGFloat                                         buildingWidthFixed, buildingHeightRatio;
+    
+    NSUInteger                                      buildingCount, windowCount;
+    Building                                        *buildings;
+    
+    GLuint                                          buildingsVertexBuffer,  buildingsIndicesBuffer;
+    GLuint                                          windowsIndicesBuffer,   windowsVertexBuffer;
 }
 
-@property (nonatomic, readonly) CGSize contentSize;
+@property (nonatomic, readonly) Building            *buildings;
+@property (nonatomic, readonly) NSUInteger          buildingCount;
 
 - (id) initWithWidth:(float)w heightRatio:(float)h;
 -(void) reset;
+
+-(BOOL) hitsBuilding:(CGPoint)pos;
 
 @end

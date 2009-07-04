@@ -197,7 +197,7 @@
         [[GorillasAppDelegate get].uiLayer message:[[GorillasConfig get] levelName]];
     
     // Reset the game field and start the game.
-    [buildingsLayer stopPanning];
+    //[buildingsLayer stopPanning];
     [self reset];
     [buildingsLayer startGame];
 }
@@ -454,7 +454,7 @@
     buildingsLayer = [[CityLayer alloc] init];
     [buildingsLayer setAnchorPoint:CGPointZero];
 
-    skiesLayer = [[SkiesLayer alloc] init];
+    skiesLayer = [[SkyLayer alloc] init];
     [skiesLayer setAnchorPoint:CGPointZero];
     
     panningLayer = [[PanningLayer alloc] init];

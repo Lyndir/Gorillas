@@ -48,4 +48,5 @@ Refact
  v  HUD doens't disappear.
  v  Optimize Skylayer star rendering by combining.
  v  Memory issues (esp. when switching city themes).
- .  Merge buildings into one like was done with stars.
+ v  Merge buildings into one like was done with stars.
+ .  Re-enable building panning.

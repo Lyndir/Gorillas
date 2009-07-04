@@ -64,7 +64,6 @@
     throwHints      = [[NSMutableArray alloc] initWithCapacity:2];
 
     self.aim        = ccp(-1, -1);
-    buildings       = [[NSMutableArray alloc] init];
     holes           = nil;
     explosions      = nil;
     
@@ -112,46 +111,30 @@
 
 
 -(void) reset {
-    
-    BOOL wasPanning = panAction != nil;
-    [panAction release];
-    panAction = nil;
-    
+
+    // Clean up.
     [self stopAllActions];
-    [self setPosition:CGPointZero];
     
-    if(holes) {
+    if (holes) {
         [self removeChild:holes cleanup:YES];
         [holes release];
     }
-    if(explosions) {
+    if (explosions) {
         [self removeChild:explosions cleanup:YES];
         [explosions release];
     }
+    if (buildings) {
+        [self removeChild:buildings cleanup:YES];
+        [buildings release];
+    }
+    
+    // Construct city.
     holes = [[HolesLayer alloc] init];
     [self addChild:holes z:-1];
     explosions = [[ExplosionsLayer alloc] init];
     [self addChild:explosions z:4];
-
-    for (BuildingsLayer *building in buildings)
-        [self removeChild:building cleanup:YES];
-    [buildings removeAllObjects];
-    
-    for (NSUInteger i = 0; i < [[GorillasConfig get] buildingAmount] * 3; ++i) {
-        float x = i * ([[GorillasConfig get] buildingWidth] + 1)
-                - ([[GorillasConfig get] buildingWidth] + 1) * [[GorillasConfig get] buildingAmount] / 2;
-        
-        BuildingsLayer *building = [[BuildingsLayer alloc] init];
-        [buildings addObject: building];
-        
-        [building setPosition: ccp(x, 0)];
-        [self addChild:building z:1];
-
-        [building release];
-    }
-    
-    if(wasPanning)
-        [self startPanning];
+    buildings = [[BuildingsLayer alloc] init];
+    [self addChild:buildings z:1];
 }
 
 
@@ -297,7 +280,6 @@
     }
 
     CGPoint wp = [self convertToWorldSpace:p];
-    NSLog(@"%f", fabsf(wp.y - [Director sharedDirector].winSize.height));
     if (fabsf(wp.y - [Director sharedDirector].winSize.height) < 20)
         [self performSelector:@selector(zoomOut) withObject:nil afterDelay:3];
     else
@@ -636,28 +618,20 @@
 
 -(BOOL) hitsBuilding:(CGPoint)pos {
     
-    // Figure out if a building was hit.
-    for(BuildingsLayer *building in buildings)
-        if( pos.x >= [building position].x &&
-            pos.y >= [building position].y &&
-            pos.x <= [building position].x + [building contentSize].width &&
-            pos.y <= [building position].y + [building contentSize].height) {
+    if ([buildings hitsBuilding:pos]) {
 
-            // A building was hit, but if it's in an explosion crater we
-            // need to let the banana continue flying.
-            if(![holes hitsHole: pos])
-                // Hit was not in a hole.
-                return YES;
-        }
+        // A building was hit, but if it's in an explosion crater we
+        // need to let the banana continue flying.
+        return ![holes hitsHole: pos];
+    }
     
-    // No hit.
     return NO;
 }
 
 
 -(void) startGame {
     
-    [self stopPanning];
+    //[self stopPanning];
 
     NSArray *gorillas = [GorillasAppDelegate get].gameLayer.gorillas;
     
@@ -684,11 +658,15 @@
     // Position our gorillas.
     // Find indexA: The left boundary of allowed gorilla indexes.
     NSUInteger indexA = 0;
-    for(BuildingsLayer *building in buildings)
-        if(self.position.x + building.position.x >= 0) {
-            indexA = [buildings indexOfObject:building];
+    for(NSUInteger b = 0; b < buildings.buildingCount; ++b) {
+        CGPoint fieldPoint = [buildings convertToWorldSpace:CGPointMake(buildings.buildings[b].x, 0)];
+        fieldPoint = [[GorillasAppDelegate get].gameLayer convertToNodeSpace:fieldPoint];
+        
+        if(fieldPoint.x >= 0) {
+            indexA = b;
             break;
         }
+    }
     // Find indexB: The right boundary of allowed gorilla indexes.
     NSUInteger indexB = indexA + [GorillasConfig get].buildingAmount - 1;
     // Less than or 3 gorillas, leave one building padding on the sides.
@@ -727,10 +705,10 @@
     }
     [gorillasQueue release];
     for(NSUInteger i = 0; i < [gorillas count]; ++i) {
-        BuildingsLayer *building = [buildings objectAtIndex:[(NSNumber *) [gorillaIndexes objectAtIndex:i] unsignedIntegerValue]];
+        Building building = buildings.buildings[[(NSNumber *) [gorillaIndexes objectAtIndex:i] unsignedIntegerValue]];
         GorillaLayer *gorilla = [gorillas objectAtIndex:i];
         
-        [gorilla setPosition:ccp([building position].x + [building contentSize].width / 2, [building contentSize].height + [gorilla contentSize].height / 2)];
+        gorilla.position = ccp(building.x + building.size.width / 2, building.size.height + gorilla.contentSize.height / 2);
         [gorilla runAction:[FadeIn actionWithDuration:1]];
         [self addChild:gorilla z:3];
     }
@@ -791,34 +769,11 @@
     
     [[GorillasAppDelegate get].gameLayer.gorillas removeAllObjects];
     
-    [self startPanning];
+    //[self startPanning];
     
     [[GorillasAppDelegate get].gameLayer stopped];
 }
  
-
--(void) startPanning {
-    
-    if(panAction)
-        // If already panning, stop first.
-        [self stopPanning];
-    
-    [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:0.7f];
-    
-    panAction = [[PanAction alloc] initWithSubNodes:buildings duration:[[GorillasConfig get] buildingSpeed] padding:1];
-    [self runAction:panAction];
-}
-
-
--(void) stopPanning {
-    
-    [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:1];
-    
-    [panAction cancel];
-    [panAction release];
-    panAction = nil;
-}
-
 
 -(void) explodeAt: (CGPoint)point isGorilla:(BOOL)isGorilla {
     
@@ -829,15 +784,17 @@
 
 -(CGFloat) left {
     
-    BuildingsLayer *firstBuilding = [buildings objectAtIndex:1];
-    return [firstBuilding position].x;
+    Building building = buildings.buildings[0];
+    
+    return building.x;
 }
 
 
 -(CGFloat) right {
     
-    BuildingsLayer *lastBuilding = [buildings lastObject];
-    return [lastBuilding position].x + [lastBuilding contentSize].width;
+    Building building = buildings.buildings[buildings.buildingCount - 1];
+    
+    return building.x + building.size.width;
 }
 
 

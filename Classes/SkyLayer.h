@@ -15,7 +15,7 @@
  */
 
 //
-//  SkiesLayer.h
+//  SkyLayer.h
 //  Gorillas
 //
 //  Created by Maarten Billemont on 26/10/08.
@@ -25,7 +25,7 @@
 #import "Resettable.h"
 
 
-@interface SkiesLayer : CocosNode <Resettable> {
+@interface SkyLayer : CocosNode <Resettable> {
 
     long skyColor;
     BOOL fancySky;

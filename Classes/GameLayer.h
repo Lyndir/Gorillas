@@ -24,7 +24,7 @@
 
 
 #import "PanningLayer.h"
-#import "SkiesLayer.h"
+#import "SkyLayer.h"
 #import "CityLayer.h"
 #import "WindLayer.h"
 
@@ -40,7 +40,7 @@
     NSMutableArray                                      *gorillas;
     GorillaLayer                                        *activeGorilla;
 
-    SkiesLayer                                          *skiesLayer;
+    SkyLayer                                          *skiesLayer;
     PanningLayer                                        *panningLayer;
     CityLayer                                      *buildingsLayer;
     ParticleSystem                                      *weather;
@@ -55,7 +55,7 @@
 @property (nonatomic, readonly) NSMutableArray          *gorillas;
 @property (nonatomic, readwrite, retain) GorillaLayer   *activeGorilla;
 
-@property (nonatomic, readonly) SkiesLayer              *skiesLayer;
+@property (nonatomic, readonly) SkyLayer              *skiesLayer;
 @property (nonatomic, readonly) PanningLayer            *panningLayer;
 @property (nonatomic, readonly) CityLayer          *buildingsLayer;
 @property (nonatomic, readonly) ParticleSystem          *weather;

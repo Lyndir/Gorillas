@@ -420,8 +420,8 @@
 
 -(float) windowWidth {
     
-	CGSize size = [[Director sharedDirector] winSize];
-    return size.width / [self buildingAmount] / ([self windowAmount] * 2 + 1);
+	CGSize size = [Director sharedDirector].winSize;
+    return size.width / self.buildingAmount / (self.windowAmount * 2 + 1);
 }
 -(float) windowHeight {
     
