@@ -53,7 +53,7 @@
 #if TARGET_IPHONE_SIMULATOR
     [[Director sharedDirector] setPixelFormat:kRGBA8];
 #else
-    [[Director sharedDirector] setDisplayFPS:YES];
+    //[[Director sharedDirector] setDisplayFPS:YES];
 #endif
 	[[Director sharedDirector] setDeviceOrientation:CCDeviceOrientationLandscapeLeft];
 	[[Director sharedDirector] attachInWindow:window];
