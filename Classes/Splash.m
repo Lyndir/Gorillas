@@ -48,7 +48,7 @@
     
 #ifdef LITE
     [[GorillasAppDelegate get].gameLayer configureGameWithMode:GorillasModeClassic humans:1 ais:1];
-    [[GorillasAppDelegate get].gameLayer performSelector:@selector(startGame) withObject:nil afterDelay:1];
+    [[GorillasAppDelegate get].gameLayer startGame];
 #else
     [[GorillasAppDelegate get] showMainMenu];
     //[[GorillasAppDelegate get].gameLayer.buildingsLayer startPanning];

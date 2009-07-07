@@ -231,7 +231,7 @@
                                 @"random",                                                  dCurrentTrack,
                                 
                                 [NSNumber numberWithInteger:    1],                         dGameConfiguration,
-                                [NSNumber numberWithInteger:    GorillasModeBootCamp],      dMode,
+                                [NSNumber numberWithUnsignedInt:GorillasModeBootCamp],      dMode,
                                 [NSNumber numberWithInteger:    -5],                        dMissScore,
                                 [NSNumber numberWithInteger:    50],                        dKillScore,
                                 [NSNumber numberWithFloat:      2],                         dBonusOneShot,
@@ -241,7 +241,7 @@
                                 [NSNumber numberWithUnsignedInt:GorillasPlayerModelGorilla],dPlayerModel,
                                 [NSNumber numberWithInteger:    0],                         dScore,
                                 [NSNumber numberWithInteger:    0],                         dSkill,
-                                [NSMutableDictionary dictionary],                           dTopScoreHistory,
+                                [NSDictionary dictionary],                                  dTopScoreHistory,
                                 [NSNumber numberWithFloat:      0.3f],                      dLevel,
                                 levelNames,                                                 dLevelNames,
                                 [NSNumber numberWithFloat:      0.03f],                     dLevelProgress,

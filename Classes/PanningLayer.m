@@ -45,7 +45,7 @@
 
 
 -(void) reset {
-
+    
     if (self.scale != 1) {
         if (scaleAction) {
             [self stopAction:scaleAction];
@@ -80,7 +80,7 @@
     
     if([[event allTouches] count] != 2)
         return [self ccTouchesCancelled:touches withEvent:event];
-
+    
     if(initialDist < 0)
         return [self ccTouchesBegan:touches withEvent:event];
     
@@ -89,7 +89,7 @@
     UITouch *to = [touchesArray objectAtIndex:1];
     CGPoint pFrom = [from locationInView: [from view]];
     CGPoint pTo = [to locationInView: [to view]];
-
+    
     CGFloat newDist = fabsf(pFrom.y - pTo.y);
     CGFloat newScale = initialScale * (newDist / initialDist);
     CGFloat limitedScale = fmaxf(fminf(newScale, 1.1f), 0.8f);
@@ -98,7 +98,7 @@
         initialDist = newDist;
         initialScale = newScale;
     }
-
+    
     [self scaleTo:newScale limited:YES];
     
     return kEventHandled;
@@ -106,7 +106,7 @@
 
 
 -(BOOL) ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-
+    
     if(initialDist < 0)
         return kEventIgnored;
     
@@ -129,16 +129,16 @@
 
 
 -(void) scaleTo:(CGFloat)newScale {
-
+    
     [self scaleTo:newScale limited:NO];
 }
 
 
 -(void) scaleTo:(CGFloat)newScale limited:(BOOL)limited {
-
+    
     if (limited)
         newScale = fmaxf(fminf(newScale, 1.1f), 0.8f);
-
+    
     CGFloat duration = [GorillasConfig get].transitionDuration;
     if(scaleAction != nil && ![scaleAction isDone]) {
         duration -= [scaleAction elapsed];
@@ -152,34 +152,45 @@
 
 -(void) scrollToCenter:(CGPoint)r horizontal:(BOOL)horizontal {
     
-    GameLayer *gameLayer = [GorillasAppDelegate get].gameLayer;
-    CityLayer *cityLayer = gameLayer.cityLayer;
-    
-    // Figure out where the buildings start and end.
-    // Use that for camera limits, take scaling into account.
-    CGRect field    = [cityLayer fieldInSpaceOf:cityLayer];
-    CGFloat left    = field.origin.x;
-    CGFloat right   = field.origin.x + field.size.width;
-    CGFloat top     = field.origin.y + field.size.height;
-    
-    // Relies on the middle of this layer being the middle of the city layer.
-    CGPoint middle  = [gameLayer convertToWorldSpace:CGPointMake(gameLayer.contentSize.width / 2, gameLayer.contentSize.height / 2)];
-    middle          = [cityLayer convertToNodeSpace:middle];
-    CGPoint origin  = [self convertToWorldSpace:ccpMult(self.position, -1)];
-    origin          = [cityLayer convertToNodeSpace:origin];
-    CGPoint zero    = [gameLayer convertToWorldSpace:CGPointZero];
-    zero            = [cityLayer convertToNodeSpace:zero];
-    CGPoint halfO    = ccpSub(middle, origin);
-    CGPoint halfZ    = ccpSub(middle, zero);
-    
-    if(horizontal)
-        r = ccp(fmaxf(fminf(r.x, right - halfZ.x), left + halfZ.x),
-                fmaxf(fminf(r.y, top - halfZ.y), halfZ.y));
-    
-    else {
-        r.x = halfZ.x;
-        if(r.y < halfZ.y * 2 * 0.8f)
-            r.y = halfZ.y;
+    CGPoint pos = r;
+    if (!CGPointEqualToPoint(r, CGPointZero)) {
+        // Save and reset position so it doesn't affect coordinate space conversions.
+        CGPoint savePosition = self.position;
+        self.position = CGPointZero;
+        
+        CGSize winSize = [Director sharedDirector].winSize;
+        GameLayer *gameLayer    = [GorillasAppDelegate get].gameLayer;
+        CityLayer *cityLayer    = gameLayer.cityLayer;
+        
+        // Figure out where (in world coordinates) the buildings start and end.
+        CGRect field            = [cityLayer fieldInSpaceOf:nil];
+        CGFloat left            = field.origin.x;
+        CGFloat right           = field.origin.x + field.size.width;
+        CGFloat bottom          = field.origin.y;
+        CGFloat top             = field.origin.y + field.size.height;
+        
+        // Limit the camera center (in world coordinates) inside the field.
+        r                       = [cityLayer convertToWorldSpace:r];
+        CGPoint middle          = ccp(winSize.width / 2, winSize.height / 2);
+        CGPoint min             = ccpAdd(ccp(left, bottom), middle);
+        CGPoint max             = ccpSub(ccp(right, top), middle);
+        
+        if(horizontal)
+            r                   = ccp(fmaxf(fminf(r.x, max.x), min.x),
+                                      fmaxf(fminf(r.y, max.y), min.y));
+        else {
+            r.x                 = middle.x;
+            if(r.y < middle.y * 2 * 0.8f)
+                r.y             = middle.y;
+        }
+        
+        // Start a new scroll with an updated destination point.
+        pos                     = ccpSub(ccp(self.contentSize.width / 2,
+                                             self.contentSize.height / 2),
+                                         [self.parent convertToNodeSpace:r]);
+
+        // Restore position.
+        self.position = savePosition;
     }
     
     // Stop the current scroll.
@@ -187,10 +198,6 @@
     if(scrollAction)
         [self stopAction: scrollAction];
     [scrollAction release];
-    
-    // Start a new scroll with an updated destination point.
-    CGPoint posInCitySpace = ccpSub(halfO, r);
-    CGPoint pos = ccp(posInCitySpace.x * self.scale, posInCitySpace.y * self.scale);
     
     // Scroll to current point should take initial duration minus what has already elapsed to scroll to approach previous points.
     if(scrollActionElapsed < [GorillasConfig get].gameScrollDuration)
