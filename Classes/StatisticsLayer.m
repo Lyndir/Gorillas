@@ -146,7 +146,6 @@
         scoreHeight                 *= (contentSize.height - padGraph * 2);
         
         scorePoints[s]              = ccp(x, scoreHeight + padGraph);
-        NSLog(@"point %d at %f, %f - padGraph: %f, step: %f, scoreHeight: %f, scoreCount: %d", s, scorePoints[s].x, scorePoints[s].y, padGraph, step, scoreHeight, scoreCount);
         scoreColors[s].r            = (float)0xff * s / (scoreCount - 1);
         scoreColors[s].g            = 0xff - (float)0xff * s / (scoreCount - 1);
         scoreColors[s].b            = 0x99;
