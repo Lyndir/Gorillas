@@ -60,7 +60,7 @@
                                              selector:@selector(back:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
-    backMenu = [[Menu menuWithItems:back, nil] retain];
+    Menu *backMenu = [Menu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
@@ -96,9 +96,6 @@
 
 
 -(void) dealloc {
-    
-    [backMenu release];
-    backMenu = nil;
     
     [super dealloc];
 }

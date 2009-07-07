@@ -27,8 +27,7 @@
 
 
 @interface ConfigurationSectionLayer : ShadeLayer <Resettable> {
-    
-    Menu *menu, *backMenu;
+
 }
 
 @end

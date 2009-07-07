@@ -89,7 +89,7 @@
 
 @implementation GorillasConfig
 
-@synthesize modes;
+@synthesize modes, modeStrings, gameConfigurations;
 
 
 #pragma mark Internal
@@ -159,6 +159,20 @@
                            NSLocalizedString(@"config.message.hit.3", @"%1$@ buried %2$@."),
                            NSLocalizedString(@"config.message.hit.4", @"%1$@ incinerated %2$@."),
                            nil];
+    
+    modeStrings         = [[NSDictionary alloc] initWithObjectsAndKeys:
+                           NSLocalizedString(@"config.gametype.bootcamp", @"Boot Camp"),
+                           [NSNumber numberWithUnsignedInt:GorillasModeBootCamp],
+                           NSLocalizedString(@"config.gametype.classic", @"Classic Game"),
+                           [NSNumber numberWithUnsignedInt:GorillasModeClassic],
+                           NSLocalizedString(@"config.gametype.dynamic", @"Dynamic Game"),
+                           [NSNumber numberWithUnsignedInt:GorillasModeDynamic],
+                           NSLocalizedString(@"config.gametype.team", @"Teamed Game"),
+                           [NSNumber numberWithUnsignedInt:GorillasModeTeam],
+                           NSLocalizedString(@"config.gametype.lms", @"Last Man Standing"),
+                           [NSNumber numberWithUnsignedInt:GorillasModeLMS],
+                           nil
+                           ];
     
     NSDictionary *themes = [CityTheme getThemes];
     NSString *defaultThemeName = [CityTheme defaultThemeName];
@@ -690,27 +704,13 @@
     [[[GorillasAppDelegate get] customGameLayer] reset];
 }
 -(NSString *) modeString {
+
+    NSString *string = [modeStrings objectForKey:[NSNumber numberWithUnsignedInt:self.mode]];
+    if (string == nil)
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"Unsupported game mode." userInfo:nil];
     
-    switch ([self mode]) {
-        case GorillasModeBootCamp:
-            return NSLocalizedString(@"config.gametype.bootcamp", @"Boot Camp");
-            
-        case GorillasModeClassic:
-            return NSLocalizedString(@"config.gametype.classic", @"Classic Game");
-            
-        case GorillasModeDynamic:
-            return NSLocalizedString(@"config.gametype.dynamic", @"Dynamic Game");
-            
-        case GorillasModeTeam:
-            return NSLocalizedString(@"config.gametype.team", @"Teamed Game");
-            
-        case GorillasModeLMS:
-            return NSLocalizedString(@"config.gametype.lms", @"Last Man Standing");
-            
-        default:
-            @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                           reason:@"Unsupported game mode." userInfo:nil];
-    }
+    return string;
 }
 -(int) missScore {
     

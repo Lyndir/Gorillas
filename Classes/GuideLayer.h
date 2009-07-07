@@ -27,7 +27,6 @@
 
 @interface GuideLayer : ShadeLayer {
 
-    Menu *chapterMenu, *backMenu, *nextMenu;
     MenuItemFont *chapterCurr, *chapterNext, *chapterSkip;
     
     SwipeLayer *swipeLayer;

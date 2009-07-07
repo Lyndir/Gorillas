@@ -43,7 +43,7 @@
     [themeT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    themeI    = [MenuItemToggle itemWithTarget:self selector:@selector(cityTheme:)];
+    themeI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(cityTheme:)];
     NSMutableArray *themeMenuItems = [NSMutableArray arrayWithCapacity:[[CityTheme getThemes] count]];
     for (NSString *themeName in [[CityTheme getThemes] allKeys])
         [themeMenuItems addObject:[MenuItemFont itemFromString:themeName]];
@@ -58,8 +58,8 @@
     [gravityT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    gravityI  = [MenuItemFont itemFromString:[NSString stringWithFormat:@"%d", [GorillasConfig get].gravity]
-                                      target:self selector:@selector(gravity:)];
+    gravityI  = [[MenuItemFont alloc] initFromString:[NSString stringWithFormat:@"%d", [GorillasConfig get].gravity]
+                                              target:self selector:@selector(gravity:)];
 
     
     // Difficulity Level.
@@ -69,7 +69,7 @@
     [levelT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    levelI    = [MenuItemToggle itemWithTarget:self selector:@selector(level:)];
+    levelI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(level:)];
     NSMutableArray *levelMenuItems = [NSMutableArray arrayWithCapacity:[[CityTheme getThemes] count]];
     for (NSString *levelName in [GorillasConfig get].levelNames)
         [levelMenuItems addObject:[MenuItemFont itemFromString:levelName]];
@@ -84,10 +84,10 @@
     [replayT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    replayI  = [MenuItemToggle itemWithTarget:self selector:@selector(replay:) items:
+    replayI  = [[MenuItemToggle itemWithTarget:self selector:@selector(replay:) items:
                 [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
                 [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
-                nil];
+                nil] retain];
     
     
     // Follow Throw.
@@ -97,13 +97,13 @@
     [followT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    followI  = [MenuItemToggle itemWithTarget:self selector:@selector(followThrow:) items:
+    followI  = [[MenuItemToggle itemWithTarget:self selector:@selector(followThrow:) items:
                 [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
                 [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
-                nil];
+                nil] retain];
     
     
-    menu = [[Menu menuWithItems:themeT, themeI, gravityT, levelT, gravityI, levelI, replayT, followT, replayI, followI, nil] retain];
+    Menu *menu = [Menu menuWithItems:themeT, themeI, gravityT, levelT, gravityI, levelI, replayT, followT, replayI, followI, nil];
     [menu alignItemsInColumns:
      [NSNumber numberWithUnsignedInteger:1],
      [NSNumber numberWithUnsignedInteger:1],
@@ -122,7 +122,7 @@
                                              selector:@selector(back:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
-    backMenu = [[Menu menuWithItems:back, nil] retain];
+    Menu *backMenu = [Menu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
@@ -215,12 +215,6 @@
 
 
 -(void) dealloc {
-    
-    [menu release];
-    menu = nil;
-    
-    [backMenu release];
-    backMenu = nil;
     
     [super dealloc];
 }

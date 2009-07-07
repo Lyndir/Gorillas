@@ -26,7 +26,6 @@
 
 @interface FullGameLayer : ShadeLayer {
 
-    Menu *backMenu;
 }
 
 @end

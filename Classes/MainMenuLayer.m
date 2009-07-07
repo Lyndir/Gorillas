@@ -35,6 +35,17 @@
     if(!(self = [super init]))
         return self;
     
+    info                = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.information", @"Information")
+                                                        target:self selector:@selector(information:)];
+    config              = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.configuration", @"Configuration")
+                                                        target:self selector:@selector(options:)];
+    continueGame        = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.continue.unpause", @"Continue Game")
+                                                        target:self selector:@selector(continueGame:)];
+    stopGame            = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.end", @"End Game")
+                                                        target:self selector:@selector(stopGame:)];
+    newGame             = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.new", @"New Game")
+                                                        target:self selector:@selector(newGame:)];
+
     return self;
 }
 
@@ -49,36 +60,23 @@
 
 -(void) reset {
 
+#ifdef LITE
+    config.isEnabled    = NO;
+#endif
     if(menu) {
         [menu removeAllChildrenWithCleanup:YES];
         [self removeChild:menu cleanup:YES];
         [menu release];
         menu = nil;
     }
-
-    MenuItemFont *info              = [MenuItemFont itemFromString:NSLocalizedString(@"entries.information", @"Information")
-                                                            target:self selector:@selector(information:)];
-    MenuItemFont *config            = [MenuItemFont itemFromString:NSLocalizedString(@"entries.configuration", @"Configuration")
-                                                            target:self selector:@selector(options:)];
-#ifdef LITE
-    [config setIsEnabled:NO];
-#endif
     
-    if([[[GorillasAppDelegate get] gameLayer] checkGameStillOn]) {
-        MenuItemFont *continueGame  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.continue.unpause", @"Continue Game")
-                                                            target:self selector:@selector(continueGame:)];
-        MenuItemFont *stopGame      = [MenuItemFont itemFromString:NSLocalizedString(@"entries.end", @"End Game")
-                                                            target:self selector:@selector(stopGame:)];
-        
+    if([[GorillasAppDelegate get].gameLayer checkGameStillOn]) {
         menu = [[Menu menuWithItems:
                  continueGame, stopGame, [MenuItemSpacer small],
                  info, config,
                  nil] retain];
     }
     else {
-        MenuItemFont *newGame       = [MenuItemFont itemFromString:NSLocalizedString(@"entries.new", @"New Game")
-                                                            target:self selector:@selector(newGame:)];
-        
         menu = [[Menu menuWithItems:
                  newGame, [MenuItemSpacer small],
                  info, config,
@@ -105,14 +103,14 @@
 -(void) continueGame: (id)sender {
     
     [[GorillasAudioController get] clickEffect];
-    [[[GorillasAppDelegate get] gameLayer] setPaused:NO];
+    [[GorillasAppDelegate get].gameLayer setPaused:NO];
 }
 
 
 -(void) stopGame: (id)sender {
     
     [[GorillasAudioController get] clickEffect];
-    [[[GorillasAppDelegate get] gameLayer] stopGame];
+    [[GorillasAppDelegate get].gameLayer stopGame];
 }
 
 

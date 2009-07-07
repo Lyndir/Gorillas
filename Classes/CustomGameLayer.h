@@ -28,7 +28,8 @@
 
 @interface CustomGameLayer : ShadeLayer <Resettable> {
     
-    Menu *menu, *backMenu;
+    MenuItemToggle      *humansI, *aisI, *gameModeI;
+    MenuItem            *startGameI;
     
     NSUInteger humans, ais;
 }

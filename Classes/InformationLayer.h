@@ -26,7 +26,6 @@
 
 @interface InformationLayer : ShadeLayer {
 
-    Menu *menu, *backMenu;
 }
 
 -(void) guide: (id)sender;

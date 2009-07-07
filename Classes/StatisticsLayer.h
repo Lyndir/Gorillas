@@ -28,8 +28,6 @@
 
 @interface StatisticsLayer : ShadeLayer <Resettable> {
     
-    Menu                *menu;
-    
     NSUInteger          scoreCount;
     CGPoint             *scorePoints;
     ccColor4B           *scoreColors;

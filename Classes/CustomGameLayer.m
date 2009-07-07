@@ -38,53 +38,6 @@
     humans = 1;
     ais = 1;
     
-    return self;
-}
-
-
--(void) reset {
-    
-    if(menu) {
-        [self removeChild:menu cleanup:YES];
-        [menu release];
-        menu = nil;
-        
-        [self removeChild:backMenu cleanup:YES];
-        [backMenu release];
-        backMenu = nil;
-    }
-    
-    NSString *humansIString;
-    switch (humans) {
-        case 0:
-            humansIString = NSLocalizedString(@"entries.player.count.0", @"None");
-            break;
-        case 1:
-            humansIString = NSLocalizedString(@"entries.player.count.1", @"1 Player");
-            break;
-        case 2:
-            humansIString = NSLocalizedString(@"entries.player.count.2", @"2 Players");
-            break;
-        default:
-            humansIString = NSLocalizedString(@"entries.player.count.3+", @"%d Player");
-            break;
-    }
-    NSString *aisIString;
-    switch (ais) {
-        case 0:
-            aisIString = NSLocalizedString(@"entries.ai.count.0", @"None");
-            break;
-        case 1:
-            aisIString = NSLocalizedString(@"entries.ai.count.1", @"1 Player");
-            break;
-        case 2:
-            aisIString = NSLocalizedString(@"entries.ai.count.2", @"2 Players");
-            break;
-        default:
-            aisIString = NSLocalizedString(@"entries.ai.count.3+", @"%d Player");
-            break;
-    }
-
     // Humans.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
@@ -92,9 +45,14 @@
     [humansT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *humansI  = [MenuItemFont itemFromString:[NSString stringWithFormat:humansIString, humans]
-                                                   target:self
-                                                 selector:@selector(humans:)];
+    humansI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(humans:)];
+    NSMutableArray *humanMenuItems = [NSMutableArray arrayWithCapacity:4];
+    [humanMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.0", @"None")]];
+    [humanMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.1", @"1 Player")]];
+    [humanMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.2", @"2 Players")]];
+    [humanMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.3+", @"%d Player")]];
+    humansI.subItems = humanMenuItems;
+    [humansI setSelectedIndex:1];
     
     
     // Game Mode.
@@ -104,42 +62,44 @@
     [gameModeT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *gameModeI    = [MenuItemFont itemFromString:[[GorillasConfig get] modeString]
-                                                   target:self
-                                                 selector:@selector(gameMode:)];
+    gameModeI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(gameMode:)];
+    NSMutableArray *modeMenuItems = [NSMutableArray arrayWithCapacity:4];
+    for (NSString *modeString in [[GorillasConfig get].modeStrings allValues])
+        [modeMenuItems addObject:[MenuItemFont itemFromString:modeString]];
+    gameModeI.subItems = modeMenuItems;
+    [gameModeI setSelectedIndex:1];
     
     
-    // Throw History.
+    // AIs.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
     MenuItem *aisT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.select.ais", @"AIs")];
     [aisT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *aisI  = [MenuItemFont itemFromString:[NSString stringWithFormat:aisIString, ais]
-                                                     target:self
-                                                   selector:@selector(ais:)];
+    aisI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(ais:)];
+    NSMutableArray *aiMenuItems = [NSMutableArray arrayWithCapacity:4];
+    [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.0", @"None")]];
+    [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.1", @"1 Player")]];
+    [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.2", @"2 Players")]];
+    [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.3+", @"%d Player")]];
+    aisI.subItems = aiMenuItems;
+    [aisI setSelectedIndex:1];
     
     
     // Start Game.
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *startGameI  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.start", @"Start!")
-                                            target:self
-                                          selector:@selector(startGame:)];
+    startGameI  = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.start", @"Start!")
+                                                target:self
+                                              selector:@selector(startGame:)];
 
-    // Disable start button when less than 2 gorillas chosen
-    // or when multiple humans are chosen for Dynamic mode.
-    [startGameI setIsEnabled:humans + ais > 1];
-    if([[GorillasConfig get] mode] == GorillasModeDynamic && humans > 1)
-        [startGameI setIsEnabled:NO];
     
-    
-    menu = [[Menu menuWithItems:
-             humansT, aisT, humansI, aisI,
-             gameModeT, gameModeI, [MenuItemSpacer small],
-             startGameI,
-             nil] retain];
+    Menu *menu = [Menu menuWithItems:
+                  humansT, aisT, humansI, aisI,
+                  gameModeT, gameModeI, [MenuItemSpacer small],
+                  startGameI,
+                  nil];
     [menu alignItemsInColumns:
      [NSNumber numberWithUnsignedInteger:2],
      [NSNumber numberWithUnsignedInteger:2],
@@ -158,10 +118,28 @@
                                              selector: @selector(back:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
-    backMenu = [[Menu menuWithItems:back, nil] retain];
+    Menu *backMenu = [Menu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
+
+    return self;
+}
+
+
+- (void)reset {
+
+    [humansI setSelectedIndex:(NSUInteger)fminf(humans, 3)];
+    [aisI setSelectedIndex:(NSUInteger)fminf(ais, 3)];
+    NSArray *modeKeys = [[GorillasConfig get].modeStrings allKeys];
+    NSNumber *modeObj = [NSNumber numberWithUnsignedInt:[GorillasConfig get].mode];
+    [gameModeI setSelectedIndex:[modeKeys indexOfObject:modeObj]];
+    
+    // Disable start button when less than 2 gorillas chosen
+    // or when multiple humans are chosen for Dynamic mode.
+    startGameI.isEnabled        = humans + ais > 1;
+    if([GorillasConfig get].mode == GorillasModeDynamic && humans > 1)
+        startGameI.isEnabled    = NO;
 }
 
 
@@ -219,13 +197,7 @@
 
 
 -(void) dealloc {
-    
-    [menu release];
-    menu = nil;
-    
-    [backMenu release];
-    backMenu = nil;
-    
+
     [super dealloc];
 }
 

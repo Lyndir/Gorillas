@@ -74,7 +74,7 @@
                                              selector: @selector(back:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
-    backMenu = [[Menu menuWithItems:back, nil] retain];
+    Menu *backMenu = [Menu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
@@ -85,7 +85,8 @@
     [MenuItemFont setFontSize:26];
     chapterCurr = [[MenuItemFont itemFromString:@"                              "] retain];
     [chapterCurr setIsEnabled:NO];
-    chapterMenu = [[Menu menuWithItems:chapterCurr, chapterNext, chapterSkip, nil] retain];
+
+    Menu *chapterMenu = [Menu menuWithItems:chapterCurr, chapterNext, chapterSkip, nil];
     [chapterMenu alignItemsHorizontally];
     [chapterMenu setPosition:ccp([chapterMenu position].x, contentSize.height - padding + 10)];
     [self addChild:chapterMenu];
@@ -208,12 +209,6 @@
 
 
 -(void) dealloc {
-    
-    [backMenu release];
-    backMenu = nil;
-    
-    [nextMenu release];
-    nextMenu = nil;
     
     [currPageLabel release];
     currPageLabel = nil;

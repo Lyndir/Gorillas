@@ -75,7 +75,7 @@
     // Build the game scene.
 	gameLayer = [[GameLayer alloc] init];
     uiLayer = [[UILayer alloc] init];
-    DebugLayer *debugLayer = [[DebugLayer alloc] init];
+    DebugLayer *debugLayer = [DebugLayer node];
     [uiLayer addChild:debugLayer z:99];
     [uiLayer addChild:gameLayer];
 	

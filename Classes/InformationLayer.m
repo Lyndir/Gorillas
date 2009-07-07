@@ -55,7 +55,7 @@
                                  target:self selector:@selector(full:)];
 #endif
     
-    menu = [[Menu menuWithItems:ver, guide, stats, [MenuItemSpacer small], full, nil] retain];
+    Menu *menu = [Menu menuWithItems:ver, guide, stats, [MenuItemSpacer small], full, nil];
     [menu alignItemsVertically];
     [self addChild:menu];
 
@@ -67,7 +67,7 @@
                                              selector: @selector(back:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
-    backMenu = [[Menu menuWithItems:back, nil] retain];
+    Menu *backMenu = [Menu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
@@ -106,12 +106,6 @@
 
 
 -(void) dealloc {
-    
-    [menu release];
-    menu = nil;
-    
-    [backMenu release];
-    backMenu = nil;
     
     [super dealloc];
 }

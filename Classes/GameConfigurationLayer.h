@@ -28,8 +28,6 @@
 
 @interface GameConfigurationLayer : ShadeLayer <Resettable> {
     
-    Menu                    *menu, *backMenu;
-    
     MenuItemToggle          *themeI, *levelI, *replayI, *followI;
     MenuItemFont            *gravityI;
 }

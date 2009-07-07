@@ -29,17 +29,10 @@
 @implementation ConfigurationSectionLayer
 
 
--(void) reset {
+-(id) init {
     
-    if(menu) {
-        [self removeChild:menu cleanup:YES];
-        [menu release];
-        menu = nil;
-        
-        [self removeChild:backMenu cleanup:YES];
-        [backMenu release];
-        backMenu = nil;
-    }
+    if (!(self = [super init]))
+        return nil;
     
     // Section menus.
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
@@ -54,7 +47,7 @@
                                                 target:self
                                               selector:@selector(models:)];
     
-    menu = [[Menu menuWithItems:game, av, models, nil] retain];
+    Menu *menu = [Menu menuWithItems:game, av, models, nil];
     [menu alignItemsVertically];
     [self addChild:menu];
     
@@ -66,10 +59,16 @@
                                              selector: @selector(back:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
-    backMenu = [[Menu menuWithItems:back, nil] retain];
+    Menu *backMenu = [Menu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
+    
+    return self;
+}
+
+
+- (void)reset {
 }
 
 
@@ -110,13 +109,7 @@
 
 
 -(void) dealloc {
-    
-    [menu release];
-    menu = nil;
-    
-    [backMenu release];
-    backMenu = nil;
-    
+
     [super dealloc];
 }
 

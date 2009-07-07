@@ -35,15 +35,15 @@
     if(!(self = [super init]))
         return self;
     
-    continueGame    = [[MenuItemFont itemFromString:NSLocalizedString(@"entries.continue.nextmatch", @"Continue")
-                                             target:self selector:@selector(continueGame:)] retain];
-    stopGame        = [[MenuItemFont itemFromString:NSLocalizedString(@"entries.stop", @"Main Menu")
-                                             target:self selector:@selector(stopGame:)] retain];
+    MenuItem *continueGame      = [MenuItemFont itemFromString:NSLocalizedString(@"entries.continue.nextmatch", @"Continue")
+                                                        target:self selector:@selector(continueGame:)];
+    MenuItem *stopGame          = [MenuItemFont itemFromString:NSLocalizedString(@"entries.stop", @"Main Menu")
+                                                        target:self selector:@selector(stopGame:)];
     
-    menu            = [[Menu menuWithItems:
-                        continueGame, [MenuItemSpacer small],
-                        stopGame,
-                        nil] retain];
+    Menu *menu                  = [Menu menuWithItems:
+                                   continueGame, [MenuItemSpacer small],
+                                   stopGame,
+                                   nil];
     [menu alignItemsVertically];
     [self addChild:menu];
 
@@ -66,15 +66,6 @@
 
 
 -(void) dealloc {
-    
-    [menu release];
-    menu = nil;
-    
-    [continueGame release];
-    continueGame = nil;
-    
-    [stopGame release];
-    stopGame = nil;
     
     [super dealloc];
 }

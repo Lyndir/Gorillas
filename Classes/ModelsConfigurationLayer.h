@@ -28,7 +28,6 @@
 
 @interface ModelsConfigurationLayer : ShadeLayer {
 
-    Menu *modelMenu, *backMenu, *nextMenu;
     MenuItemFont *modelCurr, *modelNext;
     
     SwipeLayer *swipeLayer;

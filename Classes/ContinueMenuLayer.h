@@ -26,10 +26,6 @@
 
 @interface ContinueMenuLayer : ShadeLayer {
 
-    Menu *menu;
-    
-    MenuItem *continueGame;
-    MenuItem *stopGame;
 }
 
 -(void) continueGame: (id)sender;

@@ -30,17 +30,10 @@
 @implementation NewGameLayer
 
 
--(void) reset {
+- (id) init {
     
-    if(menu) {
-        [self removeChild:menu cleanup:YES];
-        [menu release];
-        menu = nil;
-        
-        [self removeChild:backMenu cleanup:YES];
-        [backMenu release];
-        backMenu = nil;
-    }
+    if (!(self = [super init]))
+        return nil;
     
     
     // Game Configuration.
@@ -50,40 +43,42 @@
     [styleT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *configurationI    = [MenuItemFont itemFromString:[[GorillasConfig get] gameConfiguration].name
-                                                   target:self
-                                                 selector:@selector(gameConfiguration:)];
+    configurationI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(gameConfiguration:)];
+    NSMutableArray * configurationMenuItems = [NSMutableArray arrayWithCapacity:4];
+    for (GameConfiguration *configuration in [GorillasConfig get].gameConfigurations)
+        [configurationMenuItems addObject:[MenuItemFont itemFromString:configuration.name]];
+    configurationI.subItems = configurationMenuItems;
+    [configurationI setSelectedIndex:1];
+    
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
-    MenuItem *descriptionT    = [MenuItemFont itemFromString:[[GorillasConfig get] gameConfiguration].description];
-    [descriptionT setIsEnabled:NO];
+    descriptionT    = [[MenuItemFont alloc] initFromString:@"description" target:nil selector:nil];
+    descriptionT.isEnabled = NO;
     
     
     // Type (Single / Multi).
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *singlePlayerI    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.player.single", @"Single Player")
-                                                    target:self
-                                                  selector:@selector(startSingle:)];
-    [singlePlayerI setIsEnabled:[[GorillasConfig get] gameConfiguration].sHumans + [[GorillasConfig get] gameConfiguration].sAis > 0];
+    singlePlayerI    = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.player.single", @"Single Player")
+                                                       target:self
+                                                     selector:@selector(startSingle:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    MenuItem *multiPlayerI    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.player.multi", @"Multi Player")
-                                                       target:self
-                                                     selector:@selector(startMulti:)];
-    [multiPlayerI setIsEnabled:[[GorillasConfig get] gameConfiguration].mHumans + [[GorillasConfig get] gameConfiguration].mAis > 0];
+    multiPlayerI    = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.player.multi", @"Multi Player")
+                                                      target:self
+                                                    selector:@selector(startMulti:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
     MenuItem *customI    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.custom", @"Custom Game...")
-                                                      target:self
-                                                    selector:@selector(custom:)];
+                                                 target:self
+                                               selector:@selector(custom:)];
     
     
-    menu = [[Menu menuWithItems:
-             styleT, configurationI, descriptionT, [MenuItemSpacer small],
-             singlePlayerI, multiPlayerI, [MenuItemSpacer small],
-             customI,
-             nil] retain];
+    Menu *menu = [Menu menuWithItems:
+                  styleT, configurationI, descriptionT, [MenuItemSpacer small],
+                  singlePlayerI, multiPlayerI, [MenuItemSpacer small],
+                  customI,
+                  nil];
     [menu alignItemsVertically];
     [self addChild:menu];
     
@@ -95,10 +90,21 @@
                                              selector: @selector(back:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
-    backMenu = [[Menu menuWithItems:back, nil] retain];
+    Menu *backMenu = [Menu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
+    
+    return self;
+}
+
+
+- (void)reset {
+    
+    [configurationI setSelectedIndex:[[GorillasConfig get].gameConfigurations indexOfObject:[GorillasConfig get].gameConfiguration]];
+    [descriptionT setString:[GorillasConfig get].gameConfiguration.description];
+    singlePlayerI.isEnabled = [GorillasConfig get].gameConfiguration.sHumans + [GorillasConfig get].gameConfiguration.sAis > 0;
+    multiPlayerI.isEnabled = [GorillasConfig get].gameConfiguration.mHumans + [GorillasConfig get].gameConfiguration.mAis > 0;
 }
 
 
@@ -113,7 +119,7 @@
 -(void) gameConfiguration:(id) sender {
     
     [[GorillasAudioController get] clickEffect];
-
+    
     ++[GorillasConfig get].activeGameConfigurationIndex;
 }
 
@@ -155,12 +161,6 @@
 
 
 -(void) dealloc {
-    
-    [menu release];
-    menu = nil;
-    
-    [backMenu release];
-    backMenu = nil;
     
     [super dealloc];
 }

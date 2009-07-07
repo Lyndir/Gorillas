@@ -55,7 +55,7 @@
                                              selector: @selector(back:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
-    backMenu = [[Menu menuWithItems:back, nil] retain];
+    Menu *backMenu = [Menu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
@@ -65,7 +65,7 @@
     [MenuItemFont setFontSize:26];
     modelCurr = [[MenuItemFont itemFromString:@"                              "] retain];
     [modelCurr setIsEnabled:NO];
-    modelMenu = [[Menu menuWithItems:modelCurr, modelNext, nil] retain];
+    Menu *modelMenu = [Menu menuWithItems:modelCurr, modelNext, nil];
     [modelMenu alignItemsHorizontally];
     [modelMenu setPosition:ccp(modelMenu.position.x, contentSize.height - padding + 10)];
     [self addChild:modelMenu];
@@ -157,12 +157,6 @@
 
 
 -(void) dealloc {
-    
-    [backMenu release];
-    backMenu = nil;
-    
-    [nextMenu release];
-    nextMenu = nil;
     
     [modelSprites release];
     modelSprites = nil;

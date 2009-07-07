@@ -43,7 +43,7 @@
     [audioT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    audioI    = [MenuItemToggle itemWithTarget:self selector:@selector(audioTrack:)];
+    audioI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(audioTrack:)];
     NSMutableArray *trackMenuItems = [NSMutableArray arrayWithCapacity:[[GorillasConfig get].trackNames count]];
     for (NSString *trackName in [GorillasConfig get].trackNames)
         [trackMenuItems addObject:[MenuItemFont itemFromString:trackName]];
@@ -58,10 +58,10 @@
     [soundFxT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    soundFxI = [MenuItemToggle itemWithTarget:self selector:@selector(soundFx:) items:
+    soundFxI = [[MenuItemToggle itemWithTarget:self selector:@selector(soundFx:) items:
                 [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
                 [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
-                nil];
+                nil] retain];
     
     // Voice.
     [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
@@ -70,10 +70,10 @@
     [voiceT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    voiceI = [MenuItemToggle itemWithTarget:self selector:@selector(voice:) items:
+    voiceI = [[MenuItemToggle itemWithTarget:self selector:@selector(voice:) items:
               [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
               [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
-              nil];
+              nil] retain];
     
     
     // Visual Effects.
@@ -83,10 +83,10 @@
     [visualFxT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    visualFxI = [MenuItemToggle itemWithTarget:self selector:@selector(visualFx:) items:
+    visualFxI = [[MenuItemToggle itemWithTarget:self selector:@selector(visualFx:) items:
                  [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
                  [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
-                 nil];
+                 nil] retain];
     
     
     // Vibration.
@@ -96,13 +96,13 @@
     [vibrationT setIsEnabled:NO];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    vibrationI = [MenuItemToggle itemWithTarget:self selector:@selector(vibration:) items:
+    vibrationI = [[MenuItemToggle itemWithTarget:self selector:@selector(vibration:) items:
                   [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
                   [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
-                  nil];
+                  nil] retain];
     
     
-    menu = [[Menu menuWithItems:audioT, audioI, soundFxT, voiceT, soundFxI, voiceI, visualFxT, vibrationT, visualFxI, vibrationI, nil] retain];
+    Menu *menu = [Menu menuWithItems:audioT, audioI, soundFxT, voiceT, soundFxI, voiceI, visualFxT, vibrationT, visualFxI, vibrationI, nil];
     [menu alignItemsInColumns:
      [NSNumber numberWithUnsignedInteger:1],
      [NSNumber numberWithUnsignedInteger:1],
@@ -121,7 +121,7 @@
                                              selector: @selector(back:)];
     [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
     
-    backMenu = [[Menu menuWithItems:back, nil] retain];
+    Menu *backMenu = [Menu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
@@ -213,12 +213,6 @@
 
 
 -(void) dealloc {
-    
-    [menu release];
-    menu = nil;
-    
-    [backMenu release];
-    backMenu = nil;
     
     [super dealloc];
 }

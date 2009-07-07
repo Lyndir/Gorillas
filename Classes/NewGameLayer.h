@@ -29,7 +29,8 @@
 
 @interface NewGameLayer : ShadeLayer <Resettable> {
     
-    Menu                *menu, *backMenu;
+    MenuItemToggle      *configurationI;
+    MenuItemLabel       *descriptionT, *multiPlayerI, *singlePlayerI;
 }
 
 @end
