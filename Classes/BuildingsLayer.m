@@ -226,7 +226,10 @@
     
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
-    
+
+    // Drawing Front Side.
+    glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
+
     // == DRAW BUILDING ==
     // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
     glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
@@ -234,7 +237,6 @@
     glVertexPointer(2, GL_FLOAT, sizeof(BuildingVertex), 0);
     glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(BuildingVertex), (GLvoid *) sizeof(CGPoint));
 
-    glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
     glDrawElements(GL_TRIANGLES, buildingCount * 6, GL_UNSIGNED_SHORT, 0);
     //drawBoxFrom(CGPointZero, ccp(contentSize.width, contentSize.height), buildingColor, buildingColor);
     
@@ -247,25 +249,28 @@
     
     // = DRAW FRONT WINDOWS =
     // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
-    glBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
     glDrawElements(GL_TRIANGLES, windowCount * 6, GL_UNSIGNED_SHORT, 0);
-    
-    // = DRAW REAR WINDOWS =
-    // Set opacity of DST to 1 where there are windows -> building back won't draw over it.
-    glBlendFunc(GL_ONE, GL_ZERO);
-    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
-    glDrawElements(GL_TRIANGLES, windowCount * 6, GL_UNSIGNED_SHORT, 0);
-    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-    
-    // == DRAW BUILDING BACK ==
-    // Draw back of building where DST opacity is < 1.
-    glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer);
-    glVertexPointer(2, GL_FLOAT, sizeof(BuildingVertex), 0);
-    glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(BuildingVertex), (GLvoid *) sizeof(Vertex));
-    
-    glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA);
-    glDrawElements(GL_TRIANGLES, buildingCount * 6, GL_UNSIGNED_SHORT, 0);
+
+    // Drawing Rear Side.
+    if ([GorillasConfig get].visualFx) {
+        glBlendFunc(GL_ONE, GL_ZERO);
+        
+        // = DRAW REAR WINDOWS =
+        // Set opacity of DST to 1 where there are windows -> building back won't draw over it.
+        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
+        glDrawElements(GL_TRIANGLES, windowCount * 6, GL_UNSIGNED_SHORT, 0);
+        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        
+        // == DRAW BUILDING BACK ==
+        // Draw back of building where DST opacity is < 1.
+        glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer);
+        glVertexPointer(2, GL_FLOAT, sizeof(BuildingVertex), 0);
+        glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(BuildingVertex), (GLvoid *) sizeof(Vertex));
+        
+        glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA);
+        glDrawElements(GL_TRIANGLES, buildingCount * 6, GL_UNSIGNED_SHORT, 0);
+    }
     
     // Turn off state.
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

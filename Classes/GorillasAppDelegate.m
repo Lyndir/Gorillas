@@ -185,7 +185,7 @@
     [menuLayers addObject:layer];
     [uiLayer addChild:layer];
 
-    [gameLayer.panningLayer scaleTo:0.2f];
+    [gameLayer.panningLayer scaleTo:0.5f];
 }
 
 

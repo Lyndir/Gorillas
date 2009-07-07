@@ -788,7 +788,7 @@
 
     CGPoint bottomLeft = [buildings convertToWorldSpace:CGPointMake(firstBuilding.x, 0)];
     CGPoint topRight = [buildings convertToWorldSpace:CGPointMake(lastBuilding.x + lastBuilding.size.width,
-                                                                  [Director sharedDirector].winSize.height * 1.5f)];
+                                                                  [Director sharedDirector].winSize.height * 2.0f)];
     bottomLeft = [node convertToNodeSpace:bottomLeft];
     topRight = [node convertToNodeSpace:topRight];
     

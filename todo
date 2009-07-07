@@ -40,7 +40,8 @@
  v  Crappy performance.
  v  Hide vibration on iPod touch.
  v  Fix autoscale when field is flipped.
- .  Consolidate some glBlends in BuildingsLayer.
+ v  Consolidate some glBlends in BuildingsLayer.
+ .  Fix statistics.
 
 Refact
  v  Make sure aim is used as a property.
@@ -51,4 +52,4 @@ Refact
  v  Optimize Skylayer star rendering by combining.
  v  Memory issues (esp. when switching city themes).
  v  Merge buildings into one like was done with stars.
- .  Re-enable building panning.
+ x  Re-enable building panning.
