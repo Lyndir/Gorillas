@@ -282,10 +282,19 @@ static NSUInteger _teamIndex, _globalIndex;
 
 -(void) setActive:(BOOL)_active {
     
+    if (!active && _active)
+        [self applyZoom];
+    
     active = _active;
     
     [bobber setVisible:active];
     [[GorillasAppDelegate get].hudLayer updateHudWithScore:0 skill:0];
+}
+
+
+- (void) applyZoom {
+
+    [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:self.zoom limited:YES];
 }
 
 
@@ -333,13 +342,13 @@ static NSUInteger _teamIndex, _globalIndex;
     GLubyte o = active? 0xFF: 0x33;
     
     if ([GorillasConfig get].visualFx) {
-        drawBoxFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[1], ccp(0, 3)), ccc(0xCCFFCC00 | o), ccc(0x33CC3300 | o));
-        drawBoxFrom(ccpAdd(lines[2], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc(0xFFCCCC00 | o), ccc(0xCC333300 | o));
+        DrawBoxFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[1], ccp(0, 3)), ccc(0xCCFFCC00 | o), ccc(0x33CC3300 | o));
+        DrawBoxFrom(ccpAdd(lines[2], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc(0xFFCCCC00 | o), ccc(0xCC333300 | o));
     }
     else
-        drawLines(lines, healthColors, 4, 6);
+        DrawLines(lines, healthColors, 4, 6);
     
-    drawBorderFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc(0xCCCC3300 | (o - 0x33)), 1);
+    DrawBorderFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc(0xCCCC3300 | (o - 0x33)), 1);
 }
 
 

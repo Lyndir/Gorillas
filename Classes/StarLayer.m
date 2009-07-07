@@ -23,12 +23,11 @@
 //
 
 #import "StarLayer.h"
+#import "GorillasAppDelegate.h"
 #define maxStarSize 2
 
 
 @implementation StarLayer
-
-@synthesize contentSize;
 
 
 -(id) initWidthDepth:(float)aDepth {
@@ -40,11 +39,17 @@
     starCount           = -1;
     depth               = aDepth;
     
+    return self;
+}
+
+
+- (void)onEnter {
+    
     [self reset];
     
     [self schedule:@selector(update:)];
-    
-    return self;
+
+    [super onEnter];
 }
 
 
@@ -52,23 +57,23 @@
     
     if (starCount == [GorillasConfig get].starAmount)
         return;
-    
-    CGSize winSize = [Director sharedDirector].winSize;
-    contentSize = CGSizeMake(winSize.width * 2, winSize.height * 2);
-    CGFloat startX = winSize.width / 2 - contentSize.width / 2;
-    starCount = [GorillasConfig get].starAmount;
+
+    CGRect field        = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self];
+    starCount           = [GorillasConfig get].starAmount;
+    ccColor4B starColor = ccc([GorillasConfig get].starColor);
+    starColor.r         *= depth;
+    starColor.g         *= depth;
+    starColor.b         *= depth;
+    CGFloat starSize    = fmaxf(1.0f, maxStarSize * depth);
     
     free(starVertices);
     starVertices = malloc(sizeof(glPoint) * starCount);
     
     for (NSUInteger s = 0; s < starCount; ++s) {
-        starVertices[s].p   = ccp(random() % (long) contentSize.width + startX,
-                                  random() % (long) contentSize.height);
-        starVertices[s].c   = ccc([GorillasConfig get].starColor);
-        starVertices[s].c.r *= depth;
-        starVertices[s].c.g *= depth;
-        starVertices[s].c.b *= depth;
-        starVertices[s].s   = fmaxf(1.0f, maxStarSize * depth);
+        starVertices[s].p   = ccp(random() % (long) field.size.width + field.origin.x,
+                                  random() % (long) field.size.height + field.origin.y);
+        starVertices[s].c   = starColor;
+        starVertices[s].s   = starSize;
     }
     
     // Push our window data into the VBO.
@@ -82,13 +87,12 @@
 
 -(void) update:(ccTime)dt {
 
-    CGSize winSize = [[Director sharedDirector] winSize];
-    CGFloat startX = winSize.width / 2 - contentSize.width / 2;
-    int speed = [GorillasConfig get].starSpeed;
+    CGRect field        = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self];
+    NSInteger speed     = [GorillasConfig get].starSpeed;
     
     for (NSUInteger s = 0; s < starCount; ++s)
-        if (starVertices[s].p.x < startX)
-            starVertices[s].p.x = contentSize.width + startX
+        if (starVertices[s].p.x < field.origin.x)
+            starVertices[s].p.x = field.size.width + field.origin.x
                                 - ((int)(10000 * speed * dt) % random()) / 10000.0f;
         else
             starVertices[s].p.x -= dt * speed;

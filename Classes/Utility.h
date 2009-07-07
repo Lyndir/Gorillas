@@ -58,19 +58,23 @@ ivcf(const CGFloat x, const CGFloat y, const long c)
 }
 
 
-NSString* rpad(const NSString* string, NSUInteger l);
-NSString* lpad(const NSString* string, NSUInteger l);
-NSString* appendOrdinalPrefix(const NSInteger number, const NSString* prefix);
+NSString* RPad(const NSString* string, NSUInteger l);
+NSString* LPad(const NSString* string, NSUInteger l);
+NSString* AppendOrdinalPrefix(const NSInteger number, const NSString* prefix);
 
 BOOL IsIPod();
 BOOL IsIPhone();
 BOOL IsSimulator();
 
-void drawPointsAt(const CGPoint* points, const NSUInteger count, const ccColor4B color);
+void IndicateInSpaceOf(CGPoint point, CocosNode *node);
+void DrawIndicators();
 
-void drawLinesTo(const CGPoint from, const CGPoint* to, const NSUInteger count, const ccColor4B color, const CGFloat width);
-void drawLines(const CGPoint* points, const ccColor4B* colors, const NSUInteger n, const CGFloat width);
+void DrawPointsAt(const CGPoint* points, const NSUInteger count, const ccColor4B color);
+void DrawPoints(const CGPoint* points, const ccColor4B* colors, const NSUInteger n);
 
-void drawBoxFrom(const CGPoint from, const CGPoint to, const ccColor4B fromColor, const ccColor4B toColor);
+void DrawLinesTo(const CGPoint from, const CGPoint* to, const NSUInteger count, const ccColor4B color, const CGFloat width);
+void DrawLines(const CGPoint* points, const ccColor4B* colors, const NSUInteger n, const CGFloat width);
 
-void drawBorderFrom(const CGPoint from, const CGPoint to, const ccColor4B color, const CGFloat width);
+void DrawBoxFrom(const CGPoint from, const CGPoint to, const ccColor4B fromColor, const ccColor4B toColor);
+
+void DrawBorderFrom(const CGPoint from, const CGPoint to, const ccColor4B color, const CGFloat width);

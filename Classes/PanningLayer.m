@@ -24,6 +24,7 @@
 
 #import "PanningLayer.h"
 #import "GorillasAppDelegate.h"
+#import "Utility.h"
 
 
 @implementation PanningLayer
@@ -34,8 +35,10 @@
     if (!(self = [super init]))
 		return self;
     
-    isTouchEnabled  = YES;
-    initialDist    = -1;
+    self.anchorPoint    = ccp(0.5f, 0.0f);
+    
+    isTouchEnabled      = YES;
+    initialDist         = -1;
     
     return self;
 }
@@ -43,13 +46,13 @@
 
 -(void) reset {
 
-    if ([self scale] != 1) {
+    if (self.scale != 1) {
         if (scaleAction) {
             [self stopAction:scaleAction];
             [scaleAction release];
         }
         
-        [self runAction:scaleAction = [[ScaleTo alloc] initWithDuration:[[GorillasConfig get] transitionDuration]
+        [self runAction:scaleAction = [[ScaleTo alloc] initWithDuration:[GorillasConfig get].transitionDuration
                                                                   scale:1]];
     }
 }
@@ -66,7 +69,7 @@
     CGPoint pFrom = [from locationInView: [from view]];
     CGPoint pTo = [to locationInView: [to view]];
     
-    initialScale = [self scale];
+    initialScale = self.scale;
     initialDist = fabsf(pFrom.y - pTo.y);
     
     return kEventHandled;
@@ -149,28 +152,34 @@
 
 -(void) scrollToCenter:(CGPoint)r horizontal:(BOOL)horizontal {
     
-    CGSize winSize = [Director sharedDirector].winSize;
+    GameLayer *gameLayer = [GorillasAppDelegate get].gameLayer;
+    CityLayer *cityLayer = gameLayer.cityLayer;
     
     // Figure out where the buildings start and end.
     // Use that for camera limits, take scaling into account.
-    float min = [[GorillasAppDelegate get].gameLayer.cityLayer left];
-    float max = [[GorillasAppDelegate get].gameLayer.cityLayer right];
-    float top = winSize.height * 2;
-    CGFloat _scale = self.scale;
-    r = ccpMult(r, _scale);
-    min *= _scale;
-    max *= _scale;
-    top *= _scale;
+    CGRect field    = [cityLayer fieldInSpaceOf:cityLayer];
+    CGFloat left    = field.origin.x;
+    CGFloat right   = field.origin.x + field.size.width;
+    CGFloat top     = field.origin.y + field.size.height;
     
-    if(horizontal) {
-        r = ccp(fmaxf(fminf(r.x, max - winSize.width / 2), min + winSize.width / 2),
-                fmaxf(fminf(r.y, top - winSize.height / 2), winSize.height / 2));
-    }
+    // Relies on the middle of this layer being the middle of the city layer.
+    CGPoint middle  = [gameLayer convertToWorldSpace:CGPointMake(gameLayer.contentSize.width / 2, gameLayer.contentSize.height / 2)];
+    middle          = [cityLayer convertToNodeSpace:middle];
+    CGPoint origin  = [self convertToWorldSpace:ccpMult(self.position, -1)];
+    origin          = [cityLayer convertToNodeSpace:origin];
+    CGPoint zero    = [gameLayer convertToWorldSpace:CGPointZero];
+    zero            = [cityLayer convertToNodeSpace:zero];
+    CGPoint halfO    = ccpSub(middle, origin);
+    CGPoint halfZ    = ccpSub(middle, zero);
+    
+    if(horizontal)
+        r = ccp(fmaxf(fminf(r.x, right - halfZ.x), left + halfZ.x),
+                fmaxf(fminf(r.y, top - halfZ.y), halfZ.y));
     
     else {
-        r.x = winSize.width / 2;
-        if(r.y < winSize.height * 0.8f)
-            r.y = winSize.height / 2;
+        r.x = halfZ.x;
+        if(r.y < halfZ.y * 2 * 0.8f)
+            r.y = halfZ.y;
     }
     
     // Stop the current scroll.
@@ -180,15 +189,16 @@
     [scrollAction release];
     
     // Start a new scroll with an updated destination point.
-    CGPoint g = ccp(winSize.width / 2 - r.x, winSize.height / 2 - r.y);
+    CGPoint posInCitySpace = ccpSub(halfO, r);
+    CGPoint pos = ccp(posInCitySpace.x * self.scale, posInCitySpace.y * self.scale);
     
     // Scroll to current point should take initial duration minus what has already elapsed to scroll to approach previous points.
-    if(scrollActionElapsed < [[GorillasConfig get] gameScrollDuration])
-        [self runAction:(scrollAction = [[MoveTo alloc] initWithDuration:[[GorillasConfig get] gameScrollDuration] - scrollActionElapsed
-                                                                position:g])];
+    if(scrollActionElapsed < [GorillasConfig get].gameScrollDuration)
+        [self runAction:(scrollAction = [[MoveTo alloc] initWithDuration:[GorillasConfig get].gameScrollDuration - scrollActionElapsed
+                                                                position:pos])];
     else {
         scrollAction = nil;
-        self.position = g;
+        self.position = pos;
     }
 }
 

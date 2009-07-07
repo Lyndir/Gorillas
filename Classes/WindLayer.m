@@ -53,8 +53,6 @@
     [self addChild:body z:0];
     //[self addChild:tail z:1];
     
-    [self reset];
-    
     // Dynamic wind.
     // Disabled for now, it makes the banana's course fluxuate too much.
     // Would need to revise banana course calculation; it currently assumes
@@ -64,6 +62,14 @@
     //[self schedule:@selector(updateWind:)];
     
 	return self;
+}
+
+
+-(void) onEnter {
+    
+    [self reset];
+    
+    [super onEnter];
 }
 
 

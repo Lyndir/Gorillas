@@ -126,7 +126,7 @@
 
     GameLayer *gameLayer = [GorillasAppDelegate get].gameLayer;
     CityLayer *cityLayer = gameLayer.cityLayer;
-    CGSize winSize = [[Director sharedDirector] winSize];
+    //CGSize winSize = [[Director sharedDirector] winSize];
     
     // Wind influence.
     float w = gameLayer.windLayer.wind;
@@ -151,18 +151,14 @@
             // Increment rTest toward r.
             rTest = ccpAdd(rTest, rStep);
             
-            float min = [cityLayer left];
-            float max = [cityLayer right];
-            float top = winSize.height * 2;
-            if(gameLayer.panningLayer.position.x == 0) {
-                CGFloat scale = gameLayer.panningLayer.scale;
-                min = 0;
-                max = winSize.width / scale;
-            }
+            CGRect field = [cityLayer fieldInSpaceOf:cityLayer];
+            float min = field.origin.x;
+            float max = field.origin.x + field.size.width;
+            float top = field.origin.y + field.size.height;
             
             // Figure out whether banana went off screen or hit something.
             offScreen   = rTest.x < min || rTest.x > max
-                       || rTest.y < 0 || rTest.y > top;
+                       || rTest.y < 0   || rTest.y > top;
             hitGorilla  = [cityLayer hitsGorilla:rTest];
             hitBuilding = [cityLayer hitsBuilding:rTest];
         } while(++step < stepCount && !(hitBuilding || hitGorilla || offScreen));
@@ -187,10 +183,10 @@
             if(recap)
                 // Gorilla was revived; kill it again.
                 [gameLayer.cityLayer.hitGorilla killDead];
-            [[gameLayer windLayer] unregisterSystem:smoke];
-            [smoke setEmissionRate:0];
-            [target setVisible:NO];
-            running = NO;
+            [gameLayer.windLayer unregisterSystem:smoke];
+            smoke.emissionRate  = 0;
+            target.visible      = NO;
+            running             = NO;
             
             // Update game state.
             [gameLayer updateStateHitGorilla:hitGorilla hitBuilding:hitBuilding offScreen:offScreen throwSkill:throwSkill];

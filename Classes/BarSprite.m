@@ -8,16 +8,22 @@
 
 #import "BarSprite.h"
 
+#define kSmoothingTime 0.1f
+
 
 @implementation BarSprite
 
-@synthesize textureSize;
+@synthesize target, textureSize;
 
-- (id) initWithHead:(NSString *)bundleHeadReference body:(NSString *)bundleBodyReference withFrames:(NSUInteger)bodyFrameCount tail:(NSString *)bundleTailReference {
+- (id) initWithHead:(NSString *)bundleHeadReference body:(NSString *)bundleBodyReference withFrames:(NSUInteger)bodyFrameCount tail:(NSString *)bundleTailReference animatedTargetting:(BOOL)anAnimatedTargetting {
     
     if (!(self = [super init]))
         return self;
     
+    self.anchorPoint        = CGPointZero;
+    self.visible            = NO;
+    animatedTargetting      = anAnimatedTargetting;
+
     if (bundleHeadReference)
         head = [[[TextureMgr sharedTextureMgr] addImage:bundleHeadReference] retain];
     if (bundleBodyReference) {
@@ -36,6 +42,8 @@
         tail = [[[TextureMgr sharedTextureMgr] addImage:bundleTailReference] retain];
     
     [self schedule:@selector(updateBodyFrame:) interval:0.02f];
+    if (animatedTargetting)
+        [self schedule:@selector(update:)];
     
     return self;
 }
@@ -43,18 +51,37 @@
 
 - (void)updateBodyFrame:(ccTime)dt {
     
-    bodyFrame = (bodyFrame + 1) % bodyFrames;
+    age                 += dt;
+    bodyFrame           = ((NSUInteger) (age * 50 * body[0].pixelsWide / textureSize.width)) % bodyFrames;
 }
 
 
-- (void)updateWithOrigin:(CGPoint)o target:(CGPoint)t {
-
-    halfToHead = ccpMult(ccpSub(t, o), 0.5f);
-    halfLength = ccpLength(halfToHead);
+- (void)update:(ccTime)dt {
     
-    self.position = ccpAdd(o, halfToHead);
-    self.anchorPoint = CGPointZero;
-    self.rotation = CC_RADIANS_TO_DEGREES(ccpToAngle(ccp(halfToHead.x, -halfToHead.y)));
+    smoothTimeElapsed   = fminf(kSmoothingTime, smoothTimeElapsed + dt);
+
+    CGFloat completion  = smoothTimeElapsed / kSmoothingTime;
+    current             = ccpAdd(current, ccpMult(ccpSub(target, current), completion));
+    
+    CGPoint bar         = ccpSub(current, self.position);
+    currentLength       = ccpLength(bar);
+    
+    self.rotation       = CC_RADIANS_TO_DEGREES(ccpToAngle(ccp(bar.x, -bar.y)));
+}
+
+
+- (void)setTarget:(CGPoint)t {
+    
+    if (animatedTargetting && self.visible) {
+        target                  = t;
+        smoothTimeElapsed       = 0;
+    } else {
+        target = current        = t;
+        smoothTimeElapsed       = kSmoothingTime;
+        [self update:0];
+    }
+    
+    self.visible = !CGPointEqualToPoint(t, CGPointZero);
 }
 
 
@@ -68,7 +95,7 @@
     //GLfloat width = (GLfloat)body[bodyFrame].pixelsWide * body[bodyFrame].maxS;
     //GLfloat height = (GLfloat)body[bodyFrame].pixelsHigh * body[bodyFrame].maxT;
 
-    GLfloat s = (halfLength * 2 - tail.pixelsWide / 2 - head.pixelsWide / 2) / textureSize.width;
+    GLfloat s = (currentLength * 2 - tail.pixelsWide / 2 - head.pixelsWide / 2) / textureSize.width;
     GLfloat coordinates[3][8] = {
         /* head */ {
             0.0f,   1.0f,
@@ -90,20 +117,20 @@
     
     GLfloat vertices[3][12] = {
         /* head */ {
-             halfLength - textureSize.width / 2.0f, -textureSize.height / 2.0f, 0.0f,
-             halfLength + textureSize.width / 2.0f, -textureSize.height / 2.0f, 0.0f,
-             halfLength - textureSize.width / 2.0f,  textureSize.height / 2.0f, 0.0f,
-             halfLength + textureSize.width / 2.0f,  textureSize.height / 2.0f, 0.0f,
+            -textureSize.width / 2.0f + currentLength,  -textureSize.height / 2.0f, 0.0f,
+             textureSize.width / 2.0f + currentLength,  -textureSize.height / 2.0f, 0.0f,
+            -textureSize.width / 2.0f + currentLength,   textureSize.height / 2.0f, 0.0f,
+             textureSize.width / 2.0f + currentLength,   textureSize.height / 2.0f, 0.0f,
         /* body */ }, {
-            -halfLength + textureSize.width / 2.0f, -textureSize.height / 2.0f, 0.0f,
-             halfLength - textureSize.width / 2.0f, -textureSize.height / 2.0f, 0.0f,
-            -halfLength + textureSize.width / 2.0f,  textureSize.height / 2.0f, 0.0f,
-             halfLength - textureSize.width / 2.0f,  textureSize.height / 2.0f, 0.0f
+             textureSize.width / 2.0f,                  -textureSize.height / 2.0f, 0.0f,
+            -textureSize.width / 2.0f + currentLength,  -textureSize.height / 2.0f, 0.0f,
+             textureSize.width / 2.0f,                   textureSize.height / 2.0f, 0.0f,
+            -textureSize.width / 2.0f + currentLength,   textureSize.height / 2.0f, 0.0f
         /* tail */ }, {
-            -halfLength - textureSize.width / 2.0f, -textureSize.height / 2.0f, 0.0f,
-            -halfLength + textureSize.width / 2.0f, -textureSize.height / 2.0f, 0.0f,
-            -halfLength - textureSize.width / 2.0f,  textureSize.height / 2.0f, 0.0f,
-            -halfLength + textureSize.width / 2.0f,  textureSize.height / 2.0f, 0.0f,
+            -textureSize.width / 2.0f,                  -textureSize.height / 2.0f, 0.0f,
+             textureSize.width / 2.0f,                  -textureSize.height / 2.0f, 0.0f,
+            -textureSize.width / 2.0f,                   textureSize.height / 2.0f, 0.0f,
+             textureSize.width / 2.0f,                   textureSize.height / 2.0f, 0.0f,
         }
     };
 
@@ -115,8 +142,8 @@
     
     /* body */
     glBindTexture(GL_TEXTURE_2D, body[bodyFrame].name);
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
     
     glVertexPointer(3, GL_FLOAT, 0, vertices[1]);
     glTexCoordPointer(2, GL_FLOAT, 0, coordinates[1]);
@@ -135,10 +162,10 @@
     //[head drawAtPoint:CGPointMake(halfLength - head.pixelsWide / 2, head.pixelsWide / -2)];
     //[tail drawAtPoint:CGPointMake(-halfLength - tail.pixelsWide / 2,  tail.pixelsWide / -2)];
     
-    glDisable( GL_TEXTURE_2D);
+    glDisable(GL_TEXTURE_2D);
     
-    glDisableClientState(GL_VERTEX_ARRAY );
-    glDisableClientState( GL_TEXTURE_COORD_ARRAY );
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 

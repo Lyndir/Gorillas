@@ -79,8 +79,7 @@
 -(void) message: (NSString *)msg on: (CocosNode *)node;
 -(CGPoint) calculateThrowFrom:(CGPoint)r0 to:(CGPoint)rt errorLevel:(CGFloat)l;
 
--(CGFloat) left;
--(CGFloat) right;
+-(CGRect) fieldInSpaceOf:(CocosNode *)node;
 
 @property (nonatomic, readwrite) CGPoint aim;
 @property (nonatomic, readonly) BananaLayer *bananaLayer;

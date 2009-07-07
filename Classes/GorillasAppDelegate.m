@@ -25,6 +25,7 @@
 #import "GorillasAppDelegate.h"
 #import "Splash.h"
 #import "Resettable.h"
+#import "DebugLayer.h"
 
 @interface Director (Reveal)
 
@@ -52,7 +53,7 @@
 #if TARGET_IPHONE_SIMULATOR
     [[Director sharedDirector] setPixelFormat:kRGBA8];
 #else
-    //[[Director sharedDirector] setDisplayFPS:YES];
+    [[Director sharedDirector] setDisplayFPS:YES];
 #endif
 	[[Director sharedDirector] setDeviceOrientation:CCDeviceOrientationLandscapeLeft];
 	[[Director sharedDirector] attachInWindow:window];
@@ -74,6 +75,8 @@
     // Build the game scene.
 	gameLayer = [[GameLayer alloc] init];
     uiLayer = [[UILayer alloc] init];
+    DebugLayer *debugLayer = [[DebugLayer alloc] init];
+    [uiLayer addChild:debugLayer z:99];
     [uiLayer addChild:gameLayer];
 	
     // Start the background music.
@@ -143,6 +146,8 @@
     [menuLayers removeLastObject];
     if([menuLayers count])
         [uiLayer addChild:[menuLayers lastObject]];
+    else
+        [gameLayer.activeGorilla applyZoom];
 }
 
 
@@ -162,7 +167,7 @@
 
 -(void) pushLayer: (ShadeLayer *)layer {
     
-    if([layer parent]) {
+    if(layer.parent) {
         if (![menuLayers containsObject:layer])
             // Layer is showing but shouldn't have been; probably being dismissed.
             [uiLayer removeChild:layer cleanup:YES];
@@ -179,6 +184,8 @@
     [(ShadeLayer *) [menuLayers lastObject] dismissAsPush:YES];
     [menuLayers addObject:layer];
     [uiLayer addChild:layer];
+
+    [gameLayer.panningLayer scaleTo:0.2f];
 }
 
 

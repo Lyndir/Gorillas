@@ -27,15 +27,12 @@
 @interface StarLayer : Layer <Resettable> {
 
 @private
-    CGSize      contentSize;
     float       depth;
     
     glPoint     *starVertices;
     GLuint      starVertexBuffer;
     NSUInteger  starCount;
 }
-
-@property (nonatomic, readonly) CGSize contentSize;
 
 
 #pragma mark ###############################

@@ -49,6 +49,7 @@
 -(void) cheer;
 -(void) dance;
 -(void) threw:(CGPoint)aim;
+-(void) applyZoom;
 -(void) kill;
 -(void) killDead;
 -(void) revive;

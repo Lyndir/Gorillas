@@ -25,6 +25,7 @@
 #import "SkyLayer.h"
 #import "StarLayer.h"
 #import "PanAction.h"
+#import "GorillasAppDelegate.h"
 
 
 @implementation SkyLayer
@@ -35,16 +36,14 @@
     if (!(self = [super init]))
 		return self;
     
-    skyColor = ccc([GorillasConfig get].skyColor);
-    fancySky = [GorillasConfig get].visualFx;
-    
     stars = [[NSMutableArray alloc] init];
+    
     for (NSUInteger j = 0; j < 3; ++j) {
         float depth = j / 9.0f + 0.3f;
         
         const StarLayer *starLayer =  [[StarLayer alloc] initWidthDepth:j / 4.0f + 0.5f];
         [stars addObject: starLayer];
-        
+
         [self addChild:starLayer z:1 parallaxRatio:ccp(depth, depth) positionOffset:ccp(self.contentSize.width / 2,
                                                                                         self.contentSize.height / 2)];
         
@@ -55,10 +54,22 @@
 }
 
 
+- (void)onEnter {
+    
+    [self reset];
+    
+    [super onEnter];
+}
+
+
 -(void) reset {
 
     skyColor = ccc([GorillasConfig get].skyColor);
     fancySky = [GorillasConfig get].visualFx;
+
+    CGRect field = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self];
+    from    = ccp(field.origin.x, field.origin.y);
+    to      = ccp(field.origin.x + field.size.width, field.origin.y + field.size.height);
     
     for(StarLayer *starLayer in stars)
         [starLayer reset];
@@ -67,11 +78,8 @@
 
 -(void) draw {
     
-    CGSize winSize = [Director sharedDirector].winSize;
-    CGPoint from = ccp(-self.position.x - winSize.width, 0);
-    
     if(fancySky)
-        drawBoxFrom(from, ccp(from.x + winSize.width * 3, winSize.height * 1.5f), skyColor, ccc(0x000000ff));
+        DrawBoxFrom(from, to, skyColor, ccc(0x000000ff));
     
     else {
         glClearColor(skyColor.r / (float)0xff, skyColor.g / (float)0xff, skyColor.b / (float)0xff, skyColor.a / (float)0xff);

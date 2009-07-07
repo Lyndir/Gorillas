@@ -139,7 +139,7 @@
         
         // Score's date label.
         NSString *dateString = [dateFormatter stringFromDate:date];
-        Label *dateLabel = [[Label alloc] initWithString:appendOrdinalPrefix([dateString intValue], dateString)
+        Label *dateLabel = [[Label alloc] initWithString:AppendOrdinalPrefix([dateString intValue], dateString)
                                               dimensions:CGSizeMake(gBarSize * 2, [[GorillasConfig get] smallFontSize] / 2)
                                                alignment:UITextAlignmentCenter
                                                 fontName:[[GorillasConfig get] fixedFontName]

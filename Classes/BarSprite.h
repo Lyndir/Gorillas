@@ -13,10 +13,16 @@
 
 @private
     Texture2D           *head, **body, *tail;
+
+    CGFloat             age;
     NSUInteger          bodyFrame, bodyFrames;
     
-    CGPoint              halfToHead;
-    CGFloat             halfLength;
+    BOOL                animatedTargetting;
+    ccTime              smoothTimeElapsed;
+    CGPoint             target;
+    
+    CGPoint             current;
+    CGFloat             currentLength;
     
     CGSize              textureSize;
 }
@@ -25,14 +31,10 @@
 #pragma mark ###############################
 #pragma mark Lifecycle
 
-- (id) initWithHead:(NSString *)bundleHeadReference body:(NSString *)bundleBodyReference withFrames:(NSUInteger)bodyFrameCount tail:(NSString *)bundleTailReference;
+- (id) initWithHead:(NSString *)bundleHeadReference body:(NSString *)bundleBodyReference withFrames:(NSUInteger)bodyFrameCount tail:(NSString *)bundleTailReference animatedTargetting:(BOOL)anAnimatedTargetting;
 
 
-#pragma mark ###############################
-#pragma mark Behaviors
-
-- (void)updateWithOrigin:(CGPoint)o target:(CGPoint)t;
-
-@property (readwrite) CGSize    textureSize;
+@property (readwrite, assign) CGPoint   target;
+@property (readwrite, assign) CGSize    textureSize;
 
 @end

@@ -25,7 +25,7 @@
 
 
 
-NSString* rpad(const NSString* string, const NSUInteger l) {
+NSString* RPad(const NSString* string, const NSUInteger l) {
     
     NSMutableString *newString = [string mutableCopy];
     while (newString.length < l)
@@ -35,7 +35,7 @@ NSString* rpad(const NSString* string, const NSUInteger l) {
 }
 
 
-NSString* lpad(const NSString* string, const NSUInteger l) {
+NSString* LPad(const NSString* string, const NSUInteger l) {
     
     NSMutableString *newString = [string mutableCopy];
     while (newString.length < l)
@@ -45,7 +45,7 @@ NSString* lpad(const NSString* string, const NSUInteger l) {
 }
 
 
-NSString* appendOrdinalPrefix(const NSInteger number, const NSString* prefix) {
+NSString* AppendOrdinalPrefix(const NSInteger number, const NSString* prefix) {
     
     NSString *suffix = NSLocalizedString(@"time.day.suffix", @"th");
     if(number % 10 == 1 && number != 11)
@@ -89,8 +89,61 @@ BOOL IsSimulator() {
 }
 
 
-void drawPointsAt(const CGPoint* points, const NSUInteger n, const ccColor4B color) {
+#define INDICATORS 300
+static CGPoint *indicatorPoints     = nil;
+static ccColor4B *indicatorColors   = nil;
+static CocosNode* *indicatorSpaces  = nil;
+static NSUInteger indicatorPosition = INDICATORS;
+
+void IndicateInSpaceOf(CGPoint point, CocosNode *node) {
     
+    if (indicatorPoints == nil) {
+        indicatorPoints = calloc(INDICATORS, sizeof(CGPoint));
+        indicatorColors = calloc(INDICATORS, sizeof(ccColor4B));
+        indicatorSpaces = calloc(INDICATORS, sizeof(CocosNode*));
+    }
+    
+    ++indicatorPosition;
+    indicatorPoints[indicatorPosition % INDICATORS] = point;
+    indicatorSpaces[indicatorPosition % INDICATORS] = node;
+    for (NSUInteger i = 0; i <= indicatorPosition; ++i)
+        if (i < indicatorPosition - INDICATORS)
+            indicatorColors[i % INDICATORS] = ccc(0x000000ff);
+        else {
+            NSUInteger shade = 0xff - (0xff * (indicatorPosition - i) / INDICATORS);
+            indicatorColors[i % INDICATORS].r = shade;
+            indicatorColors[i % INDICATORS].g = shade;
+            indicatorColors[i % INDICATORS].b = shade;
+            indicatorColors[i % INDICATORS].a = 0xff;
+        }
+}
+
+
+void DrawIndicators() {
+    
+    if (!indicatorPoints)
+        return;
+    
+    CGPoint *points = malloc(sizeof(CGPoint) * INDICATORS);
+    for (NSUInteger i = 0; i < INDICATORS; ++i)
+        points[i] = [indicatorSpaces[i] convertToWorldSpace:indicatorPoints[i]];
+    
+    DrawPoints(points, indicatorColors, INDICATORS);
+}
+
+
+void DrawPointsAt(const CGPoint* points, const NSUInteger n, const ccColor4B color) {
+    
+    ccColor4B *colors = malloc(sizeof(ccColor4B) * n);
+    for (NSUInteger i = 0; i < n; ++i)
+        colors[i] = color;
+
+    DrawPoints(points, colors, n);
+}
+
+
+void DrawPoints(const CGPoint* points, const ccColor4B* colors, const NSUInteger n) {
+
     // Define vertices and pass to GL.
     glVertexPointer(2, GL_FLOAT, 0, points);
 	BOOL vWasEnabled = glIsEnabled(GL_VERTEX_ARRAY);
@@ -98,7 +151,14 @@ void drawPointsAt(const CGPoint* points, const NSUInteger n, const ccColor4B col
         glEnableClientState(GL_VERTEX_ARRAY);
     
     // Define colors and pass to GL.
-    glColor4ub(color.r, color.g, color.b, color.a);
+    BOOL cWasEnabled = YES; // keeps us from disabling it at the end.
+    if(colors != nil) {
+        glColorPointer(4, GL_UNSIGNED_BYTE, 0, colors);
+        
+        cWasEnabled = glIsEnabled(GL_COLOR_ARRAY);
+        if(!cWasEnabled)
+            glEnableClientState(GL_COLOR_ARRAY);
+    }
     
     // Draw.
     glDrawArrays(GL_POINTS, 0, n);
@@ -106,10 +166,12 @@ void drawPointsAt(const CGPoint* points, const NSUInteger n, const ccColor4B col
     // Reset data source.
     if(!vWasEnabled)
         glDisableClientState(GL_VERTEX_ARRAY);
+    if(!cWasEnabled)
+        glDisableClientState(GL_COLOR_ARRAY);
 }
 
 
-void drawLinesTo(const CGPoint from, const CGPoint* to, const NSUInteger n, const ccColor4B color, const CGFloat width) {
+void DrawLinesTo(const CGPoint from, const CGPoint* to, const NSUInteger n, const ccColor4B color, const CGFloat width) {
     
     CGPoint *points = malloc(sizeof(CGPoint) * (n + 1));
     points[0] = from;
@@ -118,12 +180,12 @@ void drawLinesTo(const CGPoint from, const CGPoint* to, const NSUInteger n, cons
 
     glColor4ub(color.r, color.g, color.b, color.a);
     
-    drawLines(points, nil, n + 1, width);
+    DrawLines(points, nil, n + 1, width);
     free(points);
 }
     
 
-void drawLines(const CGPoint* points, const ccColor4B* longColors, const NSUInteger n, const CGFloat width) {
+void DrawLines(const CGPoint* points, const ccColor4B* longColors, const NSUInteger n, const CGFloat width) {
     
     // Define vertices and pass to GL.
 	glVertexPointer(2, GL_FLOAT, 0, points);
@@ -156,7 +218,7 @@ void drawLines(const CGPoint* points, const ccColor4B* longColors, const NSUInte
 }
 
 
-void drawBoxFrom(const CGPoint from, const CGPoint to, const ccColor4B fromColor, const ccColor4B toColor) {
+void DrawBoxFrom(const CGPoint from, const CGPoint to, const ccColor4B fromColor, const ccColor4B toColor) {
     
     // Define vertices and pass to GL.
     const GLfloat vertices[4 * 2] = {
@@ -191,7 +253,7 @@ void drawBoxFrom(const CGPoint from, const CGPoint to, const ccColor4B fromColor
 }
 
 
-void drawBorderFrom(const CGPoint from, const CGPoint to, const ccColor4B color, const CGFloat width) {
+void DrawBorderFrom(const CGPoint from, const CGPoint to, const ccColor4B color, const CGFloat width) {
     
     // Define vertices and pass to GL.
 	BOOL vWasEnabled = glIsEnabled(GL_VERTEX_ARRAY);

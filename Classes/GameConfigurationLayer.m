@@ -156,15 +156,15 @@
     
     [[GorillasAudioController get] clickEffect];
 
-    NSUInteger curLevelInd = [[[GorillasConfig get] levelNames] indexOfObject:[[GorillasConfig get] levelName]];
-    [[GorillasConfig get] setLevel:(float) ((curLevelInd + 1) % [[[GorillasConfig get] levelNames] count]) / [[[GorillasConfig get] levelNames] count]];
+    NSUInteger curLevelInd = [[GorillasConfig get].levelNames indexOfObject:[GorillasConfig get].levelName];
+    [GorillasConfig get].level = (float) ((curLevelInd + 1) % [[GorillasConfig get].levelNames count]) / [[GorillasConfig get].levelNames count];
 }
 
 
 -(void) gravity: (id) sender {
     
     [[GorillasAudioController get] clickEffect];
-    [[GorillasConfig get] setGravity:([[GorillasConfig get] gravity] + 10) % ([[GorillasConfig get] maxGravity] + 1)];
+    [GorillasConfig get].gravity = ([GorillasConfig get].gravity + 10) % ([GorillasConfig get].maxGravity + 1);
 }
 
 
@@ -182,28 +182,28 @@
             break;
         }
         
-        if([[[GorillasConfig get] cityTheme] isEqualToString:theme])
+        if([[GorillasConfig get].cityTheme isEqualToString:theme])
             found = YES;
     }
     
     [[[CityTheme getThemes] objectForKey:newTheme] apply];
-    [[GorillasConfig get] setCityTheme:newTheme];
+    [GorillasConfig get].cityTheme = newTheme;
     
-    [[[GorillasAppDelegate get] gameLayer] reset];
+    [[GorillasAppDelegate get].gameLayer reset];
 }
 
 
 -(void) replay: (id) sender {
     
     [[GorillasAudioController get] clickEffect];
-    [[GorillasConfig get] setReplay:![[GorillasConfig get] replay]];
+    [GorillasConfig get].replay = ![GorillasConfig get].replay;
 }
 
 
 -(void) followThrow: (id) sender {
     
     [[GorillasAudioController get] clickEffect];
-    [[GorillasConfig get] setFollowThrow:![[GorillasConfig get] followThrow]];
+    [GorillasConfig get].followThrow = ![GorillasConfig get].followThrow;
 }
 
 

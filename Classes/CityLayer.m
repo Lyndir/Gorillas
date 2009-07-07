@@ -63,11 +63,11 @@
     
     throwHints      = [[NSMutableArray alloc] initWithCapacity:2];
 
-    self.aim        = ccp(-1, -1);
+    self.aim        = CGPointZero;
     holes           = nil;
     explosions      = nil;
     
-    aimSprite       = [[BarSprite alloc] initWithHead:@"aim.head.png" body:@"aim.body.%d.png" withFrames:16 tail:@"aim.tail.png"];
+    aimSprite       = [[BarSprite alloc] initWithHead:@"aim.head.png" body:@"aim.body.%d.png" withFrames:16 tail:@"aim.tail.png" animatedTargetting:YES];
     aimSprite.textureSize = CGSizeMake(aimSprite.textureSize.width / 2, aimSprite.textureSize.height / 2);
     [self addChild:aimSprite z:2];
     
@@ -88,18 +88,20 @@
     infoLabel.position      = ccp(5 + infoLabel.contentSize.width / 2,
                                   winSize.height - infoLabel.contentSize.height / 2 - 5);
     infoLabel.visible = NO;
+    [self schedule:@selector(addInfo:)];
     
+    // Must reset before entering the scene; other's onEnter depends on us being done.
     [self reset];
     
     return self;
 }
 
--(void) onEnter {
 
-    [super onEnter];
-    
+-(void) addInfo:(ccTime)dt {
+
     if (!infoLabel.parent)
         [[GorillasAppDelegate get].uiLayer addChild:infoLabel z:9];
+    [self unschedule:@selector(addInfo:)];
 }
 
 
@@ -233,7 +235,7 @@
             CGPoint to   = ccpAdd(from, throwHistory[i]);
             
             if(to.x && to.y)
-                drawLinesTo(from, &to, 1, ccc([GorillasConfig get].windowColorOff & 0xffffff33), 3);
+                DrawLinesTo(from, &to, 1, ccc([GorillasConfig get].windowColorOff & 0xffffff33), 3);
         }
     }
 }
@@ -255,7 +257,7 @@
         // Ignore when moving/clicking over/on HUD.
         return NO;
     
-    if(aim.x != -1 || aim.y != -1)
+    if(!CGPointEqualToPoint(aim, CGPointZero))
         // Has already began.
         return NO;
         
@@ -269,7 +271,7 @@
     
     if([[event allTouches] count] != 1) {
         // Cancel when: multiple fingers hit the screen.
-        self.aim = ccp(-1, -1);
+        self.aim = CGPointZero;
         return;
     }
 
@@ -293,7 +295,7 @@
     
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(zoomOut) object:nil];
 
-    self.aim = ccp(-1, -1);
+    self.aim = CGPointZero;
 }
 
 
@@ -303,22 +305,23 @@
     
     if([[event allTouches] count] != 1) {
         // Cancel when: multiple fingers hit the screen.
-        self.aim = ccp(-1, -1);
+        self.aim = CGPointZero;
         return;
     }
     
     CGPoint p = [self convertTouchToNodeSpace:[[event allTouches] anyObject]];
     
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:p]
-        || aim.x <= 0 || ![self mayThrow]) {
+       || CGPointEqualToPoint(aim, CGPointZero)
+       || ![self mayThrow]) {
         // Cancel when: released over HUD, no aim vector, state doesn't allow throwing.
-        self.aim = ccp(-1, -1);
+        self.aim = CGPointZero;
         return;
     }
     
     CGPoint r0 = [[GorillasAppDelegate get].gameLayer.activeGorilla position];
     CGPoint v = ccpSub(aim, r0);
-    self.aim = ccp(-1, -1);
+    self.aim = CGPointZero;
     
     [self throwFrom:[GorillasAppDelegate get].gameLayer.activeGorilla withVelocity:v];
 }
@@ -326,21 +329,18 @@
 
 - (void)setAim:(CGPoint)anAim {
     
-    aim                     = anAim;
+    aim = aimSprite.target  = anAim;
     
-    infoLabel.visible   = NO;
-    aimSprite.visible       = NO;
+    if (CGPointEqualToPoint(aim, CGPointZero)) {
+        infoLabel.visible   = NO;
+        return;
+    }
     
     CGPoint gorillaPosition = [GorillasAppDelegate get].gameLayer.activeGorilla.position;
-    
-    if (aim.x < 0 && aim.y < 0)
-        return;
-    
-    [aimSprite updateWithOrigin:gorillaPosition target:aim];
-    aimSprite.visible       = YES;
-    
     CGPoint relAim = ccpSub(aim, gorillaPosition);
     CGPoint worldAim = [self convertToWorldSpace:relAim];
+
+    aimSprite.position      = gorillaPosition;
 
     [angleLabel setString:[NSString stringWithFormat:@"%0.0f", CC_RADIANS_TO_DEGREES(ccpToAngle(worldAim))]];
     [strengthLabel setString:[NSString stringWithFormat:@"%0.0f", ccpLength(worldAim)]];
@@ -442,7 +442,6 @@
     }
     
     // Scale to the active gorilla's saved scale.
-    [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:[GorillasAppDelegate get].gameLayer.activeGorilla.zoom limited:YES];
     [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:YES];
 
     // AI throw.
@@ -660,7 +659,7 @@
     NSUInteger indexA = 0;
     for(NSUInteger b = 0; b < buildings.buildingCount; ++b) {
         CGPoint fieldPoint = [buildings convertToWorldSpace:CGPointMake(buildings.buildings[b].x, 0)];
-        fieldPoint = [[GorillasAppDelegate get].gameLayer convertToNodeSpace:fieldPoint];
+        fieldPoint = [self convertToNodeSpace:fieldPoint];
         
         if(fieldPoint.x >= 0) {
             indexA = b;
@@ -729,7 +728,7 @@
                      [CallFunc actionWithTarget:self selector:@selector(nextGorilla)],
                      nil]];
     
-    [[[GorillasAppDelegate get] gameLayer] started];
+    [[GorillasAppDelegate get].gameLayer started];
 }
 
 
@@ -782,19 +781,18 @@
 }
 
 
--(CGFloat) left {
+-(CGRect) fieldInSpaceOf:(CocosNode *)node {
     
-    Building building = buildings.buildings[0];
-    
-    return building.x;
-}
+    Building firstBuilding = buildings.buildings[0];
+    Building lastBuilding = buildings.buildings[buildings.buildingCount - 1];
 
-
--(CGFloat) right {
+    CGPoint bottomLeft = [buildings convertToWorldSpace:CGPointMake(firstBuilding.x, 0)];
+    CGPoint topRight = [buildings convertToWorldSpace:CGPointMake(lastBuilding.x + lastBuilding.size.width,
+                                                                  [Director sharedDirector].winSize.height * 1.5f)];
+    bottomLeft = [node convertToNodeSpace:bottomLeft];
+    topRight = [node convertToNodeSpace:topRight];
     
-    Building building = buildings.buildings[buildings.buildingCount - 1];
-    
-    return building.x + building.size.width;
+    return CGRectMake(bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
 }
 
 

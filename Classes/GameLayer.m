@@ -194,7 +194,7 @@
     
     // When there are AIs in the game, show their difficulity.
     if (ais)
-        [[GorillasAppDelegate get].uiLayer message:[[GorillasConfig get] levelName]];
+        [[GorillasAppDelegate get].uiLayer message:[GorillasConfig get].levelName];
     
     // Reset the game field and start the game.
     //[buildingsLayer stopPanning];
@@ -442,30 +442,25 @@
 
     running = NO;
     
-    IntervalAction *l = [MoveBy actionWithDuration:.05f position:ccp(-3, 0)];
-    IntervalAction *r = [MoveBy actionWithDuration:.05f position:ccp(6, 0)];
-    shakeAction = [[Sequence actions:l, r, l, l, r, l, nil] retain];
+    IntervalAction *l       = [MoveBy actionWithDuration:.05f position:ccp(-3, 0)];
+    IntervalAction *r       = [MoveBy actionWithDuration:.05f position:ccp(6, 0)];
+    shakeAction             = [[Sequence actions:l, r, l, l, r, l, r, l, l, nil] retain];
     
     // Set up our own layer.
-    CGSize winSize = [[Director sharedDirector] winSize];
-    [self setAnchorPoint:ccp(0.5f, 0.5f)];
+    self.anchorPoint        = ccp(0.5f, 0.5f);
     
     // Sky, buildings and wind.
-    cityLayer = [[CityLayer alloc] init];
-    [cityLayer setAnchorPoint:CGPointZero];
-
-    skyLayer = [[SkyLayer alloc] init];
-    skyLayer.anchorPoint = CGPointZero;
-    
-    panningLayer = [[PanningLayer alloc] init];
-    [panningLayer setAnchorPoint:CGPointZero];
+    cityLayer               = [[CityLayer alloc] init];
+    skyLayer                = [[SkyLayer alloc] init];
+    panningLayer            = [[PanningLayer alloc] init];
+    panningLayer.position   = ccp(0, 0);
     [panningLayer addChild:cityLayer z:0];
     [panningLayer addChild:skyLayer z:-5];
     [self addChild:panningLayer];
     
-    windLayer = [[WindLayer alloc] init];
+    windLayer               = [[WindLayer alloc] init];
+    windLayer.position      = ccp(self.contentSize.width / 2, self.contentSize.height - 15);
     [self addChild:windLayer z:5];
-    [windLayer setPosition:ccp(winSize.width / 2, winSize.height - 15)];
 
     paused = YES;
     
@@ -490,50 +485,49 @@
     [super onExit];
     
     [self setPausedSilently:YES];
-    
-    [self unschedule:@selector(updateWeather:)];
-    [self unschedule:@selector(randomEncounter:)];
 }
 
 
 -(void) updateWeather:(ccTime)dt {
     
-    if (![[GorillasConfig get] visualFx] && [weather active])
+    if (![GorillasConfig get].visualFx && weather.active)
         [weather stopSystem];
     
-    if (![weather emissionRate]) {
+    if (!weather.emissionRate) {
         // If not emitting ..
         
-        if ([weather active])
+        if (weather.active)
             // Stop active system.
             [weather stopSystem];
         
-        if ([weather particleCount] == 0) {
+        if (weather.particleCount == 0) {
             // If system has no particles left alive ..
             
             // Remove & release it.
             [windLayer unregisterSystem:weather];
-            [[weather parent] removeChild:weather cleanup:YES];
+            [weather.parent removeChild:weather cleanup:YES];
             [weather release];
             weather = nil;
             
-            if ([[GorillasConfig get] visualFx] && random() % 100 == 0) {
+            CGRect field = [cityLayer fieldInSpaceOf:self];
+            
+            if ([GorillasConfig get].visualFx && random() % 100 == 0) {
                 // 1% chance to start snow/rain when weather is enabled.
             
                 switch (random() % 2) {
                     case 0:
                         weather = [[ParticleRain alloc] init];
-                        [weather setEmissionRate:60];
-                        [weather setStartSizeVar:1.5f];
-                        [weather setStartSize:3];
+                        weather.emissionRate    = 60;
+                        weather.startSizeVar    = 1.5f;
+                        weather.startSize       = 3;
                         break;
                     
                     case 1:
                         weather = [[ParticleSnow alloc] init];
-                        [weather setSpeed:10];
-                        [weather setEmissionRate:3];
-                        [weather setStartSizeVar:3];
-                        [weather setStartSize:4];
+                        weather.speed           = 10;
+                        weather.emissionRate    = 3;
+                        weather.startSizeVar    = 3;
+                        weather.startSize       = 4;
                         break;
                         
                     default:
@@ -541,8 +535,8 @@
                                                        reason:@"Unsupported weather type selected." userInfo:nil];
                 }
                 
-                [weather setPosVar:ccp([weather posVar].x * 2.5f, [weather posVar].y)];
-                [weather setPosition:ccp([weather position].x, [weather position].y * 2)]; // Space above screen.
+                weather.posVar = ccp(field.size.width / 2, weather.posVar.y);
+                weather.position = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
                 [cityLayer addChild:weather z:-3 /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:ccp(self.contentSize.width / 2,
                                                                                                        self.contentSize.height / 2)*/];
 

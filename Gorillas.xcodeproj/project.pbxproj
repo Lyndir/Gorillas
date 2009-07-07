@@ -436,6 +436,11 @@
 		DA4F73F90FE6BF9D00D8BC31 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F73F70FE6BF9D00D8BC31 /* bar.png */; };
 		DA4F73FA0FE6BF9D00D8BC31 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F73F70FE6BF9D00D8BC31 /* bar.png */; };
 		DA4F73FB0FE6BF9D00D8BC31 /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4F73F70FE6BF9D00D8BC31 /* bar.png */; };
+		DA51F7CB1001CABE00C2B84E /* DebugLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA51F7CA1001CABE00C2B84E /* DebugLayer.m */; };
+		DA51F7CC1001CABE00C2B84E /* DebugLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA51F7CA1001CABE00C2B84E /* DebugLayer.m */; };
+		DA51F7CD1001CABE00C2B84E /* DebugLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA51F7CA1001CABE00C2B84E /* DebugLayer.m */; };
+		DA51F7CE1001CABE00C2B84E /* DebugLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA51F7CA1001CABE00C2B84E /* DebugLayer.m */; };
+		DA51F7CF1001CABE00C2B84E /* DebugLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA51F7CA1001CABE00C2B84E /* DebugLayer.m */; };
 		DA5A256D0F16D63900975E5A /* Splash.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5A256C0F16D63900975E5A /* Splash.m */; };
 		DA5C1F220F829FDE007B1085 /* gorilla-ai-DD.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5C1F1A0F829FDE007B1085 /* gorilla-ai-DD.png */; };
 		DA5C1F230F829FDE007B1085 /* gorilla-ai-DU.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5C1F1B0F829FDE007B1085 /* gorilla-ai-DU.png */; };
@@ -1254,6 +1259,8 @@
 		DA4F4A240EF327A30062E0E8 /* GuideLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideLayer.h; sourceTree = "<group>"; };
 		DA4F4A250EF327A30062E0E8 /* GuideLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideLayer.m; sourceTree = "<group>"; };
 		DA4F73F70FE6BF9D00D8BC31 /* bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bar.png; path = png/bar.png; sourceTree = "<group>"; };
+		DA51F7C91001CABE00C2B84E /* DebugLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugLayer.h; sourceTree = "<group>"; };
+		DA51F7CA1001CABE00C2B84E /* DebugLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugLayer.m; sourceTree = "<group>"; };
 		DA5A256B0F16D63900975E5A /* Splash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Splash.h; sourceTree = "<group>"; };
 		DA5A256C0F16D63900975E5A /* Splash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Splash.m; sourceTree = "<group>"; };
 		DA5C1F1A0F829FDE007B1085 /* gorilla-ai-DD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gorilla-ai-DD.png"; path = "png/gorilla-ai-DD.png"; sourceTree = "<group>"; };
@@ -2052,6 +2059,8 @@
 				DA5A256C0F16D63900975E5A /* Splash.m */,
 				DA7547F40EAB66D40083EC7C /* GameLayer.h */,
 				DA7547F50EAB66D40083EC7C /* GameLayer.m */,
+				DA51F7C91001CABE00C2B84E /* DebugLayer.h */,
+				DA51F7CA1001CABE00C2B84E /* DebugLayer.m */,
 				DACC1BB80F63D5AC0078A0D8 /* UILayer.h */,
 				DACC1BB90F63D5AC0078A0D8 /* UILayer.m */,
 				DAB896DB0F480411005C1D06 /* PanningLayer.h */,
@@ -2928,6 +2937,7 @@
 				DA256FAE0FF941A6004EDC3A /* CGPointExtension.m in Sources */,
 				DA256FAF0FF941A6004EDC3A /* FileUtils.m in Sources */,
 				DA2CC61F0FFEBDC000344C58 /* Schedule.m in Sources */,
+				DA51F7CD1001CABE00C2B84E /* DebugLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3041,6 +3051,7 @@
 				DA256FB70FF941A6004EDC3A /* CGPointExtension.m in Sources */,
 				DA256FB80FF941A6004EDC3A /* FileUtils.m in Sources */,
 				DA2CC6200FFEBDC000344C58 /* Schedule.m in Sources */,
+				DA51F7CF1001CABE00C2B84E /* DebugLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3154,6 +3165,7 @@
 				DA256FA50FF941A6004EDC3A /* CGPointExtension.m in Sources */,
 				DA256FA60FF941A6004EDC3A /* FileUtils.m in Sources */,
 				DA2CC61E0FFEBDC000344C58 /* Schedule.m in Sources */,
+				DA51F7CC1001CABE00C2B84E /* DebugLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3267,6 +3279,7 @@
 				DA256FC00FF941A6004EDC3A /* CGPointExtension.m in Sources */,
 				DA256FC10FF941A6004EDC3A /* FileUtils.m in Sources */,
 				DA2CC6210FFEBDC000344C58 /* Schedule.m in Sources */,
+				DA51F7CE1001CABE00C2B84E /* DebugLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3380,6 +3393,7 @@
 				DAE919AA0FFD53D300BF4B89 /* CGPointExtension.m in Sources */,
 				DAE919AB0FFD53D300BF4B89 /* FileUtils.m in Sources */,
 				DA2CC6220FFEBDC000344C58 /* Schedule.m in Sources */,
+				DA51F7CB1001CABE00C2B84E /* DebugLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

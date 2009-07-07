@@ -69,9 +69,9 @@
     
     [self setPosition:ccp([self contentSize].width / 2, [self contentSize].height / 2)];
     
-    BarSprite *loadingBar = [[BarSprite alloc] initWithHead:@"aim.head.png" body:@"aim.body.%d.png" withFrames:16 tail:@"aim.tail.png"];
-    [loadingBar updateWithOrigin:ccp(-50, 0) target:ccp(50, 0)];
-    loadingBar.position = ccp(self.contentSize.width / 2, 40);
+    BarSprite *loadingBar   = [[BarSprite alloc] initWithHead:@"aim.head.png" body:@"aim.body.%d.png" withFrames:16 tail:@"aim.tail.png" animatedTargetting:NO];
+    loadingBar.position     = ccp(self.contentSize.width / 2 - 50, 40);
+    loadingBar.target       = ccpAdd(loadingBar.position, ccp(100, 0));
     [self addChild:loadingBar];
     [loadingBar release];
     

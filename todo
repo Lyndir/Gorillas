@@ -40,6 +40,7 @@
  v  Crappy performance.
  v  Hide vibration on iPod touch.
  v  Fix autoscale when field is flipped.
+ .  Consolidate some glBlends in BuildingsLayer.
 
 Refact
  v  Make sure aim is used as a property.

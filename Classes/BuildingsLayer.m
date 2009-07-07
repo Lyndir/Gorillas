@@ -50,8 +50,8 @@
     buildingsIndicesBuffer  = 0;
     windowsVertexBuffer     = 0;
     windowsIndicesBuffer    = 0;
-    
-    // Configure building properties.
+
+    // Must reset before onEnter.  Others' onEnter depends on us being done.
     [self reset];
     
 	return self;
@@ -96,7 +96,8 @@
     buildings = malloc(sizeof(Building) * buildingCount);
     for (NSUInteger b = 0; b < buildingCount; ++b) {
         // Building's position.
-        buildings[b].x              = b * ([GorillasConfig get].buildingWidth + 1.0f);
+        buildings[b].x              = b * ([GorillasConfig get].buildingWidth + 1.0f)
+                                    - ([GorillasConfig get].buildingWidth + 1) * (buildingCount - [GorillasConfig get].buildingAmount) / 2;
         
         // Building's size.
         NSInteger addFloors;
@@ -132,10 +133,10 @@
     GLushort *windowIndices                 = malloc(sizeof(GLushort)           /* size of an index */
                                                      * 6                        /* amount of indexes per window */
                                                      * windowCount              /* amount of windows in all buildings */);
-    NSInteger bx = 0;
     NSUInteger w = 0;
     for (NSUInteger b = 0; b < buildingCount; ++b) {
         
+        CGFloat bx                          = buildings[b].x;
         NSUInteger bv                       = b * 4;
         NSUInteger bi                       = b * 6;
 
@@ -192,7 +193,6 @@
                                            reason:@"Windows vertex count not the same as window amount." userInfo:nil];
         
         w += bw;
-        bx += buildings[b].size.width + 1;
     }
     
     // Push our window data into VBOs.
