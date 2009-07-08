@@ -2353,7 +2353,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
-				DA8B76C20F44EEFF00DD88BF /* ShellScript */,
+				DAE38A881004D33B0023D941 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3141,20 +3141,6 @@
 			shellPath = /bin/bash;
 			shellScript = "cd \"$TARGET_BUILD_DIR\"\nif [[ \"$CONFIGURATION\" = Distribution ]]; then\n    if [[ \"$TARGET_NAME\" = *\"Lite\"* ]]; then\n        mv \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork-lite.png\" \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"\n    else\n        mv \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork.png\" \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"\n    fi\nfi\nrm \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"*.png\n";
 		};
-		DA8B76C20F44EEFF00DD88BF /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "cd \"$TARGET_BUILD_DIR\"\nif [[ \"$CONFIGURATION\" = Distribution ]]; then\n    if [[ \"$TARGET_NAME\" = *\"Lite\"* ]]; then\n        mv \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork-lite.png\" \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"\n    else\n        mv \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork.png\" \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"\n    fi\nfi\nrm \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"*.png\n";
-			showEnvVarsInLog = 0;
-		};
 		DA8B77930F46120600DD88BF /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3168,6 +3154,19 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"$TARGET_BUILD_DIR\"\nif [[ \"$CONFIGURATION\" = Distribution ]]; then\n    if [[ \"$TARGET_NAME\" = *\"Lite\"* ]]; then\n        mv \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork-lite.png\" \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"\n    else\n        mv \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork.png\" \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"\n    fi\nfi\nrm \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"*.png\n";
 			showEnvVarsInLog = 0;
+		};
+		DAE38A881004D33B0023D941 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "cd \"$TARGET_BUILD_DIR\"\nif [[ \"$CONFIGURATION\" = Distribution ]]; then\n    if [[ \"$TARGET_NAME\" = *\"Lite\"* ]]; then\n        mv \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork-lite.png\" \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"\n    else\n        mv \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork.png\" \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"\n    fi\nfi\nrm \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"*.png\n";
 		};
 		DAE919B40FFD53D300BF4B89 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4331,7 +4330,6 @@
 		DA76F877100402FE00030524 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
 				GCC_PREPROCESSOR_DEFINITIONS = LITE;
 				INFOPLIST_FILE = Resources/InfoLite.plist;

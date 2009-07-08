@@ -11,7 +11,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.lyndir.lhunath.Gorillas</string>
 	<key>CFBundleExecutable</key>
-	<string>Gorillas</string>
+	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleDisplayName</key>
 	<string>Gorillas</string>
 	<key>CFBundleName</key>

@@ -50,7 +50,7 @@
     [humanMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.0", @"None")]];
     [humanMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.1", @"1 Player")]];
     [humanMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.2", @"2 Players")]];
-    [humanMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.3+", @"%d Player")]];
+    [humanMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.3+", @"%d Players")]];
     humansI.subItems = humanMenuItems;
     [humansI setSelectedIndex:1];
     
@@ -80,9 +80,9 @@
     aisI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(ais:)];
     NSMutableArray *aiMenuItems = [NSMutableArray arrayWithCapacity:4];
     [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.0", @"None")]];
-    [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.1", @"1 Player")]];
-    [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.2", @"2 Players")]];
-    [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.3+", @"%d Player")]];
+    [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.1", @"1 AI")]];
+    [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.2", @"2 AIs")]];
+    [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.3+", @"%d AIs")]];
     aisI.subItems = aiMenuItems;
     [aisI setSelectedIndex:1];
     
@@ -130,7 +130,13 @@
 - (void)reset {
 
     [humansI setSelectedIndex:(NSUInteger)fminf(humans, 3)];
+    if (humans >= 3)
+        [(MenuItemFont*)[humansI selectedItem] setString:[NSString stringWithFormat:
+                                                          NSLocalizedString(@"entries.player.count.3+", @"%d Players"), humans]];
     [aisI setSelectedIndex:(NSUInteger)fminf(ais, 3)];
+    if (ais >= 3)
+        [(MenuItemFont*)[aisI selectedItem] setString:[NSString stringWithFormat:
+                                                       NSLocalizedString(@"entries.ai.count.3+", @"%d AIs"), ais]];
     NSArray *modeKeys = [[GorillasConfig get].modeStrings allKeys];
     NSNumber *modeObj = [NSNumber numberWithUnsignedInt:[GorillasConfig get].mode];
     [gameModeI setSelectedIndex:[modeKeys indexOfObject:modeObj]];
