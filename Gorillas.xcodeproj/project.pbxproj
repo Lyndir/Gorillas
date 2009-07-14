@@ -1514,7 +1514,7 @@
 		DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillaLayer.m; sourceTree = "<group>"; };
 		DA859E6E0EC598E10036B7C0 /* BananaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaLayer.h; sourceTree = "<group>"; };
 		DA859E6F0EC598E10036B7C0 /* BananaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BananaLayer.m; sourceTree = "<group>"; };
-		DA8B77990F46120600DD88BF /* Gorillas Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA8B77990F46120600DD88BF /* GorillasBeta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorillasBeta.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9A63B50F573A530031988E /* CustomGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGameLayer.h; sourceTree = "<group>"; };
 		DA9A63B60F573A530031988E /* CustomGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGameLayer.m; sourceTree = "<group>"; };
 		DAA120920FDD26F700AA1E28 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1718,7 +1718,7 @@
 			children = (
 				DA379EBC0F0964BA00541EF4 /* Gorillas Dev.app */,
 				DABD68580F190D4D00EE213D /* Gorillas.app */,
-				DA8B77990F46120600DD88BF /* Gorillas Beta.app */,
+				DA8B77990F46120600DD88BF /* GorillasBeta.app */,
 				DA4769F80FDD7334002E74F8 /* GorillasLite Dev.app */,
 				DAE919BA0FFD53D300BF4B89 /* Gorillas Dev.app */,
 				DA76F878100402FE00030524 /* GorillasLite.app */,
@@ -2415,7 +2415,7 @@
 			);
 			name = "Gorillas - iBetaTest";
 			productName = Gorillas;
-			productReference = DA8B77990F46120600DD88BF /* Gorillas Beta.app */;
+			productReference = DA8B77990F46120600DD88BF /* GorillasBeta.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DABD67E10F190D4D00EE213D /* Gorillas - App Store */ = {
