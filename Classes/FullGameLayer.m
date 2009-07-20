@@ -47,32 +47,32 @@
                                           dimensions:CGSizeMake(contentSize.width - padding, contentSize.height - padding)
                                            alignment:alignment
                                             fontName:[GorillasConfig get].fixedFontName
-                                            fontSize:[GorillasConfig get].smallFontSize];
+                                            fontSize:[[GorillasConfig get].smallFontSize intValue]];
     [pageLabel setPosition:ccp(contentSize.width / 2, contentSize.height / 2)];
-    [pageLabel runAction:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    [pageLabel runAction:[FadeIn actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]]];
     [self addChild:pageLabel];
     [pageLabel release];
 
     // Back.
-    [MenuItemFont setFontSize:[[GorillasConfig get] largeFontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
     MenuItem *back = [MenuItemFont itemFromString:@"   <   "
                                                target:self
                                              selector:@selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
     Menu *backMenu = [Menu menuWithItems:back, nil];
-    [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
+    [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
 
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     MenuItem *upgrade = [MenuItemFont itemFromString:@"Upgrade"
                                                target:self
                                              selector:@selector(upgrade:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
     Menu *buyMenu = [Menu menuWithItems:upgrade, nil];
-    [buyMenu setPosition:ccp(contentSize.width - [[GorillasConfig get] fontSize] * 2.5f, [[GorillasConfig get] fontSize])];
+    [buyMenu setPosition:ccp(contentSize.width - [[GorillasConfig get].fontSize intValue] * 2.5f, [[GorillasConfig get].fontSize intValue])];
     [buyMenu alignItemsHorizontally];
     [self addChild: buyMenu];
     

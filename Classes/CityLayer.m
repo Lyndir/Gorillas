@@ -76,7 +76,7 @@
     strengthLabel   = [[LabelAtlas alloc] initWithString:[NSString stringWithFormat:@"%0.0f", 99.99f]
                                              charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
     infoLabel       = [[Label alloc] initWithString:@"∡\n⊿" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
-                                           fontName:[GorillasConfig get].fixedFontName fontSize:[GorillasConfig get].smallFontSize];
+                                           fontName:[GorillasConfig get].fixedFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
     [infoLabel addChild:angleLabel];
     [infoLabel addChild:strengthLabel];
     
@@ -147,10 +147,10 @@
 
     else {
         msgLabel = [[Label alloc] initWithString:@""
-                                      dimensions:CGSizeMake(1000, [[GorillasConfig get] fontSize] + 5)
+                                      dimensions:CGSizeMake(1000, [[GorillasConfig get].fontSize intValue] + 5)
                                        alignment:UITextAlignmentCenter
-                                        fontName:[[GorillasConfig get] fixedFontName]
-                                        fontSize:[[GorillasConfig get] fontSize]];
+                                        fontName:[GorillasConfig get].fixedFontName
+                                        fontSize:[[GorillasConfig get].fontSize intValue]];
     
         [self addChild:msgLabel z:9];
     }
@@ -160,16 +160,16 @@
                               [node position].y + [node contentSize].height)];
     
     // Make sure label remains on screen.
-    CGSize winSize = [[Director sharedDirector] winSize];
-    if(![[GorillasConfig get] followThrow]) {
-        if([msgLabel position].x < [[GorillasConfig get] fontSize] / 2)                 // Left edge
-            [msgLabel setPosition:ccp([[GorillasConfig get] fontSize] / 2, [msgLabel position].y)];
-        if([msgLabel position].x > winSize.width - [[GorillasConfig get] fontSize] / 2) // Right edge
-            [msgLabel setPosition:ccp(winSize.width - [[GorillasConfig get] fontSize] / 2, [msgLabel position].y)];
-        if([msgLabel position].y < [[GorillasConfig get] fontSize] / 2)                 // Bottom edge
-            [msgLabel setPosition:ccp([msgLabel position].x, [[GorillasConfig get] fontSize] / 2)];
-        if([msgLabel position].y > winSize.width - [[GorillasConfig get] fontSize] * 2) // Top edge
-            [msgLabel setPosition:ccp([msgLabel position].x, winSize.height - [[GorillasConfig get] fontSize] * 2)];
+    CGSize winSize = [Director sharedDirector].winSize;
+    if(![[GorillasConfig get].followThrow boolValue]) {
+        if([msgLabel position].x < [[GorillasConfig get].fontSize intValue] / 2)                 // Left edge
+            [msgLabel setPosition:ccp([[GorillasConfig get].fontSize intValue] / 2, [msgLabel position].y)];
+        if([msgLabel position].x > winSize.width - [[GorillasConfig get].fontSize intValue] / 2) // Right edge
+            [msgLabel setPosition:ccp(winSize.width - [[GorillasConfig get].fontSize intValue] / 2, [msgLabel position].y)];
+        if([msgLabel position].y < [[GorillasConfig get].fontSize intValue] / 2)                 // Bottom edge
+            [msgLabel setPosition:ccp([msgLabel position].x, [[GorillasConfig get].fontSize intValue] / 2)];
+        if([msgLabel position].y > winSize.width - [[GorillasConfig get].fontSize intValue] * 2) // Top edge
+            [msgLabel setPosition:ccp([msgLabel position].x, winSize.height - [[GorillasConfig get].fontSize intValue] * 2)];
     }
     
     // Color depending on whether message starts with -, + or neither.
@@ -185,7 +185,7 @@
                          [FadeOut actionWithDuration:3],
                          [Sequence actions:
                           [DelayTime actionWithDuration:1],
-                          [MoveBy actionWithDuration:2 position:ccp(0, [[GorillasConfig get] fontSize] * 2)],
+                          [MoveBy actionWithDuration:2 position:ccp(0, [[GorillasConfig get].fontSize intValue] * 2)],
                           nil],
                          nil]];
 }
@@ -234,8 +234,8 @@
             CGPoint from = [gorilla position];
             CGPoint to   = ccpAdd(from, throwHistory[i]);
             
-            if(to.x && to.y)
-                DrawLinesTo(from, &to, 1, ccc([GorillasConfig get].windowColorOff & 0xffffff33), 3);
+            if(!CGPointEqualToPoint(to, CGPointZero))
+                DrawLinesTo(from, &to, 1, ccc([[GorillasConfig get].windowColorOff longValue] & 0xffffff33), 3);
         }
     }
 }
@@ -465,8 +465,8 @@
         // Aim at the target.
         CGPoint r0 = [GorillasAppDelegate get].gameLayer.activeGorilla.position;
         CGPoint v = [self calculateThrowFrom:r0
-                                         to:[target position]
-                                 errorLevel:[[GorillasConfig get] level]];
+                                         to:target.position
+                                 errorLevel:[[GorillasConfig get].level floatValue]];
         [target release];
 
         // Throw at where we aimed.
@@ -517,7 +517,7 @@
     for(Sprite *hint in throwHints)
         if([hint visible]) {
             [hint stopAllActions];
-            [hint runAction:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration] opacity:0x00]];
+            [hint runAction:[FadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue] opacity:0x00]];
         }
     
     // Record throw history & start the actual throw.
@@ -531,7 +531,7 @@
 
 -(CGPoint) calculateThrowFrom:(CGPoint)r0 to:(CGPoint)rt errorLevel:(CGFloat)l {
 
-    float g = [[GorillasConfig get] gravity];
+    float g = [[GorillasConfig get].gravity unsignedIntValue];
     float w = [[[[GorillasAppDelegate get] gameLayer] windLayer] wind];
     ccTime t = 5 * 100 / g;
 
@@ -544,7 +544,7 @@
                    (g * t * t - 2 * r0.y + 2 * rt.y) / (2 * t));
 
     // Wind-based modifier.
-    v.x -= w * t * [[GorillasConfig get] windModifier];
+    v.x -= w * t * [[GorillasConfig get].windModifier floatValue];
 
     return v;
 }
@@ -571,9 +571,9 @@
             return;
     }
     
-    int score = [[GorillasConfig get] level] * [[GorillasConfig get] missScore];
+    int score = [[GorillasConfig get].level floatValue] * [[GorillasConfig get].missScore intValue];
     
-    [[GorillasConfig get] setScore:[[GorillasConfig get] score] + score];
+    [[GorillasConfig get] recordScore:[[GorillasConfig get].score floatValue] + score];
     [[[GorillasAppDelegate get] hudLayer] updateHudWithScore:score skill:0];
 
     if(score)
@@ -667,7 +667,7 @@
         }
     }
     // Find indexB: The right boundary of allowed gorilla indexes.
-    NSUInteger indexB = indexA + [GorillasConfig get].buildingAmount - 1;
+    NSUInteger indexB = indexA + [[GorillasConfig get].buildingAmount unsignedIntValue] - 1;
     // Less than or 3 gorillas, leave one building padding on the sides.
     if([gorillas count] <= 3) {
         indexA += 1;

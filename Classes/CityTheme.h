@@ -26,71 +26,71 @@
 
 @interface CityTheme : NSObject {
 
-    int     fixedFloors;
-    float   buildingMax;
-    int     buildingAmount;
-    NSArray *buildingColors;
+    NSUInteger                                      fixedFloors;
+    float                                           buildingMax;
+    NSUInteger                                      buildingAmount;
+    NSArray                                         *buildingColors;
     
-    int     windowAmount;
-    long    windowColorOn;
-    long    windowColorOff;
+    NSUInteger                                      windowAmount;
+    long                                            windowColorOn;
+    long                                            windowColorOff;
     
-    long    skyColor;
-    long    starColor;
-    int     starAmount;
+    long                                            skyColor;
+    long                                            starColor;
+    NSUInteger                                      starAmount;
     
-    float   windModifier;
-    int     gravity;
+    float                                           windModifier;
+    NSUInteger                                      gravity;
 }
 
-@property (nonatomic, readonly) int                fixedFloors;
-@property (nonatomic, readonly) float              buildingMax;
-@property (nonatomic, readonly) int                buildingAmount;
-@property (nonatomic, readonly, assign) NSArray    *buildingColors;
+@property (nonatomic, readonly) NSUInteger          fixedFloors;
+@property (nonatomic, readonly) float               buildingMax;
+@property (nonatomic, readonly) NSUInteger          buildingAmount;
+@property (nonatomic, readonly, assign) NSArray     *buildingColors;
 
-@property (nonatomic, readonly) int                windowAmount;
-@property (nonatomic, readonly) long               windowColorOn;
-@property (nonatomic, readonly) long               windowColorOff;
+@property (nonatomic, readonly) NSUInteger          windowAmount;
+@property (nonatomic, readonly) long                windowColorOn;
+@property (nonatomic, readonly) long                windowColorOff;
 
-@property (nonatomic, readonly) long               skyColor;
-@property (nonatomic, readonly) long               starColor;
-@property (nonatomic, readonly) int                starAmount;
+@property (nonatomic, readonly) long                skyColor;
+@property (nonatomic, readonly) long                starColor;
+@property (nonatomic, readonly) NSUInteger          starAmount;
 
-@property (nonatomic, readonly) float              windModifier;
-@property (nonatomic, readonly) int                gravity;
+@property (nonatomic, readonly) float               windModifier;
+@property (nonatomic, readonly) NSUInteger          gravity;
 
 -(void) apply;
 
-+(CityTheme *) themeWithFixedFloors: (int) nFixedFloors
++(CityTheme *) themeWithFixedFloors: (NSUInteger) nFixedFloors
                         buildingMax: (float) nBuildingMax
-                     buildingAmount: (int) nBuildingAmount
+                     buildingAmount: (NSUInteger) nBuildingAmount
                      buildingColors: (NSArray *) nBuildingColors
 
-                       windowAmount: (int) nWindowAmount
+                       windowAmount: (NSUInteger) nWindowAmount
                       windowColorOn: (long) nWindowColorOn
                      windowColorOff: (long) nWindowColorOff
 
                            skyColor: (long) nSkyColor
                           starColor: (long) nStarColor
-                         starAmount: (int) nStarAmount
+                         starAmount: (NSUInteger) nStarAmount
 
                        windModifier: (float) nWindModifier
-                            gravity: (int) nGravity;
--(id) initWithFixedFloors: (int) nFixedFloors
+                            gravity: (NSUInteger) nGravity;
+-(id) initWithFixedFloors: (NSUInteger) nFixedFloors
               buildingMax: (float) nBuildingMax
-           buildingAmount: (int) nBuildingAmount
+           buildingAmount: (NSUInteger) nBuildingAmount
            buildingColors: (NSArray *) nBuildingColors
 
-             windowAmount: (int) nWindowAmount
+             windowAmount: (NSUInteger) nWindowAmount
             windowColorOn: (long) nWindowColorOn
            windowColorOff: (long) nWindowColorOff
 
                  skyColor: (long) nSkyColor
                 starColor: (long) nStarColor
-               starAmount: (int) nStarAmount
+               starAmount: (NSUInteger) nStarAmount
 
              windModifier: (float) nWindModifier
-                  gravity: (int) nGravity;
+                  gravity: (NSUInteger) nGravity;
 
 +(NSDictionary *)                       getThemes;
 + (void)                                forgetThemes;

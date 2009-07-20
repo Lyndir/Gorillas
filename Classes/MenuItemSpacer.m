@@ -44,17 +44,17 @@
 
 -(id) initSmall {
     
-    return [self initWithHeight:[[GorillasConfig get] smallFontSize]];
+    return [self initWithHeight:[[GorillasConfig get].smallFontSize intValue]];
 }
 
 -(id) initNormal {
     
-    return [self initWithHeight:[[GorillasConfig get] fontSize]];
+    return [self initWithHeight:[[GorillasConfig get].fontSize intValue]];
 }
 
 -(id) initLarge {
     
-    return [self initWithHeight:[[GorillasConfig get] largeFontSize]];
+    return [self initWithHeight:[[GorillasConfig get].largeFontSize intValue]];
 }
 
 

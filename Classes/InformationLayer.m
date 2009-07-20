@@ -36,15 +36,15 @@
         return self;
 
     // Version string.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *ver   = [MenuItemFont itemFromString:[[NSBundle mainBundle]
                                                     objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
     [ver setIsEnabled:NO];
     
     // Information menus.
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     MenuItem *guide = [MenuItemFont itemFromString:NSLocalizedString(@"entries.guide", @"Game Guide")
                                             target:self selector:@selector(guide:)];
     MenuItem *stats = [MenuItemFont itemFromString:NSLocalizedString(@"entries.stats", @"Statistics")
@@ -61,14 +61,14 @@
 
     
     // Back.
-    [MenuItemFont setFontSize:[[GorillasConfig get] largeFontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
     MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
                                                target: self
                                              selector: @selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
     Menu *backMenu = [Menu menuWithItems:back, nil];
-    [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
+    [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
 

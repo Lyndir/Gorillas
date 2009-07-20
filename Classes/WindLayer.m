@@ -97,7 +97,7 @@
 
 -(void) updateSystems {
     
-    float windRange = (3 * [[GorillasConfig get] windModifier]);
+    float windRange = (3.0f * [[GorillasConfig get].windModifier floatValue]);
     head.position   = ccp(wind * windRange, 0);
     body.position   = ccp(0, 0);
     tail.position   = ccp(-wind * windRange, 0);
@@ -189,7 +189,7 @@
     float windRange = (5 * [[GorillasConfig get] windModifier]);
     CGSize winSize = [[Director sharedDirector] winSize];
     
-    const CGPoint from = ccp(winSize.width / 2, winSize.height - [[GorillasConfig get] smallFontSize]);
+    const CGPoint from = ccp(winSize.width / 2, winSize.height - [[GorillasConfig get].smallFontSize intValue]);
     CGPoint prev = from;
     
     const CGPoint by[] = {

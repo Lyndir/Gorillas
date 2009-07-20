@@ -63,8 +63,8 @@
     srandom(time(nil));
     
     // Menu items font.
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     menuLayers = [[NSMutableArray alloc] initWithCapacity:3];
 
 	// Build the splash scene.

@@ -55,12 +55,12 @@
 
 -(void) reset {
     
-    if (starCount == [GorillasConfig get].starAmount)
+    if (starCount == [[GorillasConfig get].starAmount unsignedIntValue])
         return;
 
     CGRect field        = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self];
-    starCount           = [GorillasConfig get].starAmount;
-    ccColor4B starColor = ccc([GorillasConfig get].starColor);
+    starCount           = [[GorillasConfig get].starAmount unsignedIntValue];
+    ccColor4B starColor = ccc([[GorillasConfig get].starColor longValue]);
     starColor.r         *= depth;
     starColor.g         *= depth;
     starColor.b         *= depth;
@@ -88,7 +88,7 @@
 -(void) update:(ccTime)dt {
 
     CGRect field        = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self];
-    NSInteger speed     = [GorillasConfig get].starSpeed;
+    NSInteger speed     = [[GorillasConfig get].starSpeed integerValue];
     
     for (NSUInteger s = 0; s < starCount; ++s)
         if (starVertices[s].p.x < field.origin.x)

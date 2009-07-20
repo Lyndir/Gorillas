@@ -118,7 +118,7 @@
         && fabsf(swipeStart.y - swipePoint.y) < gSwipeMaxVertical)
         swiped = YES;
     
-    CGFloat swipeActionDuration = [GorillasConfig get].transitionDuration;
+    CGFloat swipeActionDuration = [[GorillasConfig get].transitionDuration floatValue];
     if(swipeAction) {
         if(![swipeAction isDone])
             swipeActionDuration -= swipeAction.elapsed;
@@ -171,7 +171,7 @@
     }
     
     if(swiped)
-        [self runAction:swipeAction = [[Sequence alloc] initOne:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+        [self runAction:swipeAction = [[Sequence alloc] initOne:[MoveTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                                                                   position:swipeTarget]
                                                             two:[CallFunc actionWithTarget:self selector:@selector(swipeDone:)]]];
     else

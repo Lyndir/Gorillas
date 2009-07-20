@@ -41,7 +41,7 @@
         if([GorillasAppDelegate get].gameLayer.activeGorilla.human && liveHumans > 1) {
             [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"message.nextplayer", @"Next player ..")];
 
-            if ([GorillasConfig get].voice)
+            if ([[GorillasConfig get].voice boolValue])
                 [[GorillasAudioController get] playEffectNamed:@"Next_Player"];
             
             [self performSelector:@selector(nextTurn) withObject:nil afterDelay:2];
@@ -62,7 +62,7 @@
     if ([[GorillasAppDelegate get].gameLayer.activeGorilla human] && ![GorillasAppDelegate get].gameLayer.singlePlayer) {
         [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"message.nextplayer.go", @"Go ..")];
         
-        if ([GorillasConfig get].voice)
+        if ([[GorillasConfig get].voice boolValue])
             [[GorillasAudioController get] playEffectNamed:@"Go"];
     }
 }

@@ -64,8 +64,8 @@
 
 -(void) reset {
 
-    skyColor = ccc([GorillasConfig get].skyColor);
-    fancySky = [GorillasConfig get].visualFx;
+    skyColor = ccc([[GorillasConfig get].skyColor longValue]);
+    fancySky = [[GorillasConfig get].visualFx boolValue];
 
     CGRect field = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self];
     from    = ccp(field.origin.x, field.origin.y);

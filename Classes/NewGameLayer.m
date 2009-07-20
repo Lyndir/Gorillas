@@ -37,12 +37,12 @@
     
     
     // Game Configuration.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *styleT    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.style", @"Choose a game style:")];
     [styleT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     configurationI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(gameConfiguration:)];
     NSMutableArray * configurationMenuItems = [NSMutableArray arrayWithCapacity:4];
     for (GameConfiguration *configuration in [GorillasConfig get].gameConfigurations)
@@ -50,25 +50,25 @@
     configurationI.subItems = configurationMenuItems;
     [configurationI setSelectedIndex:1];
     
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     descriptionT    = [[MenuItemFont alloc] initFromString:@"description" target:nil selector:nil];
     descriptionT.isEnabled = NO;
     
     
     // Type (Single / Multi).
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     singlePlayerI    = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.player.single", @"Single Player")
                                                        target:self
                                                      selector:@selector(startSingle:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     multiPlayerI    = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.player.multi", @"Multi Player")
                                                       target:self
                                                     selector:@selector(startMulti:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     MenuItem *customI    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.custom", @"Custom Game...")
                                                  target:self
                                                selector:@selector(custom:)];
@@ -84,14 +84,14 @@
     
     
     // Back.
-    [MenuItemFont setFontSize:[[GorillasConfig get] largeFontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
     MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
                                                target: self
                                              selector: @selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
     Menu *backMenu = [Menu menuWithItems:back, nil];
-    [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
+    [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
     
@@ -101,10 +101,13 @@
 
 - (void)reset {
     
-    [configurationI setSelectedIndex:[[GorillasConfig get].gameConfigurations indexOfObject:[GorillasConfig get].gameConfiguration]];
-    [descriptionT setString:[GorillasConfig get].gameConfiguration.description];
-    singlePlayerI.isEnabled = [GorillasConfig get].gameConfiguration.sHumans + [GorillasConfig get].gameConfiguration.sAis > 0;
-    multiPlayerI.isEnabled = [GorillasConfig get].gameConfiguration.mHumans + [GorillasConfig get].gameConfiguration.mAis > 0;
+    NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
+    GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
+    
+    [configurationI setSelectedIndex:gameConfigurationIndex];
+    [descriptionT setString:gameConfiguration.description];
+    singlePlayerI.isEnabled = gameConfiguration.sHumans + gameConfiguration.sAis > 0;
+    multiPlayerI.isEnabled = gameConfiguration.mHumans + gameConfiguration.mAis > 0;
 }
 
 
@@ -120,7 +123,9 @@
     
     [[GorillasAudioController get] clickEffect];
     
-    ++[GorillasConfig get].activeGameConfigurationIndex;
+    [GorillasConfig get].activeGameConfigurationIndex = [NSNumber numberWithUnsignedInt:
+                                                         [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue] + 1
+                                                         % [[GorillasConfig get].gameConfigurations count]];
 }
 
 
@@ -128,9 +133,12 @@
     
     [[GorillasAudioController get] clickEffect];
     
-    [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:[GorillasConfig get].gameConfiguration.mode
-                                                          humans:[GorillasConfig get].gameConfiguration.sHumans
-                                                             ais:[GorillasConfig get].gameConfiguration.sAis];
+    NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
+    GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
+
+    [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:gameConfiguration.mode
+                                                          humans:gameConfiguration.sHumans
+                                                             ais:gameConfiguration.sAis];
     [[[GorillasAppDelegate get] gameLayer] startGame];
 }
 
@@ -139,9 +147,12 @@
     
     [[GorillasAudioController get] clickEffect];
     
-    [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:[GorillasConfig get].gameConfiguration.mode
-                                                          humans:[GorillasConfig get].gameConfiguration.mHumans
-                                                             ais:[GorillasConfig get].gameConfiguration.mAis];
+    NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
+    GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
+
+    [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:gameConfiguration.mode
+                                                          humans:gameConfiguration.mHumans
+                                                             ais:gameConfiguration.mAis];
     [[[GorillasAppDelegate get] gameLayer] startGame];
 }
 

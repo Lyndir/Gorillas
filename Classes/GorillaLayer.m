@@ -55,7 +55,7 @@ static NSUInteger _teamIndex, _globalIndex;
 
 -(id) initWithName:(NSString *)_name type:(GorillasPlayerType)_type {
     
-    model   = [GorillasConfig get].playerModel;
+    model   = [[GorillasConfig get].playerModel unsignedIntValue];
     type    = _type;
     
     if(!(self = [super initWithFile:[self modelFileWithArmsUpLeft:NO right:NO]]))
@@ -82,11 +82,11 @@ static NSUInteger _teamIndex, _globalIndex;
     initialLives = 1;
     if(self.human && [[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesPl])
         // Human gorillas with lives enabled.
-        initialLives = [[GorillasConfig get] lives];
+        initialLives = [[GorillasConfig get].lives intValue];
     else if(!self.human) {
         if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesAi])
             // AI gorillas with lives enabled.
-            initialLives = [[GorillasConfig get] lives];
+            initialLives = [[GorillasConfig get].lives intValue];
         else if([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesPl])
             // AI gorillas without lives enabled get infinite lives when humans have lives enabled.
             initialLives = -1;
@@ -341,7 +341,7 @@ static NSUInteger _teamIndex, _globalIndex;
     
     GLubyte o = active? 0xFF: 0x33;
     
-    if ([GorillasConfig get].visualFx) {
+    if ([[GorillasConfig get].visualFx boolValue]) {
         DrawBoxFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[1], ccp(0, 3)), ccc(0xCCFFCC00 | o), ccc(0x33CC3300 | o));
         DrawBoxFrom(ccpAdd(lines[2], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc(0xFFCCCC00 | o), ccc(0xCC333300 | o));
     }

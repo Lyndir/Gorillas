@@ -31,7 +31,7 @@
     
     static SystemSoundID clicky = 0;
     
-    if([[GorillasConfig get] soundFx]) {
+    if([[GorillasConfig get].soundFx boolValue]) {
         if(clicky == 0)
             clicky = [GorillasAudioController loadEffectWithName:@"snapclick.caf"];
         

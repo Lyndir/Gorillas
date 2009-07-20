@@ -34,7 +34,7 @@
 
 - (id)initWithGameScene:(Scene *)gameScene {
 
-    if (!(self = [super initWithDuration:[[GorillasConfig get] transitionDuration]
+    if (!(self = [super initWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                    scene:gameScene
                              orientation:kOrientationDownOver]))
         return nil;

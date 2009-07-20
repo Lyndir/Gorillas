@@ -85,7 +85,7 @@
         [self removeChild:messageLabel cleanup:NO];
     
     self.position = self.hidePosition;
-    [self runAction:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+    [self runAction:[MoveTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                position:showPosition]];
 }
 
@@ -103,7 +103,7 @@
         [messageLabel release];
     }
     
-    CGFloat fontSize = [GorillasConfig get].smallFontSize;
+    CGFloat fontSize = [[GorillasConfig get].smallFontSize intValue];
     messageLabel = [[Label alloc] initWithString:msg dimensions:self.contentSize alignment:UITextAlignmentCenter
                                         fontName:[GorillasConfig get].fixedFontName fontSize:fontSize];
 
@@ -147,7 +147,7 @@
     
     self.position = showPosition;
     [self runAction:[Sequence actions:
-              [MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+              [MoveTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                 position:self.hidePosition],
               [Remove action],
               nil]];

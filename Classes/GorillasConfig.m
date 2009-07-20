@@ -25,72 +25,84 @@
 #import "CityTheme.h"
 #import "GorillasAppDelegate.h"
 
-#define dFontSize           @"v1.0.fontSize"
-#define dLargeFontSize      @"v1.1.largeFontSize"
-#define dSmallFontSize      @"v1.0.smallFontSize"
-#define dFixedFontName      @"v1.0.fixedFontName"
-#define dFontName           @"v1.0.fontName"
+#define dFontSize           NSStringFromSelector(@selector(fontSize))
+#define dLargeFontSize      NSStringFromSelector(@selector(largeFontSize))
+#define dSmallFontSize      NSStringFromSelector(@selector(smallFontSize))
+#define dFixedFontName      NSStringFromSelector(@selector(fixedFontName))
+#define dFontName           NSStringFromSelector(@selector(fontName))
 
-#define dCityTheme          @"v1.0.cityTheme"
-#define dFixedFloors        @"v1.0.fixedFloors"
-#define dBuildingMax        @"v1.0.buildingMax"
-#define dBuildingAmount     @"v1.0.buildingAmount"
-#define dBuildingSpeed      @"v1.0.buildingSpeed"
-#define dBuildingColorCount @"v1.0.buildingColorCount"
-#define dBuildingColors     @"v1.0.buildingColors"
+#define dCityTheme          NSStringFromSelector(@selector(cityTheme))
+#define dFixedFloors        NSStringFromSelector(@selector(fixedFloors))
+#define dBuildingMax        NSStringFromSelector(@selector(buildingMax))
+#define dBuildingAmount     NSStringFromSelector(@selector(buildingAmount))
+#define dBuildingSpeed      NSStringFromSelector(@selector(buildingSpeed))
+#define dBuildingColorCount NSStringFromSelector(@selector(buildingColorCount))
+#define dBuildingColors     NSStringFromSelector(@selector(buildingColors))
 
-#define dWindowAmount       @"v1.0.windowAmount"
-#define dWindowColorOn      @"v1.0.windowColorOn"
-#define dWindowColorOff     @"v1.0.windowColorOff"
+#define dWindowAmount       NSStringFromSelector(@selector(windowAmount))
+#define dWindowColorOn      NSStringFromSelector(@selector(windowColorOn))
+#define dWindowColorOff     NSStringFromSelector(@selector(windowColorOff))
 
-#define dSkyColor           @"v1.0.skyColor"
-#define dStarColor          @"v1.0.starColor"
-#define dStarSpeed          @"v1.3.starSpeed"
-#define dStarAmount         @"v1.0.starAmount"
+#define dSkyColor           NSStringFromSelector(@selector(skyColor))
+#define dStarColor          NSStringFromSelector(@selector(starColor))
+#define dStarSpeed          NSStringFromSelector(@selector(starSpeed))
+#define dStarAmount         NSStringFromSelector(@selector(starAmount))
 
-#define dLives              @"v1.1.lives"
-#define dWindModifier       @"v1.0.windModifier"
-#define dGravity            @"v1.0.gravity"
-#define dMinGravity         @"v1.0.minGravity"
-#define dMaxGravity         @"v1.0.maxGravity"
+#define dLives              NSStringFromSelector(@selector(lives))
+#define dWindModifier       NSStringFromSelector(@selector(windModifier))
+#define dGravity            NSStringFromSelector(@selector(gravity))
+#define dMinGravity         NSStringFromSelector(@selector(minGravity))
+#define dMaxGravity         NSStringFromSelector(@selector(maxGravity))
 
-#define dShadeColor         @"v1.0.shadeColor"
-#define dTransitionDuration @"v1.0.transitionDuration"
-#define dGameScrollDuration @"v1.1.gameScrollDuration"
+#define dShadeColor         NSStringFromSelector(@selector(shadeColor))
+#define dTransitionDuration NSStringFromSelector(@selector(transitionDuration))
+#define dGameScrollDuration NSStringFromSelector(@selector(gameScrollDuration))
 
-#define dGameConfiguration  @"v1.1.gameConfiguration"
-#define dMode               @"v1.1.mode"
-#define dMissScore          @"v1.0.missScore"
-#define dKillScore          @"v1.0.killScore"
-#define dBonusOneShot       @"v1.1.bonusOneShot"
-#define dBonusSkill         @"v1.1.bonusSkill"
-#define dDeathScoreRatio    @"v1.0.deathScoreRatio"
+#define dGameConfiguration  NSStringFromSelector(@selector(gameConfiguration))
+#define dMode               NSStringFromSelector(@selector(mode))
+#define dMissScore          NSStringFromSelector(@selector(missScore))
+#define dKillScore          NSStringFromSelector(@selector(killScore))
+#define dBonusOneShot       NSStringFromSelector(@selector(bonusOneShot))
+#define dBonusSkill         NSStringFromSelector(@selector(bonusSkill))
+#define dDeathScoreRatio    NSStringFromSelector(@selector(deathScoreRatio))
 
-#define dSoundFx            @"v1.1.soundFx"
-#define dVoice              @"v1.3.voice"
-#define dVibration          @"v1.1.vibration"
-#define dVisualFx           @"v1.1.visualFx"
+#define dSoundFx            NSStringFromSelector(@selector(soundFx))
+#define dVoice              NSStringFromSelector(@selector(voice))
+#define dVibration          NSStringFromSelector(@selector(vibration))
+#define dVisualFx           NSStringFromSelector(@selector(visualFx))
 
-#define dReplay             @"v1.1.replay"
-#define dFollowThrow        @"v1.1.followThrow"
+#define dReplay             NSStringFromSelector(@selector(replay))
+#define dFollowThrow        NSStringFromSelector(@selector(followThrow))
 
-#define dTracks             @"v1.1.tracks"
-#define dTrackNames         @"v1.3.trackNames"
-#define dCurrentTrack       @"v1.3.currentTrack"
+#define dTracks             NSStringFromSelector(@selector(tracks))
+#define dTrackNames         NSStringFromSelector(@selector(trackNames))
+#define dCurrentTrack       NSStringFromSelector(@selector(currentTrack))
 
-#define dPlayerModel        @"v1.2.playerModel"
-#define dScore              @"v1.0.score"
-#define dSkill              @"v1.1.skill"
-#define dTopScoreHistory    @"v1.0.topScoreHistory"
-#define dLevel              @"v1.0.level"
-#define dLevelNames         @"v1.0.levelNames"
-#define dLevelProgress      @"v1.0.levelProgress"
+#define dPlayerModel        NSStringFromSelector(@selector(playerModel))
+#define dScore              NSStringFromSelector(@selector(score))
+#define dSkill              NSStringFromSelector(@selector(skill))
+#define dTopScoreHistory    NSStringFromSelector(@selector(topScoreHistory))
+#define dLevel              NSStringFromSelector(@selector(level))
+#define dLevelNames         NSStringFromSelector(@selector(levelNames))
+#define dLevelProgress      NSStringFromSelector(@selector(levelProgress))
 
 
 @implementation GorillasConfig
 
 @synthesize modes, modeStrings, gameConfigurations;
 
+@dynamic fontSize, largeFontSize, smallFontSize, fontName, fixedFontName;
+@dynamic cityTheme;
+@dynamic fixedFloors, buildingMax, buildingAmount, buildingSpeed, buildingColors;
+@dynamic windowAmount, windowColorOn, windowColorOff;
+@dynamic skyColor, starColor, starSpeed, starAmount;
+@dynamic lives, windModifier, gravity, minGravity, maxGravity;
+@dynamic shadeColor, transitionDuration, gameScrollDuration;
+@dynamic level, levelNames, levelProgress;
+@dynamic activeGameConfigurationIndex, mode, playerModel, score, skill, topScoreHistory, missScore, killScore, bonusOneShot, bonusSkill, deathScoreRatio;
+@dynamic tracks, trackNames, currentTrack;
+@dynamic soundFx, voice, vibration, visualFx;
+@dynamic replay, followThrow;
 
 #pragma mark Internal
 
@@ -262,6 +274,34 @@
                                 
                                 nil]];
     
+    updateTriggers  = [[NSArray alloc] initWithObjects:
+                       dLargeFontSize,
+                       dSmallFontSize,
+                       dFontSize,
+                       dFontName,
+                       dFixedFontName,
+                       dCityTheme,
+                       dGravity,
+                       dSoundFx,
+                       dVoice,
+                       dVibration,
+                       dVisualFx,
+                       dReplay,
+                       dFollowThrow,
+                       dTracks,
+                       dTrackNames,
+                       dCurrentTrack,
+                       dLevel,
+                       dLevelNames,
+                       nil
+                       ];
+    resetTriggers   = [[NSDictionary alloc] initWithObjectsAndKeys:
+                       @"gameLayer.skyLayer", dVisualFx,
+                       @"newGameLayer", dGameConfiguration,
+                       @"customGameLayer", dMode,
+                       nil
+                       ];
+    
     return self;
 }
 
@@ -289,53 +329,48 @@
 }
 
 
-#pragma mark Text
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
+    
+    if ([NSStringFromSelector(aSelector) hasPrefix:@"set"])
+        return [NSMethodSignature signatureWithObjCTypes:"v@:@"];
+    
+    return [NSMethodSignature signatureWithObjCTypes:"@@:@"];
+}
 
--(int) largeFontSize {
-    
-    return [defaults integerForKey:dLargeFontSize];
-}
--(void) setLargeFontSize: (int)largeFontSize {
-    
-    [defaults setInteger:largeFontSize forKey: dLargeFontSize];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(int) smallFontSize {
-    
-    return [defaults integerForKey: dSmallFontSize];
-}
--(void) setSmallFontSize: (int)smallFontSize {
-    
-    [defaults setInteger:smallFontSize forKey: dSmallFontSize];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(int) fontSize {
-    
-    return [defaults integerForKey: dFontSize];
-}
--(void) setFontSize: (int)fontSize {
 
-    [defaults setInteger:fontSize forKey: dFontSize];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(NSString *) fontName {
-
-    return [defaults stringForKey: dFontName];
-}
--(void) setFontName: (NSString *)fontName {
-
-    [defaults setObject:fontName forKey: dFontName];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(NSString *) fixedFontName {
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
     
-    return [defaults stringForKey: dFixedFontName];
-}
--(void) setFixedFontName: (NSString *)fixedFontName {
+    NSString *selector = NSStringFromSelector(anInvocation.selector);
+    if ([selector hasPrefix:@"set"]) {
+        NSRange firstChar, rest;
+        firstChar.location  = 3;
+        firstChar.length    = 1;
+        rest.location       = 4;
+        rest.length         = selector.length - 5;
+        
+        selector = [NSString stringWithFormat:@"%@%@",
+                    [[selector substringWithRange:firstChar] lowercaseString],
+                    [selector substringWithRange:rest]];
+        
+        id value;
+        [anInvocation getArgument:&value atIndex:2];
+        
+        [defaults setObject:value forKey:selector];
+        
+        if ([updateTriggers containsObject:selector])
+            [[GorillasAppDelegate get] updateConfig];
+        NSString *resetTriggerKey = [resetTriggers objectForKey:selector];
+        if (resetTriggerKey)
+            [[[GorillasAppDelegate get] valueForKey:resetTriggerKey] reset];
+    }
     
-    [defaults setObject:fixedFontName forKey: dFixedFontName];
-    [[GorillasAppDelegate get] updateConfig];
+    else {
+        id value = [defaults objectForKey:selector];
+        [anInvocation setReturnValue:&value];
+    }
 }
+
+
 -(NSString *) offMessage {
 
     return [offMessages objectAtIndex:random() % offMessages.count];
@@ -346,76 +381,23 @@
 }
 
 
-#pragma mark City
-
--(NSString *) cityTheme {
-    
-    return [defaults stringForKey: dCityTheme];
-}
--(void) setCityTheme: (NSString *)cityTheme {
-    
-    [defaults setObject:cityTheme forKey: dCityTheme];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(NSUInteger) fixedFloors {
-
-    return [defaults integerForKey: dFixedFloors];
-}
--(void) setFixedFloors: (NSUInteger)fixedFloors {
-
-    [defaults setInteger:fixedFloors forKey: dFixedFloors];
-}
 -(float) cityScale {
     
     return [self buildingWidth] / 50;
 }
--(float) buildingMax {
-
-    return [defaults floatForKey: dBuildingMax];
-}
--(void) setBuildingMax: (float)buildingMax {
-
-    [defaults setFloat:buildingMax forKey: dBuildingMax];
-}
 -(float) buildingWidth {
     
-	CGSize size = [[Director sharedDirector] winSize];
-    return (size.width / [self buildingAmount] - 1);
-}
--(NSUInteger) buildingAmount {
-
-    return [defaults integerForKey: dBuildingAmount];
-}
--(void) setBuildingAmount: (NSUInteger)buildingAmount {
-
-    [defaults setInteger:buildingAmount forKey: dBuildingAmount];
-}
--(int) buildingSpeed {
-
-    return [defaults integerForKey: dBuildingSpeed];
-}
--(void) setBuildingSpeed: (int)buildingSpeed {
-
-    [defaults setInteger:buildingSpeed forKey: dBuildingSpeed];
+    return ([Director sharedDirector].winSize.width / [[self buildingAmount] unsignedIntValue] - 1);
 }
 -(long) buildingColor {
     
     return [[[self buildingColors] objectAtIndex:random() % [[self buildingColors] count]] longValue];
 }
--(NSArray *) buildingColors {
-
-    return [defaults arrayForKey: dBuildingColors];
-}
--(void) setBuildingColors: (NSArray *)buildingColors {
-
-    [defaults setObject:buildingColors forKey: dBuildingColors];
-}
 
 
 -(float) windowWidth {
     
-	CGSize size = [Director sharedDirector].winSize;
-    return size.width / self.buildingAmount / (self.windowAmount * 2 + 1);
+    return [Director sharedDirector].winSize.width / [self.buildingAmount unsignedIntValue] / ([self.windowAmount unsignedIntValue] * 2 + 1);
 }
 -(float) windowHeight {
     
@@ -425,235 +407,14 @@
     
     return [self windowWidth];
 }
--(NSUInteger) windowAmount {
-
-    return [defaults integerForKey: dWindowAmount];
-}
--(void) setWindowAmount: (NSUInteger)windowAmount {
-
-    [defaults setInteger:windowAmount forKey: dWindowAmount];
-}
--(long) windowColorOn {
-
-    return [(NSNumber *)[defaults objectForKey:dWindowColorOn] longValue];
-}
--(void) setWindowColorOn: (long)windowColorOn {
-
-    [defaults setObject:[NSNumber numberWithLong:windowColorOn] forKey: dWindowColorOn];
-}
--(long) windowColorOff {
-
-    return [(NSNumber *)[defaults objectForKey:dWindowColorOff] longValue];
-}
--(void) setWindowColorOff: (long)windowColorOff {
-
-    [defaults setObject:[NSNumber numberWithLong:windowColorOff] forKey: dWindowColorOff];
-}
-
-
-#pragma mark Environment
-
--(long) skyColor {
-
-    return [(NSNumber *)[defaults objectForKey:dSkyColor] longValue];
-}
--(void) setSkyColor: (long)skyColor {
-    
-    [defaults setObject:[NSNumber numberWithLong:skyColor] forKey: dSkyColor];
-}
--(long) starColor {
-
-    return [(NSNumber *)[defaults objectForKey:dStarColor] longValue];
-}
--(void) setStarColor: (long)starColor {
-
-    [defaults setObject:[NSNumber numberWithLong:starColor] forKey: dStarColor];
-}
--(int) starSpeed {
-
-    return [defaults integerForKey: dStarSpeed];
-}
--(void) setStarSpeed: (int)starSpeed {
-
-    [defaults setInteger:starSpeed forKey: dStarSpeed];
-}
--(NSUInteger) starAmount {
-
-    return [defaults integerForKey: dStarAmount];
-}
--(void) setStarAmount: (NSUInteger)starAmount {
-
-    [defaults setInteger:starAmount forKey: dStarAmount];
-}
-
-
-#pragma mark Gameplay
-
--(int) lives {
-    
-    return [defaults integerForKey:dLives];
-}
--(void) setLives: (int)_lives {
-    
-    [defaults setInteger:_lives forKey: dLives];
-}
--(float) windModifier {
-    
-    return [defaults floatForKey: dWindModifier];
-}
--(void) setWindModifier:(float)windModifier {
-    
-    [defaults setFloat:windModifier forKey:dWindModifier];
-}
--(NSUInteger) gravity {
-    
-    return [defaults integerForKey: dGravity];
-}
--(void) setGravity: (NSUInteger)gravity {
-
-    if(gravity > [self maxGravity])
-        gravity = [self maxGravity];
-    if(gravity < [self minGravity])
-        gravity = [self minGravity];
-    
-    [defaults setInteger:gravity forKey: dGravity];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(NSUInteger) minGravity {
-    
-    return [defaults integerForKey: dMinGravity];
-}
--(void) setMinGravity: (NSUInteger)minGravity {
-    
-    [defaults setInteger:minGravity forKey: dMinGravity];
-}
--(NSUInteger) maxGravity {
-    
-    return [defaults integerForKey: dMaxGravity];
-}
--(void) setMaxGravity: (NSUInteger)maxGravity {
-    
-    [defaults setInteger:maxGravity forKey: dMaxGravity];
-}
-
-
-#pragma mark User Interface
-
--(long) shadeColor {
-
-    return [(NSNumber *)[defaults objectForKey:dShadeColor] longValue];
-}
--(void) setShadeColor: (long)shadeColor {
-
-    [defaults setObject:[NSNumber numberWithLong:shadeColor] forKey: dShadeColor];
-}
--(ccTime) transitionDuration {
-
-    return [defaults floatForKey: dTransitionDuration];
-}
--(void) setTransitionDuration: (ccTime)transitionDuration {
-
-    [defaults setFloat:transitionDuration forKey: dTransitionDuration];
-}
--(ccTime) gameScrollDuration {
-    
-    return [defaults floatForKey: dGameScrollDuration];
-}
--(void) setGameScrollDuration: (ccTime)gameScrollDuration {
-    
-    [defaults setFloat:gameScrollDuration forKey: dGameScrollDuration];
-}
-
-
-#pragma mark Global Configuration
-
--(BOOL) soundFx {
-    
-    return [defaults boolForKey: dSoundFx];
-}
--(void) setSoundFx: (BOOL)nSoundFx {
-    
-    [defaults setBool:nSoundFx forKey: dSoundFx];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(BOOL) voice {
-    
-    return [defaults boolForKey: dVoice];
-}
--(void) setVoice: (BOOL)nVoice {
-    
-    [defaults setBool:nVoice forKey: dVoice];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(BOOL) vibration {
-    
-    return [defaults boolForKey: dVibration];
-}
--(void) setVibration: (BOOL)nVibration {
-    
-    [defaults setBool:nVibration forKey: dVibration];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(BOOL) visualFx {
-    
-    return [defaults boolForKey: dVisualFx];
-}
--(void) setVisualFx: (BOOL)nVisualFx {
-    
-    [defaults setBool:nVisualFx forKey: dVisualFx];
-    [[GorillasAppDelegate get] updateConfig];
-    [[GorillasAppDelegate get].gameLayer.skyLayer reset];
-}
-
-
--(BOOL) replay {
-    
-    return [defaults boolForKey: dReplay];
-}
--(void) setReplay: (BOOL)nReplay {
-    
-    [defaults setBool:nReplay forKey: dReplay];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(BOOL) followThrow {
-    
-    return [defaults boolForKey: dFollowThrow];
-}
--(void) setFollowThrow: (BOOL)nFollowThrow {
-    
-    [defaults setBool:nFollowThrow forKey: dFollowThrow];
-    [[GorillasAppDelegate get] updateConfig];
-}
 
 
 #pragma mark Audio
 
--(NSArray *) tracks {
-    
-    return [defaults arrayForKey: dTracks];
-}
--(void) setTracks: (NSArray *)tracks {
-    
-    [defaults setObject:tracks forKey: dTracks];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(NSArray *) trackNames {
-    
-    return [defaults arrayForKey: dTrackNames];
-}
--(void) setTrackNames: (NSArray *)trackNames {
-    
-    [defaults setObject:trackNames forKey: dTrackNames];
-    [[GorillasAppDelegate get] updateConfig];
-}
 -(NSString *) randomTrack {
     
     NSArray *tracks = self.tracks;
     return [tracks objectAtIndex:random() % ([tracks count] - 2)];
-}
--(NSString *) currentTrack {
-    
-    return [defaults stringForKey: dCurrentTrack];
 }
 -(void) setCurrentTrack: (NSString *)currentTrack {
     
@@ -681,78 +442,16 @@
     long now = (long) [[NSDate date] timeIntervalSince1970];
     return [NSDate dateWithTimeIntervalSince1970:(now / (3600 * 24)) * (3600 * 24)];
 }
--(NSUInteger) activeGameConfigurationIndex {
-    
-    return [defaults integerForKey:dGameConfiguration];
-}
--(void) setActiveGameConfigurationIndex:(NSUInteger)_activeGameConfigurationIndex {
-    
-    [defaults setInteger:_activeGameConfigurationIndex % [gameConfigurations count] forKey:dGameConfiguration];
-    [[GorillasAppDelegate get].newGameLayer reset];
-}
--(GameConfiguration *) gameConfiguration {
-    
-    return [gameConfigurations objectAtIndex:[self activeGameConfigurationIndex]];
-}
--(NSUInteger) mode {
-    
-    return [defaults integerForKey: dMode];
-}
--(void) setMode: (NSUInteger)_mode {
-    
-    [defaults setInteger:_mode forKey: dMode];
-    [[[GorillasAppDelegate get] customGameLayer] reset];
-}
 -(NSString *) modeString {
 
-    NSString *string = [modeStrings objectForKey:[NSNumber numberWithUnsignedInt:self.mode]];
+    NSString *string = [modeStrings objectForKey:self.mode];
     if (string == nil)
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:@"Unsupported game mode." userInfo:nil];
     
     return string;
 }
--(int) missScore {
-    
-    return [defaults integerForKey: dMissScore];
-}
--(void) setMissScore: (int)nMissScore {
-    
-    [defaults setInteger:nMissScore forKey: dMissScore];
-}
--(int) killScore {
-    
-    return [defaults integerForKey: dKillScore];
-}
--(void) setKillScore: (int)nKillScore {
-    
-    [defaults setInteger:nKillScore forKey: dKillScore];
-}
--(float) bonusOneShot {
-    
-    return [defaults floatForKey: dBonusOneShot];
-}
--(void) setBonusOneShot: (float)nBonusOneShot {
-    
-    [defaults setFloat:nBonusOneShot forKey: dBonusOneShot];
-}
--(float) bonusSkill {
-    
-    return [defaults floatForKey: dBonusSkill];
-}
--(void) setBonusSkill: (float)nBonusSkill {
-    
-    [defaults setFloat:nBonusSkill forKey: dBonusSkill];
-}
--(int) deathScoreRatio {
-    
-    return [defaults integerForKey: dDeathScoreRatio];
-}
--(void) setDeathScoreRatio: (int)nDeathScoreRatio {
-    
-    [defaults setInteger:nDeathScoreRatio forKey: dDeathScoreRatio];
-}
--(int) deathScore {
+-(NSInteger) deathScore {
     
     // Some info on Death Score Ratios:
     // Death score balances with kill score when player makes [deathScoreRatio] amount of misses.
@@ -760,107 +459,49 @@
     // Less misses -> score goes down slower.
     // As a result, when player A dies equally often as player B but misses less, his score will be higher.
     
-    return -([self killScore] + [self deathScoreRatio] * [self missScore]);
+    return -([self.killScore intValue] + [self.deathScoreRatio intValue] * [self.missScore intValue]);
 }
 
 
 #pragma mark User Status
 
--(NSUInteger) playerModel {
+-(void) recordScore:(NSInteger)score {
     
-    return [defaults integerForKey: dPlayerModel];
-}
--(void) setPlayerModel: (NSUInteger)nPlayerModel {
-    
-    [defaults setInteger:nPlayerModel forKey:dPlayerModel];
-}
--(int) score {
-    
-    return [defaults integerForKey: dScore];
-}
--(void) setScore: (int)nScore {
-    
-    if(nScore < 0)
-        nScore = 0;    
+    if(score < 0)
+        score = 0;
+    NSNumber *scoreObject = [NSNumber numberWithInteger:score];
     
     // Is this a new top score for today?
     NSDictionary *topScores = [self topScoreHistory];
     NSString *today = [[self today] description];
     NSNumber *topScoreToday = [topScores objectForKey:today];
     
-    if(topScoreToday == nil || [topScoreToday intValue] < nScore) {
+    if(topScoreToday == nil || [topScoreToday integerValue] < score) {
         // Record top score.
         NSMutableDictionary *newTopScores = [topScores mutableCopy];
-        [newTopScores setObject:[NSNumber numberWithInt:nScore] forKey:today];
+        [newTopScores setObject: scoreObject forKey:today];
         [self setTopScoreHistory:newTopScores];
         [newTopScores release];
     }
     
-    [defaults setInteger:nScore forKey: dScore];
-}
--(float) skill {
-    
-    return [defaults floatForKey: dSkill];
-}
--(void) setSkill: (float)nSkill {
-    
-    [defaults setFloat:nSkill forKey: dSkill];
-}
--(NSDictionary *) topScoreHistory {
-    
-    return [defaults dictionaryForKey: dTopScoreHistory];
-}
--(void) setTopScoreHistory: (NSDictionary *)nTopScoreHistory {
-    
-    [defaults setObject:nTopScoreHistory forKey: dTopScoreHistory];
-}
--(float) level {
-
-    return [defaults floatForKey: dLevel];
-}
--(void) setLevel: (float)level {
-
-    if(level < 0.1f)
-        level = 0.1f;
-    if(level > 0.9f)
-        level = 0.9f;
-    
-    [defaults setFloat:level forKey: dLevel];
-    [[GorillasAppDelegate get] updateConfig];
+    self.score = scoreObject;
 }
 -(NSString *) levelName {
 
-    int levelNameCount = [[self levelNames] count];
-    int levelIndex = (int) ([self level] * levelNameCount);
+    int levelNameCount = [self.levelNames count];
+    int levelIndex = (int) ([self.level floatValue] * levelNameCount);
     
     return [[self levelNames] objectAtIndex:levelIndex];
-}
--(NSArray *) levelNames {
-
-    return [defaults arrayForKey: dLevelNames];
-}
--(void) setLevelNames: (NSArray *)levelNames {
-
-    [defaults setObject:levelNames forKey: dLevelNames];
-    [[GorillasAppDelegate get] updateConfig];
-}
--(float) levelProgress {
-    
-    return [defaults floatForKey: dLevelProgress];
-}
--(void) setLevelProgress: (float)levelProgress {
-    
-    [defaults setFloat:levelProgress forKey: dLevelProgress];
 }
 
 
 -(void) levelUp {
     
-    [self setLevel:[self level] + [self levelProgress]];
+    self.level = [NSNumber numberWithFloat:fminf(1.0f, fmaxf(0.0f, [self.level floatValue] + [self.levelProgress floatValue]))];
 }
 -(void) levelDown {
     
-    [self setLevel:[self level] - [self levelProgress]];
+    self.level = [NSNumber numberWithFloat:fminf(1.0f, fmaxf(0.0f, [self.level floatValue] + [self.levelProgress floatValue]))];
 }
 
 

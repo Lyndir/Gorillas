@@ -88,7 +88,7 @@
 
     // Put score on HUD.
     if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureScore]) {
-        [scoreCount setString:[NSString stringWithFormat:@"%02d", [GorillasConfig get].score]];
+        [scoreCount setString:[NSString stringWithFormat:@"%02d", [[GorillasConfig get].score intValue]]];
         [scoreCount setVisible:YES];
         [scoreSprite setVisible:YES];
     } else {
@@ -98,9 +98,9 @@
 
     // Put skill on HUD.
     if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureSkill]) {
-        float skill = [GorillasConfig get].skill;
+        float skill = [[GorillasConfig get].skill floatValue];
         if(throwSkill)
-            skill = [GorillasConfig get].skill / 2 + throwSkill;
+            skill = skill / 2 + throwSkill;
         
         NSString *prefix = @"", *suffix = @"%";
         if ([NSLocalizedString(@"config.direction", "ltr") isEqualToString:@"rtl"]) {

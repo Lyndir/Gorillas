@@ -77,7 +77,7 @@
             [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.paused", @"Paused")];
         else {
             [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.unpaused", @"Unpaused")];
-            if ([GorillasConfig get].voice)
+            if ([[GorillasConfig get].voice boolValue])
                 [[GorillasAudioController get] playEffectNamed:@"Go"];
         }
     }
@@ -94,13 +94,13 @@
         if(running)
             [self scaleTimeTo:0 duration:0.5f];
         [[GorillasAppDelegate get] hideHud];
-        [windLayer runAction:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+        [windLayer runAction:[FadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                                 opacity:0x00]];
     } else {
         [self scaleTimeTo:1.0f duration:1.0f];
         [[GorillasAppDelegate get] popAllLayers];
         [[GorillasAppDelegate get] revealHud];
-        [windLayer runAction:[FadeTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+        [windLayer runAction:[FadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                                 opacity:0xFF]];
     }
 }
@@ -137,7 +137,7 @@
 
 -(void) shake {
     
-    if ([GorillasConfig get].vibration)
+    if ([[GorillasConfig get].vibration boolValue])
         [GorillasAudioController vibrate];
     
     [cityLayer runAction:shakeAction];
@@ -226,14 +226,14 @@
                 if([self isEnabled:GorillasFeatureTeam]
                    || cityLayer.hitGorilla == activeGorilla)
                     // In team mode or when suiciding, deduct score.
-                    score = [[GorillasConfig get] deathScore];
+                    score = [GorillasConfig get].deathScore;
                 else
                     cheer = YES;
             }
             
             else {
                 // ... AI.  Score boost.
-                score = [[GorillasConfig get] killScore];
+                score = [[GorillasConfig get].killScore intValue];
                 cheer = YES;
             }
         } else {
@@ -243,7 +243,7 @@
                 // ... Human.
                 if(![self isEnabled:GorillasFeatureTeam])
                     // In team mode, deduct score.
-                    score = [[GorillasConfig get] deathScore];
+                    score = [GorillasConfig get].deathScore;
                 
                 cheer = YES;
             } else {
@@ -261,41 +261,40 @@
             
             if([activeGorilla human]) {
                 // Human skill.
-                [[GorillasConfig get] setSkill:fminf(0.99f, [[GorillasConfig get] skill] / 2 + throwSkill)];
-                skill = [GorillasConfig get].skill;
+                [GorillasConfig get].skill = [NSNumber numberWithFloat:skill = fminf(0.99f, [[GorillasConfig get].skill floatValue] / 2 + throwSkill)];
             } else
                 // AI skill.
-                skill = [GorillasConfig get].level;
+                skill = [[GorillasConfig get].level floatValue];
             
             // Apply oneshot bonus.
             if(activeGorilla.turns == 0) {
                 [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.oneshot", @"Oneshot!")];
-                skill *= [[GorillasConfig get] bonusOneShot];
+                skill *= [[GorillasConfig get].bonusOneShot floatValue];
             }
             
             if(score)
-                score += (score / abs(score)) * [GorillasConfig get].bonusSkill * skill;
+                score += (score / abs(score)) * [[GorillasConfig get].bonusSkill floatValue] * skill;
         }
         
         // Update Level.
         if([self isEnabled:GorillasFeatureLevel]) {
-            score *= [[GorillasConfig get] level];
+            score *= [[GorillasConfig get].level floatValue];
             
-            NSString *oldLevel = [[GorillasConfig get] levelName];
+            NSString *oldLevel = [GorillasConfig get].levelName;
             if(score > 0)
                 [[GorillasConfig get] levelUp];
             else
                 [[GorillasConfig get] levelDown];
             
             // Message in case we level up.
-            if(![oldLevel isEqualToString:[[GorillasConfig get] levelName]]) {
+            if(![oldLevel isEqualToString:[GorillasConfig get].levelName]) {
                 if(score > 0) {
                     [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.level.up", @"Level Up!")];
-                    if ([GorillasConfig get].voice)
+                    if ([[GorillasConfig get].voice boolValue])
                         [[GorillasAudioController get] playEffectNamed:@"Level_Up"];
                 } else {
                     [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.level.down", @"Level Down")];
-                    if ([GorillasConfig get].voice)
+                    if ([[GorillasConfig get].voice boolValue])
                         [[GorillasAudioController get] playEffectNamed:@"Level_Down"];
                 }
             }
@@ -363,10 +362,10 @@
         }
         
         if (considderMiss) {
-            int score = [[GorillasConfig get] level] * [[GorillasConfig get] missScore];
+            int score = [[GorillasConfig get].level floatValue] * [[GorillasConfig get].missScore intValue];
             
-            [GorillasConfig get].score += score;
-            [[[GorillasAppDelegate get] hudLayer] updateHudWithScore:score skill:0];
+            [[GorillasConfig get] recordScore:[[GorillasConfig get].score intValue] + score];
+            [[GorillasAppDelegate get].hudLayer updateHudWithScore:score skill:0];
             
             if(score)
                 [cityLayer message:[NSString stringWithFormat:@"%+d", score] on:cityLayer.bananaLayer.banana];
@@ -474,7 +473,7 @@
     
     [self setPausedSilently:YES];
     
-    if ([[GorillasConfig get] visualFx])
+    if ([[GorillasConfig get].visualFx boolValue])
         [self schedule:@selector(updateWeather:) interval:1];
     [self schedule:@selector(randomEncounter:) interval:1];
 }
@@ -490,7 +489,7 @@
 
 -(void) updateWeather:(ccTime)dt {
     
-    if (![GorillasConfig get].visualFx && weather.active)
+    if (![[GorillasConfig get].visualFx boolValue] && weather.active)
         [weather stopSystem];
     
     if (!weather.emissionRate) {
@@ -511,7 +510,7 @@
             
             CGRect field = [cityLayer fieldInSpaceOf:panningLayer];
             
-            if ([GorillasConfig get].visualFx && random() % 100 == 0) {
+            if ([[GorillasConfig get].visualFx boolValue] && random() % 100 == 0) {
                 // 1% chance to start snow/rain when weather is enabled.
             
                 switch (random() % 2) {
@@ -586,7 +585,7 @@
 
     [self setPausedSilently:NO];
 
-    if ([GorillasConfig get].voice)
+    if ([[GorillasConfig get].voice boolValue])
         [[GorillasAudioController get] playEffectNamed:@"Go"];
 }
 
@@ -599,7 +598,7 @@
     activeGorilla = nil;
     
     if([panningLayer position].x != 0 || [panningLayer position].y != 0)
-        [panningLayer runAction:[MoveTo actionWithDuration:[[GorillasConfig get] transitionDuration]
+        [panningLayer runAction:[MoveTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                                   position:CGPointZero]];
     
     if(mode)

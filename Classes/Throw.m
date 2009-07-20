@@ -51,7 +51,7 @@
     
     v = velocity;
     r0 = startPos;
-    float g = [[GorillasConfig get] gravity];
+    NSUInteger g = [[GorillasConfig get].gravity unsignedIntValue];
     
     ccTime t = (v.y + (float) sqrt(v.y * v.y + 2.0f * g * r0.y)) / g;
 
@@ -106,7 +106,7 @@
     
     [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:smoke affectAngle:NO];
     
-    if([[GorillasConfig get] visualFx]) {
+    if([[GorillasConfig get].visualFx boolValue]) {
         [smoke setEmissionRate:30];
         [smoke setStartSize:15.0f * target.scale];
         [smoke setStartSizeVar:5.0f * target.scale];
@@ -132,9 +132,9 @@
     float w = gameLayer.windLayer.wind;
     
     // Calculate banana position.
-    float g = [GorillasConfig get].gravity;
+    NSUInteger g = [[GorillasConfig get].gravity unsignedIntValue];
     ccTime t = elapsed;
-    CGPoint r = ccp((v.x + w * t * [GorillasConfig get].windModifier) * t + r0.x,
+    CGPoint r = ccp((v.x + w * t * [[GorillasConfig get].windModifier floatValue]) * t + r0.x,
                    v.y * t - t * t * g / 2 + r0.y);
 
     // Calculate the step size.
@@ -221,11 +221,11 @@
             [gameLayer.panningLayer scaleTo:1.5f];
             [gameLayer.panningLayer scrollToCenter:r horizontal:YES];
         } else
-            [gameLayer.panningLayer scrollToCenter:r horizontal:[GorillasConfig get].followThrow];
+            [gameLayer.panningLayer scrollToCenter:r horizontal:[[GorillasConfig get].followThrow boolValue]];
     //}
 
     [target setPosition:r];
-    if([[GorillasConfig get] visualFx]) {
+    if([[GorillasConfig get].visualFx boolValue]) {
         smoke.angle             = atan2f(smoke.centerOfGravity.y - r.y,
                                          smoke.centerOfGravity.x - r.x)
                                 / (float)M_PI * 180.0f;

@@ -156,7 +156,7 @@
     
     [self resetMessage:msg];
     [messageLabel runAction:[Sequence actions:
-                             [MoveBy actionWithDuration:1 position:ccp(0, -([[GorillasConfig get] fontSize] * 2))],
+                             [MoveBy actionWithDuration:1 position:ccp(0, -([[GorillasConfig get].fontSize intValue] * 2))],
                              [FadeTo actionWithDuration:2 opacity:0x00],
                              nil]];
     
@@ -184,16 +184,16 @@
         }
         
         messageLabel = [[Label alloc] initWithString:msg
-                                            fontName:[[GorillasConfig get] fixedFontName]
-                                            fontSize: [[GorillasConfig get] fontSize]];
+                                            fontName:[GorillasConfig get].fixedFontName
+                                            fontSize: [[GorillasConfig get].fontSize intValue]];
         [self addChild: messageLabel z:1];
     }
     else
         [messageLabel setString:msg];
     
     CGSize winSize = [[Director sharedDirector] winSize];
-    [messageLabel setPosition:ccp([messageLabel contentSize].width / 2 + [[GorillasConfig get] fontSize],
-                                  winSize.height + [[GorillasConfig get] fontSize])];
+    [messageLabel setPosition:ccp([messageLabel contentSize].width / 2 + [[GorillasConfig get].fontSize intValue],
+                                  winSize.height + [[GorillasConfig get].fontSize intValue])];
     [messageLabel setOpacity:0xff];
 }
 

@@ -52,8 +52,8 @@
             [scaleAction release];
         }
         
-        [self runAction:scaleAction = [[ScaleTo alloc] initWithDuration:[GorillasConfig get].transitionDuration
-                                                                  scale:1]];
+        [self runAction:scaleAction = [[ScaleTo alloc] initWithDuration:[[GorillasConfig get].transitionDuration floatValue]
+                                                                  scale:1.0f]];
     }
 }
 
@@ -139,7 +139,7 @@
     if (limited)
         newScale = fmaxf(fminf(newScale, 1.1f), 0.8f);
     
-    CGFloat duration = [GorillasConfig get].transitionDuration;
+    CGFloat duration = [[GorillasConfig get].transitionDuration floatValue];
     if(scaleAction != nil && ![scaleAction isDone]) {
         duration -= [scaleAction elapsed];
         [self stopAction:scaleAction];
@@ -200,8 +200,8 @@
     [scrollAction release];
     
     // Scroll to current point should take initial duration minus what has already elapsed to scroll to approach previous points.
-    if(scrollActionElapsed < [GorillasConfig get].gameScrollDuration)
-        [self runAction:(scrollAction = [[MoveTo alloc] initWithDuration:[GorillasConfig get].gameScrollDuration - scrollActionElapsed
+    if(scrollActionElapsed < [[GorillasConfig get].gameScrollDuration floatValue])
+        [self runAction:(scrollAction = [[MoveTo alloc] initWithDuration:[[GorillasConfig get].gameScrollDuration floatValue] - scrollActionElapsed
                                                                 position:pos])];
     else {
         scrollAction = nil;

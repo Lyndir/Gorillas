@@ -68,14 +68,14 @@
     
     
     // Controls.
-    [MenuItemFont setFontSize:[[GorillasConfig get] largeFontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
     MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
                                                target: self
                                              selector: @selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
     Menu *backMenu = [Menu menuWithItems:back, nil];
-    [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
+    [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
     
@@ -90,9 +90,9 @@
     [chapterMenu alignItemsHorizontally];
     [chapterMenu setPosition:ccp([chapterMenu position].x, contentSize.height - padding + 10)];
     [self addChild:chapterMenu];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
-    CGPoint s = ccp(contentSize.width - padding, contentSize.height - [[GorillasConfig get] fontSize] - padding);
+    CGPoint s = ccp(contentSize.width - padding, contentSize.height - [[GorillasConfig get].fontSize intValue] - padding);
     
     UITextAlignment alignment = UITextAlignmentLeft;
     if ([NSLocalizedString(@"config.direction", "ltr") isEqualToString:@"rtl"]) {
@@ -103,24 +103,24 @@
     prevPageLabel = [[Label alloc] initWithString:@""
                              dimensions:CGSizeMake(s.x, s.y)
                               alignment:alignment
-                               fontName:[[GorillasConfig get] fixedFontName]
-                               fontSize:[[GorillasConfig get] smallFontSize]];
+                               fontName:[GorillasConfig get].fixedFontName
+                               fontSize:[[GorillasConfig get].smallFontSize intValue]];
     [prevPageLabel setPosition:ccp(contentSize.width / 2 - winSize.width, contentSize.height / 2)];
-    [prevPageLabel runAction:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    [prevPageLabel runAction:[FadeIn actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]]];
     currPageLabel = [[Label alloc] initWithString:@""
                                    dimensions:CGSizeMake(s.x, s.y)
                                     alignment:alignment
-                                     fontName:[[GorillasConfig get] fixedFontName]
-                                     fontSize:[[GorillasConfig get] smallFontSize]];
+                                     fontName:[GorillasConfig get].fixedFontName
+                                     fontSize:[[GorillasConfig get].smallFontSize intValue]];
     [currPageLabel setPosition:ccp(contentSize.width / 2, contentSize.height / 2)];
-    [currPageLabel runAction:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    [currPageLabel runAction:[FadeIn actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]]];
     nextPageLabel = [[Label alloc] initWithString:@""
                                    dimensions:CGSizeMake(s.x, s.y)
                                     alignment:alignment
-                                     fontName:[[GorillasConfig get] fixedFontName]
-                                     fontSize:[[GorillasConfig get] smallFontSize]];
+                                     fontName:[GorillasConfig get].fixedFontName
+                                     fontSize:[[GorillasConfig get].smallFontSize intValue]];
     [nextPageLabel setPosition:ccp(contentSize.width / 2 + winSize.width, contentSize.height / 2)];
-    [nextPageLabel runAction:[FadeIn actionWithDuration:[[GorillasConfig get] transitionDuration]]];
+    [nextPageLabel runAction:[FadeIn actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]]];
     
     swipeLayer = [[SwipeLayer alloc] initWithTarget:self selector:@selector(swiped:)];
     [self addChild:swipeLayer];
@@ -128,17 +128,17 @@
     [swipeLayer addChild:currPageLabel];
     [swipeLayer addChild:nextPageLabel];
     CGPoint swipeAreaHalf = ccp([currPageLabel contentSize].width / 2,
-                               [currPageLabel contentSize].height / 2 - [[GorillasConfig get] fontSize] / 2);
+                               [currPageLabel contentSize].height / 2 - [[GorillasConfig get].fontSize intValue] / 2);
     [swipeLayer setSwipeAreaFrom:ccpSub([currPageLabel position], swipeAreaHalf)
                               to:ccpAdd([currPageLabel position], swipeAreaHalf)];
     
     pageNumberLabel = [[Label alloc] initWithString:[NSString stringWithFormat:@"%d / %d", [guidePages count], [guidePages count]]
-                                         dimensions:CGSizeMake(150, [[GorillasConfig get] smallFontSize])
+                                         dimensions:CGSizeMake(150, [[GorillasConfig get].smallFontSize intValue])
                                           alignment:UITextAlignmentCenter
-                                           fontName:[[GorillasConfig get] fontName]
-                                           fontSize:[[GorillasConfig get] smallFontSize]];
-    [pageNumberLabel setPosition:ccp(contentSize.width - [[GorillasConfig get] smallFontSize] * 3,
-                                     padding - [[GorillasConfig get] fontSize] / 2)];
+                                           fontName:[GorillasConfig get].fontName
+                                           fontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [pageNumberLabel setPosition:ccp(contentSize.width - [[GorillasConfig get].smallFontSize intValue] * 3,
+                                     padding - [[GorillasConfig get].fontSize intValue] / 2)];
     [self addChild:pageNumberLabel];
     
     return self;

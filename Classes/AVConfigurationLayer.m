@@ -37,12 +37,12 @@
         return self;
     
     // Audio Track.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *audioT    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.track", @"Audio Track")];
     [audioT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     audioI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(audioTrack:)];
     NSMutableArray *trackMenuItems = [NSMutableArray arrayWithCapacity:[[GorillasConfig get].trackNames count]];
     for (NSString *trackName in [GorillasConfig get].trackNames)
@@ -52,24 +52,24 @@
 
     
     // Sound Effects.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *soundFxT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.sound", @"Sound Effects")];
     [soundFxT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     soundFxI = [[MenuItemToggle itemWithTarget:self selector:@selector(soundFx:) items:
                 [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
                 [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
                 nil] retain];
     
     // Voice.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *voiceT = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.voice", @"Voice Effects")];
     [voiceT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     voiceI = [[MenuItemToggle itemWithTarget:self selector:@selector(voice:) items:
               [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
               [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
@@ -77,12 +77,12 @@
     
     
     // Visual Effects.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *visualFxT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.visual", @"Visual Effects")];
     [visualFxT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     visualFxI = [[MenuItemToggle itemWithTarget:self selector:@selector(visualFx:) items:
                  [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
                  [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
@@ -90,12 +90,12 @@
     
     
     // Vibration.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *vibrationT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.vibration", @"Vibration")];
     [vibrationT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     vibrationI = [[MenuItemToggle itemWithTarget:self selector:@selector(vibration:) items:
                   [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
                   [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
@@ -115,14 +115,14 @@
     
     
     // Back.
-    [MenuItemFont setFontSize:[[GorillasConfig get] largeFontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
     MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
                                                target: self
                                              selector: @selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
     Menu *backMenu = [Menu menuWithItems:back, nil];
-    [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
+    [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
     
@@ -133,10 +133,10 @@
 -(void) reset {
 
     [audioI setSelectedIndex:[[GorillasConfig get].trackNames indexOfObject:[GorillasConfig get].currentTrackName]];
-    [soundFxI setSelectedIndex:[GorillasConfig get].soundFx? 1: 0];
-    [voiceI setSelectedIndex:[GorillasConfig get].voice? 1: 0];
-    [visualFxI setSelectedIndex:[GorillasConfig get].visualFx? 1: 0];
-    [vibrationI setSelectedIndex:([GorillasConfig get].vibration && IsIPhone())? 1: 0];
+    [soundFxI setSelectedIndex:[[GorillasConfig get].soundFx boolValue]? 1: 0];
+    [voiceI setSelectedIndex:[[GorillasConfig get].voice boolValue]? 1: 0];
+    [visualFxI setSelectedIndex:[[GorillasConfig get].visualFx boolValue]? 1: 0];
+    [vibrationI setSelectedIndex:([[GorillasConfig get].vibration boolValue] && IsIPhone())? 1: 0];
 
     vibrationI.isEnabled = IsIPhone();
 }
@@ -164,7 +164,7 @@
             break;
         }
         
-        if([[[GorillasConfig get] currentTrack] isEqualToString:track])
+        if([[GorillasConfig get].currentTrack isEqualToString:track])
             found = YES;
     }
 
@@ -177,7 +177,7 @@
 
 -(void) soundFx: (id) sender {
     
-    [[GorillasConfig get] setSoundFx:![[GorillasConfig get] soundFx]];
+    [GorillasConfig get].soundFx = [NSNumber numberWithBool:![[GorillasConfig get].soundFx boolValue]];
     [[GorillasAudioController get] clickEffect];
 }
 
@@ -185,8 +185,8 @@
 -(void) vibration: (id) sender {
     
     [[GorillasAudioController get] clickEffect];
-    [GorillasConfig get].vibration = ![GorillasConfig get].vibration;
-    if([GorillasConfig get].vibration)
+    [GorillasConfig get].vibration = [NSNumber numberWithBool:![[GorillasConfig get].vibration boolValue]];
+    if([[GorillasConfig get].vibration boolValue])
         [GorillasAudioController vibrate];
 }
 
@@ -194,14 +194,14 @@
 -(void) visualFx: (id) sender {
     
     [[GorillasAudioController get] clickEffect];
-    [[GorillasConfig get] setVisualFx:![[GorillasConfig get] visualFx]];
+    [GorillasConfig get].visualFx = [NSNumber numberWithBool:![[GorillasConfig get].visualFx boolValue]];
 }
 
 
 -(void) voice: (id) sender {
     
     [[GorillasAudioController get] clickEffect];
-    [[GorillasConfig get] setVoice:![[GorillasConfig get] voice]];
+    [GorillasConfig get].voice = [NSNumber numberWithBool:![[GorillasConfig get].voice boolValue]];
 }
 
 

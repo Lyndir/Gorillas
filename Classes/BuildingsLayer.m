@@ -74,8 +74,8 @@
     const CGFloat wPad              = [GorillasConfig get].windowPadding;
     const CGFloat wWidth            = [GorillasConfig get].windowWidth;
     const CGFloat wHeight           = [GorillasConfig get].windowHeight;
-    const ccColor4B wColor0         = ccc([GorillasConfig get].windowColorOff);
-    const ccColor4B wColor1         = ccc([GorillasConfig get].windowColorOn);
+    const ccColor4B wColor0         = ccc([[GorillasConfig get].windowColorOff longValue]);
+    const ccColor4B wColor1         = ccc([[GorillasConfig get].windowColorOn longValue]);
     ccColor4B wColor10;
     wColor10.r                      = (wColor0.r + wColor1.r) / 2;
     wColor10.g                      = (wColor0.g + wColor1.g) / 2;
@@ -84,20 +84,20 @@
 
     const CGSize winSize            = [Director sharedDirector].winSize;
     const CGFloat floorHeight       = wHeight + wPad;
-    const NSInteger fixedFloors     = [GorillasConfig get].fixedFloors;
-    const NSInteger varFloors       = (winSize.height * [GorillasConfig get].buildingMax
+    const NSUInteger fixedFloors    = [[GorillasConfig get].fixedFloors unsignedIntValue];
+    const NSInteger varFloors       = (winSize.height * [[GorillasConfig get].buildingMax floatValue]
                                     - (fixedFloors * floorHeight) - wPad) / floorHeight;
     const CGFloat buildingWidth     = buildingWidthFixed? buildingWidthFixed: [GorillasConfig get].buildingWidth;
 
     // Calculcate buildings.
     windowCount                     = 0;
-    buildingCount                   = [GorillasConfig get].buildingAmount * 3;
+    buildingCount                   = [[GorillasConfig get].buildingAmount unsignedIntValue] * 3;
     free(buildings);
     buildings = malloc(sizeof(Building) * buildingCount);
     for (NSUInteger b = 0; b < buildingCount; ++b) {
         // Building's position.
         buildings[b].x              = b * ([GorillasConfig get].buildingWidth + 1.0f)
-                                    - ([GorillasConfig get].buildingWidth + 1) * (buildingCount - [GorillasConfig get].buildingAmount) / 2;
+                                    - ([GorillasConfig get].buildingWidth + 1) * (buildingCount - [[GorillasConfig get].buildingAmount unsignedIntValue]) / 2;
         
         // Building's size.
         NSInteger addFloors;
@@ -170,7 +170,7 @@
                 NSUInteger wv               = (w + bw) * 4;
                 NSUInteger wi               = (w + bw) * 6;
                 
-                windowVertices[wv + 0].c    = windowVertices[wv + 1].c  = isOff? wColor0: [GorillasConfig get].visualFx? wColor10: wColor1;
+                windowVertices[wv + 0].c    = windowVertices[wv + 1].c  = isOff? wColor0: [[GorillasConfig get].visualFx boolValue]? wColor10: wColor1;
                 windowVertices[wv + 2].c    = windowVertices[wv + 3].c  = isOff? wColor0: wColor1;
                 
                 windowVertices[wv + 0].p    = ccp(bx + wx         , y);
@@ -252,7 +252,7 @@
     glDrawElements(GL_TRIANGLES, windowCount * 6, GL_UNSIGNED_SHORT, 0);
 
     // Drawing Rear Side.
-    if ([GorillasConfig get].visualFx) {
+    if ([[GorillasConfig get].visualFx boolValue]) {
         glBlendFunc(GL_ONE, GL_ZERO);
         
         // = DRAW REAR WINDOWS =

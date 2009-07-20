@@ -37,12 +37,12 @@
     
     
     // City Theme.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *themeT    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.theme", @"City Theme")];
     [themeT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     themeI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(cityTheme:)];
     NSMutableArray *themeMenuItems = [NSMutableArray arrayWithCapacity:[[CityTheme getThemes] count]];
     for (NSString *themeName in [[CityTheme getThemes] allKeys])
@@ -52,23 +52,23 @@
     
     
     // Gravity.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *gravityT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.gravity", @"Gravity")];
     [gravityT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
-    gravityI  = [[MenuItemFont alloc] initFromString:[NSString stringWithFormat:@"%d", [GorillasConfig get].gravity]
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
+    gravityI  = [[MenuItemFont alloc] initFromString:[NSString stringWithFormat:@"%d", [[GorillasConfig get].gravity unsignedIntValue]]
                                               target:self selector:@selector(gravity:)];
 
     
     // Difficulity Level.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *levelT    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.level", @"Level")];
     [levelT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     levelI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(level:)];
     NSMutableArray *levelMenuItems = [NSMutableArray arrayWithCapacity:[[CityTheme getThemes] count]];
     for (NSString *levelName in [GorillasConfig get].levelNames)
@@ -78,12 +78,12 @@
     
     
     // Killshot Replays.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *replayT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.replays", @"Replays")];
     [replayT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     replayI  = [[MenuItemToggle itemWithTarget:self selector:@selector(replay:) items:
                 [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
                 [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
@@ -91,12 +91,12 @@
     
     
     // Follow Throw.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *followT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.follow", @"Follow Throw")];
     [followT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     followI  = [[MenuItemToggle itemWithTarget:self selector:@selector(followThrow:) items:
                 [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
                 [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
@@ -116,14 +116,14 @@
     
     
     // Back.
-    [MenuItemFont setFontSize:[[GorillasConfig get] largeFontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
     MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
                                                target:self
                                              selector:@selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
     Menu *backMenu = [Menu menuWithItems:back, nil];
-    [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
+    [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
     
@@ -134,11 +134,11 @@
 -(void) reset {
     
     [themeI setSelectedIndex:[[[CityTheme getThemes] allKeys] indexOfObject:[GorillasConfig get].cityTheme]];
-    gravityI.label = [Label labelWithString:[NSString stringWithFormat:@"%d", [GorillasConfig get].gravity]
-                                   fontName:[GorillasConfig get].fontName fontSize:[GorillasConfig get].fontSize];
+    gravityI.label = [Label labelWithString:[NSString stringWithFormat:@"%d", [[GorillasConfig get].gravity unsignedIntValue]]
+                                   fontName:[GorillasConfig get].fontName fontSize:[[GorillasConfig get].fontSize intValue]];
     [levelI setSelectedIndex:[[GorillasConfig get].levelNames indexOfObject:[GorillasConfig get].levelName]];
-    [replayI setSelectedIndex:[GorillasConfig get].replay? 1: 0];
-    [followI setSelectedIndex:[GorillasConfig get].followThrow? 1: 0];
+    [replayI setSelectedIndex:[[GorillasConfig get].replay boolValue]? 1: 0];
+    [followI setSelectedIndex:[[GorillasConfig get].followThrow boolValue]? 1: 0];
 
     themeI.isEnabled = ![[GorillasAppDelegate get].gameLayer checkGameStillOn];
 }
@@ -157,14 +157,19 @@
     [[GorillasAudioController get] clickEffect];
 
     NSUInteger curLevelInd = [[GorillasConfig get].levelNames indexOfObject:[GorillasConfig get].levelName];
-    [GorillasConfig get].level = (float) ((curLevelInd + 1) % [[GorillasConfig get].levelNames count]) / [[GorillasConfig get].levelNames count];
+    [GorillasConfig get].level = [NSNumber numberWithFloat:(float)((curLevelInd + 1) % [[GorillasConfig get].levelNames count]) / [[GorillasConfig get].levelNames count]];
 }
 
 
 -(void) gravity: (id) sender {
     
     [[GorillasAudioController get] clickEffect];
-    [GorillasConfig get].gravity = ([GorillasConfig get].gravity + 10) % ([GorillasConfig get].maxGravity + 1);
+    NSUInteger minGravity = [[GorillasConfig get].minGravity unsignedIntValue];
+    NSUInteger maxGravity = [[GorillasConfig get].maxGravity unsignedIntValue];
+    NSUInteger newGravity = [[GorillasConfig get].gravity unsignedIntValue] + 10;
+    newGravity = MIN(maxGravity, MAX(minGravity, newGravity));
+
+    [GorillasConfig get].gravity = [NSNumber numberWithUnsignedInt:newGravity];
 }
 
 
@@ -196,14 +201,14 @@
 -(void) replay: (id) sender {
     
     [[GorillasAudioController get] clickEffect];
-    [GorillasConfig get].replay = ![GorillasConfig get].replay;
+    [GorillasConfig get].replay = [NSNumber numberWithBool:![[GorillasConfig get].replay boolValue]];
 }
 
 
 -(void) followThrow: (id) sender {
     
     [[GorillasAudioController get] clickEffect];
-    [GorillasConfig get].followThrow = ![GorillasConfig get].followThrow;
+    [GorillasConfig get].followThrow = [NSNumber numberWithBool:![[GorillasConfig get].followThrow boolValue]];
 }
 
 

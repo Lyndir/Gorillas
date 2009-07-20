@@ -37,7 +37,7 @@
     
     pushed = NO;
     
-    color = ccc([GorillasConfig get].shadeColor);
+    color = ccc([[GorillasConfig get].shadeColor longValue]);
     
     return self;
 }
@@ -56,7 +56,7 @@
     
     [self runAction:[Sequence actions:
                      [EaseSineOut actionWithAction:
-                      [MoveTo actionWithDuration:[GorillasConfig get].transitionDuration position:CGPointZero]],
+                      [MoveTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue] position:CGPointZero]],
                      [CallFunc actionWithTarget:self selector:@selector(ready)],
                      nil]];
 }
@@ -77,7 +77,7 @@
     CGSize winSize = [Director sharedDirector].winSize;
     [self runAction:[Sequence actions:
                      [EaseSineIn actionWithAction:
-                      [MoveTo actionWithDuration:[GorillasConfig get].transitionDuration
+                      [MoveTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                         position:ccp((pushed? -1: 1) * winSize.width, 0)]],
                      [CallFunc actionWithTarget:self selector:@selector(gone)],
                      [Remove action],

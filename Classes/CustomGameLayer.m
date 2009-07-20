@@ -39,12 +39,12 @@
     ais = 1;
     
     // Humans.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *humansT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.select.humans", @"Humans")];
     [humansT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     humansI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(humans:)];
     NSMutableArray *humanMenuItems = [NSMutableArray arrayWithCapacity:4];
     [humanMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.0", @"None")]];
@@ -56,12 +56,12 @@
     
     
     // Game Mode.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *gameModeT    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.mode", @"Game Mode")];
     [gameModeT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     gameModeI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(gameMode:)];
     NSMutableArray *modeMenuItems = [NSMutableArray arrayWithCapacity:4];
     for (NSString *modeString in [[GorillasConfig get].modeStrings allValues])
@@ -71,12 +71,12 @@
     
     
     // AIs.
-    [MenuItemFont setFontSize:[[GorillasConfig get] smallFontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fixedFontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
     MenuItem *aisT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.select.ais", @"AIs")];
     [aisT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     aisI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(ais:)];
     NSMutableArray *aiMenuItems = [NSMutableArray arrayWithCapacity:4];
     [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.0", @"None")]];
@@ -88,8 +88,8 @@
     
     
     // Start Game.
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
-    [MenuItemFont setFontName:[[GorillasConfig get] fontName]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [MenuItemFont setFontName:[GorillasConfig get].fontName];
     startGameI  = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.start", @"Start!")
                                                 target:self
                                               selector:@selector(startGame:)];
@@ -112,14 +112,14 @@
     
     
     // Back.
-    [MenuItemFont setFontSize:[[GorillasConfig get] largeFontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
     MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
                                                target: self
                                              selector: @selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get] fontSize]];
+    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
     Menu *backMenu = [Menu menuWithItems:back, nil];
-    [backMenu setPosition:ccp([[GorillasConfig get] fontSize], [[GorillasConfig get] fontSize])];
+    [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
 
@@ -138,13 +138,12 @@
         [(MenuItemFont*)[aisI selectedItem] setString:[NSString stringWithFormat:
                                                        NSLocalizedString(@"entries.ai.count.3+", @"%d AIs"), ais]];
     NSArray *modeKeys = [[GorillasConfig get].modeStrings allKeys];
-    NSNumber *modeObj = [NSNumber numberWithUnsignedInt:[GorillasConfig get].mode];
-    [gameModeI setSelectedIndex:[modeKeys indexOfObject:modeObj]];
+    [gameModeI setSelectedIndex:[modeKeys indexOfObject:[GorillasConfig get].mode]];
     
     // Disable start button when less than 2 gorillas chosen
     // or when multiple humans are chosen for Dynamic mode.
     startGameI.isEnabled        = humans + ais > 1;
-    if([GorillasConfig get].mode == GorillasModeDynamic && humans > 1)
+    if([[GorillasConfig get].mode unsignedIntValue] == GorillasModeDynamic && humans > 1)
         startGameI.isEnabled    = NO;
 }
 
@@ -161,10 +160,10 @@
     
     [[GorillasAudioController get] clickEffect];
 
-    NSArray *modes = [[GorillasConfig get] modes];
-    NSUInteger curModeIndex = [modes indexOfObject:[NSNumber numberWithUnsignedInt:[[GorillasConfig get] mode]]];
+    NSArray *modes = [GorillasConfig get].modes;
+    NSUInteger curModeIndex = [modes indexOfObject:[GorillasConfig get].mode];
     
-    [GorillasConfig get].mode = [[modes objectAtIndex:(curModeIndex + 1) % [modes count]] unsignedIntegerValue];
+    [GorillasConfig get].mode = [modes objectAtIndex:(curModeIndex + 1) % [modes count]];
 }
 
 
@@ -189,7 +188,7 @@
 -(void) startGame: (id) sender {
     
     [[GorillasAudioController get] clickEffect];
-    [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:[[GorillasConfig get] mode]
+    [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:[[GorillasConfig get].mode unsignedIntValue]
                                                           humans:humans ais:ais];
     [[[GorillasAppDelegate get] gameLayer] startGame];
 }
