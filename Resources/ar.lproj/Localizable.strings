@@ -86,11 +86,11 @@
 
 // Game Messages
 "message.killreplay"                    = "إعادة عرض الضربة القاضية";
-"message.nextplayer"                    = "..اللاعب التالي";
-"message.nextplayer.go"                 = "..إبدأ";
+"message.nextplayer"                    = "اللاعب التالي..";
+"message.nextplayer.go"                 = "إبدأ..";
 "messages.level.up"                     = "إرتفاع المستوى";
 "messages.level.down"                   = "تدني المستوى";
-"messages.oneshot"                      = "!ضربة واحدة";
+"messages.oneshot"                      = "ضربة واحدة!";
 "messages.paused"                       = "إيقاف";
 "messages.tie"                          = "تعادل!!";
 "messages.unpaused"                     = "إكمال";
@@ -119,5 +119,4 @@
 "time.day.suffix.one"                   = "";
 "time.day.suffix.two"                   = "";
 "time.day.suffix.three"                 = "";
-
 

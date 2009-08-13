@@ -29,9 +29,11 @@
 #import "Remove.h"
 
 
-@interface GameLayer (Private)
+@interface GameLayer ()
 
 -(void) setPausedSilently:(BOOL)_paused;
+- (void)updateWeather:(ccTime)dt;
+- (void)randomEncounter:(ccTime)dt;
 
 @end
 
@@ -302,7 +304,7 @@
         
         // Update score.
         if([self isEnabled:GorillasFeatureScore] && score) {
-            [GorillasConfig get].score += score;
+            [[GorillasConfig get] recordScore:[[GorillasConfig get].score intValue] + score];
             
             [[[GorillasAppDelegate get] hudLayer] updateHudWithScore:score skill:0];
             [cityLayer message:[NSString stringWithFormat:@"%+d", score] on:cityLayer.hitGorilla];
@@ -421,7 +423,8 @@
     // FIXME: Hack to avoid issue with stopGame removing parent from throw smoke (bananaLayer)
     // This causes the smoke's step: that occurs later in the event processing queue that
     // triggered this call to reference a dealloced parent (bananaLayer).
-    [self schedule:@selector(endGameFix:)];
+    //[self schedule:@selector(endGameFix:)];
+    [cityLayer stopGame];
 }
 
 

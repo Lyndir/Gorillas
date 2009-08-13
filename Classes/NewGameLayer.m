@@ -27,6 +27,15 @@
 #import "MenuItemSpacer.h"
 
 
+@interface NewGameLayer ()
+
+- (void)gameConfiguration:(id)sender;
+- (void)startSingle:(id)sender;
+- (void)startMulti:(id)sender;
+- (void)custom:(id)sender;
+
+@end
+
 @implementation NewGameLayer
 
 
@@ -124,7 +133,7 @@
     [[GorillasAudioController get] clickEffect];
     
     [GorillasConfig get].activeGameConfigurationIndex = [NSNumber numberWithUnsignedInt:
-                                                         [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue] + 1
+                                                         ([[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue] + 1)
                                                          % [[GorillasConfig get].gameConfigurations count]];
 }
 

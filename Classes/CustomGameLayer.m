@@ -27,6 +27,16 @@
 #import "MenuItemSpacer.h"
 
 
+@interface CustomGameLayer ()
+
+- (void)humans:(id)sender;
+- (void)gameMode:(id)sender;
+- (void)ais:(id)sender;
+- (void)startGame:(id)sender;
+
+@end
+
+
 @implementation CustomGameLayer
 
 

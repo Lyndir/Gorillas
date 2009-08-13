@@ -32,6 +32,8 @@
 
 @interface CityLayer (Private)
 
+- (void)addInfo:(ccTime)dt;
+- (void)zoomOut;
 - (void)showAim;
 -(void) stopGameCallback;
 

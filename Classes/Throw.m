@@ -29,9 +29,10 @@
 #define recapTime 3
 
 
-@interface Throw (Private)
+@interface Throw ()
 
--(void) throwEnded;
+- (void)throwEnded;
+- (void)skip:(id)sender;
 
 @end
 

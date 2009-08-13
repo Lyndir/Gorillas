@@ -27,6 +27,7 @@
 
 @interface ExplosionsLayer : Layer {
     
+@private
     CGPoint          *positions;
     NSMutableArray  *explosions;
     NSMutableArray  *flames;

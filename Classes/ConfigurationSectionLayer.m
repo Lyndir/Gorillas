@@ -26,6 +26,14 @@
 #import "GorillasAppDelegate.h"
 
 
+@interface ConfigurationSectionLayer ()
+
+- (void)game:(id)sender;
+- (void)av:(id)sender;
+- (void)models:(id)sender;
+
+@end
+
 @implementation ConfigurationSectionLayer
 
 

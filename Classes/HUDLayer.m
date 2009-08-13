@@ -26,6 +26,13 @@
 #import "GorillasAppDelegate.h"
 #import "ShadeTo.h"
 
+
+@interface HUDLayer ()
+
+- (void)menuButton:(id)sender;
+
+@end
+
 @implementation HUDLayer
 
 

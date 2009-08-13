@@ -11,6 +11,12 @@
 #define kSmoothingTime 0.1f
 
 
+@interface BarSprite ()
+
+- (void)updateBodyFrame:(ccTime)dt;
+
+@end
+
 @implementation BarSprite
 
 @synthesize target, textureSize;

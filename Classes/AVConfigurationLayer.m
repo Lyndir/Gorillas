@@ -28,6 +28,16 @@
 #import "Utility.h"
 
 
+@interface AVConfigurationLayer ()
+
+- (void)audioTrack:(id)sender;
+- (void)soundFx:(id)sender;
+- (void)voice:(id)sender;
+- (void)visualFx:(id)sender;
+- (void)vibration:(id)sender;
+
+@end
+
 @implementation AVConfigurationLayer
 
 

@@ -58,6 +58,12 @@
 @end
 
 
+@interface Splash ()
+
+- (void)switchScene;
+
+@end
+
 
 @implementation Splash
 

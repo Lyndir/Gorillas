@@ -26,6 +26,13 @@
 #import "GorillasAppDelegate.h"
 
 
+@interface GuideLayer ()
+
+- (void)skip:(id)sender;
+- (void)swiped:(BOOL)forward;
+
+@end
+
 @implementation GuideLayer
 
 

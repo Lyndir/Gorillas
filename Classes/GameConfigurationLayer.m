@@ -27,6 +27,18 @@
 #import "CityTheme.h"
 
 
+@interface GameConfigurationLayer ()
+
+- (void)cityTheme:(id)sender;
+- (void)gravity:(id)sender;
+- (void)level:(id)sender;
+- (void)replay:(id)sender;
+- (void)followThrow:(id)sender;
+
+@end
+
+
+
 @implementation GameConfigurationLayer
 
 

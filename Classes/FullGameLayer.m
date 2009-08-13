@@ -26,6 +26,12 @@
 #import "GorillasAppDelegate.h"
 
 
+@interface FullGameLayer ()
+
+- (void)upgrade:(id)sender;
+
+@end
+
 @implementation FullGameLayer
 
 

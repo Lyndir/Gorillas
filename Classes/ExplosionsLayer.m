@@ -32,17 +32,18 @@ typedef enum {
 } GorillasExplosion;
 
 
-@interface ExplosionsLayer (Private)
+@interface ExplosionsLayer ()
 
--(CGFloat) size;
-+(ParticleSystem *) flameWithRadius:(CGFloat)radius heavy:(BOOL)heavy;
+- (void)gc:(ccTime)dt;
+- (void)stop:(ParticleSystem *)explosion;
+- (CGFloat)size;
++ (ParticleSystem *)flameWithRadius:(CGFloat)radius heavy:(BOOL)heavy;
 
 @end
 
 static ParticleSystem **flameTypes = nil;
 
 @implementation ExplosionsLayer
-
 
 -(id) init {
 
@@ -203,7 +204,7 @@ static ParticleSystem **flameTypes = nil;
             flame.position          = CGPointZero;
             //flames.angleVar       = 90;
             flame.startSize         = typeIsHeavy? 10: 4;
-            flame.startSizeVar      = 5;
+            flame.startSizeVar      = 4;
             flame.posVar            = ccp(radius / 2, radius / 2);
             flame.speed             = 8;
             flame.speedVar          = 10;

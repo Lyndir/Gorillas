@@ -25,66 +25,66 @@
 #import "CityTheme.h"
 #import "GorillasAppDelegate.h"
 
-#define dFontSize           NSStringFromSelector(@selector(fontSize))
-#define dLargeFontSize      NSStringFromSelector(@selector(largeFontSize))
-#define dSmallFontSize      NSStringFromSelector(@selector(smallFontSize))
-#define dFixedFontName      NSStringFromSelector(@selector(fixedFontName))
-#define dFontName           NSStringFromSelector(@selector(fontName))
+#define dFontSize                       NSStringFromSelector(@selector(fontSize))
+#define dLargeFontSize                  NSStringFromSelector(@selector(largeFontSize))
+#define dSmallFontSize                  NSStringFromSelector(@selector(smallFontSize))
+#define dFixedFontName                  NSStringFromSelector(@selector(fixedFontName))
+#define dFontName                       NSStringFromSelector(@selector(fontName))
 
-#define dCityTheme          NSStringFromSelector(@selector(cityTheme))
-#define dFixedFloors        NSStringFromSelector(@selector(fixedFloors))
-#define dBuildingMax        NSStringFromSelector(@selector(buildingMax))
-#define dBuildingAmount     NSStringFromSelector(@selector(buildingAmount))
-#define dBuildingSpeed      NSStringFromSelector(@selector(buildingSpeed))
-#define dBuildingColorCount NSStringFromSelector(@selector(buildingColorCount))
-#define dBuildingColors     NSStringFromSelector(@selector(buildingColors))
+#define dCityTheme                      NSStringFromSelector(@selector(cityTheme))
+#define dFixedFloors                    NSStringFromSelector(@selector(fixedFloors))
+#define dBuildingMax                    NSStringFromSelector(@selector(buildingMax))
+#define dBuildingAmount                 NSStringFromSelector(@selector(buildingAmount))
+#define dBuildingSpeed                  NSStringFromSelector(@selector(buildingSpeed))
+#define dBuildingColorCount             NSStringFromSelector(@selector(buildingColorCount))
+#define dBuildingColors                 NSStringFromSelector(@selector(buildingColors))
 
-#define dWindowAmount       NSStringFromSelector(@selector(windowAmount))
-#define dWindowColorOn      NSStringFromSelector(@selector(windowColorOn))
-#define dWindowColorOff     NSStringFromSelector(@selector(windowColorOff))
+#define dWindowAmount                   NSStringFromSelector(@selector(windowAmount))
+#define dWindowColorOn                  NSStringFromSelector(@selector(windowColorOn))
+#define dWindowColorOff                 NSStringFromSelector(@selector(windowColorOff))
 
-#define dSkyColor           NSStringFromSelector(@selector(skyColor))
-#define dStarColor          NSStringFromSelector(@selector(starColor))
-#define dStarSpeed          NSStringFromSelector(@selector(starSpeed))
-#define dStarAmount         NSStringFromSelector(@selector(starAmount))
+#define dSkyColor                       NSStringFromSelector(@selector(skyColor))
+#define dStarColor                      NSStringFromSelector(@selector(starColor))
+#define dStarSpeed                      NSStringFromSelector(@selector(starSpeed))
+#define dStarAmount                     NSStringFromSelector(@selector(starAmount))
 
-#define dLives              NSStringFromSelector(@selector(lives))
-#define dWindModifier       NSStringFromSelector(@selector(windModifier))
-#define dGravity            NSStringFromSelector(@selector(gravity))
-#define dMinGravity         NSStringFromSelector(@selector(minGravity))
-#define dMaxGravity         NSStringFromSelector(@selector(maxGravity))
+#define dLives                          NSStringFromSelector(@selector(lives))
+#define dWindModifier                   NSStringFromSelector(@selector(windModifier))
+#define dGravity                        NSStringFromSelector(@selector(gravity))
+#define dMinGravity                     NSStringFromSelector(@selector(minGravity))
+#define dMaxGravity                     NSStringFromSelector(@selector(maxGravity))
 
-#define dShadeColor         NSStringFromSelector(@selector(shadeColor))
-#define dTransitionDuration NSStringFromSelector(@selector(transitionDuration))
-#define dGameScrollDuration NSStringFromSelector(@selector(gameScrollDuration))
+#define dShadeColor                     NSStringFromSelector(@selector(shadeColor))
+#define dTransitionDuration             NSStringFromSelector(@selector(transitionDuration))
+#define dGameScrollDuration             NSStringFromSelector(@selector(gameScrollDuration))
 
-#define dGameConfiguration  NSStringFromSelector(@selector(gameConfiguration))
-#define dMode               NSStringFromSelector(@selector(mode))
-#define dMissScore          NSStringFromSelector(@selector(missScore))
-#define dKillScore          NSStringFromSelector(@selector(killScore))
-#define dBonusOneShot       NSStringFromSelector(@selector(bonusOneShot))
-#define dBonusSkill         NSStringFromSelector(@selector(bonusSkill))
-#define dDeathScoreRatio    NSStringFromSelector(@selector(deathScoreRatio))
+#define dActiveGameConfigurationIndex   NSStringFromSelector(@selector(activeGameConfigurationIndex))
+#define dMode                           NSStringFromSelector(@selector(mode))
+#define dMissScore                      NSStringFromSelector(@selector(missScore))
+#define dKillScore                      NSStringFromSelector(@selector(killScore))
+#define dBonusOneShot                   NSStringFromSelector(@selector(bonusOneShot))
+#define dBonusSkill                     NSStringFromSelector(@selector(bonusSkill))
+#define dDeathScoreRatio                NSStringFromSelector(@selector(deathScoreRatio))
 
-#define dSoundFx            NSStringFromSelector(@selector(soundFx))
-#define dVoice              NSStringFromSelector(@selector(voice))
-#define dVibration          NSStringFromSelector(@selector(vibration))
-#define dVisualFx           NSStringFromSelector(@selector(visualFx))
+#define dSoundFx                        NSStringFromSelector(@selector(soundFx))
+#define dVoice                          NSStringFromSelector(@selector(voice))
+#define dVibration                      NSStringFromSelector(@selector(vibration))
+#define dVisualFx                       NSStringFromSelector(@selector(visualFx))
 
-#define dReplay             NSStringFromSelector(@selector(replay))
-#define dFollowThrow        NSStringFromSelector(@selector(followThrow))
+#define dReplay                         NSStringFromSelector(@selector(replay))
+#define dFollowThrow                    NSStringFromSelector(@selector(followThrow))
 
-#define dTracks             NSStringFromSelector(@selector(tracks))
-#define dTrackNames         NSStringFromSelector(@selector(trackNames))
-#define dCurrentTrack       NSStringFromSelector(@selector(currentTrack))
+#define dTracks                         NSStringFromSelector(@selector(tracks))
+#define dTrackNames                     NSStringFromSelector(@selector(trackNames))
+#define dCurrentTrack                   NSStringFromSelector(@selector(currentTrack))
 
-#define dPlayerModel        NSStringFromSelector(@selector(playerModel))
-#define dScore              NSStringFromSelector(@selector(score))
-#define dSkill              NSStringFromSelector(@selector(skill))
-#define dTopScoreHistory    NSStringFromSelector(@selector(topScoreHistory))
-#define dLevel              NSStringFromSelector(@selector(level))
-#define dLevelNames         NSStringFromSelector(@selector(levelNames))
-#define dLevelProgress      NSStringFromSelector(@selector(levelProgress))
+#define dPlayerModel                    NSStringFromSelector(@selector(playerModel))
+#define dScore                          NSStringFromSelector(@selector(score))
+#define dSkill                          NSStringFromSelector(@selector(skill))
+#define dTopScoreHistory                NSStringFromSelector(@selector(topScoreHistory))
+#define dLevel                          NSStringFromSelector(@selector(level))
+#define dLevelNames                     NSStringFromSelector(@selector(levelNames))
+#define dLevelProgress                  NSStringFromSelector(@selector(levelProgress))
 
 
 @implementation GorillasConfig
@@ -256,7 +256,7 @@
                                  nil],                                                      dTrackNames,
                                 @"random",                                                  dCurrentTrack,
                                 
-                                [NSNumber numberWithInteger:    1],                         dGameConfiguration,
+                                [NSNumber numberWithInteger:    1],                         dActiveGameConfigurationIndex,
                                 [NSNumber numberWithUnsignedInt:GorillasModeBootCamp],      dMode,
                                 [NSNumber numberWithInteger:    -5],                        dMissScore,
                                 [NSNumber numberWithInteger:    50],                        dKillScore,
@@ -297,7 +297,7 @@
                        ];
     resetTriggers   = [[NSDictionary alloc] initWithObjectsAndKeys:
                        @"gameLayer.skyLayer", dVisualFx,
-                       @"newGameLayer", dGameConfiguration,
+                       @"newGameLayer", dActiveGameConfigurationIndex,
                        @"customGameLayer", dMode,
                        nil
                        ];
@@ -334,7 +334,7 @@
     if ([NSStringFromSelector(aSelector) hasPrefix:@"set"])
         return [NSMethodSignature signatureWithObjCTypes:"v@:@"];
     
-    return [NSMethodSignature signatureWithObjCTypes:"@@:@"];
+    return [NSMethodSignature signatureWithObjCTypes:"@@:"];
 }
 
 
@@ -484,6 +484,7 @@
         [newTopScores release];
     }
     
+    NSLog(@"new score: %@", scoreObject);
     self.score = scoreObject;
 }
 -(NSString *) levelName {

@@ -26,6 +26,12 @@
 #import "GorillasAppDelegate.h"
 
 
+@interface ModelsConfigurationLayer ()
+
+- (void)swiped:(BOOL)forward;
+
+@end
+
 @implementation ModelsConfigurationLayer
 
 

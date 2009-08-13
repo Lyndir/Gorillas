@@ -28,9 +28,10 @@
 #define kAccelerometerFrequency     50 //Hz
 
 
-@interface UILayer (Private)
+@interface UILayer ()
 
 -(void) resetMessage:(NSString *)msg;
+- (void)popMessageQueue:(ccTime)dt;
 
 @end
 
@@ -130,8 +131,7 @@
         [messageQueue insertObject:msg atIndex:0];
         [callbackQueue insertObject:callback? callback: (id)[NSNull null] atIndex:0];
         
-        //if(![self isScheduled:@selector(popMessageQueue:)])
-            [self schedule:@selector(popMessageQueue:)];
+        [self schedule:@selector(popMessageQueue:)];
     }
 }
 
