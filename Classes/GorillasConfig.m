@@ -302,6 +302,40 @@
                        nil
                        ];
     
+    /*[self setTopScoreHistory:[NSDictionary dictionaryWithObjectsAndKeys:
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
+                              nil
+                              ]];
+     //*/
+    
     return self;
 }
 
@@ -498,11 +532,11 @@
 
 -(void) levelUp {
     
-    self.level = [NSNumber numberWithFloat:fminf(1.0f, fmaxf(0.0f, [self.level floatValue] + [self.levelProgress floatValue]))];
+    self.level = [NSNumber numberWithFloat:fminf(0.9f, fmaxf(0.1f, [self.level floatValue] + [self.levelProgress floatValue]))];
 }
 -(void) levelDown {
     
-    self.level = [NSNumber numberWithFloat:fminf(1.0f, fmaxf(0.0f, [self.level floatValue] + [self.levelProgress floatValue]))];
+    self.level = [NSNumber numberWithFloat:fminf(0.9f, fmaxf(0.1f, [self.level floatValue] + [self.levelProgress floatValue]))];
 }
 
 

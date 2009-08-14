@@ -145,7 +145,11 @@
 
 -(void) reset {
     
-    [themeI setSelectedIndex:[[[CityTheme getThemes] allKeys] indexOfObject:[GorillasConfig get].cityTheme]];
+    NSUInteger theme = 0;
+    NSArray *cityThemes = [[CityTheme getThemes] allKeys];
+    if ([cityThemes containsObject:[GorillasConfig get].cityTheme])
+        theme = [cityThemes indexOfObject:[GorillasConfig get].cityTheme];
+    [themeI setSelectedIndex:theme];
     gravityI.label = [Label labelWithString:[NSString stringWithFormat:@"%d", [[GorillasConfig get].gravity unsignedIntValue]]
                                    fontName:[GorillasConfig get].fontName fontSize:[[GorillasConfig get].fontSize intValue]];
     [levelI setSelectedIndex:[[GorillasConfig get].levelNames indexOfObject:[GorillasConfig get].levelName]];
@@ -169,7 +173,8 @@
     [[GorillasAudioController get] clickEffect];
 
     NSUInteger curLevelInd = [[GorillasConfig get].levelNames indexOfObject:[GorillasConfig get].levelName];
-    [GorillasConfig get].level = [NSNumber numberWithFloat:(float)((curLevelInd + 1) % [[GorillasConfig get].levelNames count]) / [[GorillasConfig get].levelNames count]];
+    float newLevel = (float)((curLevelInd + 1) % [[GorillasConfig get].levelNames count]) / [[GorillasConfig get].levelNames count];
+    [GorillasConfig get].level = [NSNumber numberWithFloat:fminf(0.9f, fmaxf(0.1f, newLevel))];
 }
 
 
@@ -179,7 +184,8 @@
     NSUInteger minGravity = [[GorillasConfig get].minGravity unsignedIntValue];
     NSUInteger maxGravity = [[GorillasConfig get].maxGravity unsignedIntValue];
     NSUInteger newGravity = [[GorillasConfig get].gravity unsignedIntValue] + 10;
-    newGravity = MIN(maxGravity, MAX(minGravity, newGravity));
+    if (newGravity > maxGravity || newGravity < minGravity)
+        newGravity = minGravity;
 
     [GorillasConfig get].gravity = [NSNumber numberWithUnsignedInt:newGravity];
 }
