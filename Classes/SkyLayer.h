@@ -27,6 +27,7 @@
 
 @interface SkyLayer : ParallaxNode <Resettable> {
 
+@private
     ccColor4B               skyColor;
     BOOL                    fancySky;
     

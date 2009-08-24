@@ -25,6 +25,7 @@
 
 @interface UILayer : Layer {
     
+@private
     Label                                   *messageLabel;
     NSMutableArray                          *messageQueue, *callbackQueue;
     

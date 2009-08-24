@@ -25,6 +25,7 @@
 
 @interface Splash : Sprite {
 
+@private
     BOOL switching;
 }
 

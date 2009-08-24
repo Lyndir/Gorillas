@@ -27,6 +27,7 @@
 
 @interface GorillaLayer : Sprite {
 
+@private
     NSString            *name;
     NSUInteger          teamIndex, globalIndex;
     

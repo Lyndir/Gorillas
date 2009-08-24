@@ -33,6 +33,7 @@
 - (void)gameMode:(id)sender;
 - (void)ais:(id)sender;
 - (void)startGame:(id)sender;
+- (void)back:(id)selector;
 
 @end
 

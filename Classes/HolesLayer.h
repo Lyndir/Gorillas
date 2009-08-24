@@ -26,6 +26,7 @@
 
 @interface HolesLayer : Layer {
 
+@private
     Texture2D   *texture;
     NSUInteger  holeCount;
     glPoint     *holes;

@@ -28,6 +28,7 @@
 
 @interface ModelsConfigurationLayer : ShadeLayer {
 
+@private
     MenuItemFont *modelCurr, *modelNext;
     
     SwipeLayer *swipeLayer;
@@ -36,10 +37,6 @@
     NSMutableArray *modelSprites, *modelTitles;
     NSUInteger model;
 }
-
--(void) flipPage;
--(void) next: (id)sender;
--(void) back: (id)sender;
 
 
 @end

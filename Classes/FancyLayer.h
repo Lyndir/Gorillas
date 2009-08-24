@@ -26,6 +26,7 @@
 
 @interface FancyLayer : Layer <CocosNodeRGBA> {
 
+@private
     CGSize  contentSize;
     float   outerPadding;
     float   padding;
@@ -38,9 +39,10 @@
 
 -(void) update;
 
-@property (nonatomic, readonly) CGSize     contentSize;
-@property (nonatomic, readwrite) float     outerPadding;
-@property (nonatomic, readwrite) float     padding;
-@property (nonatomic, readwrite) float     innerRatio;
+@property (nonatomic, readonly) CGSize     	contentSize;
+@property (nonatomic, readwrite) float      outerPadding;
+@property (nonatomic, readwrite) float      padding;
+@property (nonatomic, readwrite) float      innerRatio;
+@property (nonatomic, readwrite) ccColor4B  color;
 
 @end

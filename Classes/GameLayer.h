@@ -31,6 +31,7 @@
 
 @interface GameLayer : Layer <Resettable> {
 
+@private
     BOOL                                                paused;
     BOOL                                                running;
     GorillasMode                                        mode;

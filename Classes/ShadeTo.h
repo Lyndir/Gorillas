@@ -26,6 +26,7 @@
 
 @interface ShadeTo : IntervalAction {
 
+@private
     long startCol, endCol;
 }
 

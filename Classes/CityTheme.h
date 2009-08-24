@@ -26,6 +26,7 @@
 
 @interface CityTheme : NSObject {
 
+@private
     NSUInteger                                      fixedFloors;
     float                                           buildingMax;
     NSUInteger                                      buildingAmount;

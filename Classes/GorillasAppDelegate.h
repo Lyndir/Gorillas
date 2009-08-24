@@ -42,6 +42,7 @@
 
 @interface GorillasAppDelegate : NSObject <UIApplicationDelegate> {
     
+@private
     UIWindow                    *window;
     
     UILayer                     *uiLayer;

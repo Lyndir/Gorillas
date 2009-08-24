@@ -27,6 +27,7 @@
 
 @interface GuideLayer : ShadeLayer {
 
+@private
     MenuItemFont *chapterCurr, *chapterNext, *chapterSkip;
     
     SwipeLayer *swipeLayer;
@@ -35,10 +36,6 @@
     NSMutableArray *guidePages, *guideTitles;
     int page;
 }
-
--(void) flipPage;
--(void) next: (id)sender;
--(void) back: (id)sender;
 
 
 @end

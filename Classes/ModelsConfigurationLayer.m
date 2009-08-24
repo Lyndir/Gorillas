@@ -28,6 +28,9 @@
 
 @interface ModelsConfigurationLayer ()
 
+- (void)flipPage;
+- (void)next: (id)sender;
+- (void)back: (id)sender;
 - (void)swiped:(BOOL)forward;
 
 @end
@@ -74,7 +77,7 @@
     [modelCurr setIsEnabled:NO];
     Menu *modelMenu = [Menu menuWithItems:modelCurr, modelNext, nil];
     [modelMenu alignItemsHorizontally];
-    [modelMenu setPosition:ccp(modelMenu.position.x, contentSize.height - padding + 10)];
+    [modelMenu setPosition:ccp(modelMenu.position.x, self.contentSize.height - self.padding + 10)];
     [self addChild:modelMenu];
     [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     

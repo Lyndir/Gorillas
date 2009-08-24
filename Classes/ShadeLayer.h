@@ -27,6 +27,7 @@
 
 @interface ShadeLayer : FancyLayer {
     
+@private
     BOOL pushed;
 }
 

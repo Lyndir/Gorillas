@@ -28,7 +28,4 @@
 
 }
 
--(void) guide: (id)sender;
--(void) stats: (id)sender;
-
 @end

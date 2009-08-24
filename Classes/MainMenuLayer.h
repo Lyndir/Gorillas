@@ -27,15 +27,9 @@
 
 @interface MainMenuLayer : ShadeLayer <Resettable> {
 
+@private
     Menu                *menu;
     MenuItem            *info, *config, *continueGame, *stopGame, *newGame;
 }
-
--(void) newGame: (id)sender;
--(void) continueGame: (id)sender;
--(void) stopGame: (id)sender;
--(void) information: (id)sender;
--(void) options: (id)sender;
-
 
 @end

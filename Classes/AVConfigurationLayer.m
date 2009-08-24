@@ -35,6 +35,7 @@
 - (void)voice:(id)sender;
 - (void)visualFx:(id)sender;
 - (void)vibration:(id)sender;
+- (void)back:(id)selector;
 
 @end
 

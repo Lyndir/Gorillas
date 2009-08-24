@@ -28,6 +28,12 @@
 #define gBarSize 25
 
 
+@interface StatisticsLayer ()
+
+- (void)back:(id)selector;
+
+@end
+
 @implementation StatisticsLayer
 
 
@@ -92,7 +98,7 @@
                                                           alignment:UITextAlignmentCenter
                                                            fontName:[GorillasConfig get].fixedFontName
                                                            fontSize:[[GorillasConfig get].smallFontSize intValue]];
-    topScoreLabel.position          = ccp(self.contentSize.width / 2, self.contentSize.height - padding + [[GorillasConfig get].smallFontSize intValue]);
+    topScoreLabel.position          = ccp(self.contentSize.width / 2, self.contentSize.height - self.padding + [[GorillasConfig get].smallFontSize intValue]);
     [self addChild:topScoreLabel];
     [topScoreLabel release];
     
@@ -114,8 +120,8 @@
     scorePoints                     = malloc(sizeof(CGPoint) * scoreCount);
     scoreColors                     = malloc(sizeof(ccColor4B) * scoreCount);
     
-    CGFloat step                    = (self.contentSize.width - padding * 2.0f) / scoreCount;
-    CGFloat x                       = padding;
+    CGFloat step                    = (self.contentSize.width - self.padding * 2.0f) / scoreCount;
+    CGFloat x                       = self.padding;
     NSUInteger s                    = 0;
     
     // Iterate the scores in reverse date order (recent to last).
@@ -129,7 +135,7 @@
                                                           alignment:UITextAlignmentCenter
                                                            fontName:[GorillasConfig get].fixedFontName
                                                            fontSize:[[GorillasConfig get].smallFontSize intValue] / 2];
-        scoreLabel.position         = ccp(x, padding + [[GorillasConfig get].smallFontSize intValue] * (s % 2));
+        scoreLabel.position         = ccp(x, self.padding + [[GorillasConfig get].smallFontSize intValue] * (s % 2));
         
         // Score's date label.
         NSString *dateString        = [dateFormatter stringFromDate:date];
@@ -138,12 +144,12 @@
                                                           alignment:UITextAlignmentCenter
                                                            fontName:[GorillasConfig get].fixedFontName
                                                            fontSize:[[GorillasConfig get].smallFontSize intValue] / 2];
-        dateLabel.position          = ccp(x, padding + scoreLabel.contentSize.height + [[GorillasConfig get].smallFontSize intValue] * (s % 2));
+        dateLabel.position          = ccp(x, self.padding + scoreLabel.contentSize.height + [[GorillasConfig get].smallFontSize intValue] * (s % 2));
 
         // Score graph point.
         float scoreHeight           = ((float) score / topScore);
-        float padGraph              = padding + scoreLabel.contentSize.height * 2 + dateLabel.contentSize.height * 2;
-        scoreHeight                 *= (contentSize.height - padGraph * 2);
+        float padGraph              = self.padding + scoreLabel.contentSize.height * 2 + dateLabel.contentSize.height * 2;
+        scoreHeight                 *= (self.contentSize.height - padGraph * 2);
         
         scorePoints[s]              = ccp(x, scoreHeight + padGraph);
         scoreColors[s].r            = (float)0xff * s / (scoreCount - 1);

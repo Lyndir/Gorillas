@@ -27,6 +27,7 @@
 
 @interface HUDLayer : BarLayer {
 
+@private
     Sprite              *scoreSprite, *skillSprite;
     LabelAtlas          *scoreCount, *skillCount;
     Layer               *livesLayer;

@@ -28,9 +28,9 @@
 @implementation Remove
 
 
--(void) start {
+-(void) startWithTarget:(CocosNode *)aTarget {
 
-	[super start];
+	[super startWithTarget:aTarget];
 	[[target parent] removeChild:target cleanup:NO];
 }
 

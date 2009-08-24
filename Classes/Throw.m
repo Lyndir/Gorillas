@@ -86,11 +86,11 @@
 }
 
 
--(void) start {
+-(void) startWithTarget:(CocosNode *)aTarget {
     
     running = YES;
     skipped = NO;
-    [super start];
+    [super startWithTarget:aTarget];
     
     if(spinAction) {
         [target stopAction:spinAction];
@@ -212,7 +212,7 @@
             recap = elapsed - recapTime;
             r = r0;
             
-            [self start];
+            [self startWithTarget:target];
         }
     }
     
@@ -272,6 +272,8 @@
     
     [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:NO];
     [target setTag:GorillasTagBananaNotFlying];
+
+    [super stop];
 }
 
 

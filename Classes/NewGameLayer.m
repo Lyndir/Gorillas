@@ -33,6 +33,7 @@
 - (void)startSingle:(id)sender;
 - (void)startMulti:(id)sender;
 - (void)custom:(id)sender;
+- (void)back:(id)selector;
 
 @end
 

@@ -420,17 +420,6 @@
     
     [self setPausedSilently:NO];
 
-    // FIXME: Hack to avoid issue with stopGame removing parent from throw smoke (bananaLayer)
-    // This causes the smoke's step: that occurs later in the event processing queue that
-    // triggered this call to reference a dealloced parent (bananaLayer).
-    //[self schedule:@selector(endGameFix:)];
-    [cityLayer stopGame];
-}
-
-
--(void) endGameFix:(ccTime)dt {
-    
-    [self unschedule:@selector(endGameFix:)];
     [cityLayer stopGame];
 }
 

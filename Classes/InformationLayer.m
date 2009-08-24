@@ -27,6 +27,16 @@
 #import "MenuItemSpacer.h"
 
 
+@interface InformationLayer ()
+
+- (void)full:(id)sender;
+- (void)guide: (id)sender;
+- (void)stats: (id)sender;
+- (void)back:(id)selector;
+
+@end
+
+
 @implementation InformationLayer
 
 

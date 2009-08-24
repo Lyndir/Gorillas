@@ -37,7 +37,7 @@
     
     pushed = NO;
     
-    color = ccc([[GorillasConfig get].shadeColor longValue]);
+    self.color = ccc([[GorillasConfig get].shadeColor longValue]);
     
     return self;
 }

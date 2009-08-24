@@ -28,8 +28,4 @@
 
 }
 
--(void) continueGame: (id)sender;
--(void) stopGame: (id)sender;
-
-
 @end

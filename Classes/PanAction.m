@@ -68,7 +68,7 @@
         if(!cancelled) {
             CocosNode *newFirstNode = [subNodes objectAtIndex:0];
             delta = ccp(-[newFirstNode contentSize].width - padding, 0);
-            [self start];
+            [self startWithTarget:target];
         }
     }
 }

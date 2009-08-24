@@ -41,6 +41,7 @@ typedef struct BuildingVertex {
 
 @interface BuildingsLayer : Layer <Resettable> {
 
+@private
     CGFloat                                         buildingWidthFixed, buildingHeightRatio;
     
     NSUInteger                                      buildingCount, windowCount;

@@ -26,6 +26,7 @@
 
 @interface SwipeLayer : Layer {
 
+@private
     NSInvocation    *invocation;
     
     IntervalAction  *swipeAction;

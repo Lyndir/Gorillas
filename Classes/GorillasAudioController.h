@@ -28,6 +28,7 @@
 
 @interface GorillasAudioController : NSObject <AVAudioPlayerDelegate> {
     
+@private
     AVAudioPlayer               *audioPlayer;
     NSString                    *nextTrack;
     

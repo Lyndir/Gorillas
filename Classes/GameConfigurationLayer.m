@@ -34,6 +34,7 @@
 - (void)level:(id)sender;
 - (void)replay:(id)sender;
 - (void)followThrow:(id)sender;
+- (void)back:(id)selector;
 
 @end
 

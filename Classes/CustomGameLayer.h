@@ -27,7 +27,8 @@
 
 
 @interface CustomGameLayer : ShadeLayer <Resettable> {
-    
+
+@private
     MenuItemToggle      *humansI, *aisI, *gameModeI;
     MenuItem            *startGameI;
     

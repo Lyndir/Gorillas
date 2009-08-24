@@ -27,6 +27,7 @@
 
 @interface WindLayer : Layer <CocosNodeRGBA, Resettable> {
 
+@private
     float           wind, bar;
     float           windIncrement;
     ccTime          elapsed, incrementDuration;

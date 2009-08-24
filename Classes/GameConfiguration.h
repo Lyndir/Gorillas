@@ -26,6 +26,7 @@
 
 @interface GameConfiguration : NSObject {
 
+@private
     NSString *name;
     NSString *description;
     

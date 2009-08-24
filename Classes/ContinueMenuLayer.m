@@ -27,6 +27,14 @@
 #import "MenuItemSpacer.h"
 
 
+@interface ContinueMenuLayer ()
+
+-(void) continueGame: (id)sender;
+-(void) stopGame: (id)sender;
+
+@end
+
+
 @implementation ContinueMenuLayer
 
 

@@ -34,6 +34,7 @@
 
 @interface CityLayer : Layer <Resettable> {
 
+@private
     PanAction           *panAction;
     LabelAtlas          *angleLabel, *strengthLabel;
     Label               *msgLabel, *infoLabel;

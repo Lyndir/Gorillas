@@ -26,6 +26,7 @@
 
 @interface PanningLayer : Layer <Resettable> {
 
+@private
     CGFloat initialScale;
     CGFloat initialDist;
     ScaleTo *scaleAction;

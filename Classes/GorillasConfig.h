@@ -27,6 +27,7 @@
 
 @interface GorillasConfig : NSObject {
 
+@private
     NSUserDefaults                                      *defaults;
     
     NSArray                                             *updateTriggers;

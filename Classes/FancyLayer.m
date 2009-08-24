@@ -27,7 +27,7 @@
 
 @implementation FancyLayer
 
-@synthesize contentSize, outerPadding, padding, innerRatio;
+@synthesize contentSize, outerPadding, padding, innerRatio, color;
 
 
 - (id)init {

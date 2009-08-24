@@ -26,6 +26,7 @@
 
 @interface Throw : IntervalAction {
 
+@private
     BOOL            running;
     BOOL            skipped;
     //BOOL            focussed;

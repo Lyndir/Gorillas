@@ -27,6 +27,7 @@
 
 @interface BananaLayer : Layer {
 
+@private
     BOOL                    clearedGorilla, focussed;
     
     GorillasProjectileModel model;

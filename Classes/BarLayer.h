@@ -25,13 +25,13 @@
 
 
 @interface BarLayer : Sprite {
-    
+
     MenuItemFont        *menuButton;
     Menu                *menuMenu;
     Label               *messageLabel;
     
     long                color, renderColor;
-    CGPoint              showPosition;
+    CGPoint             showPosition;
     
     BOOL                dismissed;
 }

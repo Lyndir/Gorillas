@@ -26,7 +26,7 @@
 
 @interface PanAction : MoveBy {
 
-    @private
+@private
     NSMutableArray *subNodes;
     int padding;
     BOOL cancelled;
