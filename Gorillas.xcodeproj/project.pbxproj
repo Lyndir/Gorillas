@@ -3824,7 +3824,6 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
@@ -3868,7 +3867,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Gorillas;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos2.2.1;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VERSION_INFO_BUILDER = lhunath;
 				WARNING_CFLAGS = "-Wundeclared-selector";
@@ -3879,7 +3878,6 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -3918,7 +3916,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Gorillas;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos2.2.1;
 				VERSION_INFO_BUILDER = lhunath;
 				WARNING_CFLAGS = "-Wundeclared-selector";
 				ZERO_LINK = NO;
@@ -3928,7 +3926,6 @@
 		DA16C3750EEC575C00E46246 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = Resources/Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -3968,7 +3965,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Gorillas;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos2.2.1;
 				VERSION_INFO_BUILDER = lhunath;
 				WARNING_CFLAGS = "-Wundeclared-selector";
 				ZERO_LINK = NO;
@@ -3987,7 +3984,6 @@
 		DA312A3F0F12B91A00F1032D /* Release Debugging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Don't Code Sign";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
@@ -4029,7 +4025,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Gorillas;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos3.0;
+				SDKROOT = iphoneos2.2.1;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VERSION_INFO_BUILDER = lhunath;
 				WARNING_CFLAGS = "-Wundeclared-selector";
