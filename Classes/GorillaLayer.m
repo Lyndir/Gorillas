@@ -61,7 +61,7 @@ static NSUInteger _teamIndex, _globalIndex;
     if(!(self = [super initWithFile:[self modelFileWithArmsUpLeft:NO right:NO]]))
         return self;
     
-    name        = [_name retain];
+    name        = [_name copy];
     teamIndex   = _teamIndex++;
     globalIndex = _globalIndex++;
 

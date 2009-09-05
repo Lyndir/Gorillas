@@ -48,6 +48,8 @@
 
 -(void) startWithTarget:(CocosNode *)aTarget {
     
+    [super startWithTarget:aTarget];
+    
     if(![target conformsToProtocol:@protocol(CocosNodeRGBA)])
         @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"ShadeTo action target does not conform to CocosNodeRGBA" userInfo:nil];
     
@@ -55,8 +57,6 @@
                 | [(CocosNode< CocosNodeRGBA> *) target g] << 16
                 | [(CocosNode< CocosNodeRGBA> *) target b] << 8
                 | [(CocosNode< CocosNodeRGBA> *) target opacity];
-    
-    [super startWithTarget:aTarget];
 }
 
 

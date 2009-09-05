@@ -119,7 +119,7 @@
         buildings[b].backColor.b    = (GLubyte)(buildings[b].frontColor.b * 0.2f);
         buildings[b].backColor.a    = (GLubyte)(buildings[b].frontColor.a * 1.0f);
     }
-        
+
     // Build vertex arrays.
     BuildingVertex *buildingVertices        = malloc(sizeof(BuildingVertex)     /* size of a vertex */
                                                      * 4                        /* amount of vertices per building */
