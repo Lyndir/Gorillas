@@ -43,7 +43,7 @@ static NSUInteger _teamIndex, _globalIndex;
 
 @implementation GorillaLayer
 
-@synthesize human, name, turns, lives, active, zoom, teamIndex, globalIndex, model, type;
+@synthesize name, turns, lives, active, zoom, teamIndex, globalIndex, model, type;
 
 
 +(void) prepareCreation {

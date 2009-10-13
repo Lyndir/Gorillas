@@ -43,7 +43,9 @@
     
     NSString *fullGameData = [NSString stringWithContentsOfFile:
                               [[NSBundle mainBundle] pathForResource:@"fullGame"
-                                                              ofType:@"txt"]];
+                                                              ofType:@"txt"]
+                                                       encoding:NSUTF8StringEncoding
+                                                          error:nil];
 
     UITextAlignment alignment = UITextAlignmentLeft;
     if ([NSLocalizedString(@"config.direction", "ltr") isEqualToString:@"rtl"]) {

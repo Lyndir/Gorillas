@@ -46,6 +46,7 @@
 +(void) prepareCreation;
 -(id) initWithName:(NSString *)_name type:(GorillasPlayerType)_type;
 
+-(BOOL) human;
 -(BOOL) hitsGorilla: (CGPoint)pos;
 -(void) cheer;
 -(void) dance;
@@ -58,7 +59,6 @@
 @property (nonatomic, readonly) NSString                *name;
 @property (nonatomic, readonly) NSUInteger              teamIndex;
 @property (nonatomic, readonly) NSUInteger              globalIndex;
-@property (nonatomic, readonly) BOOL                    human;
 
 @property (nonatomic, readonly) int                     lives;
 @property (nonatomic, readonly) BOOL                    alive;

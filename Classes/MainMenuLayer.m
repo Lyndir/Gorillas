@@ -71,7 +71,8 @@
 -(void) reset {
 
 #ifdef LITE
-    config.isEnabled    = NO;
+    [config release];
+    config = nil;
 #endif
     if(menu) {
         [menu removeAllChildrenWithCleanup:YES];
