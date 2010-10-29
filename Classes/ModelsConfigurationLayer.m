@@ -58,30 +58,30 @@
     
     
     // Controls.
-    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
-    MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
+    CCMenuItem *back     = [CCMenuItemFont itemFromString:@"   <   "
                                                target: self
                                              selector: @selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
-    Menu *backMenu = [Menu menuWithItems:back, nil];
+    CCMenu *backMenu = [CCMenu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
     
-    [MenuItemFont setFontSize:15];
-    modelNext = [[MenuItemFont itemFromString:@"                              "
+    [CCMenuItemFont setFontSize:15];
+    modelNext = [[CCMenuItemFont itemFromString:@"                              "
                                        target:self selector:@selector(next:)] retain];
-    [MenuItemFont setFontSize:26];
-    modelCurr = [[MenuItemFont itemFromString:@"                              "] retain];
+    [CCMenuItemFont setFontSize:26];
+    modelCurr = [[CCMenuItemFont itemFromString:@"                              "] retain];
     [modelCurr setIsEnabled:NO];
-    Menu *modelMenu = [Menu menuWithItems:modelCurr, modelNext, nil];
+    CCMenu *modelMenu = [CCMenu menuWithItems:modelCurr, modelNext, nil];
     [modelMenu alignItemsHorizontally];
-    [modelMenu setPosition:ccp(modelMenu.position.x, self.contentSize.height - self.padding + 10)];
+    [modelMenu setPosition:ccp(modelMenu.position.x, self.contentSize.height - self.padding.top - self.padding.bottom + 10)];
     [self addChild:modelMenu];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
-    CGSize winSize = [[Director sharedDirector] winSize];
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
     prevModelSprite = [[GorillaLayer alloc] initWithName:@"" type:GorillasPlayerTypeHuman];
     currModelSprite = [[GorillaLayer alloc] initWithName:@"" type:GorillasPlayerTypeHuman];
     nextModelSprite = [[GorillaLayer alloc] initWithName:@"" type:GorillasPlayerTypeHuman];

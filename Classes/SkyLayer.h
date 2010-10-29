@@ -25,7 +25,7 @@
 #import "Resettable.h"
 
 
-@interface SkyLayer : ParallaxNode <Resettable> {
+@interface SkyLayer : CCParallaxNode <Resettable> {
 
 @private
     ccColor4B               skyColor;

@@ -29,8 +29,8 @@
 @interface GameConfigurationLayer : ShadeLayer <Resettable> {
     
 @private
-    MenuItemToggle          *themeI, *levelI, *replayI, *followI;
-    MenuItemFont            *gravityI;
+    CCMenuItemToggle          *themeI, *levelI, *replayI, *followI;
+    CCMenuItemFont            *gravityI;
 }
 
 @end

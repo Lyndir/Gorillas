@@ -28,8 +28,8 @@
 @interface MainMenuLayer : ShadeLayer <Resettable> {
 
 @private
-    Menu                *menu;
-    MenuItem            *info, *config, *continueGame, *stopGame, *newGame;
+    CCMenu                *menu;
+    CCMenuItem            *info, *config, *continueGame, *stopGame, *newGame;
 }
 
 @end

@@ -33,7 +33,7 @@
     if(!(self = [super init]))
         return self;
     
-	texture     = [[[TextureMgr sharedTextureMgr] addImage: @"hole.pvr"] retain];
+	texture     = [[[CCTextureCache sharedTextureCache] addImage: @"hole.pvr"] retain];
     holes       = nil;
     holeCount   = 0;
     
@@ -58,7 +58,7 @@
     
     holes = realloc(holes, sizeof(glPoint) * ++holeCount);
     holes[holeCount - 1].p = pos;
-    holes[holeCount - 1].c = ccc(0xffffffff);
+    holes[holeCount - 1].c = ccc4l(0xffffffff);
     holes[holeCount - 1].s = texture.pixelsWide;
     
 	glBindBuffer(GL_ARRAY_BUFFER, holeVertexBuffer);

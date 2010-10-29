@@ -24,13 +24,13 @@
 
 #import "Resettable.h"
 
-@interface PanningLayer : Layer <Resettable> {
+@interface PanningLayer : CCLayer <Resettable> {
 
 @private
     CGFloat initialScale;
     CGFloat initialDist;
-    ScaleTo *scaleAction;
-    MoveTo *scrollAction;
+    CCScaleTo *scaleAction;
+    CCMoveTo *scrollAction;
 }
 
 -(void) scaleTo:(CGFloat)newScale;

@@ -47,44 +47,44 @@
     
     
     // Game Configuration.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *styleT    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.style", @"Choose a game style:")];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *styleT    = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.choose.style", @"Choose a game style:")];
     [styleT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    configurationI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(gameConfiguration:)];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    configurationI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(gameConfiguration:)];
     NSMutableArray * configurationMenuItems = [NSMutableArray arrayWithCapacity:4];
     for (GameConfiguration *configuration in [GorillasConfig get].gameConfigurations)
-        [configurationMenuItems addObject:[MenuItemFont itemFromString:configuration.name]];
+        [configurationMenuItems addObject:[CCMenuItemFont itemFromString:configuration.name]];
     configurationI.subItems = configurationMenuItems;
     [configurationI setSelectedIndex:1];
     
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    descriptionT    = [[MenuItemFont alloc] initFromString:@"description" target:nil selector:nil];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    descriptionT    = [[CCMenuItemFont alloc] initFromString:@"description" target:nil selector:nil];
     descriptionT.isEnabled = NO;
     
     
     // Type (Single / Multi).
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    singlePlayerI    = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.player.single", @"Single Player")
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    singlePlayerI    = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.player.single", @"Single Player")
                                                        target:self
                                                      selector:@selector(startSingle:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    multiPlayerI    = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.player.multi", @"Multi Player")
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    multiPlayerI    = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.player.multi", @"Multi Player")
                                                       target:self
                                                     selector:@selector(startMulti:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    MenuItem *customI    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.custom", @"Custom Game...")
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    CCMenuItem *customI    = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.choose.custom", @"Custom Game...")
                                                  target:self
                                                selector:@selector(custom:)];
     
     
-    Menu *menu = [Menu menuWithItems:
+    CCMenu *menu = [CCMenu menuWithItems:
                   styleT, configurationI, descriptionT, [MenuItemSpacer small],
                   singlePlayerI, multiPlayerI, [MenuItemSpacer small],
                   customI,
@@ -94,13 +94,13 @@
     
     
     // Back.
-    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
-    MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
+    CCMenuItem *back     = [CCMenuItemFont itemFromString:@"   <   "
                                                target: self
                                              selector: @selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
-    Menu *backMenu = [Menu menuWithItems:back, nil];
+    CCMenu *backMenu = [CCMenu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];

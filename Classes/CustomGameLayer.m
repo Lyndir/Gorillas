@@ -50,63 +50,63 @@
     ais = 1;
     
     // Humans.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *humansT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.select.humans", @"Humans")];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *humansT  = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.select.humans", @"Humans")];
     [humansT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    humansI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(humans:)];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    humansI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(humans:)];
     NSMutableArray *humanMenuItems = [NSMutableArray arrayWithCapacity:4];
-    [humanMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.0", @"None")]];
-    [humanMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.1", @"1 Player")]];
-    [humanMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.2", @"2 Players")]];
-    [humanMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.3+", @"%d Players")]];
+    [humanMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.0", @"None")]];
+    [humanMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.1", @"1 Player")]];
+    [humanMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.2", @"2 Players")]];
+    [humanMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"entries.player.count.3+", @"%d Players")]];
     humansI.subItems = humanMenuItems;
     [humansI setSelectedIndex:1];
     
     
     // Game Mode.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *gameModeT    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.mode", @"Game Mode")];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *gameModeT    = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.choose.mode", @"Game Mode")];
     [gameModeT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    gameModeI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(gameMode:)];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    gameModeI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(gameMode:)];
     NSMutableArray *modeMenuItems = [NSMutableArray arrayWithCapacity:4];
     for (NSString *modeString in [[GorillasConfig get].modeStrings allValues])
-        [modeMenuItems addObject:[MenuItemFont itemFromString:modeString]];
+        [modeMenuItems addObject:[CCMenuItemFont itemFromString:modeString]];
     gameModeI.subItems = modeMenuItems;
     [gameModeI setSelectedIndex:1];
     
     
     // AIs.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *aisT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.select.ais", @"AIs")];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *aisT  = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.select.ais", @"AIs")];
     [aisT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    aisI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(ais:)];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    aisI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(ais:)];
     NSMutableArray *aiMenuItems = [NSMutableArray arrayWithCapacity:4];
-    [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.0", @"None")]];
-    [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.1", @"1 AI")]];
-    [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.2", @"2 AIs")]];
-    [aiMenuItems addObject:[MenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.3+", @"%d AIs")]];
+    [aiMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.0", @"None")]];
+    [aiMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.1", @"1 AI")]];
+    [aiMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.2", @"2 AIs")]];
+    [aiMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"entries.ai.count.3+", @"%d AIs")]];
     aisI.subItems = aiMenuItems;
     [aisI setSelectedIndex:1];
     
     
     // Start Game.
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    startGameI  = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.start", @"Start!")
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    startGameI  = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.start", @"Start!")
                                                 target:self
                                               selector:@selector(startGame:)];
 
     
-    Menu *menu = [Menu menuWithItems:
+    CCMenu *menu = [CCMenu menuWithItems:
                   humansT, aisT, humansI, aisI,
                   gameModeT, gameModeI, [MenuItemSpacer small],
                   startGameI,
@@ -123,13 +123,13 @@
     
     
     // Back.
-    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
-    MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
+    CCMenuItem *back     = [CCMenuItemFont itemFromString:@"   <   "
                                                target: self
                                              selector: @selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
-    Menu *backMenu = [Menu menuWithItems:back, nil];
+    CCMenu *backMenu = [CCMenu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
@@ -142,11 +142,11 @@
 
     [humansI setSelectedIndex:(NSUInteger)fminf(humans, 3)];
     if (humans >= 3)
-        [(MenuItemFont*)[humansI selectedItem] setString:[NSString stringWithFormat:
+        [(CCMenuItemFont*)[humansI selectedItem] setString:[NSString stringWithFormat:
                                                           NSLocalizedString(@"entries.player.count.3+", @"%d Players"), humans]];
     [aisI setSelectedIndex:(NSUInteger)fminf(ais, 3)];
     if (ais >= 3)
-        [(MenuItemFont*)[aisI selectedItem] setString:[NSString stringWithFormat:
+        [(CCMenuItemFont*)[aisI selectedItem] setString:[NSString stringWithFormat:
                                                        NSLocalizedString(@"entries.ai.count.3+", @"%d AIs"), ais]];
     NSArray *modeKeys = [[GorillasConfig get].modeStrings allKeys];
     [gameModeI setSelectedIndex:[modeKeys indexOfObject:[GorillasConfig get].mode]];

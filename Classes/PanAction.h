@@ -24,7 +24,7 @@
 
 
 
-@interface PanAction : MoveBy {
+@interface PanAction : CCMoveBy {
 
 @private
     NSMutableArray *subNodes;

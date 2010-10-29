@@ -24,7 +24,7 @@
 
 #import "Resettable.h"
 
-@interface StarLayer : Layer <Resettable> {
+@interface StarLayer : CCLayer <Resettable> {
 
 @private
     float       depth;

@@ -25,7 +25,6 @@
 #import "GameConfigurationLayer.h"
 #import "GorillasAppDelegate.h"
 #import "CityTheme.h"
-#import "Utility.h"
 
 
 @interface AVConfigurationLayer ()
@@ -48,72 +47,72 @@
         return self;
     
     // Audio Track.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *audioT    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.track", @"Audio Track")];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *audioT    = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.choose.track", @"Audio Track")];
     [audioT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    audioI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(audioTrack:)];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    audioI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(audioTrack:)];
     NSMutableArray *trackMenuItems = [NSMutableArray arrayWithCapacity:[[GorillasConfig get].trackNames count]];
     for (NSString *trackName in [GorillasConfig get].trackNames)
-        [trackMenuItems addObject:[MenuItemFont itemFromString:trackName]];
+        [trackMenuItems addObject:[CCMenuItemFont itemFromString:trackName]];
     audioI.subItems = trackMenuItems;
     [audioI setSelectedIndex:1];
 
     
     // Sound Effects.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *soundFxT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.sound", @"Sound Effects")];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *soundFxT  = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.sound", @"Sound Effects")];
     [soundFxT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    soundFxI = [[MenuItemToggle itemWithTarget:self selector:@selector(soundFx:) items:
-                [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
-                [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    soundFxI = [[CCMenuItemToggle itemWithTarget:self selector:@selector(soundFx:) items:
+                [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
+                [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
                 nil] retain];
     
     // Voice.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *voiceT = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.voice", @"Voice Effects")];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *voiceT = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.voice", @"Voice Effects")];
     [voiceT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    voiceI = [[MenuItemToggle itemWithTarget:self selector:@selector(voice:) items:
-              [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
-              [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    voiceI = [[CCMenuItemToggle itemWithTarget:self selector:@selector(voice:) items:
+              [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
+              [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
               nil] retain];
     
     
     // Visual Effects.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *visualFxT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.visual", @"Visual Effects")];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *visualFxT  = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.visual", @"Visual Effects")];
     [visualFxT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    visualFxI = [[MenuItemToggle itemWithTarget:self selector:@selector(visualFx:) items:
-                 [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
-                 [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    visualFxI = [[CCMenuItemToggle itemWithTarget:self selector:@selector(visualFx:) items:
+                 [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
+                 [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
                  nil] retain];
     
     
     // Vibration.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *vibrationT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.vibration", @"Vibration")];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *vibrationT  = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.choose.fx.vibration", @"Vibration")];
     [vibrationT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    vibrationI = [[MenuItemToggle itemWithTarget:self selector:@selector(vibration:) items:
-                  [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
-                  [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    vibrationI = [[CCMenuItemToggle itemWithTarget:self selector:@selector(vibration:) items:
+                  [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
+                  [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
                   nil] retain];
     
     
-    Menu *menu = [Menu menuWithItems:audioT, audioI, soundFxT, voiceT, soundFxI, voiceI, visualFxT, vibrationT, visualFxI, vibrationI, nil];
+    CCMenu *menu = [CCMenu menuWithItems:audioT, audioI, soundFxT, voiceT, soundFxI, voiceI, visualFxT, vibrationT, visualFxI, vibrationI, nil];
     [menu alignItemsInColumns:
      [NSNumber numberWithUnsignedInteger:1],
      [NSNumber numberWithUnsignedInteger:1],
@@ -126,13 +125,13 @@
     
     
     // Back.
-    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
-    MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
+    CCMenuItem *back     = [CCMenuItemFont itemFromString:@"   <   "
                                                target: self
                                              selector: @selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
-    Menu *backMenu = [Menu menuWithItems:back, nil];
+    CCMenu *backMenu = [CCMenu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];

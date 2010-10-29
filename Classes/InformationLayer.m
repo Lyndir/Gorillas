@@ -46,38 +46,38 @@
         return self;
 
     // Version string.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *ver   = [MenuItemFont itemFromString:[[NSBundle mainBundle]
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *ver   = [CCMenuItemFont itemFromString:[[NSBundle mainBundle]
                                                     objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
     [ver setIsEnabled:NO];
     
     // Information menus.
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    MenuItem *guide = [MenuItemFont itemFromString:NSLocalizedString(@"entries.guide", @"Game Guide")
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    CCMenuItem *guide = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.guide", @"Game Guide")
                                             target:self selector:@selector(guide:)];
-    MenuItem *stats = [MenuItemFont itemFromString:NSLocalizedString(@"entries.stats", @"Statistics")
+    CCMenuItem *stats = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.stats", @"Statistics")
                                             target:self selector:@selector(stats:)];
-    MenuItem *full  = nil;
+    CCMenuItem *full  = nil;
 #ifdef LITE
-    full = [MenuItemFont itemFromString:NSLocalizedString(@"entries.fullgame", @"Full Game")
+    full = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.fullgame", @"Full Game")
                                  target:self selector:@selector(full:)];
 #endif
     
-    Menu *menu = [Menu menuWithItems:ver, guide, stats, [MenuItemSpacer small], full, nil];
+    CCMenu *menu = [CCMenu menuWithItems:ver, guide, stats, [MenuItemSpacer small], full, nil];
     [menu alignItemsVertically];
     [self addChild:menu];
 
     
     // Back.
-    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
-    MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
+    CCMenuItem *back     = [CCMenuItemFont itemFromString:@"   <   "
                                                target: self
                                              selector: @selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
-    Menu *backMenu = [Menu menuWithItems:back, nil];
+    CCMenu *backMenu = [CCMenu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];

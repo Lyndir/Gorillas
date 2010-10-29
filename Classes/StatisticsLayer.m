@@ -43,13 +43,13 @@
         return self;
     
     // Back.
-    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
-    MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
+    CCMenuItem *back     = [CCMenuItemFont itemFromString:@"   <   "
                                                target: self
                                              selector: @selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
-    Menu *menu = [Menu menuWithItems:back, nil];
+    CCMenu *menu = [CCMenu menuWithItems:back, nil];
     [menu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [menu alignItemsHorizontally];
     [self addChild:menu];
@@ -93,12 +93,12 @@
     free(tScores);
     
     // Top score label.
-    Label *topScoreLabel            = [[Label alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"entries.score.top", @"Top Score: %04d"), topScore]
+    CCLabelTTF *topScoreLabel            = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"entries.score.top", @"Top Score: %04d"), topScore]
                                                          dimensions:CGSizeMake(200, [[GorillasConfig get].fontSize intValue])
                                                           alignment:UITextAlignmentCenter
                                                            fontName:[GorillasConfig get].fixedFontName
                                                            fontSize:[[GorillasConfig get].smallFontSize intValue]];
-    topScoreLabel.position          = ccp(self.contentSize.width / 2, self.contentSize.height - self.padding + [[GorillasConfig get].smallFontSize intValue]);
+    topScoreLabel.position          = ccp(self.contentSize.width / 2, self.contentSize.height - self.padding.top + self.padding.bottom + [[GorillasConfig get].smallFontSize intValue]);
     [self addChild:topScoreLabel];
     [topScoreLabel release];
     
@@ -120,8 +120,8 @@
     scorePoints                     = malloc(sizeof(CGPoint) * scoreCount);
     scoreColors                     = malloc(sizeof(ccColor4B) * scoreCount);
     
-    CGFloat step                    = (self.contentSize.width - self.padding * 2.0f) / scoreCount;
-    CGFloat x                       = self.padding;
+    CGFloat step                    = (self.contentSize.width - (self.padding.left + self.padding.right) * 2.0f) / scoreCount;
+    CGFloat x                       = self.padding.left;
     NSUInteger s                    = 0;
     
     // Iterate the scores in reverse date order (recent to last).
@@ -130,25 +130,25 @@
         NSInteger score             = [(NSNumber *) [history objectForKey:date] integerValue];
         
         // Score label.
-        Label *scoreLabel           = [[Label alloc] initWithString:[NSString stringWithFormat:@"%d", score]
+        CCLabelTTF *scoreLabel           = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%d", score]
                                                          dimensions:CGSizeMake(gBarSize * 2, [[GorillasConfig get].smallFontSize intValue] / 2)
                                                           alignment:UITextAlignmentCenter
                                                            fontName:[GorillasConfig get].fixedFontName
                                                            fontSize:[[GorillasConfig get].smallFontSize intValue] / 2];
-        scoreLabel.position         = ccp(x, self.padding + [[GorillasConfig get].smallFontSize intValue] * (s % 2));
+        scoreLabel.position         = ccp(x, self.padding.top + self.padding.bottom + [[GorillasConfig get].smallFontSize intValue] * (s % 2));
         
         // Score's date label.
         NSString *dateString        = [dateFormatter stringFromDate:date];
-        Label *dateLabel            = [[Label alloc] initWithString:AppendOrdinalPrefix([dateString intValue], dateString)
+        CCLabelTTF *dateLabel            = [[CCLabelTTF alloc] initWithString:AppendOrdinalPrefix([dateString intValue], dateString)
                                                          dimensions:CGSizeMake(gBarSize * 2, [[GorillasConfig get].smallFontSize intValue] / 2)
                                                           alignment:UITextAlignmentCenter
                                                            fontName:[GorillasConfig get].fixedFontName
                                                            fontSize:[[GorillasConfig get].smallFontSize intValue] / 2];
-        dateLabel.position          = ccp(x, self.padding + scoreLabel.contentSize.height + [[GorillasConfig get].smallFontSize intValue] * (s % 2));
+        dateLabel.position          = ccp(x, self.padding.top + self.padding.bottom + scoreLabel.contentSize.height + [[GorillasConfig get].smallFontSize intValue] * (s % 2));
 
         // Score graph point.
         float scoreHeight           = ((float) score / topScore);
-        float padGraph              = self.padding + scoreLabel.contentSize.height * 2 + dateLabel.contentSize.height * 2;
+        float padGraph              = self.padding.top + self.padding.bottom + scoreLabel.contentSize.height * 2 + dateLabel.contentSize.height * 2;
         scoreHeight                 *= (self.contentSize.height - padGraph * 2);
         
         scorePoints[s]              = ccp(x, scoreHeight + padGraph);
@@ -187,9 +187,9 @@
 }
 
 
--(void) dismissAsPush:(BOOL)_pushed {
+-(void) dismissAsPush:(BOOL)isPushed {
     
-    [super dismissAsPush:_pushed];
+    [super dismissAsPush:isPushed];
 }
 
 

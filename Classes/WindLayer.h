@@ -25,7 +25,7 @@
 #import "Resettable.h"
 
 
-@interface WindLayer : Layer <CocosNodeRGBA, Resettable> {
+@interface WindLayer : CCLayer <CCRGBAProtocol, Resettable> {
 
 @private
     float           wind, bar;
@@ -33,11 +33,11 @@
     ccTime          elapsed, incrementDuration;
     
     NSMutableArray  *systems, *affectAngles;
-    Sprite          *head, *body, *tail;
+    CCSprite          *head, *body, *tail;
 }
 
--(void) registerSystem:(ParticleSystem *)system affectAngle:(BOOL)affectAngle;
--(void) unregisterSystem:(ParticleSystem *)system;
+-(void) registerSystem:(CCParticleSystem *)system affectAngle:(BOOL)affectAngle;
+-(void) unregisterSystem:(CCParticleSystem *)system;
 
 @property (nonatomic, readonly) float wind;
 

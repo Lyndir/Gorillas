@@ -61,7 +61,7 @@
     
     recap = 0;
     
-    smoke = [[ParticleMeteor alloc] init];
+    smoke = [[CCParticleMeteor alloc] init];
     [smoke setGravity:CGPointZero];
     [smoke setPosition:CGPointZero];
     [smoke setSpeed:5];
@@ -86,33 +86,33 @@
 }
 
 
--(void) startWithTarget:(CocosNode *)aTarget {
+-(void) startWithTarget:(CCNode *)aTarget {
     
     running = YES;
     skipped = NO;
     [super startWithTarget:aTarget];
     
     if(spinAction) {
-        [target stopAction:spinAction];
+        [self.target stopAction:spinAction];
         [spinAction release];
     }
     
-    [target runAction:
-     [spinAction = [Repeat actionWithAction:[RotateBy actionWithDuration:1
+    [self.target runAction:
+     [spinAction = [CCRepeat actionWithAction:[CCRotateBy actionWithDuration:1
                                                                    angle:360]
-                                      times:(int)duration + 1] retain]];
-    [target setVisible:YES];
-    [target setTag:GorillasTagBananaFlying];
+                                      times:(int)self.duration + 1] retain]];
+    [self.target setVisible:YES];
+    [self.target setTag:GorillasTagBananaFlying];
     
     
     [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:smoke affectAngle:NO];
     
     if([[GorillasConfig get].visualFx boolValue]) {
         [smoke setEmissionRate:30];
-        [smoke setStartSize:15.0f * target.scale];
-        [smoke setStartSizeVar:5.0f * target.scale];
+        [smoke setStartSize:15.0f * [(CCNode *)self.target scale]];
+        [smoke setStartSizeVar:5.0f * [(CCNode *)self.target scale]];
         if(![smoke parent])
-            [target.parent addChild:smoke];
+            [[self.target parent] addChild:smoke];
         else
             [smoke resetSystem];
     }
@@ -127,19 +127,19 @@
 
     GameLayer *gameLayer = [GorillasAppDelegate get].gameLayer;
     CityLayer *cityLayer = gameLayer.cityLayer;
-    //CGSize winSize = [[Director sharedDirector] winSize];
+    //CGSize winSize = [[CCDirector sharedDirector] winSize];
     
     // Wind influence.
     float w = gameLayer.windLayer.wind;
     
     // Calculate banana position.
     NSUInteger g = [[GorillasConfig get].gravity unsignedIntValue];
-    ccTime t = elapsed;
+    ccTime t = self.elapsed;
     CGPoint r = ccp((v.x + w * t * [[GorillasConfig get].windModifier floatValue]) * t + r0.x,
                    v.y * t - t * t * g / 2 + r0.y);
 
     // Calculate the step size.
-    CGPoint rTest = target.position;
+    CGPoint rTest = ((CCNode *)self.target).position;
     CGPoint dr = ccpSub(r, rTest);
     float drLen = ccpLength(dr);
     int step = 0, stepCount = drLen <= maxDiff? 1: (int) (drLen / maxDiff) + 1;
@@ -166,7 +166,7 @@
 
     else
         // Stop recapping when reached recap r.
-        if(elapsed >= recap + recapTime) {
+        if(self.elapsed >= recap + recapTime) {
             hitGorilla = YES;
             rTest = recapr;
         }
@@ -186,7 +186,7 @@
                 [gameLayer.cityLayer.hitGorilla killDead];
             [gameLayer.windLayer unregisterSystem:smoke];
             smoke.emissionRate  = 0;
-            target.visible      = NO;
+            [self.target setVisible:NO];
             running             = NO;
             
             // Update game state.
@@ -196,9 +196,9 @@
                 [self throwEnded];
             
             else
-                [cityLayer runAction:[Sequence actions:
-                                      [DelayTime actionWithDuration:1],
-                                      [CallFunc actionWithTarget:self selector:@selector(throwEnded)],
+                [cityLayer runAction:[CCSequence actions:
+                                      [CCDelayTime actionWithDuration:1],
+                                      [CCCallFunc actionWithTarget:self selector:@selector(throwEnded)],
                                       nil]];
         }
         
@@ -209,15 +209,15 @@
             [[GorillasAppDelegate get].hudLayer message:NSLocalizedString(@"message.killreplay", @"Kill Shot Replay") isImportant:YES];
             [[GorillasAppDelegate get].hudLayer setButtonImage:@"skip.png" callback:self :@selector(skip:)];
             recapr = r;
-            recap = elapsed - recapTime;
+            recap = self.elapsed - recapTime;
             r = r0;
             
-            [self startWithTarget:target];
+            [self startWithTarget:self.target];
         }
     }
     
     //if(focussed) {
-        if(recap && elapsed > recap) {
+        if(recap && self.elapsed > recap) {
             [[GorillasAppDelegate get].gameLayer scaleTimeTo:0.5f duration:0.5f];
             [gameLayer.panningLayer scaleTo:1.5f];
             [gameLayer.panningLayer scrollToCenter:r horizontal:YES];
@@ -225,7 +225,7 @@
             [gameLayer.panningLayer scrollToCenter:r horizontal:[[GorillasConfig get].followThrow boolValue]];
     //}
 
-    [target setPosition:r];
+    [self.target setPosition:r];
     if([[GorillasConfig get].visualFx boolValue]) {
         smoke.angle             = atan2f(smoke.centerOfGravity.y - r.y,
                                          smoke.centerOfGravity.x - r.x)
@@ -237,8 +237,8 @@
     if(running) {
         if(gameLayer.singlePlayer && gameLayer.activeGorilla.human) {
             // Singleplayer game with human turn is still running; update the skill counter.
-            throwSkill = elapsed / 10;
-            [[[GorillasAppDelegate get] hudLayer] updateHudWithScore:0 skill:throwSkill];
+            throwSkill = self.elapsed / 10;
+            [[[GorillasAppDelegate get] hudLayer] updateHudWithNewScore:0 skill:throwSkill wasGood:YES];
         }
     }
 }
@@ -247,7 +247,7 @@
 -(void) throwEnded {
     
     [[[[GorillasAppDelegate get] gameLayer] windLayer] unregisterSystem:smoke];
-    [target stopAction:spinAction];
+    [self.target stopAction:spinAction];
     
     //if(focussed) {
         [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:CGPointZero horizontal:NO];
@@ -260,18 +260,18 @@
 
 -(void) skip: (id) caller {
     
-    elapsed = recap + recapTime;
+    //FIXME? elapsed = recap + recapTime;
     skipped = YES;
 }
 
 
 -(void) stop {
 
-    duration = 0;
+    self.duration = 0;
     running = NO;
     
     [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:NO];
-    [target setTag:GorillasTagBananaNotFlying];
+    [self.target setTag:GorillasTagBananaNotFlying];
 
     [super stop];
 }

@@ -29,7 +29,7 @@
 @interface AVConfigurationLayer : ShadeLayer <Resettable> {
 
 @private
-    MenuItemToggle *audioI, *soundFxI, *voiceI, *visualFxI, *vibrationI;
+    CCMenuItemToggle *audioI, *soundFxI, *voiceI, *visualFxI, *vibrationI;
 }
 
 @end

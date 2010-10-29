@@ -25,7 +25,7 @@
 #import "BananaLayer.h"
 
 
-@interface GorillaLayer : Sprite {
+@interface GorillaLayer : CCSprite {
 
 @private
     NSString            *name;
@@ -36,7 +36,7 @@
     NSUInteger          turns;
     float               zoom;
     
-    Sprite              *bobber;
+    CCSprite              *bobber;
     ccColor4B           *healthColors;
     
     GorillasPlayerModel model;

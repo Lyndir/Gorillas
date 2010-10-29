@@ -74,15 +74,15 @@
     const CGFloat wPad              = [GorillasConfig get].windowPadding;
     const CGFloat wWidth            = [GorillasConfig get].windowWidth;
     const CGFloat wHeight           = [GorillasConfig get].windowHeight;
-    const ccColor4B wColor0         = ccc([[GorillasConfig get].windowColorOff longValue]);
-    const ccColor4B wColor1         = ccc([[GorillasConfig get].windowColorOn longValue]);
+    const ccColor4B wColor0         = ccc4l([[GorillasConfig get].windowColorOff longValue]);
+    const ccColor4B wColor1         = ccc4l([[GorillasConfig get].windowColorOn longValue]);
     ccColor4B wColor10;
     wColor10.r                      = (wColor0.r + wColor1.r) / 2;
     wColor10.g                      = (wColor0.g + wColor1.g) / 2;
     wColor10.b                      = (wColor0.b + wColor1.b) / 2;
     wColor10.a                      = (wColor0.a + wColor1.a) / 2;
 
-    const CGSize winSize            = [Director sharedDirector].winSize;
+    const CGSize winSize            = [CCDirector sharedDirector].winSize;
     const CGFloat floorHeight       = wHeight + wPad;
     const NSUInteger fixedFloors    = [[GorillasConfig get].fixedFloors unsignedIntValue];
     const NSInteger varFloors       = (winSize.height * [[GorillasConfig get].buildingMax floatValue]
@@ -113,7 +113,7 @@
         windowCount                 += buildings[b].windowCount;
 
         // Building's color.
-        buildings[b].frontColor     = ccc([GorillasConfig get].buildingColor);
+        buildings[b].frontColor     = ccc4l([GorillasConfig get].buildingColor);
         buildings[b].backColor.r    = (GLubyte)(buildings[b].frontColor.r * 0.2f);
         buildings[b].backColor.g    = (GLubyte)(buildings[b].frontColor.g * 0.2f);
         buildings[b].backColor.b    = (GLubyte)(buildings[b].frontColor.b * 0.2f);

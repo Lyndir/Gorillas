@@ -24,7 +24,7 @@
 
 
 
-@interface Throw : IntervalAction {
+@interface Throw : CCActionInterval {
 
 @private
     BOOL            running;
@@ -36,8 +36,8 @@
     CGPoint          r0;
     float           throwSkill;
     
-    IntervalAction  *spinAction;
-    ParticleSystem  *smoke;
+    CCActionInterval  *spinAction;
+    CCParticleSystem  *smoke;
 }
 
 +(Throw *) actionWithVelocity: (CGPoint)velocity startPos: (CGPoint)startPos;

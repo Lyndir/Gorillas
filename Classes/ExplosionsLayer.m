@@ -35,13 +35,13 @@ typedef enum {
 @interface ExplosionsLayer ()
 
 - (void)gc:(ccTime)dt;
-- (void)stop:(ParticleSystem *)explosion;
+- (void)stop:(CCParticleSystem *)explosion;
 - (CGFloat)size;
-+ (ParticleSystem *)flameWithRadius:(CGFloat)radius heavy:(BOOL)heavy;
++ (CCParticleSystem *)flameWithRadius:(CGFloat)radius heavy:(BOOL)heavy;
 
 @end
 
-static ParticleSystem **flameTypes = nil;
+static CCParticleSystem **flameTypes = nil;
 
 @implementation ExplosionsLayer
 
@@ -68,7 +68,7 @@ static ParticleSystem **flameTypes = nil;
         stuffToClean = NO;
         
         if(explosions.count) {
-            ParticleSystem *explosion = [explosions objectAtIndex:0];
+            CCParticleSystem *explosion = [explosions objectAtIndex:0];
             
             if(!explosion.particleCount && !explosion.active) {
                 [explosions removeObjectAtIndex:0];
@@ -82,7 +82,7 @@ static ParticleSystem **flameTypes = nil;
 
 -(void) step:(ccTime)dt {
     
-    //for(CocosNode *node = self; node; node = node.parent)
+    //for(CCNode *node = self; node; node = node.parent)
     //    dt *= node.timeScale;
 
     if(flameTypes) {
@@ -111,7 +111,7 @@ static ParticleSystem **flameTypes = nil;
     if(heavy)
         explosionParticles += 400;
     
-    ParticleSystem *explosion = [[ParticleSun alloc] initWithTotalParticles:explosionParticles];
+    CCParticleSystem *explosion = [[CCParticleSun alloc] initWithTotalParticles:explosionParticles];
     [[GorillasAppDelegate get].gameLayer.windLayer registerSystem:explosion affectAngle:NO];
     
     explosion.position          = CGPointZero;
@@ -123,9 +123,9 @@ static ParticleSystem **flameTypes = nil;
                                       [self size] * 0.2f);
     explosion.tag               = (hitsGorilla? GorillasExplosionHitGorilla  : 0) |
                                   (heavy?       GorillasExplosionHeavy       : 0);
-    [explosion runAction:[Sequence actions:
-                          [DelayTime actionWithDuration:heavy? 0.6f: 0.2f],
-                          [CallFuncN actionWithTarget:self selector:@selector(stop:)],
+    [explosion runAction:[CCSequence actions:
+                          [CCDelayTime actionWithDuration:heavy? 0.6f: 0.2f],
+                          [CCCallFuncN actionWithTarget:self selector:@selector(stop:)],
                           nil]];
     
     [self addChild:explosion z:1];
@@ -139,7 +139,7 @@ static ParticleSystem **flameTypes = nil;
     if(positions) {
         NSUInteger f = 0;
         CGPoint prevFlamePos = CGPointZero;
-        for(ParticleSystem *flame in flames) {
+        for(CCParticleSystem *flame in flames) {
             CGPoint translate = ccpSub(positions[f], prevFlamePos);
             prevFlamePos = positions[f];
             
@@ -159,13 +159,13 @@ static ParticleSystem **flameTypes = nil;
     
     [super onExit];
     
-    for (ParticleSystem *explosion in explosions) {
+    for (CCParticleSystem *explosion in explosions) {
         [[GorillasAppDelegate get].gameLayer.windLayer unregisterSystem:explosion];
         [self removeChild:explosion cleanup:YES];
     }
     [explosions removeAllObjects];
     
-    for (ParticleSystem *flame in flames) {
+    for (CCParticleSystem *flame in flames) {
         [[GorillasAppDelegate get].gameLayer.windLayer unregisterSystem:flame];
         [self removeChild:flame cleanup:YES];
     }
@@ -173,13 +173,13 @@ static ParticleSystem **flameTypes = nil;
 }
 
 
--(void) stop:(ParticleSystem *)explosion {
+-(void) stop:(CCParticleSystem *)explosion {
     
     BOOL hitsGorilla    = [explosion tag] & GorillasExplosionHitGorilla;
     BOOL heavy          = [explosion tag] & GorillasExplosionHeavy;
     
     if(!hitsGorilla && [GorillasConfig get].visualFx) {
-        ParticleSystem *flame = [ExplosionsLayer flameWithRadius:[self size] / 2 heavy:heavy];
+        CCParticleSystem *flame = [ExplosionsLayer flameWithRadius:[self size] / 2 heavy:heavy];
 
         positions = realloc(positions, sizeof(CGPoint) * (flames.count + 1));
         positions[flames.count] = explosion.centerOfGravity;
@@ -190,16 +190,16 @@ static ParticleSystem **flameTypes = nil;
 }
 
 
-+(ParticleSystem *) flameWithRadius:(CGFloat)radius heavy:(BOOL)heavy {
++(CCParticleSystem *) flameWithRadius:(CGFloat)radius heavy:(BOOL)heavy {
     
     if(!flameTypes) {
-        flameTypes = malloc(sizeof(ParticleSystem *) * 2 * flameVariantion);
+        flameTypes = malloc(sizeof(CCParticleSystem *) * 2 * flameVariantion);
         
         for (NSUInteger type = 0; type < flameVariantion * 2; ++type) {
             BOOL typeIsHeavy = !(type < flameVariantion);
             int flameParticles = typeIsHeavy? 80: 60;
             
-            ParticleSystem *flame   = [[ParticleFire alloc] initWithTotalParticles:flameParticles];
+            CCParticleSystem *flame   = [[CCParticleFire alloc] initWithTotalParticles:flameParticles];
             
             flame.position          = CGPointZero;
             //flames.angleVar       = 90;

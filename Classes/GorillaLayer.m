@@ -67,12 +67,12 @@ static NSUInteger _teamIndex, _globalIndex;
 
     zoom    = 1;
 
-    bobber  = [[Sprite alloc] initWithFile:@"bobber.png"];
+    bobber  = [[CCSprite alloc] initWithFile:@"bobber.png"];
     [bobber setPosition:ccp([self contentSize].width / 2,
                             [self contentSize].height + [bobber contentSize].height / 2 + 15)];
-    [bobber runAction:[RepeatForever actionWithAction:[Sequence actions:
-                                                       [EaseSineInOut actionWithAction:[MoveBy actionWithDuration:0.7f position:ccp(0, 15)]],
-                                                       [EaseSineInOut actionWithAction:[MoveBy actionWithDuration:0.7f position:ccp(0, -15)]],
+    [bobber runAction:[CCRepeatForever actionWithAction:[CCSequence actions:
+                                                       [CCEaseSineInOut actionWithAction:[CCMoveBy actionWithDuration:0.7f position:ccp(0, 15)]],
+                                                       [CCEaseSineInOut actionWithAction:[CCMoveBy actionWithDuration:0.7f position:ccp(0, -15)]],
                                                        nil]]];
     [bobber setVisible:NO];
     [self addChild:bobber];
@@ -94,8 +94,8 @@ static NSUInteger _teamIndex, _globalIndex;
     lives = initialLives;
     
     healthColors    = malloc(sizeof(ccColor4B) * 4);
-    healthColors[0] = healthColors[1] = ccc(0xFF33CC33);
-    healthColors[2] = healthColors[3] = ccc(0xFF3333CC);
+    healthColors[0] = healthColors[1] = ccc4l(0xFF33CC33);
+    healthColors[2] = healthColors[3] = ccc4l(0xFF3333CC);
     
     return self;
 }
@@ -104,7 +104,7 @@ static NSUInteger _teamIndex, _globalIndex;
 -(void)setModel:(GorillasPlayerModel)_model {
     
     model = _model;
-    [self setTexture:[[TextureMgr sharedTextureMgr] addImage:[self modelFileWithArmsUpLeft:NO right:NO]]];
+    [self setTexture:[[CCTextureCache sharedTextureCache] addImage:[self modelFileWithArmsUpLeft:NO right:NO]]];
 }
 
 
@@ -123,31 +123,31 @@ static NSUInteger _teamIndex, _globalIndex;
 
 -(void) cheer {
     
-    [self runAction:[Sequence actions:
-                     [CallFunc actionWithTarget:self selector:@selector(uu)],
-                     [DelayTime actionWithDuration:0.4f],
-                     [CallFunc actionWithTarget:self selector:@selector(dd)],
-                     [DelayTime actionWithDuration:0.2f],
-                     [CallFunc actionWithTarget:self selector:@selector(uu)],
-                     [DelayTime actionWithDuration:1],
-                     [CallFunc actionWithTarget:self selector:@selector(dd)],
+    [self runAction:[CCSequence actions:
+                     [CCCallFunc actionWithTarget:self selector:@selector(uu)],
+                     [CCDelayTime actionWithDuration:0.4f],
+                     [CCCallFunc actionWithTarget:self selector:@selector(dd)],
+                     [CCDelayTime actionWithDuration:0.2f],
+                     [CCCallFunc actionWithTarget:self selector:@selector(uu)],
+                     [CCDelayTime actionWithDuration:1],
+                     [CCCallFunc actionWithTarget:self selector:@selector(dd)],
                      nil]];
 }
 
 
 -(void) dance {
     
-    [self runAction:[Sequence actions:
-                     [Repeat actionWithAction:[Sequence actions:
-                                               [CallFunc actionWithTarget:self selector:@selector(ud)],
-                                               [DelayTime actionWithDuration:0.2f],
-                                               [CallFunc actionWithTarget:self selector:@selector(du)],
-                                               [DelayTime actionWithDuration:0.2f],
+    [self runAction:[CCSequence actions:
+                     [CCRepeat actionWithAction:[CCSequence actions:
+                                               [CCCallFunc actionWithTarget:self selector:@selector(ud)],
+                                               [CCDelayTime actionWithDuration:0.2f],
+                                               [CCCallFunc actionWithTarget:self selector:@selector(du)],
+                                               [CCDelayTime actionWithDuration:0.2f],
                                                nil]
                                         times:8],
-                     [CallFunc actionWithTarget:self selector:@selector(uu)],
-                     [DelayTime actionWithDuration:0.5f],
-                     [CallFunc actionWithTarget:self selector:@selector(dd)],
+                     [CCCallFunc actionWithTarget:self selector:@selector(uu)],
+                     [CCDelayTime actionWithDuration:0.5f],
+                     [CCCallFunc actionWithTarget:self selector:@selector(dd)],
                      nil]];
 }
 
@@ -159,34 +159,34 @@ static NSUInteger _teamIndex, _globalIndex;
     else
         [self du];
     
-    [self runAction:[Sequence actions:
-                     [DelayTime actionWithDuration:0.5f],
-                     [CallFunc actionWithTarget:self selector:@selector(dd)],
+    [self runAction:[CCSequence actions:
+                     [CCDelayTime actionWithDuration:0.5f],
+                     [CCCallFunc actionWithTarget:self selector:@selector(dd)],
                      nil]];
 }
 
 
 -(void) dd {
     
-    [self setTexture:[[TextureMgr sharedTextureMgr] addImage:[self modelFileWithArmsUpLeft:NO right:NO]]];
+    [self setTexture:[[CCTextureCache sharedTextureCache] addImage:[self modelFileWithArmsUpLeft:NO right:NO]]];
 }
 
 
 -(void) ud {
     
-    [self setTexture:[[TextureMgr sharedTextureMgr] addImage:[self modelFileWithArmsUpLeft:YES right:NO]]];
+    [self setTexture:[[CCTextureCache sharedTextureCache] addImage:[self modelFileWithArmsUpLeft:YES right:NO]]];
 }
 
 
 -(void) du {
     
-    [self setTexture:[[TextureMgr sharedTextureMgr] addImage:[self modelFileWithArmsUpLeft:NO right:YES]]];
+    [self setTexture:[[CCTextureCache sharedTextureCache] addImage:[self modelFileWithArmsUpLeft:NO right:YES]]];
 }
 
 
 -(void) uu {
     
-    [self setTexture:[[TextureMgr sharedTextureMgr] addImage:[self modelFileWithArmsUpLeft:YES right:YES]]];
+    [self setTexture:[[CCTextureCache sharedTextureCache] addImage:[self modelFileWithArmsUpLeft:YES right:YES]]];
 }
 
 
@@ -249,17 +249,17 @@ static NSUInteger _teamIndex, _globalIndex;
 
     if(lives == 0) {
         [self stopAllActions];
-        [self runAction:[Sequence actions:
-                         [FadeTo actionWithDuration:0.5f opacity:0x00],
+        [self runAction:[CCSequence actions:
+                         [CCFadeTo actionWithDuration:0.5f opacity:0x00],
                          [Remove action],
                          nil]];
     } else
-        [self runAction:[Sequence actions:
-                         [ShadeTo actionWithDuration:0.5f color:0xFF0000FF],
-                         [ShadeTo actionWithDuration:0.5f color:0xFFFFFFFF],
+        [self runAction:[CCSequence actions:
+                         [ShadeTo actionWithDuration:0.5f color:ccc4l(0xFF0000FF)],
+                         [ShadeTo actionWithDuration:0.5f color:ccc4l(0xFFFFFFFF)],
                          nil]];
 
-    [[GorillasAppDelegate get].hudLayer updateHudWithScore:0 skill:0];
+    [[GorillasAppDelegate get].hudLayer updateHudWithNewScore:0 skill:0 wasGood:YES];
 }
 
 
@@ -276,7 +276,7 @@ static NSUInteger _teamIndex, _globalIndex;
     lives = 1;
     
     [self stopAllActions];
-    [self runAction:[FadeTo actionWithDuration:0.5f opacity:0xFF]];
+    [self runAction:[CCFadeTo actionWithDuration:0.5f opacity:0xFF]];
 }
 
 
@@ -288,7 +288,7 @@ static NSUInteger _teamIndex, _globalIndex;
     active = _active;
     
     [bobber setVisible:active];
-    [[GorillasAppDelegate get].hudLayer updateHudWithScore:0 skill:0];
+    [[GorillasAppDelegate get].hudLayer updateHudWithNewScore:0 skill:0 wasGood:YES];
 }
 
 
@@ -342,13 +342,13 @@ static NSUInteger _teamIndex, _globalIndex;
     GLubyte o = active? 0xFF: 0x33;
     
     if ([[GorillasConfig get].visualFx boolValue]) {
-        DrawBoxFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[1], ccp(0, 3)), ccc(0xCCFFCC00 | o), ccc(0x33CC3300 | o));
-        DrawBoxFrom(ccpAdd(lines[2], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc(0xFFCCCC00 | o), ccc(0xCC333300 | o));
+        DrawBoxFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[1], ccp(0, 3)), ccc4l(0xCCFFCC00 | o), ccc4l(0x33CC3300 | o));
+        DrawBoxFrom(ccpAdd(lines[2], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc4l(0xFFCCCC00 | o), ccc4l(0xCC333300 | o));
     }
     else
         DrawLines(lines, healthColors, 4, 6);
     
-    DrawBorderFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc(0xCCCC3300 | (o - 0x33)), 1);
+    DrawBorderFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc4l(0xCCCC3300 | (o - 0x33)), 1);
 }
 
 

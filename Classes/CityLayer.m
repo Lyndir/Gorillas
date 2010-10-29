@@ -61,7 +61,7 @@
     dbgAIVect       = malloc(sizeof(CGPoint) * dbgAIMaxInd);
 #endif
     
-    isTouchEnabled  = YES;
+    self.isTouchEnabled = YES;
     
     throwHints      = [[NSMutableArray alloc] initWithCapacity:2];
 
@@ -73,16 +73,16 @@
     aimSprite.textureSize = CGSizeMake(aimSprite.textureSize.width / 2, aimSprite.textureSize.height / 2);
     [self addChild:aimSprite z:2];
     
-    angleLabel      = [[LabelAtlas alloc] initWithString:[NSString stringWithFormat:@"%0.0f", 99.99f]
+    angleLabel      = [[CCLabelAtlas alloc] initWithString:[NSString stringWithFormat:@"%0.0f", 99.99f]
                                              charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
-    strengthLabel   = [[LabelAtlas alloc] initWithString:[NSString stringWithFormat:@"%0.0f", 99.99f]
+    strengthLabel   = [[CCLabelAtlas alloc] initWithString:[NSString stringWithFormat:@"%0.0f", 99.99f]
                                              charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
-    infoLabel       = [[Label alloc] initWithString:@"∡\n⊿" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
+    infoLabel       = [[CCLabelTTF alloc] initWithString:@"∡\n⊿" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
                                            fontName:[GorillasConfig get].fixedFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
     [infoLabel addChild:angleLabel];
     [infoLabel addChild:strengthLabel];
     
-    CGSize winSize  = [Director sharedDirector].winSize;
+    CGSize winSize  = [CCDirector sharedDirector].winSize;
     angleLabel.position     = ccp(15, 80);
     strengthLabel.position  = ccp(15, 58);
     angleLabel.scale        = 0.5f;
@@ -105,13 +105,6 @@
         [[GorillasAppDelegate get].uiLayer addChild:infoLabel z:9];
     [self unschedule:@selector(addInfo:)];
 }
-
-
--(void) registerWithTouchDispatcher {
-    
-	[[TouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
-}
-
 
 
 -(void) reset {
@@ -142,13 +135,13 @@
 }
 
 
--(void) message:(NSString *)msg on:(CocosNode *)node {
+-(void) message:(NSString *)msg on:(CCNode *)node {
     
     if(msgLabel)
         [msgLabel stopAllActions];
 
     else {
-        msgLabel = [[Label alloc] initWithString:@""
+        msgLabel = [[CCLabelTTF alloc] initWithString:@""
                                       dimensions:CGSizeMake(1000, [[GorillasConfig get].fontSize intValue] + 5)
                                        alignment:UITextAlignmentCenter
                                         fontName:[GorillasConfig get].fixedFontName
@@ -162,7 +155,7 @@
                               [node position].y + [node contentSize].height)];
     
     // Make sure label remains on screen.
-    CGSize winSize = [Director sharedDirector].winSize;
+    CGSize winSize = [CCDirector sharedDirector].winSize;
     if(![[GorillasConfig get].followThrow boolValue]) {
         if([msgLabel position].x < [[GorillasConfig get].fontSize intValue] / 2)                 // Left edge
             [msgLabel setPosition:ccp([[GorillasConfig get].fontSize intValue] / 2, [msgLabel position].y)];
@@ -176,18 +169,18 @@
     
     // Color depending on whether message starts with -, + or neither.
     if([msg hasPrefix:@"+"])
-        [msgLabel setRGB:0x66 :0xCC :0x66];
+        [msgLabel setColor:ccc3l(0x66CC66)];
     else if([msg hasPrefix:@"-"])
-        [msgLabel setRGB:0xCC :0x66 :0x66];
+        [msgLabel setColor:ccc3l(0xCC6666)];
     else
-        [msgLabel setRGB:0xFF :0xFF :0xFF];
+        [msgLabel setColor:ccc3l(0xFFFFFF)];
     
     // Animate the label to fade out.
-    [msgLabel runAction:[Spawn actions:
-                         [FadeOut actionWithDuration:3],
-                         [Sequence actions:
-                          [DelayTime actionWithDuration:1],
-                          [MoveBy actionWithDuration:2 position:ccp(0, [[GorillasConfig get].fontSize intValue] * 2)],
+    [msgLabel runAction:[CCSpawn actions:
+                         [CCFadeOut actionWithDuration:3],
+                         [CCSequence actions:
+                          [CCDelayTime actionWithDuration:1],
+                          [CCMoveBy actionWithDuration:2 position:ccp(0, [[GorillasConfig get].fontSize intValue] * 2)],
                           nil],
                          nil]];
 }
@@ -198,13 +191,13 @@
 #ifdef _DEBUG_
     BuildingLayer *fb = [buildings objectAtIndex:0], *lb = [buildings lastObject];
     int pCount = (([lb position].x - [fb position].x) / dbgTraceStep + 1)
-                * ([[Director sharedDirector] winSize].height / dbgTraceStep + 1);
+                * ([[CCDirector sharedDirector] winSize].height / dbgTraceStep + 1);
     CGPoint *hgp = malloc(sizeof(CGPoint) * pCount);
     CGPoint *hep = malloc(sizeof(CGPoint) * pCount);
     int hgc = 0, hec = 0;
     
     for(float x = [fb position].x; x < [lb position].x; x += dbgTraceStep)
-        for(float y = 0; y < [[Director sharedDirector] winSize].height; y += dbgTraceStep) {
+        for(float y = 0; y < [[CCDirector sharedDirector] winSize].height; y += dbgTraceStep) {
             CGPoint pos = ccp(x, y);
 
             BOOL hg = NO, he = NO;
@@ -237,7 +230,7 @@
             CGPoint to   = ccpAdd(from, throwHistory[i]);
             
             if(!CGPointEqualToPoint(to, CGPointZero))
-                DrawLinesTo(from, &to, 1, ccc([[GorillasConfig get].windowColorOff longValue] & 0xffffff33), 3);
+                DrawLinesTo(from, &to, 1, ccc4l([[GorillasConfig get].windowColorOff longValue] & 0xffffff33), 3);
         }
     }
 }
@@ -284,7 +277,7 @@
     }
 
     CGPoint wp = [[GorillasAppDelegate get].gameLayer convertTouchToNodeSpace:[[event allTouches] anyObject]];
-    if (fabsf(wp.y - [Director sharedDirector].winSize.height) < 20)
+    if (fabsf(wp.y - [CCDirector sharedDirector].winSize.height) < 20)
         [self performSelector:@selector(zoomOut) withObject:nil afterDelay:3];
     else
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(zoomOut) object:nil];
@@ -493,7 +486,7 @@
             || ![gorilla alive])
             hintGorilla = NO;
         
-        Sprite *hint = [throwHints objectAtIndex:i];
+        CCSprite *hint = [throwHints objectAtIndex:i];
         [hint setVisible:hintGorilla];
         [hint stopAllActions];
         
@@ -503,10 +496,10 @@
 
             [hint setOpacity:0];
             [hint setPosition:ccpAdd([GorillasAppDelegate get].gameLayer.activeGorilla.position, v)];
-            [hint runAction:[RepeatForever actionWithAction:[Sequence actions:
-                                                             [DelayTime actionWithDuration:5],
-                                                             [FadeTo actionWithDuration:3 opacity:0x55],
-                                                             [FadeTo actionWithDuration:3 opacity:0x00],
+            [hint runAction:[CCRepeatForever actionWithAction:[CCSequence actions:
+                                                             [CCDelayTime actionWithDuration:5],
+                                                             [CCFadeTo actionWithDuration:3 opacity:0x55],
+                                                             [CCFadeTo actionWithDuration:3 opacity:0x00],
                                                              nil]]];
         }
     }
@@ -516,10 +509,10 @@
 -(void) throwFrom:(GorillaLayer *)gorilla withVelocity:(CGPoint)v {
     
     // Hide all hints.
-    for(Sprite *hint in throwHints)
+    for(CCSprite *hint in throwHints)
         if([hint visible]) {
             [hint stopAllActions];
-            [hint runAction:[FadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue] opacity:0x00]];
+            [hint runAction:[CCFadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue] opacity:0x00]];
         }
     
     // Record throw history & start the actual throw.
@@ -576,7 +569,7 @@
     int score = [[GorillasConfig get].level floatValue] * [[GorillasConfig get].missScore intValue];
     
     [[GorillasConfig get] recordScore:[[GorillasConfig get].score floatValue] + score];
-    [[[GorillasAppDelegate get] hudLayer] updateHudWithScore:score skill:0];
+    [[[GorillasAppDelegate get] hudLayer] updateHudWithNewScore:score skill:0 wasGood:YES];
 
     if(score)
         [self message:[NSString stringWithFormat:@"%+d", score] on:[bananaLayer banana]];
@@ -639,7 +632,7 @@
     // Create enough throw hint sprites / remove needless ones.
     while([throwHints count] != [gorillas count]) {
         if([throwHints count] < [gorillas count]) {
-            Sprite *hint = [Sprite spriteWithFile:@"fire.png"];
+            CCSprite *hint = [CCSprite spriteWithFile:@"fire.png"];
             [throwHints addObject:hint];
             [self addChild:hint];
         }
@@ -710,7 +703,7 @@
         GorillaLayer *gorilla = [gorillas objectAtIndex:i];
         
         gorilla.position = ccp(building.x + building.size.width / 2, building.size.height + gorilla.contentSize.height / 2);
-        [gorilla runAction:[FadeIn actionWithDuration:1]];
+        [gorilla runAction:[CCFadeIn actionWithDuration:1]];
         [self addChild:gorilla z:3];
     }
     [gorillaIndexes release];
@@ -725,9 +718,9 @@
     [bananaLayer setFocussed:YES];
     [self addChild:bananaLayer z:2];
     
-    [self runAction:[Sequence actions:
-                     [DelayTime actionWithDuration:1],
-                     [CallFunc actionWithTarget:self selector:@selector(nextGorilla)],
+    [self runAction:[CCSequence actions:
+                     [CCDelayTime actionWithDuration:1],
+                     [CCCallFunc actionWithTarget:self selector:@selector(nextGorilla)],
                      nil]];
     
     [[GorillasAppDelegate get].gameLayer started];
@@ -753,9 +746,9 @@
     if(runningActions) {
         [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:[GorillasAppDelegate get].gameLayer.activeGorilla.position
                                                               horizontal:YES];
-        [self runAction:[Sequence actions:
-                  [DelayTime actionWithDuration:1],
-                  [CallFunc actionWithTarget:self selector:@selector(stopGameCallback)],
+        [self runAction:[CCSequence actions:
+                  [CCDelayTime actionWithDuration:1],
+                  [CCCallFunc actionWithTarget:self selector:@selector(stopGameCallback)],
                   nil]];
     }
     else
@@ -783,14 +776,14 @@
 }
 
 
--(CGRect) fieldInSpaceOf:(CocosNode *)node {
+-(CGRect) fieldInSpaceOf:(CCNode *)node {
     
     Building firstBuilding = buildings.buildings[0];
     Building lastBuilding = buildings.buildings[buildings.buildingCount - 1];
 
     CGPoint bottomLeft = [buildings convertToWorldSpace:CGPointMake(firstBuilding.x, 0)];
     CGPoint topRight = [buildings convertToWorldSpace:CGPointMake(lastBuilding.x + lastBuilding.size.width,
-                                                                  [Director sharedDirector].winSize.height * 2.0f)];
+                                                                  [CCDirector sharedDirector].winSize.height * 2.0f)];
     if (node != nil) {
         bottomLeft = [node convertToNodeSpace:bottomLeft];
         topRight = [node convertToNodeSpace:topRight];
