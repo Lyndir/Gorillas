@@ -24,13 +24,13 @@
 
 
 
-@interface ShadeTo : IntervalAction {
+@interface ShadeTo : CCActionInterval {
 
 @private
-    long startCol, endCol;
+    ccColor4B startCol, endCol;
 }
 
-+(ShadeTo *) actionWithDuration:(ccTime)_duration color:(long)_color;
--(ShadeTo *) initWithDuration:(ccTime)_duration color:(long)_color;
++(ShadeTo *) actionWithDuration:(ccTime)_duration color:(ccColor4B)_color;
+-(ShadeTo *) initWithDuration:(ccTime)_duration color:(ccColor4B)_color;
 
 @end

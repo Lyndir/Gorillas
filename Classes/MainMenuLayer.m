@@ -45,15 +45,15 @@
     if(!(self = [super init]))
         return self;
     
-    info                = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.information", @"Information")
+    info                = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.information", @"Information")
                                                         target:self selector:@selector(information:)];
-    config              = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.configuration", @"Configuration")
+    config              = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.configuration", @"Configuration")
                                                         target:self selector:@selector(options:)];
-    continueGame        = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.continue.unpause", @"Continue Game")
+    continueGame        = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.continue.unpause", @"Continue Game")
                                                         target:self selector:@selector(continueGame:)];
-    stopGame            = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.end", @"End Game")
+    stopGame            = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.end", @"End Game")
                                                         target:self selector:@selector(stopGame:)];
-    newGame             = [[MenuItemFont alloc] initFromString:NSLocalizedString(@"entries.new", @"New Game")
+    newGame             = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.new", @"New Game")
                                                         target:self selector:@selector(newGame:)];
 
     return self;
@@ -82,13 +82,13 @@
     }
     
     if([[GorillasAppDelegate get].gameLayer checkGameStillOn]) {
-        menu = [[Menu menuWithItems:
+        menu = [[CCMenu menuWithItems:
                  continueGame, stopGame, [MenuItemSpacer small],
                  info, config,
                  nil] retain];
     }
     else {
-        menu = [[Menu menuWithItems:
+        menu = [[CCMenu menuWithItems:
                  newGame, [MenuItemSpacer small],
                  info, config,
                  nil] retain];

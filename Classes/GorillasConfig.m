@@ -421,7 +421,7 @@
 }
 -(float) buildingWidth {
     
-    return ([Director sharedDirector].winSize.width / [[self buildingAmount] unsignedIntValue] - 1);
+    return ([CCDirector sharedDirector].winSize.width / [[self buildingAmount] unsignedIntValue] - 1);
 }
 -(long) buildingColor {
     
@@ -431,7 +431,7 @@
 
 -(float) windowWidth {
     
-    return [Director sharedDirector].winSize.width / [self.buildingAmount unsignedIntValue] / ([self.windowAmount unsignedIntValue] * 2 + 1);
+    return [CCDirector sharedDirector].winSize.width / [self.buildingAmount unsignedIntValue] / ([self.windowAmount unsignedIntValue] * 2 + 1);
 }
 -(float) windowHeight {
     

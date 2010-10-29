@@ -24,7 +24,6 @@
 
 #import "PanningLayer.h"
 #import "GorillasAppDelegate.h"
-#import "Utility.h"
 
 
 @implementation PanningLayer
@@ -37,7 +36,7 @@
     
     self.anchorPoint    = ccp(0.5f, 0.0f);
     
-    isTouchEnabled      = YES;
+    self.isTouchEnabled = YES;
     initialDist         = -1;
     
     return self;
@@ -52,16 +51,16 @@
             [scaleAction release];
         }
         
-        [self runAction:scaleAction = [[ScaleTo alloc] initWithDuration:[[GorillasConfig get].transitionDuration floatValue]
+        [self runAction:scaleAction = [[CCScaleTo alloc] initWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                                                   scale:1.0f]];
     }
 }
 
 
--(BOOL) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+-(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     if([[event allTouches] count] != 2)
-        return [self ccTouchesCancelled:touches withEvent:event];
+        [self ccTouchesCancelled:touches withEvent:event];
     
     NSArray *touchesArray = [[event allTouches] allObjects];
     UITouch *from = [touchesArray objectAtIndex:0];
@@ -71,18 +70,16 @@
     
     initialScale = self.scale;
     initialDist = fabsf(pFrom.y - pTo.y);
-    
-    return kEventHandled;
 }
 
 
--(BOOL) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+-(void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     
     if([[event allTouches] count] != 2)
-        return [self ccTouchesCancelled:touches withEvent:event];
+        [self ccTouchesCancelled:touches withEvent:event];
     
     if(initialDist < 0)
-        return [self ccTouchesBegan:touches withEvent:event];
+        [self ccTouchesBegan:touches withEvent:event];
     
     NSArray *touchesArray = [[event allTouches] allObjects];
     UITouch *from = [touchesArray objectAtIndex:0];
@@ -100,31 +97,25 @@
     }
     
     [self scaleTo:newScale limited:YES];
-    
-    return kEventHandled;
 }
 
 
--(BOOL) ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+-(void) ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     
     if(initialDist < 0)
-        return kEventIgnored;
+        return;
     
     [self setScale:initialScale];
     initialDist = -1;
-    
-    return kEventHandled;
 }
 
 
--(BOOL) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+-(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     
     if(initialDist < 0)
-        return kEventIgnored;
+        return;
     
     initialDist = -1;
-    
-    return kEventHandled;
 }
 
 
@@ -145,7 +136,7 @@
         [self stopAction:scaleAction];
     }
     [scaleAction release];
-    [self runAction:scaleAction = [[ScaleTo alloc] initWithDuration:duration
+    [self runAction:scaleAction = [[CCScaleTo alloc] initWithDuration:duration
                                                               scale:newScale]];
 }
 
@@ -158,7 +149,7 @@
         CGPoint savePosition = self.position;
         self.position = CGPointZero;
         
-        CGSize winSize = [Director sharedDirector].winSize;
+        CGSize winSize = [CCDirector sharedDirector].winSize;
         GameLayer *gameLayer    = [GorillasAppDelegate get].gameLayer;
         CityLayer *cityLayer    = gameLayer.cityLayer;
         
@@ -201,7 +192,7 @@
     
     // Scroll to current point should take initial duration minus what has already elapsed to scroll to approach previous points.
     if(scrollActionElapsed < [[GorillasConfig get].gameScrollDuration floatValue])
-        [self runAction:(scrollAction = [[MoveTo alloc] initWithDuration:[[GorillasConfig get].gameScrollDuration floatValue] - scrollActionElapsed
+        [self runAction:(scrollAction = [[CCMoveTo alloc] initWithDuration:[[GorillasConfig get].gameScrollDuration floatValue] - scrollActionElapsed
                                                                 position:pos])];
     else {
         scrollAction = nil;

@@ -52,36 +52,36 @@
         alignment = UITextAlignmentRight;
     }
     
-    Label *pageLabel = [[Label alloc] initWithString:fullGameData
-                                          dimensions:CGSizeMake(self.contentSize.width - self.padding,
-                                                                self.contentSize.height - self.padding)
+    CCLabelTTF *pageLabel = [[CCLabelTTF alloc] initWithString:fullGameData
+                                          dimensions:CGSizeMake(self.contentSize.width - self.padding.left - self.padding.right,
+                                                                self.contentSize.height - self.padding.top - self.padding.bottom)
                                            alignment:alignment
                                             fontName:[GorillasConfig get].fixedFontName
                                             fontSize:[[GorillasConfig get].smallFontSize intValue]];
     [pageLabel setPosition:ccp(self.contentSize.width / 2, self.contentSize.height / 2)];
-    [pageLabel runAction:[FadeIn actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]]];
+    [pageLabel runAction:[CCFadeIn actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]]];
     [self addChild:pageLabel];
     [pageLabel release];
 
     // Back.
-    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
-    MenuItem *back = [MenuItemFont itemFromString:@"   <   "
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
+    CCMenuItem *back = [CCMenuItemFont itemFromString:@"   <   "
                                                target:self
                                              selector:@selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
-    Menu *backMenu = [Menu menuWithItems:back, nil];
+    CCMenu *backMenu = [CCMenu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
 
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    MenuItem *upgrade = [MenuItemFont itemFromString:@"Upgrade"
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    CCMenuItem *upgrade = [CCMenuItemFont itemFromString:@"Upgrade"
                                                target:self
                                              selector:@selector(upgrade:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
-    Menu *buyMenu = [Menu menuWithItems:upgrade, nil];
+    CCMenu *buyMenu = [CCMenu menuWithItems:upgrade, nil];
     [buyMenu setPosition:ccp(self.contentSize.width - [[GorillasConfig get].fontSize intValue] * 2.5f,
                              [[GorillasConfig get].fontSize intValue])];
     [buyMenu alignItemsHorizontally];

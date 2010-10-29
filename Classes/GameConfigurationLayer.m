@@ -50,73 +50,73 @@
     
     
     // City Theme.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *themeT    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.theme", @"City Theme")];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *themeT    = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.choose.theme", @"City Theme")];
     [themeT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    themeI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(cityTheme:)];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    themeI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(cityTheme:)];
     NSMutableArray *themeMenuItems = [NSMutableArray arrayWithCapacity:[[CityTheme getThemes] count]];
     for (NSString *themeName in [[CityTheme getThemes] allKeys])
-        [themeMenuItems addObject:[MenuItemFont itemFromString:themeName]];
+        [themeMenuItems addObject:[CCMenuItemFont itemFromString:themeName]];
     themeI.subItems = themeMenuItems;
     [themeI setSelectedIndex:1];
     
     
     // Gravity.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *gravityT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.gravity", @"Gravity")];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *gravityT  = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.choose.gravity", @"Gravity")];
     [gravityT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    gravityI  = [[MenuItemFont alloc] initFromString:[NSString stringWithFormat:@"%d", [[GorillasConfig get].gravity unsignedIntValue]]
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    gravityI  = [[CCMenuItemFont alloc] initFromString:[NSString stringWithFormat:@"%d", [[GorillasConfig get].gravity unsignedIntValue]]
                                               target:self selector:@selector(gravity:)];
 
     
     // Difficulity Level.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *levelT    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.level", @"Level")];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *levelT    = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.choose.level", @"Level")];
     [levelT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    levelI    = [[MenuItemToggle alloc] initWithTarget:self selector:@selector(level:)];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    levelI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(level:)];
     NSMutableArray *levelMenuItems = [NSMutableArray arrayWithCapacity:[[CityTheme getThemes] count]];
     for (NSString *levelName in [GorillasConfig get].levelNames)
-        [levelMenuItems addObject:[MenuItemFont itemFromString:levelName]];
+        [levelMenuItems addObject:[CCMenuItemFont itemFromString:levelName]];
     levelI.subItems = levelMenuItems;
     [levelI setSelectedIndex:1];
     
     
     // Killshot Replays.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *replayT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.replays", @"Replays")];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *replayT  = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.choose.replays", @"Replays")];
     [replayT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    replayI  = [[MenuItemToggle itemWithTarget:self selector:@selector(replay:) items:
-                [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
-                [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    replayI  = [[CCMenuItemToggle itemWithTarget:self selector:@selector(replay:) items:
+                [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
+                [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
                 nil] retain];
     
     
     // Follow Throw.
-    [MenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    MenuItem *followT  = [MenuItemFont itemFromString:NSLocalizedString(@"entries.choose.follow", @"Follow Throw")];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
+    CCMenuItem *followT  = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.choose.follow", @"Follow Throw")];
     [followT setIsEnabled:NO];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    followI  = [[MenuItemToggle itemWithTarget:self selector:@selector(followThrow:) items:
-                [MenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
-                [MenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    followI  = [[CCMenuItemToggle itemWithTarget:self selector:@selector(followThrow:) items:
+                [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.off", @"Off")],
+                [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.on", @"On")],
                 nil] retain];
     
     
-    Menu *menu = [Menu menuWithItems:themeT, themeI, gravityT, levelT, gravityI, levelI, replayT, followT, replayI, followI, nil];
+    CCMenu *menu = [CCMenu menuWithItems:themeT, themeI, gravityT, levelT, gravityI, levelI, replayT, followT, replayI, followI, nil];
     [menu alignItemsInColumns:
      [NSNumber numberWithUnsignedInteger:1],
      [NSNumber numberWithUnsignedInteger:1],
@@ -129,13 +129,13 @@
     
     
     // Back.
-    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
-    MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
+    CCMenuItem *back     = [CCMenuItemFont itemFromString:@"   <   "
                                                target:self
                                              selector:@selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
-    Menu *backMenu = [Menu menuWithItems:back, nil];
+    CCMenu *backMenu = [CCMenu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];
@@ -151,7 +151,7 @@
     if ([cityThemes containsObject:[GorillasConfig get].cityTheme])
         theme = [cityThemes indexOfObject:[GorillasConfig get].cityTheme];
     [themeI setSelectedIndex:theme];
-    gravityI.label = [Label labelWithString:[NSString stringWithFormat:@"%d", [[GorillasConfig get].gravity unsignedIntValue]]
+    gravityI.label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", [[GorillasConfig get].gravity unsignedIntValue]]
                                    fontName:[GorillasConfig get].fontName fontSize:[[GorillasConfig get].fontSize intValue]];
     [levelI setSelectedIndex:[[GorillasConfig get].levelNames indexOfObject:[GorillasConfig get].levelName]];
     [replayI setSelectedIndex:[[GorillasConfig get].replay boolValue]? 1: 0];

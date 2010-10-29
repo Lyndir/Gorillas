@@ -24,7 +24,7 @@
 
 
 
-@interface TestLayer : Layer {
+@interface TestLayer : CCLayer {
 
 }
 

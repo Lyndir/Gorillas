@@ -60,7 +60,7 @@
 
     CGRect field        = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self];
     starCount           = [[GorillasConfig get].starAmount unsignedIntValue];
-    ccColor4B starColor = ccc([[GorillasConfig get].starColor longValue]);
+    ccColor4B starColor = ccc4l([[GorillasConfig get].starColor longValue]);
     starColor.r         *= depth;
     starColor.g         *= depth;
     starColor.b         *= depth;

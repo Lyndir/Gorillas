@@ -36,7 +36,7 @@
 #import "GuideLayer.h"
 #import "StatisticsLayer.h"
 #import "FullGameLayer.h"
-#import "HUDLayer.h"
+#import "GHUDLayer.h"
 #import "UILayer.h"
 
 
@@ -59,7 +59,7 @@
     FullGameLayer               *fullLayer;
     GuideLayer                  *guideLayer;
     StatisticsLayer             *statsLayer;
-    HUDLayer                    *hudLayer;
+    GHUDLayer                   *hudLayer;
     
     NSMutableArray              *menuLayers;
 }
@@ -68,7 +68,7 @@
 @property (nonatomic, readonly) NewGameLayer               *newGameLayer;
 @property (nonatomic, readonly) CustomGameLayer            *customGameLayer;
 @property (nonatomic, readonly) GameLayer                  *gameLayer;
-@property (nonatomic, readonly) HUDLayer                   *hudLayer;
+@property (nonatomic, readonly) GHUDLayer                  *hudLayer;
 
 -(void) updateConfig;
 -(void) popAllLayers;

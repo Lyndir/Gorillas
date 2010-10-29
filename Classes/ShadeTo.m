@@ -29,13 +29,13 @@
 @implementation ShadeTo
 
 
-+(ShadeTo *) actionWithDuration:(ccTime)_duration color:(long)_color {
++(ShadeTo *) actionWithDuration:(ccTime)_duration color:(ccColor4B)_color {
     
     return [[[ShadeTo alloc] initWithDuration:_duration color:_color] autorelease];
 }
 
 
--(ShadeTo *) initWithDuration:(ccTime)_duration color:(long)_color {
+-(ShadeTo *) initWithDuration:(ccTime)_duration color:(ccColor4B)_color {
     
     if(!(self = [super initWithDuration: _duration]))
         return self;
@@ -46,28 +46,24 @@
 }
 
 
--(void) startWithTarget:(CocosNode *)aTarget {
+-(void) startWithTarget:(CCNode *)aTarget {
     
     [super startWithTarget:aTarget];
     
-    if(![target conformsToProtocol:@protocol(CocosNodeRGBA)])
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"ShadeTo action target does not conform to CocosNodeRGBA" userInfo:nil];
+    if(![self.target conformsToProtocol:@protocol(CCRGBAProtocol)])
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"ShadeTo action target does not conform to CCRGBAProtocol" userInfo:nil];
     
-    startCol    = [(CocosNode< CocosNodeRGBA> *) target r] << 24
-                | [(CocosNode< CocosNodeRGBA> *) target g] << 16
-                | [(CocosNode< CocosNodeRGBA> *) target b] << 8
-                | [(CocosNode< CocosNodeRGBA> *) target opacity];
+    startCol    = ccc3to4([(CCNode<CCRGBAProtocol> *) self.target color]);
+    startCol.a  = [(CCNode<CCRGBAProtocol> *) self.target opacity];
 }
 
 
 -(void) update: (ccTime) dt {
     
-    const GLubyte *s = (GLubyte *)&startCol, *e = (GLubyte *)&endCol;
-    
-    [(id)target setRGB: (int) (s[3] * (1 - dt)) + (int) (e[3] * dt)
-                      : (int) (s[2] * (1 - dt)) + (int) (e[2] * dt)
-                      : (int) (s[1] * (1 - dt)) + (int) (e[1] * dt)];
-    [(id<CocosNodeRGBA>)target setOpacity: (int) (s[0] * (1 - dt)) + (int) (e[0] * dt)];
+    [(id<CCRGBAProtocol>)self.target setColor:ccc3((int)(startCol.r * (1-dt) + endCol.r * dt),
+                                                   (int)(startCol.g * (1-dt) + endCol.g * dt),
+                                                   (int)(startCol.b * (1-dt) + endCol.b * dt))];
+    [(id<CCRGBAProtocol>)self.target setOpacity:(int)(startCol.a * (1-dt) + endCol.a * dt)];
 }
 
 

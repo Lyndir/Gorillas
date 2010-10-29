@@ -43,12 +43,12 @@
     if(!(self = [super init]))
         return self;
     
-    MenuItem *continueGame      = [MenuItemFont itemFromString:NSLocalizedString(@"entries.continue.nextmatch", @"Continue")
+    CCMenuItem *continueGame      = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.continue.nextmatch", @"Continue")
                                                         target:self selector:@selector(continueGame:)];
-    MenuItem *stopGame          = [MenuItemFont itemFromString:NSLocalizedString(@"entries.stop", @"Main Menu")
+    CCMenuItem *stopGame          = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.stop", @"Main CCMenu")
                                                         target:self selector:@selector(stopGame:)];
     
-    Menu *menu                  = [Menu menuWithItems:
+    CCMenu *menu                  = [CCMenu menuWithItems:
                                    continueGame, [MenuItemSpacer small],
                                    stopGame,
                                    nil];

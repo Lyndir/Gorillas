@@ -29,7 +29,7 @@
 #import "WindLayer.h"
 
 
-@interface GameLayer : Layer <Resettable> {
+@interface GameLayer : CCLayer <Resettable> {
 
 @private
     BOOL                                                paused;
@@ -44,9 +44,9 @@
     SkyLayer                                            *skyLayer;
     PanningLayer                                        *panningLayer;
     CityLayer                                           *cityLayer;
-    ParticleSystem                                      *weather;
+    CCParticleSystem                                      *weather;
     WindLayer                                           *windLayer;
-    Action                                              *shakeAction;
+    CCAction                                              *shakeAction;
     ScaleTime                                           *scaleTimeAction;
 }
 
@@ -59,7 +59,7 @@
 @property (nonatomic, readonly) SkyLayer                *skyLayer;
 @property (nonatomic, readonly) PanningLayer            *panningLayer;
 @property (nonatomic, readonly) CityLayer               *cityLayer;
-@property (nonatomic, readonly) ParticleSystem          *weather;
+@property (nonatomic, readonly) CCParticleSystem          *weather;
 @property (nonatomic, readonly) WindLayer               *windLayer;
 
 @property (nonatomic, readonly) ScaleTime               *scaleTimeAction;

@@ -29,7 +29,7 @@
 @interface ModelsConfigurationLayer : ShadeLayer {
 
 @private
-    MenuItemFont *modelCurr, *modelNext;
+    CCMenuItemFont *modelCurr, *modelNext;
     
     SwipeLayer *swipeLayer;
     

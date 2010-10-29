@@ -24,7 +24,7 @@
 
 
 
-@interface MenuItemSpacer : MenuItem {
+@interface MenuItemSpacer : CCMenuItem {
 
 @private
     CGFloat height;

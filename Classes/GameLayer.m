@@ -90,19 +90,19 @@
     
     paused = _paused;
     
-    [[UIApplication sharedApplication] setStatusBarHidden:!paused animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:!paused withAnimation:YES];
     
     if(paused) {
         if(running)
             [self scaleTimeTo:0 duration:0.5f];
         [[GorillasAppDelegate get] hideHud];
-        [windLayer runAction:[FadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
+        [windLayer runAction:[CCFadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                                 opacity:0x00]];
     } else {
         [self scaleTimeTo:1.0f duration:1.0f];
         [[GorillasAppDelegate get] popAllLayers];
         [[GorillasAppDelegate get] revealHud];
-        [windLayer runAction:[FadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
+        [windLayer runAction:[CCFadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                                 opacity:0xFF]];
     }
 }
@@ -306,7 +306,7 @@
         if([self isEnabled:GorillasFeatureScore] && score) {
             [[GorillasConfig get] recordScore:[[GorillasConfig get].score intValue] + score];
             
-            [[[GorillasAppDelegate get] hudLayer] updateHudWithScore:score skill:0];
+            [[[GorillasAppDelegate get] hudLayer] updateHudWithNewScore:score skill:0 wasGood:YES];
             [cityLayer message:[NSString stringWithFormat:@"%+d", score] on:cityLayer.hitGorilla];
         }
         
@@ -367,7 +367,7 @@
             int score = [[GorillasConfig get].level floatValue] * [[GorillasConfig get].missScore intValue];
             
             [[GorillasConfig get] recordScore:[[GorillasConfig get].score intValue] + score];
-            [[GorillasAppDelegate get].hudLayer updateHudWithScore:score skill:0];
+            [[GorillasAppDelegate get].hudLayer updateHudWithNewScore:score skill:0 wasGood:YES];
             
             if(score)
                 [cityLayer message:[NSString stringWithFormat:@"%+d", score] on:cityLayer.bananaLayer.banana];
@@ -433,9 +433,9 @@
 
     running = NO;
     
-    IntervalAction *l       = [MoveBy actionWithDuration:.05f position:ccp(-3, 0)];
-    IntervalAction *r       = [MoveBy actionWithDuration:.05f position:ccp(6, 0)];
-    shakeAction             = [[Sequence actions:l, r, l, l, r, l, r, l, l, nil] retain];
+    CCActionInterval *l       = [CCMoveBy actionWithDuration:.05f position:ccp(-3, 0)];
+    CCActionInterval *r       = [CCMoveBy actionWithDuration:.05f position:ccp(6, 0)];
+    shakeAction             = [[CCSequence actions:l, r, l, l, r, l, r, l, l, nil] retain];
     
     // Set up our own layer.
     self.anchorPoint        = ccp(0.5f, 0.5f);
@@ -507,14 +507,14 @@
             
                 switch (random() % 2) {
                     case 0:
-                        weather = [[ParticleRain alloc] init];
+                        weather = [[CCParticleRain alloc] init];
                         weather.emissionRate    = 60;
                         weather.startSizeVar    = 1.5f;
                         weather.startSize       = 3;
                         break;
                     
                     case 1:
-                        weather = [[ParticleSnow alloc] init];
+                        weather = [[CCParticleSnow alloc] init];
                         weather.speed           = 10;
                         weather.emissionRate    = 3;
                         weather.startSizeVar    = 3;
@@ -539,7 +539,7 @@
     else {
         // System is alive, let the emission rate evolve.
         float rate = [weather emissionRate] + (random() % 40 - 15) / 10.0f;
-        float max = [weather isKindOfClass:[ParticleRain class]]? 100: 50;
+        float max = [weather isKindOfClass:[CCParticleRain class]]? 100: 50;
         rate = fminf(fmaxf(0, rate), max);
         
         if(random() % 100 == 0)
@@ -561,7 +561,7 @@
     //        BananaLayer *egg = [[BananaLayer alloc] init];
     //        [egg setModel:GorillasProjectileModelEasterEgg];
     //
-    //        CGSize winSize = [[Director sharedDirector] winSize];
+    //        CGSize winSize = [[CCDirector sharedDirector] winSize];
     //        [egg throwFrom:ccp(winSize.width / 2 - buildingsLayer.position.x, winSize.height * 2)
     //          withVelocity:ccp(0, 0)];
     //        
@@ -590,7 +590,7 @@
     activeGorilla = nil;
     
     if([panningLayer position].x != 0 || [panningLayer position].y != 0)
-        [panningLayer runAction:[MoveTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
+        [panningLayer runAction:[CCMoveTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                                   position:CGPointZero]];
     
     if(mode)

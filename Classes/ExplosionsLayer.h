@@ -25,7 +25,7 @@
 #import "GorillasAudioController.h"
 
 
-@interface ExplosionsLayer : Layer {
+@interface ExplosionsLayer : CCLayer {
     
 @private
     CGPoint          *positions;

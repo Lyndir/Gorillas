@@ -24,10 +24,10 @@
 
 
 
-@interface HolesLayer : Layer {
+@interface HolesLayer : CCLayer {
 
 @private
-    Texture2D   *texture;
+    CCTexture2D   *texture;
     NSUInteger  holeCount;
     glPoint     *holes;
     

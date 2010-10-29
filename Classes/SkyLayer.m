@@ -64,7 +64,7 @@
 
 -(void) reset {
 
-    skyColor = ccc([[GorillasConfig get].skyColor longValue]);
+    skyColor = ccc4l([[GorillasConfig get].skyColor longValue]);
     fancySky = [[GorillasConfig get].visualFx boolValue];
 
     CGRect field = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self];
@@ -79,7 +79,7 @@
 -(void) draw {
     
     if(fancySky)
-        DrawBoxFrom(from, to, skyColor, ccc(0x000000ff));
+        DrawBoxFrom(from, to, skyColor, ccc4l(0x000000ff));
     
     else {
         glClearColor(skyColor.r / (float)0xff, skyColor.g / (float)0xff, skyColor.b / (float)0xff, skyColor.a / (float)0xff);

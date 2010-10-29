@@ -45,9 +45,9 @@
     systems = [[NSMutableArray alloc] init];
     affectAngles = [[NSMutableArray alloc] init];
     
-    head = [[Sprite alloc] initWithFile:@"arrow.head.png"];
-    body = [[Sprite alloc] initWithFile:@"arrow.body.png"];
-    //tail = [[Sprite alloc] initWithFile:@"arrow.tail.png"];
+    head = [[CCSprite alloc] initWithFile:@"arrow.head.png"];
+    body = [[CCSprite alloc] initWithFile:@"arrow.body.png"];
+    //tail = [[CCSprite alloc] initWithFile:@"arrow.tail.png"];
     
     [self addChild:head z:1];
     [self addChild:body z:0];
@@ -106,7 +106,7 @@
     
     @synchronized(self) {
         for(NSUInteger i = 0; i < [systems count]; ++i) {
-            ParticleSystem *system = [systems objectAtIndex:i];
+            CCParticleSystem *system = [systems objectAtIndex:i];
             
             if([[affectAngles objectAtIndex:i] boolValue])
                 [system setAngle:270 + 45 * wind];
@@ -117,7 +117,7 @@
 }
 
 
--(void) registerSystem:(ParticleSystem *)system affectAngle:(BOOL)affectAngle {
+-(void) registerSystem:(CCParticleSystem *)system affectAngle:(BOOL)affectAngle {
     
     @synchronized(self) {
         if(!system || [systems containsObject:system])
@@ -133,7 +133,7 @@
 }
 
 
--(void) unregisterSystem:(ParticleSystem *)system {
+-(void) unregisterSystem:(CCParticleSystem *)system {
     
     if(!system)
         return;
@@ -144,23 +144,10 @@
 }
 
 
-- (GLubyte)r {
+- (ccColor3B)color {
     
-    return head.r;
+    return head.color;
 }
-
-
-- (GLubyte)g {
-    
-    return head.g;
-}
-
-
-- (GLubyte)b {
-    
-    return head.b;
-}
-
 
 - (GLubyte)opacity {
     
@@ -168,11 +155,11 @@
 }
 
 
-- (void)setRGB:(GLubyte)r :(GLubyte)g :(GLubyte)b {
-    
-    [head setRGB:r :g :b];
-    [body setRGB:r :g :b];
-    [tail setRGB:r :g :b];
+- (void)setColor:(ccColor3B)aColor {
+
+    head.color = aColor;
+    body.color = aColor;
+    tail.color = aColor;
 }
 
 
@@ -187,7 +174,7 @@
 /*-(void) draw {
 
     float windRange = (5 * [[GorillasConfig get] windModifier]);
-    CGSize winSize = [[Director sharedDirector] winSize];
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
     
     const CGPoint from = ccp(winSize.width / 2, winSize.height - [[GorillasConfig get].smallFontSize intValue]);
     CGPoint prev = from;

@@ -28,11 +28,11 @@
 @interface GuideLayer : ShadeLayer {
 
 @private
-    MenuItemFont *chapterCurr, *chapterNext, *chapterSkip;
+    CCMenuItemFont *chapterCurr, *chapterNext, *chapterSkip;
     
     SwipeLayer *swipeLayer;
     
-    Label *prevPageLabel, *currPageLabel, *nextPageLabel, *pageNumberLabel;
+    CCLabelTTF *prevPageLabel, *currPageLabel, *nextPageLabel, *pageNumberLabel;
     NSMutableArray *guidePages, *guideTitles;
     int page;
 }

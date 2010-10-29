@@ -32,12 +32,12 @@
 #import "BuildingsLayer.h"
 //#define _DEBUG_
 
-@interface CityLayer : Layer <Resettable> {
+@interface CityLayer : CCLayer <Resettable> {
 
 @private
     PanAction           *panAction;
-    LabelAtlas          *angleLabel, *strengthLabel;
-    Label               *msgLabel, *infoLabel;
+    CCLabelAtlas          *angleLabel, *strengthLabel;
+    CCLabelTTF               *msgLabel, *infoLabel;
     BarSprite           *aimSprite;
     
     BuildingsLayer      *buildings;
@@ -77,10 +77,10 @@
 -(void) throwFrom:(GorillaLayer *)gorilla withVelocity:(CGPoint)v;
 -(void) nextGorilla;
 
--(void) message: (NSString *)msg on: (CocosNode *)node;
+-(void) message: (NSString *)msg on: (CCNode *)node;
 -(CGPoint) calculateThrowFrom:(CGPoint)r0 to:(CGPoint)rt errorLevel:(CGFloat)l;
 
--(CGRect) fieldInSpaceOf:(CocosNode *)node;
+-(CGRect) fieldInSpaceOf:(CCNode *)node;
 
 @property (nonatomic, readwrite) CGPoint aim;
 @property (nonatomic, readonly) BananaLayer *bananaLayer;

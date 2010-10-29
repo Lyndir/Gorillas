@@ -30,8 +30,8 @@
 @interface NewGameLayer : ShadeLayer <Resettable> {
     
 @private
-    MenuItemToggle      *configurationI;
-    MenuItemLabel       *descriptionT, *multiPlayerI, *singlePlayerI;
+    CCMenuItemToggle      *configurationI;
+    CCMenuItemLabel       *descriptionT, *multiPlayerI, *singlePlayerI;
 }
 
 @end

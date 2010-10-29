@@ -44,7 +44,7 @@
     
     model           = GorillasProjectileModelBanana;
     
-    banana          = [[Sprite alloc] initWithFile:[self modelFile]];
+    banana          = [[CCSprite alloc] initWithFile:[self modelFile]];
     [banana setScale:[[GorillasConfig get] cityScale]];
     [banana setVisible:NO];
     [banana setTag:GorillasTagBananaNotFlying];
@@ -60,7 +60,7 @@
     
     model = aModel;
     type = aType;
-    [banana setTexture:[[TextureMgr sharedTextureMgr] addImage:[self modelFile]]];
+    [banana setTexture:[[CCTextureCache sharedTextureCache] addImage:[self modelFile]]];
 }
 
 

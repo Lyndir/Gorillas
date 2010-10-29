@@ -24,7 +24,7 @@
 
 
 
-@interface Remove : InstantAction {
+@interface Remove : CCActionInstant {
 
 }
 

@@ -126,10 +126,11 @@ typedef enum {
  * Global Dependencies.
  */
 #ifdef __OBJC__
-    #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>
     #import "cocos2d.h"
-    #import "Utility.h"
+    #import "GLUtils.h"
+    #import "DeviceUtils.h"
+    #import "StringUtils.h"
     #import "GorillasConfig.h"
 
     /**

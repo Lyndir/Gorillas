@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 
-@interface BarSprite : Layer {
+@interface BarSprite : CCLayer {
 
 @private
-    Texture2D           *head, **body, *tail;
+    CCTexture2D           *head, **body, *tail;
 
     CGFloat             age;
     NSUInteger          bodyFrame, bodyFrames;

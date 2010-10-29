@@ -31,21 +31,21 @@
     animatedTargetting      = anAnimatedTargetting;
 
     if (bundleHeadReference)
-        head = [[[TextureMgr sharedTextureMgr] addImage:bundleHeadReference] retain];
+        head = [[[CCTextureCache sharedTextureCache] addImage:bundleHeadReference] retain];
     if (bundleBodyReference) {
         bodyFrames = bodyFrameCount;
-        body = malloc(sizeof(Texture2D *) * bodyFrames);
+        body = malloc(sizeof(CCTexture2D *) * bodyFrames);
         if (bodyFrames > 1) {
             for (NSUInteger f = 0; f < bodyFrames; ++f)
-                body[f] = [[[TextureMgr sharedTextureMgr] addImage:[NSString stringWithFormat:bundleBodyReference, f]] retain];
+                body[f] = [[[CCTextureCache sharedTextureCache] addImage:[NSString stringWithFormat:bundleBodyReference, f]] retain];
         } else
-            body[0] = [[[TextureMgr sharedTextureMgr] addImage:bundleBodyReference] retain];
+            body[0] = [[[CCTextureCache sharedTextureCache] addImage:bundleBodyReference] retain];
         
         bodyFrame = 0;
         textureSize = CGSizeMake(body[bodyFrame].pixelsWide, body[bodyFrame].pixelsHigh);
     }
     if (bundleTailReference)
-        tail = [[[TextureMgr sharedTextureMgr] addImage:bundleTailReference] retain];
+        tail = [[[CCTextureCache sharedTextureCache] addImage:bundleTailReference] retain];
     
     [self schedule:@selector(updateBodyFrame:) interval:0.02f];
     if (animatedTargetting)

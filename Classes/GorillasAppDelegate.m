@@ -26,8 +26,9 @@
 #import "Splash.h"
 #import "Resettable.h"
 #import "DebugLayer.h"
+#import "ccMacros.h"
 
-@interface Director (Reveal)
+@interface CCDirector (Reveal)
 
 -(void) startAnimation;
 
@@ -43,30 +44,20 @@
     
 	// Init the window.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
-	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	[window setUserInteractionEnabled:YES];
+    CC_DIRECTOR_INIT();
 	[window setMultipleTouchEnabled:YES];
-    [window makeKeyAndVisible];
-
-	// Director and OpenGL Setup.
-    [Director useFastDirector];
-    [[Director sharedDirector] setPixelFormat:kRGBA8];
-    //[[Director sharedDirector] setDisplayFPS:YES];
-	[[Director sharedDirector] setDeviceOrientation:CCDeviceOrientationLandscapeLeft];
-	[[Director sharedDirector] attachInWindow:window];
-	[[Director sharedDirector] setDepthTest:NO];
     
     // Random seed with timestamp.
     srandom(time(nil));
     
-    // Menu items font.
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
+    // CCMenu items font.
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
     menuLayers = [[NSMutableArray alloc] initWithCapacity:3];
 
 	// Build the splash scene.
-    Scene *splashScene = [Scene node];
-    Sprite *splash = [Splash node];
+    CCScene *splashScene = [CCScene node];
+    CCSprite *splash = [Splash node];
     [splashScene addChild:splash];
     
     // Build the game scene.
@@ -80,12 +71,12 @@
     [[GorillasAudioController get] playTrack:[[GorillasConfig get] currentTrack]];
 
     // Show the splash screen, this starts the main loop in the current thread.
-    [[Director sharedDirector] pushScene:splashScene];
+    [[CCDirector sharedDirector] pushScene:splashScene];
     do {
 #if ! TARGET_IPHONE_SIMULATOR
         @try {
 #endif
-            [[Director sharedDirector] startAnimation];
+            [[CCDirector sharedDirector] startAnimation];
 #if ! TARGET_IPHONE_SIMULATOR
         }
         @catch (NSException * e) {
@@ -94,7 +85,7 @@
             [hudLayer message:[e reason] duration:5 isImportant:YES];
         }
 #endif
-    } while ([[Director sharedDirector] runningScene]);
+    } while ([[CCDirector sharedDirector] runningScene]);
 }
 
 
@@ -166,11 +157,11 @@
     
     if(layer.parent) {
         if (![menuLayers containsObject:layer])
-            // Layer is showing but shouldn't have been; probably being dismissed.
+            // CCLayer is showing but shouldn't have been; probably being dismissed.
             [uiLayer removeChild:layer cleanup:YES];
         
         else {
-            // Layer is already showing.
+            // CCLayer is already showing.
             if ([layer conformsToProtocol:@protocol(Resettable)])
                 [(ShadeLayer<Resettable> *) layer reset];
         
@@ -296,7 +287,7 @@
 
 -(void) applicationWillResignActive:(UIApplication *)application {
     
-    [[Director sharedDirector] pause];
+    [[CCDirector sharedDirector] pause];
 
     if(!gameLayer.paused)
         [self showMainMenu];
@@ -305,13 +296,13 @@
 
 -(void) applicationDidBecomeActive:(UIApplication *)application {
 
-    [[Director sharedDirector] resume];
+    [[CCDirector sharedDirector] resume];
 }
 
 
 -(void) applicationDidReceiveMemoryWarning:(UIApplication *)application {
     
-	[[TextureMgr sharedTextureMgr] removeAllTextures];
+	[[CCTextureCache sharedTextureCache] removeAllTextures];
     
     [self cleanup];
 }

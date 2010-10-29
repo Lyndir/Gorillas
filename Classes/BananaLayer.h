@@ -25,7 +25,7 @@
 #import "Throw.h"
 
 
-@interface BananaLayer : Layer {
+@interface BananaLayer : CCLayer {
 
 @private
     BOOL                    clearedGorilla, focussed;
@@ -33,7 +33,7 @@
     GorillasProjectileModel model;
     GorillasPlayerType      type;
 
-    Sprite                  *banana;
+    CCSprite                  *banana;
     Throw                   *throwAction;
 }
 
@@ -45,7 +45,7 @@
 @property (nonatomic, readwrite) BOOL                       clearedGorilla;
 @property (nonatomic, readwrite) BOOL                       focussed;
 @property (nonatomic, readonly) GorillasProjectileModel     model;
-@property (nonatomic, readonly) Sprite                      *banana;
+@property (nonatomic, readonly) CCSprite                      *banana;
 @property (nonatomic, readonly) Throw                       *throwAction;
 
 @end

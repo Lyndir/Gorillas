@@ -44,31 +44,31 @@
         return nil;
     
     // Section menus.
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [MenuItemFont setFontName:[GorillasConfig get].fontName];
-    MenuItem *game      = [MenuItemFont itemFromString:NSLocalizedString(@"entries.gameplay", @"Gameplay")
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
+    CCMenuItem *game      = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.gameplay", @"Gameplay")
                                                 target:self
                                               selector:@selector(game:)];
-    MenuItem *av        = [MenuItemFont itemFromString:NSLocalizedString(@"entries.av", @"Audio / Video")
+    CCMenuItem *av        = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.av", @"Audio / Video")
                                                 target:self
                                               selector:@selector(av:)];
-    MenuItem *models    = [MenuItemFont itemFromString:NSLocalizedString(@"entries.models", @"Models")
+    CCMenuItem *models    = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.models", @"Models")
                                                 target:self
                                               selector:@selector(models:)];
     
-    Menu *menu = [Menu menuWithItems:game, av, models, nil];
+    CCMenu *menu = [CCMenu menuWithItems:game, av, models, nil];
     [menu alignItemsVertically];
     [self addChild:menu];
     
     
     // Back.
-    [MenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
-    MenuItem *back     = [MenuItemFont itemFromString:@"   <   "
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
+    CCMenuItem *back     = [CCMenuItemFont itemFromString:@"   <   "
                                                target: self
                                              selector: @selector(back:)];
-    [MenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
-    Menu *backMenu = [Menu menuWithItems:back, nil];
+    CCMenu *backMenu = [CCMenu menuWithItems:back, nil];
     [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
     [backMenu alignItemsHorizontally];
     [self addChild:backMenu];

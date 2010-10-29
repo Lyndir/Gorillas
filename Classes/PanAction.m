@@ -37,7 +37,7 @@
 
 -(PanAction *) initWithSubNodes: (NSMutableArray *)nSubNodes duration: (ccTime)nDuration padding: (int)nPadding {
 
-    CocosNode *firstNode = [nSubNodes objectAtIndex:0];
+    CCNode *firstNode = [nSubNodes objectAtIndex:0];
     if(!(self = [super initWithDuration:nDuration position:ccp(-([firstNode contentSize].width + nPadding), 0)]))
         return self;
     
@@ -54,8 +54,8 @@
     [super update: dt];
     
     if ([self isDone]) {
-        CocosNode<Resettable> *firstNode = [subNodes objectAtIndex:0];
-        CocosNode *lastNode = [subNodes lastObject];
+        CCNode<Resettable> *firstNode = [subNodes objectAtIndex:0];
+        CCNode *lastNode = [subNodes lastObject];
         
         float x = [lastNode position].x + [lastNode contentSize].width + padding;
 
@@ -66,9 +66,9 @@
         [subNodes addObject:firstNode];
     
         if(!cancelled) {
-            CocosNode *newFirstNode = [subNodes objectAtIndex:0];
+            CCNode *newFirstNode = [subNodes objectAtIndex:0];
             delta = ccp(-[newFirstNode contentSize].width - padding, 0);
-            [self startWithTarget:target];
+            [self startWithTarget:self.target];
         }
     }
 }
