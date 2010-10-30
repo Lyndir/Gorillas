@@ -45,7 +45,7 @@
 @synthesize paused;
 @synthesize gorillas, activeGorilla;
 @synthesize skyLayer, panningLayer, cityLayer, windLayer, weather;
-@synthesize scaleTimeAction;
+//FIXME @synthesize scaleTimeAction;
 
 -(BOOL) singlePlayer {
 
@@ -110,12 +110,12 @@
 
 - (void)scaleTimeTo:(float)aTimeScale duration:(ccTime)aDuration {
 
-    if (scaleTimeAction)
+/*FIXME    if (scaleTimeAction)
         [self stopAction:scaleTimeAction];
     [scaleTimeAction release];
     
     scaleTimeAction = [[ScaleTime actionWithTimeScaleTarget:aTimeScale duration:aDuration] retain];
-    [self runAction:scaleTimeAction scaleTime:NO];
+    [self runAction:scaleTimeAction scaleTime:NO];*/
 }
 
 

@@ -47,7 +47,7 @@
     CCParticleSystem                                      *weather;
     WindLayer                                           *windLayer;
     CCAction                                              *shakeAction;
-    ScaleTime                                           *scaleTimeAction;
+    //FIXME ScaleTime                                           *scaleTimeAction;
 }
 
 @property (nonatomic, readwrite) BOOL                   paused;
@@ -62,7 +62,7 @@
 @property (nonatomic, readonly) CCParticleSystem          *weather;
 @property (nonatomic, readonly) WindLayer               *windLayer;
 
-@property (nonatomic, readonly) ScaleTime               *scaleTimeAction;
+//FIXME @property (nonatomic, readonly) ScaleTime               *scaleTimeAction;
 
 -(void) shake;
 -(BOOL) isEnabled:(GorillasFeature)feature;
