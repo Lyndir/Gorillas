@@ -305,8 +305,6 @@
 		DA3B94FC127B7407009196E8 /* GHUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3B94F8127B7407009196E8 /* GHUDLayer.m */; };
 		DA3B94FD127B7407009196E8 /* GHUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3B94F8127B7407009196E8 /* GHUDLayer.m */; };
 		DA3B94FE127B7407009196E8 /* GHUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3B94F8127B7407009196E8 /* GHUDLayer.m */; };
-		DA3B963E127C1DC6009196E8 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B938A127B6D6A009196E8 /* libcocos2d.a */; };
-		DA3B963F127C1DC6009196E8 /* libiLibs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B92C1127B6D21009196E8 /* libiLibs.a */; };
 		DA3B9644127C1DD3009196E8 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B938A127B6D6A009196E8 /* libcocos2d.a */; };
 		DA3B9645127C1DD3009196E8 /* libiLibs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B92C1127B6D21009196E8 /* libiLibs.a */; };
 		DA3B964A127C1DE1009196E8 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B938A127B6D6A009196E8 /* libcocos2d.a */; };
@@ -318,13 +316,11 @@
 		DA3B965C127C1E01009196E8 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B938A127B6D6A009196E8 /* libcocos2d.a */; };
 		DA3B965D127C1E01009196E8 /* libiLibs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B92C1127B6D21009196E8 /* libiLibs.a */; };
 		DA3B9668127C1E81009196E8 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B938A127B6D6A009196E8 /* libcocos2d.a */; };
-		DA3B971B127C3787009196E8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B971A127C3787009196E8 /* libz.dylib */; };
 		DA3B971E127C379C009196E8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B971A127C3787009196E8 /* libz.dylib */; };
 		DA3B971F127C37A7009196E8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B971A127C3787009196E8 /* libz.dylib */; };
 		DA3B9720127C37B3009196E8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B971A127C3787009196E8 /* libz.dylib */; };
 		DA3B9721127C37BD009196E8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B971A127C3787009196E8 /* libz.dylib */; };
 		DA3B9722127C37CA009196E8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B971A127C3787009196E8 /* libz.dylib */; };
-		DA3B9723127C37D5009196E8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B971A127C3787009196E8 /* libz.dylib */; };
 		DA4769520FDD7334002E74F8 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
 		DA47695D0FDD7334002E74F8 /* bobber.png in Resources */ = {isa = PBXBuildFile; fileRef = DACC157F0F61F2FB0078A0D8 /* bobber.png */; };
 		DA47695F0FDD7334002E74F8 /* buildings.png in Resources */ = {isa = PBXBuildFile; fileRef = DACC15810F61F2FB0078A0D8 /* buildings.png */; };
@@ -383,7 +379,6 @@
 		DA4769A20FDD7334002E74F8 /* CustomGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9A63B60F573A530031988E /* CustomGameLayer.m */; };
 		DA4769A30FDD7334002E74F8 /* NewGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D73B0F59425500D36C7C /* NewGameLayer.m */; };
 		DA4769A40FDD7334002E74F8 /* GameConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D79F0F59531100D36C7C /* GameConfiguration.m */; };
-		DA4769A50FDD7334002E74F8 /* MenuItemSpacer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79DBEC0F5BBFC100D36C7C /* MenuItemSpacer.m */; };
 		DA4769A80FDD7334002E74F8 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
 		DA4769A90FDD7334002E74F8 /* ThrowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA021E430F84A0F0007CED57 /* ThrowController.m */; };
 		DA4769AA0FDD7334002E74F8 /* ModelsConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7B091E0F85562500B3118E /* ModelsConfigurationLayer.m */; };
@@ -414,6 +409,8 @@
 		DA487C820FF5778700EEE2E9 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C6F0FF5778700EEE2E9 /* Level_Down.caf */; };
 		DA487C830FF5778700EEE2E9 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C710FF5778700EEE2E9 /* Level_Up.caf */; };
 		DA487C840FF5778700EEE2E9 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA487C730FF5778700EEE2E9 /* Next_Player.caf */; };
+		DA4B2277127CC81700C1748F /* libiLibs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B92C1127B6D21009196E8 /* libiLibs.a */; };
+		DA4B227A127CC83800C1748F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B971A127C3787009196E8 /* libz.dylib */; };
 		DA4E5D090F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
 		DA4E5D0A0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
 		DA4E5D0C0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
@@ -571,12 +568,10 @@
 		DA76F821100402FE00030524 /* CustomGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9A63B60F573A530031988E /* CustomGameLayer.m */; };
 		DA76F822100402FE00030524 /* NewGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D73B0F59425500D36C7C /* NewGameLayer.m */; };
 		DA76F823100402FE00030524 /* GameConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D79F0F59531100D36C7C /* GameConfiguration.m */; };
-		DA76F824100402FE00030524 /* MenuItemSpacer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79DBEC0F5BBFC100D36C7C /* MenuItemSpacer.m */; };
 		DA76F827100402FE00030524 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
 		DA76F828100402FE00030524 /* ThrowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA021E430F84A0F0007CED57 /* ThrowController.m */; };
 		DA76F829100402FE00030524 /* ModelsConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7B091E0F85562500B3118E /* ModelsConfigurationLayer.m */; };
 		DA76F82A100402FE00030524 /* FullGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA476A2B0FDD8002002E74F8 /* FullGameLayer.m */; };
-		DA76F82B100402FE00030524 /* BarSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DABD54E50FF6BE600034FDB1 /* BarSprite.m */; };
 		DA76F86B100402FE00030524 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6610F95368600E5607E /* UIKit.framework */; };
 		DA76F86C100402FE00030524 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6620F95368600E5607E /* Foundation.framework */; };
 		DA76F86D100402FE00030524 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6630F95368600E5607E /* CoreGraphics.framework */; };
@@ -590,9 +585,6 @@
 		DA79D7A10F59531100D36C7C /* GameConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D79F0F59531100D36C7C /* GameConfiguration.m */; };
 		DA79D7A30F59531100D36C7C /* GameConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D79F0F59531100D36C7C /* GameConfiguration.m */; };
 		DA79D7A40F59531100D36C7C /* GameConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D79F0F59531100D36C7C /* GameConfiguration.m */; };
-		DA79DBEE0F5BBFC100D36C7C /* MenuItemSpacer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79DBEC0F5BBFC100D36C7C /* MenuItemSpacer.m */; };
-		DA79DBF00F5BBFC100D36C7C /* MenuItemSpacer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79DBEC0F5BBFC100D36C7C /* MenuItemSpacer.m */; };
-		DA79DBF10F5BBFC100D36C7C /* MenuItemSpacer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79DBEC0F5BBFC100D36C7C /* MenuItemSpacer.m */; };
 		DA7B091F0F85562500B3118E /* ModelsConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7B091E0F85562500B3118E /* ModelsConfigurationLayer.m */; };
 		DA7B09210F85562500B3118E /* ModelsConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7B091E0F85562500B3118E /* ModelsConfigurationLayer.m */; };
 		DA7B09220F85562500B3118E /* ModelsConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7B091E0F85562500B3118E /* ModelsConfigurationLayer.m */; };
@@ -638,10 +630,6 @@
 		DAB898750F485418005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
 		DAB898830F4854B0005C1D06 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
 		DAB8C42E0EF1D582003D22DA /* ContinueMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */; };
-		DABD54E60FF6BE600034FDB1 /* BarSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DABD54E50FF6BE600034FDB1 /* BarSprite.m */; };
-		DABD54E70FF6BE600034FDB1 /* BarSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DABD54E50FF6BE600034FDB1 /* BarSprite.m */; };
-		DABD54E80FF6BE600034FDB1 /* BarSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DABD54E50FF6BE600034FDB1 /* BarSprite.m */; };
-		DABD54E90FF6BE600034FDB1 /* BarSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DABD54E50FF6BE600034FDB1 /* BarSprite.m */; };
 		DABD68000F190D4D00EE213D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		DABD68010F190D4D00EE213D /* GorillasAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* GorillasAppDelegate.m */; };
 		DABD68020F190D4D00EE213D /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
@@ -916,12 +904,10 @@
 		DAE919640FFD53D300BF4B89 /* CustomGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9A63B60F573A530031988E /* CustomGameLayer.m */; };
 		DAE919650FFD53D300BF4B89 /* NewGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D73B0F59425500D36C7C /* NewGameLayer.m */; };
 		DAE919660FFD53D300BF4B89 /* GameConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D79F0F59531100D36C7C /* GameConfiguration.m */; };
-		DAE919670FFD53D300BF4B89 /* MenuItemSpacer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79DBEC0F5BBFC100D36C7C /* MenuItemSpacer.m */; };
 		DAE9196A0FFD53D300BF4B89 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
 		DAE9196B0FFD53D300BF4B89 /* ThrowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA021E430F84A0F0007CED57 /* ThrowController.m */; };
 		DAE9196C0FFD53D300BF4B89 /* ModelsConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7B091E0F85562500B3118E /* ModelsConfigurationLayer.m */; };
 		DAE9196D0FFD53D300BF4B89 /* FullGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA476A2B0FDD8002002E74F8 /* FullGameLayer.m */; };
-		DAE9196E0FFD53D300BF4B89 /* BarSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DABD54E50FF6BE600034FDB1 /* BarSprite.m */; };
 		DAE919AD0FFD53D300BF4B89 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6610F95368600E5607E /* UIKit.framework */; };
 		DAE919AE0FFD53D300BF4B89 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6620F95368600E5607E /* Foundation.framework */; };
 		DAE919AF0FFD53D300BF4B89 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6630F95368600E5607E /* CoreGraphics.framework */; };
@@ -951,13 +937,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = DA3B92C0127B6D21009196E8;
 			remoteInfo = iLibs;
-		};
-		DA3B963C127C1DC0009196E8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DA3B9389127B6D6A009196E8;
-			remoteInfo = cocos2d;
 		};
 		DA3B9640127C1DCF009196E8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1415,8 +1394,6 @@
 		DA79D73B0F59425500D36C7C /* NewGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGameLayer.m; sourceTree = "<group>"; };
 		DA79D79E0F59531000D36C7C /* GameConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConfiguration.h; sourceTree = "<group>"; };
 		DA79D79F0F59531100D36C7C /* GameConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameConfiguration.m; sourceTree = "<group>"; };
-		DA79DBEB0F5BBFC100D36C7C /* MenuItemSpacer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItemSpacer.h; sourceTree = "<group>"; };
-		DA79DBEC0F5BBFC100D36C7C /* MenuItemSpacer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItemSpacer.m; sourceTree = "<group>"; };
 		DA7B091D0F85562500B3118E /* ModelsConfigurationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelsConfigurationLayer.h; sourceTree = "<group>"; };
 		DA7B091E0F85562500B3118E /* ModelsConfigurationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelsConfigurationLayer.m; sourceTree = "<group>"; };
 		DA83EC190EFEE93100305C9F /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
@@ -1434,8 +1411,6 @@
 		DAB896DC0F480411005C1D06 /* PanningLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanningLayer.m; sourceTree = "<group>"; };
 		DAB8C42C0EF1D582003D22DA /* ContinueMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinueMenuLayer.h; sourceTree = "<group>"; };
 		DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinueMenuLayer.m; sourceTree = "<group>"; };
-		DABD54E40FF6BE600034FDB1 /* BarSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarSprite.h; sourceTree = "<group>"; };
-		DABD54E50FF6BE600034FDB1 /* BarSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarSprite.m; sourceTree = "<group>"; };
 		DABD68580F190D4D00EE213D /* Gorillas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gorillas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DACA4E6C0EB3AEA40096F970 /* BuildingsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingsLayer.h; sourceTree = "<group>"; };
 		DACA4E6D0EB3AEA40096F970 /* BuildingsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingsLayer.m; sourceTree = "<group>"; };
@@ -1512,9 +1487,8 @@
 				DA0DD7900F9536D800E5607E /* AudioToolbox.framework in Frameworks */,
 				DA0DD7A30F9536E600E5607E /* QuartzCore.framework in Frameworks */,
 				DAA120930FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */,
-				DA3B963E127C1DC6009196E8 /* libcocos2d.a in Frameworks */,
-				DA3B963F127C1DC6009196E8 /* libiLibs.a in Frameworks */,
-				DA3B971B127C3787009196E8 /* libz.dylib in Frameworks */,
+				DA4B2277127CC81700C1748F /* libiLibs.a in Frameworks */,
+				DA4B227A127CC83800C1748F /* libz.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1523,7 +1497,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA3B9668127C1E81009196E8 /* libcocos2d.a in Frameworks */,
-				DA3B9723127C37D5009196E8 /* libz.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1721,8 +1694,6 @@
 				DA9A63B60F573A530031988E /* CustomGameLayer.m */,
 				DAB8C42C0EF1D582003D22DA /* ContinueMenuLayer.h */,
 				DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */,
-				DA79DBEB0F5BBFC100D36C7C /* MenuItemSpacer.h */,
-				DA79DBEC0F5BBFC100D36C7C /* MenuItemSpacer.m */,
 				DA18164A0F0E252B0064F470 /* Information */,
 				DA1816490F0E251B0064F470 /* Configuration */,
 			);
@@ -1780,8 +1751,6 @@
 				DA6C17CD0EC0F698006D43BD /* ExplosionsLayer.m */,
 				DA83F0B90F00527B00305C9F /* WindLayer.h */,
 				DA83F0BA0F00527B00305C9F /* WindLayer.m */,
-				DABD54E40FF6BE600034FDB1 /* BarSprite.h */,
-				DABD54E50FF6BE600034FDB1 /* BarSprite.m */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -2507,7 +2476,6 @@
 			);
 			dependencies = (
 				DA3B963B127C1DC0009196E8 /* PBXTargetDependency */,
-				DA3B963D127C1DC0009196E8 /* PBXTargetDependency */,
 			);
 			name = "Gorillas - Development";
 			productName = Gorillas;
@@ -3276,12 +3244,10 @@
 				DA9A63B90F573A530031988E /* CustomGameLayer.m in Sources */,
 				DA79D73E0F59425500D36C7C /* NewGameLayer.m in Sources */,
 				DA79D7A40F59531100D36C7C /* GameConfiguration.m in Sources */,
-				DA79DBF10F5BBFC100D36C7C /* MenuItemSpacer.m in Sources */,
 				DA4E5D0C0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */,
 				DA021E460F84A0F0007CED57 /* ThrowController.m in Sources */,
 				DA7B09210F85562500B3118E /* ModelsConfigurationLayer.m in Sources */,
 				DA476A2C0FDD8002002E74F8 /* FullGameLayer.m in Sources */,
-				DABD54E70FF6BE600034FDB1 /* BarSprite.m in Sources */,
 				DA3B94FB127B7407009196E8 /* GHUDLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3443,12 +3409,10 @@
 				DA4769A20FDD7334002E74F8 /* CustomGameLayer.m in Sources */,
 				DA4769A30FDD7334002E74F8 /* NewGameLayer.m in Sources */,
 				DA4769A40FDD7334002E74F8 /* GameConfiguration.m in Sources */,
-				DA4769A50FDD7334002E74F8 /* MenuItemSpacer.m in Sources */,
 				DA4769A80FDD7334002E74F8 /* GorillasAudioController.m in Sources */,
 				DA4769A90FDD7334002E74F8 /* ThrowController.m in Sources */,
 				DA4769AA0FDD7334002E74F8 /* ModelsConfigurationLayer.m in Sources */,
 				DA476A2F0FDD8002002E74F8 /* FullGameLayer.m in Sources */,
-				DABD54E80FF6BE600034FDB1 /* BarSprite.m in Sources */,
 				DA3B94FE127B7407009196E8 /* GHUDLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3487,12 +3451,10 @@
 				DA76F821100402FE00030524 /* CustomGameLayer.m in Sources */,
 				DA76F822100402FE00030524 /* NewGameLayer.m in Sources */,
 				DA76F823100402FE00030524 /* GameConfiguration.m in Sources */,
-				DA76F824100402FE00030524 /* MenuItemSpacer.m in Sources */,
 				DA76F827100402FE00030524 /* GorillasAudioController.m in Sources */,
 				DA76F828100402FE00030524 /* ThrowController.m in Sources */,
 				DA76F829100402FE00030524 /* ModelsConfigurationLayer.m in Sources */,
 				DA76F82A100402FE00030524 /* FullGameLayer.m in Sources */,
-				DA76F82B100402FE00030524 /* BarSprite.m in Sources */,
 				DA3B94F9127B7407009196E8 /* GHUDLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3531,12 +3493,10 @@
 				DA9A63BA0F573A530031988E /* CustomGameLayer.m in Sources */,
 				DA79D73F0F59425500D36C7C /* NewGameLayer.m in Sources */,
 				DA79D7A10F59531100D36C7C /* GameConfiguration.m in Sources */,
-				DA79DBEE0F5BBFC100D36C7C /* MenuItemSpacer.m in Sources */,
 				DA4E5D090F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */,
 				DA021E440F84A0F0007CED57 /* ThrowController.m in Sources */,
 				DA7B091F0F85562500B3118E /* ModelsConfigurationLayer.m in Sources */,
 				DA476A2D0FDD8002002E74F8 /* FullGameLayer.m in Sources */,
-				DABD54E60FF6BE600034FDB1 /* BarSprite.m in Sources */,
 				DA3B94FD127B7407009196E8 /* GHUDLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3575,12 +3535,10 @@
 				DA9A63BB0F573A530031988E /* CustomGameLayer.m in Sources */,
 				DA79D7400F59425500D36C7C /* NewGameLayer.m in Sources */,
 				DA79D7A30F59531100D36C7C /* GameConfiguration.m in Sources */,
-				DA79DBF00F5BBFC100D36C7C /* MenuItemSpacer.m in Sources */,
 				DA4E5D0A0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */,
 				DA021E470F84A0F0007CED57 /* ThrowController.m in Sources */,
 				DA7B09220F85562500B3118E /* ModelsConfigurationLayer.m in Sources */,
 				DA476A2E0FDD8002002E74F8 /* FullGameLayer.m in Sources */,
-				DABD54E90FF6BE600034FDB1 /* BarSprite.m in Sources */,
 				DA3B94FC127B7407009196E8 /* GHUDLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3619,12 +3577,10 @@
 				DAE919640FFD53D300BF4B89 /* CustomGameLayer.m in Sources */,
 				DAE919650FFD53D300BF4B89 /* NewGameLayer.m in Sources */,
 				DAE919660FFD53D300BF4B89 /* GameConfiguration.m in Sources */,
-				DAE919670FFD53D300BF4B89 /* MenuItemSpacer.m in Sources */,
 				DAE9196A0FFD53D300BF4B89 /* GorillasAudioController.m in Sources */,
 				DAE9196B0FFD53D300BF4B89 /* ThrowController.m in Sources */,
 				DAE9196C0FFD53D300BF4B89 /* ModelsConfigurationLayer.m in Sources */,
 				DAE9196D0FFD53D300BF4B89 /* FullGameLayer.m in Sources */,
-				DAE9196E0FFD53D300BF4B89 /* BarSprite.m in Sources */,
 				DA3B94FA127B7407009196E8 /* GHUDLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3636,11 +3592,6 @@
 			isa = PBXTargetDependency;
 			target = DA3B92C0127B6D21009196E8 /* iLibs */;
 			targetProxy = DA3B963A127C1DC0009196E8 /* PBXContainerItemProxy */;
-		};
-		DA3B963D127C1DC0009196E8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DA3B9389127B6D6A009196E8 /* cocos2d */;
-			targetProxy = DA3B963C127C1DC0009196E8 /* PBXContainerItemProxy */;
 		};
 		DA3B9641127C1DCF009196E8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3925,6 +3876,10 @@
 				LINKER_DISPLAYS_MANGLED_NAMES = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PREBINDING = NO;
 				SDKROOT = iphonesimulator4.1;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -3971,6 +3926,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PREBINDING = NO;
 				SDKROOT = iphonesimulator4.1;
 				VERSION_INFO_BUILDER = lhunath;
@@ -4017,6 +3976,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PREBINDING = NO;
 				SDKROOT = iphonesimulator4.1;
 				VERSION_INFO_BUILDER = lhunath;
@@ -4074,6 +4037,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
 				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PREBINDING = NO;
 				SDKROOT = iphonesimulator4.1;
 				STRIP_INSTALLED_PRODUCT = NO;

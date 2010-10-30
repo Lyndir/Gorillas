@@ -55,11 +55,14 @@ static NSUInteger _teamIndex, _globalIndex;
 
 -(id) initWithName:(NSString *)_name type:(GorillasPlayerType)_type {
     
+    if(!(self = [super init]))
+        return self;
+    
     model   = [[GorillasConfig get].playerModel unsignedIntValue];
     type    = _type;
-    
-    if(!(self = [super initWithFile:[self modelFileWithArmsUpLeft:NO right:NO]]))
-        return self;
+
+    self.texture            = [[CCTextureCache sharedTextureCache] addImage:[self modelFileWithArmsUpLeft:NO right:NO]];
+    self.textureRect        = CGRectFromPointAndSize(CGPointZero, self.texture.contentSize);
     
     name        = [_name copy];
     teamIndex   = _teamIndex++;
