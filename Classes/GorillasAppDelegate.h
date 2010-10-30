@@ -22,7 +22,7 @@
 //  Copyright, lhunath (Maarten Billemont) 2008. All rights reserved.
 //
 
-#import "GorillasAudioController.h"
+#import "AbstractCocos2DAppDelegate.h"
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
 #import "NewGameLayer.h"
@@ -37,15 +37,11 @@
 #import "StatisticsLayer.h"
 #import "FullGameLayer.h"
 #import "GHUDLayer.h"
-#import "UILayer.h"
 
 
-@interface GorillasAppDelegate : NSObject <UIApplicationDelegate> {
+@interface GorillasAppDelegate : AbstractCocos2DAppDelegate {
     
 @private
-    UIWindow                    *window;
-    
-    UILayer                     *uiLayer;
     GameLayer                   *gameLayer;
     ContinueMenuLayer           *continueMenuLayer;
     MainMenuLayer               *mainMenuLayer;
@@ -59,21 +55,24 @@
     FullGameLayer               *fullLayer;
     GuideLayer                  *guideLayer;
     StatisticsLayer             *statsLayer;
-    GHUDLayer                   *hudLayer;
-    
-    NSMutableArray              *menuLayers;
 }
 
-@property (nonatomic, readonly) UILayer                    *uiLayer;
-@property (nonatomic, readonly) NewGameLayer               *newGameLayer;
-@property (nonatomic, readonly) CustomGameLayer            *customGameLayer;
-@property (nonatomic, readonly) GameLayer                  *gameLayer;
-@property (nonatomic, readonly) GHUDLayer                  *hudLayer;
+@property (nonatomic, readonly, retain) GameLayer                  *gameLayer;
+@property (nonatomic, readonly, retain) MainMenuLayer              *mainMenuLayer;
+@property (nonatomic, readonly, retain) NewGameLayer               *newGameLayer;
+@property (nonatomic, readonly, retain) CustomGameLayer            *customGameLayer;
+@property (nonatomic, readonly, retain) ContinueMenuLayer          *continueMenuLayer;
+@property (nonatomic, readonly, retain) ConfigurationSectionLayer  *configLayer;
+@property (nonatomic, readonly, retain) GameConfigurationLayer     *gameConfigLayer;
+@property (nonatomic, readonly, retain) AVConfigurationLayer       *avConfigLayer;
+@property (nonatomic, readonly, retain) ModelsConfigurationLayer   *modelsConfigLayer;
+@property (nonatomic, readonly, retain) InformationLayer           *infoLayer;
+@property (nonatomic, readonly, retain) GuideLayer                 *guideLayer;
+@property (nonatomic, readonly, retain) StatisticsLayer            *statsLayer;
+@property (nonatomic, readonly, retain) FullGameLayer              *fullLayer;
+@property (nonatomic, readonly, retain) GHUDLayer                  *hudLayer;
 
 -(void) updateConfig;
--(void) popAllLayers;
--(void) popLayer;
--(void) cleanup;
 
 -(void) showMainMenu;
 -(void) showNewGame;
@@ -87,8 +86,6 @@
 -(void) showGuide;
 -(void) showStatistics;
 -(void) showFullGame;
--(void) revealHud;
--(void) hideHud;
 
 +(GorillasAppDelegate *) get;
 

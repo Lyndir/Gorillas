@@ -23,15 +23,13 @@
 //
 
 #import "GameConfiguration.h"
+#import "Config.h"
 
 
-@interface GorillasConfig : NSObject {
+@interface GorillasConfig : Config {
 
 @private
-    NSUserDefaults                                      *defaults;
-    
     NSArray                                             *updateTriggers;
-    NSDictionary                                        *resetTriggers;
     
     NSDictionary                                        *modeStrings;
     NSArray                                             *modes;
@@ -39,12 +37,6 @@
     NSArray                                             *offMessages, *hitMessages;
 }
 
-
-@property (nonatomic, readwrite, retain) NSNumber       *fontSize;
-@property (nonatomic, readwrite, retain) NSNumber       *largeFontSize;
-@property (nonatomic, readwrite, retain) NSNumber       *smallFontSize;
-@property (nonatomic, readwrite, retain) NSString       *fontName;
-@property (nonatomic, readwrite, retain) NSString       *fixedFontName;
 
 @property (nonatomic, readwrite, retain) NSString       *cityTheme;
 
@@ -74,8 +66,6 @@
 @property (nonatomic, readwrite, retain) NSNumber       *minGravity;
 @property (nonatomic, readwrite, retain) NSNumber       *maxGravity;
 
-@property (nonatomic, readwrite, retain) NSNumber       *shadeColor;
-@property (nonatomic, readwrite, retain) NSNumber       *transitionDuration;
 @property (nonatomic, readwrite, retain) NSNumber       *gameScrollDuration;
 
 @property (nonatomic, readwrite, retain) NSNumber       *level;
@@ -99,17 +89,6 @@
 @property (nonatomic, readwrite, retain) NSNumber       *bonusSkill;
 @property (nonatomic, readwrite, retain) NSNumber       *deathScoreRatio;
 @property (nonatomic, readonly) NSInteger               deathScore;
-
-@property (nonatomic, readwrite, retain) NSArray        *tracks;
-@property (nonatomic, readwrite, retain) NSArray        *trackNames;
-@property (nonatomic, readonly) NSString                *randomTrack;
-@property (nonatomic, readwrite, retain) NSString       *currentTrack;
-@property (nonatomic, readonly) NSString                *currentTrackName;
-
-@property (nonatomic, readwrite, retain) NSNumber       *soundFx;
-@property (nonatomic, readwrite, retain) NSNumber       *voice;
-@property (nonatomic, readwrite, retain) NSNumber       *vibration;
-@property (nonatomic, readwrite, retain) NSNumber       *visualFx;
 
 @property (nonatomic, readwrite, retain) NSNumber       *replay;
 @property (nonatomic, readwrite, retain) NSNumber       *followThrow;

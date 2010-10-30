@@ -34,27 +34,37 @@
 
 @end
 
+@interface GorillasAppDelegate ()
+
+@property (nonatomic, readwrite, retain) GameLayer                     *gameLayer;
+@property (nonatomic, readwrite, retain) MainMenuLayer                 *mainMenuLayer;
+@property (nonatomic, readwrite, retain) NewGameLayer                  *newGameLayer;
+@property (nonatomic, readwrite, retain) CustomGameLayer               *customGameLayer;
+@property (nonatomic, readwrite, retain) ContinueMenuLayer             *continueMenuLayer;
+@property (nonatomic, readwrite, retain) ConfigurationSectionLayer     *configLayer;
+@property (nonatomic, readwrite, retain) GameConfigurationLayer        *gameConfigLayer;
+@property (nonatomic, readwrite, retain) AVConfigurationLayer          *avConfigLayer;
+@property (nonatomic, readwrite, retain) ModelsConfigurationLayer      *modelsConfigLayer;
+@property (nonatomic, readwrite, retain) InformationLayer              *infoLayer;
+@property (nonatomic, readwrite, retain) GuideLayer                    *guideLayer;
+@property (nonatomic, readwrite, retain) StatisticsLayer               *statsLayer;
+@property (nonatomic, readwrite, retain) FullGameLayer                 *fullLayer;
+
+@end
 
 @implementation GorillasAppDelegate
 
-@synthesize uiLayer, gameLayer, newGameLayer, customGameLayer;
+@synthesize gameLayer, mainMenuLayer, newGameLayer, customGameLayer, continueMenuLayer;
+@synthesize configLayer, gameConfigLayer, avConfigLayer, modelsConfigLayer;
+@synthesize infoLayer, guideLayer, statsLayer, fullLayer;
 
++ (void)initialize {
+    
+    [GorillasConfig get];
+}
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application {
+- (void)setup {
     
-	// Init the window.
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
-    CC_DIRECTOR_INIT();
-	[window setMultipleTouchEnabled:YES];
-    
-    // Random seed with timestamp.
-    srandom(time(nil));
-    
-    // CCMenu items font.
-    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
-    menuLayers = [[NSMutableArray alloc] initWithCapacity:3];
-
 	// Build the splash scene.
     CCScene *splashScene = [CCScene node];
     CCSprite *splash = [Splash node];
@@ -62,14 +72,8 @@
     
     // Build the game scene.
 	gameLayer = [[GameLayer alloc] init];
-    uiLayer = [[UILayer alloc] init];
-    DebugLayer *debugLayer = [DebugLayer node];
-    [uiLayer addChild:debugLayer z:99];
-    [uiLayer addChild:gameLayer];
+    [self.uiLayer addChild:gameLayer];
 	
-    // Start the background music.
-    [[GorillasAudioController get] playTrack:[[GorillasConfig get] currentTrack]];
-
     // Show the splash screen, this starts the main loop in the current thread.
     [[CCDirector sharedDirector] pushScene:splashScene];
     do {
@@ -89,34 +93,12 @@
 }
 
 
--(void) revealHud {
+-(GHUDLayer *) hudLayer {
     
-    if(hudLayer) {
-        if(![hudLayer dismissed])
-            // Already showing and not dismissed.
-            return;
+    if(!_hudLayer)
+        _hudLayer = [[GHUDLayer alloc] init];
     
-        if([hudLayer parent])
-            // Already showing and being dismissed.
-            [uiLayer removeChild:hudLayer cleanup:YES];
-    }
-
-    [uiLayer addChild:[self hudLayer]];
-}
-
-
--(void) hideHud {
-    
-    [hudLayer dismiss];
-}
-
-
--(HUDLayer *) hudLayer {
-    
-    if(!hudLayer)
-        hudLayer = [[HUDLayer alloc] init];
-    
-    return hudLayer;
+    return (GHUDLayer *)super.hudLayer;
 }
 
 
@@ -125,55 +107,6 @@
     [configLayer reset];
     [gameConfigLayer reset];
     [avConfigLayer reset];
-}
-
-
--(void) popLayer {
-
-    [(ShadeLayer *) [menuLayers lastObject] dismissAsPush:NO];
-    [menuLayers removeLastObject];
-    if([menuLayers count])
-        [uiLayer addChild:[menuLayers lastObject]];
-    else
-        [gameLayer.activeGorilla applyZoom];
-}
-
-
--(void) popAllLayers {
-    
-    if(![menuLayers count])
-        return;
-
-    id last = [menuLayers lastObject];
-    [menuLayers makeObjectsPerformSelector:@selector(dismissAsPush:) withObject:NO];
-    [menuLayers removeAllObjects];
-    [menuLayers addObject:last];
-
-    [self popLayer];
-}
-
-
--(void) pushLayer: (ShadeLayer *)layer {
-    
-    if(layer.parent) {
-        if (![menuLayers containsObject:layer])
-            // CCLayer is showing but shouldn't have been; probably being dismissed.
-            [uiLayer removeChild:layer cleanup:YES];
-        
-        else {
-            // CCLayer is already showing.
-            if ([layer conformsToProtocol:@protocol(Resettable)])
-                [(ShadeLayer<Resettable> *) layer reset];
-        
-            return;
-        }
-    }
-
-    [(ShadeLayer *) [menuLayers lastObject] dismissAsPush:YES];
-    [menuLayers addObject:layer];
-    [uiLayer addChild:layer];
-
-    [gameLayer.panningLayer scaleTo:0.5f];
 }
 
 
@@ -286,152 +219,84 @@
 
 
 -(void) applicationWillResignActive:(UIApplication *)application {
-    
-    [[CCDirector sharedDirector] pause];
+
+    [super applicationWillResignActive:application];
 
     if(!gameLayer.paused)
         [self showMainMenu];
 }
 
 
--(void) applicationDidBecomeActive:(UIApplication *)application {
-
-    [[CCDirector sharedDirector] resume];
-}
-
-
--(void) applicationDidReceiveMemoryWarning:(UIApplication *)application {
-    
-	[[CCTextureCache sharedTextureCache] removeAllTextures];
-    
-    [self cleanup];
-}
-
-
 -(void) cleanup {
     
-    if(hudLayer && ![hudLayer parent]) {
-        [hudLayer stopAllActions];
-        [hudLayer release];
-        hudLayer = nil;
-    }
+    [super cleanup];
+    
     if(mainMenuLayer && ![mainMenuLayer parent]) {
         [mainMenuLayer stopAllActions];
-        [mainMenuLayer release];
-        mainMenuLayer = nil;
+        self.mainMenuLayer = nil;
     }
     if(newGameLayer && ![newGameLayer parent]) {
         [newGameLayer stopAllActions];
-        [newGameLayer release];
-        newGameLayer = nil;
+        self.newGameLayer = nil;
     }
     if(customGameLayer && ![customGameLayer parent]) {
         [customGameLayer stopAllActions];
-        [customGameLayer release];
-        customGameLayer = nil;
+        self.customGameLayer = nil;
     }
     if(continueMenuLayer && ![continueMenuLayer parent]) {
         [continueMenuLayer stopAllActions];
-        [continueMenuLayer release];
-        continueMenuLayer = nil;
+        self.continueMenuLayer = nil;
     }
     if(configLayer && ![configLayer parent]) {
         [configLayer stopAllActions];
-        [configLayer release];
-        configLayer = nil;
+        self.configLayer = nil;
     }
     if(gameConfigLayer && ![gameConfigLayer parent]) {
         [gameConfigLayer stopAllActions];
-        [gameConfigLayer release];
-        gameConfigLayer = nil;
+        self.gameConfigLayer = nil;
     }
     if(avConfigLayer && ![avConfigLayer parent]) {
         [avConfigLayer stopAllActions];
-        [avConfigLayer release];
-        avConfigLayer = nil;
+        self.avConfigLayer = nil;
     }
     if(modelsConfigLayer && ![modelsConfigLayer parent]) {
         [modelsConfigLayer stopAllActions];
-        [modelsConfigLayer release];
-        modelsConfigLayer = nil;
+        self.modelsConfigLayer = nil;
     }
     if(infoLayer && ![infoLayer parent]) {
         [infoLayer stopAllActions];
-        [infoLayer release];
-        infoLayer = nil;
+        self.infoLayer = nil;
     }
     if(guideLayer && ![guideLayer parent]) {
         [guideLayer stopAllActions];
-        [guideLayer release];
-        guideLayer = nil;
+        self.guideLayer = nil;
     }
     if(statsLayer && ![statsLayer parent]) {
         [statsLayer stopAllActions];
-        [statsLayer release];
-        statsLayer = nil;
+        self.statsLayer = nil;
     }
     if(fullLayer && ![fullLayer parent]) {
         [fullLayer stopAllActions];
-        [fullLayer release];
-        fullLayer = nil;
+        self.fullLayer = nil;
     }
-    
-    [[GorillasAudioController get] playTrack:nil];
 }
 
 
 - (void)dealloc {
     
-    [gameLayer release];
-    gameLayer = nil;
-    
-    [uiLayer release];
-    uiLayer = nil;
-    
-    [menuLayers release];
-    menuLayers = nil;
-    
-    [mainMenuLayer release];
-    mainMenuLayer = nil;
-    
-    [newGameLayer release];
-    newGameLayer = nil;
-    
-    [customGameLayer release];
-    customGameLayer = nil;
-    
-    [continueMenuLayer release];
-    continueMenuLayer = nil;
-    
-    [configLayer release];
-    configLayer = nil;
-
-    [gameConfigLayer release];
-    gameConfigLayer = nil;
-
-    [avConfigLayer release];
-    avConfigLayer = nil;
-
-    [modelsConfigLayer release];
-    modelsConfigLayer = nil;
-    
-    [infoLayer release];
-    infoLayer = nil;
-
-    [guideLayer release];
-    guideLayer = nil;
-
-    [statsLayer release];
-    statsLayer = nil;
-    
-    [fullLayer release];
-    fullLayer = nil;
-    
-    [hudLayer release];
-    hudLayer = nil;
-    
-    [window release];
-    window = nil;
+    self.gameLayer = nil;
+    self.mainMenuLayer = nil;
+    self.newGameLayer = nil;
+    self.customGameLayer = nil;
+    self.continueMenuLayer = nil;
+    self.configLayer = nil;
+    self.gameConfigLayer = nil;
+    self.avConfigLayer = nil;
+    self.modelsConfigLayer = nil;
+    self.infoLayer = nil;
+    self.guideLayer = nil;
+    self.statsLayer = nil;
+    self.fullLayer = nil;
     
     [super dealloc];
 }
