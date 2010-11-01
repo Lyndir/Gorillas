@@ -35,67 +35,59 @@
 -(void) information: (id)sender;
 -(void) options: (id)sender;
 
+@property (readwrite, retain) CCMenuItem            *info;
+@property (readwrite, retain) CCMenuItem            *config;
+@property (readwrite, retain) CCMenuItem            *continueGame;
+@property (readwrite, retain) CCMenuItem            *stopGame;
+@property (readwrite, retain) CCMenuItem            *newGame;
+
 @end
 
 @implementation MainMenuLayer
 
+@synthesize info = _info, config = _config, continueGame = _continueGame, stopGame = _stopGame, newGame = _newGame;
 
 -(id) init {
 
-    if(!(self = [super init]))
+    if(!(self = [super initWithDelegate:self logo:nil items:
+                 self.newGame       = [CCMenuItemFont itemFromString:l(@"entries.new")
+                                                              target:self selector:@selector(newGame:)],
+                 self.continueGame  = [CCMenuItemFont itemFromString:l(@"entries.continue.unpause")
+                                                              target:self selector:@selector(continueGame:)],
+                 self.stopGame      = [CCMenuItemFont itemFromString:l(@"entries.end")
+                                                              target:self selector:@selector(stopGame:)],
+                 [MenuItemSpacer spacerSmall],
+                 self.info          = [CCMenuItemFont itemFromString:l(@"entries.information")
+                                                              target:self selector:@selector(information:)],
+#ifndef LITE
+                 self.config        = [CCMenuItemFont itemFromString:l(@"entries.configuration")
+                                                              target:self selector:@selector(options:)],
+#endif
+                 nil]))
         return self;
     
-    info                = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.information", @"Information")
-                                                        target:self selector:@selector(information:)];
-    config              = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.configuration", @"Configuration")
-                                                        target:self selector:@selector(options:)];
-    continueGame        = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.continue.unpause", @"Continue Game")
-                                                        target:self selector:@selector(continueGame:)];
-    stopGame            = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.end", @"End Game")
-                                                        target:self selector:@selector(stopGame:)];
-    newGame             = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.new", @"New Game")
-                                                        target:self selector:@selector(newGame:)];
 
     return self;
 }
 
 
--(void) onEnter {
+- (void)onEnter {
     
     [self reset];
-
+    
     [super onEnter];
 }
 
 
 -(void) reset {
 
-#ifdef LITE
-    [config release];
-    config = nil;
-#endif
-    if(menu) {
-        [menu removeAllChildrenWithCleanup:YES];
-        [self removeChild:menu cleanup:YES];
-        [menu release];
-        menu = nil;
-    }
+    BOOL gameIsOn = [[GorillasAppDelegate get].gameLayer checkGameStillOn], gameWasOn = [self.continueGame isEnabled];
     
-    if([[GorillasAppDelegate get].gameLayer checkGameStillOn]) {
-        menu = [[CCMenu menuWithItems:
-                 continueGame, stopGame, [MenuItemSpacer small],
-                 info, config,
-                 nil] retain];
-    }
-    else {
-        menu = [[CCMenu menuWithItems:
-                 newGame, [MenuItemSpacer small],
-                 info, config,
-                 nil] retain];
-    }
-    
-    [menu alignItemsVertically];
-    [self addChild:menu];
+    if(gameIsOn != gameWasOn)
+        //TODO self.menu = nil;
+
+    [self.continueGame setIsEnabled:gameIsOn];
+    [self.stopGame setIsEnabled:gameIsOn];
 }
 
 
@@ -140,9 +132,12 @@
 
 
 -(void) dealloc {
-    
-    [menu release];
-    menu = nil;
+
+    self.newGame = nil;
+    self.continueGame = nil;
+    self.stopGame = nil;
+    self.info = nil;
+    self.config = nil;
 
     [super dealloc];
 }

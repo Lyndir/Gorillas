@@ -76,6 +76,8 @@
 	
     // Show the splash screen, this starts the main loop in the current thread.
     [[CCDirector sharedDirector] pushScene:splashScene];
+    [self showMainMenu];
+    
     do {
 #if ! TARGET_IPHONE_SIMULATOR
         @try {
@@ -109,6 +111,10 @@
     [avConfigLayer reset];
 }
 
+- (void)hudMenuPressed {
+    
+    [self showMainMenu];
+}
 
 -(void) showMainMenu {
     

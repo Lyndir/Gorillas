@@ -85,8 +85,8 @@
     
     
     CCMenu *menu = [CCMenu menuWithItems:
-                  styleT, configurationI, descriptionT, [MenuItemSpacer small],
-                  singlePlayerI, multiPlayerI, [MenuItemSpacer small],
+                  styleT, configurationI, descriptionT, [MenuItemSpacer spacerSmall],
+                  singlePlayerI, multiPlayerI, [MenuItemSpacer spacerSmall],
                   customI,
                   nil];
     [menu alignItemsVertically];

@@ -104,11 +104,14 @@
 
 
 -(void) draw {
-
-    glEnableClientState(GL_COLOR_ARRAY);
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
     
+	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+    //glEnableClientState(GL_COLOR_ARRAY);
+    //glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisable(GL_TEXTURE_2D);
+
     // Stars.
     glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
     glVertexPointer(2, GL_FLOAT, sizeof(glPoint), 0);
@@ -118,9 +121,11 @@
     glDrawArrays(GL_POINTS, 0, starCount);
     
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    //glDisableClientState(GL_VERTEX_ARRAY);
+    //glDisableClientState(GL_COLOR_ARRAY);
     glDisableClientState(GL_POINT_SIZE_ARRAY_OES);
-    glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_COLOR_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnable(GL_TEXTURE_2D);
 }
 
 

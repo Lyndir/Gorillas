@@ -433,8 +433,8 @@
 
     running = NO;
     
-    CCActionInterval *l       = [CCMoveBy actionWithDuration:.05f position:ccp(-3, 0)];
-    CCActionInterval *r       = [CCMoveBy actionWithDuration:.05f position:ccp(6, 0)];
+    CCActionInterval *l     = [CCMoveBy actionWithDuration:.05f position:ccp(-3, 0)];
+    CCActionInterval *r     = [CCMoveBy actionWithDuration:.05f position:ccp(6, 0)];
     shakeAction             = [[CCSequence actions:l, r, l, l, r, l, r, l, l, nil] retain];
     
     // Set up our own layer.
@@ -444,10 +444,10 @@
     cityLayer               = [[CityLayer alloc] init];
     skyLayer                = [[SkyLayer alloc] init];
     panningLayer            = [[PanningLayer alloc] init];
-    panningLayer.position   = ccp(0, 0);
+    panningLayer.position   = CGPointZero;
     [panningLayer addChild:cityLayer z:0];
     [panningLayer addChild:skyLayer z:-5];
-    [self addChild:panningLayer];
+    [self addChild:panningLayer z:0];
     
     windLayer               = [[WindLayer alloc] init];
     windLayer.position      = ccp(self.contentSize.width / 2, self.contentSize.height - 15);

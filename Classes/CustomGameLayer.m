@@ -108,7 +108,7 @@
     
     CCMenu *menu = [CCMenu menuWithItems:
                   humansT, aisT, humansI, aisI,
-                  gameModeT, gameModeI, [MenuItemSpacer small],
+                  gameModeT, gameModeI, [MenuItemSpacer spacerSmall],
                   startGameI,
                   nil];
     [menu alignItemsInColumns:

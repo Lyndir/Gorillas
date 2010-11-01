@@ -49,7 +49,7 @@
                                                         target:self selector:@selector(stopGame:)];
     
     CCMenu *menu                  = [CCMenu menuWithItems:
-                                   continueGame, [MenuItemSpacer small],
+                                   continueGame, [MenuItemSpacer spacerSmall],
                                    stopGame,
                                    nil];
     [menu alignItemsVertically];

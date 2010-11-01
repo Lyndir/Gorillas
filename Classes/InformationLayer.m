@@ -65,7 +65,7 @@
                                  target:self selector:@selector(full:)];
 #endif
     
-    CCMenu *menu = [CCMenu menuWithItems:ver, guide, stats, [MenuItemSpacer small], full, nil];
+    CCMenu *menu = [CCMenu menuWithItems:ver, guide, stats, [MenuItemSpacer spacerSmall], full, nil];
     [menu alignItemsVertically];
     [self addChild:menu];
 

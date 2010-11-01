@@ -59,8 +59,10 @@
 
 -(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
-    if([[event allTouches] count] != 2)
+    if([[event allTouches] count] != 2) {
         [self ccTouchesCancelled:touches withEvent:event];
+        return;
+    }
     
     NSArray *touchesArray = [[event allTouches] allObjects];
     UITouch *from = [touchesArray objectAtIndex:0];
@@ -75,12 +77,16 @@
 
 -(void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     
-    if([[event allTouches] count] != 2)
+    if([[event allTouches] count] != 2) {
         [self ccTouchesCancelled:touches withEvent:event];
+        return;
+    }
     
-    if(initialDist < 0)
+    if(initialDist < 0) {
         [self ccTouchesBegan:touches withEvent:event];
-    
+        return;
+    }
+
     NSArray *touchesArray = [[event allTouches] allObjects];
     UITouch *from = [touchesArray objectAtIndex:0];
     UITouch *to = [touchesArray objectAtIndex:1];

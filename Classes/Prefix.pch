@@ -132,6 +132,7 @@ typedef enum {
     #import "DeviceUtils.h"
     #import "StringUtils.h"
     #import "GorillasConfig.h"
+    #import "Logger.h"
 
     /**
     * GL types
@@ -141,4 +142,6 @@ typedef enum {
         GLfloat s;
         ccColor4B c;
     } glPoint;
+//*/
+
 #endif
