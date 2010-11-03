@@ -224,6 +224,14 @@
 }
 
 
+- (void)pushLayer: (ShadeLayer *)layer hidden:(BOOL)hidden {
+    
+    [gameLayer setPaused:YES];
+    
+    [super pushLayer:layer hidden:hidden];
+}
+
+
 -(void) applicationWillResignActive:(UIApplication *)application {
 
     [super applicationWillResignActive:application];

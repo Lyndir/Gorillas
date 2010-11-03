@@ -81,11 +81,12 @@
 
 -(void) reset {
 
-    BOOL gameIsOn = [[GorillasAppDelegate get].gameLayer checkGameStillOn], gameWasOn = [self.continueGame isEnabled];
+    BOOL gameIsOn = [[GorillasAppDelegate get].gameLayer checkGameStillOn];//, gameWasOn = [self.continueGame isEnabled];
     
-    if(gameIsOn != gameWasOn)
+    //if(gameIsOn != gameWasOn)
         //TODO self.menu = nil;
 
+    [self.newGame setIsEnabled:!gameIsOn];
     [self.continueGame setIsEnabled:gameIsOn];
     [self.stopGame setIsEnabled:gameIsOn];
 }

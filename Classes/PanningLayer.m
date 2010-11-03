@@ -43,6 +43,12 @@
 }
 
 
+-(void) registerWithTouchDispatcher {
+    
+    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+}
+
+
 -(void) reset {
     
     if (self.scale != 1) {
@@ -57,12 +63,10 @@
 }
 
 
--(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     
-    if([[event allTouches] count] != 2) {
-        [self ccTouchesCancelled:touches withEvent:event];
-        return;
-    }
+    if([[event allTouches] count] != 2)
+        return NO;
     
     NSArray *touchesArray = [[event allTouches] allObjects];
     UITouch *from = [touchesArray objectAtIndex:0];
@@ -72,20 +76,18 @@
     
     initialScale = self.scale;
     initialDist = fabsf(pFrom.y - pTo.y);
+    
+    return YES;
 }
 
 
--(void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
     
-    if([[event allTouches] count] != 2) {
-        [self ccTouchesCancelled:touches withEvent:event];
+    if([[event allTouches] count] != 2)
         return;
-    }
     
-    if(initialDist < 0) {
-        [self ccTouchesBegan:touches withEvent:event];
+    if(initialDist < 0)
         return;
-    }
 
     NSArray *touchesArray = [[event allTouches] allObjects];
     UITouch *from = [touchesArray objectAtIndex:0];
@@ -106,7 +108,7 @@
 }
 
 
--(void) ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
     
     if(initialDist < 0)
         return;
@@ -116,7 +118,7 @@
 }
 
 
--(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     
     if(initialDist < 0)
         return;
@@ -192,18 +194,18 @@
     
     // Stop the current scroll.
     ccTime scrollActionElapsed = [scrollAction isDone]? 0: scrollAction.elapsed;
-    if(scrollAction)
-        [self stopAction: scrollAction];
-    [scrollAction release];
     
     // Scroll to current point should take initial duration minus what has already elapsed to scroll to approach previous points.
-    if(scrollActionElapsed < [[GorillasConfig get].gameScrollDuration floatValue])
-        [self runAction:(scrollAction = [[CCMoveTo alloc] initWithDuration:[[GorillasConfig get].gameScrollDuration floatValue] - scrollActionElapsed
+    if(!scrollAction || [scrollAction isDone]) {
+        if(scrollAction)
+            [self stopAction: scrollAction];
+        [scrollAction release];
+        
+        [self runAction:(scrollAction = [[MovingTo alloc] initWithDuration:[[GorillasConfig get].gameScrollDuration floatValue] - scrollActionElapsed
                                                                 position:pos])];
-    else {
-        scrollAction = nil;
-        self.position = pos;
     }
+    else
+        [scrollAction updatePosition:pos];
 }
 
 

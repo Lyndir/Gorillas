@@ -32,7 +32,7 @@
 #import "BuildingsLayer.h"
 //#define _DEBUG_
 
-@interface CityLayer : CCLayer <Resettable> {
+@interface CityLayer : CCLayer <Resettable, CCTargetedTouchDelegate> {
 
 @private
     PanAction           *panAction;

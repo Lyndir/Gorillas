@@ -87,7 +87,7 @@ static CCParticleSystem **flameTypes = nil;
 
     if(flameTypes) {
         for (NSUInteger type = 0; type < flameVariantion * 2; ++type)
-            [(id)flameTypes[type] step:dt];
+            [(id)flameTypes[type] update:dt];
     }
 }
 

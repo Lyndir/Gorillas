@@ -915,6 +915,12 @@
 		DAE919B10FFD53D300BF4B89 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD78D0F9536D800E5607E /* AudioToolbox.framework */; };
 		DAE919B20FFD53D300BF4B89 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD7A00F9536E600E5607E /* QuartzCore.framework */; };
 		DAE919B30FFD53D300BF4B89 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA120920FDD26F700AA1E28 /* AVFoundation.framework */; };
+		DAF4D8141280D8170012132B /* MovingTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF4D8131280D8170012132B /* MovingTo.m */; };
+		DAF4D8151280D8170012132B /* MovingTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF4D8131280D8170012132B /* MovingTo.m */; };
+		DAF4D8161280D8170012132B /* MovingTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF4D8131280D8170012132B /* MovingTo.m */; };
+		DAF4D8171280D8170012132B /* MovingTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF4D8131280D8170012132B /* MovingTo.m */; };
+		DAF4D8181280D8170012132B /* MovingTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF4D8131280D8170012132B /* MovingTo.m */; };
+		DAF4D8191280D8170012132B /* MovingTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF4D8131280D8170012132B /* MovingTo.m */; };
 		DAF7265E0FDEFF1000CFFB32 /* fullGame.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAF7265A0FDEFF1000CFFB32 /* fullGame.txt */; };
 		DAF7265F0FDEFF1000CFFB32 /* guide.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAF7265C0FDEFF1000CFFB32 /* guide.txt */; };
 		DAF726600FDEFF1000CFFB32 /* fullGame.txt in Resources */ = {isa = PBXBuildFile; fileRef = DAF7265A0FDEFF1000CFFB32 /* fullGame.txt */; };
@@ -1465,6 +1471,8 @@
 		DAE919BA0FFD53D300BF4B89 /* Gorillas Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAEE79DD0FF14077002AAB54 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DAEE79DE0FF14086002AAB54 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DAF4D8121280D8170012132B /* MovingTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingTo.h; sourceTree = "<group>"; };
+		DAF4D8131280D8170012132B /* MovingTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingTo.m; sourceTree = "<group>"; };
 		DAF7265B0FDEFF1000CFFB32 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = en; path = en.lproj/fullGame.txt; sourceTree = "<group>"; };
 		DAF7265D0FDEFF1000CFFB32 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = en; path = en.lproj/guide.txt; sourceTree = "<group>"; };
 		DAF726680FDEFF2500CFFB32 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text; name = nl; path = nl.lproj/fullGame.txt; sourceTree = "<group>"; };
@@ -1766,6 +1774,8 @@
 				DAFEF9720ED847D40019F7E5 /* Throw.m */,
 				DA021E420F84A0F0007CED57 /* ThrowController.h */,
 				DA021E430F84A0F0007CED57 /* ThrowController.m */,
+				DAF4D8121280D8170012132B /* MovingTo.h */,
+				DAF4D8131280D8170012132B /* MovingTo.m */,
 			);
 			name = Actions;
 			sourceTree = "<group>";
@@ -3249,6 +3259,7 @@
 				DA7B09210F85562500B3118E /* ModelsConfigurationLayer.m in Sources */,
 				DA476A2C0FDD8002002E74F8 /* FullGameLayer.m in Sources */,
 				DA3B94FB127B7407009196E8 /* GHUDLayer.m in Sources */,
+				DAF4D8161280D8170012132B /* MovingTo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3414,6 +3425,7 @@
 				DA4769AA0FDD7334002E74F8 /* ModelsConfigurationLayer.m in Sources */,
 				DA476A2F0FDD8002002E74F8 /* FullGameLayer.m in Sources */,
 				DA3B94FE127B7407009196E8 /* GHUDLayer.m in Sources */,
+				DAF4D8181280D8170012132B /* MovingTo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3456,6 +3468,7 @@
 				DA76F829100402FE00030524 /* ModelsConfigurationLayer.m in Sources */,
 				DA76F82A100402FE00030524 /* FullGameLayer.m in Sources */,
 				DA3B94F9127B7407009196E8 /* GHUDLayer.m in Sources */,
+				DAF4D8141280D8170012132B /* MovingTo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3498,6 +3511,7 @@
 				DA7B091F0F85562500B3118E /* ModelsConfigurationLayer.m in Sources */,
 				DA476A2D0FDD8002002E74F8 /* FullGameLayer.m in Sources */,
 				DA3B94FD127B7407009196E8 /* GHUDLayer.m in Sources */,
+				DAF4D8171280D8170012132B /* MovingTo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3540,6 +3554,7 @@
 				DA7B09220F85562500B3118E /* ModelsConfigurationLayer.m in Sources */,
 				DA476A2E0FDD8002002E74F8 /* FullGameLayer.m in Sources */,
 				DA3B94FC127B7407009196E8 /* GHUDLayer.m in Sources */,
+				DAF4D8191280D8170012132B /* MovingTo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3582,6 +3597,7 @@
 				DAE9196C0FFD53D300BF4B89 /* ModelsConfigurationLayer.m in Sources */,
 				DAE9196D0FFD53D300BF4B89 /* FullGameLayer.m in Sources */,
 				DA3B94FA127B7407009196E8 /* GHUDLayer.m in Sources */,
+				DAF4D8151280D8170012132B /* MovingTo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
