@@ -526,8 +526,9 @@
                                                        reason:@"Unsupported weather type selected." userInfo:nil];
                 }
                 
-                weather.posVar = ccp(field.size.width / 2, weather.posVar.y);
-                weather.position = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
+                weather.positionType    = kCCPositionTypeGrouped;
+                weather.posVar          = ccp(field.size.width / 2, weather.posVar.y);
+                weather.position        = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
                 [panningLayer addChild:weather z:-3 /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:ccp(self.contentSize.width / 2,
                                                                                                        self.contentSize.height / 2)*/];
 
@@ -539,8 +540,8 @@
     else {
         // System is alive, let the emission rate evolve.
         float rate = [weather emissionRate] + (random() % 40 - 15) / 10.0f;
-        float max = [weather isKindOfClass:[CCParticleRain class]]? 100: 50;
-        rate = fminf(fmaxf(0, rate), max);
+        float max = [weather isKindOfClass:[CCParticleRain class]]? 200: 100;
+        rate = max; // fminf(fmaxf(0, rate), max);
         
         if(random() % 100 == 0)
             // 1% chance for a full stop.

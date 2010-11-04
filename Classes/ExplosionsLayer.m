@@ -114,6 +114,7 @@ static CCParticleSystem **flameTypes = nil;
     CCParticleSystem *explosion = [[CCParticleSun alloc] initWithTotalParticles:explosionParticles];
     [[GorillasAppDelegate get].gameLayer.windLayer registerSystem:explosion affectAngle:NO];
     
+    explosion.positionType      = kCCPositionTypeGrouped;
     explosion.position          = CGPointZero;
     explosion.centerOfGravity   = pos;
     explosion.startSize         = (heavy? 20: 15) * self.scale;

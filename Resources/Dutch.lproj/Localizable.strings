@@ -4,6 +4,7 @@
 "font.size.large"                       = "48";
 "font.family.default"                   = "Marker Felt";
 "font.family.fixed"                     = "American Typewriter";
+"font.family.symbolic"                  = "DejaVuSansMono";
 
 // Game Logic
 "config.direction"                      = "ltr";

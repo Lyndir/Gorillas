@@ -45,10 +45,12 @@
 
 -(BOOL) hitsHole: (CGPoint)pos {
     
-    for(NSUInteger h = 0; h < holeCount; ++h)
-        if(((holes[h].p.x - pos.x) * (holes[h].p.x - pos.x) +
-            (holes[h].p.y - pos.y) * (holes[h].p.y - pos.y) ) < powf(texture.pixelsWide, 2) / 9)
+    CGFloat d = powf(texture.pixelsWide * 1 / 4, 2);
+    for(NSUInteger h = 0; h < holeCount; ++h) {
+        CGFloat x = holes[h].p.x - pos.x, y = holes[h].p.y - pos.y;
+        if ((powf(x, 2) + powf(y, 2)) < d)
             return YES;
+    }
     
     return NO;
 }

@@ -132,7 +132,6 @@
     return [NSString stringWithFormat:@"%@-%@.png", modelName, typeName];
 }
 
-
 -(void) dealloc {
     
     [banana release];

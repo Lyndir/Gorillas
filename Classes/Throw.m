@@ -62,6 +62,7 @@
     recap = 0;
     
     smoke = [[CCParticleMeteor alloc] init];
+    smoke.positionType = kCCPositionTypeGrouped;
     [smoke setGravity:CGPointZero];
     [smoke setPosition:CGPointZero];
     [smoke setSpeed:5];
@@ -103,7 +104,6 @@
                                       times:(int)self.duration + 1] retain]];
     [self.target setVisible:YES];
     [self.target setTag:GorillasTagBananaFlying];
-    
     
     [[[[GorillasAppDelegate get] gameLayer] windLayer] registerSystem:smoke affectAngle:NO];
     
@@ -227,6 +227,7 @@
 
     [self.target setPosition:r];
     if([[GorillasConfig get].visualFx boolValue]) {
+        dbg(@"r: %@", NSStringFromCGPoint(r));
         smoke.angle             = atan2f(smoke.centerOfGravity.y - r.y,
                                          smoke.centerOfGravity.x - r.x)
                                 / (float)M_PI * 180.0f;
