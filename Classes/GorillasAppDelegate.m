@@ -88,7 +88,7 @@
         @catch (NSException * e) {
             NSLog(@"=== Exception Occurred! ===");
             NSLog(@"Name: %@; Reason: %@; Context: %@.\n", [e name], [e reason], [e userInfo]);
-            [hudLayer message:[e reason] duration:5 isImportant:YES];
+            [self.hudLayer message:[e reason] duration:5 isImportant:YES];
         }
 #endif
     } while ([[CCDirector sharedDirector] runningScene]);

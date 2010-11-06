@@ -22,11 +22,11 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "ShadeLayer.h"
 #import "Resettable.h"
+#import "ConfigMenuLayer.h"
 
 
-@interface GameConfigurationLayer : ShadeLayer <Resettable> {
+@interface GameConfigurationLayer : ConfigMenuLayer <Resettable, MenuDelegate, ConfigMenuDelegate> {
     
 @private
     CCMenuItemToggle          *themeI, *levelI, *replayI, *followI;

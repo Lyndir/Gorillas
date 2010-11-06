@@ -1,10 +1,10 @@
 // Fonts
-"font.size.small"                       = "18";
-"font.size.normal"                      = "34";
+"font.size.small"                       = "12";
+"font.size.normal"                      = "32";
 "font.size.large"                       = "48";
-"font.family.default"                   = "Marker Felt";
-"font.family.fixed"                     = "American Typewriter";
-"font.family.symbolic"                  = "DejaVuSansMono";
+"font.family.default"                   = "MammaGamma";
+"font.family.fixed"                     = "Absolute";
+"font.family.symbolic"                  = "Apple Symbols";
 
 // Game Logic
 "config.direction"                      = "ltr";
@@ -121,3 +121,58 @@
 "time.day.suffix.two"                   = "nd";
 "time.day.suffix.three"                 = "rd";
 
+// Fonts
+"font.size.small"                           = "18";
+"font.size.normal"                          = "34";
+"font.size.large"                           = "48";
+"font.family.default"                       = "Marker Felt";
+"font.family.fixed"                         = "American Typewriter";
+"font.family.symbolic"                      = "DejaVuSansMono";
+
+// Numbers
+"time.day.suffix"                           = "th";
+"time.day.suffix.one"                       = "st";
+"time.day.suffix.two"                       = "nd";
+"time.day.suffix.three"                     = "rd";
+
+/* Strings that are the same everywhere. */
+"global.button.okay"                        = "Okay";
+"global.button.next"                        = "Next";
+"global.button.done"                        = "Done";
+"global.button.back"                        = "Back";
+"global.button.retry"                       = "Retry";
+"global.button.abort"                       = "Abort";
+"global.button.upgrade"                     = "Upgrade";
+"global.notice"                             = "Notice";
+"global.error"                              = "Error";
+
+/* Strings that describe error conditions. */
+"error.connection"                          = "Could not connect to the server.";
+"error.response.invalid"                    = "Incompatible server response.";
+"error.response.clientOutdated.required"    = "A new version is available.\nPlease upgrade before proceding.";
+"error.response.clientOutdated.optional"    = "A new version is available.";
+
+// Global Config
+"config.direction"                          = "ltr";
+
+// Menu Items
+"menu.config"                               = "Configuration";
+"menu.config.music"                         = "Music";
+"menu.config.off"                           = "Off";
+"menu.config.on"                            = "On";
+"menu.config.song.sequential"               = "Sequential";
+"menu.config.song.random"                   = "Shuffle";
+"menu.config.song.off"                      = "Off";
+"menu.config.sound"                         = "Sound Effects";
+"menu.config.wifi"                          = "Only over WiFi";
+"menu.config.wifi+carrier"                  = "Over WiFi or Carrier";
+"menu.continue"                             = "Continue Game";
+"menu.game.end"                             = "End Game";
+"menu.game.new"                             = "New Game";
+"menu.level.restart"                        = "Restart Level";
+"menu.level.retry"                          = "Retry Level";
+"menu.main"                                 = "Main Menu";
+
+// Game Messages
+"message.paused"                            = "Paused";
+"message.unpaused"                          = "Resuming";

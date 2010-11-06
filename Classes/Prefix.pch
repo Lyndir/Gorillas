@@ -123,6 +123,12 @@ typedef enum {
 
 
 /**
+ * Cocos2D Configuration
+ */
+#define CC_FONT_LABEL_SUPPORT   1
+
+
+/**
  * Global Dependencies.
  */
 #ifdef __OBJC__

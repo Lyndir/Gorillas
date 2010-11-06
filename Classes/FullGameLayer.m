@@ -53,8 +53,8 @@
     }
     
     CCLabelTTF *pageLabel = [[CCLabelTTF alloc] initWithString:fullGameData
-                                          dimensions:CGSizeMake(self.contentSize.width - self.padding.left - self.padding.right,
-                                                                self.contentSize.height - self.padding.top - self.padding.bottom)
+                                          dimensions:CGSizeMake(self.contentSize.width - self.padding.left,
+                                                                self.contentSize.height - self.padding.top)
                                            alignment:alignment
                                             fontName:[GorillasConfig get].fixedFontName
                                             fontSize:[[GorillasConfig get].smallFontSize intValue]];
@@ -64,17 +64,6 @@
     [pageLabel release];
 
     // Back.
-    [CCMenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
-    CCMenuItem *back = [CCMenuItemFont itemFromString:@"   <   "
-                                               target:self
-                                             selector:@selector(back:)];
-    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    
-    CCMenu *backMenu = [CCMenu menuWithItems:back, nil];
-    [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
-    [backMenu alignItemsHorizontally];
-    [self addChild:backMenu];
-
     [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     CCMenuItem *upgrade = [CCMenuItemFont itemFromString:@"Upgrade"
                                                target:self

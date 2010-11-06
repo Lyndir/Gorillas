@@ -37,27 +37,6 @@
 @implementation StatisticsLayer
 
 
--(id) init {
-    
-    if(!(self = [super init]))
-        return self;
-    
-    // Back.
-    [CCMenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
-    CCMenuItem *back     = [CCMenuItemFont itemFromString:@"   <   "
-                                               target: self
-                                             selector: @selector(back:)];
-    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    
-    CCMenu *menu = [CCMenu menuWithItems:back, nil];
-    [menu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
-    [menu alignItemsHorizontally];
-    [self addChild:menu];
-    
-    return self;
-}
-
-
 -(void) onEnter {
     
     [self reset];

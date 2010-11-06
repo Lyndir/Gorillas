@@ -40,21 +40,14 @@
 
 -(id) init {
 
-    if(!(self = [super init]))
+    if(!(self = [super initWithDelegate:self logo:nil items:
+                 [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.continue.nextmatch", @"Continue")
+                                         target:self selector:@selector(continueGame:)],
+                 [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.stop", @"Main CCMenu")
+                                         target:self selector:@selector(stopGame:)],
+                 nil]))
         return self;
     
-    CCMenuItem *continueGame      = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.continue.nextmatch", @"Continue")
-                                                        target:self selector:@selector(continueGame:)];
-    CCMenuItem *stopGame          = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.stop", @"Main CCMenu")
-                                                        target:self selector:@selector(stopGame:)];
-    
-    CCMenu *menu                  = [CCMenu menuWithItems:
-                                   continueGame, [MenuItemSpacer spacerSmall],
-                                   stopGame,
-                                   nil];
-    [menu alignItemsVertically];
-    [self addChild:menu];
-
     return self;
 }
 

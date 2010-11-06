@@ -78,17 +78,6 @@
     
     
     // Controls.
-    [CCMenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
-    CCMenuItem *back     = [CCMenuItemFont itemFromString:@"   <   "
-                                               target: self
-                                             selector: @selector(back:)];
-    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    
-    CCMenu *backMenu = [CCMenu menuWithItems:back, nil];
-    [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
-    [backMenu alignItemsHorizontally];
-    [self addChild:backMenu];
-    
     [CCMenuItemFont setFontSize:15];
     chapterNext = [[CCMenuItemFont itemFromString:@"                              " target:self selector:@selector(next:)] retain];
     chapterSkip = [[CCMenuItemFont itemFromString:@"                              " target:self selector:@selector(skip:)] retain];
@@ -98,12 +87,12 @@
 
     CCMenu *chapterMenu = [CCMenu menuWithItems:chapterCurr, chapterNext, chapterSkip, nil];
     [chapterMenu alignItemsHorizontally];
-    [chapterMenu setPosition:ccp([chapterMenu position].x, self.contentSize.height - self.padding.top - self.padding.bottom + 10)];
+    [chapterMenu setPosition:ccp([chapterMenu position].x, self.contentSize.height - self.padding.top + 10)];
     [self addChild:chapterMenu];
     [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
     CGPoint s = ccp(self.contentSize.width - self.padding.left - self.padding.right,
-                    self.contentSize.height - [[GorillasConfig get].fontSize intValue] - self.padding.top - self.padding.bottom);
+                    self.contentSize.height - [[GorillasConfig get].fontSize intValue] - self.padding.top);
     
     UITextAlignment alignment = UITextAlignmentLeft;
     if ([NSLocalizedString(@"config.direction", "ltr") isEqualToString:@"rtl"]) {

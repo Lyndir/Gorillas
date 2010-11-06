@@ -25,6 +25,7 @@
 #import "InformationLayer.h"
 #import "GorillasAppDelegate.h"
 #import "MenuItemSpacer.h"
+#import "MenuItemTitle.h"
 
 
 @interface InformationLayer ()
@@ -42,46 +43,22 @@
 
 -(id) init {
 
-    if(!(self = [super init]))
-        return self;
-
-    // Version string.
-    [CCMenuItemFont setFontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [CCMenuItemFont setFontName:[GorillasConfig get].fixedFontName];
-    CCMenuItem *ver   = [CCMenuItemFont itemFromString:[[NSBundle mainBundle]
-                                                    objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
-    [ver setIsEnabled:NO];
-    
-    // Information menus.
-    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    [CCMenuItemFont setFontName:[GorillasConfig get].fontName];
-    CCMenuItem *guide = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.guide", @"Game Guide")
-                                            target:self selector:@selector(guide:)];
-    CCMenuItem *stats = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.stats", @"Statistics")
-                                            target:self selector:@selector(stats:)];
     CCMenuItem *full  = nil;
 #ifdef LITE
     full = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.fullgame", @"Full Game")
-                                 target:self selector:@selector(full:)];
+                                   target:self selector:@selector(full:)];
 #endif
     
-    CCMenu *menu = [CCMenu menuWithItems:ver, guide, stats, [MenuItemSpacer spacerSmall], full, nil];
-    [menu alignItemsVertically];
-    [self addChild:menu];
-
-    
-    // Back.
-    [CCMenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
-    CCMenuItem *back     = [CCMenuItemFont itemFromString:@"   <   "
-                                               target: self
-                                             selector: @selector(back:)];
-    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    
-    CCMenu *backMenu = [CCMenu menuWithItems:back, nil];
-    [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
-    [backMenu alignItemsHorizontally];
-    [self addChild:backMenu];
-
+    if(!(self = [super initWithDelegate:self logo:nil items:
+                 [MenuItemTitle itemFromString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]],
+                 [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.guide", @"Game Guide")
+                                         target:self selector:@selector(guide:)],
+                 [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.stats", @"Statistics")
+                                         target:self selector:@selector(stats:)],
+                 [MenuItemSpacer spacerSmall],
+                 full,
+                 nil]))
+        return self;
     
     return self;
 }

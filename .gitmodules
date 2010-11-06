@@ -1,6 +1,3 @@
 [submodule "External/iLibs"]
 	path = External/iLibs
-	url = git@github.com:Lamentum/iLibs.git
-[submodule "External/cocos2d-iphone"]
-	path = External/cocos2d-iphone
-	url = git://github.com/cocos2d/cocos2d-iphone.git
+	url = git://github.com/Lamentum/iLibs.git

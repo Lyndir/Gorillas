@@ -574,7 +574,7 @@
     
     int score = [[GorillasConfig get].level floatValue] * [[GorillasConfig get].missScore intValue];
     
-    [[GorillasConfig get] recordScore:[[GorillasConfig get].score floatValue] + score];
+    [[GorillasConfig get] recorcScore:[[GorillasConfig get].score floatValue] + score];
     [[[GorillasAppDelegate get] hudLayer] updateHudWithNewScore:score skill:0 wasGood:YES];
 
     if(score)

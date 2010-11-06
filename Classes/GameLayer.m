@@ -282,14 +282,14 @@
         if([self isEnabled:GorillasFeatureLevel]) {
             score *= [[GorillasConfig get].level floatValue];
             
-            NSString *oldLevel = [GorillasConfig get].levelName;
+            NSString *olcLevel = [GorillasConfig get].levelName;
             if(score > 0)
                 [[GorillasConfig get] levelUp];
             else
                 [[GorillasConfig get] levelDown];
             
             // Message in case we level up.
-            if(![oldLevel isEqualToString:[GorillasConfig get].levelName]) {
+            if(![olcLevel isEqualToString:[GorillasConfig get].levelName]) {
                 if(score > 0) {
                     [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.level.up", @"Level Up!")];
                     if ([[GorillasConfig get].voice boolValue])
@@ -304,7 +304,7 @@
         
         // Update score.
         if([self isEnabled:GorillasFeatureScore] && score) {
-            [[GorillasConfig get] recordScore:[[GorillasConfig get].score intValue] + score];
+            [[GorillasConfig get] recorcScore:[[GorillasConfig get].score intValue] + score];
             
             [[[GorillasAppDelegate get] hudLayer] updateHudWithNewScore:score skill:0 wasGood:YES];
             [cityLayer message:[NSString stringWithFormat:@"%+d", score] on:cityLayer.hitGorilla];
@@ -366,7 +366,7 @@
         if (considderMiss) {
             int score = [[GorillasConfig get].level floatValue] * [[GorillasConfig get].missScore intValue];
             
-            [[GorillasConfig get] recordScore:[[GorillasConfig get].score intValue] + score];
+            [[GorillasConfig get] recorcScore:[[GorillasConfig get].score intValue] + score];
             [[GorillasAppDelegate get].hudLayer updateHudWithNewScore:score skill:0 wasGood:YES];
             
             if(score)

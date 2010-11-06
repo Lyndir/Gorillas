@@ -58,17 +58,6 @@
     
     
     // Controls.
-    [CCMenuItemFont setFontSize:[[GorillasConfig get].largeFontSize intValue]];
-    CCMenuItem *back     = [CCMenuItemFont itemFromString:@"   <   "
-                                               target: self
-                                             selector: @selector(back:)];
-    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
-    
-    CCMenu *backMenu = [CCMenu menuWithItems:back, nil];
-    [backMenu setPosition:ccp([[GorillasConfig get].fontSize intValue], [[GorillasConfig get].fontSize intValue])];
-    [backMenu alignItemsHorizontally];
-    [self addChild:backMenu];
-    
     [CCMenuItemFont setFontSize:15];
     modelNext = [[CCMenuItemFont itemFromString:@"                              "
                                        target:self selector:@selector(next:)] retain];
@@ -77,7 +66,7 @@
     [modelCurr setIsEnabled:NO];
     CCMenu *modelMenu = [CCMenu menuWithItems:modelCurr, modelNext, nil];
     [modelMenu alignItemsHorizontally];
-    [modelMenu setPosition:ccp(modelMenu.position.x, self.contentSize.height - self.padding.top - self.padding.bottom + 10)];
+    [modelMenu setPosition:ccp(modelMenu.position.x, self.contentSize.height - self.padding.top + 10)];
     [self addChild:modelMenu];
     [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     

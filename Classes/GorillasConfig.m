@@ -25,50 +25,6 @@
 #import "CityTheme.h"
 #import "GorillasAppDelegate.h"
 
-#define dCityTheme                      NSStringFromSelector(@selector(cityTheme))
-#define dFixedFloors                    NSStringFromSelector(@selector(fixedFloors))
-#define dBuildingMax                    NSStringFromSelector(@selector(buildingMax))
-#define dBuildingAmount                 NSStringFromSelector(@selector(buildingAmount))
-#define dBuildingSpeed                  NSStringFromSelector(@selector(buildingSpeed))
-#define dBuildingColorCount             NSStringFromSelector(@selector(buildingColorCount))
-#define dBuildingColors                 NSStringFromSelector(@selector(buildingColors))
-
-#define dWindowAmount                   NSStringFromSelector(@selector(windowAmount))
-#define dWindowColorOn                  NSStringFromSelector(@selector(windowColorOn))
-#define dWindowColorOff                 NSStringFromSelector(@selector(windowColorOff))
-
-#define dSkyColor                       NSStringFromSelector(@selector(skyColor))
-#define dStarColor                      NSStringFromSelector(@selector(starColor))
-#define dStarSpeed                      NSStringFromSelector(@selector(starSpeed))
-#define dStarAmount                     NSStringFromSelector(@selector(starAmount))
-
-#define dLives                          NSStringFromSelector(@selector(lives))
-#define dWindModifier                   NSStringFromSelector(@selector(windModifier))
-#define dGravity                        NSStringFromSelector(@selector(gravity))
-#define dMinGravity                     NSStringFromSelector(@selector(minGravity))
-#define dMaxGravity                     NSStringFromSelector(@selector(maxGravity))
-
-#define dGameScrollDuration             NSStringFromSelector(@selector(gameScrollDuration))
-
-#define dActiveGameConfigurationIndex   NSStringFromSelector(@selector(activeGameConfigurationIndex))
-#define dMode                           NSStringFromSelector(@selector(mode))
-#define dMissScore                      NSStringFromSelector(@selector(missScore))
-#define dKillScore                      NSStringFromSelector(@selector(killScore))
-#define dBonusOneShot                   NSStringFromSelector(@selector(bonusOneShot))
-#define dBonusSkill                     NSStringFromSelector(@selector(bonusSkill))
-#define dDeathScoreRatio                NSStringFromSelector(@selector(deathScoreRatio))
-
-#define dReplay                         NSStringFromSelector(@selector(replay))
-#define dFollowThrow                    NSStringFromSelector(@selector(followThrow))
-
-#define dPlayerModel                    NSStringFromSelector(@selector(playerModel))
-#define dScore                          NSStringFromSelector(@selector(score))
-#define dSkill                          NSStringFromSelector(@selector(skill))
-#define dTopScoreHistory                NSStringFromSelector(@selector(topScoreHistory))
-#define dLevel                          NSStringFromSelector(@selector(level))
-#define dLevelNames                     NSStringFromSelector(@selector(levelNames))
-#define dLevelProgress                  NSStringFromSelector(@selector(levelProgress))
-
 
 @implementation GorillasConfig
 
@@ -170,33 +126,33 @@
     
     [self.defaults
      registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-                       [CityTheme defaultThemeName],                               dCityTheme,
+                       [CityTheme defaultThemeName],                               cCityTheme,
      
-                       [NSNumber numberWithInteger:    [theme fixedFloors]],       dFixedFloors,
-                       [NSNumber numberWithFloat:      [theme buildingMax]],       dBuildingMax,
-                       [NSNumber numberWithInteger:    [theme buildingAmount]],    dBuildingAmount,
-                       [NSNumber numberWithInteger:    1],                         dBuildingSpeed,
-                       [theme buildingColors],                                     dBuildingColors,
+                       [NSNumber numberWithInteger:    [theme fixedFloors]],       cFixedFloors,
+                       [NSNumber numberWithFloat:      [theme buildingMax]],       cBuildingMax,
+                       [NSNumber numberWithInteger:    [theme buildingAmount]],    cBuildingAmount,
+                       [NSNumber numberWithInteger:    1],                         cBuildingSpeed,
+                       [theme buildingColors],                                     cBuildingColors,
      
-                       [NSNumber numberWithInteger:    [theme windowAmount]],      dWindowAmount,
-                       [NSNumber numberWithLong:       [theme windowColorOn]],     dWindowColorOn,
-                       [NSNumber numberWithLong:       [theme windowColorOff]],    dWindowColorOff,
+                       [NSNumber numberWithInteger:    [theme windowAmount]],      cWindowAmount,
+                       [NSNumber numberWithLong:       [theme windowColorOn]],     cWindowColorOn,
+                       [NSNumber numberWithLong:       [theme windowColorOff]],    cWindowColorOff,
      
-                       [NSNumber numberWithLong:       [theme skyColor]],          dSkyColor,
-                       [NSNumber numberWithLong:       [theme starColor]],         dStarColor,
-                       [NSNumber numberWithInteger:    10],                        dStarSpeed,
-                       [NSNumber numberWithInteger:    [theme starAmount]],        dStarAmount,
+                       [NSNumber numberWithLong:       [theme skyColor]],          cSkyColor,
+                       [NSNumber numberWithLong:       [theme starColor]],         cStarColor,
+                       [NSNumber numberWithInteger:    10],                        cStarSpeed,
+                       [NSNumber numberWithInteger:    [theme starAmount]],        cStarAmount,
                        
-                       [NSNumber numberWithInteger:    3],                         dLives,
-                       [NSNumber numberWithFloat:      [theme windModifier]],      dWindModifier,
-                       [NSNumber numberWithInteger:    [theme gravity]],           dGravity,
-                       [NSNumber numberWithInteger:    30],                        dMinGravity,
-                       [NSNumber numberWithInteger:    150],                       dMaxGravity,
+                       [NSNumber numberWithInteger:    3],                         cLives,
+                       [NSNumber numberWithFloat:      [theme windModifier]],      cWindModifier,
+                       [NSNumber numberWithInteger:    [theme gravity]],           cGravity,
+                       [NSNumber numberWithInteger:    30],                        cMinGravity,
+                       [NSNumber numberWithInteger:    150],                       cMaxGravity,
                        
-                       [NSNumber numberWithFloat:      0.5f],                      dGameScrollDuration,
+                       [NSNumber numberWithFloat:      0.5f],                      cGameScrollDuration,
                        
-                       [NSNumber numberWithBool:       YES],                       dReplay,
-                       [NSNumber numberWithBool:       YES],                       dFollowThrow,
+                       [NSNumber numberWithBool:       YES],                       cReplay,
+                       [NSNumber numberWithBool:       YES],                       cFollowThrow,
                        
                        [NSArray arrayWithObjects:
                         @"Fighting_Gorillas.mp3",
@@ -219,21 +175,21 @@
                         l(@"menu.config.song.off"),
                         nil],                                                      cTrackNames,
                        
-                       [NSNumber numberWithInteger:    1],                         dActiveGameConfigurationIndex,
-                       [NSNumber numberWithUnsignedInt:GorillasModeBootCamp],      dMode,
-                       [NSNumber numberWithInteger:    -5],                        dMissScore,
-                       [NSNumber numberWithInteger:    50],                        dKillScore,
-                       [NSNumber numberWithFloat:      2],                         dBonusOneShot,
-                       [NSNumber numberWithFloat:      50],                        dBonusSkill,
-                       [NSNumber numberWithInteger:    5],                         dDeathScoreRatio,
+                       [NSNumber numberWithInteger:    1],                         cActiveGameConfigurationIndex,
+                       [NSNumber numberWithUnsignedInt:GorillasModeBootCamp],      cMode,
+                       [NSNumber numberWithInteger:    -5],                        cMissScore,
+                       [NSNumber numberWithInteger:    50],                        cKillScore,
+                       [NSNumber numberWithFloat:      2],                         cBonusOneShot,
+                       [NSNumber numberWithFloat:      50],                        cBonusSkill,
+                       [NSNumber numberWithInteger:    5],                         cDeathScoreRatio,
                        
-                       [NSNumber numberWithUnsignedInt:GorillasPlayerModelGorilla],dPlayerModel,
-                       [NSNumber numberWithInteger:    0],                         dScore,
-                       [NSNumber numberWithInteger:    0],                         dSkill,
-                       [NSDictionary dictionary],                                  dTopScoreHistory,
-                       [NSNumber numberWithFloat:      0.3f],                      dLevel,
-                       levelNames,                                                 dLevelNames,
-                       [NSNumber numberWithFloat:      0.03f],                     dLevelProgress,
+                       [NSNumber numberWithUnsignedInt:GorillasPlayerModelGorilla],cPlayerModel,
+                       [NSNumber numberWithInteger:    0],                         cScore,
+                       [NSNumber numberWithInteger:    0],                         cSkill,
+                       [NSDictionary dictionary],                                  cTopScoreHistory,
+                       [NSNumber numberWithFloat:      0.3f],                      cLevel,
+                       levelNames,                                                 cLevelNames,
+                       [NSNumber numberWithFloat:      0.03f],                     cLevelProgress,
                        
                        nil]];
     
@@ -243,24 +199,24 @@
                        cFontSize,
                        cFontName,
                        cFixedFontName,
-                       dCityTheme,
-                       dGravity,
+                       cCityTheme,
+                       cGravity,
                        cSoundFx,
                        cVoice,
                        cVibration,
                        cVisualFx,
-                       dReplay,
-                       dFollowThrow,
+                       cReplay,
+                       cFollowThrow,
                        cTracks,
                        cTrackNames,
                        cCurrentTrack,
-                       dLevel,
-                       dLevelNames,
+                       cLevel,
+                       cLevelNames,
                        nil
                        ];
     [self.resetTriggers setObject:@"gameLayer.skyLayer" forKey:cVisualFx];
-    [self.resetTriggers setObject:@"newGameLayer" forKey:dActiveGameConfigurationIndex];
-    [self.resetTriggers setObject:@"customGameLayer" forKey:dMode];
+    [self.resetTriggers setObject:@"newGameLayer" forKey:cActiveGameConfigurationIndex];
+    [self.resetTriggers setObject:@"customGameLayer" forKey:cMode];
     
     /*[self setTopScoreHistory:[NSDictionary dictionaryWithObjectsAndKeys:
                               [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
@@ -380,7 +336,7 @@
 
 #pragma mark User Status
 
--(void) recordScore:(NSInteger)score {
+-(void) recorcScore:(NSInteger)score {
     
     if(score < 0)
         score = 0;

@@ -146,9 +146,9 @@
     [soundFxI setSelectedIndex:[[GorillasConfig get].soundFx boolValue]? 1: 0];
     [voiceI setSelectedIndex:[[GorillasConfig get].voice boolValue]? 1: 0];
     [visualFxI setSelectedIndex:[[GorillasConfig get].visualFx boolValue]? 1: 0];
-    [vibrationI setSelectedIndex:([[GorillasConfig get].vibration boolValue] && IsIPhone())? 1: 0];
+    [vibrationI setSelectedIndex:([[GorillasConfig get].vibration boolValue] && [DeviceUtils isIPhone])? 1: 0];
 
-    vibrationI.isEnabled = IsIPhone();
+    vibrationI.isEnabled = [DeviceUtils isIPhone];
 }
 
 
