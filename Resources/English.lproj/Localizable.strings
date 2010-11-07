@@ -1,178 +1,151 @@
-// Fonts
-"font.size.small"                       = "12";
-"font.size.normal"                      = "32";
-"font.size.large"                       = "48";
-"font.family.default"                   = "MammaGamma";
-"font.family.fixed"                     = "Absolute";
-"font.family.symbolic"                  = "Apple Symbols";
-
-// Game Logic
-"config.direction"                      = "ltr";
-"config.gametype.bootcamp"              = "Boot Camp";
-"config.gametype.bootcamp.desc"         = "Practice your aim with some helpful hints.";
-"config.gametype.classic"               = "Classic Game";
-"config.gametype.classic.desc"          = "Quick and simple one-on-one battle.";
-"config.gametype.dynamic"               = "Dynamic Game";
-"config.gametype.dynamic.desc"          = "One-on-one battle with adapting skill and difficulty.";
-"config.gametype.lms"                   = "Last Man Standing";
-"config.gametype.lms.desc"              = "Gorillas have lives; be the last left standing!";
-"config.gametype.team"                  = "Team Battle";
-"config.gametype.team.desc"             = "Face the AIs with a little help from your friends.";
-"config.level.one"                      = "Junior";
-"config.level.two"                      = "Trainee";
-"config.level.three"                    = "Adept";
-"config.level.four"                     = "Skilled";
-"config.level.five"                     = "Masterful";
-"config.level.six"                      = "Sniper";
-"config.level.seven"                    = "Deadly";
-"config.level.eight"                    = "Impossible";
-"config.message.off.1"                  = "Way out.";
-"config.message.off.2"                  = "Just a little too far.";
-"config.message.hit.1"                  = "%2$@ ate %1$@'s banana.";
-"config.message.hit.2"                  = "%2$@ didn't dodge %1$@'s banana.";
-"config.message.hit.3"                  = "%1$@ buried %2$@.";
-"config.message.hit.4"                  = "%1$@ incinerated %2$@.";
-"config.song.fighting_gorillas"         = "Fighting Gorillas";
-"config.song.flow_square"               = "Flow Square";
-"config.song.happy_fun_ball"            = "Happy Fun Ball";
-"config.song.man_or_machine"            = "Man Or Machine";
-"config.song.rc_car"                    = "RC Car";
-"config.song.random"                    = "Shuffle";
-"config.song.off"                       = "Off";
-
-// Menu Entries
-"entries.ai.count.0"                    = "None";
-"entries.ai.count.1"                    = "1 AI";
-"entries.ai.count.2"                    = "2 AIs";
-"entries.ai.count.3+"                   = "%d AIs";
-"entries.av"                            = "Audio / Video";
-"entries.choose.custom"                 = "Custom Game...";
-"entries.choose.follow"                 = "Follow Throw";
-"entries.choose.fx.sound"               = "Sound Effects";
-"entries.choose.fx.voice"               = "Voice Effects";
-"entries.choose.fx.vibration"           = "Vibration";
-"entries.choose.fx.visual"              = "Visual Effects";
-"entries.choose.fx.weather"             = "Weather";
-"entries.choose.gravity"                = "Gravity";
-"entries.choose.level"                  = "Level";
-"entries.choose.mode"                   = "Game Mode";
-"entries.choose.replays"                = "Replays";
-"entries.choose.style"                  = "Choose a game style:";
-"entries.choose.theme"                  = "City Theme";
-"entries.choose.track"                  = "Audio Track";
-"entries.configuration"                 = "Configuration";
-"entries.continue.nextmatch"            = "Continue";
-"entries.continue.unpause"              = "Continue Game";
-"entries.end"                           = "End Game";
-"entries.fullgame"                      = "Full Game";
-"entries.gameplay"                      = "Gameplay";
-"entries.guide"                         = "Game Guide";
-"entries.information"                   = "Information";
-"entries.models"                        = "Models";
-"entries.new"                           = "New Game";
-"entries.off"                           = "Off";
-"entries.on"                            = "On";
-"entries.player.count.0"                = "None";
-"entries.player.count.1"                = "1 Player";
-"entries.player.count.2"                = "2 Players";
-"entries.player.count.3+"               = "%d Players";
-"entries.player.multi"                  = "Multi Player";
-"entries.player.single"                 = "Single Player";
-"entries.score.top"                     = "Top Score: %04d";
-"entries.select.ais"                    = "AIs";
-"entries.select.humans"                 = "Humans";
-"entries.start"                         = "Start!";
-"entries.stats"                         = "Statistics";
-"entries.stop"                          = "Main Menu";
-
-// Game Messages
-"message.killreplay"                    = "Kill Shot Replay";
-"message.nextplayer"                    = "Next player ..";
-"message.nextplayer.go"                 = "Go ..";
-"messages.level.up"                     = "Level Up!";
-"messages.level.down"                   = "Level Down";
-"messages.oneshot"                      = "Oneshot!";
-"messages.paused"                       = "Paused";
-"messages.tie"                          = "Tie!";
-"messages.unpaused"                     = "Unpaused";
-"messages.wins"                         = "%@ wins!";
-
-// Model Names
-"model.gorilla"                         = "Mean Gorilla";
-"model.bunny"                           = "Easter Bunny";
-"model.banana"                          = "Vengeful Banana";
-
-// Player Names
-"names.chip"                            = "Chip";
-"names.chip.n"                          = "Chip %d";
-"names.player"                          = "Player";
-"names.player.n"                        = "Player %d";
-
-// Theme Names
-"theme.aliengreen"                      = "Alien Retro";
-"theme.classic"                         = "Classic";
-"theme.classic.aliendark"               = "Alien Skies";
-"theme.classiclarge"                    = "Metropolis";
-"theme.warm"                            = "Summer";
-
-// Time Localization
-"time.day.suffix"                       = "th";
-"time.day.suffix.one"                   = "st";
-"time.day.suffix.two"                   = "nd";
-"time.day.suffix.three"                 = "rd";
-
-// Fonts
-"font.size.small"                           = "18";
-"font.size.normal"                          = "34";
-"font.size.large"                           = "48";
-"font.family.default"                       = "Marker Felt";
-"font.family.fixed"                         = "American Typewriter";
-"font.family.symbolic"                      = "DejaVuSansMono";
-
-// Numbers
-"time.day.suffix"                           = "th";
-"time.day.suffix.one"                       = "st";
-"time.day.suffix.two"                       = "nd";
-"time.day.suffix.three"                     = "rd";
-
 /* Strings that are the same everywhere. */
-"global.button.okay"                        = "Okay";
-"global.button.next"                        = "Next";
-"global.button.done"                        = "Done";
-"global.button.back"                        = "Back";
-"global.button.retry"                       = "Retry";
-"global.button.abort"                       = "Abort";
-"global.button.upgrade"                     = "Upgrade";
-"global.notice"                             = "Notice";
-"global.error"                              = "Error";
-
 /* Strings that describe error conditions. */
-"error.connection"                          = "Could not connect to the server.";
-"error.response.invalid"                    = "Incompatible server response.";
-"error.response.clientOutdated.required"    = "A new version is available.\nPlease upgrade before proceding.";
-"error.response.clientOutdated.optional"    = "A new version is available.";
-
+// Fonts
+// Game Logic
+// Game Messages
 // Global Config
-"config.direction"                          = "ltr";
-
+// Menu Entries
 // Menu Items
+// Model Names
+// Numbers
+// Player Names
+// Theme Names
+// Time Localization
+
+"error.connection"                          = "Could not connect to the server.";
+"error.response.clientOutdated.optional"    = "A new version is available.";
+"error.response.clientOutdated.required"    = "A new version is available.\nPlease upgrade before proceding.";
+"error.response.invalid"                    = "Incompatible server response.";
+"font.family.default"                       = "MammaGamma";
+"font.family.fixed"                         = "Absolute";
+"font.family.symbolic"                      = "Apple Symbols";
+"font.size.large"                           = "48";
+"font.size.normal"                          = "32";
+"font.size.small"                           = "16";
+"global.button.abort"                       = "Abort";
+"global.button.back"                        = "Back";
+"global.button.done"                        = "Done";
+"global.button.next"                        = "Next";
+"global.button.okay"                        = "Okay";
+"global.button.retry"                       = "Retry";
+"global.button.upgrade"                     = "Upgrade";
+"global.error"                              = "Error";
+"global.notice"                             = "Notice";
+"menu.ai.count.0"                           = "None";
+"menu.ai.count.1"                           = "1 AI";
+"menu.ai.count.2"                           = "2 AIs";
+"menu.ai.count.3+"                          = "%d AIs";
+"menu.av"                                   = "Audio / Video";
+"menu.choose.custom"                        = "Custom Game...";
+"menu.choose.follow"                        = "Follow Throw";
+"menu.choose.fx.music"                      = "Music";
+"menu.choose.fx.sound"                      = "Sound Effects";
+"menu.choose.fx.vibration"                  = "Vibration";
+"menu.choose.fx.visual"                     = "Visual Effects";
+"menu.choose.fx.voice"                      = "Voice Effects";
+"menu.choose.fx.weather"                    = "Weather";
+"menu.choose.gravity"                       = "Gravity";
+"menu.choose.level"                         = "Level";
+"menu.choose.mode"                          = "Game Mode";
+"menu.choose.replays"                       = "Replays";
+"menu.choose.style"                         = "Choose a game style:";
+"menu.choose.theme"                         = "City Theme";
+"menu.choose.track"                         = "Audio Track";
 "menu.config"                               = "Configuration";
-"menu.config.music"                         = "Music";
+"menu.config.direction"                     = "ltr";
+"menu.config.gametype.bootcamp"             = "Boot Camp";
+"menu.config.gametype.bootcamp.desc"        = "Practice your aim with some helpful hints.";
+"menu.config.gametype.classic"              = "Classic Game";
+"menu.config.gametype.classic.desc"         = "Quick and simple one-on-one battle.";
+"menu.config.gametype.dynamic"              = "Dynamic Game";
+"menu.config.gametype.dynamic.desc"         = "One-on-one battle with adapting skill and difficulty.";
+"menu.config.gametype.lms"                  = "Last Man Standing";
+"menu.config.gametype.lms.desc"             = "Gorillas have lives; be the last left standing!";
+"menu.config.gametype.team"                 = "Team Battle";
+"menu.config.gametype.team.desc"            = "Face the AIs with a little help from your friends.";
+"menu.config.level.eight"                   = "Impossible";
+"menu.config.level.five"                    = "Masterful";
+"menu.config.level.four"                    = "Skilled";
+"menu.config.level.one"                     = "Junior";
+"menu.config.level.seven"                   = "Deadly";
+"menu.config.level.six"                     = "Sniper";
+"menu.config.level.three"                   = "Adept";
+"menu.config.level.two"                     = "Trainee";
+"menu.config.message.hit.1"                 = "%2$@ ate %1$@'s banana.";
+"menu.config.message.hit.2"                 = "%2$@ didn't dodge %1$@'s banana.";
+"menu.config.message.hit.3"                 = "%1$@ buried %2$@.";
+"menu.config.message.hit.4"                 = "%1$@ incinerated %2$@.";
+"menu.config.message.off.1"                 = "Way out.";
+"menu.config.message.off.2"                 = "Just a little too far.";
 "menu.config.off"                           = "Off";
 "menu.config.on"                            = "On";
-"menu.config.song.sequential"               = "Sequential";
-"menu.config.song.random"                   = "Shuffle";
+"menu.config.song.fighting_gorillas"        = "Fighting Gorillas";
+"menu.config.song.flow_square"              = "Flow Square";
+"menu.config.song.happy_fun_ball"           = "Happy Fun Ball";
+"menu.config.song.man_or_machine"           = "Man Or Machine";
 "menu.config.song.off"                      = "Off";
-"menu.config.sound"                         = "Sound Effects";
+"menu.config.song.off"                      = "Off";
+"menu.config.song.random"                   = "Shuffle";
+"menu.config.song.random"                   = "Shuffle";
+"menu.config.song.rc_car"                   = "RC Car";
+"menu.config.song.sequential"               = "Sequential";
 "menu.config.wifi"                          = "Only over WiFi";
 "menu.config.wifi+carrier"                  = "Over WiFi or Carrier";
+"menu.configuration"                        = "Configuration";
 "menu.continue"                             = "Continue Game";
+"menu.continue.nextmatch"                   = "Continue";
+"menu.continue.unpause"                     = "Continue Game";
+"menu.end"                                  = "End Game";
+"menu.fullgame"                             = "Full Game";
 "menu.game.end"                             = "End Game";
 "menu.game.new"                             = "New Game";
+"menu.gameplay"                             = "Gameplay";
+"menu.guide"                                = "Game Guide";
+"menu.information"                          = "Information";
 "menu.level.restart"                        = "Restart Level";
 "menu.level.retry"                          = "Retry Level";
 "menu.main"                                 = "Main Menu";
-
-// Game Messages
+"menu.models"                               = "Models";
+"menu.new"                                  = "New Game";
+"menu.off"                                  = "Off";
+"menu.on"                                   = "On";
+"menu.player.count.0"                       = "None";
+"menu.player.count.1"                       = "1 Player";
+"menu.player.count.2"                       = "2 Players";
+"menu.player.count.3+"                      = "%d Players";
+"menu.player.multi"                         = "Multi Player";
+"menu.player.single"                        = "Single Player";
+"menu.score.top"                            = "Top Score: %04d";
+"menu.select.ais"                           = "AIs";
+"menu.select.humans"                        = "Humans";
+"menu.start"                                = "Start!";
+"menu.stats"                                = "Statistics";
+"menu.stop"                                 = "Main Menu";
+"message.killreplay"                        = "Kill Shot Replay";
+"message.nextplayer"                        = "Next player ..";
+"message.nextplayer.go"                     = "Go ..";
 "message.paused"                            = "Paused";
 "message.unpaused"                          = "Resuming";
+"messages.level.down"                       = "Level Down";
+"messages.level.up"                         = "Level Up!";
+"messages.oneshot"                          = "Oneshot!";
+"messages.paused"                           = "Paused";
+"messages.tie"                              = "Tie!";
+"messages.unpaused"                         = "Unpaused";
+"messages.wins"                             = "%@ wins!";
+"model.banana"                              = "Vengeful Banana";
+"model.bunny"                               = "Easter Bunny";
+"model.gorilla"                             = "Mean Gorilla";
+"names.chip"                                = "Chip";
+"names.chip.n"                              = "Chip %d";
+"names.player"                              = "Player";
+"names.player.n"                            = "Player %d";
+"theme.aliengreen"                          = "Alien Retro";
+"theme.classic"                             = "Classic";
+"theme.classic.aliendark"                   = "Alien Skies";
+"theme.classiclarge"                        = "Metropolis";
+"theme.warm"                                = "Summer";
+"time.day.suffix"                           = "th";
+"time.day.suffix.one"                       = "st";
+"time.day.suffix.three"                     = "rd";
+"time.day.suffix.two"                       = "nd";

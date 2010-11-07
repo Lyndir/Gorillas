@@ -48,7 +48,7 @@
                                                           error:nil];
 
     UITextAlignment alignment = UITextAlignmentLeft;
-    if ([NSLocalizedString(@"config.direction", "ltr") isEqualToString:@"rtl"]) {
+    if ([NSLocalizedString(@"menu.config.direction", "ltr") isEqualToString:@"rtl"]) {
         alignment = UITextAlignmentRight;
     }
     

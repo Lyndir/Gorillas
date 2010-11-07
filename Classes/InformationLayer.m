@@ -45,15 +45,15 @@
 
     CCMenuItem *full  = nil;
 #ifdef LITE
-    full = [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.fullgame", @"Full Game")
+    full = [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.fullgame", @"Full Game")
                                    target:self selector:@selector(full:)];
 #endif
     
     if(!(self = [super initWithDelegate:self logo:nil items:
                  [MenuItemTitle itemFromString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]],
-                 [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.guide", @"Game Guide")
+                 [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.guide", @"Game Guide")
                                          target:self selector:@selector(guide:)],
-                 [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.stats", @"Statistics")
+                 [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.stats", @"Statistics")
                                          target:self selector:@selector(stats:)],
                  [MenuItemSpacer spacerSmall],
                  full,

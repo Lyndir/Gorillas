@@ -44,17 +44,17 @@
 - (id) init {
     
     if (!(self = [super initWithDelegate:self logo:nil items:
-                  [MenuItemTitle itemFromString:l(@"entries.choose.style")],
+                  [MenuItemTitle itemFromString:l(@"menu.choose.style")],
                   configurationI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(gameConfiguration:)],
                   descriptionT      = [MenuItemTitle itemFromString:@"description"],
-                  singlePlayerI    = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.player.single", @"Single Player")
+                  singlePlayerI    = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"menu.player.single", @"Single Player")
                                                                      target:self
                                                                    selector:@selector(startSingle:)],
-                  multiPlayerI    = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"entries.player.multi", @"Multi Player")
+                  multiPlayerI    = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"menu.player.multi", @"Multi Player")
                                                                     target:self
                                                                   selector:@selector(startMulti:)],
                   [MenuItemSpacer spacerNormal],
-                  [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.choose.custom", @"Custom Game...")
+                  [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.choose.custom", @"Custom Game...")
                                                                    target:self
                                                                  selector:@selector(custom:)],
                   nil]))

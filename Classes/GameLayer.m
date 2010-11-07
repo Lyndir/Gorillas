@@ -196,7 +196,7 @@
     
     // When there are AIs in the game, show their difficulity.
     if (ais)
-        [[GorillasAppDelegate get].uiLayer message:[GorillasConfig get].levelName];
+        [[GorillasAppDelegate get].uiLayer message:[GorillasConfig nameForLevel:[GorillasConfig get].level]];
     
     // Reset the game field and start the game.
     //[buildingsLayer stopPanning];
@@ -282,14 +282,14 @@
         if([self isEnabled:GorillasFeatureLevel]) {
             score *= [[GorillasConfig get].level floatValue];
             
-            NSString *olcLevel = [GorillasConfig get].levelName;
+            NSString *oldLevel = [GorillasConfig nameForLevel:[GorillasConfig get].level];
             if(score > 0)
                 [[GorillasConfig get] levelUp];
             else
                 [[GorillasConfig get] levelDown];
             
             // Message in case we level up.
-            if(![olcLevel isEqualToString:[GorillasConfig get].levelName]) {
+            if(![oldLevel isEqualToString:[GorillasConfig nameForLevel:[GorillasConfig get].level]]) {
                 if(score > 0) {
                     [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.level.up", @"Level Up!")];
                     if ([[GorillasConfig get].voice boolValue])
@@ -304,7 +304,7 @@
         
         // Update score.
         if([self isEnabled:GorillasFeatureScore] && score) {
-            [[GorillasConfig get] recorcScore:[[GorillasConfig get].score intValue] + score];
+            [[GorillasConfig get] recordScore:[[GorillasConfig get].score intValue] + score];
             
             [[[GorillasAppDelegate get] hudLayer] updateHudWithNewScore:score skill:0 wasGood:YES];
             [cityLayer message:[NSString stringWithFormat:@"%+d", score] on:cityLayer.hitGorilla];
@@ -366,7 +366,7 @@
         if (considderMiss) {
             int score = [[GorillasConfig get].level floatValue] * [[GorillasConfig get].missScore intValue];
             
-            [[GorillasConfig get] recorcScore:[[GorillasConfig get].score intValue] + score];
+            [[GorillasConfig get] recordScore:[[GorillasConfig get].score intValue] + score];
             [[GorillasAppDelegate get].hudLayer updateHudWithNewScore:score skill:0 wasGood:YES];
             
             if(score)

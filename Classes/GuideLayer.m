@@ -95,7 +95,7 @@
                     self.contentSize.height - [[GorillasConfig get].fontSize intValue] - self.padding.top);
     
     UITextAlignment alignment = UITextAlignmentLeft;
-    if ([NSLocalizedString(@"config.direction", "ltr") isEqualToString:@"rtl"]) {
+    if ([NSLocalizedString(@"menu.config.direction", "ltr") isEqualToString:@"rtl"]) {
         alignment = UITextAlignmentRight;
     }
     

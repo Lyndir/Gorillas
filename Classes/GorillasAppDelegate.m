@@ -26,6 +26,7 @@
 #import "Splash.h"
 #import "Resettable.h"
 #import "DebugLayer.h"
+#import "CityTheme.h"
 #import "ccMacros.h"
 
 @interface CCDirector (Reveal)
@@ -104,11 +105,28 @@
 }
 
 
--(void) updateConfig {
+- (void)didUpdateConfigForKey:(SEL)configKey {
+    
+    [super didUpdateConfigForKey:configKey];
+    
+    if (configKey == @selector(cityTheme))
+        [[[CityTheme getThemes] objectForKey:[GorillasConfig get].cityTheme] apply];
+    if (configKey == @selector(fixedFloors)         ||
+        configKey == @selector(buildingMax)         ||
+        configKey == @selector(buildingAmount)      ||
+        configKey == @selector(buildingSpeed)       ||
+        configKey == @selector(buildingColors)      ||
+        configKey == @selector(windowAmount)        ||
+        configKey == @selector(windowColorOn)       ||
+        configKey == @selector(windowColorOff)      ||
+        configKey == @selector(skyColor)            ||
+        configKey == @selector(starColor)           ||
+        configKey == @selector(starSpeed)           ||
+        configKey == @selector(starAmount))
+        [gameLayer reset];
 
-    [configLayer reset];
-    [gameConfigLayer reset];
-    [avConfigLayer reset];
+    if (configKey == @selector(playerModel))
+        [gameLayer reset];
 }
 
 - (void)hudMenuPressed {

@@ -30,7 +30,6 @@
 #define cBuildingMax                    NSStringFromSelector(@selector(buildingMax))
 #define cBuildingAmount                 NSStringFromSelector(@selector(buildingAmount))
 #define cBuildingSpeed                  NSStringFromSelector(@selector(buildingSpeed))
-#define cBuildingColorCount             NSStringFromSelector(@selector(buildingColorCount))
 #define cBuildingColors                 NSStringFromSelector(@selector(buildingColors))
 
 #define cWindowAmount                   NSStringFromSelector(@selector(windowAmount))
@@ -113,7 +112,6 @@
 @property (nonatomic, readwrite, retain) NSNumber       *gameScrollDuration;
 
 @property (nonatomic, readwrite, retain) NSNumber       *level;
-@property (nonatomic, readonly) NSString                *levelName;
 @property (nonatomic, readwrite, retain) NSArray        *levelNames;
 @property (nonatomic, readwrite, retain) NSNumber       *levelProgress;
 
@@ -145,8 +143,9 @@
 -(void)                                                 levelUp;
 -(void)                                                 levelDown;
 
--(void)                                                 recorcScore:(NSInteger)score;
+-(void)                                                 recordScore:(NSInteger)score;
 
 +(GorillasConfig *)                                     get;
++ (NSString *)nameForLevel:(NSNumber *)aLevel;
 
 @end

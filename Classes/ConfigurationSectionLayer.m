@@ -41,11 +41,11 @@
 -(id) init {
     
     if (!(self = [super initWithDelegate:self logo:nil items:
-                  [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.gameplay", @"Gameplay")
+                  [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.gameplay", @"Gameplay")
                                           target:self selector:@selector(game:)],
-                  [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.av", @"Audio / Video")
+                  [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.av", @"Audio / Video")
                                           target:self selector:@selector(av:)],
-                  [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.models", @"Models")
+                  [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.models", @"Models")
                                           target:self selector:@selector(models:)],
                   nil]))
         return nil;

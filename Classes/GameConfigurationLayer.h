@@ -22,11 +22,10 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "Resettable.h"
 #import "ConfigMenuLayer.h"
 
 
-@interface GameConfigurationLayer : ConfigMenuLayer <Resettable, MenuDelegate, ConfigMenuDelegate> {
+@interface GameConfigurationLayer : ConfigMenuLayer <MenuDelegate, ConfigMenuDelegate> {
     
 @private
     CCMenuItemToggle          *themeI, *levelI, *replayI, *followI;

@@ -50,17 +50,17 @@
 -(id) init {
 
     if(!(self = [super initWithDelegate:self logo:nil items:
-                 self.newGame       = [CCMenuItemFont itemFromString:l(@"entries.new")
+                 self.newGame       = [CCMenuItemFont itemFromString:l(@"menu.new")
                                                               target:self selector:@selector(newGame:)],
-                 self.continueGame  = [CCMenuItemFont itemFromString:l(@"entries.continue.unpause")
+                 self.continueGame  = [CCMenuItemFont itemFromString:l(@"menu.continue.unpause")
                                                               target:self selector:@selector(continueGame:)],
-                 self.stopGame      = [CCMenuItemFont itemFromString:l(@"entries.end")
+                 self.stopGame      = [CCMenuItemFont itemFromString:l(@"menu.end")
                                                               target:self selector:@selector(stopGame:)],
                  [MenuItemSpacer spacerSmall],
-                 self.info          = [CCMenuItemFont itemFromString:l(@"entries.information")
+                 self.info          = [CCMenuItemFont itemFromString:l(@"menu.information")
                                                               target:self selector:@selector(information:)],
 #ifndef LITE
-                 self.config        = [CCMenuItemFont itemFromString:l(@"entries.configuration")
+                 self.config        = [CCMenuItemFont itemFromString:l(@"menu.configuration")
                                                               target:self selector:@selector(options:)],
 #endif
                  nil]))

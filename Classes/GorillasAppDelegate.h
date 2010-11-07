@@ -72,8 +72,6 @@
 @property (nonatomic, readonly, retain) FullGameLayer              *fullLayer;
 @property (nonatomic, readonly, retain) GHUDLayer                  *hudLayer;
 
--(void) updateConfig;
-
 -(void) showMainMenu;
 -(void) showNewGame;
 -(void) showCustomGame;

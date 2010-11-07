@@ -41,9 +41,9 @@
 -(id) init {
 
     if(!(self = [super initWithDelegate:self logo:nil items:
-                 [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.continue.nextmatch", @"Continue")
+                 [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.continue.nextmatch", @"Continue")
                                          target:self selector:@selector(continueGame:)],
-                 [CCMenuItemFont itemFromString:NSLocalizedString(@"entries.stop", @"Main CCMenu")
+                 [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.stop", @"Main CCMenu")
                                          target:self selector:@selector(stopGame:)],
                  nil]))
         return self;

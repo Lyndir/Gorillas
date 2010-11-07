@@ -28,30 +28,17 @@
 #import "StringUtils.h"
 
 
-@interface GameConfigurationLayer ()
-
-- (void)cityTheme:(id)sender;
-- (void)gravity:(id)sender;
-- (void)level:(id)sender;
-- (void)replay:(id)sender;
-- (void)followThrow:(id)sender;
-- (void)back:(id)selector;
-
-@end
-
-
-
 @implementation GameConfigurationLayer
 
 
 -(id) init {
     
     if (!(self = [super initWithDelegate:self logo:nil settings:
-                  @selector(cityTheme),
                   @selector(gravity),
                   @selector(level),
                   @selector(replay),
                   @selector(followThrow),
+                  @selector(cityTheme),
                   nil]))
         return self;
     
@@ -60,43 +47,18 @@
     return self;
 }
 
-
--(void) reset {
-    
-    NSUInteger theme = 0;
-    NSArray *cityThemes = [[CityTheme getThemes] allKeys];
-    if ([cityThemes containsObject:[GorillasConfig get].cityTheme])
-        theme = [cityThemes indexOfObject:[GorillasConfig get].cityTheme];
-    [themeI setSelectedIndex:theme];
-    gravityI.label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", [[GorillasConfig get].gravity unsignedIntValue]]
-                                        fontName:[GorillasConfig get].fontName fontSize:[[GorillasConfig get].fontSize intValue]];
-    [levelI setSelectedIndex:[[GorillasConfig get].levelNames indexOfObject:[GorillasConfig get].levelName]];
-    [replayI setSelectedIndex:[[GorillasConfig get].replay boolValue]? 1: 0];
-    [followI setSelectedIndex:[[GorillasConfig get].followThrow boolValue]? 1: 0];
-    
-    themeI.isEnabled = ![[GorillasAppDelegate get].gameLayer checkGameStillOn];
-}
-
-
--(void) onEnter {
-    
-    [self reset];
-    
-    [super onEnter];
-}
-
 - (NSString *)labelForSetting:(SEL)setting {
     
     if (setting == @selector(cityTheme))
-        return l(@"entries.choose.theme");
+        return l(@"menu.choose.theme");
     if (setting == @selector(gravity))
-        return l(@"entries.choose.gravity");
+        return l(@"menu.choose.gravity");
     if (setting == @selector(level))
-        return l(@"entries.choose.level");
+        return l(@"menu.choose.level");
     if (setting == @selector(replay))
-        return l(@"entries.choose.replays");
+        return l(@"menu.choose.replays");
     if (setting == @selector(followThrow))
-        return l(@"entries.choose.follow");
+        return l(@"menu.choose.follow");
     
     return nil;
 }
@@ -121,71 +83,23 @@
         return [[[CityTheme getThemes] allKeys] indexOfObject:value];
     if (setting == @selector(gravity))
         return (NSUInteger) (([value doubleValue] - [[GorillasConfig get].minGravity doubleValue]) / 10);
-    
-    return [value unsignedIntValue];
+    if (setting == @selector(level))
+        return [[GorillasConfig get].levelNames indexOfObject:[GorillasConfig nameForLevel:value]];
+
+    return NSUIntegerMax;
 }
 
--(void) level: (id) sender {
+- (id)valueForSetting:(SEL)setting index:(NSUInteger)index {
     
-    [[GorillasAudioController get] clickEffect];
+    if (setting == @selector(cityTheme))
+        return [[[CityTheme getThemes] allKeys] objectAtIndex:index];
+    if (setting == @selector(gravity))
+        return [NSNumber numberWithDouble:[[GorillasConfig get].minGravity doubleValue] + 10 * index];
+    if (setting == @selector(level))
+        return [NSNumber numberWithFloat:fminf(0.9f, fmaxf(0.1f, (float)index / [[GorillasConfig get].levelNames count]))];
     
-    NSUInteger curLevelInd = [[GorillasConfig get].levelNames indexOfObject:[GorillasConfig get].levelName];
-    float newLevel = (float)((curLevelInd + 1) % [[GorillasConfig get].levelNames count]) / [[GorillasConfig get].levelNames count];
-    [GorillasConfig get].level = [NSNumber numberWithFloat:fminf(0.9f, fmaxf(0.1f, newLevel))];
+    return nil;
 }
-
-
--(void) gravity: (id) sender {
-    
-    [[GorillasAudioController get] clickEffect];
-    NSUInteger minGravity = [[GorillasConfig get].minGravity unsignedIntValue];
-    NSUInteger maxGravity = [[GorillasConfig get].maxGravity unsignedIntValue];
-    NSUInteger newGravity = [[GorillasConfig get].gravity unsignedIntValue] + 10;
-    if (newGravity > maxGravity || newGravity < minGravity)
-        newGravity = minGravity;
-    
-    [GorillasConfig get].gravity = [NSNumber numberWithUnsignedInt:newGravity];
-}
-
-
--(void) cityTheme: (id) sender {
-    
-    [[GorillasAudioController get] clickEffect];
-    
-    NSArray *themes = [[CityTheme getThemes] allKeys];
-    NSString *newTheme = [themes objectAtIndex:0];
-    
-    BOOL found = NO;
-    for(NSString *theme in themes) {
-        if(found) {
-            newTheme = theme;
-            break;
-        }
-        
-        if([[GorillasConfig get].cityTheme isEqualToString:theme])
-            found = YES;
-    }
-    
-    [[[CityTheme getThemes] objectForKey:newTheme] apply];
-    [GorillasConfig get].cityTheme = newTheme;
-    
-    [[GorillasAppDelegate get].gameLayer reset];
-}
-
-
--(void) replay: (id) sender {
-    
-    [[GorillasAudioController get] clickEffect];
-    [GorillasConfig get].replay = [NSNumber numberWithBool:![[GorillasConfig get].replay boolValue]];
-}
-
-
--(void) followThrow: (id) sender {
-    
-    [[GorillasAudioController get] clickEffect];
-    [GorillasConfig get].followThrow = [NSNumber numberWithBool:![[GorillasConfig get].followThrow boolValue]];
-}
-
 
 -(void) back: (id) sender {
     

@@ -72,7 +72,7 @@
     free(tScores);
     
     // Top score label.
-    CCLabelTTF *topScoreLabel            = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"entries.score.top", @"Top Score: %04d"), topScore]
+    CCLabelTTF *topScoreLabel            = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"menu.score.top", @"Top Score: %04d"), topScore]
                                                          dimensions:CGSizeMake(200, [[GorillasConfig get].fontSize intValue])
                                                           alignment:UITextAlignmentCenter
                                                            fontName:[GorillasConfig get].fixedFontName
