@@ -341,7 +341,7 @@
     CGPoint relAim = ccpSub(aim, gorillaPosition);
     CGPoint worldAim = [self convertToWorldSpace:relAim];
 
-    aimSprite.position      = gorillaPosition;
+    aimSprite.position = gorillaPosition;
 
     [angleLabel setString:[NSString stringWithFormat:@"%0.0f", CC_RADIANS_TO_DEGREES(ccpToAngle(worldAim))]];
     [strengthLabel setString:[NSString stringWithFormat:@"%0.0f", ccpLength(worldAim)]];
@@ -358,8 +358,11 @@
 
 -(BOOL) mayThrow {
 
-    return ![bananaLayer throwing] && [[GorillasAppDelegate get].gameLayer.activeGorilla active] && [[GorillasAppDelegate get].gameLayer.activeGorilla alive] && [[GorillasAppDelegate get].gameLayer.activeGorilla human]
-            && ![GorillasAppDelegate get].gameLayer.paused;
+    return ![bananaLayer throwing] &&
+    [[GorillasAppDelegate get].gameLayer.activeGorilla active] &&
+    [[GorillasAppDelegate get].gameLayer.activeGorilla alive] &&
+    [[GorillasAppDelegate get].gameLayer.activeGorilla human] &&
+    ![GorillasAppDelegate get].gameLayer.paused;
 }
 
 
@@ -373,13 +376,13 @@
 -(void) nextGorilla {
     
     // Make sure the game hasn't ended.
-    if(![[GorillasAppDelegate get].gameLayer checkGameStillOn]) {
+    if (![[GorillasAppDelegate get].gameLayer checkGameStillOn]) {
         [[GorillasAppDelegate get].gameLayer endGame];
         return;
     }
 
     // Schedule to retry later if game is paused.
-    if([GorillasAppDelegate get].gameLayer.paused) {
+    if ([GorillasAppDelegate get].gameLayer.paused) {
         [self schedule:@selector(tryNextGorilla:) interval:0.1f];
         return;
     }
@@ -395,7 +398,7 @@
     // Look for the next live gorilla; first try the next gorilla AFTER the current.
     // If none there is alive, try the first one from the beginning UNTIL the current.
     BOOL foundNextGorilla = NO;
-    for(BOOL startFromAfterCurrent = YES; YES; startFromAfterCurrent = NO) {
+    for (BOOL startFromAfterCurrent = YES; YES; startFromAfterCurrent = NO) {
         BOOL reachedCurrent = NO;
         
         for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas) {
@@ -437,7 +440,7 @@
     }
     
     // Make sure the game hasn't ended.
-    if(![[GorillasAppDelegate get].gameLayer checkGameStillOn]) {
+    if (![[GorillasAppDelegate get].gameLayer checkGameStillOn]) {
         [[GorillasAppDelegate get].gameLayer endGame];
         return;
     }
@@ -446,13 +449,13 @@
     [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:YES];
 
     // AI throw.
-    if([GorillasAppDelegate get].gameLayer.activeGorilla.alive && ![GorillasAppDelegate get].gameLayer.activeGorilla.human) {
+    if ([GorillasAppDelegate get].gameLayer.activeGorilla.alive && ![GorillasAppDelegate get].gameLayer.activeGorilla.human) {
         // Active gorilla is a live AI.
         NSMutableArray *enemies = [[GorillasAppDelegate get].gameLayer.gorillas mutableCopy];
 
         // Exclude from enemy list: Dead gorillas, Self, AIs when in team mode.
-        for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas) {
-            if(![gorilla alive]
+        for (GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas) {
+            if (![gorilla alive]
                 || gorilla == [GorillasAppDelegate get].gameLayer.activeGorilla
                 || ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureTeam]
                     && ![gorilla human]))
@@ -481,7 +484,7 @@
     }
     
     // Throw hints.
-    for(NSUInteger i = 0; i < [[GorillasAppDelegate get].gameLayer.gorillas count]; ++i) {
+    for (NSUInteger i = 0; i < [[GorillasAppDelegate get].gameLayer.gorillas count]; ++i) {
         GorillaLayer *gorilla = [[GorillasAppDelegate get].gameLayer.gorillas objectAtIndex:i];
 
         BOOL hintGorilla = YES;
@@ -537,7 +540,8 @@
     ccTime t = 5 * 100 / g;
 
     // Level-based error.
-    rt = ccp(rt.x + random() % (int) ((1 - l) * 100), rt.y + random() % (int) (100 * (1 - l)));
+    NSUInteger rtError = (NSUInteger) ((1 - l) * 100);
+    rt = ccp(rt.x + random() % rtError - rtError / 2, rt.y + random() % rtError - rtError / 2);
     t = (random() % (int) ((t / 2) * l * 10)) / 10.0f + (t / 2);
 
     // Velocity vector to hit rt in t seconds.
@@ -553,15 +557,15 @@
 
 -(void) miss {
     
-    if(!([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureScore]))
+    if (!([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureScore]))
         // Don't deduct score when score not enabled.
         return;
     
-    if(!([[GorillasAppDelegate get].gameLayer.activeGorilla human]))
+    if (!([[GorillasAppDelegate get].gameLayer.activeGorilla human]))
         // Don't deduct score for AI misses.
         return;
     
-    if(![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureTeam]) {
+    if (![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureTeam]) {
         NSUInteger humanGorillas = 0;
         for (GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
             if ([gorilla human])
@@ -577,7 +581,7 @@
     [[GorillasConfig get] recordScore:[[GorillasConfig get].score floatValue] + score];
     [[[GorillasAppDelegate get] hudLayer] updateHudWithNewScore:score skill:0 wasGood:YES];
 
-    if(score)
+    if (score)
         [self message:[NSString stringWithFormat:@"%+d", score] on:[bananaLayer banana]];
 }
 
