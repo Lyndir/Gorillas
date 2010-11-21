@@ -36,8 +36,8 @@
 
 @private
     PanAction           *panAction;
-    CCLabelAtlas          *angleLabel, *strengthLabel;
-    CCLabelTTF               *msgLabel, *infoLabel;
+    CCLabelAtlas        *angleLabel, *strengthLabel;
+    CCLabelTTF          *msgLabel, *infoLabel;
     BarSprite           *aimSprite;
     
     BuildingsLayer      *buildings;
@@ -57,16 +57,20 @@
     NSUInteger          dbgTraceStep;
     NSUInteger          dbgPathMaxInd;
     NSUInteger          dbgPathCurInd;
-    CGPoint              *dbgPath;
+    CGPoint             *dbgPath;
     NSUInteger          dbgAIMaxInd;
     NSUInteger          dbgAICurInd;
     GorillaLayer        **dbgAI;
-    CGPoint              *dbgAIVect;
+    CGPoint             *dbgAIVect;
 #endif
 }
 
--(void) startGame;
--(void) stopGame;
+@property (nonatomic, readwrite) CGPoint aim;
+@property (nonatomic, readonly) BananaLayer *bananaLayer;
+@property (nonatomic, readonly) GorillaLayer *hitGorilla;
+
+-(void) beginGame;
+-(void) endGame;
 
 -(BOOL) mayThrow;
 
@@ -81,9 +85,5 @@
 -(CGPoint) calculateThrowFrom:(CGPoint)r0 to:(CGPoint)rt errorLevel:(CGFloat)l;
 
 -(CGRect) fieldInSpaceOf:(CCNode *)node;
-
-@property (nonatomic, readwrite) CGPoint aim;
-@property (nonatomic, readonly) BananaLayer *bananaLayer;
-@property (nonatomic, readonly) GorillaLayer *hitGorilla;
 
 @end

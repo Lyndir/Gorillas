@@ -123,6 +123,16 @@ typedef enum {
 
 
 /**
+ * Game Random Scopes.
+ */
+typedef enum {
+    GorillasGameRandomExplosions,
+    GorillasGameRandomWeather,
+    GorillasGameRandomStars,
+} GorillasGameRandom;
+
+
+/**
  * Cocos2D Configuration
  */
 #define CC_FONT_LABEL_SUPPORT   1

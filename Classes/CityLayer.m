@@ -35,7 +35,7 @@
 - (void)addInfo:(ccTime)dt;
 - (void)zoomOut;
 - (void)showAim;
--(void) stopGameCallback;
+- (void)endGameCallback;
 
 @end
 
@@ -92,7 +92,7 @@
     infoLabel.visible = NO;
     [self schedule:@selector(addInfo:)];
     
-    // Must reset before entering the scene; other's onEnter depends on us being done.
+    // Must reset before entering the scene; others' onEnter depends on us being done.
     [self reset];
     
     return self;
@@ -358,10 +358,13 @@
 
 -(BOOL) mayThrow {
 
+    dbg(@"mayThrow? !throwing(%d) && active(%d) && alive(%d) && human(%d) && local(%d) && !paused(%d)",
+        [bananaLayer throwing], [[GorillasAppDelegate get].gameLayer.activeGorilla active], [[GorillasAppDelegate get].gameLayer.activeGorilla alive], [[GorillasAppDelegate get].gameLayer.activeGorilla human], [[GorillasAppDelegate get].gameLayer.activeGorilla local], [GorillasAppDelegate get].gameLayer.paused);
     return ![bananaLayer throwing] &&
     [[GorillasAppDelegate get].gameLayer.activeGorilla active] &&
     [[GorillasAppDelegate get].gameLayer.activeGorilla alive] &&
     [[GorillasAppDelegate get].gameLayer.activeGorilla human] &&
+    [[GorillasAppDelegate get].gameLayer.activeGorilla local] &&
     ![GorillasAppDelegate get].gameLayer.paused;
 }
 
@@ -463,7 +466,7 @@
         }
 
         // Pick a random target from the enemies.
-        GorillaLayer *target = [[enemies objectAtIndex:random() % [enemies count]] retain];
+        GorillaLayer *target = [[enemies objectAtIndex:[[GorillasConfig get] gameRandom] % [enemies count]] retain];
         [enemies release];
         
         // Aim at the target.
@@ -541,8 +544,8 @@
 
     // Level-based error.
     NSUInteger rtError = (NSUInteger) ((1 - l) * 100);
-    rt = ccp(rt.x + random() % rtError - rtError / 2, rt.y + random() % rtError - rtError / 2);
-    t = (random() % (int) ((t / 2) * l * 10)) / 10.0f + (t / 2);
+    rt = ccp(rt.x + [[GorillasConfig get] gameRandom] % rtError - rtError / 2, rt.y + [[GorillasConfig get] gameRandom] % rtError - rtError / 2);
+    t = ([[GorillasConfig get] gameRandom] % (int) ((t / 2) * l * 10)) / 10.0f + (t / 2);
 
     // Velocity vector to hit rt in t seconds.
     CGPoint v = ccp((rt.x - r0.x) / t,
@@ -633,10 +636,8 @@
 }
 
 
--(void) startGame {
+-(void) beginGame {
     
-    //[self stopPanning];
-
     NSArray *gorillas = [GorillasAppDelegate get].gameLayer.gorillas;
     
     // Create enough throw hint sprites / remove needless ones.
@@ -690,7 +691,7 @@
     NSMutableArray *gorillasQueue = [gorillas mutableCopy];
     NSMutableArray *gorillaIndexes = [[NSMutableArray alloc] initWithCapacity: [gorillas count]];
     while ([gorillasQueue count]) {
-        NSUInteger index = indexA + random() % (delta + 1);
+        NSUInteger index = indexA + [[GorillasConfig get] gameRandom] % (delta + 1);
         BOOL validIndex = YES;
         
         if (index - minSpace <= indexA && index + minSpace >= indexB)
@@ -717,7 +718,6 @@
         [self addChild:gorilla z:3];
     }
     [gorillaIndexes release];
-    
     // Add a banana to the scene.
     if(bananaLayer) {
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
@@ -728,16 +728,11 @@
     [bananaLayer setFocussed:YES];
     [self addChild:bananaLayer z:2];
     
-    [self runAction:[CCSequence actions:
-                     [CCDelayTime actionWithDuration:1],
-                     [CCCallFunc actionWithTarget:self selector:@selector(nextGorilla)],
-                     nil]];
-    
-    [[GorillasAppDelegate get].gameLayer started];
+    [[GorillasAppDelegate get].gameLayer began];
 }
 
 
--(void) stopGame {
+-(void) endGame {
     
     [hitGorilla release];
     hitGorilla = nil;
@@ -758,24 +753,22 @@
                                                               horizontal:YES];
         [self runAction:[CCSequence actions:
                   [CCDelayTime actionWithDuration:1],
-                  [CCCallFunc actionWithTarget:self selector:@selector(stopGameCallback)],
+                  [CCCallFunc actionWithTarget:self selector:@selector(endGameCallback)],
                   nil]];
     }
     else
-        [self stopGameCallback];
+        [self endGameCallback];
 }
 
 
--(void) stopGameCallback {
+-(void) endGameCallback {
     
     for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
         [gorilla killDead];
     
-    [[GorillasAppDelegate get].gameLayer.gorillas removeAllObjects];
-    
     //[self startPanning];
     
-    [[GorillasAppDelegate get].gameLayer stopped];
+    [[GorillasAppDelegate get].gameLayer ended];
 }
  
 

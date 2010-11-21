@@ -25,51 +25,55 @@
 #import "GameConfiguration.h"
 
 
+@interface GameConfiguration ()
+
+@property (nonatomic, copy, readwrite) NSString         *name;
+@property (nonatomic, copy, readwrite) NSString         *description;
+@property (nonatomic, assign, readwrite) GorillasMode   mode;
+@property (nonatomic, assign, readwrite) NSUInteger     singleplayerAICount;
+@property (nonatomic, assign, readwrite) NSUInteger     multiplayerAICount;
+@property (nonatomic, assign, readwrite) NSUInteger     multiplayerHumanCount;
+
+@end
+
 @implementation GameConfiguration
 
-@synthesize name, description;
-@synthesize mode, sHumans, mHumans, sAis, mAis;
+@synthesize name = _name, description = _description, mode = _mode;
+@synthesize singleplayerAICount = _singleplayerAICount, multiplayerAICount = _multiplayerAICount, multiplayerHumanCount = _multiplayerHumanCount;
 
 
-+(id) configurationWithName:(NSString *)_name description:(NSString *)_description
-                       mode:(GorillasMode)_mode
-                    sHumans:(NSUInteger)_sHumans mHumans:(NSUInteger)_mHumans
-                       sAis:(NSUInteger)_sAis mAis:(NSUInteger)_mAis {
++ (GameConfiguration *)configurationWithName:(NSString *)aName description:(NSString *)aDescription mode:(GorillasMode)aMode
+                         singleplayerAICount:(NSUInteger)aSingleplayerAICount
+                          multiplayerAICount:(NSUInteger)aMultiplayerAICount multiplayerHumanCount:(NSUInteger)aMultiplayerHumanCount {
     
-    return [[[GameConfiguration alloc] initWithName:_name description:_description mode:_mode
-                                            sHumans:_sHumans mHumans:_mHumans
-                                               sAis:_sAis mAis:_mAis] autorelease];
+    return [[[GameConfiguration alloc] initWithName:aName description:aDescription mode:aMode
+                                singleplayerAICount:aSingleplayerAICount
+                                 multiplayerAICount:aMultiplayerAICount multiplayerHumanCount:aMultiplayerHumanCount] autorelease];
 }
 
 
--(id) initWithName:(NSString *)_name description:(NSString *)_description
-              mode:(GorillasMode)_mode
-           sHumans:(NSUInteger)_sHumans mHumans:(NSUInteger)_mHumans
-              sAis:(NSUInteger)_sAis mAis:(NSUInteger)_mAis {
+- (GameConfiguration *)initWithName:(NSString *)aName description:(NSString *)aDescription mode:(GorillasMode)aMode
+                singleplayerAICount:(NSUInteger)aSingleplayerAICount
+                 multiplayerAICount:(NSUInteger)aMultiplayerAICount multiplayerHumanCount:(NSUInteger)aMultiplayerHumanCount {
 
     if(!(self = [super init]))
         return self;
     
-    name        = [_name copy];
-    description = [_description copy];
-    
-    mode        = _mode;
-    sHumans     = _sHumans;
-    mHumans     = _mHumans;
-    sAis        = _sAis;
-    mAis        = _mAis;
+    self.name                   = aName;
+    self.description            = aDescription;
+    self.mode                   = aMode;
+    self.singleplayerAICount    = aSingleplayerAICount;
+    self.multiplayerAICount     = aMultiplayerAICount;
+    self.multiplayerHumanCount  = aMultiplayerHumanCount;
     
     return self;
 }
 
 
 -(void) dealloc {
-    
-    [name release];
-    name = nil;
-    
-    [description release];
-    description = nil;
+
+    self.name           = nil;
+    self.description    = nil;
     
     [super dealloc];
 }

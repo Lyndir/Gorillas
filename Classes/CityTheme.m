@@ -241,6 +241,11 @@ static NSDictionary *themes = nil;
     return themes;
 }
 
++(NSArray *) getThemeNames {
+    
+    return [[[self getThemes] allKeys] sortedArrayUsingSelector:@selector(compare:)];
+}
+
 + (void)forgetThemes {
     
     [themes release];

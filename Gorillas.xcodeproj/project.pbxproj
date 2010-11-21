@@ -630,6 +630,22 @@
 		DA5C1F710F829FFD007B1085 /* bunny-human-UU.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5C1F510F829FFD007B1085 /* bunny-human-UU.png */; };
 		DA6314C20EFAEA06007D203B /* TestLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6314C10EFAEA06007D203B /* TestLayer.m */; };
 		DA6C17CE0EC0F698006D43BD /* ExplosionsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C17CD0EC0F698006D43BD /* ExplosionsLayer.m */; };
+		DA711DC9128DF40800EDB885 /* NetMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DC8128DF40800EDB885 /* NetMessage.m */; };
+		DA711DCA128DF40800EDB885 /* NetMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DC8128DF40800EDB885 /* NetMessage.m */; };
+		DA711DCB128DF40800EDB885 /* NetMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DC8128DF40800EDB885 /* NetMessage.m */; };
+		DA711DCC128DF40800EDB885 /* NetMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DC8128DF40800EDB885 /* NetMessage.m */; };
+		DA711DCD128DF40800EDB885 /* NetMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DC8128DF40800EDB885 /* NetMessage.m */; };
+		DA711DCE128DF40800EDB885 /* NetMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DC8128DF40800EDB885 /* NetMessage.m */; };
+		DA711DF1128EA44700EDB885 /* NetController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DF0128EA44700EDB885 /* NetController.m */; };
+		DA711DF2128EA44700EDB885 /* NetController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DF0128EA44700EDB885 /* NetController.m */; };
+		DA711DF3128EA44700EDB885 /* NetController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DF0128EA44700EDB885 /* NetController.m */; };
+		DA711DF4128EA44700EDB885 /* NetController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DF0128EA44700EDB885 /* NetController.m */; };
+		DA711DF5128EA44700EDB885 /* NetController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DF0128EA44700EDB885 /* NetController.m */; };
+		DA711DF6128EA44700EDB885 /* NetController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DF0128EA44700EDB885 /* NetController.m */; };
+		DA711E09128EBAD500EDB885 /* ArrayTVC.h in Headers */ = {isa = PBXBuildFile; fileRef = DA711E07128EBAD500EDB885 /* ArrayTVC.h */; };
+		DA711E0A128EBAD500EDB885 /* ArrayTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711E08128EBAD500EDB885 /* ArrayTVC.m */; };
+		DA711E0D128EBAEC00EDB885 /* ObjectUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = DA711E0B128EBAEC00EDB885 /* ObjectUtils.h */; };
+		DA711E0E128EBAEC00EDB885 /* ObjectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711E0C128EBAEC00EDB885 /* ObjectUtils.m */; };
 		DA7547F80EAB66D40083EC7C /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
 		DA76F7A0100402FE00030524 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
 		DA76F7A1100402FE00030524 /* bobber.png in Resources */ = {isa = PBXBuildFile; fileRef = DACC157F0F61F2FB0078A0D8 /* bobber.png */; };
@@ -830,6 +846,8 @@
 		DA83F0BB0F00527B00305C9F /* WindLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83F0BA0F00527B00305C9F /* WindLayer.m */; };
 		DA859C500EC4F3950036B7C0 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DA859E700EC598E10036B7C0 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
+		DA8B147C128CB11000D2211C /* RootViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA8B147A128CB10F00D2211C /* RootViewController.h */; };
+		DA8B147D128CB11000D2211C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA8B147B128CB10F00D2211C /* RootViewController.m */; };
 		DA8B76B30F44EC6600DD88BF /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
 		DA8B771D0F46120600DD88BF /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
 		DA8B772D0F46120600DD88BF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -861,6 +879,12 @@
 		DA9A63B90F573A530031988E /* CustomGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9A63B60F573A530031988E /* CustomGameLayer.m */; };
 		DA9A63BA0F573A530031988E /* CustomGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9A63B60F573A530031988E /* CustomGameLayer.m */; };
 		DA9A63BB0F573A530031988E /* CustomGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9A63B60F573A530031988E /* CustomGameLayer.m */; };
+		DA9BD564128B465E00B854A7 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9BD563128B465E00B854A7 /* GameKit.framework */; };
+		DA9BD57D128B466A00B854A7 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9BD563128B465E00B854A7 /* GameKit.framework */; };
+		DA9BD57E128B466C00B854A7 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9BD563128B465E00B854A7 /* GameKit.framework */; };
+		DA9BD57F128B466C00B854A7 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9BD563128B465E00B854A7 /* GameKit.framework */; };
+		DA9BD580128B466D00B854A7 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9BD563128B465E00B854A7 /* GameKit.framework */; };
+		DA9BD581128B466D00B854A7 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9BD563128B465E00B854A7 /* GameKit.framework */; };
 		DAA120930FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA120920FDD26F700AA1E28 /* AVFoundation.framework */; };
 		DAA120960FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA120920FDD26F700AA1E28 /* AVFoundation.framework */; };
 		DAA120970FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA120920FDD26F700AA1E28 /* AVFoundation.framework */; };
@@ -1592,6 +1616,14 @@
 		DA6314C10EFAEA06007D203B /* TestLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestLayer.m; path = Classes/TestLayer.m; sourceTree = "<group>"; };
 		DA6C17CC0EC0F698006D43BD /* ExplosionsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplosionsLayer.h; sourceTree = "<group>"; };
 		DA6C17CD0EC0F698006D43BD /* ExplosionsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExplosionsLayer.m; sourceTree = "<group>"; };
+		DA711DC7128DF40800EDB885 /* NetMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetMessage.h; sourceTree = "<group>"; };
+		DA711DC8128DF40800EDB885 /* NetMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetMessage.m; sourceTree = "<group>"; };
+		DA711DEF128EA44700EDB885 /* NetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetController.h; sourceTree = "<group>"; };
+		DA711DF0128EA44700EDB885 /* NetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetController.m; sourceTree = "<group>"; };
+		DA711E07128EBAD500EDB885 /* ArrayTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayTVC.h; sourceTree = "<group>"; };
+		DA711E08128EBAD500EDB885 /* ArrayTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayTVC.m; sourceTree = "<group>"; };
+		DA711E0B128EBAEC00EDB885 /* ObjectUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectUtils.h; sourceTree = "<group>"; };
+		DA711E0C128EBAEC00EDB885 /* ObjectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectUtils.m; sourceTree = "<group>"; };
 		DA7547F40EAB66D40083EC7C /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
 		DA7547F50EAB66D40083EC7C /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		DA76F878100402FE00030524 /* GorillasLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GorillasLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1647,9 +1679,12 @@
 		DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillaLayer.m; sourceTree = "<group>"; };
 		DA859E6E0EC598E10036B7C0 /* BananaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaLayer.h; sourceTree = "<group>"; };
 		DA859E6F0EC598E10036B7C0 /* BananaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BananaLayer.m; sourceTree = "<group>"; };
+		DA8B147A128CB10F00D2211C /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		DA8B147B128CB10F00D2211C /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		DA8B77990F46120600DD88BF /* Gorillas Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9A63B50F573A530031988E /* CustomGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGameLayer.h; sourceTree = "<group>"; };
 		DA9A63B60F573A530031988E /* CustomGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGameLayer.m; sourceTree = "<group>"; };
+		DA9BD563128B465E00B854A7 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		DAA120920FDD26F700AA1E28 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		DAB896DB0F480411005C1D06 /* PanningLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanningLayer.h; sourceTree = "<group>"; };
 		DAB896DC0F480411005C1D06 /* PanningLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanningLayer.m; sourceTree = "<group>"; };
@@ -1718,6 +1753,7 @@
 				DAA120930FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */,
 				DA4B2277127CC81700C1748F /* libiLibs.a in Frameworks */,
 				DA4B227A127CC83800C1748F /* libz.dylib in Frameworks */,
+				DA9BD564128B465E00B854A7 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1751,6 +1787,7 @@
 				DA3B9656127C1DF7009196E8 /* libcocos2d.a in Frameworks */,
 				DA3B9657127C1DF7009196E8 /* libiLibs.a in Frameworks */,
 				DA3B9720127C37B3009196E8 /* libz.dylib in Frameworks */,
+				DA9BD580128B466D00B854A7 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1768,6 +1805,7 @@
 				DA3B965C127C1E01009196E8 /* libcocos2d.a in Frameworks */,
 				DA3B965D127C1E01009196E8 /* libiLibs.a in Frameworks */,
 				DA3B9721127C37BD009196E8 /* libz.dylib in Frameworks */,
+				DA9BD581128B466D00B854A7 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1785,6 +1823,7 @@
 				DA3B9650127C1DED009196E8 /* libcocos2d.a in Frameworks */,
 				DA3B9651127C1DED009196E8 /* libiLibs.a in Frameworks */,
 				DA3B971F127C37A7009196E8 /* libz.dylib in Frameworks */,
+				DA9BD57F128B466C00B854A7 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1801,6 +1840,7 @@
 				DAA120960FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */,
 				DA3B964A127C1DE1009196E8 /* libcocos2d.a in Frameworks */,
 				DA3B964B127C1DE1009196E8 /* libiLibs.a in Frameworks */,
+				DA9BD57E128B466C00B854A7 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1818,6 +1858,7 @@
 				DA3B9644127C1DD3009196E8 /* libcocos2d.a in Frameworks */,
 				DA3B9645127C1DD3009196E8 /* libiLibs.a in Frameworks */,
 				DA3B971E127C379C009196E8 /* libz.dylib in Frameworks */,
+				DA9BD57D128B466A00B854A7 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1898,6 +1939,7 @@
 				DA0DD6610F95368600E5607E /* UIKit.framework */,
 				DA0DD6620F95368600E5607E /* Foundation.framework */,
 				DA0DD6630F95368600E5607E /* CoreGraphics.framework */,
+				DA9BD563128B465E00B854A7 /* GameKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2024,6 +2066,10 @@
 				DACFEC200EE96AA300A0D08E /* CityTheme.m */,
 				DA79D79E0F59531000D36C7C /* GameConfiguration.h */,
 				DA79D79F0F59531100D36C7C /* GameConfiguration.m */,
+				DA711DC7128DF40800EDB885 /* NetMessage.h */,
+				DA711DC8128DF40800EDB885 /* NetMessage.m */,
+				DA711DEF128EA44700EDB885 /* NetController.h */,
+				DA711DF0128EA44700EDB885 /* NetController.m */,
 			);
 			name = Backend;
 			sourceTree = "<group>";
@@ -2162,6 +2208,8 @@
 		DA2DE3CA128565C200E9035D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				DA711E07128EBAD500EDB885 /* ArrayTVC.h */,
+				DA711E08128EBAD500EDB885 /* ArrayTVC.m */,
 				DA2DE3CB128565C200E9035D /* AlertViewController.h */,
 				DA2DE3CC128565C200E9035D /* AlertViewController.m */,
 				DA2DE3CD128565C200E9035D /* BoxView.h */,
@@ -2174,6 +2222,8 @@
 				DA2DE3D4128565C200E9035D /* SheetViewController.m */,
 				DA2DE3D5128565C200E9035D /* ValidatingTextField.h */,
 				DA2DE3D6128565C200E9035D /* ValidatingTextField.m */,
+				DA8B147A128CB10F00D2211C /* RootViewController.h */,
+				DA8B147B128CB10F00D2211C /* RootViewController.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -2181,6 +2231,8 @@
 		DA2DE3D7128565C200E9035D /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				DA711E0B128EBAEC00EDB885 /* ObjectUtils.h */,
+				DA711E0C128EBAEC00EDB885 /* ObjectUtils.m */,
 				DA2DE3D8128565C300E9035D /* AudioController.h */,
 				DA2DE3D9128565C300E9035D /* AudioController.m */,
 				DA2DE3DA128565C300E9035D /* Config.h */,
@@ -2643,6 +2695,9 @@
 				DA2DE440128565C300E9035D /* UIColor-Expanded.h in Headers */,
 				DA2DE442128565C300E9035D /* UIImage_Scaling.h in Headers */,
 				DA2DE444128565C300E9035D /* UIUtils.h in Headers */,
+				DA8B147C128CB11000D2211C /* RootViewController.h in Headers */,
+				DA711E09128EBAD500EDB885 /* ArrayTVC.h in Headers */,
+				DA711E0D128EBAEC00EDB885 /* ObjectUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3708,6 +3763,8 @@
 				DA476A2C0FDD8002002E74F8 /* FullGameLayer.m in Sources */,
 				DA3B94FB127B7407009196E8 /* GHUDLayer.m in Sources */,
 				DAF4D8161280D8170012132B /* MovingTo.m in Sources */,
+				DA711DCC128DF40800EDB885 /* NetMessage.m in Sources */,
+				DA711DF4128EA44700EDB885 /* NetController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3755,6 +3812,9 @@
 				DA2DE441128565C300E9035D /* UIColor-Expanded.m in Sources */,
 				DA2DE443128565C300E9035D /* UIImage_Scaling.m in Sources */,
 				DA2DE445128565C300E9035D /* UIUtils.m in Sources */,
+				DA8B147D128CB11000D2211C /* RootViewController.m in Sources */,
+				DA711E0A128EBAD500EDB885 /* ArrayTVC.m in Sources */,
+				DA711E0E128EBAEC00EDB885 /* ObjectUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3887,6 +3947,8 @@
 				DA476A2F0FDD8002002E74F8 /* FullGameLayer.m in Sources */,
 				DA3B94FE127B7407009196E8 /* GHUDLayer.m in Sources */,
 				DAF4D8181280D8170012132B /* MovingTo.m in Sources */,
+				DA711DCE128DF40800EDB885 /* NetMessage.m in Sources */,
+				DA711DF1128EA44700EDB885 /* NetController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3930,6 +3992,8 @@
 				DA76F82A100402FE00030524 /* FullGameLayer.m in Sources */,
 				DA3B94F9127B7407009196E8 /* GHUDLayer.m in Sources */,
 				DAF4D8141280D8170012132B /* MovingTo.m in Sources */,
+				DA711DCA128DF40800EDB885 /* NetMessage.m in Sources */,
+				DA711DF2128EA44700EDB885 /* NetController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3973,6 +4037,8 @@
 				DA476A2D0FDD8002002E74F8 /* FullGameLayer.m in Sources */,
 				DA3B94FD127B7407009196E8 /* GHUDLayer.m in Sources */,
 				DAF4D8171280D8170012132B /* MovingTo.m in Sources */,
+				DA711DC9128DF40800EDB885 /* NetMessage.m in Sources */,
+				DA711DF6128EA44700EDB885 /* NetController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4016,6 +4082,8 @@
 				DA476A2E0FDD8002002E74F8 /* FullGameLayer.m in Sources */,
 				DA3B94FC127B7407009196E8 /* GHUDLayer.m in Sources */,
 				DAF4D8191280D8170012132B /* MovingTo.m in Sources */,
+				DA711DCD128DF40800EDB885 /* NetMessage.m in Sources */,
+				DA711DF5128EA44700EDB885 /* NetController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4059,6 +4127,8 @@
 				DAE9196D0FFD53D300BF4B89 /* FullGameLayer.m in Sources */,
 				DA3B94FA127B7407009196E8 /* GHUDLayer.m in Sources */,
 				DAF4D8151280D8170012132B /* MovingTo.m in Sources */,
+				DA711DCB128DF40800EDB885 /* NetMessage.m in Sources */,
+				DA711DF3128EA44700EDB885 /* NetController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4324,6 +4394,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Classes/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_STRICT_ALIASING = NO;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -4490,6 +4561,7 @@
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Classes/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_STRICT_ALIASING = YES;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;

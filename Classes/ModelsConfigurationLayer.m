@@ -71,9 +71,9 @@
     [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
     CGSize winSize = [[CCDirector sharedDirector] winSize];
-    prevModelSprite = [[GorillaLayer alloc] initWithName:@"" type:GorillasPlayerTypeHuman];
-    currModelSprite = [[GorillaLayer alloc] initWithName:@"" type:GorillasPlayerTypeHuman];
-    nextModelSprite = [[GorillaLayer alloc] initWithName:@"" type:GorillasPlayerTypeHuman];
+    prevModelSprite = [[GorillaLayer alloc] initWithType:GorillasPlayerTypeHuman playerID:nil];
+    currModelSprite = [[GorillaLayer alloc] initWithType:GorillasPlayerTypeHuman playerID:nil];
+    nextModelSprite = [[GorillaLayer alloc] initWithType:GorillasPlayerTypeHuman playerID:nil];
     [prevModelSprite setPosition:ccp(winSize.width / 2 - winSize.width, winSize.height / 2)];
     [currModelSprite setPosition:ccp(winSize.width / 2, winSize.height / 2)];
     [nextModelSprite setPosition:ccp(winSize.width / 2 + winSize.width, winSize.height / 2)];

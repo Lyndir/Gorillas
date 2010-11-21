@@ -58,13 +58,6 @@
     [[GorillasAppDelegate get].hudLayer dismissMessage];
     
     [[GorillasAppDelegate get].gameLayer.cityLayer nextGorilla];
-
-    if ([[GorillasAppDelegate get].gameLayer.activeGorilla human] && ![GorillasAppDelegate get].gameLayer.singlePlayer) {
-        [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"message.nextplayer.go", @"Go ..")];
-        
-        if ([[GorillasConfig get].voice boolValue])
-            [[GorillasAudioController get] playEffectNamed:@"Go"];
-    }
 }
 
 

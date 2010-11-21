@@ -100,14 +100,14 @@ static CCParticleSystem **flameTypes = nil;
 
 -(void) addExplosionAt:(CGPoint)pos hitsGorilla:(BOOL) hitsGorilla {
     
-    BOOL heavy = hitsGorilla || (random() % 100 > 90);
+    BOOL heavy = hitsGorilla || ([[GorillasConfig get] gameRandom:GorillasGameRandomExplosions] % 100 > 90);
 
     if([[GorillasConfig get].soundFx boolValue])
         [GorillasAudioController playEffect:[ExplosionsLayer explosionEffect:heavy]];
 
     [[GorillasAppDelegate get].gameLayer shake];
     
-    int explosionParticles = random() % 50 + 300;
+    int explosionParticles = [[GorillasConfig get] gameRandom:GorillasGameRandomExplosions] % 50 + 300;
     if(heavy)
         explosionParticles += 400;
     
@@ -221,7 +221,7 @@ static CCParticleSystem **flameTypes = nil;
         }
     }
     
-    NSUInteger t = (heavy? 1: 0) * flameVariantion + random() % flameVariantion;
+    NSUInteger t = (heavy? 1: 0) * flameVariantion + [[GorillasConfig get] gameRandom:GorillasGameRandomExplosions] % flameVariantion;
     return flameTypes[t];
 }
 
@@ -249,7 +249,7 @@ static CCParticleSystem **flameTypes = nil;
     else
         // Pick an effect that is not 0 (see above) and not the same as the last effect.
         do {
-            chosenEffect = random() % explosionEffects;
+            chosenEffect = [[GorillasConfig get] gameRandom:GorillasGameRandomExplosions] % explosionEffects;
         } while(chosenEffect == lastEffect || chosenEffect == 0);
     
     lastEffect = chosenEffect;

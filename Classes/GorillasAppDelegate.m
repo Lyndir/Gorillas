@@ -37,27 +37,30 @@
 
 @interface GorillasAppDelegate ()
 
-@property (nonatomic, readwrite, retain) GameLayer                     *gameLayer;
-@property (nonatomic, readwrite, retain) MainMenuLayer                 *mainMenuLayer;
-@property (nonatomic, readwrite, retain) NewGameLayer                  *newGameLayer;
-@property (nonatomic, readwrite, retain) CustomGameLayer               *customGameLayer;
-@property (nonatomic, readwrite, retain) ContinueMenuLayer             *continueMenuLayer;
-@property (nonatomic, readwrite, retain) ConfigurationSectionLayer     *configLayer;
-@property (nonatomic, readwrite, retain) GameConfigurationLayer        *gameConfigLayer;
-@property (nonatomic, readwrite, retain) AVConfigurationLayer          *avConfigLayer;
-@property (nonatomic, readwrite, retain) ModelsConfigurationLayer      *modelsConfigLayer;
-@property (nonatomic, readwrite, retain) InformationLayer              *infoLayer;
-@property (nonatomic, readwrite, retain) GuideLayer                    *guideLayer;
-@property (nonatomic, readwrite, retain) StatisticsLayer               *statsLayer;
-@property (nonatomic, readwrite, retain) FullGameLayer                 *fullLayer;
+@property (nonatomic, readwrite, retain) GameLayer                      *gameLayer;
+@property (nonatomic, readwrite, retain) MainMenuLayer                  *mainMenuLayer;
+@property (nonatomic, readwrite, retain) NewGameLayer                   *newGameLayer;
+@property (nonatomic, readwrite, retain) CustomGameLayer                *customGameLayer;
+@property (nonatomic, readwrite, retain) ContinueMenuLayer              *continueMenuLayer;
+@property (nonatomic, readwrite, retain) ConfigurationSectionLayer      *configLayer;
+@property (nonatomic, readwrite, retain) GameConfigurationLayer         *gameConfigLayer;
+@property (nonatomic, readwrite, retain) AVConfigurationLayer           *avConfigLayer;
+@property (nonatomic, readwrite, retain) ModelsConfigurationLayer       *modelsConfigLayer;
+@property (nonatomic, readwrite, retain) InformationLayer               *infoLayer;
+@property (nonatomic, readwrite, retain) GuideLayer                     *guideLayer;
+@property (nonatomic, readwrite, retain) StatisticsLayer                *statsLayer;
+@property (nonatomic, readwrite, retain) FullGameLayer                  *fullLayer;
+
+@property (nonatomic, readwrite, retain) NetController                  *netController;
 
 @end
 
 @implementation GorillasAppDelegate
-
-@synthesize gameLayer, mainMenuLayer, newGameLayer, customGameLayer, continueMenuLayer;
-@synthesize configLayer, gameConfigLayer, avConfigLayer, modelsConfigLayer;
-@synthesize infoLayer, guideLayer, statsLayer, fullLayer;
+@synthesize gameLayer = _gameLayer;
+@synthesize mainMenuLayer = _mainMenuLayer, newGameLayer = _newGameLayer, customGameLayer = _customGameLayer, continueMenuLayer = _continueMenuLayer;
+@synthesize configLayer = _configLayer, gameConfigLayer = _gameConfigLayer, avConfigLayer = _avConfigLayer, modelsConfigLayer = _modelsConfigLayer;
+@synthesize infoLayer = _infoLayer, guideLayer = _guideLayer, statsLayer = _statsLayer, fullLayer = _fullLayer;
+@synthesize netController = _netController;
 
 + (void)initialize {
     
@@ -66,14 +69,30 @@
 
 - (void)setup {
     
+    // Game Center setup.
+    self.netController = [[NetController new] autorelease];
+    [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
+        if (error)
+            wrn(@"Game Center unavailable: %@", error);
+    }];
+    [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
+        [self.gameLayer performSelectorOnMainThread:@selector(stopGame) withObject:nil waitUntilDone:YES];
+        
+        if (acceptedInvite)
+            [self.netController performSelectorOnMainThread:@selector(beginInvite:) withObject:acceptedInvite waitUntilDone:NO];
+        
+        else if(playersToInvite)
+            [self performSelectorOnMainThread:@selector(showNewGameForPlayers:) withObject:playersToInvite waitUntilDone:NO];
+    };
+    
 	// Build the splash scene.
     CCScene *splashScene = [CCScene node];
     CCSprite *splash = [Splash node];
     [splashScene addChild:splash];
     
     // Build the game scene.
-	gameLayer = [[GameLayer alloc] init];
-    [self.uiLayer addChild:gameLayer];
+	self.gameLayer = [GameLayer node];
+    [self.uiLayer addChild:self.gameLayer];
 	
     // Show the splash screen, this starts the main loop in the current thread.
     [[CCDirector sharedDirector] pushScene:splashScene];
@@ -123,10 +142,10 @@
         configKey == @selector(starColor)           ||
         configKey == @selector(starSpeed)           ||
         configKey == @selector(starAmount))
-        [gameLayer reset];
+        [self.gameLayer reset];
 
     if (configKey == @selector(playerModel))
-        [gameLayer reset];
+        [self.gameLayer reset];
 }
 
 - (void)hudMenuPressed {
@@ -136,115 +155,122 @@
 
 -(void) showMainMenu {
     
-    if(!mainMenuLayer)
-        mainMenuLayer = [[MainMenuLayer alloc] init];
+    if(!self.mainMenuLayer)
+        self.mainMenuLayer = [MainMenuLayer node];
 
-    [self pushLayer:mainMenuLayer];
+    [self pushLayer:self.mainMenuLayer];
 }
 
 
 -(void) showNewGame {
+
+    [self showNewGameForPlayers:nil];
+}
+
+
+-(void) showNewGameForPlayers:(NSArray *)aPlayersToInvite {
     
-    if(!newGameLayer)
-        newGameLayer = [[NewGameLayer alloc] init];
+    if(!self.newGameLayer)
+        self.newGameLayer = [NewGameLayer node];
+    self.newGameLayer.playersToInvite = aPlayersToInvite;
     
-    [self pushLayer:newGameLayer];
+    [self pushLayer:self.newGameLayer];
 }
 
 
 -(void) showCustomGame {
     
-    if(!customGameLayer)
-        customGameLayer = [[CustomGameLayer alloc] init];
+    if(!self.customGameLayer)
+        self.customGameLayer = [CustomGameLayer node];
     
-    [self pushLayer: customGameLayer];
+    [self pushLayer:self.customGameLayer];
 }
 
 
 -(void) showContinueMenu {
     
-    if(!continueMenuLayer)
-        continueMenuLayer = [[ContinueMenuLayer alloc] init];
+    if(!self.continueMenuLayer)
+        self.continueMenuLayer = [ContinueMenuLayer node];
     
-    [self pushLayer:continueMenuLayer];
+    [self pushLayer:self.continueMenuLayer];
 }
 
 
 -(void) showConfiguration {
     
-    if(!configLayer)
-        configLayer = [[ConfigurationSectionLayer alloc] init];
+    if(!self.configLayer)
+        self.configLayer = [ConfigurationSectionLayer node];
     
-    [self pushLayer:configLayer];
+    [self pushLayer:self.configLayer];
 }
 
 
 -(void) showGameConfiguration {
     
-    if(!gameConfigLayer)
-        gameConfigLayer = [[GameConfigurationLayer alloc] init];
+    if(!self.gameConfigLayer)
+        self.gameConfigLayer = [GameConfigurationLayer node];
     
-    [self pushLayer:gameConfigLayer];
+    [self pushLayer:self.gameConfigLayer];
 }
 
 
 -(void) showAVConfiguration {
     
-    if(!avConfigLayer)
-        avConfigLayer = [[AVConfigurationLayer alloc] init];
+    if(!self.avConfigLayer)
+        self.avConfigLayer = [AVConfigurationLayer node];
     
-    [self pushLayer:avConfigLayer];
+    [self pushLayer:self.avConfigLayer];
 }
 
 
 -(void) showModelsConfiguration {
     
-    if(!modelsConfigLayer)
-        modelsConfigLayer = [[ModelsConfigurationLayer alloc] init];
+    if(!self.modelsConfigLayer)
+        self.modelsConfigLayer = [ModelsConfigurationLayer node];
     
-    [self pushLayer:modelsConfigLayer];
+    [self pushLayer:self.modelsConfigLayer];
 }
 
 
 -(void) showInformation {
     
-    if(!infoLayer)
-        infoLayer = [[InformationLayer alloc] init];
+    if(!self.infoLayer)
+        self.infoLayer = [InformationLayer node];
     
-    [self pushLayer:infoLayer];
+    [self pushLayer:self.infoLayer];
 }
 
 
 -(void) showGuide {
     
-    if(!guideLayer)
-        guideLayer = [[GuideLayer alloc] init];
+    if(!self.guideLayer)
+        self.guideLayer = [GuideLayer node];
     
-    [self pushLayer:guideLayer];
+    [self pushLayer:self.guideLayer];
 }
 
 
 -(void) showStatistics {
 
-    if(!statsLayer)
-        statsLayer = [[StatisticsLayer alloc] init];
+    if(!self.statsLayer)
+        self.statsLayer = [StatisticsLayer node];
     
-    [self pushLayer:statsLayer];
+    [self pushLayer:self.statsLayer];
 }
 
 
 -(void) showFullGame {
     
-    if(!fullLayer)
-        fullLayer = [[FullGameLayer alloc] init];
+    if(!self.fullLayer)
+        self.fullLayer = [FullGameLayer node];
     
-    [self pushLayer:fullLayer];
+    [self pushLayer:self.fullLayer];
 }
 
 
 - (void)pushLayer: (ShadeLayer *)layer hidden:(BOOL)hidden {
     
-    [gameLayer setPaused:YES];
+    [self.gameLayer setPaused:YES];
     
     [super pushLayer:layer hidden:hidden];
 }
@@ -254,7 +280,7 @@
 
     [super applicationWillResignActive:application];
 
-    if(!gameLayer.paused)
+    if(!self.gameLayer.paused)
         [self showMainMenu];
 }
 
@@ -263,52 +289,52 @@
     
     [super cleanup];
     
-    if(mainMenuLayer && ![mainMenuLayer parent]) {
-        [mainMenuLayer stopAllActions];
+    if(self.mainMenuLayer && ![self.mainMenuLayer parent]) {
+        [self.mainMenuLayer stopAllActions];
         self.mainMenuLayer = nil;
     }
-    if(newGameLayer && ![newGameLayer parent]) {
-        [newGameLayer stopAllActions];
+    if(self.newGameLayer && ![self.newGameLayer parent]) {
+        [self.newGameLayer stopAllActions];
         self.newGameLayer = nil;
     }
-    if(customGameLayer && ![customGameLayer parent]) {
-        [customGameLayer stopAllActions];
+    if(self.customGameLayer && ![self.customGameLayer parent]) {
+        [self.customGameLayer stopAllActions];
         self.customGameLayer = nil;
     }
-    if(continueMenuLayer && ![continueMenuLayer parent]) {
-        [continueMenuLayer stopAllActions];
+    if(self.continueMenuLayer && ![self.continueMenuLayer parent]) {
+        [self.continueMenuLayer stopAllActions];
         self.continueMenuLayer = nil;
     }
-    if(configLayer && ![configLayer parent]) {
-        [configLayer stopAllActions];
+    if(self.configLayer && ![self.configLayer parent]) {
+        [self.configLayer stopAllActions];
         self.configLayer = nil;
     }
-    if(gameConfigLayer && ![gameConfigLayer parent]) {
-        [gameConfigLayer stopAllActions];
+    if(self.gameConfigLayer && ![self.gameConfigLayer parent]) {
+        [self.gameConfigLayer stopAllActions];
         self.gameConfigLayer = nil;
     }
-    if(avConfigLayer && ![avConfigLayer parent]) {
-        [avConfigLayer stopAllActions];
+    if(self.avConfigLayer && ![self.avConfigLayer parent]) {
+        [self.avConfigLayer stopAllActions];
         self.avConfigLayer = nil;
     }
-    if(modelsConfigLayer && ![modelsConfigLayer parent]) {
-        [modelsConfigLayer stopAllActions];
+    if(self.modelsConfigLayer && ![self.modelsConfigLayer parent]) {
+        [self.modelsConfigLayer stopAllActions];
         self.modelsConfigLayer = nil;
     }
-    if(infoLayer && ![infoLayer parent]) {
-        [infoLayer stopAllActions];
+    if(self.infoLayer && ![self.infoLayer parent]) {
+        [self.infoLayer stopAllActions];
         self.infoLayer = nil;
     }
-    if(guideLayer && ![guideLayer parent]) {
-        [guideLayer stopAllActions];
+    if(self.guideLayer && ![self.guideLayer parent]) {
+        [self.guideLayer stopAllActions];
         self.guideLayer = nil;
     }
-    if(statsLayer && ![statsLayer parent]) {
-        [statsLayer stopAllActions];
+    if(self.statsLayer && ![self.statsLayer parent]) {
+        [self.statsLayer stopAllActions];
         self.statsLayer = nil;
     }
-    if(fullLayer && ![fullLayer parent]) {
-        [fullLayer stopAllActions];
+    if(self.fullLayer && ![self.fullLayer parent]) {
+        [self.fullLayer stopAllActions];
         self.fullLayer = nil;
     }
 }
@@ -316,19 +342,19 @@
 
 - (void)dealloc {
     
-    self.gameLayer = nil;
-    self.mainMenuLayer = nil;
-    self.newGameLayer = nil;
-    self.customGameLayer = nil;
-    self.continueMenuLayer = nil;
-    self.configLayer = nil;
-    self.gameConfigLayer = nil;
-    self.avConfigLayer = nil;
-    self.modelsConfigLayer = nil;
-    self.infoLayer = nil;
-    self.guideLayer = nil;
-    self.statsLayer = nil;
-    self.fullLayer = nil;
+    self.gameLayer          = nil;
+    self.mainMenuLayer      = nil;
+    self.newGameLayer       = nil;
+    self.customGameLayer    = nil;
+    self.continueMenuLayer  = nil;
+    self.configLayer        = nil;
+    self.gameConfigLayer    = nil;
+    self.avConfigLayer      = nil;
+    self.modelsConfigLayer  = nil;
+    self.infoLayer          = nil;
+    self.guideLayer         = nil;
+    self.statsLayer         = nil;
+    self.fullLayer          = nil;
     
     [super dealloc];
 }
@@ -336,7 +362,7 @@
 
 +(GorillasAppDelegate *) get {
     
-    return (GorillasAppDelegate *) [[UIApplication sharedApplication] delegate];
+    return (GorillasAppDelegate *) [UIApplication sharedApplication].delegate;
 }
 
 

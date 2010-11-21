@@ -25,13 +25,17 @@
 #import "Resettable.h"
 #import "GameConfiguration.h"
 #import "ConfigMenuLayer.h"
+#import <GameKit/GameKit.h>
 
 
 @interface NewGameLayer : MenuLayer <Resettable, MenuDelegate> {
     
 @private
-    CCMenuItemToggle      *configurationI;
-    CCMenuItemLabel       *descriptionT, *multiPlayerI, *singlePlayerI;
+    CCMenuItemToggle                                *configurationI;
+    CCMenuItemLabel                                 *descriptionT, *multiPlayerI, *singlePlayerI;
+    NSArray                                         *_playersToInvite;
 }
+
+@property (nonatomic, retain, readwrite) NSArray    *playersToInvite;
 
 @end

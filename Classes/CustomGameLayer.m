@@ -30,7 +30,6 @@
 
 @interface CustomGameLayer ()
 
-- (void)humans:(id)sender;
 - (void)gameMode:(id)sender;
 - (void)ais:(id)sender;
 - (void)startGame:(id)sender;
@@ -47,8 +46,6 @@
     if (!(self = [super initWithDelegate:self logo:nil items:
                   [MenuItemTitle itemFromString:l(@"menu.choose.mode")],
                   gameModeI     = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(gameMode:)],
-                  [MenuItemTitle itemFromString:l(@"menu.select.humans")],
-                  humansI       = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(humans:)],
                   [MenuItemTitle itemFromString:l(@"menu.select.ais")],
                   aisI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(ais:)],
                   [MenuItemSpacer spacerNormal],
@@ -58,18 +55,7 @@
                   nil]))
         return self;
     
-    humans = 1;
     ais = 1;
-    
-    // Humans.
-    NSMutableArray *humanMenuItems = [NSMutableArray arrayWithCapacity:4];
-    [humanMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"menu.player.count.0", @"None")]];
-    [humanMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"menu.player.count.1", @"1 Player")]];
-    [humanMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"menu.player.count.2", @"2 Players")]];
-    [humanMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"menu.player.count.3+", @"%d Players")]];
-    humansI.subItems = humanMenuItems;
-    [humansI setSelectedIndex:1];
-    
     
     // Game Mode.
     NSMutableArray *modeMenuItems = [NSMutableArray arrayWithCapacity:4];
@@ -94,13 +80,6 @@
 
 - (void)reset {
     
-    NSUInteger humanIndex = (NSUInteger)fminf(humans, 3);
-    if ([[humansI subItems] count] > humanIndex) {
-        [humansI setSelectedIndex:humanIndex];
-        if (humans >= 3)
-            [(CCMenuItemFont*)[humansI selectedItem] setString:[NSString stringWithFormat:
-                                                                NSLocalizedString(@"menu.player.count.3+", @"%d Players"), humans]];
-    }
     NSUInteger aiIndex = (NSUInteger)fminf(ais, 3);
     if ([[aisI subItems] count] > aiIndex) {
         [aisI setSelectedIndex:aiIndex];
@@ -112,12 +91,6 @@
     NSUInteger modeIndex = [modeKeys indexOfObject:[GorillasConfig get].mode];
     if ([[gameModeI subItems] count] > modeIndex)
         [gameModeI setSelectedIndex:modeIndex];
-    
-    // Disable start button when less than 2 gorillas chosen
-    // or when multiple humans are chosen for Dynamic mode.
-    startGameI.isEnabled        = humans + ais > 1;
-    if([[GorillasConfig get].mode unsignedIntValue] == GorillasModeDynamic && humans > 1)
-        startGameI.isEnabled    = NO;
 }
 
 
@@ -140,15 +113,6 @@
 }
 
 
--(void) humans: (id) sender {
-    
-    [[GorillasAudioController get] clickEffect];
-    humans = (humans + 1) % 4;
-    
-    [self reset];
-}
-
-
 -(void) ais: (id) sender {
     
     [[GorillasAudioController get] clickEffect];
@@ -162,8 +126,8 @@
     
     [[GorillasAudioController get] clickEffect];
     [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:[[GorillasConfig get].mode unsignedIntValue]
-                                                          humans:humans ais:ais];
-    [[[GorillasAppDelegate get] gameLayer] startGame];
+                                                       playerIDs:nil ais:ais];
+    [[[GorillasAppDelegate get] gameLayer] startGameHosted:YES];
 }
 
 

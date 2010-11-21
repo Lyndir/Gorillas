@@ -136,10 +136,7 @@
 "model.banana"                              = "Vengeful Banana";
 "model.bunny"                               = "Easter Bunny";
 "model.gorilla"                             = "Mean Gorilla";
-"names.chip"                                = "Chip";
-"names.chip.n"                              = "Chip %d";
-"names.player"                              = "Player";
-"names.player.n"                            = "Player %d";
+"names.n"                                   = "Gorilla %d";
 "theme.aliengreen"                          = "Alien Retro";
 "theme.classic"                             = "Classic";
 "theme.classic.aliendark"                   = "Alien Skies";

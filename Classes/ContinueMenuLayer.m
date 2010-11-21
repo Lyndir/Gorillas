@@ -55,7 +55,7 @@
 -(void) continueGame: (id)sender {
     
     [[GorillasAudioController get] clickEffect];
-    [[[GorillasAppDelegate get] gameLayer] startGame];
+    [[[GorillasAppDelegate get] gameLayer] startGameHosted:YES];
 }
 
 

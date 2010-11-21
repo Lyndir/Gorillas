@@ -104,7 +104,7 @@
         if (buildingHeightRatio || !varFloors)
             addFloors               = varFloors * buildingHeightRatio;
         else
-            addFloors               = random() % varFloors;
+            addFloors               = [[GorillasConfig get] gameRandom] % varFloors;
         buildings[b].size           = CGSizeMake(buildingWidth, (fixedFloors + addFloors) * floorHeight + wPad);
 
         // Building's windows.
@@ -166,7 +166,7 @@
                  wx < buildings[b].size.width - wWidth && bw < buildings[b].windowCount;
                  wx += wPad + wWidth) {
                 
-                BOOL isOff                  = random() % 100 < 20;
+                BOOL isOff                  = [[GorillasConfig get] gameRandom] % 100 < 20;
                 NSUInteger wv               = (w + bw) * 4;
                 NSUInteger wi               = (w + bw) * 6;
                 

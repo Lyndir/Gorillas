@@ -27,29 +27,28 @@
 @interface GameConfiguration : NSObject {
 
 @private
-    NSString *name;
-    NSString *description;
+    NSString                                            *_name;
+    NSString                                            *_description;
     
-    GorillasMode mode;
-    NSUInteger sHumans, mHumans, sAis, mAis;
+    GorillasMode                                        _mode;
+    NSUInteger                                          _singleplayerAICount;
+    NSUInteger                                          _multiplayerAICount;
+    NSUInteger                                          _multiplayerHumanCount;
 }
 
-+(id) configurationWithName:(NSString *)_name description:(NSString *)_description
-                       mode:(GorillasMode)_mode
-                    sHumans:(NSUInteger)_sHumans mHumans:(NSUInteger)_mHumans
-                       sAis:(NSUInteger)_sAis mAis:(NSUInteger)_mAis;
+@property (nonatomic, copy, readonly) NSString          *name;
+@property (nonatomic, copy, readonly) NSString          *description;
+@property (nonatomic, assign, readonly) GorillasMode    mode;
+@property (nonatomic, assign, readonly) NSUInteger      singleplayerAICount;
+@property (nonatomic, assign, readonly) NSUInteger      multiplayerAICount;
+@property (nonatomic, assign, readonly) NSUInteger      multiplayerHumanCount;
 
--(id) initWithName:(NSString *)_name description:(NSString *)_description
-              mode:(GorillasMode)_mode
-           sHumans:(NSUInteger)_sHumans mHumans:(NSUInteger)_mHumans
-              sAis:(NSUInteger)_sAis mAis:(NSUInteger)_mAis;
++ (GameConfiguration *)configurationWithName:(NSString *)aName description:(NSString *)aDescription mode:(GorillasMode)aMode
+                         singleplayerAICount:(NSUInteger)aSingleplayerAICount
+                          multiplayerAICount:(NSUInteger)aMultiplayerAICount multiplayerHumanCount:(NSUInteger)aMultiplayerHumanCount;
 
-@property (nonatomic, readonly) NSString       *name;
-@property (nonatomic, readonly) NSString       *description;
-@property (nonatomic, readonly) GorillasMode   mode;
-@property (nonatomic, readonly) NSUInteger     sHumans;
-@property (nonatomic, readonly) NSUInteger     mHumans;
-@property (nonatomic, readonly) NSUInteger     sAis;
-@property (nonatomic, readonly) NSUInteger     mAis;
+- (GameConfiguration *)initWithName:(NSString *)aName description:(NSString *)aDescription mode:(GorillasMode)aMode
+                singleplayerAICount:(NSUInteger)aSingleplayerAICount
+                 multiplayerAICount:(NSUInteger)aMultiplayerAICount multiplayerHumanCount:(NSUInteger)aMultiplayerHumanCount;
 
 @end

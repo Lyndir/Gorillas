@@ -66,7 +66,7 @@
 - (NSArray *)toggleItemsForSetting:(SEL)setting {
     
     if (setting == @selector(cityTheme))
-        return [[CityTheme getThemes] allKeys];
+        return [CityTheme getThemeNames];
     if (setting == @selector(gravity))
         return NumbersRanging([[GorillasConfig get].minGravity doubleValue], [[GorillasConfig get].maxGravity doubleValue], 10,
                               NSNumberFormatterDecimalStyle);
@@ -80,7 +80,7 @@
     
     dbg(@"setting %s is now %@", setting, value);
     if (setting == @selector(cityTheme))
-        return [[[CityTheme getThemes] allKeys] indexOfObject:value];
+        return [[CityTheme getThemeNames] indexOfObject:value];
     if (setting == @selector(gravity))
         return (NSUInteger) (([value doubleValue] - [[GorillasConfig get].minGravity doubleValue]) / 10);
     if (setting == @selector(level))
@@ -92,7 +92,7 @@
 - (id)valueForSetting:(SEL)setting index:(NSUInteger)index {
     
     if (setting == @selector(cityTheme))
-        return [[[CityTheme getThemes] allKeys] objectAtIndex:index];
+        return [[CityTheme getThemeNames] objectAtIndex:index];
     if (setting == @selector(gravity))
         return [NSNumber numberWithDouble:[[GorillasConfig get].minGravity doubleValue] + 10 * index];
     if (setting == @selector(level))

@@ -227,7 +227,6 @@
 
     [self.target setPosition:r];
     if([[GorillasConfig get].visualFx boolValue]) {
-        dbg(@"r: %@", NSStringFromCGPoint(r));
         smoke.angle             = atan2f(smoke.centerOfGravity.y - r.y,
                                          smoke.centerOfGravity.x - r.x)
                                 / (float)M_PI * 180.0f;

@@ -94,6 +94,7 @@
                   gravity: (NSUInteger) nGravity;
 
 +(NSDictionary *)                       getThemes;
++(NSArray *)                            getThemeNames;
 + (void)                                forgetThemes;
 +(NSString *)                           defaultThemeName;
 

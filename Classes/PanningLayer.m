@@ -52,13 +52,10 @@
 -(void) reset {
     
     if (self.scale != 1) {
-        if (scaleAction) {
-            [self stopAction:scaleAction];
-            [scaleAction release];
-        }
+        if (scaleAction)
+            [self stopAction:[scaleAction autorelease]];
         
-        [self runAction:scaleAction = [[CCScaleTo alloc] initWithDuration:[[GorillasConfig get].transitionDuration floatValue]
-                                                                  scale:1.0f]];
+        [self runAction:scaleAction = [[CCScaleTo alloc] initWithDuration:[[GorillasConfig get].transitionDuration floatValue] scale:1.0f]];
     }
 }
 
@@ -145,7 +142,7 @@
     }
     [scaleAction release];
     [self runAction:scaleAction = [[CCScaleTo alloc] initWithDuration:duration
-                                                              scale:newScale]];
+                                                                scale:newScale]];
 }
 
 

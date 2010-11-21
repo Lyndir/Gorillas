@@ -23,30 +23,60 @@
 //
 
 #import "BananaLayer.h"
+#import "ActivitySprite.h"
+#import <GameKit/GameKit.h>
 
 
 @interface GorillaLayer : CCSprite {
 
 @private
-    NSString            *name;
-    NSUInteger          teamIndex, globalIndex;
+    NSString                                                        *_name;
+    NSUInteger                                                      _teamIndex, _globalIndex;
     
-    int                 initialLives, lives;
-    BOOL                active;
-    NSUInteger          turns;
-    float               zoom;
+    NSString                                                        *_playerID;
+    GKPlayer                                                        *_player;
+    GKPlayerConnectionState                                         _connectionState;
     
-    CCSprite              *bobber;
-    ccColor4B           *healthColors;
+    int                                                             _initialLives, _lives;
+    BOOL                                                            _active;
+    NSUInteger                                                      _turns;
+    float                                                           _zoom;
     
-    GorillasPlayerModel model;
-    GorillasPlayerType  type;
+    CCSprite                                                        *_bobber;
+    ccColor4B                                                       *_healthColors;
+    
+    GorillasPlayerModel                                             _model;
+    GorillasPlayerType                                              _type;
 }
 
-+(void) prepareCreation;
--(id) initWithName:(NSString *)_name type:(GorillasPlayerType)_type;
+@property (nonatomic, readonly, copy) NSString                      *name;
+@property (nonatomic, readonly, assign) NSUInteger                  teamIndex;
+@property (nonatomic, readonly, assign) NSUInteger                  globalIndex;
+
+@property (nonatomic, readonly, copy) NSString                      *playerID;
+@property (nonatomic, readwrite, retain) GKPlayer                   *player;
+@property (nonatomic, readwrite, assign) GKPlayerConnectionState    connectionState;
+
+@property (nonatomic, readonly, assign) int                         initialLives;
+@property (nonatomic, readonly, assign) int                         lives;
+@property (nonatomic, readwrite, assign) BOOL                       active;
+@property (nonatomic, readwrite, assign) NSUInteger                 turns;
+@property (nonatomic, readwrite, assign) float                      zoom;
+
+@property (nonatomic, readonly, retain) CCSprite                    *bobber;
+@property (nonatomic, readonly, retain) CCSprite                    *spinner;
+@property (nonatomic, readwrite, assign) GorillasPlayerModel        model;
+@property (nonatomic, readwrite, assign) GorillasPlayerType         type;
+
+@property (nonatomic, readonly, assign) GorillasProjectileModel     projectileModel;
+@property (nonatomic, readonly, assign) BOOL                        alive;
+
++ (void)prepareCreation;
++ (GorillaLayer *)gorillaWithType:(GorillasPlayerType)aType playerID:(NSString *)aPlayerId;
+- (id)initWithType:(GorillasPlayerType)aType playerID:(NSString *)aPlayerId;
 
 -(BOOL) human;
+-(BOOL) local;
 -(BOOL) hitsGorilla: (CGPoint)pos;
 -(void) cheer;
 -(void) dance;
@@ -55,18 +85,5 @@
 -(void) kill;
 -(void) killDead;
 -(void) revive;
-
-@property (nonatomic, readonly) NSString                *name;
-@property (nonatomic, readonly) NSUInteger              teamIndex;
-@property (nonatomic, readonly) NSUInteger              globalIndex;
-
-@property (nonatomic, readonly) int                     lives;
-@property (nonatomic, readonly) BOOL                    alive;
-@property (nonatomic, readwrite) BOOL                   active;
-@property (nonatomic, readwrite) NSUInteger             turns;
-@property (nonatomic, readwrite) float                  zoom;
-@property (nonatomic, readwrite) GorillasPlayerModel    model;
-@property (nonatomic, readwrite) GorillasPlayerType     type;
-@property (nonatomic, readonly) GorillasProjectileModel projectileModel;
 
 @end

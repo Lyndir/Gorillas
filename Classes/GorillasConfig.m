@@ -62,28 +62,23 @@
                            [GameConfiguration configurationWithName:NSLocalizedString(@"menu.config.gametype.bootcamp", @"Boot Camp")
                                                         description:NSLocalizedString(@"menu.config.gametype.bootcamp.desc", @"Practice your aim with some helpful hints.")
                                                                mode:GorillasModeBootCamp
-                                                            sHumans:1 mHumans:0
-                                                               sAis:1    mAis:0],
+                                                singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:0],
                            [GameConfiguration configurationWithName:NSLocalizedString(@"menu.config.gametype.classic", @"Classic")
                                                         description:NSLocalizedString(@"menu.config.gametype.classic.desc", @"Quick and simple one-on-one battle.")
                                                                mode:GorillasModeClassic
-                                                            sHumans:1 mHumans:2
-                                                               sAis:1    mAis:0],
+                                                singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:4],
                            [GameConfiguration configurationWithName:NSLocalizedString(@"menu.config.gametype.dynamic", @"Dynamic")
                                                         description:NSLocalizedString(@"menu.config.gametype.dynamic.desc", @"One-on-one battle with adapting skill and difficulty.")
                                                                mode:GorillasModeDynamic
-                                                            sHumans:1 mHumans:0
-                                                               sAis:1    mAis:0],
+                                                singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:4],
                            [GameConfiguration configurationWithName:NSLocalizedString(@"menu.config.gametype.team", @"Team Battle")
                                                         description:NSLocalizedString(@"menu.config.gametype.team.desc", @"Face the AIs with a little help from your friends.")
                                                                mode:GorillasModeTeam
-                                                            sHumans:0 mHumans:2
-                                                               sAis:0    mAis:2],
+                                                singleplayerAICount:0 multiplayerAICount:2 multiplayerHumanCount:2],
                            [GameConfiguration configurationWithName:NSLocalizedString(@"menu.config.gametype.lms", @"Last Man Standing")
                                                         description:NSLocalizedString(@"menu.config.gametype.lms.desc", @"Gorillas have lives; be the last left standing!")
                                                                mode:GorillasModeLMS
-                                                            sHumans:1 mHumans:2
-                                                               sAis:3    mAis:3],
+                                                singleplayerAICount:3 multiplayerAICount:3 multiplayerHumanCount:3],
                            nil];
     
     modes               = [[NSArray alloc] initWithObjects:
@@ -218,40 +213,6 @@
     [self.resetTriggers setObject:@"newGameLayer" forKey:cActiveGameConfigurationIndex];
     [self.resetTriggers setObject:@"customGameLayer" forKey:cMode];
     
-    /*[self setTopScoreHistory:[NSDictionary dictionaryWithObjectsAndKeys:
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              [NSNumber numberWithInteger:random() % 200], [[NSDate dateWithTimeIntervalSinceNow:random() % 10000] description],
-                              nil
-                              ]];
-     //*/
-    
     return self;
 }
 
@@ -275,11 +236,11 @@
 
 -(NSString *) offMessage {
 
-    return [offMessages objectAtIndex:random() % offMessages.count];
+    return [offMessages objectAtIndex:[[GorillasConfig get] gameRandom] % offMessages.count];
 }
 -(NSString *) hitMessage {
     
-    return [hitMessages objectAtIndex:random() % hitMessages.count];
+    return [hitMessages objectAtIndex:[[GorillasConfig get] gameRandom] % hitMessages.count];
 }
 
 
@@ -293,7 +254,7 @@
 }
 -(long) buildingColor {
     
-    return [[[self buildingColors] objectAtIndex:random() % [[self buildingColors] count]] longValue];
+    return [[[self buildingColors] objectAtIndex:[[GorillasConfig get] gameRandom] % [[self buildingColors] count]] longValue];
 }
 
 

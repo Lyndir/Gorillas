@@ -66,7 +66,6 @@
                  nil]))
         return self;
     
-
     return self;
 }
 

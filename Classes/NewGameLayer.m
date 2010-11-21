@@ -39,7 +39,7 @@
 @end
 
 @implementation NewGameLayer
-
+@synthesize playersToInvite = _playersToInvite;
 
 - (id) init {
     
@@ -55,8 +55,8 @@
                                                                   selector:@selector(startMulti:)],
                   [MenuItemSpacer spacerNormal],
                   [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.choose.custom", @"Custom Game...")
-                                                                   target:self
-                                                                 selector:@selector(custom:)],
+                                          target:self
+                                        selector:@selector(custom:)],
                   nil]))
         return self;
     
@@ -79,8 +79,8 @@
     if ([[configurationI subItems] count] > gameConfigurationIndex)
         [configurationI setSelectedIndex:gameConfigurationIndex];
     [descriptionT setString:gameConfiguration.description];
-    singlePlayerI.isEnabled = gameConfiguration.sHumans + gameConfiguration.sAis > 0;
-    multiPlayerI.isEnabled = gameConfiguration.mHumans + gameConfiguration.mAis > 0;
+    singlePlayerI.isEnabled = gameConfiguration.singleplayerAICount;
+    multiPlayerI.isEnabled = gameConfiguration.multiplayerHumanCount && [GKLocalPlayer localPlayer].authenticated;
 }
 
 
@@ -108,11 +108,10 @@
     
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
     GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
-
-    [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:gameConfiguration.mode
-                                                          humans:gameConfiguration.sHumans
-                                                             ais:gameConfiguration.sAis];
-    [[[GorillasAppDelegate get] gameLayer] startGame];
+    
+    [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode
+                                                       playerIDs:nil ais:gameConfiguration.singleplayerAICount];
+    [[GorillasAppDelegate get].gameLayer startGameHosted:YES];
 }
 
 
@@ -122,13 +121,19 @@
     
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
     GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
-
-    [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:gameConfiguration.mode
-                                                          humans:gameConfiguration.mHumans
-                                                             ais:gameConfiguration.mAis];
-    [[[GorillasAppDelegate get] gameLayer] startGame];
+    
+    if (!gameConfiguration.multiplayerHumanCount || ![GKLocalPlayer localPlayer].authenticated)
+        // Multiplayer is not supported or game center is unavailable.
+        return;
+    
+    GKMatchRequest *matchRequest = [[GKMatchRequest new] autorelease];
+    matchRequest.minPlayers = 2;
+    matchRequest.maxPlayers = gameConfiguration.multiplayerHumanCount;
+    matchRequest.playerGroup = gameConfiguration.mode;
+    matchRequest.playersToInvite = self.playersToInvite;
+    
+    [[GorillasAppDelegate get].netController beginRequest:matchRequest];
 }
-
 
 -(void) custom: (id) sender {
     

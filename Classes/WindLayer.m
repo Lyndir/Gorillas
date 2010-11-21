@@ -59,7 +59,6 @@
     // the active wind has been applied to the banana the whole time it's
     // been flying already (assumes constant wind).
     incrementDuration = 0.5f;
-    //[self schedule:@selector(updateWind:)];
     
 	return self;
 }
@@ -75,22 +74,8 @@
 
 -(void) reset {
 
-    wind = (random() % 100) / 100.0f - 0.5f;
+    wind = ([[GorillasConfig get] gameRandom] % 100) / 100.0f - 0.5f;
 
-    [self updateSystems];
-}
-
-
--(void) updateWind:(ccTime)dt {
-    
-    elapsed += dt;
-    wind += dt / incrementDuration * windIncrement;
-    
-    if(elapsed >= incrementDuration) {
-        windIncrement = (random() % 100) / 1000.0f - 0.05f;
-        elapsed = 0;
-    }
-    
     [self updateSystems];
 }
 

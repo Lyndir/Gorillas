@@ -28,7 +28,18 @@
 #import "Remove.h"
 
 
-@interface GorillaLayer (Private)
+@interface GorillaLayer ()
+
+@property (nonatomic, readwrite, copy) NSString                 *name;
+@property (nonatomic, readwrite, assign) NSUInteger             teamIndex;
+@property (nonatomic, readwrite, assign) NSUInteger             globalIndex;
+
+@property (nonatomic, readwrite, retain) CCSprite               *bobber;
+@property (nonatomic, readwrite, retain) CCSprite               *spinner;
+
+@property (nonatomic, readwrite, copy) NSString                 *playerID;
+@property (nonatomic, readwrite, assign) int                    initialLives;
+@property (nonatomic, readwrite, assign) int                    lives;
 
 -(void) dd;
 -(void) ud;
@@ -39,88 +50,117 @@
 
 @end
 
-static NSUInteger _teamIndex, _globalIndex;
+static NSUInteger nextTeamIndex, nextGlobalIndex;
 
 @implementation GorillaLayer
 
-@synthesize name, turns, lives, active, zoom, teamIndex, globalIndex, model, type;
+@synthesize name = _name, teamIndex = _teamIndex, globalIndex = _globalIndex;
+@synthesize playerID = _playerID, player = _player, connectionState = _connectionState;
+@synthesize initialLives = _initialLives, lives = _lives, active = _active, turns = _turns, zoom = _zoom;
+@synthesize bobber = _bobber, spinner = _spinner, model = _model, type = _type;
 
 
 +(void) prepareCreation {
-
-    _teamIndex      = 0;
-    _globalIndex    = 0;
+    
+    nextTeamIndex      = 0;
+    nextGlobalIndex    = 0;
 }
 
 
--(id) initWithName:(NSString *)_name type:(GorillasPlayerType)_type {
++ (GorillaLayer *)gorillaWithType:(GorillasPlayerType)aType playerID:(NSString *)aPlayerId {
+    
+    return [[[self alloc] initWithType:aType playerID:aPlayerId] autorelease];
+}
+
+- (id)initWithType:(GorillasPlayerType)aType playerID:(NSString *)aPlayerId {
     
     if(!(self = [super init]))
         return self;
     
-    model   = [[GorillasConfig get].playerModel unsignedIntValue];
-    type    = _type;
-
+    self.model              = [[GorillasConfig get].playerModel unsignedIntValue];
+    self.type               = aType;
+    self.teamIndex          = nextTeamIndex++;
+    self.globalIndex        = nextGlobalIndex++;
+    self.zoom               = 1;
+    self.scale              = [GorillasConfig get].cityScale;
     self.texture            = [[CCTextureCache sharedTextureCache] addImage:[self modelFileWithArmsUpLeft:NO right:NO]];
     self.textureRect        = CGRectFromPointAndSize(CGPointZero, self.texture.contentSize);
+    self.bobber             = [CCSprite spriteWithFile:@"bobber.png"];
+    self.bobber.visible     = NO;
+    self.bobber.position    = ccp([self contentSize].width / 2, [self contentSize].height + [self.bobber contentSize].height / 2 + 15);
+    [self.bobber runAction:[CCRepeatForever actionWithAction:[CCSequence actions:
+                                                              [CCEaseSineInOut actionWithAction:
+                                                               [CCMoveBy actionWithDuration:0.7f position:ccp(0, 15)]],
+                                                              [CCEaseSineInOut actionWithAction:
+                                                               [CCMoveBy actionWithDuration:0.7f position:ccp(0, -15)]],
+                                                              nil]]];
+    [self addChild:self.bobber];
+    self.spinner            = [ActivitySprite node];
+    self.spinner.position   = ccp([self contentSize].width / 2, [self contentSize].height + [self.spinner contentSize].height / 2 + 15);
+    [self addChild:self.spinner];
     
-    name        = [_name copy];
-    teamIndex   = _teamIndex++;
-    globalIndex = _globalIndex++;
-
-    zoom    = 1;
-
-    bobber  = [[CCSprite alloc] initWithFile:@"bobber.png"];
-    [bobber setPosition:ccp([self contentSize].width / 2,
-                            [self contentSize].height + [bobber contentSize].height / 2 + 15)];
-    [bobber runAction:[CCRepeatForever actionWithAction:[CCSequence actions:
-                                                       [CCEaseSineInOut actionWithAction:[CCMoveBy actionWithDuration:0.7f position:ccp(0, 15)]],
-                                                       [CCEaseSineInOut actionWithAction:[CCMoveBy actionWithDuration:0.7f position:ccp(0, -15)]],
-                                                       nil]]];
-    [bobber setVisible:NO];
-    [self addChild:bobber];
-    [self setScale:[[GorillasConfig get] cityScale]];
+    self.playerID           = aPlayerId;
+    self.connectionState    = self.playerID ? GKPlayerStateConnected: GKPlayerStateUnknown;
+    self.name = [NSString stringWithFormat:l(@"names.n"), self.globalIndex + 1];
+    if (self.playerID && [self.playerID isEqualToString:[GKLocalPlayer localPlayer].playerID]) {
+        self.player = [GKLocalPlayer localPlayer];
+        self.connectionState = GKPlayerStateConnected;
+    }
 
     // By default, a gorilla has 1 life, unless features say otherwise.
-    initialLives = 1;
+    self.initialLives = 1;
     if(self.human && [[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesPl])
         // Human gorillas with lives enabled.
-        initialLives = [[GorillasConfig get].lives intValue];
+        self.initialLives = [[GorillasConfig get].lives intValue];
     else if(!self.human) {
         if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesAi])
             // AI gorillas with lives enabled.
-            initialLives = [[GorillasConfig get].lives intValue];
+            self.initialLives = [[GorillasConfig get].lives intValue];
         else if([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesPl])
             // AI gorillas without lives enabled get infinite lives when humans have lives enabled.
-            initialLives = -1;
+            self.initialLives = -1;
     }
-    lives = initialLives;
+    self.lives = self.initialLives;
     
-    healthColors    = malloc(sizeof(ccColor4B) * 4);
-    healthColors[0] = healthColors[1] = ccc4l(0xFF33CC33);
-    healthColors[2] = healthColors[3] = ccc4l(0xFF3333CC);
+    _healthColors    = malloc(sizeof(ccColor4B) * 4);
+    _healthColors[0] = _healthColors[1] = ccc4l(0xFF33CC33);
+    _healthColors[2] = _healthColors[3] = ccc4l(0xFF3333CC);
     
     return self;
 }
 
 
--(void)setModel:(GorillasPlayerModel)_model {
+-(void)setModel:(GorillasPlayerModel)aModel {
     
-    model = _model;
+    _model = aModel;
     [self setTexture:[[CCTextureCache sharedTextureCache] addImage:[self modelFileWithArmsUpLeft:NO right:NO]]];
+}
+
+- (NSString *)name {
+    
+    if (self.player)
+        return self.player.alias;
+    
+    return _name;
 }
 
 
 -(BOOL) alive {
     
     // More than (or less than!) zero means gorilla is alive.
-    return lives != 0;
+    return self.lives != 0;
 }
 
 
 -(BOOL) human {
     
-    return type == GorillasPlayerTypeHuman;
+    return self.type == GorillasPlayerTypeHuman;
+}
+
+
+-(BOOL) local {
+    
+    return [self.playerID isEqualToString:[GKLocalPlayer localPlayer].playerID];
 }
 
 
@@ -142,12 +182,12 @@ static NSUInteger _teamIndex, _globalIndex;
     
     [self runAction:[CCSequence actions:
                      [CCRepeat actionWithAction:[CCSequence actions:
-                                               [CCCallFunc actionWithTarget:self selector:@selector(ud)],
-                                               [CCDelayTime actionWithDuration:0.2f],
-                                               [CCCallFunc actionWithTarget:self selector:@selector(du)],
-                                               [CCDelayTime actionWithDuration:0.2f],
-                                               nil]
-                                        times:8],
+                                                 [CCCallFunc actionWithTarget:self selector:@selector(ud)],
+                                                 [CCDelayTime actionWithDuration:0.2f],
+                                                 [CCCallFunc actionWithTarget:self selector:@selector(du)],
+                                                 [CCDelayTime actionWithDuration:0.2f],
+                                                 nil]
+                                          times:8],
                      [CCCallFunc actionWithTarget:self selector:@selector(uu)],
                      [CCDelayTime actionWithDuration:0.5f],
                      [CCCallFunc actionWithTarget:self selector:@selector(dd)],
@@ -156,7 +196,7 @@ static NSUInteger _teamIndex, _globalIndex;
 
 
 -(void) threw:(CGPoint)aim {
-
+    
     if(aim.x > 0)
         [self ud];
     else
@@ -196,7 +236,7 @@ static NSUInteger _teamIndex, _globalIndex;
 -(NSString *) modelFileWithArmsUpLeft:(BOOL)left right:(BOOL)right {
     
     NSString *modelName, *typeName;
-    switch (model) {
+    switch (self.model) {
         case GorillasPlayerModelGorilla:
             modelName = @"gorilla";
             break;
@@ -210,7 +250,7 @@ static NSUInteger _teamIndex, _globalIndex;
             @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                            reason:@"Active gorilla model not implemented." userInfo:nil];
     }
-    switch (type) {
+    switch (self.type) {
         case GorillasPlayerTypeAI:
             typeName = @"ai";
             break;
@@ -227,14 +267,14 @@ static NSUInteger _teamIndex, _globalIndex;
 
 
 -(GorillasProjectileModel) projectileModel {
-
-    switch (model) {
+    
+    switch (self.model) {
         case GorillasPlayerModelGorilla:
             return GorillasProjectileModelBanana;
-
+            
         case GorillasPlayerModelEasterBunny:
             return GorillasProjectileModelEasterEgg;
-
+            
         case GorillasPlayerModelBanana:
             return GorillasProjectileModelGorilla;
             
@@ -247,10 +287,10 @@ static NSUInteger _teamIndex, _globalIndex;
 
 -(void) kill {
     
-    if(lives > 0)
-        --lives;
-
-    if(lives == 0) {
+    if(self.lives > 0)
+        --self.lives;
+    
+    if(self.lives == 0) {
         [self stopAllActions];
         [self runAction:[CCSequence actions:
                          [CCFadeTo actionWithDuration:0.5f opacity:0x00],
@@ -261,14 +301,14 @@ static NSUInteger _teamIndex, _globalIndex;
                          [ShadeTo actionWithDuration:0.5f color:ccc4l(0xFF0000FF)],
                          [ShadeTo actionWithDuration:0.5f color:ccc4l(0xFFFFFFFF)],
                          nil]];
-
+    
     [[GorillasAppDelegate get].hudLayer updateHudWithNewScore:0 skill:0 wasGood:YES];
 }
 
 
 -(void) killDead {
     
-    lives = 1;
+    self.lives = 1;
     
     [self kill];
 }
@@ -276,27 +316,58 @@ static NSUInteger _teamIndex, _globalIndex;
 
 -(void) revive {
     
-    lives = 1;
+    self.lives = 1;
     
     [self stopAllActions];
     [self runAction:[CCFadeTo actionWithDuration:0.5f opacity:0xFF]];
 }
 
 
--(void) setActive:(BOOL)_active {
+-(void) setActive:(BOOL)isActive {
     
-    if (!active && _active)
+    if (!_active && isActive)
         [self applyZoom];
     
-    active = _active;
+    _active = isActive;
     
-    [bobber setVisible:active];
+    [self.bobber setVisible:self.active];
     [[GorillasAppDelegate get].hudLayer updateHudWithNewScore:0 skill:0 wasGood:YES];
+}
+
+- (void)setConnectionState:(GKPlayerConnectionState)aConnectionState {
+    
+    _connectionState = aConnectionState;
+    
+    switch (_connectionState) {
+        case GKPlayerStateUnknown: {
+            self.spinner.visible = YES;
+            break;
+        }
+        case GKPlayerStateConnected: {
+            if ([self local]) {
+                self.bobber.color       = ccc3l(0xFFFFFF);
+                dbg(@"%@: bobber color 0xFFFFFF", self.name);
+            }
+            else {
+                self.bobber.color       = ccc3l(0xFFFF00);
+                dbg(@"%@: bobber color 0xFFFF00", self.name);
+            }
+
+            self.spinner.visible = NO;
+            break;
+        }
+        case GKPlayerStateDisconnected: {
+            self.bobber.color = ccc3l(0xFF0000);
+            dbg(@"%@: bobber color 0xFFFFFF", self.name);
+            self.spinner.visible = NO;
+            break;
+        }
+    }
 }
 
 
 - (void) applyZoom {
-
+    
     [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:self.zoom limited:YES];
 }
 
@@ -307,9 +378,9 @@ static NSUInteger _teamIndex, _globalIndex;
         return NO;
     
     return  pos.x >= self.position.x - self.contentSize.width  / 2 &&
-            pos.y >= self.position.y - self.contentSize.height / 2 &&
-            pos.x <= self.position.x + self.contentSize.width  / 2 &&
-            pos.y <= self.position.y + self.contentSize.height / 2;
+    pos.y >= self.position.y - self.contentSize.height / 2 &&
+    pos.x <= self.position.x + self.contentSize.width  / 2 &&
+    pos.y <= self.position.y + self.contentSize.height / 2;
 }
 
 
@@ -320,36 +391,36 @@ static NSUInteger _teamIndex, _globalIndex;
 
 
 -(void) draw {
-
-    [super draw];
     
-    if(lives <= 0)
+    [super draw];
+
+    if(self.lives <= 0)
         return;
     
     if(self.human && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesPl])
-       return;
-
+        return;
+    
     if(!self.human && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesAi])
-       return;
+        return;
     
     CGFloat barX = self.contentSize.width / self.scale / 2;
     CGFloat barY = self.contentSize.height / self.scale + 10;
     CGFloat barW = 40;
     CGPoint lines[4] = {
         ccp(barX - barW / 2, barY),
-        ccp(barX - barW / 2 + barW * lives / initialLives, barY),
-        ccp(barX - barW / 2 + barW * lives / initialLives, barY),
+        ccp(barX - barW / 2 + barW * self.lives / self.initialLives, barY),
+        ccp(barX - barW / 2 + barW * self.lives / self.initialLives, barY),
         ccp(barX - barW / 2 + barW, barY),
     };
     
-    GLubyte o = active? 0xFF: 0x33;
+    GLubyte o = self.active? 0xFF: 0x33;
     
     if ([[GorillasConfig get].visualFx boolValue]) {
         DrawBoxFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[1], ccp(0, 3)), ccc4l(0xCCFFCC00 | o), ccc4l(0x33CC3300 | o));
         DrawBoxFrom(ccpAdd(lines[2], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc4l(0xFFCCCC00 | o), ccc4l(0xCC333300 | o));
     }
     else
-        DrawLines(lines, healthColors, 4, 6);
+        DrawLines(lines, _healthColors, 4, 6);
     
     DrawBorderFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc4l(0xCCCC3300 | (o - 0x33)), 1);
 }
@@ -357,11 +428,12 @@ static NSUInteger _teamIndex, _globalIndex;
 
 -(void) dealloc {
     
-    [name release];
-    name = nil;
+    self.name       = nil;
+    self.playerID   = nil;
+    self.bobber     = nil;
     
-    free(healthColors);
-    healthColors = nil;
+    free(_healthColors);
+    _healthColors = nil;
     
     [super dealloc];
 }

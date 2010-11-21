@@ -29,10 +29,10 @@
 @interface CustomGameLayer : MenuLayer <Resettable, MenuDelegate> {
 
 @private
-    CCMenuItemToggle      *humansI, *aisI, *gameModeI;
-    CCMenuItem            *startGameI;
+    CCMenuItemToggle        *aisI, *gameModeI;
+    CCMenuItem              *startGameI;
     
-    NSUInteger humans, ais;
+    NSUInteger              ais;
 }
 
 @end

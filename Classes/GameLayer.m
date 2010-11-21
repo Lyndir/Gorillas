@@ -31,6 +31,8 @@
 
 @interface GameLayer ()
 
+@property (nonatomic, readwrite, retain) NSArray    *playerIDs;
+
 -(void) setPausedSilently:(BOOL)_paused;
 - (void)updateWeather:(ccTime)dt;
 - (void)randomEncounter:(ccTime)dt;
@@ -42,13 +44,14 @@
 
 #pragma mark Properties
 
-@synthesize paused;
+@synthesize paused, hosted;
 @synthesize gorillas, activeGorilla;
 @synthesize skyLayer, panningLayer, cityLayer, windLayer, weather;
 //FIXME @synthesize scaleTimeAction;
+@synthesize playerIDs;
 
--(BOOL) singlePlayer {
-
+-(BOOL) isSinglePlayer {
+    
     return humans == 1;
 }
 
@@ -67,7 +70,7 @@
 
 
 -(void) setPaused:(BOOL)_paused {
-
+    
     if(paused == _paused)
         // Nothing changed.
         return;
@@ -77,11 +80,8 @@
     if(running) {
         if(paused)
             [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.paused", @"Paused")];
-        else {
+        else
             [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.unpaused", @"Unpaused")];
-            if ([[GorillasConfig get].voice boolValue])
-                [[GorillasAudioController get] playEffectNamed:@"Go"];
-        }
     }
 }
 
@@ -97,33 +97,72 @@
             [self scaleTimeTo:0 duration:0.5f];
         [[GorillasAppDelegate get] hideHud];
         [windLayer runAction:[CCFadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
-                                                opacity:0x00]];
+                                                  opacity:0x00]];
     } else {
         [self scaleTimeTo:1.0f duration:1.0f];
         [[GorillasAppDelegate get] popAllLayers];
         [[GorillasAppDelegate get] revealHud];
         [windLayer runAction:[CCFadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
-                                                opacity:0xFF]];
+                                                  opacity:0xFF]];
     }
 }
 
 
 - (void)scaleTimeTo:(float)aTimeScale duration:(ccTime)aDuration {
-
-/*FIXME    if (scaleTimeAction)
-        [self stopAction:scaleTimeAction];
-    [scaleTimeAction release];
     
-    scaleTimeAction = [[ScaleTime actionWithTimeScaleTarget:aTimeScale duration:aDuration] retain];
-    [self runAction:scaleTimeAction scaleTime:NO];*/
+    /*FIXME    if (scaleTimeAction)
+     [self stopAction:scaleTimeAction];
+     [scaleTimeAction release];
+     
+     scaleTimeAction = [[ScaleTime actionWithTimeScaleTarget:aTimeScale duration:aDuration] retain];
+     [self runAction:scaleTimeAction scaleTime:NO];*/
 }
 
 
--(void) configureGameWithMode:(GorillasMode)_mode humans:(NSUInteger)_humans ais:(NSUInteger)_ais {
+-(void) configureGameWithMode:(GorillasMode)_mode playerIDs:(NSArray *)aPlayerIDs ais:(NSUInteger)_ais {
     
-    mode = _mode;
-    humans = _humans;
-    ais = _ais;
+    self.playerIDs  = aPlayerIDs;
+
+    mode            = _mode;
+    humans          = 1 + [self.playerIDs count];
+    ais             = _ais;
+    
+    // Create gorillas array.
+    if(activeGorilla)
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"Tried to start a game while there's still an active gorilla in the field."
+                                     userInfo:nil];
+    [gorillas removeAllObjects];
+    if(!gorillas)
+        gorillas = [[NSMutableArray alloc] initWithCapacity:humans + ais];
+    
+    // Prepare.
+    [GorillaLayer prepareCreation];
+    
+    // Add humans to the game.
+    if (self.playerIDs) {
+        [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeHuman playerID:[GKLocalPlayer localPlayer].playerID]];
+        
+        for (NSString *playerID in self.playerIDs)
+            [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeHuman playerID:playerID]];
+        
+        [GKPlayer loadPlayersForIdentifiers:self.playerIDs withCompletionHandler:^(NSArray *players, NSError *error) {
+            if (error)
+                err(@"While loading player information: %@", error);
+            
+            for (GKPlayer *player in players)
+                for (GorillaLayer *gorilla in gorillas)
+                    if ([gorilla.playerID isEqualToString:player.playerID])
+                        gorilla.player = player;
+        }];
+    }
+    else
+        for (NSUInteger i = 0; i < humans; ++i)
+            [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeHuman playerID:nil]];
+    
+    // Add AIs to the game.
+    for (NSUInteger i = 0; i < ais; ++i)
+        [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeAI playerID:nil]];
 }
 
 
@@ -146,7 +185,7 @@
 }
 
 
--(void) startGame {
+-(void) startGameHosted:(BOOL)isHosted {
 
     if(!mode)
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
@@ -157,53 +196,16 @@
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:@"Tried to start a game while one's still running."
                                      userInfo:nil];
-    
-    // Create gorillas array.
-    if(activeGorilla)
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:@"Tried to start a game while there's still an active gorilla in the field."
-                                     userInfo:nil];
-    if(!gorillas)
-        gorillas = [[NSMutableArray alloc] initWithCapacity:4];
-    if([gorillas count])
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:@"Tried to start a game while there's still gorillas in the field."
-                                     userInfo:nil];
-    
-    [GorillaLayer prepareCreation];
-    
-    // Add humans to the game.
-    for (NSUInteger i = 0; i < humans; ++i) {
-        NSString *name = NSLocalizedString(@"names.player", @"Player");
-        if(humans > 1)
-            name = [NSString stringWithFormat:NSLocalizedString(@"names.player.n", @"Player %d"), i + 1];
-        
-        GorillaLayer *gorilla = [[GorillaLayer alloc] initWithName:name type:GorillasPlayerTypeHuman];
-        [gorillas addObject:gorilla];
-        [gorilla release];
-    }
-    
-    // Add AIs to the game.
-    for (NSUInteger i = 0; i < ais; ++i) {
-        NSString *name = NSLocalizedString(@"names.chip", @"Chip");
-        if(ais > 1)
-            name = [NSString stringWithFormat:NSLocalizedString(@"names.chip.n", @"Chip %d"), i + 1];
-        
-        GorillaLayer *gorilla = [[GorillaLayer alloc] initWithName:name type:GorillasPlayerTypeAI];
-        [gorillas addObject:gorilla];
-        [gorilla release];
-    }
-    
+
+    hosted          = isHosted;
+
     // When there are AIs in the game, show their difficulity.
     if (ais)
         [[GorillasAppDelegate get].uiLayer message:[GorillasConfig nameForLevel:[GorillasConfig get].level]];
     
-    // Reset the game field and start the game.
-    //[buildingsLayer stopPanning];
     [self reset];
-    [cityLayer startGame];
+    [self.cityLayer beginGame];
 }
-
 
 -(void) updateStateHitGorilla:(BOOL)hitGorilla hitBuilding:(BOOL)hitBuilding offScreen:(BOOL)offScreen throwSkill:(float)throwSkill {
     
@@ -214,7 +216,7 @@
         [[[GorillasAppDelegate get] hudLayer] message:[NSString stringWithFormat:[GorillasConfig get].hitMessage,
                                                        activeGorilla.name, cityLayer.hitGorilla.name]
                                              duration:4 isImportant:NO];
-
+    
     if (hitGorilla) {
         // Gorilla hit a gorilla.
         
@@ -377,7 +379,7 @@
 
 
 -(BOOL) checkGameStillOn {
-
+    
     if(running) {
         // Check to see if there are any opponents left.
         NSUInteger liveGorillas = 0;
@@ -418,9 +420,11 @@
 
 -(void) endGame {
     
+    [[GorillasAppDelegate get].netController endMatch];
+    
     [self setPausedSilently:NO];
-
-    [cityLayer stopGame];
+    
+    [cityLayer endGame];
 }
 
 
@@ -430,7 +434,7 @@
     
 	if (!(self = [super init]))
 		return self;
-
+    
     running = NO;
     
     CCActionInterval *l     = [CCMoveBy actionWithDuration:.05f position:ccp(-3, 0)];
@@ -452,7 +456,7 @@
     windLayer               = [[WindLayer alloc] init];
     windLayer.position      = ccp(self.contentSize.width / 2, self.contentSize.height - 15);
     [self addChild:windLayer z:5];
-
+    
     paused = YES;
     
     return self;
@@ -472,7 +476,7 @@
 
 
 -(void) onExit {
-
+    
     [super onExit];
     
     [self setPausedSilently:YES];
@@ -502,17 +506,17 @@
             
             CGRect field = [cityLayer fieldInSpaceOf:panningLayer];
             
-            if ([[GorillasConfig get].visualFx boolValue] && random() % 100 == 0) {
+            if ([[GorillasConfig get].visualFx boolValue] && [[GorillasConfig get] gameRandom:GorillasGameRandomWeather] % 100 == 0) {
                 // 1% chance to start snow/rain when weather is enabled.
-            
-                switch (random() % 2) {
+                
+                switch ([[GorillasConfig get] gameRandom:GorillasGameRandomWeather] % 2) {
                     case 0:
                         weather = [[CCParticleRain alloc] init];
                         weather.emissionRate    = 60;
                         weather.startSizeVar    = 1.5f;
                         weather.startSize       = 3;
                         break;
-                    
+                        
                     case 1:
                         weather = [[CCParticleSnow alloc] init];
                         weather.speed           = 10;
@@ -530,8 +534,8 @@
                 weather.posVar          = ccp(field.size.width / 2, weather.posVar.y);
                 weather.position        = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
                 [panningLayer addChild:weather z:-3 /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:ccp(self.contentSize.width / 2,
-                                                                                                       self.contentSize.height / 2)*/];
-
+                                                     self.contentSize.height / 2)*/];
+                
                 [windLayer registerSystem:weather affectAngle:YES];
             }
         }
@@ -539,26 +543,26 @@
     
     else {
         // System is alive, let the emission rate evolve.
-        float rate = [weather emissionRate] + (random() % 40 - 15) / 10.0f;
+        float rate = [weather emissionRate] + ([[GorillasConfig get] gameRandom:GorillasGameRandomWeather] % 40 - 15) / 10.0f;
         float max = [weather isKindOfClass:[CCParticleRain class]]? 200: 100;
         rate = max; // fminf(fmaxf(0, rate), max);
         
-        if(random() % 100 == 0)
+        if([[GorillasConfig get] gameRandom:GorillasGameRandomWeather] % 100 == 0)
             // 1% chance for a full stop.
             rate = 0;
-    
+        
         [weather setEmissionRate:rate];
     }
 }
 
 
 -(void) randomEncounter:(ccTime)dt {
-
+    
     if(!running)
         return;
-
+    
     // Need to refactor some bad logic about setting projectile as cleared before this'll work.
-    //    if(random() % 1 == 0) {
+    //    if([[GorillasConfig get] gameRandom:GorillasGameRandomWeather] % 1 == 0) {
     //        BananaLayer *egg = [[BananaLayer alloc] init];
     //        [egg setModel:GorillasProjectileModelEasterEgg];
     //
@@ -572,18 +576,17 @@
 }
 
 
--(void) started {
+-(void) began {
     
     running = YES;
-
+    
     [self setPausedSilently:NO];
-
-    if ([[GorillasConfig get].voice boolValue])
-        [[GorillasAudioController get] playEffectNamed:@"Go"];
+    
+    [self.cityLayer nextGorilla];
 }
 
 
--(void) stopped {
+-(void) ended {
     
     running = NO;
     
@@ -592,7 +595,7 @@
     
     if([panningLayer position].x != 0 || [panningLayer position].y != 0)
         [panningLayer runAction:[CCMoveTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
-                                                  position:CGPointZero]];
+                                                    position:CGPointZero]];
     
     if(mode)
         [[GorillasAppDelegate get] showContinueMenu];
@@ -627,6 +630,8 @@
     
     [activeGorilla release];
     activeGorilla = nil;
+    
+    self.playerIDs = nil;
     
     [super dealloc];
 }
