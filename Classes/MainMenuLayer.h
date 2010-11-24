@@ -29,13 +29,13 @@
 @interface MainMenuLayer : MenuLayer <Resettable, MenuDelegate> {
 
 @private
-    CCMenuItem            *_info, *_config, *_continueGame, *_stopGame, *_newGame;
+    CCMenuItem                                      *_info, *_config, *_continueGame, *_stopGame, *_newGame;
 }
 
-@property (readonly, retain) CCMenuItem            *info;
-@property (readonly, retain) CCMenuItem            *config;
-@property (readonly, retain) CCMenuItem            *continueGame;
-@property (readonly, retain) CCMenuItem            *stopGame;
-@property (readonly, retain) CCMenuItem            *newGame;
+@property (nonatomic, readonly, retain) CCMenuItem  *info;
+@property (nonatomic, readonly, retain) CCMenuItem  *config;
+@property (nonatomic, readonly, retain) CCMenuItem  *continueGame;
+@property (nonatomic, readonly, retain) CCMenuItem  *stopGame;
+@property (nonatomic, readonly, retain) CCMenuItem  *newGame;
 
 @end

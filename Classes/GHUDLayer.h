@@ -28,16 +28,16 @@
 @interface GHUDLayer : HUDLayer {
 
 @private
-    CCSprite              *_skillSprite;
-    CCLabelAtlas          *_skillCount;
-    CCLayer               *_livesLayer;
-    CCSprite              *_infiniteLives;
+    CCSprite                                            *_skillSprite;
+    CCLabelAtlas                                        *_skillCount;
+    CCLayer                                             *_livesLayer;
+    CCSprite                                            *_infiniteLives;
 }
 
-@property (readonly, retain) CCSprite                 *skillSprite;
-@property (readonly, retain) CCLabelAtlas             *skillCount;
-@property (readonly, retain) CCLayer                  *livesLayer;
-@property (readonly, retain) CCSprite                 *infiniteLives;
+@property (nonatomic, readonly, retain) CCSprite        *skillSprite;
+@property (nonatomic, readonly, retain) CCLabelAtlas    *skillCount;
+@property (nonatomic, readonly, retain) CCLayer         *livesLayer;
+@property (nonatomic, readonly, retain) CCSprite        *infiniteLives;
 
 -(void) updateHudWithNewScore:(int)newScore skill:(float)throwSkill wasGood:(BOOL)wasGood;
 

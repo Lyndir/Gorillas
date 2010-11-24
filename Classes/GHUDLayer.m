@@ -28,10 +28,10 @@
 
 @interface GHUDLayer ()
 
-@property (readwrite, retain) CCSprite                 *skillSprite;
-@property (readwrite, retain) CCLabelAtlas             *skillCount;
-@property (readwrite, retain) CCLayer                  *livesLayer;
-@property (readwrite, retain) CCSprite                 *infiniteLives;
+@property (nonatomic, readwrite, retain) CCSprite       *skillSprite;
+@property (nonatomic, readwrite, retain) CCLabelAtlas   *skillCount;
+@property (nonatomic, readwrite, retain) CCLayer        *livesLayer;
+@property (nonatomic, readwrite, retain) CCSprite       *infiniteLives;
 
 @end
 

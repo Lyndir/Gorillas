@@ -41,7 +41,7 @@
     for (NSUInteger j = 0; j < 3; ++j) {
         float depth = j / 9.0f + 0.3f;
         
-        const StarLayer *starLayer =  [[StarLayer alloc] initWidthDepth:j / 4.0f + 0.5f];
+        StarLayer *starLayer =  [[StarLayer alloc] initWidthDepth:j / 4.0f + 0.5f];
         [stars addObject: starLayer];
 
         [self addChild:starLayer z:1 parallaxRatio:ccp(depth, depth) positionOffset:ccp(self.contentSize.width / 2,

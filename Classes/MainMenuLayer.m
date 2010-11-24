@@ -35,11 +35,11 @@
 -(void) information: (id)sender;
 -(void) options: (id)sender;
 
-@property (readwrite, retain) CCMenuItem            *info;
-@property (readwrite, retain) CCMenuItem            *config;
-@property (readwrite, retain) CCMenuItem            *continueGame;
-@property (readwrite, retain) CCMenuItem            *stopGame;
-@property (readwrite, retain) CCMenuItem            *newGame;
+@property (nonatomic, readwrite, retain) CCMenuItem *info;
+@property (nonatomic, readwrite, retain) CCMenuItem *config;
+@property (nonatomic, readwrite, retain) CCMenuItem *continueGame;
+@property (nonatomic, readwrite, retain) CCMenuItem *stopGame;
+@property (nonatomic, readwrite, retain) CCMenuItem *newGame;
 
 @end
 
