@@ -19,6 +19,8 @@
 @property (nonatomic, readwrite, retain) GKMatch                *match;
 @property (nonatomic, readwrite, retain) NetMessageElectHost    *hostElection;
 
+- (GorillaLayer *)findGorillaWithPlayerID:(NSString *)playerID;
+
 @end
 
 @implementation NetController
@@ -59,6 +61,18 @@
     self.match = nil;
 }
 
+- (void)throwBy:(NSString *)playerID velocity:(CGPoint)velocity {
+    
+    dbg(@"Sending throw of: %@ by: %@ to all players.", playerID, NSStringFromCGPoint(velocity));
+    NSError *error = nil;
+    if (![self.match sendDataToAllPlayers:[NSKeyedArchiver archivedDataWithRootObject:[NetMessageThrow throwWithPlayerID:playerID velocity:velocity]]
+                             withDataMode:GKMatchSendDataReliable error:&error] || error) {
+        err(@"Failed to send our throw: %@", error);
+        [self endMatch];
+        return;
+    }
+}
+
 // The user has cancelled matchmaking
 - (void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController {
     
@@ -91,7 +105,8 @@
         NetMessageElectHost *electMessage = (NetMessageElectHost *)message;
         [self.hostElection addVote:electMessage fromPlayer:playerID];
         dbg(@" -> Host Election: %d", electMessage.vote);
-        dbg(@" -> Winning host: %@ (%@)", self.hostElection.hostID, [self.hostElection isLocalHost]? @"local": @"remote");
+        dbg(@" -> Winning host: %@ (%@), ordered hosts: %@",
+            self.hostElection.hostID, [self.hostElection isLocalHost]? @"local": @"remote", self.hostElection.orderedPlayerIDs);
         
         if (!started && self.hostElection.host) {
             // Beginning of the game, host determined.  Start the game.
@@ -100,15 +115,21 @@
             
             // Use the host's seed for the game random.
             [[GorillasConfig get] setGameRandomSeed:self.hostElection.host.vote];
-            [GorillasConfig get].cityTheme = [[CityTheme getThemeNames] objectAtIndex:[[GorillasConfig get] gameRandom] % [[CityTheme getThemeNames] count]];
+            [GorillasConfig get].cityTheme = [[CityTheme getThemeNames] objectAtIndex:gameRandom() % [[CityTheme getThemeNames] count]];
             
             NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
             GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
             
-            [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:gameConfiguration.mode
-                                                               playerIDs:self.match.playerIDs ais:gameConfiguration.multiplayerAICount];
+            [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode
+                                                               playerIDs:self.hostElection.orderedPlayerIDs ais:gameConfiguration.multiplayerAICount];
             [[GorillasAppDelegate get].gameLayer startGameHosted:[self.hostElection isLocalHost]];
         }
+    }
+    else if ([message isKindOfClass:[NetMessageThrow class]]) {
+        NetMessageThrow *throwMessage = (NetMessageThrow *)message;
+        dbg(@"Received throw of: %@ by: %@ from player: %@", throwMessage.playerID, NSStringFromCGPoint(throwMessage.velocity), playerID);
+        [[GorillasAppDelegate get].gameLayer.cityLayer throwFrom:[self findGorillaWithPlayerID:throwMessage.playerID]
+                                                    withVelocity:throwMessage.velocity];
     }
     else
         err(@"Did not understand data unarchived as: %@\n%@", message, data);
@@ -117,21 +138,16 @@
 // Called when a player connects to or disconnects from the match.
 - (void)match:(GKMatch *)match player:(NSString *)playerID didChangeState:(GKPlayerConnectionState)state {
     
-    BOOL gorillaFound = NO;
-    for (GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
-        if ([gorilla.playerID isEqualToString:playerID]) {
-            gorillaFound = YES;
-            gorilla.connectionState = state;
-            break;
-        }
-    
-    if (!gorillaFound)
+    GorillaLayer *gorilla = [self findGorillaWithPlayerID:playerID];
+    if (gorilla)
+        gorilla.connectionState = state;
+    else
         err(@"No gorilla found for player: %@", playerID);
     
     if (!started && !match.expectedPlayerCount) {
         // Beginning of the game, all players have connected.  Vote for host.
         NSError *error = nil;
-        self.hostElection = [[[NetMessageElectHost alloc] initWithPlayers:self.match.playerIDs] autorelease];
+        self.hostElection = [NetMessageElectHost electHostWithPlayerIDs:self.match.playerIDs];
         if (![self.match sendDataToAllPlayers:[NSKeyedArchiver archivedDataWithRootObject:self.hostElection]
                                  withDataMode:GKMatchSendDataReliable error:&error] || error) {
             err(@"Failed to send our host election: %@", error);
@@ -149,6 +165,15 @@
 // Called when the match could not connect to any other players.
 - (void)match:(GKMatch *)match didFailWithError:(NSError *)error {
     
+}
+
+- (GorillaLayer *)findGorillaWithPlayerID:(NSString *)playerID {
+
+    for (GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
+        if ([gorilla.playerID isEqualToString:playerID])
+            return gorilla;
+    
+    return nil;
 }
 
 @end

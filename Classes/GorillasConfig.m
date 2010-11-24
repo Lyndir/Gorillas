@@ -236,11 +236,11 @@
 
 -(NSString *) offMessage {
 
-    return [offMessages objectAtIndex:[[GorillasConfig get] gameRandom] % offMessages.count];
+    return [offMessages objectAtIndex:gameRandom() % offMessages.count];
 }
 -(NSString *) hitMessage {
     
-    return [hitMessages objectAtIndex:[[GorillasConfig get] gameRandom] % hitMessages.count];
+    return [hitMessages objectAtIndex:gameRandom() % hitMessages.count];
 }
 
 
@@ -254,7 +254,7 @@
 }
 -(long) buildingColor {
     
-    return [[[self buildingColors] objectAtIndex:[[GorillasConfig get] gameRandom] % [[self buildingColors] count]] longValue];
+    return [[[self buildingColors] objectAtIndex:gameRandom() % [[self buildingColors] count]] longValue];
 }
 
 

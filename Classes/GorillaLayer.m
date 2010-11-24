@@ -340,13 +340,14 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     
     switch (_connectionState) {
         case GKPlayerStateUnknown: {
+            self.bobber.color       = ccc3l(0xFFFFFF);
             self.spinner.visible = YES;
             break;
         }
         case GKPlayerStateConnected: {
             if ([self local]) {
-                self.bobber.color       = ccc3l(0xFFFFFF);
-                dbg(@"%@: bobber color 0xFFFFFF", self.name);
+                self.bobber.color       = ccc3l(0x00FF00);
+                dbg(@"%@: bobber color 0x00FF00", self.name);
             }
             else {
                 self.bobber.color       = ccc3l(0xFFFF00);
@@ -358,7 +359,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
         }
         case GKPlayerStateDisconnected: {
             self.bobber.color = ccc3l(0xFF0000);
-            dbg(@"%@: bobber color 0xFFFFFF", self.name);
+            dbg(@"%@: bobber color 0xFF0000", self.name);
             self.spinner.visible = NO;
             break;
         }

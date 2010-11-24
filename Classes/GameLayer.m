@@ -141,8 +141,6 @@
     
     // Add humans to the game.
     if (self.playerIDs) {
-        [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeHuman playerID:[GKLocalPlayer localPlayer].playerID]];
-        
         for (NSString *playerID in self.playerIDs)
             [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeHuman playerID:playerID]];
         
@@ -506,10 +504,10 @@
             
             CGRect field = [cityLayer fieldInSpaceOf:panningLayer];
             
-            if ([[GorillasConfig get].visualFx boolValue] && [[GorillasConfig get] gameRandom:GorillasGameRandomWeather] % 100 == 0) {
+            if ([[GorillasConfig get].visualFx boolValue] && gameRandomFor(GorillasGameRandomWeather) % 100 == 0) {
                 // 1% chance to start snow/rain when weather is enabled.
                 
-                switch ([[GorillasConfig get] gameRandom:GorillasGameRandomWeather] % 2) {
+                switch (gameRandomFor(GorillasGameRandomWeather) % 2) {
                     case 0:
                         weather = [[CCParticleRain alloc] init];
                         weather.emissionRate    = 60;
@@ -543,11 +541,11 @@
     
     else {
         // System is alive, let the emission rate evolve.
-        float rate = [weather emissionRate] + ([[GorillasConfig get] gameRandom:GorillasGameRandomWeather] % 40 - 15) / 10.0f;
+        float rate = [weather emissionRate] + (gameRandomFor(GorillasGameRandomWeather) % 40 - 15) / 10.0f;
         float max = [weather isKindOfClass:[CCParticleRain class]]? 200: 100;
         rate = max; // fminf(fmaxf(0, rate), max);
         
-        if([[GorillasConfig get] gameRandom:GorillasGameRandomWeather] % 100 == 0)
+        if(gameRandomFor(GorillasGameRandomWeather) % 100 == 0)
             // 1% chance for a full stop.
             rate = 0;
         
@@ -562,7 +560,7 @@
         return;
     
     // Need to refactor some bad logic about setting projectile as cleared before this'll work.
-    //    if([[GorillasConfig get] gameRandom:GorillasGameRandomWeather] % 1 == 0) {
+    //    if(gameRandom(GorillasGameRandomWeather) % 1 == 0) {
     //        BananaLayer *egg = [[BananaLayer alloc] init];
     //        [egg setModel:GorillasProjectileModelEasterEgg];
     //

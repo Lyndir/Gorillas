@@ -4421,7 +4421,7 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LINKER_DISPLAYS_MANGLED_NAMES = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
@@ -4430,7 +4430,7 @@
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VERSION_INFO_BUILDER = lhunath;
 				WARNING_CFLAGS = "-Wundeclared-selector";
@@ -4474,14 +4474,14 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 				VERSION_INFO_BUILDER = lhunath;
 				WARNING_CFLAGS = "-Wundeclared-selector";
 				ZERO_LINK = NO;
@@ -4525,14 +4525,14 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 				VERSION_INFO_BUILDER = lhunath;
 				WARNING_CFLAGS = "-Wundeclared-selector";
 				ZERO_LINK = NO;
@@ -4588,14 +4588,14 @@
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				VERSION_INFO_BUILDER = lhunath;
 				WARNING_CFLAGS = "-Wundeclared-selector";
@@ -4873,7 +4873,7 @@
 				DA16C3760EEC575C00E46246 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Gorillas" */ = {
 			isa = XCConfigurationList;
@@ -4884,7 +4884,7 @@
 				DA16C3750EEC575C00E46246 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		DA3B9385127B6D51009196E8 /* Build configuration list for PBXNativeTarget "iLibs" */ = {
 			isa = XCConfigurationList;
@@ -4895,7 +4895,7 @@
 				DA3B92C5127B6D21009196E8 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		DA3B938F127B6DA8009196E8 /* Build configuration list for PBXNativeTarget "cocos2d" */ = {
 			isa = XCConfigurationList;
@@ -4906,7 +4906,7 @@
 				DA3B938E127B6D6A009196E8 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		DA4769F30FDD7334002E74F8 /* Build configuration list for PBXNativeTarget "Gorillas Lite - Development" */ = {
 			isa = XCConfigurationList;
@@ -4917,7 +4917,7 @@
 				DA4769F70FDD7334002E74F8 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		DA76F873100402FE00030524 /* Build configuration list for PBXNativeTarget "Gorillas Lite - App Store" */ = {
 			isa = XCConfigurationList;
@@ -4928,7 +4928,7 @@
 				DA76F877100402FE00030524 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		DA8B77940F46120600DD88BF /* Build configuration list for PBXNativeTarget "Gorillas - iBetaTest" */ = {
 			isa = XCConfigurationList;
@@ -4939,7 +4939,7 @@
 				DA8B77980F46120600DD88BF /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		DABD68530F190D4D00EE213D /* Build configuration list for PBXNativeTarget "Gorillas - App Store" */ = {
 			isa = XCConfigurationList;
@@ -4950,7 +4950,7 @@
 				DABD68570F190D4D00EE213D /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		DAE919B50FFD53D300BF4B89 /* Build configuration list for PBXNativeTarget "Gorillas - Tracing" */ = {
 			isa = XCConfigurationList;
@@ -4961,7 +4961,7 @@
 				DAE919B90FFD53D300BF4B89 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

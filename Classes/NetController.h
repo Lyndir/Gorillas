@@ -26,4 +26,6 @@
 
 - (void)endMatch;
 
+- (void)throwBy:(NSString *)playerID velocity:(CGPoint)velocity;
+
 @end

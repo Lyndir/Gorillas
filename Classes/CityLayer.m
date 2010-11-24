@@ -320,11 +320,16 @@
         return;
     }
     
-    CGPoint r0 = [[GorillasAppDelegate get].gameLayer.activeGorilla position];
+    GorillaLayer *activeGorilla = [GorillasAppDelegate get].gameLayer.activeGorilla;
+    CGPoint r0 = activeGorilla.position;
     CGPoint v = ccpSub(aim, r0);
     self.aim = CGPointZero;
     
-    [self throwFrom:[GorillasAppDelegate get].gameLayer.activeGorilla withVelocity:v];
+    // Notify the network controller.
+    if (activeGorilla.playerID)
+        [[GorillasAppDelegate get].netController throwBy:activeGorilla.playerID velocity:v];
+    
+    [self throwFrom:activeGorilla withVelocity:v];
 }
 
 
@@ -466,7 +471,7 @@
         }
 
         // Pick a random target from the enemies.
-        GorillaLayer *target = [[enemies objectAtIndex:[[GorillasConfig get] gameRandom] % [enemies count]] retain];
+        GorillaLayer *target = [[enemies objectAtIndex:gameRandom() % [enemies count]] retain];
         [enemies release];
         
         // Aim at the target.
@@ -544,8 +549,8 @@
 
     // Level-based error.
     NSUInteger rtError = (NSUInteger) ((1 - l) * 100);
-    rt = ccp(rt.x + [[GorillasConfig get] gameRandom] % rtError - rtError / 2, rt.y + [[GorillasConfig get] gameRandom] % rtError - rtError / 2);
-    t = ([[GorillasConfig get] gameRandom] % (int) ((t / 2) * l * 10)) / 10.0f + (t / 2);
+    rt = ccp(rt.x + gameRandom() % rtError - rtError / 2, rt.y + gameRandom() % rtError - rtError / 2);
+    t = (gameRandom() % (int) ((t / 2) * l * 10)) / 10.0f + (t / 2);
 
     // Velocity vector to hit rt in t seconds.
     CGPoint v = ccp((rt.x - r0.x) / t,
@@ -691,7 +696,7 @@
     NSMutableArray *gorillasQueue = [gorillas mutableCopy];
     NSMutableArray *gorillaIndexes = [[NSMutableArray alloc] initWithCapacity: [gorillas count]];
     while ([gorillasQueue count]) {
-        NSUInteger index = indexA + [[GorillasConfig get] gameRandom] % (delta + 1);
+        NSUInteger index = indexA + gameRandom() % (delta + 1);
         BOOL validIndex = YES;
         
         if (index - minSpace <= indexA && index + minSpace >= indexB)

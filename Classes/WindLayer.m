@@ -74,7 +74,7 @@
 
 -(void) reset {
 
-    wind = ([[GorillasConfig get] gameRandom] % 100) / 100.0f - 0.5f;
+    wind = (gameRandom() % 100) / 100.0f - 0.5f;
 
     [self updateSystems];
 }
