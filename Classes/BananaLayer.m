@@ -45,9 +45,9 @@
     model           = GorillasProjectileModelBanana;
     
     banana          = [[CCSprite alloc] initWithFile:[self modelFile]];
-    [banana setScale:[[GorillasConfig get] cityScale]];
-    [banana setVisible:NO];
-    [banana setTag:GorillasTagBananaNotFlying];
+    banana.scale    = GorillasModelScale(4, banana.texture.pixelsWide);
+    banana.visible  = NO;
+    banana.tag      = GorillasTagBananaNotFlying;
     
     throwAction     = nil;
     focussed        = NO;

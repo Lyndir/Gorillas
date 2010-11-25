@@ -35,7 +35,6 @@
 @property (nonatomic, readwrite, assign) NSUInteger             globalIndex;
 
 @property (nonatomic, readwrite, retain) CCSprite               *bobber;
-@property (nonatomic, readwrite, retain) CCSprite               *spinner;
 
 @property (nonatomic, readwrite, copy) NSString                 *playerID;
 @property (nonatomic, readwrite, assign) int                    initialLives;
@@ -57,7 +56,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
 @synthesize name = _name, teamIndex = _teamIndex, globalIndex = _globalIndex;
 @synthesize playerID = _playerID, player = _player, connectionState = _connectionState;
 @synthesize initialLives = _initialLives, lives = _lives, active = _active, turns = _turns, zoom = _zoom;
-@synthesize bobber = _bobber, spinner = _spinner, model = _model, type = _type;
+@synthesize bobber = _bobber, model = _model, type = _type;
 
 
 +(void) prepareCreation {
@@ -82,12 +81,13 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     self.teamIndex          = nextTeamIndex++;
     self.globalIndex        = nextGlobalIndex++;
     self.zoom               = 1;
-    self.scale              = [GorillasConfig get].cityScale;
     self.texture            = [[CCTextureCache sharedTextureCache] addImage:[self modelFileWithArmsUpLeft:NO right:NO]];
     self.textureRect        = CGRectFromPointAndSize(CGPointZero, self.texture.contentSize);
+    self.scale              = GorillasModelScale(2, self.texture.pixelsWide);
     self.bobber             = [CCSprite spriteWithFile:@"bobber.png"];
     self.bobber.visible     = NO;
-    self.bobber.position    = ccp([self contentSize].width / 2, [self contentSize].height + [self.bobber contentSize].height / 2 + 15);
+    self.bobber.position    = ccp(0, self.texture.pixelsHigh);
+    self.bobber.isRelativeAnchorPoint = NO;
     [self.bobber runAction:[CCRepeatForever actionWithAction:[CCSequence actions:
                                                               [CCEaseSineInOut actionWithAction:
                                                                [CCMoveBy actionWithDuration:0.7f position:ccp(0, 15)]],
@@ -95,9 +95,6 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
                                                                [CCMoveBy actionWithDuration:0.7f position:ccp(0, -15)]],
                                                               nil]]];
     [self addChild:self.bobber];
-    self.spinner            = [ActivitySprite node];
-    self.spinner.position   = ccp([self contentSize].width / 2, [self contentSize].height + [self.spinner contentSize].height / 2 + 15);
-    [self addChild:self.spinner];
     
     self.playerID           = aPlayerId;
     self.connectionState    = self.playerID ? GKPlayerStateConnected: GKPlayerStateUnknown;
@@ -341,26 +338,18 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     switch (_connectionState) {
         case GKPlayerStateUnknown: {
             self.bobber.color       = ccc3l(0xFFFFFF);
-            self.spinner.visible = YES;
             break;
         }
         case GKPlayerStateConnected: {
-            if ([self local]) {
+            if ([self local])
                 self.bobber.color       = ccc3l(0x00FF00);
-                dbg(@"%@: bobber color 0x00FF00", self.name);
-            }
-            else {
+            else
                 self.bobber.color       = ccc3l(0xFFFF00);
-                dbg(@"%@: bobber color 0xFFFF00", self.name);
-            }
 
-            self.spinner.visible = NO;
             break;
         }
         case GKPlayerStateDisconnected: {
             self.bobber.color = ccc3l(0xFF0000);
-            dbg(@"%@: bobber color 0xFF0000", self.name);
-            self.spinner.visible = NO;
             break;
         }
     }

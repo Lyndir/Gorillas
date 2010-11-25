@@ -167,7 +167,8 @@
 #pragma mark Interact
 
 -(void) reset {
-    
+    dbg(@"GameLayer reset");
+
     [skyLayer reset];
     [panningLayer reset];
     [cityLayer reset];
@@ -184,6 +185,7 @@
 
 
 -(void) startGameHosted:(BOOL)isHosted {
+    dbg(@"GameLayer startGame");
 
     if(!mode)
         @throw [NSException exceptionWithName:NSInternalInconsistencyException

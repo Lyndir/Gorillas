@@ -26,8 +26,8 @@
 #import "Config.h"
 
 #define cCityTheme                      NSStringFromSelector(@selector(cityTheme))
+#define cVarFloors                      NSStringFromSelector(@selector(varFloors))
 #define cFixedFloors                    NSStringFromSelector(@selector(fixedFloors))
-#define cBuildingMax                    NSStringFromSelector(@selector(buildingMax))
 #define cBuildingAmount                 NSStringFromSelector(@selector(buildingAmount))
 #define cBuildingSpeed                  NSStringFromSelector(@selector(buildingSpeed))
 #define cBuildingColors                 NSStringFromSelector(@selector(buildingColors))
@@ -83,18 +83,13 @@
 
 @property (nonatomic, readwrite, retain) NSString       *cityTheme;
 
+@property (nonatomic, readwrite, retain) NSNumber       *varFloors;
 @property (nonatomic, readwrite, retain) NSNumber       *fixedFloors;
-@property (nonatomic, readonly) float                   cityScale;
-@property (nonatomic, readwrite, retain) NSNumber       *buildingMax;
-@property (nonatomic, readonly) float                   buildingWidth;
 @property (nonatomic, readwrite, retain) NSNumber       *buildingAmount;
 @property (nonatomic, readwrite, retain) NSNumber       *buildingSpeed;
 @property (nonatomic, readwrite, retain) NSArray        *buildingColors;
 
-@property (nonatomic, readonly) float                   windowWidth;
-@property (nonatomic, readonly) float                   windowHeight;
 @property (nonatomic, readwrite, retain) NSNumber       *windowAmount;
-@property (nonatomic, readonly) float                   windowPadding;
 @property (nonatomic, readwrite, retain) NSNumber       *windowColorOn;
 @property (nonatomic, readwrite, retain) NSNumber       *windowColorOff;
 
@@ -138,7 +133,7 @@
 @property (nonatomic, readonly) NSString                *offMessage;
 @property (nonatomic, readonly) NSString                *hitMessage;
 
--(long)                                                 buildingColor;
+-(ccColor4B)                                            buildingColor;
 
 -(void)                                                 levelUp;
 -(void)                                                 levelDown;
@@ -149,3 +144,12 @@
 + (NSString *)nameForLevel:(NSNumber *)aLevel;
 
 @end
+
+/**
+ * Utility for scaling Gorillas models.
+ */
+static inline float GorillasModelScale(const float amountPerBuildingWidth, const float modelPixelsWide) {
+    
+    return [CCDirector sharedDirector].winSize.width / [[GorillasConfig get].buildingAmount floatValue]
+    / amountPerBuildingWidth / modelPixelsWide;
+}

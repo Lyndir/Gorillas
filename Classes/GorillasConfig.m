@@ -31,7 +31,7 @@
 @synthesize modes, modeStrings, gameConfigurations;
 
 @dynamic cityTheme;
-@dynamic fixedFloors, buildingMax, buildingAmount, buildingSpeed, buildingColors;
+@dynamic varFloors, fixedFloors, buildingAmount, buildingSpeed, buildingColors;
 @dynamic windowAmount, windowColorOn, windowColorOff;
 @dynamic skyColor, starColor, starSpeed, starAmount;
 @dynamic lives, windModifier, gravity, minGravity, maxGravity;
@@ -123,8 +123,8 @@
      registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
                        [CityTheme defaultThemeName],                               cCityTheme,
      
+                       [NSNumber numberWithInteger:    [theme varFloors]],         cVarFloors,
                        [NSNumber numberWithInteger:    [theme fixedFloors]],       cFixedFloors,
-                       [NSNumber numberWithFloat:      [theme buildingMax]],       cBuildingMax,
                        [NSNumber numberWithInteger:    [theme buildingAmount]],    cBuildingAmount,
                        [NSNumber numberWithInteger:    1],                         cBuildingSpeed,
                        [theme buildingColors],                                     cBuildingColors,
@@ -244,31 +244,9 @@
 }
 
 
--(float) cityScale {
+-(ccColor4B) buildingColor {
     
-    return [self buildingWidth] / 50;
-}
--(float) buildingWidth {
-    
-    return ([CCDirector sharedDirector].winSize.width / [[self buildingAmount] unsignedIntValue] - 1);
-}
--(long) buildingColor {
-    
-    return [[[self buildingColors] objectAtIndex:gameRandom() % [[self buildingColors] count]] longValue];
-}
-
-
--(float) windowWidth {
-    
-    return [CCDirector sharedDirector].winSize.width / [self.buildingAmount unsignedIntValue] / ([self.windowAmount unsignedIntValue] * 2 + 1);
-}
--(float) windowHeight {
-    
-    return [self windowWidth] * 2;
-}
--(float) windowPadding {
-    
-    return [self windowWidth];
+    return ccc4l([[self.buildingColors objectAtIndex:gameRandom() % [self.buildingColors count]] longValue]);
 }
 
 

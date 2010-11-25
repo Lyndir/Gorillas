@@ -46,6 +46,7 @@
 
 
 -(id) init {
+    dbg(@"CityLayer init");
     
     if (!(self = [super init]))
 		return self;
@@ -114,6 +115,7 @@
 
 
 -(void) reset {
+    dbg(@"CityLayer reset");
 
     // Clean up.
     [self stopAllActions];
@@ -225,6 +227,8 @@
     free(hgp);
     free(hep);
 #endif
+    
+    CGPoint winSize = ccpFromSize([CCDirector sharedDirector].winSize);
 
     if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureCheat]) {
         for(NSUInteger i = 0; i < [[GorillasAppDelegate get].gameLayer.gorillas count]; ++i) {
@@ -233,7 +237,7 @@
                 continue;
             
             CGPoint from = [gorilla position];
-            CGPoint to   = ccpAdd(from, throwHistory[i]);
+            CGPoint to   = ccpAdd(from, ccpCompMult(throwHistory[i], winSize));
             
             if(!CGPointEqualToPoint(to, CGPointZero))
                 DrawLinesTo(from, &to, 1, ccc4l([[GorillasConfig get].windowColorOff longValue] & 0xffffff33), 3);
@@ -321,8 +325,10 @@
     }
     
     GorillaLayer *activeGorilla = [GorillasAppDelegate get].gameLayer.activeGorilla;
+    CGSize winSize = [CCDirector sharedDirector].winSize;
     CGPoint r0 = activeGorilla.position;
-    CGPoint v = ccpSub(aim, r0);
+    CGPoint v = ccpSub(aim, r0); // Velocity = Vector from origin to aim point.
+    v = ccp(v.x / winSize.width, v.y / winSize.height); // Normalize velocity so it's resolution-independant.
     self.aim = CGPointZero;
     
     // Notify the network controller.

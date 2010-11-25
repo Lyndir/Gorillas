@@ -50,7 +50,8 @@
 
 -(Throw *) initWithVelocity: (CGPoint)velocity startPos: (CGPoint)startPos {
     
-    v = velocity;
+    // De-normalize the velocity back to our resolution.
+    v = ccpCompMult(velocity, ccpFromSize([CCDirector sharedDirector].winSize));
     r0 = startPos;
     NSUInteger g = [[GorillasConfig get].gravity unsignedIntValue];
     

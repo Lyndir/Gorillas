@@ -64,7 +64,6 @@
 @property (nonatomic, readwrite, assign) float                      zoom;
 
 @property (nonatomic, readonly, retain) CCSprite                    *bobber;
-@property (nonatomic, readonly, retain) CCSprite                    *spinner;
 @property (nonatomic, readwrite, assign) GorillasPlayerModel        model;
 @property (nonatomic, readwrite, assign) GorillasPlayerType         type;
 

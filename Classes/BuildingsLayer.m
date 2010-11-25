@@ -70,10 +70,11 @@
 
 
 -(void) reset {
+    
+    dbg(@"BuildingsLayer reset start");
+    GorillasConfig *config          = [GorillasConfig get];
+    BOOL visualFx                   = [config.visualFx boolValue];
 
-    const CGFloat wPad              = [GorillasConfig get].windowPadding;
-    const CGFloat wWidth            = [GorillasConfig get].windowWidth;
-    const CGFloat wHeight           = [GorillasConfig get].windowHeight;
     const ccColor4B wColor0         = ccc4l([[GorillasConfig get].windowColorOff longValue]);
     const ccColor4B wColor1         = ccc4l([[GorillasConfig get].windowColorOn longValue]);
     ccColor4B wColor10;
@@ -83,21 +84,22 @@
     wColor10.a                      = (wColor0.a + wColor1.a) / 2;
 
     const CGSize winSize            = [CCDirector sharedDirector].winSize;
+    const CGFloat buildingWidth     = buildingWidthFixed? buildingWidthFixed: winSize.width / [config.buildingAmount unsignedIntValue];
+    const CGFloat wWidth            = buildingWidth / ([config.windowAmount unsignedIntValue] * 2 + 1);
+    const CGFloat wPad              = wWidth;
+    const CGFloat wHeight           = wWidth * 2;
     const CGFloat floorHeight       = wHeight + wPad;
-    const NSUInteger fixedFloors    = [[GorillasConfig get].fixedFloors unsignedIntValue];
-    const NSInteger varFloors       = (winSize.height * [[GorillasConfig get].buildingMax floatValue]
-                                    - (fixedFloors * floorHeight) - wPad) / floorHeight;
-    const CGFloat buildingWidth     = buildingWidthFixed? buildingWidthFixed: [GorillasConfig get].buildingWidth;
+    const NSUInteger fixedFloors    = [config.fixedFloors unsignedIntValue];
+    const NSInteger varFloors       = [config.varFloors unsignedIntValue];
 
     // Calculcate buildings.
     windowCount                     = 0;
-    buildingCount                   = [[GorillasConfig get].buildingAmount unsignedIntValue] * 3;
+    buildingCount                   = [config.buildingAmount unsignedIntValue] * 3;
     free(buildings);
     buildings = malloc(sizeof(Building) * buildingCount);
     for (NSUInteger b = 0; b < buildingCount; ++b) {
         // Building's position.
-        buildings[b].x              = b * ([GorillasConfig get].buildingWidth + 1.0f)
-                                    - ([GorillasConfig get].buildingWidth + 1) * (buildingCount - [[GorillasConfig get].buildingAmount unsignedIntValue]) / 2;
+        buildings[b].x              = b * buildingWidth - buildingWidth * (buildingCount - [config.buildingAmount unsignedIntValue]) / 2;
         
         // Building's size.
         NSInteger addFloors;
@@ -105,7 +107,7 @@
             addFloors               = varFloors * buildingHeightRatio;
         else
             addFloors               = gameRandom() % varFloors;
-        buildings[b].size           = CGSizeMake(buildingWidth, (fixedFloors + addFloors) * floorHeight + wPad);
+        buildings[b].size           = CGSizeMake(buildingWidth - 1, (fixedFloors + addFloors) * floorHeight + wPad);
 
         // Building's windows.
         buildings[b].windowCount    = (1 + (int) (buildings[b].size.height - wHeight - (int)wPad) / (int) (wPad + wHeight))
@@ -113,11 +115,13 @@
         windowCount                 += buildings[b].windowCount;
 
         // Building's color.
-        buildings[b].frontColor     = ccc4l([GorillasConfig get].buildingColor);
+        buildings[b].frontColor     = [config buildingColor];
         buildings[b].backColor.r    = (GLubyte)(buildings[b].frontColor.r * 0.2f);
         buildings[b].backColor.g    = (GLubyte)(buildings[b].frontColor.g * 0.2f);
         buildings[b].backColor.b    = (GLubyte)(buildings[b].frontColor.b * 0.2f);
         buildings[b].backColor.a    = (GLubyte)(buildings[b].frontColor.a * 1.0f);
+
+        dbg(@"building(%d/%d, varFloors(%d) => addFloors(%d))", b, buildingCount, varFloors, addFloors);
     }
 
     // Build vertex arrays.
@@ -166,11 +170,13 @@
                  wx < buildings[b].size.width - wWidth && bw < buildings[b].windowCount;
                  wx += wPad + wWidth) {
                 
-                BOOL isOff                  = gameRandom() % 100 < 20;
+                // Reason we don't use gameRandom for windows:
+                // Window count across multiple resolution devices is unpredictable due to rounding errors.
+                BOOL isOff                  = random() % 100 < 20;
                 NSUInteger wv               = (w + bw) * 4;
                 NSUInteger wi               = (w + bw) * 6;
                 
-                windowVertices[wv + 0].c    = windowVertices[wv + 1].c  = isOff? wColor0: [[GorillasConfig get].visualFx boolValue]? wColor10: wColor1;
+                windowVertices[wv + 0].c    = windowVertices[wv + 1].c  = isOff? wColor0: visualFx? wColor10: wColor1;
                 windowVertices[wv + 2].c    = windowVertices[wv + 3].c  = isOff? wColor0: wColor1;
                 
                 windowVertices[wv + 0].p    = ccp(bx + wx         , y);
@@ -219,6 +225,7 @@
     free(buildingVertices);
     free(windowVertices);
     free(windowIndices);
+    dbg(@"BuildingsLayer reset done");
 }
 
 

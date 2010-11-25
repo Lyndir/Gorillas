@@ -128,29 +128,21 @@
     
     [super didUpdateConfigForKey:configKey];
     
-    if (configKey == @selector(cityTheme))
+    if (configKey == @selector(cityTheme)) {
+        dbg(@"City Theme changed to: %@", [GorillasConfig get].cityTheme);
         [[[CityTheme getThemes] objectForKey:[GorillasConfig get].cityTheme] apply];
-    if (configKey == @selector(fixedFloors)         ||
-        configKey == @selector(buildingMax)         ||
-        configKey == @selector(buildingAmount)      ||
-        configKey == @selector(buildingSpeed)       ||
-        configKey == @selector(buildingColors)      ||
-        configKey == @selector(windowAmount)        ||
-        configKey == @selector(windowColorOn)       ||
-        configKey == @selector(windowColorOff)      ||
-        configKey == @selector(skyColor)            ||
-        configKey == @selector(starColor)           ||
-        configKey == @selector(starSpeed)           ||
-        configKey == @selector(starAmount))
-        [self.gameLayer reset];
+    }
 
-    if (configKey == @selector(playerModel))
+    if (configKey == @selector(playerModel)) {
+        dbg(@"Model changed");
         [self.gameLayer reset];
+    }
 }
 
 - (void)hudMenuPressed {
     
-    [self showMainMenu];
+    [[Logger get] printAllWithLevel:LogLevelDebug];
+    //[self showMainMenu];
 }
 
 -(void) showMainMenu {
@@ -278,6 +270,8 @@
 
 -(void) applicationWillResignActive:(UIApplication *)application {
 
+    [[Logger get] printAllWithLevel:LogLevelDebug];
+    
     [super applicationWillResignActive:application];
 
     if(!self.gameLayer.paused)
