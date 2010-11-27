@@ -44,7 +44,7 @@
 
 #pragma mark Properties
 
-@synthesize paused, hosted;
+@synthesize paused;
 @synthesize gorillas, activeGorilla;
 @synthesize skyLayer, panningLayer, cityLayer, windLayer, weather;
 //FIXME @synthesize scaleTimeAction;
@@ -173,6 +173,8 @@
     [panningLayer reset];
     [cityLayer reset];
     [windLayer reset];
+    for (GorillaLayer *gorilla in self.gorillas)
+        [gorilla reset];
 }
 
 -(void) shake {
@@ -184,7 +186,7 @@
 }
 
 
--(void) startGameHosted:(BOOL)isHosted {
+-(void) startGame {
     dbg(@"GameLayer startGame");
 
     if(!mode)
@@ -196,8 +198,6 @@
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:@"Tried to start a game while one's still running."
                                      userInfo:nil];
-
-    hosted          = isHosted;
 
     // When there are AIs in the game, show their difficulity.
     if (ais)

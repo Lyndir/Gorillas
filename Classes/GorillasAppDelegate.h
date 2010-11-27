@@ -34,7 +34,6 @@
 #import "ModelsConfigurationLayer.h"
 #import "InformationLayer.h"
 #import "GuideLayer.h"
-#import "StatisticsLayer.h"
 #import "FullGameLayer.h"
 #import "GHUDLayer.h"
 #import "NetController.h"
@@ -55,7 +54,6 @@
     InformationLayer                                                *_infoLayer;
     FullGameLayer                                                   *_fullLayer;
     GuideLayer                                                      *_guideLayer;
-    StatisticsLayer                                                 *_statsLayer;
     
     NetController                                                   *_netController;
 }
@@ -71,7 +69,6 @@
 @property (nonatomic, readonly, retain) ModelsConfigurationLayer    *modelsConfigLayer;
 @property (nonatomic, readonly, retain) InformationLayer            *infoLayer;
 @property (nonatomic, readonly, retain) GuideLayer                  *guideLayer;
-@property (nonatomic, readonly, retain) StatisticsLayer             *statsLayer;
 @property (nonatomic, readonly, retain) FullGameLayer               *fullLayer;
 @property (nonatomic, readonly, retain) GHUDLayer                   *hudLayer;
 
@@ -88,7 +85,6 @@
 -(void) showModelsConfiguration;
 -(void) showInformation;
 -(void) showGuide;
--(void) showStatistics;
 -(void) showFullGame;
 
 +(GorillasAppDelegate *) get;

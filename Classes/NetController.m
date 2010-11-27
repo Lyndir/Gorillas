@@ -122,8 +122,8 @@
             GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
             
             [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode
-                                                               playerIDs:self.hostElection.orderedPlayerIDs ais:gameConfiguration.multiplayerAICount];
-            [[GorillasAppDelegate get].gameLayer startGameHosted:[self.hostElection isLocalHost]];
+                                                             playerIDs:self.hostElection.orderedPlayerIDs ais:gameConfiguration.multiplayerAICount];
+            [[GorillasAppDelegate get].gameLayer startGame];
         }
     }
     else if ([message isKindOfClass:[NetMessageThrow class]]) {

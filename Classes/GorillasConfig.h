@@ -63,7 +63,6 @@
 #define cPlayerModel                    NSStringFromSelector(@selector(playerModel))
 #define cScore                          NSStringFromSelector(@selector(score))
 #define cSkill                          NSStringFromSelector(@selector(skill))
-#define cTopScoreHistory                NSStringFromSelector(@selector(topScoreHistory))
 #define cLevel                          NSStringFromSelector(@selector(level))
 #define cLevelNames                     NSStringFromSelector(@selector(levelNames))
 #define cLevelProgress                  NSStringFromSelector(@selector(levelProgress))
@@ -119,7 +118,6 @@
 @property (nonatomic, readwrite, retain) NSNumber       *playerModel;
 @property (nonatomic, readwrite, retain) NSNumber       *score;
 @property (nonatomic, readwrite, retain) NSNumber       *skill;
-@property (nonatomic, readwrite, retain) NSDictionary   *topScoreHistory;
 @property (nonatomic, readwrite, retain) NSNumber       *missScore;
 @property (nonatomic, readwrite, retain) NSNumber       *killScore;
 @property (nonatomic, readwrite, retain) NSNumber       *bonusOneShot;

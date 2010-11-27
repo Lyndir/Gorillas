@@ -35,7 +35,6 @@
 @private
     BOOL                                                    paused;
     BOOL                                                    running;
-    BOOL                                                    hosted;
     GorillasMode                                            mode;
     NSUInteger                                              humans;
     NSUInteger                                              ais;
@@ -56,7 +55,6 @@
 
 @property (nonatomic, readwrite, getter=isPaused) BOOL      paused;
 @property (nonatomic, readonly, getter=isSinglePlayer) BOOL singlePlayer;
-@property (nonatomic, readonly, getter=isHosted) BOOL       hosted;
 
 @property (nonatomic, readonly) NSMutableArray              *gorillas;
 @property (nonatomic, readwrite, retain) GorillaLayer       *activeGorilla;
@@ -78,7 +76,7 @@
 
 -(void) updateStateHitGorilla:(BOOL)hitGorilla hitBuilding:(BOOL)hitBuilding offScreen:(BOOL)offScreen throwSkill:(float)throwSkill;
 -(BOOL) checkGameStillOn;
--(void) startGameHosted:(BOOL)isHosted;
+-(void) startGame;
 /** Invoked when we want to stop playing. */
 -(void) stopGame;
 /** Invoked when the game ends and can be continued. */

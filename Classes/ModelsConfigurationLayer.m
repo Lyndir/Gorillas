@@ -40,9 +40,13 @@
 
 -(id) init {
 
-    if(!(self = [super init]))
+    if(!(self = [super initWithDelegate:nil logo:nil itemsFromArray:nil]))
         return self;
-
+    
+    self.opacity            = 0xaa;
+    self.color              = ccc3(0x00, 0x00, 0x00);
+    self.colorGradient      = ccc4(0x00, 0x66, 0xcc, 0xcc);
+    
     // Models Content.
     modelSprites = [[NSMutableArray alloc] initWithCapacity:2];
     modelTitles = [[NSMutableArray alloc] initWithCapacity:2];
@@ -134,7 +138,6 @@
 
 -(void) next: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
     model = (model + 1) % [modelSprites count];
     [self flipPage];
 }
@@ -142,7 +145,6 @@
 
 -(void) skip: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
     model = (model + 2) % [modelSprites count];
     [self flipPage];
 }
@@ -150,7 +152,6 @@
 
 -(void) back: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] popLayer];
 }
 

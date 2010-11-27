@@ -25,9 +25,10 @@
 #import "BananaLayer.h"
 #import "ActivitySprite.h"
 #import <GameKit/GameKit.h>
+#import "Resettable.h"
 
 
-@interface GorillaLayer : CCSprite {
+@interface GorillaLayer : CCSprite <Resettable> {
 
 @private
     NSString                                                        *_name;

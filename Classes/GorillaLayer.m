@@ -117,13 +117,22 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
             // AI gorillas without lives enabled get infinite lives when humans have lives enabled.
             self.initialLives = -1;
     }
-    self.lives = self.initialLives;
     
     _healthColors    = malloc(sizeof(ccColor4B) * 4);
     _healthColors[0] = _healthColors[1] = ccc4l(0xFF33CC33);
     _healthColors[2] = _healthColors[3] = ccc4l(0xFF3333CC);
     
     return self;
+}
+
+- (void)reset {
+    
+    [self stopAllActions];
+    
+    self.lives      = self.initialLives;
+    self.opacity    = 0xff;
+    
+    [self dd];
 }
 
 

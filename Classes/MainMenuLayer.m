@@ -65,7 +65,7 @@
 #endif
                  nil]))
         return self;
-    
+
     return self;
 }
 
@@ -93,9 +93,10 @@
 
 -(void) newGame: (id)sender {
     
-    [[GorillasAudioController get] clickEffect];
 #ifdef LITE
-    [[GorillasAppDelegate get].gameLayer configureGameWithMode:GorillasModeClassic humans:1 ais:1];
+    [[GorillasAppDelegate get].gameLayer configureGameWithMode:GorillasModeClassic
+                                                     playerIDs:[NSArray arrayWithObject:[GKLocalPlayer localPlayer].playerID]
+                                                           ais:1];
     [[GorillasAppDelegate get].gameLayer startGame];
 #else
     [[GorillasAppDelegate get] showNewGame];
@@ -105,28 +106,24 @@
 
 -(void) continueGame: (id)sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get].gameLayer setPaused:NO];
 }
 
 
 -(void) stopGame: (id)sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get].gameLayer stopGame];
 }
 
 
 -(void) information: (id)sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showInformation];
 }
 
 
 -(void) options: (id)sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showConfiguration];
 }
 

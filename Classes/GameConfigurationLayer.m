@@ -42,6 +42,10 @@
                   nil]))
         return self;
     
+    self.opacity            = 0xaa;
+    self.color              = ccc3(0x00, 0x00, 0x00);
+    self.colorGradient      = ccc4(0x00, 0x66, 0xcc, 0xcc);
+    
     self.layout = MenuLayoutColumns;
     
     return self;
@@ -103,7 +107,6 @@
 
 -(void) back: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] popLayer];
 }
 

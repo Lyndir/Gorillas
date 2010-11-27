@@ -30,7 +30,8 @@
 #import "HolesLayer.h"
 #import "BarSprite.h"
 #import "BuildingsLayer.h"
-//#define _DEBUG_
+
+#define _DEBUG_ 0
 
 @interface CityLayer : CCLayer <Resettable, CCTargetedTouchDelegate> {
 

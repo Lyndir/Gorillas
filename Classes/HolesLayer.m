@@ -37,15 +37,18 @@
     holes       = nil;
     holeCount   = 0;
     
+    self.scale  = GorillasModelScale(1, texture.pixelsWide);
+
     glGenBuffers(1, &holeVertexBuffer);
     
     return self;
 }
 
 
--(BOOL) hitsHole: (CGPoint)pos {
+-(BOOL)hitsHoleWorld: (CGPoint)worldPos {
     
-    CGFloat d = powf(texture.pixelsWide * 1 / 4, 2);
+    CGPoint pos = [self convertToNodeSpace:worldPos];
+    CGFloat d = powf(texture.pixelsWide / 5, 2) * self.scale;
     for(NSUInteger h = 0; h < holeCount; ++h) {
         CGFloat x = holes[h].p.x - pos.x, y = holes[h].p.y - pos.y;
         if ((powf(x, 2) + powf(y, 2)) < d)
@@ -56,12 +59,12 @@
 }
 
 
--(void) addHoleAt:(CGPoint)pos {
+-(void) addHoleAtWorld:(CGPoint)worldPos {
     
     holes = realloc(holes, sizeof(glPoint) * ++holeCount);
-    holes[holeCount - 1].p = pos;
+    holes[holeCount - 1].p = [self convertToNodeSpace:worldPos];
     holes[holeCount - 1].c = ccc4l(0xffffffff);
-    holes[holeCount - 1].s = texture.pixelsWide;
+    holes[holeCount - 1].s = texture.pixelsWide * self.scale; // Scale seems to not affect pointsize.
     
 	glBindBuffer(GL_ARRAY_BUFFER, holeVertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(glPoint) * holeCount, holes, GL_DYNAMIC_DRAW);

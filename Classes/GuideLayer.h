@@ -22,10 +22,10 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "ShadeLayer.h"
+#import "GMenuLayer.h"
 #import "SwipeLayer.h"
 
-@interface GuideLayer : ShadeLayer {
+@interface GuideLayer : GMenuLayer {
 
 @private
     CCMenuItemFont *chapterCurr, *chapterNext, *chapterSkip;

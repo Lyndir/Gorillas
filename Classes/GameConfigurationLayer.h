@@ -22,10 +22,10 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "ConfigMenuLayer.h"
+#import "GConfigMenuLayer.h"
 
 
-@interface GameConfigurationLayer : ConfigMenuLayer <MenuDelegate, ConfigMenuDelegate> {
+@interface GameConfigurationLayer : GConfigMenuLayer <MenuDelegate, ConfigMenuDelegate> {
     
 @private
     CCMenuItemToggle          *themeI, *levelI, *replayI, *followI;

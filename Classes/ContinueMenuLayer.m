@@ -54,14 +54,12 @@
 
 -(void) continueGame: (id)sender {
     
-    [[GorillasAudioController get] clickEffect];
-    [[[GorillasAppDelegate get] gameLayer] startGameHosted:YES];
+    [[[GorillasAppDelegate get] gameLayer] startGame];
 }
 
 
 -(void) stopGame: (id)sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showMainMenu];
 }
 

@@ -38,8 +38,12 @@
 
 -(id) init {
 
-    if(!(self = [super init]))
+    if(!(self = [super initWithDelegate:nil logo:nil itemsFromArray:nil]))
         return self;
+    
+    self.opacity            = 0xaa;
+    self.color              = ccc3(0x00, 0x00, 0x00);
+    self.colorGradient      = ccc4(0x00, 0x66, 0xcc, 0xcc);
     
     NSString *fullGameData = [NSString stringWithContentsOfFile:
                               [[NSBundle mainBundle] pathForResource:@"fullGame"
@@ -83,14 +87,12 @@
 
 -(void) back: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] popLayer];
 }
 
 
 -(void) upgrade: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=302275459&mt=8&s=143441"]];
 }
 

@@ -22,11 +22,11 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "ShadeLayer.h"
+#import "GMenuLayer.h"
 #import "SwipeLayer.h"
 #import "GorillaLayer.h"
 
-@interface ModelsConfigurationLayer : ShadeLayer {
+@interface ModelsConfigurationLayer : GMenuLayer {
 
 @private
     CCMenuItemFont *modelCurr, *modelNext;

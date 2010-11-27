@@ -33,7 +33,7 @@
     NSMutableArray  *flames;
 }
 
--(void) addExplosionAt:(CGPoint)pos hitsGorilla:(BOOL)gorillaHit;
+-(void) addExplosionAtWorld:(CGPoint)pos hitsGorilla:(BOOL)gorillaHit;
 
 +(SystemSoundID) explosionEffect: (BOOL)heavy;
 

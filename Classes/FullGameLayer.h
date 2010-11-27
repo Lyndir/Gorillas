@@ -22,9 +22,9 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "ShadeLayer.h"
+#import "GMenuLayer.h"
 
-@interface FullGameLayer : ShadeLayer {
+@interface FullGameLayer : GMenuLayer {
 
 }
 

@@ -24,9 +24,9 @@
 
 #import "ShadeLayer.h"
 #import "Resettable.h"
-#import "MenuLayer.h"
+#import "GMenuLayer.h"
 
-@interface MainMenuLayer : MenuLayer <Resettable, MenuDelegate> {
+@interface MainMenuLayer : GMenuLayer <Resettable, MenuDelegate> {
 
 @private
     CCMenuItem                                      *_info, *_config, *_continueGame, *_stopGame, *_newGame;

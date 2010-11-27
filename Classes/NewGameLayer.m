@@ -94,8 +94,6 @@
 
 -(void) gameConfiguration:(id) sender {
     
-    [[GorillasAudioController get] clickEffect];
-    
     [GorillasConfig get].activeGameConfigurationIndex = [NSNumber numberWithUnsignedInt:
                                                          ([[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue] + 1)
                                                          % [[GorillasConfig get].gameConfigurations count]];
@@ -104,20 +102,17 @@
 
 -(void) startSingle: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
-    
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
     GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
     
     [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode
-                                                       playerIDs:nil ais:gameConfiguration.singleplayerAICount];
-    [[GorillasAppDelegate get].gameLayer startGameHosted:YES];
+                                                     playerIDs:[NSArray arrayWithObject:[GKLocalPlayer localPlayer].playerID]
+                                                           ais:gameConfiguration.singleplayerAICount];
+    [[GorillasAppDelegate get].gameLayer startGame];
 }
 
 
 -(void) startMulti: (id) sender {
-    
-    [[GorillasAudioController get] clickEffect];
     
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
     GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
@@ -137,14 +132,12 @@
 
 -(void) custom: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showCustomGame];
 }
 
 
 -(void) back: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] popLayer];
 }
 

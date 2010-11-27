@@ -23,10 +23,10 @@
 //
 
 #import "ShadeLayer.h"
-#import "MenuLayer.h"
+#import "GMenuLayer.h"
 
 
-@interface InformationLayer : MenuLayer <MenuDelegate> {
+@interface InformationLayer : GMenuLayer <MenuDelegate> {
 
 }
 

@@ -340,7 +340,6 @@
 		DA2DFDCD1285662600E9035D /* snapclick.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA2DE9AD1285662300E9035D /* snapclick.caf */; };
 		DA2DFDCE1285662600E9035D /* wheel.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DE9B01285662300E9035D /* wheel.png */; };
 		DA31251D0F10F74C00F1032D /* HolesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA31251C0F10F74C00F1032D /* HolesLayer.m */; };
-		DA34006D0EB516D800B68C06 /* StatisticsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006C0EB516D800B68C06 /* StatisticsLayer.m */; };
 		DA3400700EB516F400B68C06 /* GameConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006F0EB516F400B68C06 /* GameConfigurationLayer.m */; };
 		DA34FD100EB4851E00B68C06 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
 		DA34FD7D0EB49F4000B68C06 /* CityLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* CityLayer.m */; };
@@ -392,7 +391,6 @@
 		DA4769870FDD7334002E74F8 /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
 		DA4769880FDD7334002E74F8 /* SkyLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FE1B0EB4AE5400B68C06 /* SkyLayer.m */; };
 		DA47698A0FDD7334002E74F8 /* MainMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */; };
-		DA47698B0FDD7334002E74F8 /* StatisticsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006C0EB516D800B68C06 /* StatisticsLayer.m */; };
 		DA47698C0FDD7334002E74F8 /* GameConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006F0EB516F400B68C06 /* GameConfigurationLayer.m */; };
 		DA47698D0FDD7334002E74F8 /* ExplosionsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C17CD0EC0F698006D43BD /* ExplosionsLayer.m */; };
 		DA47698E0FDD7334002E74F8 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
@@ -456,6 +454,14 @@
 		DA711E0D128EBAEC00EDB885 /* ObjectUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = DA711E0B128EBAEC00EDB885 /* ObjectUtils.h */; };
 		DA711E0E128EBAEC00EDB885 /* ObjectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711E0C128EBAEC00EDB885 /* ObjectUtils.m */; };
 		DA7547F80EAB66D40083EC7C /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
+		DA75CF7B12A123B60051EF09 /* frame-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA75CF7912A123B60051EF09 /* frame-hd.png */; };
+		DA75CF7C12A123B60051EF09 /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = DA75CF7A12A123B60051EF09 /* frame.png */; };
+		DA75CF7D12A123B60051EF09 /* frame-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA75CF7912A123B60051EF09 /* frame-hd.png */; };
+		DA75CF7E12A123B60051EF09 /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = DA75CF7A12A123B60051EF09 /* frame.png */; };
+		DA75CFCA12A13FA10051EF09 /* GMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA75CFC912A13FA10051EF09 /* GMenuLayer.m */; };
+		DA75CFCB12A13FA10051EF09 /* GMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA75CFC912A13FA10051EF09 /* GMenuLayer.m */; };
+		DA75D04F12A14A150051EF09 /* GConfigMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA75D04E12A14A150051EF09 /* GConfigMenuLayer.m */; };
+		DA75D05012A14A150051EF09 /* GConfigMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA75D04E12A14A150051EF09 /* GConfigMenuLayer.m */; };
 		DA79D73E0F59425500D36C7C /* NewGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D73B0F59425500D36C7C /* NewGameLayer.m */; };
 		DA79D7A40F59531100D36C7C /* GameConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D79F0F59531100D36C7C /* GameConfiguration.m */; };
 		DA7ABE0E1282308A006A2E71 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7ABCA21282308A006A2E71 /* Default.png */; };
@@ -923,8 +929,6 @@
 		DA2DE9B01285662300E9035D /* wheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wheel.png; sourceTree = "<group>"; };
 		DA31251B0F10F74C00F1032D /* HolesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HolesLayer.h; sourceTree = "<group>"; };
 		DA31251C0F10F74C00F1032D /* HolesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HolesLayer.m; sourceTree = "<group>"; };
-		DA34006B0EB516D800B68C06 /* StatisticsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsLayer.h; sourceTree = "<group>"; };
-		DA34006C0EB516D800B68C06 /* StatisticsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsLayer.m; sourceTree = "<group>"; };
 		DA34006E0EB516F400B68C06 /* GameConfigurationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConfigurationLayer.h; sourceTree = "<group>"; };
 		DA34006F0EB516F400B68C06 /* GameConfigurationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameConfigurationLayer.m; sourceTree = "<group>"; };
 		DA34FD0E0EB4851D00B68C06 /* PanAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanAction.h; sourceTree = "<group>"; };
@@ -983,6 +987,12 @@
 		DA711E0C128EBAEC00EDB885 /* ObjectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectUtils.m; sourceTree = "<group>"; };
 		DA7547F40EAB66D40083EC7C /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
 		DA7547F50EAB66D40083EC7C /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
+		DA75CF7912A123B60051EF09 /* frame-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "frame-hd.png"; path = "png/frame-hd.png"; sourceTree = "<group>"; };
+		DA75CF7A12A123B60051EF09 /* frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frame.png; path = png/frame.png; sourceTree = "<group>"; };
+		DA75CFC812A13FA10051EF09 /* GMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMenuLayer.h; sourceTree = "<group>"; };
+		DA75CFC912A13FA10051EF09 /* GMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMenuLayer.m; sourceTree = "<group>"; };
+		DA75D04D12A14A150051EF09 /* GConfigMenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GConfigMenuLayer.h; sourceTree = "<group>"; };
+		DA75D04E12A14A150051EF09 /* GConfigMenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GConfigMenuLayer.m; sourceTree = "<group>"; };
 		DA76F880100404BD00030524 /* InfoLite.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = InfoLite.plist; sourceTree = "<group>"; };
 		DA79D73A0F59425500D36C7C /* NewGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGameLayer.h; sourceTree = "<group>"; };
 		DA79D73B0F59425500D36C7C /* NewGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGameLayer.m; sourceTree = "<group>"; };
@@ -1226,6 +1236,10 @@
 		DA1816480F0E24F50064F470 /* Menus */ = {
 			isa = PBXGroup;
 			children = (
+				DA75CFC812A13FA10051EF09 /* GMenuLayer.h */,
+				DA75CFC912A13FA10051EF09 /* GMenuLayer.m */,
+				DA75D04D12A14A150051EF09 /* GConfigMenuLayer.h */,
+				DA75D04E12A14A150051EF09 /* GConfigMenuLayer.m */,
 				DA34FFA80EB4EEF300B68C06 /* MainMenuLayer.h */,
 				DA34FFA90EB4EEF300B68C06 /* MainMenuLayer.m */,
 				DA79D73A0F59425500D36C7C /* NewGameLayer.h */,
@@ -1262,8 +1276,6 @@
 				DA4F49F80EF3243C0062E0E8 /* InformationLayer.m */,
 				DA4F4A240EF327A30062E0E8 /* GuideLayer.h */,
 				DA4F4A250EF327A30062E0E8 /* GuideLayer.m */,
-				DA34006B0EB516D800B68C06 /* StatisticsLayer.h */,
-				DA34006C0EB516D800B68C06 /* StatisticsLayer.m */,
 				DA476A2A0FDD8002002E74F8 /* FullGameLayer.h */,
 				DA476A2B0FDD8002002E74F8 /* FullGameLayer.m */,
 			);
@@ -1775,6 +1787,8 @@
 		DA5F1BD30EE74CE80041691E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DA75CF7912A123B60051EF09 /* frame-hd.png */,
+				DA75CF7A12A123B60051EF09 /* frame.png */,
 				DA7ABCA21282308A006A2E71 /* Default.png */,
 				DA7ABCB51282308A006A2E71 /* skill.png */,
 				DA7ABCB71282308A006A2E71 /* skip.png */,
@@ -2310,6 +2324,8 @@
 				DAC22E6B129ED345001D545B /* Level_Down.caf in Resources */,
 				DAC22E6C129ED345001D545B /* Level_Up.caf in Resources */,
 				DAC22E6E129ED345001D545B /* Next_Player.caf in Resources */,
+				DA75CF7B12A123B60051EF09 /* frame-hd.png in Resources */,
+				DA75CF7C12A123B60051EF09 /* frame.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2415,6 +2431,8 @@
 				DAC22E8B129ED345001D545B /* Level_Down.caf in Resources */,
 				DAC22E8C129ED345001D545B /* Level_Up.caf in Resources */,
 				DAC22E8E129ED345001D545B /* Next_Player.caf in Resources */,
+				DA75CF7D12A123B60051EF09 /* frame-hd.png in Resources */,
+				DA75CF7E12A123B60051EF09 /* frame.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2465,7 +2483,6 @@
 				DA34FD800EB49FFB00B68C06 /* StarLayer.m in Sources */,
 				DA34FE1C0EB4AE5400B68C06 /* SkyLayer.m in Sources */,
 				DA34FFAA0EB4EEF300B68C06 /* MainMenuLayer.m in Sources */,
-				DA34006D0EB516D800B68C06 /* StatisticsLayer.m in Sources */,
 				DA3400700EB516F400B68C06 /* GameConfigurationLayer.m in Sources */,
 				DA6C17CE0EC0F698006D43BD /* ExplosionsLayer.m in Sources */,
 				DA859C500EC4F3950036B7C0 /* GorillaLayer.m in Sources */,
@@ -2493,6 +2510,8 @@
 				DAF4D8161280D8170012132B /* MovingTo.m in Sources */,
 				DA711DCC128DF40800EDB885 /* NetMessage.m in Sources */,
 				DA711DF4128EA44700EDB885 /* NetController.m in Sources */,
+				DA75CFCA12A13FA10051EF09 /* GMenuLayer.m in Sources */,
+				DA75D04F12A14A150051EF09 /* GConfigMenuLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2649,7 +2668,6 @@
 				DA4769870FDD7334002E74F8 /* StarLayer.m in Sources */,
 				DA4769880FDD7334002E74F8 /* SkyLayer.m in Sources */,
 				DA47698A0FDD7334002E74F8 /* MainMenuLayer.m in Sources */,
-				DA47698B0FDD7334002E74F8 /* StatisticsLayer.m in Sources */,
 				DA47698C0FDD7334002E74F8 /* GameConfigurationLayer.m in Sources */,
 				DA47698D0FDD7334002E74F8 /* ExplosionsLayer.m in Sources */,
 				DA47698E0FDD7334002E74F8 /* GorillaLayer.m in Sources */,
@@ -2677,6 +2695,8 @@
 				DAF4D8181280D8170012132B /* MovingTo.m in Sources */,
 				DA711DCE128DF40800EDB885 /* NetMessage.m in Sources */,
 				DA711DF1128EA44700EDB885 /* NetController.m in Sources */,
+				DA75CFCB12A13FA10051EF09 /* GMenuLayer.m in Sources */,
+				DA75D05012A14A150051EF09 /* GConfigMenuLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

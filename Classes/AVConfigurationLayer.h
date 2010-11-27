@@ -26,7 +26,7 @@
 #import "Resettable.h"
 
 
-@interface AVConfigurationLayer : ConfigMenuLayer <MenuDelegate, ConfigMenuDelegate> {
+@interface AVConfigurationLayer : GConfigMenuLayer <MenuDelegate, ConfigMenuDelegate> {
 
 @private
     CCMenuItemToggle *audioI, *soundFxI, *voiceI, *visualFxI, *vibrationI;

@@ -48,7 +48,6 @@
 @property (nonatomic, readwrite, retain) ModelsConfigurationLayer       *modelsConfigLayer;
 @property (nonatomic, readwrite, retain) InformationLayer               *infoLayer;
 @property (nonatomic, readwrite, retain) GuideLayer                     *guideLayer;
-@property (nonatomic, readwrite, retain) StatisticsLayer                *statsLayer;
 @property (nonatomic, readwrite, retain) FullGameLayer                  *fullLayer;
 
 @property (nonatomic, readwrite, retain) NetController                  *netController;
@@ -59,7 +58,7 @@
 @synthesize gameLayer = _gameLayer;
 @synthesize mainMenuLayer = _mainMenuLayer, newGameLayer = _newGameLayer, customGameLayer = _customGameLayer, continueMenuLayer = _continueMenuLayer;
 @synthesize configLayer = _configLayer, gameConfigLayer = _gameConfigLayer, avConfigLayer = _avConfigLayer, modelsConfigLayer = _modelsConfigLayer;
-@synthesize infoLayer = _infoLayer, guideLayer = _guideLayer, statsLayer = _statsLayer, fullLayer = _fullLayer;
+@synthesize infoLayer = _infoLayer, guideLayer = _guideLayer, fullLayer = _fullLayer;
 @synthesize netController = _netController;
 
 + (void)initialize {
@@ -92,6 +91,9 @@
     
     // Build the game scene.
 	self.gameLayer = [GameLayer node];
+    CCSprite *frame = [CCSprite spriteWithFile:@"frame-hd.png"];
+    frame.anchorPoint = CGPointZero;
+    [self.uiLayer addChild:frame z:1];
     [self.uiLayer addChild:self.gameLayer];
 	
     // Show the splash screen, this starts the main loop in the current thread.
@@ -142,7 +144,7 @@
 - (void)hudMenuPressed {
     
     [[Logger get] printAllWithLevel:LogLevelDebug];
-    //[self showMainMenu];
+    [self showMainMenu];
 }
 
 -(void) showMainMenu {
@@ -242,15 +244,6 @@
 }
 
 
--(void) showStatistics {
-
-    if(!self.statsLayer)
-        self.statsLayer = [StatisticsLayer node];
-    
-    [self pushLayer:self.statsLayer];
-}
-
-
 -(void) showFullGame {
     
     if(!self.fullLayer)
@@ -270,12 +263,10 @@
 
 -(void) applicationWillResignActive:(UIApplication *)application {
 
-    [[Logger get] printAllWithLevel:LogLevelDebug];
-    
-    [super applicationWillResignActive:application];
-
     if(!self.gameLayer.paused)
         [self showMainMenu];
+
+    [super applicationWillResignActive:application];
 }
 
 
@@ -323,10 +314,6 @@
         [self.guideLayer stopAllActions];
         self.guideLayer = nil;
     }
-    if(self.statsLayer && ![self.statsLayer parent]) {
-        [self.statsLayer stopAllActions];
-        self.statsLayer = nil;
-    }
     if(self.fullLayer && ![self.fullLayer parent]) {
         [self.fullLayer stopAllActions];
         self.fullLayer = nil;
@@ -347,7 +334,6 @@
     self.modelsConfigLayer  = nil;
     self.infoLayer          = nil;
     self.guideLayer         = nil;
-    self.statsLayer         = nil;
     self.fullLayer          = nil;
     
     [super dealloc];

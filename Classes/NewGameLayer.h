@@ -24,11 +24,11 @@
 
 #import "Resettable.h"
 #import "GameConfiguration.h"
-#import "ConfigMenuLayer.h"
+#import "GMenuLayer.h"
 #import <GameKit/GameKit.h>
 
 
-@interface NewGameLayer : MenuLayer <Resettable, MenuDelegate> {
+@interface NewGameLayer : GMenuLayer <Resettable, MenuDelegate> {
     
 @private
     CCMenuItemToggle                                *configurationI;

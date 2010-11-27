@@ -66,28 +66,24 @@
 
 -(void) guide: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showGuide];
 }
 
 
 -(void) stats: (id) sender {
-    
-    [[GorillasAudioController get] clickEffect];
-    [[GorillasAppDelegate get] showStatistics];
+
+    // TODO: GK top scores.
 }
 
 
 -(void) full: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] showFullGame];
 }
 
 
 -(void) back: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] popLayer];
 }
 

@@ -23,10 +23,10 @@
 //
 
 #import "Resettable.h"
-#import "MenuLayer.h"
+#import "GMenuLayer.h"
 
 
-@interface CustomGameLayer : MenuLayer <Resettable, MenuDelegate> {
+@interface CustomGameLayer : GMenuLayer <Resettable, MenuDelegate> {
 
 @private
     CCMenuItemToggle        *aisI, *gameModeI;

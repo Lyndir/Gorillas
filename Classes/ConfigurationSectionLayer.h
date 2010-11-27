@@ -23,10 +23,10 @@
 //
 
 #import "Resettable.h"
-#import "MenuLayer.h"
+#import "GMenuLayer.h"
 
 
-@interface ConfigurationSectionLayer : MenuLayer <Resettable, MenuDelegate> {
+@interface ConfigurationSectionLayer : GMenuLayer <Resettable, MenuDelegate> {
 
 }
 

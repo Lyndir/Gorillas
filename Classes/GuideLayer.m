@@ -41,9 +41,9 @@
 
 -(id) init {
 
-    if(!(self = [super init]))
+    if(!(self = [super initWithDelegate:nil logo:nil itemsFromArray:nil]))
         return self;
-
+    
     // Guide Content.
     id error = nil;
     NSString *guideData = [NSString stringWithContentsOfFile:
@@ -190,7 +190,6 @@
 
 -(void) next: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
     page = (page + 1) % [guidePages count];
     [self flipPage];
 }
@@ -198,7 +197,6 @@
 
 -(void) skip: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
     page = (page + 2) % [guidePages count];
     [self flipPage];
 }
@@ -206,7 +204,6 @@
 
 -(void) back: (id) sender {
     
-    [[GorillasAudioController get] clickEffect];
     [[GorillasAppDelegate get] popLayer];
 }
 

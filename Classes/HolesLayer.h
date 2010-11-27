@@ -34,7 +34,7 @@
     GLuint      holeVertexBuffer;
 }
 
--(BOOL) hitsHole:(CGPoint)pos;
--(void) addHoleAt:(CGPoint)pos;
+-(BOOL) hitsHoleWorld:(CGPoint)pos;
+-(void) addHoleAtWorld:(CGPoint)pos;
 
 @end

@@ -37,7 +37,7 @@
 @dynamic lives, windModifier, gravity, minGravity, maxGravity;
 @dynamic gameScrollDuration;
 @dynamic level, levelNames, levelProgress;
-@dynamic activeGameConfigurationIndex, mode, playerModel, score, skill, topScoreHistory, missScore, killScore, bonusOneShot, bonusSkill, deathScoreRatio;
+@dynamic activeGameConfigurationIndex, mode, playerModel, score, skill, missScore, killScore, bonusOneShot, bonusSkill, deathScoreRatio;
 @dynamic replay, followThrow;
 
 #pragma mark Internal
@@ -181,7 +181,6 @@
                        [NSNumber numberWithUnsignedInt:GorillasPlayerModelGorilla],cPlayerModel,
                        [NSNumber numberWithInteger:    0],                         cScore,
                        [NSNumber numberWithInteger:    0],                         cSkill,
-                       [NSDictionary dictionary],                                  cTopScoreHistory,
                        [NSNumber numberWithFloat:      0.3f],                      cLevel,
                        levelNames,                                                 cLevelNames,
                        [NSNumber numberWithFloat:      0.03f],                     cLevelProgress,
@@ -279,23 +278,7 @@
     
     if(score < 0)
         score = 0;
-    NSNumber *scoreObject = [NSNumber numberWithInteger:score];
-    
-    // Is this a new top score for today?
-    NSDictionary *topScores = [self topScoreHistory];
-    NSString *today = [[self today] description];
-    NSNumber *topScoreToday = [topScores objectForKey:today];
-    
-    if(topScoreToday == nil || [topScoreToday integerValue] < score) {
-        // Record top score.
-        NSMutableDictionary *newTopScores = [topScores mutableCopy];
-        [newTopScores setObject: scoreObject forKey:today];
-        [self setTopScoreHistory:newTopScores];
-        [newTopScores release];
-    }
-    
-    NSLog(@"new score: %@", scoreObject);
-    self.score = scoreObject;
+    self.score = [NSNumber numberWithInteger:score];
 }
 
 + (NSString *)nameForLevel:(NSNumber *)aLevel {

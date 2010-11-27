@@ -24,7 +24,7 @@
 
 #import "ExplosionsLayer.h"
 #import "GorillasAppDelegate.h"
-#define flameVariantion 3
+#define flameVariantion 10
 
 typedef enum {
     GorillasExplosionHitGorilla  = 2 << 0,
@@ -37,11 +37,12 @@ typedef enum {
 - (void)gc:(ccTime)dt;
 - (void)stop:(CCParticleSystem *)explosion;
 - (CGFloat)size;
-+ (CCParticleSystem *)flameWithRadius:(CGFloat)radius heavy:(BOOL)heavy;
+- (CCParticleSystem *)flameWithRadius:(CGFloat)radius heavy:(BOOL)heavy;
 
 @end
 
 static CCParticleSystem **flameTypes = nil;
+static float flameRadius;
 
 @implementation ExplosionsLayer
 
@@ -53,6 +54,8 @@ static CCParticleSystem **flameTypes = nil;
     explosions      = [[NSMutableArray alloc] initWithCapacity:10];
     flames          = [[NSMutableArray alloc] initWithCapacity:10];
     positions       = nil;
+    
+    self.scale      = GorillasModelScale(1, [[CCTextureCache sharedTextureCache] addImage:@"hole.pvr"].pixelsWide);
     
     [self schedule:@selector(gc:) interval:0.5f];
     [self schedule:@selector(step:)];
@@ -94,11 +97,11 @@ static CCParticleSystem **flameTypes = nil;
 
 -(CGFloat) size {
     
-    return 32;
+    return 32 * self.scale;
 }
 
 
--(void) addExplosionAt:(CGPoint)pos hitsGorilla:(BOOL) hitsGorilla {
+-(void) addExplosionAtWorld:(CGPoint)worldPos hitsGorilla:(BOOL) hitsGorilla {
     
     BOOL heavy = hitsGorilla || (gameRandomFor(GorillasGameRandomExplosions) % 100 > 90);
 
@@ -116,7 +119,7 @@ static CCParticleSystem **flameTypes = nil;
     
     explosion.positionType      = kCCPositionTypeGrouped;
     explosion.position          = CGPointZero;
-    explosion.centerOfGravity   = pos;
+    explosion.centerOfGravity   = [self convertToNodeSpace:worldPos];
     explosion.startSize         = (heavy? 20: 15) * self.scale;
     explosion.startSizeVar      = 5 * self.scale;
     explosion.speed             = 10;
@@ -180,7 +183,7 @@ static CCParticleSystem **flameTypes = nil;
     BOOL heavy          = [explosion tag] & GorillasExplosionHeavy;
     
     if(!hitsGorilla && [GorillasConfig get].visualFx) {
-        CCParticleSystem *flame = [ExplosionsLayer flameWithRadius:[self size] / 2 heavy:heavy];
+        CCParticleSystem *flame = [self flameWithRadius:[self size] / 2 heavy:heavy];
 
         positions = realloc(positions, sizeof(CGPoint) * (flames.count + 1));
         positions[flames.count] = explosion.centerOfGravity;
@@ -191,10 +194,21 @@ static CCParticleSystem **flameTypes = nil;
 }
 
 
-+(CCParticleSystem *) flameWithRadius:(CGFloat)radius heavy:(BOOL)heavy {
+-(CCParticleSystem *) flameWithRadius:(CGFloat)radius heavy:(BOOL)heavy {
+    
+    if (flameTypes && flameRadius != radius) {
+        [flames removeAllObjects];
+        for (NSUInteger type = 0; type < flameVariantion * 2; ++type) {
+            [[GorillasAppDelegate get].gameLayer.windLayer unregisterSystem:flameTypes[type]];
+            [flameTypes[type] release];
+        }
+        free(flameTypes);
+        flameTypes = nil;
+    }
     
     if(!flameTypes) {
-        flameTypes = malloc(sizeof(CCParticleSystem *) * 2 * flameVariantion);
+        flameTypes  = malloc(sizeof(CCParticleSystem *) * 2 * flameVariantion);
+        flameRadius = radius;
         
         for (NSUInteger type = 0; type < flameVariantion * 2; ++type) {
             BOOL typeIsHeavy = !(type < flameVariantion);
@@ -221,7 +235,8 @@ static CCParticleSystem **flameTypes = nil;
         }
     }
     
-    NSUInteger t = (heavy? 1: 0) * flameVariantion + gameRandomFor(GorillasGameRandomExplosions) % flameVariantion;
+    NSUInteger t = (gameRandomFor(GorillasGameRandomExplosions) % flameVariantion) + (heavy? 1: 0) * flameVariantion;
+    dbg(@"flame: %d", t);
     return flameTypes[t];
 }
 

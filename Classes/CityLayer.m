@@ -28,6 +28,7 @@
 #import "GorillasAppDelegate.h"
 #import "ShadeTo.h"
 #import "Remove.h"
+#import "GLUtils.h"
 
 
 @interface CityLayer (Private)
@@ -51,8 +52,8 @@
     if (!(self = [super init]))
 		return self;
 
-#ifdef _DEBUG_
-    dbgTraceStep    = 2;
+#if _DEBUG_
+    dbgTraceStep    = 10;
     dbgPathMaxInd   = 50;
     dbgPathCurInd   = 0;
     dbgPath         = malloc(sizeof(CGPoint) * dbgPathMaxInd);
@@ -196,20 +197,20 @@
 
 -(void) draw {
 
-#ifdef _DEBUG_
-    BuildingLayer *fb = [buildings objectAtIndex:0], *lb = [buildings lastObject];
-    int pCount = (([lb position].x - [fb position].x) / dbgTraceStep + 1)
+#if _DEBUG_
+    CGRect field = [self fieldInSpaceOf:self];
+    int pCount = (field.size.width / dbgTraceStep + 1)
                 * ([[CCDirector sharedDirector] winSize].height / dbgTraceStep + 1);
     CGPoint *hgp = malloc(sizeof(CGPoint) * pCount);
     CGPoint *hep = malloc(sizeof(CGPoint) * pCount);
-    int hgc = 0, hec = 0;
+    NSUInteger hgc = 0, hec = 0;
     
-    for(float x = [fb position].x; x < [lb position].x; x += dbgTraceStep)
-        for(float y = 0; y < [[CCDirector sharedDirector] winSize].height; y += dbgTraceStep) {
+    for(float x = field.origin.x; x < field.origin.x + field.size.width; x += dbgTraceStep)
+        for(float y = field.origin.y; y < field.origin.y + field.size.height; y += dbgTraceStep) {
             CGPoint pos = ccp(x, y);
 
             BOOL hg = NO, he = NO;
-            he = [holes hitsHole:pos];
+            he = [holes hitsHoleWorld:pos];
 
             for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
                 if((hg = [gorilla hitsGorilla:pos]))
@@ -221,9 +222,9 @@
                 hep[hec++] = pos;
         }
     
-    drawPointsAt(hgp, hgc, 0x00FF00FF);
-    drawPointsAt(hep, hec, 0xFF0000FF);
-    drawPointsAt(dbgPath, dbgPathMaxInd, 0xFFFF00FF);
+    DrawPointsAt(hgp, hgc, ccc4l(0x00FF00FF));
+    DrawPointsAt(hep, hec, ccc4l(0xFF0000FF));
+    DrawPointsAt(dbgPath, dbgPathMaxInd, ccc4l(0xFFFF00FF));
     free(hgp);
     free(hep);
 #endif
@@ -490,7 +491,7 @@
         // Throw at where we aimed.
         [self throwFrom:[GorillasAppDelegate get].gameLayer.activeGorilla withVelocity:v];
         
-#ifdef _DEBUG_
+#if _DEBUG_
         dbgAI[dbgAICurInd] = [GorillasAppDelegate get].gameLayer.activeGorilla;
         dbgAIVect[dbgAICurInd] = v;
         dbgAICurInd = (dbgAICurInd + 1) % dbgAIMaxInd;
@@ -554,7 +555,7 @@
     ccTime t = 5 * 100 / g;
 
     // Level-based error.
-    NSUInteger rtError = (NSUInteger) ((1 - l) * 100);
+    NSUInteger rtError = (NSUInteger) ((1 - l) * [CCDirector sharedDirector].winSize.width / 4);
     rt = ccp(rt.x + gameRandom() % rtError - rtError / 2, rt.y + gameRandom() % rtError - rtError / 2);
     t = (gameRandom() % (int) ((t / 2) * l * 10)) / 10.0f + (t / 2);
 
@@ -564,6 +565,10 @@
 
     // Wind-based modifier.
     v.x -= w * t * [[GorillasConfig get].windModifier floatValue];
+    
+    // Normalize velocity so it's resolution-independant.
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    v = ccp(v.x / winSize.width, v.y / winSize.height);
 
     return v;
 }
@@ -602,7 +607,7 @@
 
 -(BOOL) hitsGorilla:(CGPoint)pos {
 
-#ifdef _DEBUG_
+#if _DEBUG_
     dbgPath[dbgPathCurInd] = pos;
     dbgPathCurInd = (dbgPathCurInd + 1) % dbgPathMaxInd;
 #endif
@@ -640,7 +645,7 @@
 
         // A building was hit, but if it's in an explosion crater we
         // need to let the banana continue flying.
-        return ![holes hitsHole: pos];
+        return ![holes hitsHoleWorld:[self convertToWorldSpace:pos]];
     }
     
     return NO;
@@ -785,8 +790,9 @@
 
 -(void) explodeAt: (CGPoint)point isGorilla:(BOOL)isGorilla {
     
-    [holes addHoleAt:point];
-    [explosions addExplosionAt:point hitsGorilla:isGorilla];
+    CGPoint worldPoint = [self convertToWorldSpace:point];
+    [holes addHoleAtWorld:worldPoint];
+    [explosions addExplosionAtWorld:worldPoint hitsGorilla:isGorilla];
 }
 
 
@@ -836,7 +842,7 @@
     free(throwHistory);
     throwHistory = nil;
     
-#ifdef _DEBUG_
+#if _DEBUG_
     free(dbgPath);
     free(dbgAI);
     free(dbgAIVect);
