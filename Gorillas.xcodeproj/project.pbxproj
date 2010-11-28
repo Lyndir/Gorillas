@@ -2960,7 +2960,7 @@
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSION_INFO_BUILDER = lhunath;
 				WARNING_CFLAGS = "-Wundeclared-selector";
 				ZERO_LINK = NO;
@@ -3012,7 +3012,7 @@
 				);
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSION_INFO_BUILDER = lhunath;
 				WARNING_CFLAGS = "-Wundeclared-selector";
 				ZERO_LINK = NO;
@@ -3065,7 +3065,7 @@
 				);
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSION_INFO_BUILDER = lhunath;
 				WARNING_CFLAGS = "-Wundeclared-selector";
 				ZERO_LINK = NO;
@@ -3131,7 +3131,7 @@
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSION_INFO_BUILDER = lhunath;
 				WARNING_CFLAGS = "-Wundeclared-selector";
 				ZERO_LINK = NO;

@@ -228,10 +228,10 @@
 
     [self.target setPosition:r];
     if([[GorillasConfig get].visualFx boolValue]) {
-        smoke.angle             = atan2f(smoke.centerOfGravity.y - r.y,
-                                         smoke.centerOfGravity.x - r.x)
+        smoke.angle             = atan2f(smoke.sourcePosition.y - r.y,
+                                         smoke.sourcePosition.x - r.x)
                                 / (float)M_PI * 180.0f;
-        smoke.centerOfGravity   = r;
+        smoke.sourcePosition    = r;
     } else if([smoke emissionRate])
         [smoke setEmissionRate:0];
     

@@ -148,6 +148,6 @@
  */
 static inline float GorillasModelScale(const float amountPerBuildingWidth, const float modelPixelsWide) {
     
-    return [CCDirector sharedDirector].winSize.width / [[GorillasConfig get].buildingAmount floatValue]
+    return [CCDirector sharedDirector].winSizeInPixels.width / [[GorillasConfig get].buildingAmount floatValue]
     / amountPerBuildingWidth / modelPixelsWide;
 }

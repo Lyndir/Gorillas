@@ -83,7 +83,7 @@
     wColor10.b                      = (wColor0.b + wColor1.b) / 2;
     wColor10.a                      = (wColor0.a + wColor1.a) / 2;
 
-    const CGSize winSize            = [CCDirector sharedDirector].winSize;
+    const CGSize winSize            = [CCDirector sharedDirector].winSizeInPixels;
     const CGFloat buildingWidth     = buildingWidthFixed? buildingWidthFixed: winSize.width / [config.buildingAmount unsignedIntValue];
     const CGFloat wWidth            = buildingWidth / ([config.windowAmount unsignedIntValue] * 2 + 1);
     const CGFloat wPad              = wWidth;

@@ -197,10 +197,13 @@
 
 -(void) draw {
 
+    CGPoint winSizePx = ccpFromSize([CCDirector sharedDirector].winSizeInPixels);
+    
 #if _DEBUG_
+    CGPoint winSize = ccpFromSize([CCDirector sharedDirector].winSize);
     CGRect field = [self fieldInSpaceOf:self];
     int pCount = (field.size.width / dbgTraceStep + 1)
-                * ([[CCDirector sharedDirector] winSize].height / dbgTraceStep + 1);
+                * (winSize.height / dbgTraceStep + 1);
     CGPoint *hgp = malloc(sizeof(CGPoint) * pCount);
     CGPoint *hep = malloc(sizeof(CGPoint) * pCount);
     NSUInteger hgc = 0, hec = 0;
@@ -217,9 +220,9 @@
                     break;
             
             if(hg)
-                hgp[hgc++] = pos;
+                hgp[hgc++] = ccpMult(pos, CC_CONTENT_SCALE_FACTOR()); /* pt to px */
             else if(he)
-                hep[hec++] = pos;
+                hep[hec++] = ccpMult(pos, CC_CONTENT_SCALE_FACTOR()); /* pt to px */
         }
     
     DrawPointsAt(hgp, hgc, ccc4l(0x00FF00FF));
@@ -229,16 +232,14 @@
     free(hep);
 #endif
     
-    CGPoint winSize = ccpFromSize([CCDirector sharedDirector].winSize);
-
     if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureCheat]) {
         for(NSUInteger i = 0; i < [[GorillasAppDelegate get].gameLayer.gorillas count]; ++i) {
             GorillaLayer *gorilla = [[GorillasAppDelegate get].gameLayer.gorillas objectAtIndex:i];
             if(![gorilla alive])
                 continue;
             
-            CGPoint from = [gorilla position];
-            CGPoint to   = ccpAdd(from, ccpCompMult(throwHistory[i], winSize));
+            CGPoint from = ccpMult(gorilla.position, CC_CONTENT_SCALE_FACTOR()); /* pt to px */;
+            CGPoint to   = ccpAdd(from, ccpCompMult(throwHistory[i], winSizePx));
             
             if(!CGPointEqualToPoint(to, CGPointZero))
                 DrawLinesTo(from, &to, 1, ccc4l([[GorillasConfig get].windowColorOff longValue] & 0xffffff33), 3);
