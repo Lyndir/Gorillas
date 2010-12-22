@@ -17,12 +17,12 @@
 
 @interface NetMessageElectHost : NetMessage
 {
-    NSUInteger                                      vote;
+    NSUInteger                                      _vote;
 
-    NSMutableDictionary                             *playerVotes;
-    NetMessageElectHost                             *host;
-    NSString                                        *hostID;
-    NSArray                                         *orderedPlayerIDs;
+    NSMutableDictionary                             *_playerVotes;
+    NetMessageElectHost                             *_host;
+    NSString                                        *_hostID;
+    NSArray                                         *_orderedPlayerIDs;
 }
 
 @property (nonatomic, assign) NSUInteger            vote;
@@ -45,15 +45,15 @@
 
 @interface NetMessageThrow : NetMessage
 {
-    NSString                                        *playerID;
-    CGPoint                                         velocity;
+    NSString                                        *_playerID;
+    CGPoint                                         _normalizedVelocity;
 }
 
 @property (nonatomic, retain) NSString              *playerID;
-@property (nonatomic, assign) CGPoint               velocity;
+@property (nonatomic, assign) CGPoint               normalizedVelocity;
 
-+ (NetMessageThrow *)throwWithPlayerID:(NSString *)aPlayerID velocity:(CGPoint)aVelocity;
++ (NetMessageThrow *)throwWithPlayerID:(NSString *)aPlayerID normalizedVelocity:(CGPoint)aNormalizedVelocity;
 
-- (id)initWithPlayerID:(NSString *)aPlayerID velocity:(CGPoint)aVelocity;
+- (id)initWithPlayerID:(NSString *)aPlayerID normalizedVelocity:(CGPoint)aNormalizedVelocity;
 
 @end

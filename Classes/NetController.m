@@ -61,11 +61,12 @@
     self.match = nil;
 }
 
-- (void)throwBy:(NSString *)playerID velocity:(CGPoint)velocity {
+- (void)throwBy:(NSString *)playerID normalizedVelocity:(CGPoint)velocity {
     
     dbg(@"Sending throw of: %@ by: %@ to all players.", playerID, NSStringFromCGPoint(velocity));
     NSError *error = nil;
-    if (![self.match sendDataToAllPlayers:[NSKeyedArchiver archivedDataWithRootObject:[NetMessageThrow throwWithPlayerID:playerID velocity:velocity]]
+    if (![self.match sendDataToAllPlayers:[NSKeyedArchiver archivedDataWithRootObject:
+                                           [NetMessageThrow throwWithPlayerID:playerID normalizedVelocity:velocity]]
                              withDataMode:GKMatchSendDataReliable error:&error] || error) {
         err(@"Failed to send our throw: %@", error);
         [self endMatch];
@@ -128,9 +129,8 @@
     }
     else if ([message isKindOfClass:[NetMessageThrow class]]) {
         NetMessageThrow *throwMessage = (NetMessageThrow *)message;
-        dbg(@"Received throw of: %@ by: %@ from player: %@", throwMessage.playerID, NSStringFromCGPoint(throwMessage.velocity), playerID);
-        [[GorillasAppDelegate get].gameLayer.cityLayer throwFrom:[self findGorillaWithPlayerID:throwMessage.playerID]
-                                                    withVelocity:throwMessage.velocity];
+        dbg(@"Received throw of: %@ by: %@ from player: %@", throwMessage.playerID, NSStringFromCGPoint(throwMessage.normalizedVelocity), playerID);
+        [[ThrowController get] throwFrom:[self findGorillaWithPlayerID:throwMessage.playerID] normalizedVelocity:throwMessage.normalizedVelocity];
     }
     else
         err(@"Did not understand data unarchived as: %@\n%@", message, data);

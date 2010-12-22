@@ -22,7 +22,6 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "BananaLayer.h"
 #import "ActivitySprite.h"
 #import <GameKit/GameKit.h>
 #import "Resettable.h"

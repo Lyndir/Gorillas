@@ -335,9 +335,9 @@
     
     // Notify the network controller.
     if (activeGorilla.playerID)
-        [[GorillasAppDelegate get].netController throwBy:activeGorilla.playerID velocity:v];
+        [[GorillasAppDelegate get].netController throwBy:activeGorilla.playerID normalizedVelocity:v];
     
-    [self throwFrom:activeGorilla withVelocity:v];
+    [[ThrowController get] throwFrom:activeGorilla normalizedVelocity:v];
 }
 
 
@@ -542,10 +542,6 @@
     
     // Record throw history & start the actual throw.
     throwHistory[[[GorillasAppDelegate get].gameLayer.gorillas indexOfObject:gorilla]] = v;
-    [gorilla threw:v];
-
-    [bananaLayer setModel:gorilla.projectileModel type:gorilla.type];
-    [bananaLayer throwFrom:[gorilla position] withVelocity:v];
 }
 
 
@@ -617,7 +613,7 @@
     for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
         if([gorilla hitsGorilla:pos]) {
 
-            if(gorilla == [GorillasAppDelegate get].gameLayer.activeGorilla && ![bananaLayer clearedGorilla])
+            if(gorilla == [GorillasAppDelegate get].gameLayer.activeGorilla && !bananaLayer.clearedGorilla)
                 // Disregard this hit on active gorilla because the banana didn't clear him yet.
                 continue;
             
@@ -633,7 +629,7 @@
             // No hit.
             if(gorilla == [GorillasAppDelegate get].gameLayer.activeGorilla)
                 // Active gorilla was not hit -> banana cleared him.
-                [bananaLayer setClearedGorilla:YES];
+                bananaLayer.clearedGorilla = YES;
     
     // No hit.
     return NO;
@@ -742,7 +738,6 @@
                                      userInfo:nil];
     }
     bananaLayer = [[BananaLayer alloc] init];
-    [bananaLayer setFocussed:YES];
     [self addChild:bananaLayer z:2];
     
     [[GorillasAppDelegate get].gameLayer began];

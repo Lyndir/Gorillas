@@ -22,28 +22,25 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
+#import "ThrowController.h"
 
 
-@interface Throw : CCActionInterval {
+@interface ThrowAction : CCActionInterval {
 
 @private
-    BOOL            running;
-    BOOL            skipped;
-    //BOOL            focussed;
-    ccTime          recap;
-    CGPoint          recapr;
-    CGPoint          v;
-    CGPoint          r0;
-    float           throwSkill;
+    CGPoint                                     _v;
+    CGPoint                                     _r0;
     
-    CCActionInterval  *spinAction;
-    CCParticleSystem  *smoke;
+    CCActionInterval                            *_spinAction;
+    CCParticleSystem                            *_smoke;
 }
 
-+(Throw *) actionWithVelocity: (CGPoint)velocity startPos: (CGPoint)startPos;
--(Throw *) initWithVelocity: (CGPoint)velocity startPos: (CGPoint)startPos;
+@property (nonatomic, assign) CGPoint           v;
+@property (nonatomic, assign) CGPoint           r0;
+@property (nonatomic, retain) CCActionInterval  *spinAction;
+@property (nonatomic, retain) CCParticleSystem  *smoke;
 
-@property (nonatomic, readwrite) ccTime recap;
-//@property (nonatomic, readwrite) BOOL   focussed;
++(ThrowAction *) actionWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration;
+-(ThrowAction *) initWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration;
 
 @end

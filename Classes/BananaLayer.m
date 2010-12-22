@@ -34,7 +34,7 @@
 
 @implementation BananaLayer
 
-@synthesize clearedGorilla, banana, throwAction, model, focussed;
+@synthesize clearedGorilla = _clearedGorilla, banana = _banana, model = _model, type = _type;
 
 
 -(id) init {
@@ -42,36 +42,32 @@
     if(!(self = [super init]))
         return self;
     
-    model           = GorillasProjectileModelBanana;
+    self.model          = GorillasProjectileModelBanana;
     
-    banana          = [[CCSprite alloc] initWithFile:[self modelFile]];
-    banana.scale    = GorillasModelScale(4, banana.texture.pixelsWide);
-    banana.visible  = NO;
-    banana.tag      = GorillasTagBananaNotFlying;
+    self.banana         = [CCSprite spriteWithFile:[self modelFile]];
+    self.banana.scale   = GorillasModelScale(4, self.banana.texture.pixelsWide);
+    self.banana.visible = NO;
+    self.banana.tag     = GorillasTagBananaNotFlying;
     
-    throwAction     = nil;
-    focussed        = NO;
-
     return self;
 }
 
 
 -(void) setModel:(GorillasProjectileModel)aModel type:(GorillasPlayerType)aType {
     
-    model = aModel;
-    type = aType;
-    [banana setTexture:[[CCTextureCache sharedTextureCache] addImage:[self modelFile]]];
+    self.model = aModel;
+    self.type = aType;
+    
+    [self.banana setTexture:[[CCTextureCache sharedTextureCache] addImage:[self modelFile]]];
 }
 
 
--(void) throwFrom: (CGPoint)r0 withVelocity: (CGPoint)v {
+-(CCSprite *)bananaForThrowFrom:(GorillaLayer *)gorilla {
     
-    [self setClearedGorilla:NO];
-
-    [throwAction release];
-    [banana setPosition:r0];
-    [banana runAction:[throwAction = [Throw actionWithVelocity:v startPos:r0] retain]];
-    //[throwAction setFocussed:focussed];
+    [self setModel:gorilla.projectileModel type:gorilla.type];
+    [self.banana setPosition:gorilla.position];
+    
+    return self.banana;
 }
 
 
@@ -79,31 +75,29 @@
     
     [super onEnter];
     
-    [self addChild:banana];
+    [self addChild:self.banana];
 }
 
 
 -(void) onExit {
     
     [super onExit];
-    
-    [throwAction release];
-    throwAction = nil;
-    
-    [self removeChild:banana cleanup:YES];
+
+    [self.banana stopAllActions];
+    [self removeChild:self.banana cleanup:YES];
 }
 
 
 -(BOOL) throwing {
     
-    return [banana tag] == GorillasTagBananaFlying;
+    return [self.banana tag] == GorillasTagBananaFlying;
 }
 
 
 -(NSString *) modelFile {
 
     NSString *modelName, *typeName;
-    switch (model) {
+    switch (self.model) {
         case GorillasProjectileModelBanana:
             modelName = @"banana";
             break;
@@ -117,7 +111,7 @@
             @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                            reason:@"Active banana model not implemented." userInfo:nil];
     }
-    switch (type) {
+    switch (self.type) {
         case GorillasPlayerTypeAI:
             typeName = @"ai";
             break;
@@ -134,11 +128,7 @@
 
 -(void) dealloc {
     
-    [banana release];
-    banana = nil;
-    
-    [throwAction release];
-    throwAction = nil;
+    self.banana = nil;
     
     [super dealloc];
 }

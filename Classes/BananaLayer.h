@@ -22,30 +22,29 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "Throw.h"
+#import "ThrowAction.h"
+#import "GorillaLayer.h"
 
 
 @interface BananaLayer : CCLayer {
 
 @private
-    BOOL                    clearedGorilla, focussed;
+    BOOL                                                _clearedGorilla;
     
-    GorillasProjectileModel model;
-    GorillasPlayerType      type;
+    GorillasProjectileModel                             _model;
+    GorillasPlayerType                                  _type;
 
-    CCSprite                  *banana;
-    Throw                   *throwAction;
+    CCSprite                                            *_banana;
 }
 
--(void) throwFrom: (CGPoint)r0 withVelocity: (CGPoint)v;
+@property (nonatomic, assign) BOOL                      clearedGorilla;
+@property (nonatomic, assign) GorillasProjectileModel   model;
+@property (nonatomic, assign) GorillasPlayerType        type;
+@property (nonatomic, retain) CCSprite                  *banana;
+
+-(CCSprite *)bananaForThrowFrom:(GorillaLayer *)gorilla;
 -(BOOL) throwing;
 
 -(void) setModel:(GorillasProjectileModel)aModel type:(GorillasPlayerType)aType;
-
-@property (nonatomic, readwrite) BOOL                       clearedGorilla;
-@property (nonatomic, readwrite) BOOL                       focussed;
-@property (nonatomic, readonly) GorillasProjectileModel     model;
-@property (nonatomic, readonly) CCSprite                      *banana;
-@property (nonatomic, readonly) Throw                       *throwAction;
 
 @end

@@ -395,7 +395,7 @@
 		DA47698D0FDD7334002E74F8 /* ExplosionsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C17CD0EC0F698006D43BD /* ExplosionsLayer.m */; };
 		DA47698E0FDD7334002E74F8 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DA47698F0FDD7334002E74F8 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
-		DA4769910FDD7334002E74F8 /* Throw.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* Throw.m */; };
+		DA4769910FDD7334002E74F8 /* ThrowAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* ThrowAction.m */; };
 		DA4769930FDD7334002E74F8 /* CityTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = DACFEC200EE96AA300A0D08E /* CityTheme.m */; };
 		DA4769940FDD7334002E74F8 /* ShadeTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DA16C5180EEC856200E46246 /* ShadeTo.m */; };
 		DA4769950FDD7334002E74F8 /* ContinueMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB8C42D0EF1D582003D22DA /* ContinueMenuLayer.m */; };
@@ -571,7 +571,7 @@
 		DAE489660FEEE92B00E9017C /* explosion3.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAE489560FEEE92B00E9017C /* explosion3.caf */; };
 		DAF4D8161280D8170012132B /* MovingTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF4D8131280D8170012132B /* MovingTo.m */; };
 		DAF4D8181280D8170012132B /* MovingTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF4D8131280D8170012132B /* MovingTo.m */; };
-		DAFEF9730ED847D40019F7E5 /* Throw.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* Throw.m */; };
+		DAFEF9730ED847D40019F7E5 /* ThrowAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* ThrowAction.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1098,8 +1098,8 @@
 		DAE489B30FEEEC4D00E9017C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAF4D8121280D8170012132B /* MovingTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingTo.h; sourceTree = "<group>"; };
 		DAF4D8131280D8170012132B /* MovingTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingTo.m; sourceTree = "<group>"; };
-		DAFEF9710ED847D40019F7E5 /* Throw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Throw.h; sourceTree = "<group>"; };
-		DAFEF9720ED847D40019F7E5 /* Throw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Throw.m; sourceTree = "<group>"; };
+		DAFEF9710ED847D40019F7E5 /* ThrowAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThrowAction.h; sourceTree = "<group>"; };
+		DAFEF9720ED847D40019F7E5 /* ThrowAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThrowAction.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1314,10 +1314,8 @@
 				DA34FD0F0EB4851D00B68C06 /* PanAction.m */,
 				DA16C5170EEC855900E46246 /* ShadeTo.h */,
 				DA16C5180EEC856200E46246 /* ShadeTo.m */,
-				DAFEF9710ED847D40019F7E5 /* Throw.h */,
-				DAFEF9720ED847D40019F7E5 /* Throw.m */,
-				DA021E420F84A0F0007CED57 /* ThrowController.h */,
-				DA021E430F84A0F0007CED57 /* ThrowController.m */,
+				DAFEF9710ED847D40019F7E5 /* ThrowAction.h */,
+				DAFEF9720ED847D40019F7E5 /* ThrowAction.m */,
 				DAF4D8121280D8170012132B /* MovingTo.h */,
 				DAF4D8131280D8170012132B /* MovingTo.m */,
 			);
@@ -1350,6 +1348,8 @@
 				DA711DC8128DF40800EDB885 /* NetMessage.m */,
 				DA711DEF128EA44700EDB885 /* NetController.h */,
 				DA711DF0128EA44700EDB885 /* NetController.m */,
+				DA021E420F84A0F0007CED57 /* ThrowController.h */,
+				DA021E430F84A0F0007CED57 /* ThrowController.m */,
 			);
 			name = Backend;
 			sourceTree = "<group>";
@@ -2487,7 +2487,7 @@
 				DA6C17CE0EC0F698006D43BD /* ExplosionsLayer.m in Sources */,
 				DA859C500EC4F3950036B7C0 /* GorillaLayer.m in Sources */,
 				DA859E700EC598E10036B7C0 /* BananaLayer.m in Sources */,
-				DAFEF9730ED847D40019F7E5 /* Throw.m in Sources */,
+				DAFEF9730ED847D40019F7E5 /* ThrowAction.m in Sources */,
 				DACFEC210EE96AA300A0D08E /* CityTheme.m in Sources */,
 				DA16C5190EEC856200E46246 /* ShadeTo.m in Sources */,
 				DAB8C42E0EF1D582003D22DA /* ContinueMenuLayer.m in Sources */,
@@ -2672,7 +2672,7 @@
 				DA47698D0FDD7334002E74F8 /* ExplosionsLayer.m in Sources */,
 				DA47698E0FDD7334002E74F8 /* GorillaLayer.m in Sources */,
 				DA47698F0FDD7334002E74F8 /* BananaLayer.m in Sources */,
-				DA4769910FDD7334002E74F8 /* Throw.m in Sources */,
+				DA4769910FDD7334002E74F8 /* ThrowAction.m in Sources */,
 				DA4769930FDD7334002E74F8 /* CityTheme.m in Sources */,
 				DA4769940FDD7334002E74F8 /* ShadeTo.m in Sources */,
 				DA4769950FDD7334002E74F8 /* ContinueMenuLayer.m in Sources */,

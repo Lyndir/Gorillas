@@ -74,7 +74,7 @@
 -(void) configureGameWithMode:(GorillasMode)nMode playerIDs:(NSArray *)playerIDs ais:(NSUInteger)ais;
 - (void)scaleTimeTo:(float)aTimeScale duration:(ccTime)aDuration;
 
--(void) updateStateHitGorilla:(BOOL)hitGorilla hitBuilding:(BOOL)hitBuilding offScreen:(BOOL)offScreen throwSkill:(float)throwSkill;
+-(void) updateStateForThrow:(Throw)throw withSkill:(float)throwSkill;
 -(BOOL) checkGameStillOn;
 -(void) startGame;
 /** Invoked when we want to stop playing. */

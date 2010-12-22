@@ -25,7 +25,7 @@
 @end
 
 @implementation NetMessageElectHost
-@synthesize vote, playerVotes, host, hostID, orderedPlayerIDs;
+@synthesize vote = _vote, playerVotes = _playerVotes, host = _host, hostID = _hostID, orderedPlayerIDs = _orderedPlayerIDs;
 
 + (NetMessageElectHost *)electHostWithPlayerIDs:(NSArray *)aPlayerIDs {
     
@@ -105,23 +105,33 @@
     return [self.hostID isEqualToString:[GKLocalPlayer localPlayer].playerID];
 }
 
+- (void)dealloc {
+    
+    self.playerVotes        = nil;
+    self.host               = nil;
+    self.hostID             = nil;
+    self.orderedPlayerIDs   = nil;
+    
+    [super dealloc];
+}
+
 @end
 
 @implementation NetMessageThrow
-@synthesize playerID, velocity;
+@synthesize playerID = _playerID, normalizedVelocity = _normalizedVelocity;
 
-+ (NetMessageThrow *)throwWithPlayerID:(NSString *)aPlayerID velocity:(CGPoint)aVelocity {
++ (NetMessageThrow *)throwWithPlayerID:(NSString *)aPlayerID normalizedVelocity:(CGPoint)aNormalizedVelocity {
     
-    return [[[self alloc] initWithPlayerID:aPlayerID velocity:aVelocity] autorelease];
+    return [[[self alloc] initWithPlayerID:aPlayerID normalizedVelocity:aNormalizedVelocity] autorelease];
 }
 
-- (id)initWithPlayerID:(NSString *)aPlayerID velocity:(CGPoint)aVelocity {
+- (id)initWithPlayerID:(NSString *)aPlayerID normalizedVelocity:(CGPoint)aNormalizedVelocity {
     
     if (!(self = [super init]))
         return self;
     
-    self.playerID = aPlayerID;
-    self.velocity = aVelocity;
+    self.playerID           = aPlayerID;
+    self.normalizedVelocity = aNormalizedVelocity;
     
     return self;
 }
@@ -131,8 +141,9 @@
     if (!(self = [self init]))
         return self;
     
-    self.playerID = [aDecoder decodeObjectForKey:@"playerID"];
-    self.velocity = CGPointMake([aDecoder decodeFloatForKey:@"velocity.x"], [aDecoder decodeFloatForKey:@"velocity.y"]);
+    self.playerID           = [aDecoder decodeObjectForKey:@"playerID"];
+    self.normalizedVelocity = CGPointMake([aDecoder decodeFloatForKey:@"normalizedVelocity.x"],
+                                          [aDecoder decodeFloatForKey:@"normalizedVelocity.y"]);
     
     return self;
 }
@@ -140,8 +151,15 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     
     [aCoder encodeObject:self.playerID forKey:@"playerID"];
-    [aCoder encodeFloat:self.velocity.x forKey:@"velocity.x"];
-    [aCoder encodeFloat:self.velocity.y forKey:@"velocity.y"];
+    [aCoder encodeFloat:self.normalizedVelocity.x forKey:@"normalizedVelocity.x"];
+    [aCoder encodeFloat:self.normalizedVelocity.y forKey:@"normalizedVelocity.y"];
+}
+
+- (void)dealloc {
+    
+    self.playerID = nil;
+    
+    [super dealloc];
 }
 
 @end

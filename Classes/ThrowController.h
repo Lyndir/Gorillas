@@ -22,14 +22,36 @@
 //  Copyright 2009 lhunath (Maarten Billemont). All rights reserved.
 //
 
+#import "GorillaLayer.h"
+
+
+typedef enum {
+    ThrowNotEnded,
+    ThrowEndHitBuilding,
+    ThrowEndHitGorilla,
+    ThrowEndOffScreen,
+} ThrowEnd;
+typedef struct {
+    CGPoint     endPoint;
+    ThrowEnd    endCondition;
+    ccTime      duration;
+} Throw;
 
 @interface ThrowController : NSObject {
 
+    Throw                               _throw;
+    CCSprite                            *_banana;
 }
+
+@property (nonatomic, assign) Throw     throw;
+@property (nonatomic, assign) CCSprite  *banana;
 
 -(void) nextTurn;
 -(void) throwEnded;
 
-+(ThrowController *) get;
+- (void)throwFrom:(GorillaLayer *)gorilla normalizedVelocity:(CGPoint)velocity;
+
++ (Throw)calculateThrowFrom:(CGPoint)r0 withVelocity:(CGPoint)v afterTime:(ccTime)t;
++ (ThrowController *) get;
 
 @end
