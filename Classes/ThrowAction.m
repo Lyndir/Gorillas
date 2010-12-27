@@ -116,8 +116,6 @@
 
 -(void) stop {
     
-    [super stop];
-    
     // self.target.position = [guaranteed time-independant end point of the throw]
     self.target.visible = NO;
     
@@ -128,6 +126,8 @@
     [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:CGPointZero horizontal:NO];
     [[GorillasAppDelegate get].gameLayer scaleTimeTo:1.0f duration:0.5f];
 
+    [super stop];
+    
     [[ThrowController get] throwEnded];
 }    
 

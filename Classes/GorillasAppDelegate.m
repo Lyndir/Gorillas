@@ -73,6 +73,8 @@
     [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
         if (error)
             wrn(@"Game Center unavailable: %@", error);
+        
+        [self.newGameLayer reset];
     }];
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
         [self.gameLayer performSelectorOnMainThread:@selector(stopGame) withObject:nil waitUntilDone:YES];

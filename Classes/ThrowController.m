@@ -83,7 +83,7 @@
     // Determine throw endpoint.
     ccTime t = 0;
     while (! (self.throw = [ThrowController calculateThrowFrom:gorilla.position withVelocity:v afterTime:t]).endCondition)
-        t += 0.1f;
+        t += 0.01f;
     [GorillasAppDelegate get].gameLayer.cityLayer.bananaLayer.clearedGorilla = NO;
     
     // Begin throw.
