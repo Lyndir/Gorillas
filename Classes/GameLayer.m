@@ -177,6 +177,9 @@
     if ([[GorillasConfig get].vibration boolValue])
         [GorillasAudioController vibrate];
     
+    if (![shakeAction isDone])
+        [cityLayer stopAction:shakeAction];
+    
     [cityLayer runAction:shakeAction];
 }
 
@@ -249,6 +252,8 @@
         }
             
         case ThrowEndHitGorilla: {
+            [cityLayer.hitGorilla kill];
+            
             if (!cityLayer.hitGorilla.alive)
                 [[[GorillasAppDelegate get] hudLayer] message:[NSString stringWithFormat:[GorillasConfig get].hitMessage,
                                                                activeGorilla.name, cityLayer.hitGorilla.name]

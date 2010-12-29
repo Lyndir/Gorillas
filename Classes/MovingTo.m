@@ -20,12 +20,10 @@
 
 - (void)updatePosition:(CGPoint)pos {
 
-    dbg(@"before: %@ -> %@, %f/%f", NSStringFromCGPoint(startPosition), NSStringFromCGPoint(endPosition), elapsed_, duration_);
     endPosition = pos;
 	startPosition = [(CCNode*)target_ position];
 	delta = ccpSub( endPosition, startPosition );
     elapsed_ = 0;
-    dbg(@"after: %@ -> %@, %f/%f", NSStringFromCGPoint(startPosition), NSStringFromCGPoint(endPosition), elapsed_, duration_);
 }
 
 @end

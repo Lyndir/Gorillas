@@ -479,7 +479,7 @@
         }
 
         // Pick a random target from the enemies.
-        GorillaLayer *target = [[enemies objectAtIndex:gameRandom() % [enemies count]] retain];
+        GorillaLayer *target = [enemies objectAtIndex:gameRandom() % [enemies count]];
         [enemies release];
         
         // Aim at the target.
@@ -487,10 +487,9 @@
         CGPoint v = [self calculateThrowFrom:r0
                                          to:target.position
                                  errorLevel:[[GorillasConfig get].level floatValue]];
-        [target release];
 
         // Throw at where we aimed.
-        [self throwFrom:[GorillasAppDelegate get].gameLayer.activeGorilla withVelocity:v];
+        [[ThrowController get] throwFrom:[GorillasAppDelegate get].gameLayer.activeGorilla normalizedVelocity:v];
         
 #if _DEBUG_
         dbgAI[dbgAICurInd] = [GorillasAppDelegate get].gameLayer.activeGorilla;
@@ -620,7 +619,6 @@
             // A gorilla was hit.
             [hitGorilla release];
             hitGorilla = [gorilla retain];
-            [hitGorilla kill];
 
             return YES;
         }
