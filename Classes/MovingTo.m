@@ -15,17 +15,17 @@
 	if(!(self = [super initWithDuration:t position:p]))
         return self;
     
-    stepDuration = t;
-    
 	return self;
 }
 
 - (void)updatePosition:(CGPoint)pos {
-    
+
+    dbg(@"before: %@ -> %@, %f/%f", NSStringFromCGPoint(startPosition), NSStringFromCGPoint(endPosition), elapsed_, duration_);
     endPosition = pos;
 	startPosition = [(CCNode*)target_ position];
 	delta = ccpSub( endPosition, startPosition );
-    duration_ = elapsed_ + stepDuration;
+    elapsed_ = 0;
+    dbg(@"after: %@ -> %@, %f/%f", NSStringFromCGPoint(startPosition), NSStringFromCGPoint(endPosition), elapsed_, duration_);
 }
 
 @end

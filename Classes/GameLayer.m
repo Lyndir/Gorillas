@@ -31,8 +31,6 @@
 
 @interface GameLayer ()
 
-@property (nonatomic, readwrite, retain) NSArray    *playerIDs;
-
 -(void) setPausedSilently:(BOOL)_paused;
 - (void)updateWeather:(ccTime)dt;
 - (void)randomEncounter:(ccTime)dt;
@@ -48,7 +46,6 @@
 @synthesize gorillas, activeGorilla;
 @synthesize skyLayer, panningLayer, cityLayer, windLayer, weather;
 //FIXME @synthesize scaleTimeAction;
-@synthesize playerIDs;
 
 -(BOOL) isSinglePlayer {
     
@@ -119,12 +116,10 @@
 }
 
 
--(void) configureGameWithMode:(GorillasMode)_mode playerIDs:(NSArray *)aPlayerIDs ais:(NSUInteger)_ais {
-    
-    self.playerIDs  = aPlayerIDs;
+-(void) configureGameWithMode:(GorillasMode)_mode playerIDs:(NSArray *)playerIDs ais:(NSUInteger)_ais {
     
     mode            = _mode;
-    humans          = 1 + [self.playerIDs count];
+    humans          = 1 + [playerIDs count];
     ais             = _ais;
     
     // Create gorillas array.
@@ -140,11 +135,11 @@
     [GorillaLayer prepareCreation];
     
     // Add humans to the game.
-    if (self.playerIDs) {
-        for (NSString *playerID in self.playerIDs)
+    if (playerIDs) {
+        for (NSString *playerID in playerIDs)
             [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeHuman playerID:playerID]];
         
-        [GKPlayer loadPlayersForIdentifiers:self.playerIDs withCompletionHandler:^(NSArray *players, NSError *error) {
+        [GKPlayer loadPlayersForIdentifiers:playerIDs withCompletionHandler:^(NSArray *players, NSError *error) {
             if (error)
                 err(@"While loading player information: %@", error);
             
@@ -637,8 +632,6 @@
     
     [activeGorilla release];
     activeGorilla = nil;
-    
-    self.playerIDs = nil;
     
     [super dealloc];
 }

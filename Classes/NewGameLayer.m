@@ -79,7 +79,7 @@
     if ([[configurationI subItems] count] > gameConfigurationIndex)
         [configurationI setSelectedIndex:gameConfigurationIndex];
     [descriptionT setString:gameConfiguration.description];
-    singlePlayerI.isEnabled = gameConfiguration.singleplayerAICount;
+    singlePlayerI.isEnabled = gameConfiguration.singleplayerAICount && [GKLocalPlayer localPlayer].playerID;
     multiPlayerI.isEnabled = gameConfiguration.multiplayerHumanCount && [GKLocalPlayer localPlayer].authenticated;
 }
 

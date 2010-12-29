@@ -49,8 +49,6 @@
     WindLayer                                               *windLayer;
     CCAction                                                *shakeAction;
     //FIXME ScaleTime                                       *scaleTimeAction;
-    
-    NSArray                                                 *playerIDs;
 }
 
 @property (nonatomic, readwrite, getter=isPaused) BOOL      paused;
@@ -66,8 +64,6 @@
 @property (nonatomic, readonly) WindLayer                   *windLayer;
 
 //FIXME @property (nonatomic, readonly) ScaleTime           *scaleTimeAction;
-
-@property (nonatomic, readonly, retain) NSArray             *playerIDs;
 
 -(void) shake;
 -(BOOL) isEnabled:(GorillasFeature)feature;

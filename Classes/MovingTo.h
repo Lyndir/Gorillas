@@ -11,7 +11,6 @@
 
 @interface MovingTo : CCMoveTo {
 
-    ccTime stepDuration;
 }
 
 - (void)updatePosition:(CGPoint)pos;
