@@ -354,7 +354,6 @@
 		DA3B9668127C1E81009196E8 /* libcocos2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B938A127B6D6A009196E8 /* libcocos2d.a */; };
 		DA3B9720127C37B3009196E8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B971A127C3787009196E8 /* libz.dylib */; };
 		DA3B9722127C37CA009196E8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B971A127C3787009196E8 /* libz.dylib */; };
-		DA4769520FDD7334002E74F8 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
 		DA47695D0FDD7334002E74F8 /* bobber.png in Resources */ = {isa = PBXBuildFile; fileRef = DACC157F0F61F2FB0078A0D8 /* bobber.png */; };
 		DA47695F0FDD7334002E74F8 /* buildings.png in Resources */ = {isa = PBXBuildFile; fileRef = DACC15810F61F2FB0078A0D8 /* buildings.png */; };
 		DA4769620FDD7334002E74F8 /* gorilla-shape.png in Resources */ = {isa = PBXBuildFile; fileRef = DACC15880F61F2FB0078A0D8 /* gorilla-shape.png */; };
@@ -492,7 +491,6 @@
 		DA859E700EC598E10036B7C0 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
 		DA8B147C128CB11000D2211C /* RootViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA8B147A128CB10F00D2211C /* RootViewController.h */; };
 		DA8B147D128CB11000D2211C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA8B147B128CB10F00D2211C /* RootViewController.m */; };
-		DA8B76B30F44EC6600DD88BF /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA83EC190EFEE93100305C9F /* Entitlements.plist */; };
 		DA9A63B90F573A530031988E /* CustomGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9A63B60F573A530031988E /* CustomGameLayer.m */; };
 		DA9BD564128B465E00B854A7 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9BD563128B465E00B854A7 /* GameKit.framework */; };
 		DA9BD580128B466D00B854A7 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9BD563128B465E00B854A7 /* GameKit.framework */; };
@@ -2226,7 +2224,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA8B76B30F44EC6600DD88BF /* Entitlements.plist in Resources */,
 				DACC15DE0F61F2FB0078A0D8 /* bobber.png in Resources */,
 				DACC15E00F61F2FB0078A0D8 /* buildings.png in Resources */,
 				DACC15E70F61F2FB0078A0D8 /* gorilla-shape.png in Resources */,
@@ -2333,7 +2330,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA4769520FDD7334002E74F8 /* Entitlements.plist in Resources */,
 				DA47695D0FDD7334002E74F8 /* bobber.png in Resources */,
 				DA47695F0FDD7334002E74F8 /* buildings.png in Resources */,
 				DA4769620FDD7334002E74F8 /* gorilla-shape.png in Resources */,

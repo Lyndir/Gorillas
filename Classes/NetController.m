@@ -116,9 +116,8 @@
             
             // Use the host's seed for the game random.
             [[GorillasConfig get] setGameRandomSeed:self.hostElection.host.vote];
-            dbg(@"Choosing a random city theme for network game");
-            [GorillasConfig get].cityTheme = [[CityTheme getThemeNames] objectAtIndex:gameRandom() % [[CityTheme getThemeNames] count]];
             
+            [GorillasConfig get].cityTheme = [[CityTheme getThemeNames] objectAtIndex:gameRandom() % [[CityTheme getThemeNames] count]];
             NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
             GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
             

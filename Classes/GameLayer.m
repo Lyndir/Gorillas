@@ -421,13 +421,13 @@
     humans = 0;
     ais = 0;
     
+    [[GorillasAppDelegate get].netController endMatch];
+    
     [self endGame];
 }
 
 
 -(void) endGame {
-    
-    [[GorillasAppDelegate get].netController endMatch];
     
     [self setPausedSilently:NO];
     

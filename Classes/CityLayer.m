@@ -775,8 +775,7 @@
     
     for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
         [gorilla killDead];
-    
-    //[self startPanning];
+    [GorillasAppDelegate get].gameLayer.activeGorilla = nil;
     
     [[GorillasAppDelegate get].gameLayer ended];
 }

@@ -129,6 +129,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     
     [self stopAllActions];
     
+    self.active     = NO;
     self.lives      = self.initialLives;
     self.opacity    = 0xff;
     
