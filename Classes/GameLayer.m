@@ -27,6 +27,7 @@
 #import "MainMenuLayer.h"
 #import "GorillasAppDelegate.h"
 #import "Remove.h"
+#import "CityTheme.h"
 
 
 @interface GameLayer ()
@@ -116,9 +117,11 @@
 }
 
 
--(void) configureGameWithMode:(GorillasMode)_mode playerIDs:(NSArray *)playerIDs ais:(NSUInteger)_ais {
+-(void) configureGameWithMode:(GorillasMode)_mode randomCity:(BOOL)aRandomCity
+                    playerIDs:(NSArray *)playerIDs ais:(NSUInteger)_ais {
     
     mode            = _mode;
+    randomCity      = aRandomCity;
     humans          = 1 + [playerIDs count];
     ais             = _ais;
     
@@ -196,6 +199,10 @@
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                        reason:@"Tried to start a game while one's still running."
                                      userInfo:nil];
+    
+    if (randomCity)
+        [GorillasConfig get].cityTheme = [[CityTheme getThemeNames] objectAtIndex:gameRandom() % [[CityTheme getThemeNames] count]];
+
     
     // When there are AIs in the game, show their difficulity.
     if (ais)

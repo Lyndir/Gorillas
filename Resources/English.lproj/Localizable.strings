@@ -51,6 +51,9 @@
 "menu.choose.style"                         = "Choose a game style:";
 "menu.choose.theme"                         = "City Theme";
 "menu.choose.track"                         = "Audio Track";
+"menu.choose.ais"                           = "AIs";
+"menu.choose.humans"                        = "Humans";
+"menu.choose.randomCity"                    = "Play in a random city:";
 "menu.config"                               = "Configuration";
 "menu.config.direction"                     = "ltr";
 "menu.config.gametype.bootcamp"             = "Boot Camp";
@@ -116,8 +119,6 @@
 "menu.player.multi"                         = "Multi Player";
 "menu.player.single"                        = "Single Player";
 "menu.score.top"                            = "Top Score: %04d";
-"menu.select.ais"                           = "AIs";
-"menu.select.humans"                        = "Humans";
 "menu.start"                                = "Start!";
 "menu.stats"                                = "Statistics";
 "menu.stop"                                 = "Main Menu";

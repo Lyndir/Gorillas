@@ -36,6 +36,7 @@
     BOOL                                                    paused;
     BOOL                                                    running;
     GorillasMode                                            mode;
+    BOOL                                                    randomCity;
     NSUInteger                                              humans;
     NSUInteger                                              ais;
     
@@ -67,8 +68,9 @@
 
 -(void) shake;
 -(BOOL) isEnabled:(GorillasFeature)feature;
--(void) configureGameWithMode:(GorillasMode)nMode playerIDs:(NSArray *)playerIDs ais:(NSUInteger)ais;
-- (void)scaleTimeTo:(float)aTimeScale duration:(ccTime)aDuration;
+-(void) configureGameWithMode:(GorillasMode)nMode randomCity:(BOOL)aRandomCity
+                    playerIDs:(NSArray *)playerIDs ais:(NSUInteger)ais;
+-(void) scaleTimeTo:(float)aTimeScale duration:(ccTime)aDuration;
 
 -(void) updateStateForThrow:(Throw)throw withSkill:(float)throwSkill;
 -(BOOL) checkGameStillOn;

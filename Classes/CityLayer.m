@@ -783,6 +783,8 @@
 
 -(void) explodeAt: (CGPoint)point isGorilla:(BOOL)isGorilla {
     
+    dbg(@"Explosion at: %@", NSStringFromCGPoint(point));
+    
     CGPoint worldPoint = [self convertToWorldSpace:point];
     [holes addHoleAtWorld:worldPoint];
     [explosions addExplosionAtWorld:worldPoint hitsGorilla:isGorilla];

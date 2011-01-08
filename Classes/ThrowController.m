@@ -84,6 +84,11 @@
     ccTime t = 0;
     while (! (self.throw = [ThrowController calculateThrowFrom:gorilla.position withVelocity:v afterTime:t]).endCondition)
         t += 0.01f;
+    if (self.throw.endCondition)
+        dbg(@"Throw: %@ -> %@, v = %@ ends after t = %f, condition: %d",
+            NSStringFromCGPoint(gorilla.position), NSStringFromCGPoint(self.throw.endPoint), NSStringFromCGPoint(v),
+            self.throw.duration, self.throw.endCondition);
+    
     [GorillasAppDelegate get].gameLayer.cityLayer.bananaLayer.clearedGorilla = NO;
     
     // Begin throw.
@@ -119,10 +124,6 @@
         endCondition = ThrowEndHitGorilla;
     else if (r.x < min || r.x > max || r.y < 0   || r.y > top)
         endCondition = ThrowEndOffScreen;
-    
-    if (endCondition)
-        dbg(@"Throw: r0 = %@ -> r = %@, v = %@ ends after t = %f, condition: %d",
-            NSStringFromCGPoint(r0), NSStringFromCGPoint(r), NSStringFromCGPoint(v), t, endCondition);
     
     return (Throw){r, endCondition, t};
 }

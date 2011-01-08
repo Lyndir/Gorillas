@@ -63,6 +63,7 @@
 
 + (void)initialize {
     
+    [[Logger get] setAutoprintLevel:LogLevelDebug];
     [GorillasConfig get];
 }
 
@@ -145,7 +146,6 @@
 
 - (void)hudMenuPressed {
     
-    [[Logger get] printAllWithLevel:LogLevelDebug];
     [self showMainMenu];
 }
 

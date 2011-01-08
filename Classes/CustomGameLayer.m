@@ -32,6 +32,7 @@
 
 - (void)gameMode:(id)sender;
 - (void)ais:(id)sender;
+- (void)random:(id)sender;
 - (void)startGame:(id)sender;
 - (void)back:(id)selector;
 
@@ -46,16 +47,16 @@
     if (!(self = [super initWithDelegate:self logo:nil items:
                   [MenuItemTitle itemFromString:l(@"menu.choose.mode")],
                   gameModeI     = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(gameMode:)],
-                  [MenuItemTitle itemFromString:l(@"menu.select.ais")],
+                  [MenuItemTitle itemFromString:l(@"menu.choose.ais")],
                   aisI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(ais:)],
-                  [MenuItemSpacer spacerNormal],
-                  startGameI  = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"menu.start", @"Start!")
-                                                                target:self
-                                                              selector:@selector(startGame:)],
+                  [MenuItemTitle itemFromString:l(@"menu.choose.randomCity")],
+                  randomI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(random:)],
                   nil]))
         return self;
     
+    self.layout = MenuLayoutColumns;
     ais = 1;
+    randomCity = YES;
     
     // Game Mode.
     NSMutableArray *modeMenuItems = [NSMutableArray arrayWithCapacity:4];
@@ -64,15 +65,25 @@
     gameModeI.subItems = modeMenuItems;
     [gameModeI setSelectedIndex:1];
     
-    
     // AIs.
     NSMutableArray *aiMenuItems = [NSMutableArray arrayWithCapacity:4];
-    [aiMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"menu.ai.count.0", @"None")]];
-    [aiMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"menu.ai.count.1", @"1 AI")]];
-    [aiMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"menu.ai.count.2", @"2 AIs")]];
-    [aiMenuItems addObject:[CCMenuItemFont itemFromString:NSLocalizedString(@"menu.ai.count.3+", @"%d AIs")]];
+    [aiMenuItems addObject:[CCMenuItemFont itemFromString:l(@"menu.ai.count.0")]];
+    [aiMenuItems addObject:[CCMenuItemFont itemFromString:l(@"menu.ai.count.1")]];
+    [aiMenuItems addObject:[CCMenuItemFont itemFromString:l(@"menu.ai.count.2")]];
+    [aiMenuItems addObject:[CCMenuItemFont itemFromString:l(@"menu.ai.count.3+")]];
     aisI.subItems = aiMenuItems;
     [aisI setSelectedIndex:1];
+
+    // Random City.
+    NSMutableArray *randomMenuItems = [NSMutableArray arrayWithCapacity:2];
+    [randomMenuItems addObject:[CCMenuItemFont itemFromString:l(@"menu.config.off")]];
+    [randomMenuItems addObject:[CCMenuItemFont itemFromString:l(@"menu.config.on")]];
+    randomI.subItems = randomMenuItems;
+    [randomI setSelectedIndex:1];
+    
+    [self setNextButton:[[CCMenuItemFont alloc] initFromString:l(@"menu.start")
+                                                        target:self
+                                                      selector:@selector(startGame:)]];
     
     return self;
 }
@@ -91,6 +102,10 @@
     NSUInteger modeIndex = [modeKeys indexOfObject:[GorillasConfig get].mode];
     if ([[gameModeI subItems] count] > modeIndex)
         [gameModeI setSelectedIndex:modeIndex];
+    
+    NSUInteger randomIndex = randomCity? 1: 0;
+    if ([[randomI subItems] count] > randomIndex)
+        [randomI setSelectedIndex:randomIndex];
 }
 
 
@@ -119,9 +134,17 @@
 }
 
 
+-(void) random: (id) sender {
+    
+    randomCity = !randomCity;
+    
+    [self reset];
+}
+
+
 -(void) startGame: (id) sender {
     
-    [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:[[GorillasConfig get].mode unsignedIntValue]
+    [[[GorillasAppDelegate get] gameLayer] configureGameWithMode:[[GorillasConfig get].mode unsignedIntValue] randomCity:randomCity
                                                        playerIDs:nil ais:ais];
     [[[GorillasAppDelegate get] gameLayer] startGame];
 }

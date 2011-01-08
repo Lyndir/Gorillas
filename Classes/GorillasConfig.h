@@ -24,6 +24,7 @@
 
 #import "GameConfiguration.h"
 #import "Config.h"
+#import "Logger.h"
 
 #define cCityTheme                      NSStringFromSelector(@selector(cityTheme))
 #define cVarFloors                      NSStringFromSelector(@selector(varFloors))
@@ -148,6 +149,8 @@
  */
 static inline float GorillasModelScale(const float amountPerBuildingWidth, const float modelPixelsWide) {
     
+    dbg(@"winWidthPx: %f, buildings: %f, amountPerBuildingWidth: %f, modelPixelsWide: %f => %f", [CCDirector sharedDirector].winSizeInPixels.width, [[GorillasConfig get].buildingAmount floatValue], amountPerBuildingWidth, modelPixelsWide, [CCDirector sharedDirector].winSizeInPixels.width / [[GorillasConfig get].buildingAmount floatValue]
+        / amountPerBuildingWidth / modelPixelsWide);
     return [CCDirector sharedDirector].winSizeInPixels.width / [[GorillasConfig get].buildingAmount floatValue]
-    / amountPerBuildingWidth / modelPixelsWide;
+            / amountPerBuildingWidth / modelPixelsWide;
 }

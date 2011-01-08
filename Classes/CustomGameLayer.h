@@ -29,10 +29,11 @@
 @interface CustomGameLayer : GMenuLayer <Resettable, MenuDelegate> {
 
 @private
-    CCMenuItemToggle        *aisI, *gameModeI;
+    CCMenuItemToggle        *aisI, *gameModeI, *randomI;
     CCMenuItem              *startGameI;
     
     NSUInteger              ais;
+    BOOL                    randomCity;
 }
 
 @end

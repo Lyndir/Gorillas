@@ -47,13 +47,13 @@
                   [MenuItemTitle itemFromString:l(@"menu.choose.style")],
                   configurationI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(gameConfiguration:)],
                   descriptionT      = [MenuItemTitle itemFromString:@"description"],
+                  [MenuItemSpacer spacerNormal],
                   singlePlayerI    = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"menu.player.single", @"Single Player")
                                                                      target:self
                                                                    selector:@selector(startSingle:)],
                   multiPlayerI    = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"menu.player.multi", @"Multi Player")
                                                                     target:self
                                                                   selector:@selector(startMulti:)],
-                  [MenuItemSpacer spacerNormal],
                   [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.choose.custom", @"Custom Game...")
                                           target:self
                                         selector:@selector(custom:)],
@@ -105,7 +105,7 @@
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
     GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
     
-    [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode
+    [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode randomCity:NO
                                                      playerIDs:[NSArray arrayWithObject:[GKLocalPlayer localPlayer].playerID]
                                                            ais:gameConfiguration.singleplayerAICount];
     [[GorillasAppDelegate get].gameLayer startGame];

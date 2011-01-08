@@ -45,7 +45,7 @@
     self.model          = GorillasProjectileModelBanana;
     
     self.banana         = [CCSprite spriteWithFile:[self modelFile]];
-    self.banana.scale   = GorillasModelScale(4, self.banana.texture.pixelsWide);
+    self.banana.scale   = GorillasModelScale(4, self.banana.texture.contentSize.width);
     self.banana.visible = NO;
     self.banana.tag     = GorillasTagBananaNotFlying;
     

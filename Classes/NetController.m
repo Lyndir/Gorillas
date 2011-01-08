@@ -117,11 +117,10 @@
             // Use the host's seed for the game random.
             [[GorillasConfig get] setGameRandomSeed:self.hostElection.host.vote];
             
-            [GorillasConfig get].cityTheme = [[CityTheme getThemeNames] objectAtIndex:gameRandom() % [[CityTheme getThemeNames] count]];
             NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
             GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
             
-            [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode
+            [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode randomCity:YES
                                                              playerIDs:self.hostElection.orderedPlayerIDs ais:gameConfiguration.multiplayerAICount];
             [[GorillasAppDelegate get].gameLayer startGame];
         }
@@ -138,21 +137,26 @@
 // Called when a player connects to or disconnects from the match.
 - (void)match:(GKMatch *)match player:(NSString *)playerID didChangeState:(GKPlayerConnectionState)state {
     
+    dbg(@"State changed for player: %@, to: %d", playerID, state);
     GorillaLayer *gorilla = [self findGorillaWithPlayerID:playerID];
     if (gorilla)
         gorilla.connectionState = state;
     else
         err(@"No gorilla found for player: %@", playerID);
     
-    if (!started && !match.expectedPlayerCount) {
-        // Beginning of the game, all players have connected.  Vote for host.
-        NSError *error = nil;
-        self.hostElection = [NetMessageElectHost electHostWithPlayerIDs:self.match.playerIDs];
-        if (![self.match sendDataToAllPlayers:[NSKeyedArchiver archivedDataWithRootObject:self.hostElection]
-                                 withDataMode:GKMatchSendDataReliable error:&error] || error) {
-            err(@"Failed to send our host election: %@", error);
-            [self endMatch];
-            return;
+    if (!started) {
+        if (match.expectedPlayerCount)
+            dbg(@"Need %d more players.", match.expectedPlayerCount);
+        else {
+            // Beginning of the game, all players have connected.  Vote for host.
+            NSError *error = nil;
+            self.hostElection = [NetMessageElectHost electHostWithPlayerIDs:self.match.playerIDs];
+            if (![self.match sendDataToAllPlayers:[NSKeyedArchiver archivedDataWithRootObject:self.hostElection]
+                                     withDataMode:GKMatchSendDataReliable error:&error] || error) {
+                err(@"Failed to send our host election: %@", error);
+                [self endMatch];
+                return;
+            }
         }
     }
 }
