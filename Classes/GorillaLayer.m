@@ -83,7 +83,6 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     self.zoom               = 1;
     self.texture            = [[CCTextureCache sharedTextureCache] addImage:[self modelFileWithArmsUpLeft:NO right:NO]];
     self.textureRect        = CGRectFromPointAndSize(CGPointZero, self.texture.contentSize);
-    self.scale              = GorillasModelScale(2, self.texture.pixelsWide);
     self.bobber             = [CCSprite spriteWithFile:@"bobber.png"];
     self.bobber.visible     = NO;
     self.bobber.position    = ccp(0, self.texture.pixelsHigh);
@@ -129,6 +128,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     
     [self stopAllActions];
     
+    self.scale      = GorillasModelScale(2, self.texture.contentSize.width);
     self.active     = NO;
     self.lives      = self.initialLives;
     self.opacity    = 0xff;

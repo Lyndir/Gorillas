@@ -37,7 +37,7 @@
     holes       = nil;
     holeCount   = 0;
     
-    self.scale  = GorillasModelScale(1, texture.pixelsWide);
+    self.scale  = GorillasModelScale(1, texture.contentSize.width);
 
     glGenBuffers(1, &holeVertexBuffer);
     

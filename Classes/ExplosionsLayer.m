@@ -55,7 +55,7 @@ static float flameRadius;
     flames          = [[NSMutableArray alloc] initWithCapacity:10];
     positions       = nil;
     
-    self.scale      = GorillasModelScale(1, [[CCTextureCache sharedTextureCache] addImage:@"hole.pvr"].pixelsWide);
+    self.scale      = GorillasModelScale(1, [[CCTextureCache sharedTextureCache] addImage:@"hole.pvr"].contentSize.width);
     
     [self schedule:@selector(gc:) interval:0.5f];
     [self schedule:@selector(step:)];
