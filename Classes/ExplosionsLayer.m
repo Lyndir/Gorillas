@@ -123,8 +123,8 @@ static float flameRadius;
     explosion.startSize         = (heavy? 20: 15) * self.scale;
     explosion.startSizeVar      = 5 * self.scale;
     explosion.speed             = 10;
-    explosion.posVar            = ccp([self size] * 0.2f,
-                                      [self size] * 0.2f);
+    explosion.posVar            = ccp([self size] * 0.3f,
+                                      [self size] * 0.3f);
     explosion.tag               = (hitsGorilla? GorillasExplosionHitGorilla  : 0) |
                                   (heavy?       GorillasExplosionHeavy       : 0);
     [explosion runAction:[CCSequence actions:
@@ -218,9 +218,9 @@ static float flameRadius;
             
             flame.position          = CGPointZero;
             //flames.angleVar       = 90;
-            flame.startSize         = typeIsHeavy? 10: 4;
-            flame.startSizeVar      = 4;
-            flame.posVar            = ccp(radius / 2, radius / 2);
+            flame.startSize         = typeIsHeavy? 10: 5;
+            flame.startSizeVar      = 5;
+            flame.posVar            = ccp(radius, radius);
             flame.speed             = 8;
             flame.speedVar          = 10;
             flame.life              = typeIsHeavy? 2: 1;
