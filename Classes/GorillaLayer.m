@@ -98,10 +98,13 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     self.playerID           = aPlayerId;
     self.connectionState    = self.playerID ? GKPlayerStateConnected: GKPlayerStateUnknown;
     self.name = [NSString stringWithFormat:l(@"names.n"), self.globalIndex + 1];
-    if (self.playerID && [self.playerID isEqualToString:[GKLocalPlayer localPlayer].playerID]) {
-        self.player = [GKLocalPlayer localPlayer];
+    if (!self.playerID)
         self.connectionState = GKPlayerStateConnected;
-    }
+    else
+        if ([self.playerID isEqualToString:[GKLocalPlayer localPlayer].playerID]) {
+            self.player = [GKLocalPlayer localPlayer];
+            self.connectionState = GKPlayerStateConnected;
+        }
 
     // By default, a gorilla has 1 life, unless features say otherwise.
     self.initialLives = 1;
@@ -167,7 +170,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
 
 -(BOOL) local {
     
-    return [self.playerID isEqualToString:[GKLocalPlayer localPlayer].playerID];
+    return !self.playerID || [self.playerID isEqualToString:[GKLocalPlayer localPlayer].playerID];
 }
 
 

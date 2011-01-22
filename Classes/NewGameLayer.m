@@ -79,7 +79,7 @@
     if ([[configurationI subItems] count] > gameConfigurationIndex)
         [configurationI setSelectedIndex:gameConfigurationIndex];
     [descriptionT setString:gameConfiguration.description];
-    singlePlayerI.isEnabled = gameConfiguration.singleplayerAICount && [GKLocalPlayer localPlayer].playerID;
+    singlePlayerI.isEnabled = gameConfiguration.singleplayerAICount;
     multiPlayerI.isEnabled = gameConfiguration.multiplayerHumanCount && [GKLocalPlayer localPlayer].authenticated;
 }
 
@@ -106,8 +106,7 @@
     GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
     
     [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode randomCity:NO
-                                                     playerIDs:[NSArray arrayWithObject:[GKLocalPlayer localPlayer].playerID]
-                                                           ais:gameConfiguration.singleplayerAICount];
+                                                     playerIDs:nil ais:gameConfiguration.singleplayerAICount];
     [[GorillasAppDelegate get].gameLayer startGame];
 }
 

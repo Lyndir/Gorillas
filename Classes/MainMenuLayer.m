@@ -95,8 +95,7 @@
     
 #ifdef LITE
     [[GorillasAppDelegate get].gameLayer configureGameWithMode:GorillasModeClassic
-                                                     playerIDs:[NSArray arrayWithObject:[GKLocalPlayer localPlayer].playerID]
-                                                           ais:1];
+                                                     playerIDs:nil ais:1];
     [[GorillasAppDelegate get].gameLayer startGame];
 #else
     [[GorillasAppDelegate get] showNewGame];
