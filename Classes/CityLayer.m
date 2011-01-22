@@ -75,18 +75,18 @@
     aimSprite.textureSize = CGSizeMake(aimSprite.textureSize.width / 2, aimSprite.textureSize.height / 2);
     [self addChild:aimSprite z:2];
     
-    angleLabel      = [[CCLabelAtlas alloc] initWithString:[NSString stringWithFormat:@"%0.0f", 99.99f]
-                                             charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
-    strengthLabel   = [[CCLabelAtlas alloc] initWithString:[NSString stringWithFormat:@"%0.0f", 99.99f]
-                                             charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
+    angleLabel      = [[CCLabelTTF alloc] initWithString:@"0" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
+                                                fontName:[GorillasConfig get].fixedFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
+    strengthLabel   = [[CCLabelTTF alloc] initWithString:@"0" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
+                                                fontName:[GorillasConfig get].fixedFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
     infoLabel       = [[CCLabelTTF alloc] initWithString:@"∡\n⊿" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
-                                           fontName:[GorillasConfig get].fixedFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
+                                           fontName:[GorillasConfig get].symbolicFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
     [infoLabel addChild:angleLabel];
     [infoLabel addChild:strengthLabel];
     
     CGSize winSize  = [CCDirector sharedDirector].winSize;
-    angleLabel.position     = ccp(15, 80);
-    strengthLabel.position  = ccp(15, 58);
+    angleLabel.position     = ccp(45, 72);
+    strengthLabel.position  = ccp(45, 52);
     angleLabel.scale        = 0.5f;
     strengthLabel.scale     = 0.5f;
     infoLabel.position      = ccp(5 + infoLabel.contentSize.width / 2,

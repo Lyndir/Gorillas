@@ -21,7 +21,7 @@
 "font.family.symbolic"                      = "Apple Symbols";
 "font.size.large"                           = "48";
 "font.size.normal"                          = "32";
-"font.size.small"                           = "16";
+"font.size.small"                           = "20";
 "global.button.abort"                       = "Abort";
 "global.button.back"                        = "Back";
 "global.button.done"                        = "Done";
