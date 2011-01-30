@@ -547,7 +547,7 @@
                 weather.positionType    = kCCPositionTypeGrouped;
                 weather.posVar          = ccp(field.size.width / 2, weather.posVar.y);
                 weather.position        = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
-                [panningLayer addChild:weather z:-3 /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:ccp(self.contentSize.width / 2,
+                [panningLayer addChild:weather /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:ccp(self.contentSize.width / 2,
                                                      self.contentSize.height / 2)*/];
                 
                 [windLayer registerSystem:weather affectAngle:YES];
