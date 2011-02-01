@@ -39,6 +39,7 @@
     
     int                                                             _initialLives, _lives;
     BOOL                                                            _active;
+    BOOL                                                            _ready;
     NSUInteger                                                      _turns;
     float                                                           _zoom;
     
@@ -60,6 +61,7 @@
 @property (nonatomic, readonly, assign) int                         initialLives;
 @property (nonatomic, readonly, assign) int                         lives;
 @property (nonatomic, readwrite, assign) BOOL                       active;
+@property (nonatomic, readwrite, assign) BOOL                       ready;
 @property (nonatomic, readwrite, assign) NSUInteger                 turns;
 @property (nonatomic, readwrite, assign) float                      zoom;
 

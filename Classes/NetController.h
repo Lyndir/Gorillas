@@ -26,6 +26,7 @@
 
 - (void)endMatch;
 
-- (void)throwBy:(NSString *)playerID normalizedVelocity:(CGPoint)velocity;
+- (void)sendBecameReady;
+- (void)sendThrowWithNormalizedVelocity:(CGPoint)velocity;
 
 @end

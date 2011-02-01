@@ -43,17 +43,39 @@
 
 @end
 
+@interface NetMessageReady : NetMessage
+{
+}
+
++ (NetMessageReady *)ready;
+
+@end
+
+@interface NetMessageBecameReady : NetMessageReady
+{
+}
+
++ (NetMessageBecameReady *)ready;
+
+@end
+
+@interface NetMessageUpdateReady : NetMessageReady
+{
+}
+
++ (NetMessageUpdateReady *)ready;
+
+@end
+
 @interface NetMessageThrow : NetMessage
 {
-    NSString                                        *_playerID;
     CGPoint                                         _normalizedVelocity;
 }
 
-@property (nonatomic, retain) NSString              *playerID;
 @property (nonatomic, assign) CGPoint               normalizedVelocity;
 
-+ (NetMessageThrow *)throwWithPlayerID:(NSString *)aPlayerID normalizedVelocity:(CGPoint)aNormalizedVelocity;
++ (NetMessageThrow *)throwWithNormalizedVelocity:(CGPoint)aNormalizedVelocity;
 
-- (id)initWithPlayerID:(NSString *)aPlayerID normalizedVelocity:(CGPoint)aNormalizedVelocity;
+- (id)initWithNormalizedVelocity:(CGPoint)aNormalizedVelocity;
 
 @end

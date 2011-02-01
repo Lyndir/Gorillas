@@ -43,7 +43,7 @@
 
 #pragma mark Properties
 
-@synthesize paused;
+@synthesize paused, started, running;
 @synthesize gorillas, activeGorilla;
 @synthesize skyLayer, panningLayer, cityLayer, windLayer, weather;
 //FIXME @synthesize scaleTimeAction;
@@ -202,13 +202,14 @@
     
     if (randomCity)
         [GorillasConfig get].cityTheme = [[CityTheme getThemeNames] objectAtIndex:gameRandom() % [[CityTheme getThemeNames] count]];
-
     
     // When there are AIs in the game, show their difficulity.
     if (ais)
         [[GorillasAppDelegate get].uiLayer message:[GorillasConfig nameForLevel:[GorillasConfig get].level]];
     
     [self reset];
+    self.started = YES;
+    
     [self.cityLayer beginGame];
 }
 
@@ -436,6 +437,7 @@
 
 -(void) endGame {
     
+    running = NO;
     [self setPausedSilently:NO];
     
     [cityLayer endGame];
@@ -592,17 +594,18 @@
 
 -(void) began {
     
-    running = YES;
-    
     [self setPausedSilently:NO];
     
-    [self.cityLayer nextGorilla];
+    if ([GorillasAppDelegate get].netController.match)
+        [[GorillasAppDelegate get].netController sendBecameReady];
+    else
+        [self.cityLayer nextGorilla];
 }
 
 
 -(void) ended {
     
-    running = NO;
+    started = NO;
     
     [activeGorilla release];
     activeGorilla = nil;

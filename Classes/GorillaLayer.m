@@ -55,7 +55,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
 
 @synthesize name = _name, teamIndex = _teamIndex, globalIndex = _globalIndex;
 @synthesize playerID = _playerID, player = _player, connectionState = _connectionState;
-@synthesize initialLives = _initialLives, lives = _lives, active = _active, turns = _turns, zoom = _zoom;
+@synthesize initialLives = _initialLives, lives = _lives, active = _active, ready = _ready, turns = _turns, zoom = _zoom;
 @synthesize bobber = _bobber, model = _model, type = _type;
 
 
@@ -127,12 +127,14 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     return self;
 }
 
+
 - (void)reset {
     
     [self stopAllActions];
     
     self.scale      = GorillasModelScale(2, self.texture.contentSize.width);
     self.active     = NO;
+    self.ready      = NO;
     self.lives      = self.initialLives;
     self.opacity    = 0xff;
     
@@ -145,6 +147,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     _model = aModel;
     [self setTexture:[[CCTextureCache sharedTextureCache] addImage:[self modelFileWithArmsUpLeft:NO right:NO]]];
 }
+
 
 - (NSString *)name {
     

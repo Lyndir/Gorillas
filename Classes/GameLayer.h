@@ -34,6 +34,7 @@
 
 @private
     BOOL                                                    paused;
+    BOOL                                                    started;
     BOOL                                                    running;
     GorillasMode                                            mode;
     BOOL                                                    randomCity;
@@ -53,6 +54,8 @@
 }
 
 @property (nonatomic, readwrite, getter=isPaused) BOOL      paused;
+@property (nonatomic, readwrite) BOOL                       started;
+@property (nonatomic, readwrite) BOOL                       running;
 @property (nonatomic, readonly, getter=isSinglePlayer) BOOL singlePlayer;
 
 @property (nonatomic, readonly) NSMutableArray              *gorillas;

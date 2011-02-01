@@ -14,12 +14,14 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Implement Me" userInfo:nil];
+    if (!(self = [self init]))
+        return self;
+    
+    return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Implement Me" userInfo:nil];
 }
 
 @end
@@ -117,20 +119,46 @@
 
 @end
 
-@implementation NetMessageThrow
-@synthesize playerID = _playerID, normalizedVelocity = _normalizedVelocity;
+@implementation NetMessageReady
 
-+ (NetMessageThrow *)throwWithPlayerID:(NSString *)aPlayerID normalizedVelocity:(CGPoint)aNormalizedVelocity {
++ (NetMessageReady *)ready {
     
-    return [[[self alloc] initWithPlayerID:aPlayerID normalizedVelocity:aNormalizedVelocity] autorelease];
+    return [[[self alloc] init] autorelease];
 }
 
-- (id)initWithPlayerID:(NSString *)aPlayerID normalizedVelocity:(CGPoint)aNormalizedVelocity {
+@end
+
+@implementation NetMessageBecameReady
+
++ (NetMessageBecameReady *)ready {
+    
+    return [[[self alloc] init] autorelease];
+}
+
+@end
+
+@implementation NetMessageUpdateReady
+
++ (NetMessageUpdateReady *)ready {
+    
+    return [[[self alloc] init] autorelease];
+}
+
+@end
+
+@implementation NetMessageThrow
+@synthesize normalizedVelocity = _normalizedVelocity;
+
++ (NetMessageThrow *)throwWithNormalizedVelocity:(CGPoint)aNormalizedVelocity {
+    
+    return [[[self alloc] initWithNormalizedVelocity:aNormalizedVelocity] autorelease];
+}
+
+- (id)initWithNormalizedVelocity:(CGPoint)aNormalizedVelocity {
     
     if (!(self = [super init]))
         return self;
     
-    self.playerID           = aPlayerID;
     self.normalizedVelocity = aNormalizedVelocity;
     
     return self;
@@ -141,7 +169,6 @@
     if (!(self = [self init]))
         return self;
     
-    self.playerID           = [aDecoder decodeObjectForKey:@"playerID"];
     self.normalizedVelocity = CGPointMake([aDecoder decodeFloatForKey:@"normalizedVelocity.x"],
                                           [aDecoder decodeFloatForKey:@"normalizedVelocity.y"]);
     
@@ -150,14 +177,11 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     
-    [aCoder encodeObject:self.playerID forKey:@"playerID"];
     [aCoder encodeFloat:self.normalizedVelocity.x forKey:@"normalizedVelocity.x"];
     [aCoder encodeFloat:self.normalizedVelocity.y forKey:@"normalizedVelocity.y"];
 }
 
 - (void)dealloc {
-    
-    self.playerID = nil;
     
     [super dealloc];
 }

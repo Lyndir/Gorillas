@@ -19,6 +19,9 @@
 @property (nonatomic, readwrite, retain) GKMatch                *match;
 @property (nonatomic, readwrite, retain) NetMessageElectHost    *hostElection;
 
+- (void)sendUpdateReady;
+
+- (void)sendToAll:(NetMessage *)message;
 - (GorillaLayer *)findGorillaWithPlayerID:(NSString *)playerID;
 
 @end
@@ -61,14 +64,31 @@
     self.match = nil;
 }
 
-- (void)throwBy:(NSString *)playerID normalizedVelocity:(CGPoint)velocity {
+- (void)sendBecameReady {
     
-    dbg(@"Sending throw of: %@ by: %@ to all players.", playerID, NSStringFromCGPoint(velocity));
+    dbg(@"Sending became ready for play to all players.");
+    [self findGorillaWithPlayerID:[GKLocalPlayer localPlayer].playerID].ready = YES;
+    [self sendToAll:[NetMessageBecameReady ready]];
+}
+
+- (void)sendUpdateReady {
+    
+    dbg(@"Sending update ready for play to all players.");
+    [self sendToAll:[NetMessageUpdateReady ready]];
+}
+
+- (void)sendThrowWithNormalizedVelocity:(CGPoint)velocity {
+    
+    dbg(@"Sending throw of: %@, to all players.", NSStringFromCGPoint(velocity));
+    [self sendToAll:[NetMessageThrow throwWithNormalizedVelocity:velocity]];
+}
+
+- (void)sendToAll:(NetMessage *)message {
+    
     NSError *error = nil;
-    if (![self.match sendDataToAllPlayers:[NSKeyedArchiver archivedDataWithRootObject:
-                                           [NetMessageThrow throwWithPlayerID:playerID normalizedVelocity:velocity]]
+    if (![self.match sendDataToAllPlayers:[NSKeyedArchiver archivedDataWithRootObject:message]
                              withDataMode:GKMatchSendDataReliable error:&error] || error) {
-        err(@"Failed to send our throw: %@", error);
+        err(@"Failed to send message: %@, error: %@", error);
         [self endMatch];
         return;
     }
@@ -125,10 +145,26 @@
             [[GorillasAppDelegate get].gameLayer startGame];
         }
     }
+    else if ([message isKindOfClass:[NetMessageReady class]]) {
+        [self findGorillaWithPlayerID:playerID].ready = YES;
+
+        if ([message isKindOfClass:[NetMessageBecameReady class]])
+            if ([self findGorillaWithPlayerID:[GKLocalPlayer localPlayer].playerID].ready)
+                [self sendUpdateReady];
+
+        if ([GorillasAppDelegate get].gameLayer.started && ![GorillasAppDelegate get].gameLayer.running) {
+            BOOL allReady = YES;
+            for (GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
+                allReady &= gorilla.ready;
+            
+            if (allReady)
+                [[GorillasAppDelegate get].gameLayer.cityLayer nextGorilla];
+        }
+    }
     else if ([message isKindOfClass:[NetMessageThrow class]]) {
         NetMessageThrow *throwMessage = (NetMessageThrow *)message;
-        dbg(@"Received throw of: %@ by: %@ from player: %@", throwMessage.playerID, NSStringFromCGPoint(throwMessage.normalizedVelocity), playerID);
-        [[ThrowController get] throwFrom:[self findGorillaWithPlayerID:throwMessage.playerID] normalizedVelocity:throwMessage.normalizedVelocity];
+        dbg(@"Received throw by: %@ from player: %@", NSStringFromCGPoint(throwMessage.normalizedVelocity), playerID);
+        [[ThrowController get] throwFrom:[self findGorillaWithPlayerID:playerID] normalizedVelocity:throwMessage.normalizedVelocity];
     }
     else
         err(@"Did not understand data unarchived as: %@\n%@", message, data);

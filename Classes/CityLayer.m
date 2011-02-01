@@ -334,8 +334,7 @@
     self.aim = CGPointZero;
     
     // Notify the network controller.
-    if (activeGorilla.playerID)
-        [[GorillasAppDelegate get].netController throwBy:activeGorilla.playerID normalizedVelocity:v];
+    [[GorillasAppDelegate get].netController sendThrowWithNormalizedVelocity:v];
     
     [[ThrowController get] throwFrom:activeGorilla normalizedVelocity:v];
 }
@@ -390,6 +389,8 @@
 
 
 -(void) nextGorilla {
+    
+    [GorillasAppDelegate get].gameLayer.running = YES;
     
     // Make sure the game hasn't ended.
     if (![[GorillasAppDelegate get].gameLayer checkGameStillOn]) {
