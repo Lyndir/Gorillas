@@ -1,140 +1,140 @@
 -The Goal
 
-    Sling your deadly bananas over the roof tops toward your opponent to blow him out of town.
+Sling your deadly bananas over the roof tops toward your opponent to blow him out of town.
 
-    In Gorillas, you'll be trying to hit the opponent with deadly projectiles.  To aim, touch the screen and indicate the direction of your throw.  The length of your aim indicates its velocity.
+In Gorillas, you'll be trying to hit the opponent with deadly projectiles.  To aim, touch the screen and indicate the direction of your throw.  The length of your aim indicates its velocity.
 
 
 ===== NEXT PAGE =====
 -Hitting and Missing
 
-    With some luck, you'll send your banana flying on a collision course with your opponent.
+With some luck, you'll send your banana flying on a collision course with your opponent.
 
-    On impact, your opponent will be obliterated.  Misses will leave nasty scars on the city scape.
+On impact, your opponent will be obliterated.  Misses will leave nasty scars on the city scape.
 
-    Gorillas take turns in throwing:  Miss, and watch as one comes flying right back at you.
+Gorillas take turns in throwing:  Miss, and watch as one comes flying right back at you.
 
 
 ===== NEXT PAGE =====
 -Controls
 
-    You throw by tapping onto or dragging toward the location you want to aim at with one finger.
+You throw by tapping onto or dragging toward the location you want to aim at with one finger.
 
-    Zooming is achieved by pinching or pulling the screen with two fingers.
-    
-    Notice that while aiming, you can add a second finger to the screen to cancel your aim.
+Zooming is achieved by pinching or pulling the screen with two fingers.
+
+Notice that while aiming, you can add a second finger to the screen to cancel your aim.
 
 
 ===== NEXT PAGE =====
 +Game Modes
 
-    There are several game styles from which you can choose.  Most of them can be played either as single or multi player.
+There are several game styles from which you can choose.  Most of them can be played either as single or multi player.
 
-    Choosing a custom game allows you to pick the amount of human players and AIs you want to put in the field.
+Choosing a custom game allows you to pick the amount of human players and AIs you want to put in the field.
 
 
 ===== NEXT PAGE =====
 +Boot Camp
 
-    To get the hang of the game and train your aiming, try playing a few Boot Camp games.
+To get the hang of the game and train your aiming, try playing a few Boot Camp games.
 
-    Faint lines indicate your and your opponent's last aim: A good indication of how to course correct your next throw.
-    After every five seconds, you'll also be given a hint of where you might considder aiming.
+Faint lines indicate your and your opponent's last aim: A good indication of how to course correct your next throw.
+After every five seconds, you'll also be given a hint of where you might considder aiming.
 
 
 ===== NEXT PAGE =====
 +Classic Game
 
-    The quickest way to play a game of Gorillas is the Classic game.
+The quickest way to play a game of Gorillas is the Classic game.
 
-    A direct hit kills the opponent and increases your score.
-    
-    Increase the difficulty for a more rewarding and challanging fight.
+A direct hit kills the opponent and increases your score.
+
+Increase the difficulty for a more rewarding and challanging fight.
 
 
 ===== NEXT PAGE =====
 +Dynamic Game
 
-    For a more sophisticated gameplay, start a Dynamic game.
+For a more sophisticated gameplay, start a Dynamic game.
 
-    The more skillful your throws are, the higher your kill score will get.
+The more skillful your throws are, the higher your kill score will get.
 
-    As you continue to play, your skill will evolve as well as the difficulty of your opponent.
+As you continue to play, your skill will evolve as well as the difficulty of your opponent.
 
 
 ===== NEXT PAGE =====
 +Team Game
 
-    Team games are excellent for when you're in company of friends.
-    
-    Challenge the AIs together, but be careful not to hit each other!
+Team games are excellent for when you're in company of friends.
 
-    Up to three human players can challenge up to three AIs.
+Challenge the AIs together, but be careful not to hit each other!
+
+Up to three human players can challenge up to three AIs.
 
 
 ===== NEXT PAGE =====
 +Last Man Standing
 
-    Finally, there's Last Man Standing.  Here you play a completely different game style where the object is simply to stay alive.
+Finally, there's Last Man Standing.  Here you play a completely different game style where the object is simply to stay alive.
 
-    Every gorillas has three lives.  Battle it out for supremacy in this endurance fight to remain the last one alive.
+Every gorillas has three lives.  Battle it out for supremacy in this endurance fight to remain the last one alive.
 
 
 ===== NEXT PAGE =====
 +Configuration
 
-    You can change the AI's difficulty level if you're interested in a real challenge.
+You can change the AI's difficulty level if you're interested in a real challenge.
 
-    The gravity can also be controlled:  Less gravity means your bananas don't fall as fast.
+The gravity can also be controlled:  Less gravity means your bananas don't fall as fast.
 
-    City themes completely change the game setting.  Different worlds have different gravities.
+City themes completely change the game setting.  Different worlds have different gravities.
 
 
 ===== NEXT PAGE =====
 -Tactical 1
 
-    The key to avoiding buildings is to throw more vertical and with more velocity.  This makes aiming quite a bit harder, though!
+The key to avoiding buildings is to throw more vertical and with more velocity.  This makes aiming quite a bit harder, though!
 
-    Don't let buildings that are in your way stop you:  A few bananas should be sufficient to dig yourself a path through them.
+Don't let buildings that are in your way stop you:  A few bananas should be sufficient to dig yourself a path through them.
 
 
 ===== NEXT PAGE =====
 -Tactical 2
 
-    Zoom out to get a wider aiming range.  That's especially handy for those long throws.
-    
-    Remember that high throws are better throws.  They land more vertically and are excellent for dodging buildings.
-    Plus, in Dynamic games, if they hit, they'll yield far higher skill values.
+Zoom out to get a wider aiming range.  That's especially handy for those long throws.
+
+Remember that high throws are better throws.  They land more vertically and are excellent for dodging buildings.
+Plus, in Dynamic games, if they hit, they'll yield far higher skill values.
 
 
 ===== NEXT PAGE =====
 -Statistics
 
-    As your score evolves, your daily and global top scores are remembered.
-    
-    The Statistics panel in the Information menu graphs out your recent score history and shows your global top score.
+As your score evolves, your daily and global top scores are remembered.
+
+The Statistics panel in the Information menu graphs out your recent score history and shows your global top score.
 
 
 ===== NEXT PAGE =====
 -Technical
 
-    Your aim represents the vector of your throw's initial velocity.
-    The current wind velocity will affect your banana's direction every step of the way.
-    Higher difficulty means the AI will throw more accurately and prefers vertical shots over more horizontal ones.
+Your aim represents the vector of your throw's initial velocity.
+The current wind velocity will affect your banana's direction every step of the way.
+Higher difficulty means the AI will throw more accurately and prefers vertical shots over more horizontal ones.
 
 
 ===== NEXT PAGE =====
 -Thanks
 
-    Gorillas has been designed and written by Maarten Billemont. (http://lhunath.lyndir.com)
-    Thanks to Emmett for the excellent retro-sounding music.
-    Thanks to the people at iBetaTest for excellent feedback.
-    Love and care goes out to my darling wife and adorable young daughter.
+Gorillas has been designed and written by Maarten Billemont. (http://lhunath.lyndir.com)
+Thanks to Emmett for the excellent retro-sounding music.
+Thanks to the people at iBetaTest for excellent feedback.
+Love and care goes out to my darling wife and adorable young daughter.
 
 
 ===== NEXT PAGE =====
 -Open Source
 
-    The Gorillas source code is freely available and licensed to anyone under the terms of the Java Research License.
+The Gorillas source code is freely available and licensed to anyone under the terms of the Java Research License.
 
-    For more information or to report problems, visit http://gorillas.lhunath.com/.
+For more information or to report problems, visit http://gorillas.lhunath.com/.

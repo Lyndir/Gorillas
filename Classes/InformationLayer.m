@@ -72,7 +72,17 @@
 
 -(void) stats: (id) sender {
 
-    // TODO: GK top scores.
+    GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];
+    if (leaderboardController != nil) {
+        leaderboardController.leaderboardDelegate = self;
+        [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:leaderboardController animated:YES];
+        [leaderboardController release];
+    }
+}
+
+- (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController {
+
+    [[[UIApplication sharedApplication] keyWindow].rootViewController dismissModalViewControllerAnimated:YES];
 }
 
 

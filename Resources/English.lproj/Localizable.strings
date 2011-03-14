@@ -16,12 +16,12 @@
 "error.response.clientOutdated.optional"    = "A new version is available.";
 "error.response.clientOutdated.required"    = "A new version is available.\nPlease upgrade before proceding.";
 "error.response.invalid"                    = "Incompatible server response.";
-"font.family.default"                       = "MammaGamma";
+"font.family.default"                       = "Didot";
 "font.family.fixed"                         = "Absolute";
 "font.family.symbolic"                      = "Apple Symbols";
-"font.size.large"                           = "48";
+"font.size.large"                           = "44";
 "font.size.normal"                          = "32";
-"font.size.small"                           = "20";
+"font.size.small"                           = "18";
 "global.button.abort"                       = "Abort";
 "global.button.back"                        = "Back";
 "global.button.done"                        = "Done";

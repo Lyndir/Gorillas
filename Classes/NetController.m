@@ -36,9 +36,11 @@
     NSAssert(self.match == nil && !started, @"A previous match has not been cleaned up.");
     
     GKMatchmakerViewController *matchVC = [[GKMatchmakerViewController alloc] initWithMatchRequest:aMatchRequest];
-    matchVC.matchmakerDelegate = self;
-    [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:matchVC animated:YES];
-    [matchVC release];
+    if (matchVC != nil) {
+        matchVC.matchmakerDelegate = self;
+        [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:matchVC animated:YES];
+        [matchVC release];
+    }
 }
 
 - (void)beginInvite:(GKInvite *)anInvite {
@@ -48,9 +50,11 @@
     NSAssert(self.match == nil && !started, @"A previous match has not been cleaned up.");
     
     GKMatchmakerViewController *matchVC = [[GKMatchmakerViewController alloc] initWithInvite:anInvite];
-    matchVC.matchmakerDelegate = self;
-    [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:matchVC animated:YES];
-    [matchVC release];
+    if (matchVC != nil) {
+        matchVC.matchmakerDelegate = self;
+        [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:matchVC animated:YES];
+        [matchVC release];
+    }
 }
 
 - (void)endMatch {
@@ -88,7 +92,7 @@
     NSError *error = nil;
     if (![self.match sendDataToAllPlayers:[NSKeyedArchiver archivedDataWithRootObject:message]
                              withDataMode:GKMatchSendDataReliable error:&error] || error) {
-        err(@"Failed to send message: %@, error: %@", error);
+        err(@"Failed to send message: %@, error: %@", message, error);
         [self endMatch];
         return;
     }

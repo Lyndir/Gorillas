@@ -249,7 +249,7 @@
             if (considderMiss) {
                 int score = [[GorillasConfig get].level floatValue] * [[GorillasConfig get].missScore intValue];
                 
-                [[GorillasConfig get] recordScore:[[GorillasConfig get].score intValue] + score];
+                [[GorillasConfig get] recordScore:[[GorillasConfig get] scoreForMode:mode] + score forMode:mode];
                 [[GorillasAppDelegate get].hudLayer updateHudWithNewScore:score skill:0 wasGood:YES];
                 
                 if(score)
@@ -266,7 +266,7 @@
                 [[[GorillasAppDelegate get] hudLayer] message:[NSString stringWithFormat:[GorillasConfig get].hitMessage,
                                                                activeGorilla.name, cityLayer.hitGorilla.name]
                                                      duration:4 isImportant:NO];
-
+            
             int score = 0;
             BOOL cheer = NO;
             if([activeGorilla human]) {
@@ -352,7 +352,7 @@
             
             // Update score.
             if([self isEnabled:GorillasFeatureScore] && score) {
-                [[GorillasConfig get] recordScore:[[GorillasConfig get].score intValue] + score];
+                [[GorillasConfig get] recordScore:[[GorillasConfig get] scoreForMode:mode] + score forMode:mode];
                 
                 [[[GorillasAppDelegate get] hudLayer] updateHudWithNewScore:score skill:0 wasGood:YES];
                 [cityLayer message:[NSString stringWithFormat:@"%+d", score] on:cityLayer.hitGorilla];
@@ -550,7 +550,7 @@
                 weather.posVar          = ccp(field.size.width / 2, weather.posVar.y);
                 weather.position        = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
                 [panningLayer addChild:weather /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:ccp(self.contentSize.width / 2,
-                                                     self.contentSize.height / 2)*/];
+                                                self.contentSize.height / 2)*/];
                 
                 [windLayer registerSystem:weather affectAngle:YES];
             }

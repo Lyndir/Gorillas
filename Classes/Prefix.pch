@@ -77,6 +77,8 @@ typedef enum {
     
     /** Last Man Standing.          */
     GorillasModeLMS         = GorillasFeatureLivesPl    | GorillasFeatureLivesAi,
+    
+    GorillasModeCount,
 } GorillasMode;
 
 

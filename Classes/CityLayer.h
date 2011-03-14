@@ -75,7 +75,6 @@
 
 -(BOOL) mayThrow;
 
--(void) miss;
 -(BOOL) hitsGorilla: (CGPoint)pos;
 -(BOOL) hitsBuilding: (CGPoint)pos;
 -(void) explodeAt: (CGPoint)point isGorilla:(BOOL)isGorilla;

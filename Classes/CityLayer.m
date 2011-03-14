@@ -571,37 +571,6 @@
 }
 
 
--(void) miss {
-    
-    if (!([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureScore]))
-        // Don't deduct score when score not enabled.
-        return;
-    
-    if (!([[GorillasAppDelegate get].gameLayer.activeGorilla human]))
-        // Don't deduct score for AI misses.
-        return;
-    
-    if (![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureTeam]) {
-        NSUInteger humanGorillas = 0;
-        for (GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
-            if ([gorilla human])
-                ++humanGorillas;
-        
-        if(humanGorillas != 1)
-            // Don't deduct score for non-teamed multiplayer.
-            return;
-    }
-    
-    int score = [[GorillasConfig get].level floatValue] * [[GorillasConfig get].missScore intValue];
-    
-    [[GorillasConfig get] recordScore:[[GorillasConfig get].score floatValue] + score];
-    [[[GorillasAppDelegate get] hudLayer] updateHudWithNewScore:score skill:0 wasGood:YES];
-
-    if (score)
-        [self message:[NSString stringWithFormat:@"%+d", score] on:[bananaLayer banana]];
-}
-
-
 -(BOOL) hitsGorilla:(CGPoint)pos {
 
 #if _DEBUG_

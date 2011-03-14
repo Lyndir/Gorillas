@@ -92,7 +92,7 @@
 
     // Put score on HUD.
     if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureScore])
-        [self updateHudWithNewScore:[[GorillasConfig get].score intValue] wasGood:YES];
+        [self updateHudWithNewScore:newScore wasGood:YES];
     else {
         [self.scoreCount setVisible:NO];
         [self.scoreSprite setVisible:NO];

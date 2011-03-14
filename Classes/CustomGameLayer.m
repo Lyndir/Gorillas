@@ -60,7 +60,7 @@
     
     // Game Mode.
     NSMutableArray *modeMenuItems = [NSMutableArray arrayWithCapacity:4];
-    for (NSString *modeString in [[GorillasConfig get].modeStrings allValues])
+    for (NSString *modeString in [GorillasConfig descriptionsForModes])
         [modeMenuItems addObject:[CCMenuItemFont itemFromString:modeString]];
     gameModeI.subItems = modeMenuItems;
     [gameModeI setSelectedIndex:1];
@@ -98,10 +98,7 @@
             [(CCMenuItemFont*)[aisI selectedItem] setString:[NSString stringWithFormat:
                                                              NSLocalizedString(@"menu.ai.count.3+", @"%d AIs"), ais]];
     }
-    NSArray *modeKeys = [[GorillasConfig get].modeStrings allKeys];
-    NSUInteger modeIndex = [modeKeys indexOfObject:[GorillasConfig get].mode];
-    if ([[gameModeI subItems] count] > modeIndex)
-        [gameModeI setSelectedIndex:modeIndex];
+    [gameModeI setSelectedIndex:[[GorillasConfig get].mode unsignedIntValue]];
     
     NSUInteger randomIndex = randomCity? 1: 0;
     if ([[randomI subItems] count] > randomIndex)
@@ -119,10 +116,7 @@
 
 -(void) gameMode: (id) sender {
     
-    NSArray *modes = [GorillasConfig get].modes;
-    NSUInteger curModeIndex = [modes indexOfObject:[GorillasConfig get].mode];
-    
-    [GorillasConfig get].mode = [modes objectAtIndex:(curModeIndex + 1) % [modes count]];
+    [GorillasConfig get].mode = [NSNumber numberWithUnsignedInt:([[GorillasConfig get].mode unsignedIntValue] + 1) % GorillasModeCount];
 }
 
 

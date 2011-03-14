@@ -25,8 +25,10 @@
 #import "ShadeLayer.h"
 #import "GMenuLayer.h"
 
+#import <GameKit/GameKit.h>
 
-@interface InformationLayer : GMenuLayer <MenuDelegate> {
+
+@interface InformationLayer : GMenuLayer <MenuDelegate, GKLeaderboardViewControllerDelegate> {
 
 }
 

@@ -28,7 +28,7 @@
 
 @implementation GorillasConfig
 
-@synthesize modes, modeStrings, gameConfigurations;
+@synthesize gameConfigurations;
 
 @dynamic cityTheme;
 @dynamic varFloors, fixedFloors, buildingAmount, buildingSpeed, buildingColors;
@@ -37,7 +37,7 @@
 @dynamic lives, windModifier, gravity, minGravity, maxGravity;
 @dynamic gameScrollDuration;
 @dynamic level, levelNames, levelProgress;
-@dynamic activeGameConfigurationIndex, mode, playerModel, score, skill, missScore, killScore, bonusOneShot, bonusSkill, deathScoreRatio;
+@dynamic activeGameConfigurationIndex, mode, playerModel, scores, skill, missScore, killScore, bonusOneShot, bonusSkill, deathScoreRatio;
 @dynamic replay, followThrow;
 
 #pragma mark Internal
@@ -81,14 +81,6 @@
                                                 singleplayerAICount:3 multiplayerAICount:3 multiplayerHumanCount:3],
                            nil];
     
-    modes               = [[NSArray alloc] initWithObjects:
-                           [NSNumber numberWithUnsignedInt:GorillasModeBootCamp],
-                           [NSNumber numberWithUnsignedInt:GorillasModeClassic],
-                           [NSNumber numberWithUnsignedInt:GorillasModeDynamic],
-                           [NSNumber numberWithUnsignedInt:GorillasModeTeam],
-                           [NSNumber numberWithUnsignedInt:GorillasModeLMS],
-                           nil];
-    
     offMessages         = [[NSArray alloc] initWithObjects:
                            NSLocalizedString(@"menu.config.message.off.1", @"Way out."),
                            NSLocalizedString(@"menu.config.message.off.2", @"Just a little too far."),
@@ -100,20 +92,6 @@
                            NSLocalizedString(@"menu.config.message.hit.3", @"%1$@ buried %2$@."),
                            NSLocalizedString(@"menu.config.message.hit.4", @"%1$@ incinerated %2$@."),
                            nil];
-    
-    modeStrings         = [[NSDictionary alloc] initWithObjectsAndKeys:
-                           NSLocalizedString(@"menu.config.gametype.bootcamp", @"Boot Camp"),
-                           [NSNumber numberWithUnsignedInt:GorillasModeBootCamp],
-                           NSLocalizedString(@"menu.config.gametype.classic", @"Classic Game"),
-                           [NSNumber numberWithUnsignedInt:GorillasModeClassic],
-                           NSLocalizedString(@"menu.config.gametype.dynamic", @"Dynamic Game"),
-                           [NSNumber numberWithUnsignedInt:GorillasModeDynamic],
-                           NSLocalizedString(@"menu.config.gametype.team", @"Teamed Game"),
-                           [NSNumber numberWithUnsignedInt:GorillasModeTeam],
-                           NSLocalizedString(@"menu.config.gametype.lms", @"Last Man Standing"),
-                           [NSNumber numberWithUnsignedInt:GorillasModeLMS],
-                           nil
-                           ];
     
     NSDictionary *themes = [CityTheme getThemes];
     NSString *defaultThemeName = [CityTheme defaultThemeName];
@@ -179,7 +157,7 @@
                        [NSNumber numberWithInteger:    5],                         cDeathScoreRatio,
                        
                        [NSNumber numberWithUnsignedInt:GorillasPlayerModelGorilla],cPlayerModel,
-                       [NSNumber numberWithInteger:    0],                         cScore,
+                       [NSDictionary dictionary],                                  cScores,
                        [NSNumber numberWithInteger:    0],                         cSkill,
                        [NSNumber numberWithFloat:      0.3f],                      cLevel,
                        levelNames,                                                 cLevelNames,
@@ -220,9 +198,6 @@
     
     [CityTheme forgetThemes];
     
-    free(modes);
-    modes = nil;
-    
     [super dealloc];
 }
 
@@ -251,15 +226,65 @@
 
 #pragma mark Game Configuration
 
--(NSString *) modeString {
++(NSString *)descriptionForMode:(GorillasMode)mode {
 
-    NSString *string = [modeStrings objectForKey:self.mode];
-    if (string == nil)
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:@"Unsupported game mode." userInfo:nil];
-    
-    return string;
+    switch (mode) {
+        case GorillasModeBootCamp:
+            return l(@"menu.config.gametype.bootcamp", @"Boot Camp");
+        case GorillasModeClassic:
+            return l(@"menu.config.gametype.classic", @"Classic Game");
+        case GorillasModeDynamic:
+            return l(@"menu.config.gametype.dynamic", @"Dynamic Game");
+        case GorillasModeTeam:
+            return l(@"menu.config.gametype.team", @"Teamed Game");
+        case GorillasModeLMS:
+            return l(@"menu.config.gametype.lms", @"Last Man Standing");
+        case GorillasModeCount:
+            break;
+    }
+
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:@"Unsupported game mode." userInfo:nil];
 }
+
++(NSArray *)descriptionsForModes {
+    
+    NSMutableArray *descriptions = [NSMutableArray arrayWithCapacity:GorillasModeCount];
+    for (NSUInteger mode = 0; mode < GorillasModeCount; ++mode)
+        [descriptions addObject:[self descriptionForMode:mode]];
+    
+    return descriptions;
+}
+
++(NSString *)nameForMode:(GorillasMode)mode {
+    
+    switch (mode) {
+        case GorillasModeBootCamp:
+            return @"BootCamp";
+        case GorillasModeClassic:
+            return @"Classic";
+        case GorillasModeDynamic:
+            return @"Dynamic";
+        case GorillasModeTeam:
+            return @"Team";
+        case GorillasModeLMS:
+            return @"LastManStanding";
+        case GorillasModeCount:
+            break;
+    }
+
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:@"Unsupported game mode." userInfo:nil];
+}
+
++ (NSString *)nameForLevel:(NSNumber *)aLevel {
+    
+    int levelIndex = (int)([aLevel floatValue] * [[self get].levelNames count]);
+    
+    return [[self get].levelNames objectAtIndex:levelIndex];
+}
+
+
 -(NSInteger) deathScore {
     
     // Some info on Death Score Ratios:
@@ -274,20 +299,32 @@
 
 #pragma mark User Status
 
--(void) recordScore:(NSInteger)score {
+-(void)recordScore:(long long)scoreValue forMode:(GorillasMode)mode {
     
-    if(score < 0)
-        score = 0;
-    self.score = [NSNumber numberWithInteger:score];
+    NSString *category = [GorillasConfig nameForMode:mode];
+    
+    if(scoreValue < 0)
+        scoreValue = 0;
+    GKScore *score = [[GKScore alloc] initWithCategory:category];
+    score.value = scoreValue;
+
+    NSMutableDictionary *newScores = [self.scores mutableCopy];
+    [newScores setObject:score forKey:category];
+    self.scores = newScores;
+    [newScores release];
+    
+    [score reportScoreWithCompletionHandler:^(NSError *error) {
+        if (error)
+            err(@"Error reporting score: %@", error);
+    }];
 }
 
-+ (NSString *)nameForLevel:(NSNumber *)aLevel {
-
-    int levelIndex = (int)([aLevel floatValue] * [[self get].levelNames count]);
+-(long long)scoreForMode:(GorillasMode)mode {
     
-    return [[self get].levelNames objectAtIndex:levelIndex];
-}
+    NSString *category = [GorillasConfig nameForMode:mode];
 
+    return ((GKScore *)[self.scores objectForKey:category]).value;
+}
 
 -(void) levelUp {
     

@@ -92,7 +92,7 @@
     [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     
     CGPoint s = ccp(self.contentSize.width - self.padding.left - self.padding.right,
-                    self.contentSize.height - [[GorillasConfig get].fontSize intValue] - self.padding.top);
+                    self.contentSize.height - [[GorillasConfig get].fontSize intValue]);
     
     UITextAlignment alignment = UITextAlignmentLeft;
     if ([NSLocalizedString(@"menu.config.direction", "ltr") isEqualToString:@"rtl"]) {
@@ -141,7 +141,7 @@
                                            fontName:[GorillasConfig get].fontName
                                            fontSize:[[GorillasConfig get].smallFontSize intValue]];
     [pageNumberLabel setPosition:ccp(self.contentSize.width - [[GorillasConfig get].smallFontSize intValue] * 3,
-                                     self.padding.top + self.padding.bottom - [[GorillasConfig get].fontSize intValue] / 2)];
+                                     self.padding.bottom - [[GorillasConfig get].fontSize intValue] / 2)];
     [self addChild:pageNumberLabel];
     
     return self;

@@ -67,7 +67,9 @@
     [GorillasConfig get];
 }
 
-- (void)setup {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [super application:application didFinishLaunchingWithOptions:launchOptions];
     
     // Game Center setup.
     self.netController = [[NetController new] autorelease];
@@ -94,7 +96,7 @@
     
     // Build the game scene.
 	self.gameLayer = [GameLayer node];
-    CCSprite *frame = [CCSprite spriteWithFile:@"frame-hd.png"];
+    CCSprite *frame = [CCSprite spriteWithFile:@"frame.png"];
     frame.anchorPoint = CGPointZero;
     [self.uiLayer addChild:frame z:1];
     [self.uiLayer addChild:self.gameLayer];
@@ -117,6 +119,8 @@
         }
 #endif
     } while ([[CCDirector sharedDirector] runningScene]);
+    
+    return NO;
 }
 
 

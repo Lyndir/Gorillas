@@ -62,7 +62,7 @@
 #define cFollowThrow                    NSStringFromSelector(@selector(followThrow))
 
 #define cPlayerModel                    NSStringFromSelector(@selector(playerModel))
-#define cScore                          NSStringFromSelector(@selector(score))
+#define cScores                         NSStringFromSelector(@selector(scores))
 #define cSkill                          NSStringFromSelector(@selector(skill))
 #define cLevel                          NSStringFromSelector(@selector(level))
 #define cLevelNames                     NSStringFromSelector(@selector(levelNames))
@@ -74,8 +74,6 @@
 @private
     NSArray                                             *updateTriggers;
     
-    NSDictionary                                        *modeStrings;
-    NSArray                                             *modes;
     NSArray                                             *gameConfigurations;
     NSArray                                             *offMessages, *hitMessages;
 }
@@ -113,11 +111,8 @@
 @property (nonatomic, readonly, retain) NSArray         *gameConfigurations;
 @property (nonatomic, readwrite, retain) NSNumber       *activeGameConfigurationIndex;
 @property (nonatomic, readwrite, retain) NSNumber       *mode;
-@property (nonatomic, readonly) NSArray                 *modes;
-@property (nonatomic, readonly) NSDictionary            *modeStrings;
-@property (nonatomic, readonly) NSString                *modeString;
 @property (nonatomic, readwrite, retain) NSNumber       *playerModel;
-@property (nonatomic, readwrite, retain) NSNumber       *score;
+@property (nonatomic, readwrite, retain) NSDictionary   *scores;
 @property (nonatomic, readwrite, retain) NSNumber       *skill;
 @property (nonatomic, readwrite, retain) NSNumber       *missScore;
 @property (nonatomic, readwrite, retain) NSNumber       *killScore;
@@ -137,10 +132,16 @@
 -(void)                                                 levelUp;
 -(void)                                                 levelDown;
 
--(void)                                                 recordScore:(NSInteger)score;
+-(void)recordScore:(long long)scoreValue forMode:(GorillasMode)mode;
+-(long long)scoreForMode:(GorillasMode)mode;
 
 +(GorillasConfig *)                                     get;
-+ (NSString *)nameForLevel:(NSNumber *)aLevel;
+
++(NSString *)nameForLevel:(NSNumber *)aLevel;
+
++(NSString *)descriptionForMode:(GorillasMode)mode;
++(NSArray *)descriptionsForModes;
++(NSString *)nameForMode:(GorillasMode)mode;
 
 @end
 
