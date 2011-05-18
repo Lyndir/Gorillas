@@ -301,7 +301,7 @@
 
 -(void)recordScore:(long long)scoreValue forMode:(GorillasMode)mode {
     
-    NSString *category = [GorillasConfig nameForMode:mode];
+    NSString *category = [NSString stringWithFormat:@"com.lyndir.lhunath.gorillas.%@", [GorillasConfig nameForMode:mode]];
     
     if(scoreValue < 0)
         scoreValue = 0;

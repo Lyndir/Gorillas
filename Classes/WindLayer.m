@@ -48,7 +48,7 @@
     head = [[CCSprite alloc] initWithFile:@"arrow.head.png"];
     body = [[CCSprite alloc] initWithFile:@"arrow.body.png"];
     //tail = [[CCSprite alloc] initWithFile:@"arrow.tail.png"];
-    
+
     [self addChild:head z:1];
     [self addChild:body z:0];
     //[self addChild:tail z:1];

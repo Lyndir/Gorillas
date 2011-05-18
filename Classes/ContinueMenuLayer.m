@@ -48,6 +48,8 @@
                  nil]))
         return self;
     
+    [self setBackButtonTarget:nil selector:nil];
+    
     return self;
 }
 

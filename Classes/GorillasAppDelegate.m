@@ -23,6 +23,7 @@
 //
 
 #import "GorillasAppDelegate.h"
+#import "RootViewController.h"
 #import "Splash.h"
 #import "Resettable.h"
 #import "DebugLayer.h"
@@ -70,6 +71,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [super application:application didFinishLaunchingWithOptions:launchOptions];
+    [((RootViewController *) self.window.rootViewController) supportInterfaceOrientation:UIInterfaceOrientationLandscapeRight];
     
     // Game Center setup.
     self.netController = [[NetController new] autorelease];
@@ -146,6 +148,12 @@
         dbg(@"Model changed");
         [self.gameLayer reset];
     }
+}
+
+- (void)didPopLayer:(ShadeLayer *)layer anyLeft:(BOOL)anyLeft {
+    
+    if (!anyLeft)
+        [self.gameLayer setPaused:NO];
 }
 
 - (void)hudMenuPressed {
@@ -276,9 +284,9 @@
 }
 
 
--(void) cleanup {
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
     
-    [super cleanup];
+    [super applicationDidReceiveMemoryWarning:application];
     
     if(self.mainMenuLayer && ![self.mainMenuLayer parent]) {
         [self.mainMenuLayer stopAllActions];

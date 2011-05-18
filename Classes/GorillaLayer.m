@@ -82,7 +82,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     self.globalIndex        = nextGlobalIndex++;
     self.zoom               = 1;
     self.texture            = [[CCTextureCache sharedTextureCache] addImage:[self modelFileWithArmsUpLeft:NO right:NO]];
-    self.textureRect        = CGRectFromPointAndSize(CGPointZero, self.texture.contentSize);
+    self.textureRect        = CGRectFromCGPointAndCGSize(CGPointZero, self.texture.contentSize);
     self.bobber             = [CCSprite spriteWithFile:@"bobber.png"];
     self.bobber.visible     = NO;
     self.bobber.position    = ccp(0, self.texture.pixelsHigh);

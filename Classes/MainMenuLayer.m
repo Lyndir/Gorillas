@@ -52,8 +52,6 @@
     if(!(self = [super initWithDelegate:self logo:nil items:
                  self.newGame       = [CCMenuItemFont itemFromString:l(@"menu.new")
                                                               target:self selector:@selector(newGame:)],
-                 self.continueGame  = [CCMenuItemFont itemFromString:l(@"menu.continue.unpause")
-                                                              target:self selector:@selector(continueGame:)],
                  self.stopGame      = [CCMenuItemFont itemFromString:l(@"menu.end")
                                                               target:self selector:@selector(stopGame:)],
                  [MenuItemSpacer spacerSmall],
@@ -81,7 +79,12 @@
 -(void) reset {
 
     BOOL gameIsOn = [[GorillasAppDelegate get].gameLayer checkGameStillOn];//, gameWasOn = [self.continueGame isEnabled];
-    
+
+    if (gameIsOn)
+        [self setBackButtonTarget:self selector:@selector(back)];
+    else
+        [self setBackButtonTarget:nil selector:nil];
+
     //if(gameIsOn != gameWasOn)
         //TODO self.menu = nil;
 
