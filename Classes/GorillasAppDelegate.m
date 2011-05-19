@@ -72,6 +72,7 @@
     
     [super application:application didFinishLaunchingWithOptions:launchOptions];
     [((RootViewController *) self.window.rootViewController) supportInterfaceOrientation:UIInterfaceOrientationLandscapeRight];
+    [((RootViewController *) self.window.rootViewController) supportInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
     
     // Game Center setup.
     self.netController = [[NetController new] autorelease];
