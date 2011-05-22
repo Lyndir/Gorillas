@@ -37,9 +37,10 @@
 #import "FullGameLayer.h"
 #import "GHUDLayer.h"
 #import "NetController.h"
+#import "PlayHaven.h"
 
 
-@interface GorillasAppDelegate : AbstractCocos2DAppDelegate {
+@interface GorillasAppDelegate : AbstractCocos2DAppDelegate <PHPreloadDelegate, PHRequestDelegate> {
     
 @private
     GameLayer                                                       *_gameLayer;
@@ -56,6 +57,7 @@
     GuideLayer                                                      *_guideLayer;
     
     NetController                                                   *_netController;
+    UIView                                                          *_notifierView;
 }
 
 @property (nonatomic, readonly, retain) GameLayer                   *gameLayer;
@@ -86,6 +88,7 @@
 -(void) showInformation;
 -(void) showGuide;
 -(void) showFullGame;
+-(void) moreGames;
 
 +(GorillasAppDelegate *) get;
 

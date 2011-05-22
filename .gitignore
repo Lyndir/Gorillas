@@ -1,6 +1,9 @@
 # Compiled objects.
 /Web/target
 
+# Secret stuff
+/Resources/PlayHaven.plist
+
 # Encoded audio.
 /Resources/Audio/*/*flac
 

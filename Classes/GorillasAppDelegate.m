@@ -30,6 +30,11 @@
 #import "CityTheme.h"
 #import "ccMacros.h"
 
+
+static NSString *PHContextNotifier  = @"PH.notifier";
+static NSString *PHContextCharts    = @"PH.charts";
+//static NSString *PHContextCommunity = @"PH.community";
+
 @interface CCDirector (Reveal)
 
 -(void) startAnimation;
@@ -52,6 +57,7 @@
 @property (nonatomic, readwrite, retain) FullGameLayer                  *fullLayer;
 
 @property (nonatomic, readwrite, retain) NetController                  *netController;
+@property (nonatomic, readwrite, retain) UIView                         *notifierView;
 
 @end
 
@@ -61,6 +67,7 @@
 @synthesize configLayer = _configLayer, gameConfigLayer = _gameConfigLayer, avConfigLayer = _avConfigLayer, modelsConfigLayer = _modelsConfigLayer;
 @synthesize infoLayer = _infoLayer, guideLayer = _guideLayer, fullLayer = _fullLayer;
 @synthesize netController = _netController;
+@synthesize notifierView = _notifierView;
 
 + (void)initialize {
     
@@ -108,6 +115,15 @@
     [[CCDirector sharedDirector] pushScene:splashScene];
     [self showMainMenu];
     
+    // PlayHaven setup.
+    @try {
+        [PlayHaven preloadWithDelegate:self];
+        [PlayHaven loadChartsNotifierWithDelegate:self context:PHContextNotifier];
+    }
+    @catch (NSException *exception) {
+        err(@"PlayHaven exception: %@", exception);
+    }
+    
     do {
 #if ! TARGET_IPHONE_SIMULATOR
         @try {
@@ -135,27 +151,6 @@
     return (GHUDLayer *)super.hudLayer;
 }
 
-
-- (void)didUpdateConfigForKey:(SEL)configKey {
-    
-    [super didUpdateConfigForKey:configKey];
-    
-    if (configKey == @selector(cityTheme)) {
-        dbg(@"City Theme changed to: %@", [GorillasConfig get].cityTheme);
-        [[[CityTheme getThemes] objectForKey:[GorillasConfig get].cityTheme] apply];
-    }
-
-    if (configKey == @selector(playerModel)) {
-        dbg(@"Model changed");
-        [self.gameLayer reset];
-    }
-}
-
-- (void)didPopLayer:(ShadeLayer *)layer anyLeft:(BOOL)anyLeft {
-    
-    if (!anyLeft)
-        [self.gameLayer setPaused:NO];
-}
 
 - (void)hudMenuPressed {
     
@@ -267,12 +262,137 @@
     [self pushLayer:self.fullLayer];
 }
 
+- (void)moreGames {
+    
+    [PlayHaven loadChartsWithDelegate:self context:PHContextCharts];
+}
+
 
 - (void)pushLayer: (ShadeLayer *)layer hidden:(BOOL)hidden {
     
     [self.gameLayer setPaused:YES];
     
     [super pushLayer:layer hidden:hidden];
+}
+
+- (void)didUpdateConfigForKey:(SEL)configKey {
+    
+    [super didUpdateConfigForKey:configKey];
+    
+    if (configKey == @selector(cityTheme)) {
+        dbg(@"City Theme changed to: %@", [GorillasConfig get].cityTheme);
+        [[[CityTheme getThemes] objectForKey:[GorillasConfig get].cityTheme] apply];
+    }
+    
+    if (configKey == @selector(playerModel)) {
+        dbg(@"Model changed");
+        [self.gameLayer reset];
+    }
+}
+
+- (void)didPushLayer:(ShadeLayer *)layer hidden:(BOOL)hidden {
+    
+    self.gameLayer.paused = YES;
+
+    if (self.notifierView.superview && (layer != self.mainMenuLayer || layer != self.continueMenuLayer))
+        [self.notifierView removeFromSuperview];
+    
+    else if (self.notifierView) {
+        if (layer == self.mainMenuLayer) {
+            self.notifierView.center = ccp(100, 325);
+            [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
+        } else if (layer == self.continueMenuLayer) {
+            self.notifierView.center = ccp(65, 325);
+            [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
+        }
+    }
+
+    [super didPushLayer:layer hidden:hidden];
+}
+
+- (void)didPopLayer:(ShadeLayer *)layer anyLeft:(BOOL)anyLeft {
+     
+    if (self.notifierView.superview && (layer == self.mainMenuLayer || layer == self.continueMenuLayer))
+        [self.notifierView removeFromSuperview];
+     
+    else if (self.notifierView) {
+        if ([self isLayerShowing:self.mainMenuLayer]) {
+            self.notifierView.center = ccp(100, 330);
+            [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
+        } else if ([self isLayerShowing:self.continueMenuLayer]) {
+            self.notifierView.center = ccp(65, 330);
+            [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
+        }
+    }
+ 
+    if (!anyLeft)
+        self.gameLayer.paused = NO;
+    
+    [super didPopLayer:layer anyLeft:anyLeft];
+}
+
+
+#pragma mark - PHPreloadDelegate
+
+-(NSString *)playhavenPublisherToken {
+    
+    return [[NSDictionary dictionaryWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"PlayHaven" withExtension:@"plist"]] valueForKeyPath:@"Token"];
+}
+
+-(BOOL)shouldTestPlayHaven {
+    
+#ifdef DEBUG
+    return YES;
+#else
+    return NO;
+#endif
+}
+
+-(void)playhavenDidFinishPreloading {
+    
+}
+
+-(void)playhavenPreloadDidFailWithError:(NSString *)message {
+    
+    err(@"Playhaven preload failed with error: %@", message);
+}
+
+-(PHLogLevel *)playhavenDebugLogLevel {
+    
+    return [self shouldTestPlayHaven]? [PHLogLevel logLevelDebug]: [PHLogLevel logLevelWarn];
+}
+
+
+#pragma mark - PHRequestDelegate
+
+- (void)playhaven:(UIView *)view didLoadWithContext:(id)contextValue {
+    
+    if (contextValue == PHContextNotifier) {
+        [self.notifierView removeFromSuperview];
+        self.notifierView = view;
+        
+        if ([self isLayerShowing:self.mainMenuLayer] || [self isLayerShowing:self.continueMenuLayer])
+            [[CCDirector sharedDirector].openGLView addSubview:view];
+    }
+    
+    if (contextValue == PHContextCharts) {
+        [[CCDirector sharedDirector].openGLView addSubview:view];
+        [[CCDirector sharedDirector] pause];
+    }
+}
+
+- (void)playhaven:(UIView *)view didFailWithError:(NSString *)message context:(id)contextValue {
+    
+    err(@"Playhaven context: %@, failed with error: %@", contextValue, message);
+    
+    [view removeFromSuperview];
+    [[CCDirector sharedDirector] resume];
+}
+
+- (void)playhaven:(UIView *)view wasDismissedWithContext:(id)contextValue {
+    
+    [view removeFromSuperview];
+    [[CCDirector sharedDirector] resume];
 }
 
 

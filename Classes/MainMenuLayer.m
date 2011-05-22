@@ -25,12 +25,14 @@
 #import "MainMenuLayer.h"
 #import "GorillasAppDelegate.h"
 #import "MenuItemSpacer.h"
+#import "PlayHaven.h"
 
 
 @interface MainMenuLayer ()
 
 -(void) newGame: (id)sender;
 -(void) continueGame: (id)sender;
+-(void) moreGames: (id)sender;
 -(void) stopGame: (id)sender;
 -(void) information: (id)sender;
 -(void) options: (id)sender;
@@ -61,6 +63,8 @@
                  self.config        = [CCMenuItemFont itemFromString:l(@"menu.configuration")
                                                               target:self selector:@selector(options:)],
 #endif
+                 [CCMenuItemFont itemFromString:l(@"menu.moreGames")
+                                         target:self selector:@selector(moreGames:)],
                  nil]))
         return self;
 
@@ -124,11 +128,16 @@
 }
 
 
+-(void) moreGames: (id)sender {
+    
+    [[GorillasAppDelegate get] moreGames];
+}
+
+
 -(void) options: (id)sender {
     
     [[GorillasAppDelegate get] showConfiguration];
 }
-
 
 -(void) dealloc {
 

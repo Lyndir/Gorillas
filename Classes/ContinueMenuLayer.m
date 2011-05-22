@@ -30,6 +30,7 @@
 @interface ContinueMenuLayer ()
 
 -(void) continueGame: (id)sender;
+-(void) moreGames: (id)sender;
 -(void) stopGame: (id)sender;
 
 @end
@@ -41,9 +42,11 @@
 -(id) init {
 
     if(!(self = [super initWithDelegate:self logo:nil items:
-                 [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.continue.nextmatch", @"Continue")
+                 [CCMenuItemFont itemFromString:l(@"menu.continue.nextmatch")
                                          target:self selector:@selector(continueGame:)],
-                 [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.stop", @"Main CCMenu")
+                 [CCMenuItemFont itemFromString:l(@"menu.moreGames")
+                                         target:self selector:@selector(moreGames:)],
+                 [CCMenuItemFont itemFromString:l(@"menu.stop")
                                          target:self selector:@selector(stopGame:)],
                  nil]))
         return self;
@@ -63,6 +66,12 @@
 -(void) stopGame: (id)sender {
     
     [[GorillasAppDelegate get] showMainMenu];
+}
+
+
+-(void) moreGames: (id)sender {
+    
+    [[GorillasAppDelegate get] moreGames];
 }
 
 

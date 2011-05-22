@@ -588,6 +588,12 @@
 		DAE489640FEEE92B00E9017C /* explosion1.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAE489540FEEE92B00E9017C /* explosion1.caf */; };
 		DAE489650FEEE92B00E9017C /* explosion2.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAE489550FEEE92B00E9017C /* explosion2.caf */; };
 		DAE489660FEEE92B00E9017C /* explosion3.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAE489560FEEE92B00E9017C /* explosion3.caf */; };
+		DAE4EAAD1389AC79001FECE7 /* libPlayHaven.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE4E9B81389AC78001FECE7 /* libPlayHaven.a */; };
+		DAE4EAAE1389AC79001FECE7 /* libPlayHaven.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE4E9B81389AC78001FECE7 /* libPlayHaven.a */; };
+		DAE4EABF1389ACFC001FECE7 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE4EABE1389ACFC001FECE7 /* libicucore.dylib */; };
+		DAE4EAC11389B189001FECE7 /* PlayHaven.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAE4EAC01389B189001FECE7 /* PlayHaven.plist */; };
+		DAE4EAC21389B189001FECE7 /* PlayHaven.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAE4EAC01389B189001FECE7 /* PlayHaven.plist */; };
+		DAE4EAC41389B2E2001FECE7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE4EAC31389B2E2001FECE7 /* SystemConfiguration.framework */; };
 		DAF4D8161280D8170012132B /* MovingTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF4D8131280D8170012132B /* MovingTo.m */; };
 		DAF4D8181280D8170012132B /* MovingTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF4D8131280D8170012132B /* MovingTo.m */; };
 		DAFEF9730ED847D40019F7E5 /* ThrowAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* ThrowAction.m */; };
@@ -1143,6 +1149,11 @@
 		DAE489550FEEE92B00E9017C /* explosion2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion2.caf; sourceTree = "<group>"; };
 		DAE489560FEEE92B00E9017C /* explosion3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion3.caf; sourceTree = "<group>"; };
 		DAE489B30FEEEC4D00E9017C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAE4E9B81389AC78001FECE7 /* libPlayHaven.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPlayHaven.a; sourceTree = "<group>"; };
+		DAE4E9B91389AC78001FECE7 /* PlayHaven.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayHaven.h; sourceTree = "<group>"; };
+		DAE4EABE1389ACFC001FECE7 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		DAE4EAC01389B189001FECE7 /* PlayHaven.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlayHaven.plist; sourceTree = "<group>"; };
+		DAE4EAC31389B2E2001FECE7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DAF4D8121280D8170012132B /* MovingTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingTo.h; sourceTree = "<group>"; };
 		DAF4D8131280D8170012132B /* MovingTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingTo.m; sourceTree = "<group>"; };
 		DAFEF9710ED847D40019F7E5 /* ThrowAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThrowAction.h; sourceTree = "<group>"; };
@@ -1154,6 +1165,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAE4EAC41389B2E2001FECE7 /* SystemConfiguration.framework in Frameworks */,
+				DAE4EABF1389ACFC001FECE7 /* libicucore.dylib in Frameworks */,
 				DA925266132EDA6400488108 /* Security.framework in Frameworks */,
 				DA0DD66A0F95368600E5607E /* UIKit.framework in Frameworks */,
 				DA0DD66B0F95368600E5607E /* Foundation.framework in Frameworks */,
@@ -1165,6 +1178,7 @@
 				DA4B2277127CC81700C1748F /* libiLibs.a in Frameworks */,
 				DA4B227A127CC83800C1748F /* libz.dylib in Frameworks */,
 				DA9BD564128B465E00B854A7 /* GameKit.framework in Frameworks */,
+				DAE4EAAD1389AC79001FECE7 /* libPlayHaven.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1199,6 +1213,7 @@
 				DA3B9657127C1DF7009196E8 /* libiLibs.a in Frameworks */,
 				DA3B9720127C37B3009196E8 /* libz.dylib in Frameworks */,
 				DA9BD580128B466D00B854A7 /* GameKit.framework in Frameworks */,
+				DAE4EAAE1389AC79001FECE7 /* libPlayHaven.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1253,6 +1268,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DAE4EAC01389B189001FECE7 /* PlayHaven.plist */,
 				DA1297070FF23232000A8051 /* iTunesArtwork-lite.png */,
 				DA1297080FF23232000A8051 /* iTunesArtwork.png */,
 				DA5F1BD30EE74CE80041691E /* Images */,
@@ -1269,6 +1285,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DAE4EAC31389B2E2001FECE7 /* SystemConfiguration.framework */,
+				DAE4EABE1389ACFC001FECE7 /* libicucore.dylib */,
 				DA925265132EDA6400488108 /* Security.framework */,
 				DAA120920FDD26F700AA1E28 /* AVFoundation.framework */,
 				DA0DD7A00F9536E600E5607E /* QuartzCore.framework */,
@@ -1953,6 +1971,7 @@
 		DABF1FF40EB2703B002C32BF /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				DAE4E8BD1389AC78001FECE7 /* PlayHavenSDK */,
 				DA4385421384723F002F9FCC /* FontLabel */,
 				DA4383F513847110002F9FCC /* cocos2d */,
 				DA155564138001B300597223 /* jrswizzle */,
@@ -2018,6 +2037,16 @@
 				DAE488980FEED7F600E9017C /* clickservo.caf */,
 			);
 			path = Sound;
+			sourceTree = "<group>";
+		};
+		DAE4E8BD1389AC78001FECE7 /* PlayHavenSDK */ = {
+			isa = PBXGroup;
+			children = (
+				DAE4E9B81389AC78001FECE7 /* libPlayHaven.a */,
+				DAE4E9B91389AC78001FECE7 /* PlayHaven.h */,
+			);
+			name = PlayHavenSDK;
+			path = External/PlayHavenSDK;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2407,6 +2436,7 @@
 				DA614522132995EA009DBC56 /* Didot.ttf in Resources */,
 				DA4383F113845E05002F9FCC /* Default@2x.png in Resources */,
 				DA4383F313845E05002F9FCC /* Default~ipad.png in Resources */,
+				DAE4EAC11389B189001FECE7 /* PlayHaven.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2520,6 +2550,7 @@
 				DA614523132995EA009DBC56 /* Didot.ttf in Resources */,
 				DA4383F213845E05002F9FCC /* Default@2x.png in Resources */,
 				DA4383F413845E05002F9FCC /* Default~ipad.png in Resources */,
+				DAE4EAC21389B189001FECE7 /* PlayHaven.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3032,6 +3063,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/PlayHavenSDK\"",
+				);
 				PRODUCT_NAME = "Gorillas Dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3041,6 +3076,10 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/PlayHavenSDK\"",
+				);
 				PRODUCT_NAME = "Gorillas Dev";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3213,6 +3252,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/PlayHavenSDK\"",
+				);
 				PRODUCT_NAME = "Gorillas Dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3273,6 +3316,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = LITE;
 				INFOPLIST_FILE = Resources/InfoLite.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/PlayHavenSDK\"",
+				);
 				PRODUCT_NAME = "GorillasLite Dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
@@ -3284,6 +3331,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = LITE;
 				INFOPLIST_FILE = Resources/InfoLite.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/PlayHavenSDK\"",
+				);
 				PRODUCT_NAME = "GorillasLite Dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
@@ -3295,6 +3346,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PREPROCESSOR_DEFINITIONS = LITE;
 				INFOPLIST_FILE = Resources/InfoLite.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/PlayHavenSDK\"",
+				);
 				PRODUCT_NAME = "GorillasLite Dev";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
