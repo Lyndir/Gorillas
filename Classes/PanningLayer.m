@@ -199,7 +199,7 @@
         [scrollAction release];
         
         [self runAction:(scrollAction = [[MovingTo alloc] initWithDuration:[[GorillasConfig get].gameScrollDuration floatValue] - scrollActionElapsed
-                                                                position:pos])];
+                                                                  position:pos])];
     }
     else
         [scrollAction updatePosition:pos];

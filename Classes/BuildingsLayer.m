@@ -83,14 +83,14 @@
     wColor10.b                      = (wColor0.b + wColor1.b) / 2;
     wColor10.a                      = (wColor0.a + wColor1.a) / 2;
 
-    const CGSize winSize            = [CCDirector sharedDirector].winSizeInPixels;
-    const CGFloat buildingWidth     = buildingWidthFixed? buildingWidthFixed: winSize.width / [config.buildingAmount unsignedIntValue];
-    const CGFloat wWidth            = buildingWidth / ([config.windowAmount unsignedIntValue] * 2 + 1);
-    const CGFloat wPad              = wWidth;
-    const CGFloat wHeight           = wWidth * 2;
-    const CGFloat floorHeight       = wHeight + wPad;
     const NSUInteger fixedFloors    = [config.fixedFloors unsignedIntValue];
     const NSInteger varFloors       = [config.varFloors unsignedIntValue];
+    const CGSize winSize            = [CCDirector sharedDirector].winSize;
+    const CGFloat buildingWidth     = buildingWidthFixed? buildingWidthFixed: winSize.width / [config.buildingAmount unsignedIntValue];
+    CGFloat wWidth                  = buildingWidth / ([config.windowAmount unsignedIntValue] * 2 + 1);
+    CGFloat wPad                    = wWidth;
+    CGFloat wHeight                 = wWidth * 2;
+    const CGFloat floorHeight       = wHeight + wPad;
 
     // Calculcate buildings.
     windowCount                     = 0;
@@ -137,10 +137,15 @@
     GLushort *windowIndices                 = malloc(sizeof(GLushort)           /* size of an index */
                                                      * 6                        /* amount of indexes per window */
                                                      * windowCount              /* amount of windows in all buildings */);
+    wPad *= CC_CONTENT_SCALE_FACTOR();
+    wWidth *= CC_CONTENT_SCALE_FACTOR();
+    wHeight *= CC_CONTENT_SCALE_FACTOR();
     NSUInteger w = 0;
     for (NSUInteger b = 0; b < buildingCount; ++b) {
         
-        CGFloat bx                          = buildings[b].x;
+        CGFloat bx                          = buildings[b].x * CC_CONTENT_SCALE_FACTOR();
+        CGSize bs                           = CGSizeMake(buildings[b].size.width    * CC_CONTENT_SCALE_FACTOR(),
+                                                         buildings[b].size.height   * CC_CONTENT_SCALE_FACTOR());
         NSUInteger bv                       = b * 4;
         NSUInteger bi                       = b * 6;
 
@@ -150,9 +155,9 @@
         buildingVertices[bv + 2].backColor  = buildingVertices[bv + 3].backColor    = buildings[b].backColor;
         
         buildingVertices[bv + 0].front.p    = ccp(bx                          , 0);
-        buildingVertices[bv + 1].front.p    = ccp(bx + buildings[b].size.width, 0);
-        buildingVertices[bv + 2].front.p    = ccp(bx                          , 0 + buildings[b].size.height);
-        buildingVertices[bv + 3].front.p    = ccp(bx + buildings[b].size.width, 0 + buildings[b].size.height);
+        buildingVertices[bv + 1].front.p    = ccp(bx + bs.width, 0);
+        buildingVertices[bv + 2].front.p    = ccp(bx           , 0 + bs.height);
+        buildingVertices[bv + 3].front.p    = ccp(bx + bs.width, 0 + bs.height);
         
         buildingIndices[bi + 0]             = bv + 0;
         buildingIndices[bi + 1]             = bv + 1;
@@ -167,7 +172,7 @@
              y += wPad + wHeight) {
             
             for (NSInteger wx = wPad;
-                 wx < buildings[b].size.width - wWidth && bw < buildings[b].windowCount;
+                 wx < bs.width - wWidth && bw < buildings[b].windowCount;
                  wx += wPad + wWidth) {
                 
                 // Reason we don't use gameRandom for windows:

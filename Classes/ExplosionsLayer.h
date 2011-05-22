@@ -28,9 +28,9 @@
 @interface ExplosionsLayer : CCLayer {
     
 @private
-    CGPoint          *positions;
-    NSMutableArray  *explosions;
-    NSMutableArray  *flames;
+    CGPoint             *positionsPx;
+    NSMutableArray      *explosions;
+    NSMutableArray      *flames;
 }
 
 -(void) addExplosionAtWorld:(CGPoint)pos hitsGorilla:(BOOL)gorillaHit;

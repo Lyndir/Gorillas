@@ -132,7 +132,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     
     [self stopAllActions];
     
-    self.scale      = GorillasModelScale(2, self.texture.contentSize.width);
+    self.scale      = GorillasModelScale(2, self.texture.contentSizeInPixels.width);
     self.active     = NO;
     self.ready      = NO;
     self.lives      = self.initialLives;

@@ -53,9 +53,9 @@ static float flameRadius;
 
     explosions      = [[NSMutableArray alloc] initWithCapacity:10];
     flames          = [[NSMutableArray alloc] initWithCapacity:10];
-    positions       = nil;
+    positionsPx     = nil;
     
-    self.scale      = GorillasModelScale(1, [[CCTextureCache sharedTextureCache] addImage:@"hole.pvr"].contentSize.width);
+    self.scale      = GorillasModelScale(1, [[CCTextureCache sharedTextureCache] addImage:@"hole.png"].contentSizeInPixels.width);
     
     [self schedule:@selector(gc:) interval:0.5f];
     [self schedule:@selector(step:)];
@@ -140,14 +140,14 @@ static float flameRadius;
 
 -(void) draw {
 
-    if(positions) {
+    if(positionsPx) {
         NSUInteger f = 0;
         CGPoint prevFlamePos = CGPointZero;
         for(CCParticleSystem *flame in flames) {
-            CGPoint translate = ccpSub(positions[f], prevFlamePos);
-            prevFlamePos = positions[f];
+            CGPoint translatePx = ccpSub(positionsPx[f], prevFlamePos);
+            prevFlamePos = positionsPx[f];
             
-            glTranslatef(translate.x, translate.y, 0);
+            glTranslatef(translatePx.x, translatePx.y, 0);
             [flame draw];
             
             ++f;
@@ -185,8 +185,8 @@ static float flameRadius;
     if(!hitsGorilla && [GorillasConfig get].visualFx) {
         CCParticleSystem *flame = [self flameWithRadius:[self size] / 2 heavy:heavy];
 
-        positions = realloc(positions, sizeof(CGPoint) * (flames.count + 1));
-        positions[flames.count] = explosion.sourcePosition;
+        positionsPx = realloc(positionsPx, sizeof(CGPoint) * (flames.count + 1));
+        positionsPx[flames.count] = ccpMult(explosion.sourcePosition, CC_CONTENT_SCALE_FACTOR());
         [flames addObject:flame];
     }
     

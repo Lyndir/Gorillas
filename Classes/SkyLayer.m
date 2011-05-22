@@ -68,8 +68,8 @@
     fancySky = [[GorillasConfig get].visualFx boolValue];
 
     CGRect field = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self];
-    from    = ccp(field.origin.x, field.origin.y);
-    to      = ccp(field.origin.x + field.size.width, field.origin.y + field.size.height);
+    fromPx  = ccpMult(ccp(field.origin.x, field.origin.y), CC_CONTENT_SCALE_FACTOR());
+    toPx    = ccpMult(ccp(field.origin.x + field.size.width, field.origin.y + field.size.height), CC_CONTENT_SCALE_FACTOR());
     
     for(StarLayer *starLayer in stars)
         [starLayer reset];
@@ -79,7 +79,7 @@
 -(void) draw {
     
     if(fancySky)
-        DrawBoxFrom(from, to, skyColor, ccc4l(0x000000ff));
+        DrawBoxFrom(fromPx, toPx, skyColor, ccc4l(0x000000ff));
     
     else {
         glClearColor(skyColor.r / (float)0xff, skyColor.g / (float)0xff, skyColor.b / (float)0xff, skyColor.a / (float)0xff);

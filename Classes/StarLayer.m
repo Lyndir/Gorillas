@@ -58,7 +58,7 @@
     if (starCount == [[GorillasConfig get].starAmount unsignedIntValue])
         return;
 
-    CGRect field        = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self];
+    CGRect fieldPx      = CC_RECT_POINTS_TO_PIXELS([[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self]);
     starCount           = [[GorillasConfig get].starAmount unsignedIntValue];
     ccColor4B starColor = ccc4l([[GorillasConfig get].starColor longValue]);
     starColor.r         *= depth;
@@ -70,8 +70,8 @@
     starVertices = malloc(sizeof(glPoint) * starCount);
     
     for (NSUInteger s = 0; s < starCount; ++s) {
-        starVertices[s].p   = ccp(gameRandomFor(GorillasGameRandomStars) % (long) field.size.width + field.origin.x,
-                                  gameRandomFor(GorillasGameRandomStars) % (long) field.size.height + field.origin.y);
+        starVertices[s].p   = ccp(gameRandomFor(GorillasGameRandomStars) % (long) fieldPx.size.width + fieldPx.origin.x,
+                                  gameRandomFor(GorillasGameRandomStars) % (long) fieldPx.size.height + fieldPx.origin.y);
         starVertices[s].c   = starColor;
         starVertices[s].s   = starSize;
     }
@@ -87,12 +87,12 @@
 
 -(void) update:(ccTime)dt {
 
-    CGRect field        = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self];
+    CGRect fieldPx      = CC_RECT_POINTS_TO_PIXELS([[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self]);
     NSInteger speed     = [[GorillasConfig get].starSpeed integerValue];
     
     for (NSUInteger s = 0; s < starCount; ++s)
-        if (starVertices[s].p.x < field.origin.x)
-            starVertices[s].p.x = field.size.width + field.origin.x
+        if (starVertices[s].p.x < fieldPx.origin.x)
+            starVertices[s].p.x = fieldPx.size.width + fieldPx.origin.x
                                 - ((int)(10000 * speed * dt) % gameRandomFor(GorillasGameRandomStars)) / 10000.0f;
         else
             starVertices[s].p.x -= dt * speed;

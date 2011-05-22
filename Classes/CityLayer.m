@@ -238,11 +238,11 @@
             if(![gorilla alive])
                 continue;
             
-            CGPoint from = ccpMult(gorilla.position, CC_CONTENT_SCALE_FACTOR()); /* pt to px */;
-            CGPoint to   = ccpAdd(from, ccpCompMult(throwHistory[i], winSizePx));
+            CGPoint fromPx = ccpMult(gorilla.position, CC_CONTENT_SCALE_FACTOR()); /* pt to px */;
+            CGPoint toPx   = ccpAdd(fromPx, ccpCompMult(throwHistory[i], winSizePx));
             
-            if(!CGPointEqualToPoint(to, CGPointZero))
-                DrawLinesTo(from, &to, 1, ccc4l([[GorillasConfig get].windowColorOff longValue] & 0xffffff33), 3);
+            if(!CGPointEqualToPoint(toPx, CGPointZero))
+                DrawLinesTo(fromPx, &toPx, 1, ccc4l([[GorillasConfig get].windowColorOff longValue] & 0xffffff33), 3);
         }
     }
 }
@@ -610,7 +610,7 @@
 
         // A building was hit, but if it's in an explosion crater we
         // need to let the banana continue flying.
-        return ![holes hitsHoleWorld:[self convertToWorldSpace:pos]];
+        return ![holes isHoleAtWorld:[self convertToWorldSpace:pos]];
     }
     
     return NO;
@@ -695,6 +695,7 @@
         GorillaLayer *gorilla = [gorillas objectAtIndex:i];
         
         gorilla.position = ccp(building.x + building.size.width / 2, building.size.height + gorilla.contentSize.height / 2);
+        dbg(@"position: %f + %f / 2, %f + %f / 2 = %@", building.x + building.size.width, building.size.height, gorilla.contentSize.height, NSStringFromCGPoint(gorilla.position));
         [gorilla runAction:[CCFadeIn actionWithDuration:1]];
         [self addChild:gorilla z:3];
     }
@@ -767,8 +768,9 @@
     Building lastBuilding = buildings.buildings[buildings.buildingCount - 1];
 
     CGPoint bottomLeft = [buildings convertToWorldSpace:CGPointMake(firstBuilding.x, 0)];
-    CGPoint topRight = [buildings convertToWorldSpace:CGPointMake(lastBuilding.x + lastBuilding.size.width,
-                                                                  [CCDirector sharedDirector].winSize.height * 2.0f)];
+    CGPoint topRight = [buildings convertToWorldSpace:CGPointMake(lastBuilding.x + lastBuilding.size.width, 0)];
+    topRight.y = [CCDirector sharedDirector].winSize.height * 2.0f;
+    
     if (node != nil) {
         bottomLeft = [node convertToNodeSpace:bottomLeft];
         topRight = [node convertToNodeSpace:topRight];

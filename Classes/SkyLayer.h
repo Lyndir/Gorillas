@@ -31,7 +31,7 @@
     ccColor4B               skyColor;
     BOOL                    fancySky;
     
-    CGPoint                 from, to;
+    CGPoint                 fromPx, toPx;
     
     NSMutableArray          *stars;
 }

@@ -47,7 +47,7 @@
     SkyLayer                                                *skyLayer;
     PanningLayer                                            *panningLayer;
     CityLayer                                               *cityLayer;
-    CCParticleSystem                                        *weather;
+    CCParticleSystem                                        *backWeather, *frontWeather;
     WindLayer                                               *windLayer;
     CCAction                                                *shakeAction;
     //FIXME ScaleTime                                       *scaleTimeAction;
@@ -64,7 +64,8 @@
 @property (nonatomic, readonly) SkyLayer                    *skyLayer;
 @property (nonatomic, readonly) PanningLayer                *panningLayer;
 @property (nonatomic, readonly) CityLayer                   *cityLayer;
-@property (nonatomic, readonly) CCParticleSystem            *weather;
+@property (nonatomic, readonly) CCParticleSystem            *backWeather;
+@property (nonatomic, readonly) CCParticleSystem            *frontWeather;
 @property (nonatomic, readonly) WindLayer                   *windLayer;
 
 //FIXME @property (nonatomic, readonly) ScaleTime           *scaleTimeAction;

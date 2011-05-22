@@ -45,7 +45,7 @@
 
 @synthesize paused, started, running;
 @synthesize gorillas, activeGorilla;
-@synthesize skyLayer, panningLayer, cityLayer, windLayer, weather;
+@synthesize skyLayer, panningLayer, cityLayer, windLayer, backWeather, frontWeather;
 //FIXME @synthesize scaleTimeAction;
 
 -(BOOL) isSinglePlayer {
@@ -190,15 +190,15 @@
 -(void) startGame {
     dbg(@"GameLayer startGame");
     
-    if(!mode)
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:@"Tried to start a game without configuring it first."
-                                     userInfo:nil];
+    if(!mode) {
+        err(@"Tried to start a game without configuring it first.");
+        return;
+    }
     
-    if(running)
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:@"Tried to start a game while one's still running."
-                                     userInfo:nil];
+    if(running) {
+        err(@"Tried to start a game while one's still running.");
+        return;
+    }
     
     if (randomCity)
         [GorillasConfig get].cityTheme = [[CityTheme getThemeNames] objectAtIndex:gameRandom() % [[CityTheme getThemeNames] count]];
@@ -217,7 +217,8 @@
     
     switch (throw.endCondition) {
         case ThrowNotEnded:
-            @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Throw should have ended." userInfo:nil];
+            err(@"Throw should have ended.");
+            return;
             
         case ThrowEndOffScreen:
             [[[GorillasAppDelegate get] hudLayer] message:[GorillasConfig get].offMessage
@@ -507,24 +508,33 @@
 
 -(void) updateWeather:(ccTime)dt {
     
-    if (![[GorillasConfig get].visualFx boolValue] && weather.active)
-        [weather stopSystem];
+    if (![[GorillasConfig get].visualFx boolValue] && backWeather.active) {
+        [backWeather stopSystem];
+        [frontWeather stopSystem];
+    }
     
-    if (!weather.emissionRate) {
+    if (!backWeather.emissionRate) {
         // If not emitting ..
         
-        if (weather.active)
+        if (backWeather.active) {
             // Stop active system.
-            [weather stopSystem];
+            [backWeather stopSystem];
+            [frontWeather stopSystem];
+        }
         
-        if (weather.particleCount == 0) {
+        if (backWeather.particleCount == 0) {
             // If system has no particles left alive ..
             
             // Remove & release it.
-            [windLayer unregisterSystem:weather];
-            [weather.parent removeChild:weather cleanup:YES];
-            [weather release];
-            weather = nil;
+            [windLayer unregisterSystem:backWeather];
+            [backWeather removeFromParentAndCleanup:YES];
+            [backWeather release];
+            backWeather = nil;
+            [windLayer unregisterSystem:frontWeather];
+            [frontWeather removeFromParentAndCleanup:YES];
+            [frontWeather release];
+            frontWeather = nil;
+            
             
             CGRect field = [cityLayer fieldInSpaceOf:panningLayer];
             
@@ -533,18 +543,29 @@
                 
                 switch (gameRandomFor(GorillasGameRandomWeather) % 2) {
                     case 0:
-                        weather = [[CCParticleRain alloc] init];
-                        weather.emissionRate    = 60;
-                        weather.startSizeVar    = 1.5f;
-                        weather.startSize       = 3;
+                        backWeather                 = [[CCParticleRain alloc] init];
+                        backWeather.emissionRate    = 60;
+                        backWeather.startSizeVar    = 0.5f;
+                        backWeather.startSize       = 1;
+
+                        frontWeather                = [[CCParticleRain alloc] init];
+                        frontWeather.emissionRate   = 60;
+                        frontWeather.startSizeVar   = 1.5f;
+                        frontWeather.startSize      = 3;
                         break;
                         
                     case 1:
-                        weather = [[CCParticleSnow alloc] init];
-                        weather.speed           = 10;
-                        weather.emissionRate    = 3;
-                        weather.startSizeVar    = 3;
-                        weather.startSize       = 4;
+                        backWeather                 = [[CCParticleSnow alloc] init];
+                        backWeather.speed           = 10;
+                        backWeather.emissionRate    = 3;
+                        backWeather.startSizeVar    = 2;
+                        backWeather.startSize       = 2;
+
+                        frontWeather                = [[CCParticleSnow alloc] init];
+                        frontWeather.speed          = 10;
+                        frontWeather.emissionRate   = 3;
+                        frontWeather.startSizeVar   = 3;
+                        frontWeather.startSize      = 4;
                         break;
                         
                     default:
@@ -552,28 +573,35 @@
                                                        reason:@"Unsupported weather type selected." userInfo:nil];
                 }
                 
-                weather.positionType    = kCCPositionTypeGrouped;
-                weather.posVar          = ccp(field.size.width / 2, weather.posVar.y);
-                weather.position        = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
-                [panningLayer addChild:weather /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:ccp(self.contentSize.width / 2,
-                                                self.contentSize.height / 2)*/];
-                
-                [windLayer registerSystem:weather affectAngle:YES];
+                backWeather.positionType    = kCCPositionTypeGrouped;
+                backWeather.posVar          = ccp(field.size.width / 2, backWeather.posVar.y);
+                backWeather.position        = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
+                [panningLayer addChild:backWeather z:-1 /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:ccp(self.contentSize.width / 2,
+                                                    self.contentSize.height / 2)*/];
+                [windLayer registerSystem:backWeather affectAngle:YES];
+
+                frontWeather.positionType   = kCCPositionTypeGrouped;
+                frontWeather.posVar         = ccp(field.size.width / 2, frontWeather.posVar.y);
+                frontWeather.position       = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
+                [panningLayer addChild:frontWeather /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:ccp(self.contentSize.width / 2,
+                                                    self.contentSize.height / 2)*/];
+                [windLayer registerSystem:frontWeather affectAngle:YES];
             }
         }
     }
     
     else {
         // System is alive, let the emission rate evolve.
-        float rate = [weather emissionRate] + (gameRandomFor(GorillasGameRandomWeather) % 40 - 15) / 10.0f;
-        float max = [weather isKindOfClass:[CCParticleRain class]]? 200: 100;
+        float rate = [backWeather emissionRate] + (gameRandomFor(GorillasGameRandomWeather) % 40 - 15) / 10.0f;
+        float max = [backWeather isKindOfClass:[CCParticleRain class]]? 200: 100;
         rate = max; // fminf(fmaxf(0, rate), max);
         
         if(gameRandomFor(GorillasGameRandomWeather) % 100 == 0)
             // 1% chance for a full stop.
             rate = 0;
         
-        [weather setEmissionRate:rate];
+        [backWeather setEmissionRate:rate];
+        [frontWeather setEmissionRate:rate];
     }
 }
 
@@ -639,8 +667,11 @@
     [cityLayer release];
     cityLayer = nil;
     
-    [weather release];
-    weather = nil;
+    [backWeather release];
+    backWeather = nil;
+    
+    [frontWeather release];
+    frontWeather = nil;
     
     [panningLayer release];
     panningLayer = nil;
