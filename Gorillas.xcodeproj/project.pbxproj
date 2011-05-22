@@ -508,8 +508,6 @@
 		DA8B147C128CB11000D2211C /* RootViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA8B147A128CB10F00D2211C /* RootViewController.h */; };
 		DA8B147D128CB11000D2211C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA8B147B128CB10F00D2211C /* RootViewController.m */; };
 		DA925266132EDA6400488108 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA925265132EDA6400488108 /* Security.framework */; };
-		DA9491B9131AF96000BD7458 /* menu-main.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9491B8131AF96000BD7458 /* menu-main.png */; };
-		DA9491BA131AF96000BD7458 /* menu-main.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9491B8131AF96000BD7458 /* menu-main.png */; };
 		DA9A63B90F573A530031988E /* CustomGameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9A63B60F573A530031988E /* CustomGameLayer.m */; };
 		DA9BD564128B465E00B854A7 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9BD563128B465E00B854A7 /* GameKit.framework */; };
 		DA9BD580128B466D00B854A7 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9BD563128B465E00B854A7 /* GameKit.framework */; };
@@ -1074,7 +1072,6 @@
 		DA8B147A128CB10F00D2211C /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		DA8B147B128CB10F00D2211C /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		DA925265132EDA6400488108 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		DA9491B8131AF96000BD7458 /* menu-main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-main.png"; path = "png/menu-main.png"; sourceTree = "<group>"; };
 		DA9A63B50F573A530031988E /* CustomGameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGameLayer.h; sourceTree = "<group>"; };
 		DA9A63B60F573A530031988E /* CustomGameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGameLayer.m; sourceTree = "<group>"; };
 		DA9BD563128B465E00B854A7 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -1855,7 +1852,6 @@
 			children = (
 				DA4383ED13845E05002F9FCC /* Default@2x.png */,
 				DA4383EF13845E05002F9FCC /* Default~ipad.png */,
-				DA9491B8131AF96000BD7458 /* menu-main.png */,
 				DAB25BE712DA029A0089B33E /* menu.png */,
 				DAB25BE912DA029A0089B33E /* score.png */,
 				DA75CF7912A123B60051EF09 /* frame-hd.png */,
@@ -2405,7 +2401,6 @@
 				DA75CF7C12A123B60051EF09 /* frame.png in Resources */,
 				DAB25FFE12DA029C0089B33E /* menu.png in Resources */,
 				DAB25FFF12DA029C0089B33E /* score.png in Resources */,
-				DA9491B9131AF96000BD7458 /* menu-main.png in Resources */,
 				DA61451613299376009DBC56 /* Bilbao-Poster-Black.ttf in Resources */,
 				DA61451C13299534009DBC56 /* CharcoalCY.ttf in Resources */,
 				DA61451F13299590009DBC56 /* AppleGothic.ttf in Resources */,
@@ -2519,7 +2514,6 @@
 				DA75CF7E12A123B60051EF09 /* frame.png in Resources */,
 				DAB2640412DA029C0089B33E /* menu.png in Resources */,
 				DAB2640512DA029C0089B33E /* score.png in Resources */,
-				DA9491BA131AF96000BD7458 /* menu-main.png in Resources */,
 				DA61451713299376009DBC56 /* Bilbao-Poster-Black.ttf in Resources */,
 				DA61451D13299534009DBC56 /* CharcoalCY.ttf in Resources */,
 				DA61452013299590009DBC56 /* AppleGothic.ttf in Resources */,
