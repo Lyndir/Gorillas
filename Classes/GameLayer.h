@@ -73,7 +73,7 @@
 -(void) shake;
 -(BOOL) isEnabled:(GorillasFeature)feature;
 -(void) configureGameWithMode:(GorillasMode)nMode randomCity:(BOOL)aRandomCity
-                    playerIDs:(NSArray *)playerIDs ais:(NSUInteger)ais;
+                    playerIDs:(NSArray *)playerIDs localHumans:(NSUInteger)localHumans ais:(NSUInteger)ais;
 -(void) scaleTimeTo:(float)aTimeScale duration:(ccTime)aDuration;
 
 -(void) updateStateForThrow:(Throw)throw withSkill:(float)throwSkill;

@@ -24,7 +24,6 @@
 
 
 #import "GameLayer.h"
-#import "MainMenuLayer.h"
 #import "GorillasAppDelegate.h"
 #import "Remove.h"
 #import "CityTheme.h"
@@ -88,8 +87,6 @@
     
     paused = _paused;
     
-    [[UIApplication sharedApplication] setStatusBarHidden:!paused withAnimation:YES];
-    
     if(paused) {
         if(running)
             [self scaleTimeTo:0 duration:0.5f];
@@ -118,11 +115,11 @@
 
 
 -(void) configureGameWithMode:(GorillasMode)_mode randomCity:(BOOL)aRandomCity
-                    playerIDs:(NSArray *)playerIDs ais:(NSUInteger)_ais {
+                    playerIDs:(NSArray *)playerIDs localHumans:(NSUInteger)localHumans ais:(NSUInteger)_ais {
     
     mode            = _mode;
     randomCity      = aRandomCity;
-    humans          = 1 + [playerIDs count];
+    humans          = localHumans + [playerIDs count];
     ais             = _ais;
     
     // Create gorillas array.
@@ -648,11 +645,7 @@
         [panningLayer runAction:[CCMoveTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                                     position:CGPointZero]];
     
-    if(mode)
-        [[GorillasAppDelegate get] showContinueMenu];
-    else
-        // Selected game mode was unset, can't "continue".
-        [[GorillasAppDelegate get] showMainMenu];
+    [[GorillasAppDelegate get] showMainMenu];
 }
 
 

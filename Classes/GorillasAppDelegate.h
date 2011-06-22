@@ -24,10 +24,7 @@
 
 #import "AbstractCocos2DAppDelegate.h"
 #import "GameLayer.h"
-#import "MainMenuLayer.h"
 #import "NewGameLayer.h"
-#import "CustomGameLayer.h"
-#import "ContinueMenuLayer.h"
 #import "ConfigurationSectionLayer.h"
 #import "GameConfigurationLayer.h"
 #import "AVConfigurationLayer.h"
@@ -44,10 +41,7 @@
     
 @private
     GameLayer                                                       *_gameLayer;
-    ContinueMenuLayer                                               *_continueMenuLayer;
-    MainMenuLayer                                                   *_mainMenuLayer;
     NewGameLayer                                                    *_newGameLayer;
-    CustomGameLayer                                                 *_customGameLayer;
     ConfigurationSectionLayer                                       *_configLayer;
     GameConfigurationLayer                                          *_gameConfigLayer;
     AVConfigurationLayer                                            *_avConfigLayer;
@@ -61,10 +55,7 @@
 }
 
 @property (nonatomic, readonly, retain) GameLayer                   *gameLayer;
-@property (nonatomic, readonly, retain) MainMenuLayer               *mainMenuLayer;
 @property (nonatomic, readonly, retain) NewGameLayer                *newGameLayer;
-@property (nonatomic, readonly, retain) CustomGameLayer             *customGameLayer;
-@property (nonatomic, readonly, retain) ContinueMenuLayer           *continueMenuLayer;
 @property (nonatomic, readonly, retain) ConfigurationSectionLayer   *configLayer;
 @property (nonatomic, readonly, retain) GameConfigurationLayer      *gameConfigLayer;
 @property (nonatomic, readonly, retain) AVConfigurationLayer        *avConfigLayer;
@@ -77,10 +68,7 @@
 @property (nonatomic, readonly, retain) NetController               *netController;
 
 -(void) showMainMenu;
--(void) showNewGame;
--(void) showNewGameForPlayers:(NSArray *)aPlayersToInvite;
--(void) showCustomGame;
--(void) showContinueMenu;
+-(void) showMainMenuForPlayers:(NSArray *)aPlayersToInvite;
 -(void) showConfiguration;
 -(void) showGameConfiguration;
 -(void) showAVConfiguration;

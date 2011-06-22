@@ -44,10 +44,7 @@ static NSString *PHContextCharts    = @"PH.charts";
 @interface GorillasAppDelegate ()
 
 @property (nonatomic, readwrite, retain) GameLayer                      *gameLayer;
-@property (nonatomic, readwrite, retain) MainMenuLayer                  *mainMenuLayer;
 @property (nonatomic, readwrite, retain) NewGameLayer                   *newGameLayer;
-@property (nonatomic, readwrite, retain) CustomGameLayer                *customGameLayer;
-@property (nonatomic, readwrite, retain) ContinueMenuLayer              *continueMenuLayer;
 @property (nonatomic, readwrite, retain) ConfigurationSectionLayer      *configLayer;
 @property (nonatomic, readwrite, retain) GameConfigurationLayer         *gameConfigLayer;
 @property (nonatomic, readwrite, retain) AVConfigurationLayer           *avConfigLayer;
@@ -63,7 +60,7 @@ static NSString *PHContextCharts    = @"PH.charts";
 
 @implementation GorillasAppDelegate
 @synthesize gameLayer = _gameLayer;
-@synthesize mainMenuLayer = _mainMenuLayer, newGameLayer = _newGameLayer, customGameLayer = _customGameLayer, continueMenuLayer = _continueMenuLayer;
+@synthesize newGameLayer = _newGameLayer;
 @synthesize configLayer = _configLayer, gameConfigLayer = _gameConfigLayer, avConfigLayer = _avConfigLayer, modelsConfigLayer = _modelsConfigLayer;
 @synthesize infoLayer = _infoLayer, guideLayer = _guideLayer, fullLayer = _fullLayer;
 @synthesize netController = _netController;
@@ -96,7 +93,7 @@ static NSString *PHContextCharts    = @"PH.charts";
             [self.netController performSelectorOnMainThread:@selector(beginInvite:) withObject:acceptedInvite waitUntilDone:NO];
         
         else if(playersToInvite)
-            [self performSelectorOnMainThread:@selector(showNewGameForPlayers:) withObject:playersToInvite waitUntilDone:NO];
+            [self performSelectorOnMainThread:@selector(showMainMenuForPlayers:) withObject:playersToInvite waitUntilDone:NO];
     };
     
 	// Build the splash scene.
@@ -159,44 +156,20 @@ static NSString *PHContextCharts    = @"PH.charts";
 
 -(void) showMainMenu {
     
-    if(!self.mainMenuLayer)
-        self.mainMenuLayer = [MainMenuLayer node];
+    if(!self.newGameLayer)
+        self.newGameLayer = [NewGameLayer node];
 
-    [self pushLayer:self.mainMenuLayer];
+    [self pushLayer:self.newGameLayer];
 }
 
 
--(void) showNewGame {
-
-    [self showNewGameForPlayers:nil];
-}
-
-
--(void) showNewGameForPlayers:(NSArray *)aPlayersToInvite {
+-(void) showMainMenuForPlayers:(NSArray *)aPlayersToInvite {
     
     if(!self.newGameLayer)
         self.newGameLayer = [NewGameLayer node];
     self.newGameLayer.playersToInvite = aPlayersToInvite;
     
     [self pushLayer:self.newGameLayer];
-}
-
-
--(void) showCustomGame {
-    
-    if(!self.customGameLayer)
-        self.customGameLayer = [CustomGameLayer node];
-    
-    [self pushLayer:self.customGameLayer];
-}
-
-
--(void) showContinueMenu {
-    
-    if(!self.continueMenuLayer)
-        self.continueMenuLayer = [ContinueMenuLayer node];
-    
-    [self pushLayer:self.continueMenuLayer];
 }
 
 
@@ -294,15 +267,12 @@ static NSString *PHContextCharts    = @"PH.charts";
     
     self.gameLayer.paused = YES;
 
-    if (self.notifierView.superview && (layer != self.mainMenuLayer || layer != self.continueMenuLayer))
+    if (self.notifierView.superview && layer != self.newGameLayer)
         [self.notifierView removeFromSuperview];
     
     else if (self.notifierView) {
-        if (layer == self.mainMenuLayer) {
+        if (layer == self.newGameLayer) {
             self.notifierView.center = ccp(100, 325);
-            [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
-        } else if (layer == self.continueMenuLayer) {
-            self.notifierView.center = ccp(65, 325);
             [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
         }
     }
@@ -312,15 +282,12 @@ static NSString *PHContextCharts    = @"PH.charts";
 
 - (void)didPopLayer:(ShadeLayer *)layer anyLeft:(BOOL)anyLeft {
      
-    if (self.notifierView.superview && (layer == self.mainMenuLayer || layer == self.continueMenuLayer))
+    if (self.notifierView.superview && layer == self.newGameLayer)
         [self.notifierView removeFromSuperview];
      
     else if (self.notifierView) {
-        if ([self isLayerShowing:self.mainMenuLayer]) {
+        if ([self isLayerShowing:self.newGameLayer]) {
             self.notifierView.center = ccp(100, 330);
-            [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
-        } else if ([self isLayerShowing:self.continueMenuLayer]) {
-            self.notifierView.center = ccp(65, 330);
             [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
         }
     }
@@ -371,7 +338,7 @@ static NSString *PHContextCharts    = @"PH.charts";
         [self.notifierView removeFromSuperview];
         self.notifierView = view;
         
-        if ([self isLayerShowing:self.mainMenuLayer] || [self isLayerShowing:self.continueMenuLayer])
+        if ([self isLayerShowing:self.newGameLayer])
             [[CCDirector sharedDirector].openGLView addSubview:view];
     }
     
@@ -409,21 +376,9 @@ static NSString *PHContextCharts    = @"PH.charts";
     
     [super applicationDidReceiveMemoryWarning:application];
     
-    if(self.mainMenuLayer && ![self.mainMenuLayer parent]) {
-        [self.mainMenuLayer stopAllActions];
-        self.mainMenuLayer = nil;
-    }
     if(self.newGameLayer && ![self.newGameLayer parent]) {
         [self.newGameLayer stopAllActions];
         self.newGameLayer = nil;
-    }
-    if(self.customGameLayer && ![self.customGameLayer parent]) {
-        [self.customGameLayer stopAllActions];
-        self.customGameLayer = nil;
-    }
-    if(self.continueMenuLayer && ![self.continueMenuLayer parent]) {
-        [self.continueMenuLayer stopAllActions];
-        self.continueMenuLayer = nil;
     }
     if(self.configLayer && ![self.configLayer parent]) {
         [self.configLayer stopAllActions];
@@ -459,10 +414,7 @@ static NSString *PHContextCharts    = @"PH.charts";
 - (void)dealloc {
     
     self.gameLayer          = nil;
-    self.mainMenuLayer      = nil;
     self.newGameLayer       = nil;
-    self.customGameLayer    = nil;
-    self.continueMenuLayer  = nil;
     self.configLayer        = nil;
     self.gameConfigLayer    = nil;
     self.avConfigLayer      = nil;

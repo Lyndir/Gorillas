@@ -32,8 +32,8 @@
 
 - (void)gameConfiguration:(id)sender;
 - (void)startSingle:(id)sender;
+- (void)startHotSeat:(id)sender;
 - (void)startMulti:(id)sender;
-- (void)custom:(id)sender;
 - (void)back:(id)selector;
 
 @end
@@ -44,21 +44,14 @@
 - (id) init {
     
     if (!(self = [super initWithDelegate:self logo:nil items:
-                  [MenuItemTitle itemFromString:l(@"menu.choose.style")],
+                  [MenuItemSpacer spacerLarge],
+                  [MenuItemSpacer spacerSmall],
                   configurationI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(gameConfiguration:)],
                   descriptionT      = [MenuItemTitle itemFromString:@"description"],
-                  [MenuItemSpacer spacerNormal],
-                  singlePlayerI    = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"menu.player.single", @"Single Player")
-                                                                     target:self
-                                                                   selector:@selector(startSingle:)],
-                  multiPlayerI    = [[CCMenuItemFont alloc] initFromString:NSLocalizedString(@"menu.player.multi", @"Multi Player")
-                                                                    target:self
-                                                                  selector:@selector(startMulti:)],
-                  [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.choose.custom", @"Custom Game...")
-                                          target:self
-                                        selector:@selector(custom:)],
                   nil]))
         return self;
+    
+    self.background = [CCSprite spriteWithFile:@"menu-main.png"];
     
     // Game Configuration.
     NSMutableArray * configurationMenuItems = [NSMutableArray arrayWithCapacity:4];
@@ -106,7 +99,18 @@
     GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
     
     [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode randomCity:NO
-                                                     playerIDs:nil ais:gameConfiguration.singleplayerAICount];
+                                                     playerIDs:nil localHumans:1 ais:gameConfiguration.singleplayerAICount];
+    [[GorillasAppDelegate get].gameLayer startGame];
+}
+
+
+-(void) startHotSeat: (id) sender {
+    
+    NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
+    GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
+    
+    [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode randomCity:NO
+                                                     playerIDs:nil localHumans:2 ais:gameConfiguration.singleplayerAICount];
     [[GorillasAppDelegate get].gameLayer startGame];
 }
 
@@ -127,11 +131,6 @@
     matchRequest.playersToInvite = self.playersToInvite;
     
     [[GorillasAppDelegate get].netController beginRequest:matchRequest];
-}
-
--(void) custom: (id) sender {
-    
-    [[GorillasAppDelegate get] showCustomGame];
 }
 
 

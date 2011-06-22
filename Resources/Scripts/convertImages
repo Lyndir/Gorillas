@@ -1,27 +1,25 @@
 #!/usr/bin/env bash
 source bashlib
+cd "${0%/*}/../Images/png"
 
 
-# Configuration.
-srcs=(
-    fire
-    smoke
-    hole
-)
-weightings=(
-    linear
-    linear
-    linear
-)
-bpps=(
-    2
-    2
-    2
-)
+emit "Converting PVRs"
+    srcs=(
+#        fire
+#        smoke
+#        hole
+    )
+    weightings=(
+        linear
+        linear
+        perceptual
+    )
+    bpps=(
+        2
+        2
+        4
+    )
 
-
-# Perform conversion.
-emit "Converting:" --
     for i in "${!srcs[@]}"; do
         src=../png/${srcs[i]}.png
         weighting=${weightings[i]}
@@ -33,10 +31,48 @@ emit "Converting:" --
         }
 
         dst=${src##*/}
-        emit "Converting: $dst (${bpp}bpp, $weighting)"
-
-        texturetool -e PVRTC -f PVR \
-            --channel-weighting-linear --bits-per-pixel-2 \
-            -p "$dst" -o "${dst%.png}.pvr" "$src"
+        emit "$dst (${bpp}bpp, $weighting)" --
+            texturetool -e PVRTC -f PVR \
+                --channel-weighting-linear --bits-per-pixel-2 \
+                -p "$dst" -o "${dst%.png}.pvr" "$src"
+        emit -$?
     done
-emit -$?
+
+
+echo
+emit "Converting iTunesArtwork"
+    icons=(
+        [29]="Icon-Small.png"
+        [50]="Icon-Small-50.png"
+        [58]="Icon-Small@2x.png"
+        [57]="Icon.png"
+        [72]="Icon-72.png"
+        [114]="Icon@2x.png"
+    )
+
+    for size in "${!icons[@]}"; do
+        file=${icons[size]}
+
+        emit "$file ($size px)" --
+            convert "iTunesArtwork.png" -resize "${size}x${size}" "$file"
+        emit -$?
+    done
+
+
+echo
+emit "Converting @2x/-hd artwork"
+    for file in !(Icon*){@2x,-hd}.png; do
+        [[ -e $file ]] || continue
+
+        if [[ $file = Default* ]]; then
+            read width height < <(identify -format '%w %h' "$file")
+            if (( width > height )); then
+                emit "Rotating $file" --
+                    mogrify -rotate 90 "$file"
+                emit -$?
+            fi
+        fi
+        emit "${file/@(@2x|-hd)}" --
+            convert "$file" -resize 50% "${file/@(@2x|-hd)}"
+        emit -$?
+    done

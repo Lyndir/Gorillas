@@ -17,10 +17,11 @@
     if (!(self = [super initWithDelegate:aDelegate logo:aLogo itemsFromArray:menuItems]))
         return self;
 
-    self.colorGradient      = ccc4l(0x33333399);
-    self.opacity            = 0xaa;
+    self.colorGradient      = ccc4l(0x00000000);
+    self.opacity            = 0x00;
     self.outerPadding       = margin(0, 0, 0, 0);
     self.innerRatio         = 0;
+    self.background         = [CCSprite spriteWithFile:@"menu-back.png"];
 
     return self;
 }
