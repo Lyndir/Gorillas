@@ -104,8 +104,6 @@
 		DA2DE435128565C300E9035D /* Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DE3E1128565C300E9035D /* Layout.m */; };
 		DA2DE436128565C300E9035D /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = DA2DE3E2128565C300E9035D /* Logger.h */; };
 		DA2DE437128565C300E9035D /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DE3E3128565C300E9035D /* Logger.m */; };
-		DA2DE438128565C300E9035D /* NSData_MBBase64.h in Headers */ = {isa = PBXBuildFile; fileRef = DA2DE3E4128565C300E9035D /* NSData_MBBase64.h */; };
-		DA2DE439128565C300E9035D /* NSData_MBBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DE3E5128565C300E9035D /* NSData_MBBase64.m */; };
 		DA2DE43A128565C300E9035D /* NSString_NSArrayFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = DA2DE3E6128565C300E9035D /* NSString_NSArrayFormat.h */; };
 		DA2DE43B128565C300E9035D /* NSString_NSArrayFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2DE3E7128565C300E9035D /* NSString_NSArrayFormat.m */; };
 		DA2DE43C128565C300E9035D /* NSString_SEL.h in Headers */ = {isa = PBXBuildFile; fileRef = DA2DE3E8128565C300E9035D /* NSString_SEL.h */; };
@@ -170,6 +168,8 @@
 		DA2DFDCE1285662600E9035D /* wheel.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2DE9B01285662300E9035D /* wheel.png */; };
 		DA31251D0F10F74C00F1032D /* HolesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA31251C0F10F74C00F1032D /* HolesLayer.m */; };
 		DA3400700EB516F400B68C06 /* GameConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34006F0EB516F400B68C06 /* GameConfigurationLayer.m */; };
+		DA341D4113B1EB0C00F42F23 /* NSObject_Export.h in Headers */ = {isa = PBXBuildFile; fileRef = DA341D3F13B1EB0C00F42F23 /* NSObject_Export.h */; };
+		DA341D4213B1EB0C00F42F23 /* NSObject_Export.m in Sources */ = {isa = PBXBuildFile; fileRef = DA341D4013B1EB0C00F42F23 /* NSObject_Export.m */; };
 		DA34FD100EB4851E00B68C06 /* PanAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD0F0EB4851D00B68C06 /* PanAction.m */; };
 		DA34FD7D0EB49F4000B68C06 /* CityLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7C0EB49F4000B68C06 /* CityLayer.m */; };
 		DA34FD800EB49FFB00B68C06 /* StarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA34FD7F0EB49FFB00B68C06 /* StarLayer.m */; };
@@ -732,8 +732,6 @@
 		DA2DE3E1128565C300E9035D /* Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Layout.m; sourceTree = "<group>"; };
 		DA2DE3E2128565C300E9035D /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		DA2DE3E3128565C300E9035D /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
-		DA2DE3E4128565C300E9035D /* NSData_MBBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSData_MBBase64.h; sourceTree = "<group>"; };
-		DA2DE3E5128565C300E9035D /* NSData_MBBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSData_MBBase64.m; sourceTree = "<group>"; };
 		DA2DE3E6128565C300E9035D /* NSString_NSArrayFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_NSArrayFormat.h; sourceTree = "<group>"; };
 		DA2DE3E7128565C300E9035D /* NSString_NSArrayFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_NSArrayFormat.m; sourceTree = "<group>"; };
 		DA2DE3E8128565C300E9035D /* NSString_SEL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSString_SEL.h; sourceTree = "<group>"; };
@@ -788,6 +786,8 @@
 		DA31251C0F10F74C00F1032D /* HolesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HolesLayer.m; sourceTree = "<group>"; };
 		DA34006E0EB516F400B68C06 /* GameConfigurationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConfigurationLayer.h; sourceTree = "<group>"; };
 		DA34006F0EB516F400B68C06 /* GameConfigurationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameConfigurationLayer.m; sourceTree = "<group>"; };
+		DA341D3F13B1EB0C00F42F23 /* NSObject_Export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObject_Export.h; sourceTree = "<group>"; };
+		DA341D4013B1EB0C00F42F23 /* NSObject_Export.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObject_Export.m; sourceTree = "<group>"; };
 		DA34FD0E0EB4851D00B68C06 /* PanAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanAction.h; sourceTree = "<group>"; };
 		DA34FD0F0EB4851D00B68C06 /* PanAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanAction.m; sourceTree = "<group>"; };
 		DA34FD7B0EB49F4000B68C06 /* CityLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityLayer.h; sourceTree = "<group>"; };
@@ -1573,6 +1573,8 @@
 		DA2DE3D7128565C200E9035D /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				DA341D3F13B1EB0C00F42F23 /* NSObject_Export.h */,
+				DA341D4013B1EB0C00F42F23 /* NSObject_Export.m */,
 				DA15555C1380013B00597223 /* LayoutView.h */,
 				DA15555D1380013B00597223 /* LayoutView.m */,
 				DA15555E1380013B00597223 /* WebUtils.h */,
@@ -1591,8 +1593,6 @@
 				DA2DE3E1128565C300E9035D /* Layout.m */,
 				DA2DE3E2128565C300E9035D /* Logger.h */,
 				DA2DE3E3128565C300E9035D /* Logger.m */,
-				DA2DE3E4128565C300E9035D /* NSData_MBBase64.h */,
-				DA2DE3E5128565C300E9035D /* NSData_MBBase64.m */,
 				DA2DE3E6128565C300E9035D /* NSString_NSArrayFormat.h */,
 				DA2DE3E7128565C300E9035D /* NSString_NSArrayFormat.m */,
 				DA2DE3E8128565C300E9035D /* NSString_SEL.h */,
@@ -2090,7 +2090,6 @@
 				DA2DE432128565C300E9035D /* DeviceUtils.h in Headers */,
 				DA2DE434128565C300E9035D /* Layout.h in Headers */,
 				DA2DE436128565C300E9035D /* Logger.h in Headers */,
-				DA2DE438128565C300E9035D /* NSData_MBBase64.h in Headers */,
 				DA2DE43A128565C300E9035D /* NSString_NSArrayFormat.h in Headers */,
 				DA2DE43C128565C300E9035D /* NSString_SEL.h in Headers */,
 				DA2DE43E128565C300E9035D /* StringUtils.h in Headers */,
@@ -2105,6 +2104,7 @@
 				DA1555601380013B00597223 /* LayoutView.h in Headers */,
 				DA1555621380013B00597223 /* WebUtils.h in Headers */,
 				DA155629138001B400597223 /* JRSwizzle.h in Headers */,
+				DA341D4113B1EB0C00F42F23 /* NSObject_Export.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2671,7 +2671,6 @@
 				DA2DE433128565C300E9035D /* DeviceUtils.m in Sources */,
 				DA2DE435128565C300E9035D /* Layout.m in Sources */,
 				DA2DE437128565C300E9035D /* Logger.m in Sources */,
-				DA2DE439128565C300E9035D /* NSData_MBBase64.m in Sources */,
 				DA2DE43B128565C300E9035D /* NSString_NSArrayFormat.m in Sources */,
 				DA2DE43D128565C300E9035D /* NSString_SEL.m in Sources */,
 				DA2DE43F128565C300E9035D /* StringUtils.m in Sources */,
@@ -2686,6 +2685,7 @@
 				DA1555611380013B00597223 /* LayoutView.m in Sources */,
 				DA1555631380013B00597223 /* WebUtils.m in Sources */,
 				DA15562A138001B400597223 /* JRSwizzle.m in Sources */,
+				DA341D4213B1EB0C00F42F23 /* NSObject_Export.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3092,7 +3092,7 @@
 				GCC_DYNAMIC_NO_PIC = YES;
 				GCC_FAST_MATH = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Classes/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
@@ -3118,6 +3118,8 @@
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
@@ -3135,7 +3137,6 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSION_INFO_BUILDER = lhunath;
-				WARNING_CFLAGS = "-Wundeclared-selector";
 				ZERO_LINK = NO;
 			};
 			name = Debug;
@@ -3172,6 +3173,8 @@
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
@@ -3187,7 +3190,6 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSION_INFO_BUILDER = lhunath;
-				WARNING_CFLAGS = "-Wundeclared-selector";
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -3225,6 +3227,8 @@
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_VALUE = YES;
@@ -3240,7 +3244,6 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSION_INFO_BUILDER = lhunath;
-				WARNING_CFLAGS = "-Wundeclared-selector";
 				ZERO_LINK = NO;
 			};
 			name = Distribution;
@@ -3281,6 +3284,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 			};
 			name = Debug;
 		};
@@ -3290,6 +3294,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 			};
 			name = Release;
 		};
@@ -3299,6 +3304,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 			};
 			name = Distribution;
 		};

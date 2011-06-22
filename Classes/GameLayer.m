@@ -369,7 +369,7 @@
             
             // Check whether any gorillas are left.
             int liveGorillaCount = 0;
-            GorillaLayer *liveGorilla;
+            GorillaLayer *liveGorilla = nil;
             for(GorillaLayer *_gorilla in gorillas)
                 if([_gorilla alive]) {
                     liveGorillaCount++;
