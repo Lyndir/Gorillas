@@ -146,11 +146,11 @@ typedef enum {
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import "cocos2d.h"
-    #import "GLUtils.h"
-    #import "DeviceUtils.h"
-    #import "StringUtils.h"
+    #import "Pearl.h"
+    #import "Pearl-UIKit.h"
+    #import "Pearl-Media.h"
+    #import "Pearl-Cocos2D.h"
     #import "GorillasConfig.h"
-    #import "Logger.h"
 
     /**
     * GL types
