@@ -139,6 +139,13 @@ typedef enum {
  */
 #define CC_FONT_LABEL_SUPPORT   1
 
+/**
+ * Pearl Configuration
+ */
+#define PEARL
+#define PEARL_UIKIT
+#define PEARL_MEDIA
+#define PEARL_COCOS2D
 
 /**
  * Global Dependencies.

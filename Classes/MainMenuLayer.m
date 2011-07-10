@@ -15,41 +15,56 @@
  */
 
 //
-//  NewGameLayer.m
+//  MainMenuLayer.m
 //  Gorillas
 //
 //  Created by Maarten Billemont on 28/02/09.
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "NewGameLayer.h"
+#import "MainMenuLayer.h"
 #import "GorillasAppDelegate.h"
 #import "MenuItemSpacer.h"
 #import "MenuItemTitle.h"
 
 
-@interface NewGameLayer ()
+@interface MainMenuLayer ()
 
-- (void)gameConfiguration:(id)sender;
 - (void)startSingle:(id)sender;
-- (void)startHotSeat:(id)sender;
 - (void)startMulti:(id)sender;
+- (void)startHotSeat:(id)sender;
+- (void)gameConfiguration:(id)sender;
+- (void)settings:(id)sender;
+- (void)scores:(id)sender;
+- (void)moreGames:(id)sender;
 - (void)back:(id)selector;
 
 @end
 
-@implementation NewGameLayer
+@implementation MainMenuLayer
 @synthesize playersToInvite = _playersToInvite;
 
 - (id) init {
     
     if (!(self = [super initWithDelegate:self logo:nil items:
-                  [MenuItemSpacer spacerLarge],
                   [MenuItemSpacer spacerSmall],
+                  [MenuItemBlock itemWithSize:100 target:self selector:@selector(startMulti:)],
+                  [MenuItemBlock itemWithSize:100 target:self selector:@selector(startSingle:)],
+                  [MenuItemBlock itemWithSize:100 target:self selector:@selector(startHotSeat:)],
                   configurationI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(gameConfiguration:)],
                   descriptionT      = [MenuItemTitle itemFromString:@"description"],
+                  [MenuItemSpacer spacerSmall],
+                  [MenuItemBlock itemWithSize:50 target:self selector:@selector(settings:)],
+                  [MenuItemBlock itemWithSize:50 target:self selector:@selector(scores:)],
+                  [MenuItemBlock itemWithSize:50 target:self selector:@selector(moreGames:)],
                   nil]))
         return self;
+    
+    self.itemCounts = [NSArray arrayWithObjects:
+                       [NSNumber numberWithInt:1], [NSNumber numberWithInt:3],
+                       [NSNumber numberWithInt:1], [NSNumber numberWithInt:1],
+                       [NSNumber numberWithInt:1], [NSNumber numberWithInt:3], nil];
+    self.layout = MenuLayoutCustomColumns;
     
     self.background = [CCSprite spriteWithFile:@"menu-main.png"];
     
@@ -85,14 +100,6 @@
 }
 
 
--(void) gameConfiguration:(id) sender {
-    
-    [GorillasConfig get].activeGameConfigurationIndex = [NSNumber numberWithUnsignedInt:
-                                                         ([[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue] + 1)
-                                                         % [[GorillasConfig get].gameConfigurations count]];
-}
-
-
 -(void) startSingle: (id) sender {
     
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
@@ -100,17 +107,6 @@
     
     [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode randomCity:NO
                                                      playerIDs:nil localHumans:1 ais:gameConfiguration.singleplayerAICount];
-    [[GorillasAppDelegate get].gameLayer startGame];
-}
-
-
--(void) startHotSeat: (id) sender {
-    
-    NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
-    GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
-    
-    [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode randomCity:NO
-                                                     playerIDs:nil localHumans:2 ais:gameConfiguration.singleplayerAICount];
     [[GorillasAppDelegate get].gameLayer startGame];
 }
 
@@ -134,7 +130,54 @@
 }
 
 
--(void) back: (id) sender {
+-(void) startHotSeat: (id) sender {
+    
+    NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
+    GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
+    
+    [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode randomCity:NO
+                                                     playerIDs:nil localHumans:2 ais:gameConfiguration.singleplayerAICount];
+    [[GorillasAppDelegate get].gameLayer startGame];
+}
+
+
+- (void)gameConfiguration:(id)sender {
+    
+    [GorillasConfig get].activeGameConfigurationIndex = [NSNumber numberWithUnsignedInt:
+                                                         ([[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue] + 1)
+                                                         % [[GorillasConfig get].gameConfigurations count]];
+}
+
+
+- (void)settings:(id)sender {
+    
+    [[GorillasAppDelegate get] showConfiguration];
+}
+
+
+- (void)scores:(id)sender {
+    
+    GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];
+    if (leaderboardController != nil) {
+        leaderboardController.leaderboardDelegate = self;
+        [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:leaderboardController animated:YES];
+        [leaderboardController release];
+    }
+}
+
+- (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController {
+    
+    [[[UIApplication sharedApplication] keyWindow].rootViewController dismissModalViewControllerAnimated:YES];
+}
+
+
+- (void)moreGames:(id)sender {
+
+    [[GorillasAppDelegate get] moreGames];
+}
+
+
+- (void)back:(id) sender {
     
     [[GorillasAppDelegate get] popLayer];
 }

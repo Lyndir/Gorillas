@@ -62,10 +62,10 @@
 }
 
 
--(void) startWithTarget:(CCNode *)aTarget {
+-(void) startWithTarget:(id)aTarget {
     
     [super startWithTarget:aTarget];
-    self.r0 = self.target.position;
+    self.r0 = [(CCNode*)self.target position];
     
     if(self.spinAction) {
         [self.spinAction.target stopAction:self.spinAction];
@@ -75,14 +75,14 @@
     [self.target runAction:
      self.spinAction = [CCRepeat actionWithAction:[CCRotateBy actionWithDuration:1 angle:360]
                                             times:(int)self.duration + 1]];
-    self.target.visible = YES;
-    self.target.tag     = GorillasTagBananaFlying;
+    [self.target setVisible:YES];
+    [self.target setTag:GorillasTagBananaFlying];
     
     [[GorillasAppDelegate get].gameLayer.windLayer registerSystem:self.smoke affectAngle:NO];
     if ([[GorillasConfig get].visualFx boolValue]) {
         self.smoke.emissionRate = 30;
-        self.smoke.startSize    = 15.0f * [self.target scale];
-        self.smoke.startSizeVar = 5.0f * [self.target scale];
+        self.smoke.startSize    = 15.0f * [(CCNode*)self.target scale];
+        self.smoke.startSizeVar = 5.0f * [(CCNode*)self.target scale];
         if(!self.smoke.parent)
             [[self.target parent] addChild:self.smoke];
         else
@@ -93,18 +93,18 @@
 
 -(void) update: (ccTime) dt {
 
-    self.target.position = [ThrowController calculateThrowFrom:self.r0 withVelocity:self.v afterTime:self.elapsed].endPoint;
+    [self.target setPosition:[ThrowController calculateThrowFrom:self.r0 withVelocity:self.v afterTime:self.elapsed].endPoint];
     
     // Pan the screen.
     GameLayer *gameLayer = [GorillasAppDelegate get].gameLayer;
-    [gameLayer.panningLayer scrollToCenter:self.target.position
+    [gameLayer.panningLayer scrollToCenter:[(CCNode*)self.target position]
                                 horizontal:[[GorillasConfig get].followThrow boolValue]];
     
     // Update smoke.
     if([[GorillasConfig get].visualFx boolValue]) {
-        self.smoke.angle = atan2f(self.smoke.sourcePosition.y - self.target.position.y,
-                                  self.smoke.sourcePosition.x - self.target.position.x) / (float)M_PI * 180.0f;
-        self.smoke.sourcePosition = self.target.position;
+        self.smoke.angle = atan2f(self.smoke.sourcePosition.y - [(CCNode*)self.target position].y,
+                                  self.smoke.sourcePosition.x - [(CCNode*)self.target position].x) / (float)M_PI * 180.0f;
+        self.smoke.sourcePosition = [(CCNode*)self.target position];
     } else if(self.smoke.emissionRate)
         self.smoke.emissionRate = 0;
     
@@ -117,7 +117,7 @@
 -(void) stop {
     
     // self.target.position = [guaranteed time-independant end point of the throw]
-    self.target.visible = NO;
+    [self.target setVisible:NO];
     
     self.smoke.emissionRate  = 0;
     [[GorillasAppDelegate get].gameLayer.windLayer unregisterSystem:self.smoke];

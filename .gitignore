@@ -1,6 +1,3 @@
-# Compiled objects.
-/Web/target
-
 # Secret stuff
 /Resources/PlayHaven.plist
 
@@ -10,11 +7,15 @@
 # OS-Specific junk.
 .DS_Store
 
-# Eclipse IDE
-/Web/.classpath
-/Web/.project
-/Web/.settings
-/Web/eclipse
+# IntelliJ
+/.idea/*
+!/.idea/encodings.xml
+!/.idea/inspectionProfiles
+!/.idea/projectCodeStyle.xml
+!/.idea/validation.xml
+*.iml
+/*.ipr
+/*.iws
 
 # Xcode IDE
 /*.xcodeproj/*
@@ -22,6 +23,4 @@
 /build
 
 # Gorillas Stuff
-/Web*/trac
-/Web*/cocos2d-iphone-*-gorillas.tbz2
 /promocodes

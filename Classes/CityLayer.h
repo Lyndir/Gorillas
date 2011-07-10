@@ -37,7 +37,7 @@
 
 @private
     PanAction           *panAction;
-    CCLabelAtlas        *angleLabel, *strengthLabel;
+    CCLabelTTF          *angleLabel, *strengthLabel;
     CCLabelTTF          *msgLabel, *infoLabel;
     BarSprite           *aimSprite;
     

@@ -695,7 +695,7 @@
         GorillaLayer *gorilla = [gorillas objectAtIndex:i];
         
         gorilla.position = ccp(building.x + building.size.width / 2, building.size.height + gorilla.contentSize.height / 2);
-        dbg(@"position: %f + %f / 2, %f + %f / 2 = %@", building.x + building.size.width, building.size.height, gorilla.contentSize.height, NSStringFromCGPoint(gorilla.position));
+        dbg(@"position: %f + %f / 2, %f + %f / 2 = %@", building.x, building.size.width, building.size.height, gorilla.contentSize.height, NSStringFromCGPoint(gorilla.position));
         [gorilla runAction:[CCFadeIn actionWithDuration:1]];
         [self addChild:gorilla z:3];
     }

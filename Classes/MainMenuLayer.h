@@ -15,27 +15,27 @@
  */
 
 //
-//  GuideLayer.h
+//  MainMenuLayer.h
 //  Gorillas
 //
-//  Created by Maarten Billemont on 26/10/08.
+//  Created by Maarten Billemont on 28/02/09.
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
+#import "Resettable.h"
+#import "GameConfiguration.h"
 #import "GMenuLayer.h"
-#import "SwipeLayer.h"
+#import <GameKit/GameKit.h>
 
-@interface GuideLayer : GMenuLayer {
 
+@interface MainMenuLayer : GMenuLayer <Resettable, MenuDelegate, GKLeaderboardViewControllerDelegate> {
+    
 @private
-    CCMenuItemFont *chapterCurr, *chapterNext, *chapterSkip;
-    
-    SwipeLayer *swipeLayer;
-    
-    CCLabelTTF *prevPageLabel, *currPageLabel, *nextPageLabel, *pageNumberLabel;
-    NSMutableArray *guidePages, *guideTitles;
-    int page;
+    CCMenuItemToggle                                *configurationI;
+    CCMenuItemLabel                                 *descriptionT, *multiPlayerI, *singlePlayerI;
+    NSArray                                         *_playersToInvite;
 }
 
+@property (nonatomic, retain, readwrite) NSArray    *playersToInvite;
 
 @end

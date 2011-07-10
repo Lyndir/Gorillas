@@ -44,14 +44,11 @@ static NSString *PHContextCharts    = @"PH.charts";
 @interface GorillasAppDelegate ()
 
 @property (nonatomic, readwrite, retain) GameLayer                      *gameLayer;
-@property (nonatomic, readwrite, retain) NewGameLayer                   *newGameLayer;
+@property (nonatomic, readwrite, retain) MainMenuLayer                   *mainMenuLayer;
 @property (nonatomic, readwrite, retain) ConfigurationSectionLayer      *configLayer;
 @property (nonatomic, readwrite, retain) GameConfigurationLayer         *gameConfigLayer;
 @property (nonatomic, readwrite, retain) AVConfigurationLayer           *avConfigLayer;
 @property (nonatomic, readwrite, retain) ModelsConfigurationLayer       *modelsConfigLayer;
-@property (nonatomic, readwrite, retain) InformationLayer               *infoLayer;
-@property (nonatomic, readwrite, retain) GuideLayer                     *guideLayer;
-@property (nonatomic, readwrite, retain) FullGameLayer                  *fullLayer;
 
 @property (nonatomic, readwrite, retain) NetController                  *netController;
 @property (nonatomic, readwrite, retain) UIView                         *notifierView;
@@ -60,9 +57,8 @@ static NSString *PHContextCharts    = @"PH.charts";
 
 @implementation GorillasAppDelegate
 @synthesize gameLayer = _gameLayer;
-@synthesize newGameLayer = _newGameLayer;
+@synthesize mainMenuLayer = _mainMenuLayer;
 @synthesize configLayer = _configLayer, gameConfigLayer = _gameConfigLayer, avConfigLayer = _avConfigLayer, modelsConfigLayer = _modelsConfigLayer;
-@synthesize infoLayer = _infoLayer, guideLayer = _guideLayer, fullLayer = _fullLayer;
 @synthesize netController = _netController;
 @synthesize notifierView = _notifierView;
 
@@ -84,7 +80,7 @@ static NSString *PHContextCharts    = @"PH.charts";
         if (error)
             wrn(@"Game Center unavailable: %@", error);
         
-        [self.newGameLayer reset];
+        [self.mainMenuLayer reset];
     }];
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
         [self.gameLayer performSelectorOnMainThread:@selector(stopGame) withObject:nil waitUntilDone:YES];
@@ -114,8 +110,8 @@ static NSString *PHContextCharts    = @"PH.charts";
     
     // PlayHaven setup.
     @try {
-        [PlayHaven preloadWithDelegate:self];
-        [PlayHaven loadChartsNotifierWithDelegate:self context:PHContextNotifier];
+        //[PlayHaven preloadWithDelegate:self];
+        //[PlayHaven loadChartsNotifierWithDelegate:self context:PHContextNotifier];
     }
     @catch (NSException *exception) {
         err(@"PlayHaven exception: %@", exception);
@@ -156,20 +152,20 @@ static NSString *PHContextCharts    = @"PH.charts";
 
 -(void) showMainMenu {
     
-    if(!self.newGameLayer)
-        self.newGameLayer = [NewGameLayer node];
+    if(!self.mainMenuLayer)
+        self.mainMenuLayer = [MainMenuLayer node];
 
-    [self pushLayer:self.newGameLayer];
+    [self pushLayer:self.mainMenuLayer];
 }
 
 
 -(void) showMainMenuForPlayers:(NSArray *)aPlayersToInvite {
     
-    if(!self.newGameLayer)
-        self.newGameLayer = [NewGameLayer node];
-    self.newGameLayer.playersToInvite = aPlayersToInvite;
+    if(!self.mainMenuLayer)
+        self.mainMenuLayer = [MainMenuLayer node];
+    self.mainMenuLayer.playersToInvite = aPlayersToInvite;
     
-    [self pushLayer:self.newGameLayer];
+    [self pushLayer:self.mainMenuLayer];
 }
 
 
@@ -209,32 +205,6 @@ static NSString *PHContextCharts    = @"PH.charts";
 }
 
 
--(void) showInformation {
-    
-    if(!self.infoLayer)
-        self.infoLayer = [InformationLayer node];
-    
-    [self pushLayer:self.infoLayer];
-}
-
-
--(void) showGuide {
-    
-    if(!self.guideLayer)
-        self.guideLayer = [GuideLayer node];
-    
-    [self pushLayer:self.guideLayer];
-}
-
-
--(void) showFullGame {
-    
-    if(!self.fullLayer)
-        self.fullLayer = [FullGameLayer node];
-    
-    [self pushLayer:self.fullLayer];
-}
-
 - (void)moreGames {
     
     [PlayHaven loadChartsWithDelegate:self context:PHContextCharts];
@@ -267,11 +237,11 @@ static NSString *PHContextCharts    = @"PH.charts";
     
     self.gameLayer.paused = YES;
 
-    if (self.notifierView.superview && layer != self.newGameLayer)
+    if (self.notifierView.superview && layer != self.mainMenuLayer)
         [self.notifierView removeFromSuperview];
     
     else if (self.notifierView) {
-        if (layer == self.newGameLayer) {
+        if (layer == self.mainMenuLayer) {
             self.notifierView.center = ccp(100, 325);
             [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
         }
@@ -282,11 +252,11 @@ static NSString *PHContextCharts    = @"PH.charts";
 
 - (void)didPopLayer:(ShadeLayer *)layer anyLeft:(BOOL)anyLeft {
      
-    if (self.notifierView.superview && layer == self.newGameLayer)
+    if (self.notifierView.superview && layer == self.mainMenuLayer)
         [self.notifierView removeFromSuperview];
      
     else if (self.notifierView) {
-        if ([self isLayerShowing:self.newGameLayer]) {
+        if ([self isLayerShowing:self.mainMenuLayer]) {
             self.notifierView.center = ccp(100, 330);
             [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
         }
@@ -303,7 +273,7 @@ static NSString *PHContextCharts    = @"PH.charts";
 
 -(NSString *)playhavenPublisherToken {
     
-    return [[NSDictionary dictionaryWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"PlayHaven" withExtension:@"plist"]] valueForKeyPath:@"Token"];
+    return nil;//[[NSDictionary dictionaryWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"PlayHaven" withExtension:@"plist"]] valueForKeyPath:@"Token"];
 }
 
 -(BOOL)shouldTestPlayHaven {
@@ -338,7 +308,7 @@ static NSString *PHContextCharts    = @"PH.charts";
         [self.notifierView removeFromSuperview];
         self.notifierView = view;
         
-        if ([self isLayerShowing:self.newGameLayer])
+        if ([self isLayerShowing:self.mainMenuLayer])
             [[CCDirector sharedDirector].openGLView addSubview:view];
     }
     
@@ -376,9 +346,9 @@ static NSString *PHContextCharts    = @"PH.charts";
     
     [super applicationDidReceiveMemoryWarning:application];
     
-    if(self.newGameLayer && ![self.newGameLayer parent]) {
-        [self.newGameLayer stopAllActions];
-        self.newGameLayer = nil;
+    if(self.mainMenuLayer && ![self.mainMenuLayer parent]) {
+        [self.mainMenuLayer stopAllActions];
+        self.mainMenuLayer = nil;
     }
     if(self.configLayer && ![self.configLayer parent]) {
         [self.configLayer stopAllActions];
@@ -396,32 +366,17 @@ static NSString *PHContextCharts    = @"PH.charts";
         [self.modelsConfigLayer stopAllActions];
         self.modelsConfigLayer = nil;
     }
-    if(self.infoLayer && ![self.infoLayer parent]) {
-        [self.infoLayer stopAllActions];
-        self.infoLayer = nil;
-    }
-    if(self.guideLayer && ![self.guideLayer parent]) {
-        [self.guideLayer stopAllActions];
-        self.guideLayer = nil;
-    }
-    if(self.fullLayer && ![self.fullLayer parent]) {
-        [self.fullLayer stopAllActions];
-        self.fullLayer = nil;
-    }
 }
 
 
 - (void)dealloc {
     
     self.gameLayer          = nil;
-    self.newGameLayer       = nil;
+    self.mainMenuLayer       = nil;
     self.configLayer        = nil;
     self.gameConfigLayer    = nil;
     self.avConfigLayer      = nil;
     self.modelsConfigLayer  = nil;
-    self.infoLayer          = nil;
-    self.guideLayer         = nil;
-    self.fullLayer          = nil;
     
     [super dealloc];
 }

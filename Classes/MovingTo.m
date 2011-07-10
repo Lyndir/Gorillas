@@ -20,9 +20,9 @@
 
 - (void)updatePosition:(CGPoint)pos {
 
-    endPosition = pos;
-	startPosition = [(CCNode*)target_ position];
-	delta = ccpSub( endPosition, startPosition );
+    endPosition_ = pos;
+	startPosition_ = [(CCNode*)target_ position];
+	delta_ = ccpSub( endPosition_, startPosition_ );
     elapsed_ = 0;
 }
 

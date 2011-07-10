@@ -187,7 +187,7 @@
                        nil
                        ];
     [self.resetTriggers setObject:@"gameLayer.skyLayer" forKey:cVisualFx];
-    [self.resetTriggers setObject:@"newGameLayer" forKey:cActiveGameConfigurationIndex];
+    [self.resetTriggers setObject:@"mainMenuLayer" forKey:cActiveGameConfigurationIndex];
     [self.resetTriggers setObject:@"customGameLayer" forKey:cMode];
     
     return self;

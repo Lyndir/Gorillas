@@ -24,14 +24,11 @@
 
 #import "AbstractCocos2DAppDelegate.h"
 #import "GameLayer.h"
-#import "NewGameLayer.h"
+#import "MainMenuLayer.h"
 #import "ConfigurationSectionLayer.h"
 #import "GameConfigurationLayer.h"
 #import "AVConfigurationLayer.h"
 #import "ModelsConfigurationLayer.h"
-#import "InformationLayer.h"
-#import "GuideLayer.h"
-#import "FullGameLayer.h"
 #import "GHUDLayer.h"
 #import "NetController.h"
 #import "PlayHaven.h"
@@ -41,28 +38,22 @@
     
 @private
     GameLayer                                                       *_gameLayer;
-    NewGameLayer                                                    *_newGameLayer;
+    MainMenuLayer                                                   *_mainMenuLayer;
     ConfigurationSectionLayer                                       *_configLayer;
     GameConfigurationLayer                                          *_gameConfigLayer;
     AVConfigurationLayer                                            *_avConfigLayer;
     ModelsConfigurationLayer                                        *_modelsConfigLayer;
-    InformationLayer                                                *_infoLayer;
-    FullGameLayer                                                   *_fullLayer;
-    GuideLayer                                                      *_guideLayer;
     
     NetController                                                   *_netController;
     UIView                                                          *_notifierView;
 }
 
 @property (nonatomic, readonly, retain) GameLayer                   *gameLayer;
-@property (nonatomic, readonly, retain) NewGameLayer                *newGameLayer;
+@property (nonatomic, readonly, retain) MainMenuLayer               *mainMenuLayer;
 @property (nonatomic, readonly, retain) ConfigurationSectionLayer   *configLayer;
 @property (nonatomic, readonly, retain) GameConfigurationLayer      *gameConfigLayer;
 @property (nonatomic, readonly, retain) AVConfigurationLayer        *avConfigLayer;
 @property (nonatomic, readonly, retain) ModelsConfigurationLayer    *modelsConfigLayer;
-@property (nonatomic, readonly, retain) InformationLayer            *infoLayer;
-@property (nonatomic, readonly, retain) GuideLayer                  *guideLayer;
-@property (nonatomic, readonly, retain) FullGameLayer               *fullLayer;
 @property (nonatomic, readonly, retain) GHUDLayer                   *hudLayer;
 
 @property (nonatomic, readonly, retain) NetController               *netController;
@@ -73,9 +64,6 @@
 -(void) showGameConfiguration;
 -(void) showAVConfiguration;
 -(void) showModelsConfiguration;
--(void) showInformation;
--(void) showGuide;
--(void) showFullGame;
 -(void) moreGames;
 
 +(GorillasAppDelegate *) get;
