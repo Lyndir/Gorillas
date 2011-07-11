@@ -729,7 +729,7 @@
         if((runningActions = [gorilla numberOfRunningActions]))
             break;
 
-    if(runningActions) {
+    if(runningActions && ![GorillasAppDelegate get].gameLayer.configuring) {
         [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:[GorillasAppDelegate get].gameLayer.activeGorilla.position
                                                               horizontal:YES];
         [self runAction:[CCSequence actions:

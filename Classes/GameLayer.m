@@ -42,7 +42,7 @@
 
 #pragma mark Properties
 
-@synthesize paused, started, running;
+@synthesize paused, configuring, started, running;
 @synthesize gorillas, activeGorilla;
 @synthesize skyLayer, panningLayer, cityLayer, windLayer, backWeather, frontWeather;
 //FIXME @synthesize scaleTimeAction;
@@ -76,9 +76,9 @@
     
     if(running) {
         if(paused)
-            [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.paused", @"Paused")];
+            [[GorillasAppDelegate get].uiLayer message:l(@"messages.paused", @"Paused")];
         else
-            [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.unpaused", @"Unpaused")];
+            [[GorillasAppDelegate get].uiLayer message:l(@"messages.unpaused", @"Unpaused")];
     }
 }
 
@@ -116,17 +116,17 @@
 
 -(void) configureGameWithMode:(GorillasMode)_mode randomCity:(BOOL)aRandomCity
                     playerIDs:(NSArray *)playerIDs localHumans:(NSUInteger)localHumans ais:(NSUInteger)_ais {
-    
+
+    configuring     = YES;
+    if(activeGorilla)
+        [self stopGame];
+
     mode            = _mode;
     randomCity      = aRandomCity;
     humans          = localHumans + [playerIDs count];
     ais             = _ais;
     
     // Create gorillas array.
-    if(activeGorilla)
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:@"Tried to start a game while there's still an active gorilla in the field."
-                                     userInfo:nil];
     [gorillas removeAllObjects];
     if(!gorillas)
         gorillas = [[NSMutableArray alloc] initWithCapacity:humans + ais];
@@ -156,6 +156,8 @@
     // Add AIs to the game.
     for (NSUInteger i = 0; i < ais; ++i)
         [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeAI playerID:nil]];
+
+    configuring     = NO;
 }
 
 
@@ -316,7 +318,7 @@
                 
                 // Apply oneshot bonus.
                 if(activeGorilla.turns == 0) {
-                    [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.oneshot", @"Oneshot!")];
+                    [[GorillasAppDelegate get].uiLayer message:l(@"messages.oneshot", @"Oneshot!")];
                     skill *= [[GorillasConfig get].bonusOneShot floatValue];
                 }
                 
@@ -337,11 +339,11 @@
                 // Message in case we level up.
                 if(![oldLevel isEqualToString:[GorillasConfig nameForLevel:[GorillasConfig get].level]]) {
                     if(score > 0) {
-                        [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.level.up", @"Level Up!")];
+                        [[GorillasAppDelegate get].uiLayer message:l(@"messages.level.up", @"Level Up!")];
                         if ([[GorillasConfig get].voice boolValue])
                             [[GorillasAudioController get] playEffectNamed:@"Level_Up"];
                     } else {
-                        [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"messages.level.down", @"Level Down")];
+                        [[GorillasAppDelegate get].uiLayer message:l(@"messages.level.down", @"Level Down")];
                         if ([[GorillasConfig get].voice boolValue])
                             [[GorillasAudioController get] playEffectNamed:@"Level_Down"];
                     }
@@ -376,10 +378,10 @@
             // If 0 or 1 gorillas left; show who won and stop the game.
             if(liveGorillaCount < 2) {
                 if(liveGorillaCount == 1)
-                    [[[GorillasAppDelegate get] hudLayer] message:[NSString stringWithFormat:NSLocalizedString(@"messages.wins", @"%@ wins!"),
+                    [[[GorillasAppDelegate get] hudLayer] message:[NSString stringWithFormat:l(@"messages.wins", @"%@ wins!"),
                                                                    [liveGorilla name]] duration:4 isImportant:NO];
                 else
-                    [[[GorillasAppDelegate get] hudLayer] message:NSLocalizedString(@"messages.tie", @"Tie!") duration:4 isImportant:NO];
+                    [[[GorillasAppDelegate get] hudLayer] message:l(@"messages.tie", @"Tie!") duration:4 isImportant:NO];
             }
             
             // Reset the wind.
@@ -645,7 +647,8 @@
         [panningLayer runAction:[CCMoveTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                                     position:CGPointZero]];
     
-    [[GorillasAppDelegate get] showMainMenu];
+    if (!configuring)
+        [[GorillasAppDelegate get] showMainMenu];
 }
 
 

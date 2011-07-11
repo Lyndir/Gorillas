@@ -52,7 +52,7 @@
             ++liveHumans;
     
     if([GorillasAppDelegate get].gameLayer.activeGorilla.human && liveHumans > 1) {
-        [[GorillasAppDelegate get].uiLayer message:NSLocalizedString(@"message.nextplayer", @"Next player ..")];
+        [[GorillasAppDelegate get].uiLayer message:l(@"message.nextplayer", @"Next player ..")];
         
         if ([[GorillasConfig get].voice boolValue])
             [[GorillasAudioController get] playEffectNamed:@"Next_Player"];

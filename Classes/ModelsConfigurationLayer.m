@@ -48,13 +48,13 @@
     modelTitles = [[NSMutableArray alloc] initWithCapacity:2];
 
     [modelSprites addObject:[NSNumber numberWithUnsignedInt:GorillasPlayerModelGorilla]];
-    [modelTitles addObject:NSLocalizedString(@"model.gorilla", @"Mean Gorilla")];
+    [modelTitles addObject:l(@"model.gorilla", @"Mean Gorilla")];
 
     [modelSprites addObject:[NSNumber numberWithUnsignedInt:GorillasPlayerModelEasterBunny]];
-    [modelTitles addObject:NSLocalizedString(@"model.bunny", @"Easter Bunny")];
+    [modelTitles addObject:l(@"model.bunny", @"Easter Bunny")];
     
     [modelSprites addObject:[NSNumber numberWithUnsignedInt:GorillasPlayerModelBanana]];
-    [modelTitles addObject:NSLocalizedString(@"model.banana", @"Vengeful Banana")];
+    [modelTitles addObject:l(@"model.banana", @"Vengeful Banana")];
     
     
     // Controls.
@@ -66,7 +66,7 @@
     [modelCurr setIsEnabled:NO];
     CCMenu *modelMenu = [CCMenu menuWithItems:modelCurr, modelNext, nil];
     [modelMenu alignItemsHorizontally];
-    [modelMenu setPosition:ccp(modelMenu.position.x, self.contentSize.height - self.padding.top + 10)];
+    [modelMenu setPosition:ccp(modelMenu.position.x, self.contentSize.height - self.padding.top - 50)];
     [self addChild:modelMenu];
     [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
     

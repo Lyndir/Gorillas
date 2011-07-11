@@ -11,8 +11,8 @@ isIn() {
 cd "${0%/*}/../../"
 
 emit "Enumerating localization keys"
-code=$(find Classes -type f -exec grep -o 'NSLocalizedString(@"[^"]*"' {} + | sed -n 's/.*\("[^"]*"\).*/\1/p' | sort -u)
-for l in Resources/*.lproj/Localizable.strings; do
+code=$(find Classes -type f -name '*.m' -exec gsed -rn 's/.*(NSLocalizedString|l)\(@("[^"]*").*/\2/p' {} + | sort -u)
+for l in Resources/English.lproj/Localizable.strings; do
     k=${l#*/}; k=${k%%/*}
     emit "   - $k"
 

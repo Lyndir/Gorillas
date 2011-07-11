@@ -34,6 +34,7 @@
 
 @private
     BOOL                                                    paused;
+    BOOL                                                    configuring;
     BOOL                                                    started;
     BOOL                                                    running;
     GorillasMode                                            mode;
@@ -54,6 +55,7 @@
 }
 
 @property (nonatomic, readwrite, getter=isPaused) BOOL      paused;
+@property (nonatomic, readwrite) BOOL                       configuring;
 @property (nonatomic, readwrite) BOOL                       started;
 @property (nonatomic, readwrite) BOOL                       running;
 @property (nonatomic, readonly, getter=isSinglePlayer) BOOL singlePlayer;

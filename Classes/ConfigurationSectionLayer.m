@@ -39,17 +39,17 @@
 
 
 -(id) init {
-    
+
     if (!(self = [super initWithDelegate:self logo:nil items:
-                  [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.gameplay", @"Gameplay")
+                  [CCMenuItemFont itemFromString:l(@"menu.gameplay")
                                           target:self selector:@selector(game:)],
-                  [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.av", @"Audio / Video")
+                  [CCMenuItemFont itemFromString:l(@"menu.av")
                                           target:self selector:@selector(av:)],
-                  [CCMenuItemFont itemFromString:NSLocalizedString(@"menu.models", @"Models")
+                  [CCMenuItemFont itemFromString:l(@"menu.models")
                                           target:self selector:@selector(models:)],
                   nil]))
         return nil;
-    
+
     return self;
 }
 
@@ -59,39 +59,39 @@
 
 
 -(void) onEnter {
-    
+
     [self reset];
-    
+
     [super onEnter];
 }
 
 
 -(void) game: (id) sender {
-    
+
     [[GorillasAppDelegate get] showGameConfiguration];
 }
 
 
 -(void) av: (id) sender {
-    
+
     [[GorillasAppDelegate get] showAVConfiguration];
 }
 
 
 -(void) models: (id) sender {
-    
+
     [[GorillasAppDelegate get] showModelsConfiguration];
 }
 
 
 -(void) back: (id) sender {
-    
+
     [[GorillasAppDelegate get] popLayer];
 }
 
 
 -(void) dealloc {
-    
+
     [super dealloc];
 }
 

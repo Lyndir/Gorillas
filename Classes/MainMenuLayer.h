@@ -32,7 +32,8 @@
     
 @private
     CCMenuItemToggle                                *configurationI;
-    CCMenuItemLabel                                 *descriptionT, *multiPlayerI, *singlePlayerI;
+    CCMenuItemLabel                                 *descriptionT;
+    CCMenuItem                                      *multiPlayerI, *singlePlayerI, *hotSeatI;
     NSArray                                         *_playersToInvite;
 }
 

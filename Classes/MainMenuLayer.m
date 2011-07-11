@@ -48,11 +48,11 @@
     
     if (!(self = [super initWithDelegate:self logo:nil items:
                   [MenuItemSpacer spacerSmall],
-                  [MenuItemBlock itemWithSize:100 target:self selector:@selector(startMulti:)],
-                  [MenuItemBlock itemWithSize:100 target:self selector:@selector(startSingle:)],
-                  [MenuItemBlock itemWithSize:100 target:self selector:@selector(startHotSeat:)],
-                  configurationI    = [[CCMenuItemToggle alloc] initWithTarget:self selector:@selector(gameConfiguration:)],
-                  descriptionT      = [MenuItemTitle itemFromString:@"description"],
+                  [multiPlayerI     = [MenuItemBlock itemWithSize:100 target:self selector:@selector(startMulti:)] retain],
+                  [singlePlayerI    = [MenuItemBlock itemWithSize:100 target:self selector:@selector(startSingle:)] retain],
+                  [hotSeatI         = [MenuItemBlock itemWithSize:100 target:self selector:@selector(startHotSeat:)] retain],
+                  [configurationI   = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)] retain],
+                  [descriptionT     = [MenuItemTitle itemFromString:@"description"] retain],
                   [MenuItemSpacer spacerSmall],
                   [MenuItemBlock itemWithSize:50 target:self selector:@selector(settings:)],
                   [MenuItemBlock itemWithSize:50 target:self selector:@selector(scores:)],
@@ -61,9 +61,12 @@
         return self;
     
     self.itemCounts = [NSArray arrayWithObjects:
-                       [NSNumber numberWithInt:1], [NSNumber numberWithInt:3],
-                       [NSNumber numberWithInt:1], [NSNumber numberWithInt:1],
-                       [NSNumber numberWithInt:1], [NSNumber numberWithInt:3], nil];
+                       [NSNumber numberWithInt:1],
+                       [NSNumber numberWithInt:3],
+                       [NSNumber numberWithInt:1],
+                       [NSNumber numberWithInt:1],
+                       [NSNumber numberWithInt:1],
+                       [NSNumber numberWithInt:3], nil];
     self.layout = MenuLayoutCustomColumns;
     
     self.background = [CCSprite spriteWithFile:@"menu-main.png"];

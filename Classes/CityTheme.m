@@ -153,7 +153,7 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:20
                                         gravity:100
-                   ], NSLocalizedString(@"theme.classic", @"Classic"),
+                   ], l(@"theme.classic", @"Classic"),
                   
                   [CityTheme themeWithVarFloors:12
                                     fixedFloors:4
@@ -174,7 +174,7 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:30
                                         gravity:60
-                   ], NSLocalizedString(@"theme.aliengreen", @"Alien Retro"),
+                   ], l(@"theme.aliengreen", @"Alien Retro"),
                   
                   [CityTheme themeWithVarFloors:28
                                     fixedFloors:6
@@ -195,7 +195,7 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:10
                                         gravity:40
-                   ], NSLocalizedString(@"theme.classic.aliendark", @"Alien Skies"),
+                   ], l(@"theme.classic.aliendark", @"Alien Skies"),
                   
                   [CityTheme themeWithVarFloors:17
                                     fixedFloors:7
@@ -216,7 +216,7 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:40
                                         gravity:140
-                   ], NSLocalizedString(@"theme.classiclarge", @"Metropolis"),
+                   ], l(@"theme.classiclarge", @"Metropolis"),
                   
                   [CityTheme themeWithVarFloors:18
                                     fixedFloors:3
@@ -237,7 +237,7 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:15
                                         gravity:80
-                   ], NSLocalizedString(@"theme.warm", @"Summer"),
+                   ], l(@"theme.warm", @"Summer"),
                   
                   nil];
     }
@@ -268,7 +268,7 @@ static NSDictionary *themes = nil;
 
 +(NSString *) defaultThemeName {
     
-    return NSLocalizedString(@"theme.classic", @"Classic");
+    return l(@"theme.classic", @"Classic");
 }
 
 
