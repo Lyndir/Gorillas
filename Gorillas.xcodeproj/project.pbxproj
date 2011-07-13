@@ -5301,6 +5301,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = Classes/Prefix.pch;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -5313,6 +5314,7 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREFIX_HEADER = Classes/Prefix.pch;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -5334,7 +5336,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Classes/Prefix.pch;
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_STRICT_ALIASING = NO;
 				GCC_THUMB_SUPPORT = NO;
@@ -5391,7 +5393,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Classes/Prefix.pch;
+				GCC_PREFIX_HEADER = "";
 				GCC_STRICT_ALIASING = YES;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -5437,21 +5439,18 @@
 		DA0EA01713CCF06A00BB7666 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PREFIX_HEADER = "PlayHaven/PlayHaven-Prefix.pch";
 			};
 			name = Debug;
 		};
 		DA0EA01813CCF06A00BB7666 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PREFIX_HEADER = "PlayHaven/PlayHaven-Prefix.pch";
 			};
 			name = Release;
 		};
 		DA0EA01913CCF06A00BB7666 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PREFIX_HEADER = "PlayHaven/PlayHaven-Prefix.pch";
 			};
 			name = Distribution;
 		};
@@ -5467,7 +5466,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Classes/Prefix.pch;
+				GCC_PREFIX_HEADER = "";
 				GCC_STRICT_ALIASING = YES;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
@@ -5514,6 +5513,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_PREFIX_HEADER = Classes/Prefix.pch;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -5575,6 +5575,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = Classes/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = LITE;
 				INFOPLIST_FILE = Resources/InfoLite.plist;
 				OTHER_LDFLAGS = (
@@ -5590,6 +5591,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = Classes/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = LITE;
 				INFOPLIST_FILE = Resources/InfoLite.plist;
 				OTHER_LDFLAGS = (
@@ -5605,6 +5607,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_PREFIX_HEADER = Classes/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = LITE;
 				INFOPLIST_FILE = Resources/InfoLite.plist;
 				OTHER_LDFLAGS = (
