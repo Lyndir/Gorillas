@@ -770,7 +770,6 @@
 		DA0DD78D0F9536D800E5607E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DA0DD7A00F9536E600E5607E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DA0EA01113CCF06900BB7666 /* libPlayHaven.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPlayHaven.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA0EA01513CCF06A00BB7666 /* PlayHaven-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlayHaven-Prefix.pch"; sourceTree = "<group>"; };
 		DA16C5170EEC855900E46246 /* ShadeTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadeTo.h; sourceTree = "<group>"; };
 		DA16C5180EEC856200E46246 /* ShadeTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadeTo.m; sourceTree = "<group>"; };
 		DA1816240F0E227C0064F470 /* ConfigurationSectionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationSectionLayer.h; sourceTree = "<group>"; };
@@ -2468,17 +2467,8 @@
 				DA0DA0B713CCF5EB00B1D188 /* PlayHavenSDK.h */,
 				DA0DA0B813CCF5EB00B1D188 /* UIDevice+HardwareString.h */,
 				DA0DA0B913CCF5EB00B1D188 /* UIDevice+HardwareString.m */,
-				DA0EA01413CCF06A00BB7666 /* Supporting Files */,
 			);
 			path = PlayHaven;
-			sourceTree = "<group>";
-		};
-		DA0EA01413CCF06A00BB7666 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				DA0EA01513CCF06A00BB7666 /* PlayHaven-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		DA1816480F0E24F50064F470 /* Menus */ = {
