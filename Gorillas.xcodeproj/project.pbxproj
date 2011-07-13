@@ -103,14 +103,6 @@
 		DA0EA01213CCF06900BB7666 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6620F95368600E5607E /* Foundation.framework */; };
 		DA16C5190EEC856200E46246 /* ShadeTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DA16C5180EEC856200E46246 /* ShadeTo.m */; };
 		DA16EC8713CE378400F5D800 /* Pearl-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = DA16EC8613CE378400F5D800 /* Pearl-Prefix.pch */; };
-		DA16EC8C13CE398D00F5D800 /* Go.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E3E129ED345001D545B /* Go.caf */; };
-		DA16EC8D13CE398D00F5D800 /* Go.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E3E129ED345001D545B /* Go.caf */; };
-		DA16EC8E13CE398D00F5D800 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E44129ED345001D545B /* Level_Down.caf */; };
-		DA16EC8F13CE398D00F5D800 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E44129ED345001D545B /* Level_Down.caf */; };
-		DA16EC9013CE398D00F5D800 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E46129ED345001D545B /* Level_Up.caf */; };
-		DA16EC9113CE398D00F5D800 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E46129ED345001D545B /* Level_Up.caf */; };
-		DA16EC9213CE398D00F5D800 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E4A129ED345001D545B /* Next_Player.caf */; };
-		DA16EC9313CE398D00F5D800 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E4A129ED345001D545B /* Next_Player.caf */; };
 		DA1816260F0E227C0064F470 /* ConfigurationSectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816250F0E227C0064F470 /* ConfigurationSectionLayer.m */; };
 		DA1816470F0E24D80064F470 /* AVConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816460F0E24D80064F470 /* AVConfigurationLayer.m */; };
 		DA18218F0FED092400E80B3D /* arrow.body.png in Resources */ = {isa = PBXBuildFile; fileRef = DA18218C0FED092400E80B3D /* arrow.body.png */; };
@@ -574,14 +566,20 @@
 		DAC0386F13CE317E003FAE6D /* PlayHavenSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = DAC0382713CE317E003FAE6D /* PlayHavenSDK.h */; };
 		DAC0387013CE317E003FAE6D /* UIDevice+HardwareString.h in Headers */ = {isa = PBXBuildFile; fileRef = DAC0382813CE317E003FAE6D /* UIDevice+HardwareString.h */; };
 		DAC0387113CE317E003FAE6D /* UIDevice+HardwareString.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0382913CE317E003FAE6D /* UIDevice+HardwareString.m */; };
-		DAC22E68129ED345001D545B /* Go.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E3E129ED345001D545B /* Go.caf */; };
-		DAC22E6B129ED345001D545B /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E44129ED345001D545B /* Level_Down.caf */; };
-		DAC22E6C129ED345001D545B /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E46129ED345001D545B /* Level_Up.caf */; };
-		DAC22E6E129ED345001D545B /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E4A129ED345001D545B /* Next_Player.caf */; };
-		DAC22E88129ED345001D545B /* Go.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E3E129ED345001D545B /* Go.caf */; };
-		DAC22E8B129ED345001D545B /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E44129ED345001D545B /* Level_Down.caf */; };
-		DAC22E8C129ED345001D545B /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E46129ED345001D545B /* Level_Up.caf */; };
-		DAC22E8E129ED345001D545B /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC22E4A129ED345001D545B /* Next_Player.caf */; };
+		DAC10D6113CE3CC800A546E4 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D5913CE3CC800A546E4 /* Level_Down.caf */; };
+		DAC10D6213CE3CC800A546E4 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D5913CE3CC800A546E4 /* Level_Down.caf */; };
+		DAC10D6313CE3CC800A546E4 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D5B13CE3CC800A546E4 /* Level_Up.caf */; };
+		DAC10D6413CE3CC800A546E4 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D5B13CE3CC800A546E4 /* Level_Up.caf */; };
+		DAC10D6513CE3CC800A546E4 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D5D13CE3CC800A546E4 /* Next_Player.caf */; };
+		DAC10D6613CE3CC800A546E4 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D5D13CE3CC800A546E4 /* Next_Player.caf */; };
+		DAC10D7B13CE3DBB00A546E4 /* Go.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D7313CE3DBB00A546E4 /* Go.caf */; };
+		DAC10D7C13CE3DBB00A546E4 /* Go.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D7313CE3DBB00A546E4 /* Go.caf */; };
+		DAC10D7D13CE3DBB00A546E4 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D7513CE3DBB00A546E4 /* Level_Down.caf */; };
+		DAC10D7E13CE3DBB00A546E4 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D7513CE3DBB00A546E4 /* Level_Down.caf */; };
+		DAC10D7F13CE3DBB00A546E4 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D7713CE3DBB00A546E4 /* Level_Up.caf */; };
+		DAC10D8013CE3DBB00A546E4 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D7713CE3DBB00A546E4 /* Level_Up.caf */; };
+		DAC10D8113CE3DBB00A546E4 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D7913CE3DBB00A546E4 /* Next_Player.caf */; };
+		DAC10D8213CE3DBB00A546E4 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D7913CE3DBB00A546E4 /* Next_Player.caf */; };
 		DAC52A9113CE35DE00A23373 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC52A8D13CE35DE00A23373 /* Default@2x.png */; };
 		DAC52A9213CE35DE00A23373 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC52A8D13CE35DE00A23373 /* Default@2x.png */; };
 		DAC52A9313CE35DE00A23373 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC52A8F13CE35DE00A23373 /* Default~ipad.png */; };
@@ -729,10 +727,6 @@
 		DA16C5170EEC855900E46246 /* ShadeTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadeTo.h; sourceTree = "<group>"; };
 		DA16C5180EEC856200E46246 /* ShadeTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadeTo.m; sourceTree = "<group>"; };
 		DA16EC8613CE378400F5D800 /* Pearl-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pearl-Prefix.pch"; sourceTree = "<group>"; };
-		DA16EC8813CE398D00F5D800 /* Arabic */ = {isa = PBXFileReference; lastKnownFileType = file; name = Arabic; path = Gorillas/Resources/Arabic.lproj/Go.caf; sourceTree = SOURCE_ROOT; };
-		DA16EC8913CE398D00F5D800 /* Arabic */ = {isa = PBXFileReference; lastKnownFileType = file; name = Arabic; path = Gorillas/Resources/Arabic.lproj/Level_Down.caf; sourceTree = SOURCE_ROOT; };
-		DA16EC8A13CE398D00F5D800 /* Arabic */ = {isa = PBXFileReference; lastKnownFileType = file; name = Arabic; path = Gorillas/Resources/Arabic.lproj/Level_Up.caf; sourceTree = SOURCE_ROOT; };
-		DA16EC8B13CE398D00F5D800 /* Arabic */ = {isa = PBXFileReference; lastKnownFileType = file; name = Arabic; path = Gorillas/Resources/Arabic.lproj/Next_Player.caf; sourceTree = SOURCE_ROOT; };
 		DA1816240F0E227C0064F470 /* ConfigurationSectionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationSectionLayer.h; sourceTree = "<group>"; };
 		DA1816250F0E227C0064F470 /* ConfigurationSectionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationSectionLayer.m; sourceTree = "<group>"; };
 		DA1816450F0E24D80064F470 /* AVConfigurationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVConfigurationLayer.h; sourceTree = "<group>"; };
@@ -2203,10 +2197,10 @@
 		DAC0382713CE317E003FAE6D /* PlayHavenSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayHavenSDK.h; path = src/PlayHavenSDK.h; sourceTree = "<group>"; };
 		DAC0382813CE317E003FAE6D /* UIDevice+HardwareString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+HardwareString.h"; path = "src/UIDevice+HardwareString.h"; sourceTree = "<group>"; };
 		DAC0382913CE317E003FAE6D /* UIDevice+HardwareString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+HardwareString.m"; path = "src/UIDevice+HardwareString.m"; sourceTree = "<group>"; };
-		DAC22E3F129ED345001D545B /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Go.caf; sourceTree = "<group>"; };
-		DAC22E45129ED345001D545B /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Level_Down.caf; sourceTree = "<group>"; };
-		DAC22E47129ED345001D545B /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Level_Up.caf; sourceTree = "<group>"; };
-		DAC22E4B129ED345001D545B /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Next_Player.caf; sourceTree = "<group>"; };
+		DAC10D7413CE3DBB00A546E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Gorillas/Resources/English.lproj/Go.caf; sourceTree = SOURCE_ROOT; };
+		DAC10D7613CE3DBB00A546E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Gorillas/Resources/English.lproj/Level_Down.caf; sourceTree = SOURCE_ROOT; };
+		DAC10D7813CE3DBB00A546E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Gorillas/Resources/English.lproj/Level_Up.caf; sourceTree = SOURCE_ROOT; };
+		DAC10D7A13CE3DBB00A546E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Gorillas/Resources/English.lproj/Next_Player.caf; sourceTree = SOURCE_ROOT; };
 		DAC52A8E13CE35DE00A23373 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = "Gorillas/Resources/English.lproj/Default@2x.png"; sourceTree = SOURCE_ROOT; };
 		DAC52A9013CE35DE00A23373 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = "Gorillas/Resources/English.lproj/Default~ipad.png"; sourceTree = SOURCE_ROOT; };
 		DACA4E6C0EB3AEA40096F970 /* BuildingsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingsLayer.h; sourceTree = "<group>"; };
@@ -4187,10 +4181,10 @@
 		DAC22E0C129ED31F001D545B /* Voice */ = {
 			isa = PBXGroup;
 			children = (
-				DAC22E3E129ED345001D545B /* Go.caf */,
-				DAC22E44129ED345001D545B /* Level_Down.caf */,
-				DAC22E46129ED345001D545B /* Level_Up.caf */,
-				DAC22E4A129ED345001D545B /* Next_Player.caf */,
+				DAC10D7313CE3DBB00A546E4 /* Go.caf */,
+				DAC10D7513CE3DBB00A546E4 /* Level_Down.caf */,
+				DAC10D7713CE3DBB00A546E4 /* Level_Up.caf */,
+				DAC10D7913CE3DBB00A546E4 /* Next_Player.caf */,
 			);
 			name = Voice;
 			sourceTree = "<group>";
@@ -4637,10 +4631,6 @@
 				DA7ABE181282308A006A2E71 /* skip.png in Resources */,
 				DA7ABE191282308A006A2E71 /* splash.png in Resources */,
 				DA7ABFE412823377006A2E71 /* Apple Symbols.ttf in Resources */,
-				DAC22E68129ED345001D545B /* Go.caf in Resources */,
-				DAC22E6B129ED345001D545B /* Level_Down.caf in Resources */,
-				DAC22E6C129ED345001D545B /* Level_Up.caf in Resources */,
-				DAC22E6E129ED345001D545B /* Next_Player.caf in Resources */,
 				DA75CF7B12A123B60051EF09 /* frame-hd.png in Resources */,
 				DA75CF7C12A123B60051EF09 /* frame.png in Resources */,
 				DA61451613299376009DBC56 /* Bilbao-Poster-Black.ttf in Resources */,
@@ -4688,10 +4678,13 @@
 				DA03B6B113CA67EB009DF176 /* Pearl-Cocos2D.strings in Resources */,
 				DAC52A9113CE35DE00A23373 /* Default@2x.png in Resources */,
 				DAC52A9313CE35DE00A23373 /* Default~ipad.png in Resources */,
-				DA16EC8C13CE398D00F5D800 /* Go.caf in Resources */,
-				DA16EC8E13CE398D00F5D800 /* Level_Down.caf in Resources */,
-				DA16EC9013CE398D00F5D800 /* Level_Up.caf in Resources */,
-				DA16EC9213CE398D00F5D800 /* Next_Player.caf in Resources */,
+				DAC10D6113CE3CC800A546E4 /* Level_Down.caf in Resources */,
+				DAC10D6313CE3CC800A546E4 /* Level_Up.caf in Resources */,
+				DAC10D6513CE3CC800A546E4 /* Next_Player.caf in Resources */,
+				DAC10D7B13CE3DBB00A546E4 /* Go.caf in Resources */,
+				DAC10D7D13CE3DBB00A546E4 /* Level_Down.caf in Resources */,
+				DAC10D7F13CE3DBB00A546E4 /* Level_Up.caf in Resources */,
+				DAC10D8113CE3DBB00A546E4 /* Next_Player.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4756,10 +4749,6 @@
 				DA7ABEEB1282308A006A2E71 /* splash.png in Resources */,
 				DA7ABFBB12823135006A2E71 /* InfoPlist.strings in Resources */,
 				DA7ABFEA12823377006A2E71 /* Apple Symbols.ttf in Resources */,
-				DAC22E88129ED345001D545B /* Go.caf in Resources */,
-				DAC22E8B129ED345001D545B /* Level_Down.caf in Resources */,
-				DAC22E8C129ED345001D545B /* Level_Up.caf in Resources */,
-				DAC22E8E129ED345001D545B /* Next_Player.caf in Resources */,
 				DA75CF7D12A123B60051EF09 /* frame-hd.png in Resources */,
 				DA75CF7E12A123B60051EF09 /* frame.png in Resources */,
 				DA61451713299376009DBC56 /* Bilbao-Poster-Black.ttf in Resources */,
@@ -4807,10 +4796,13 @@
 				DA03B6B213CA67EC009DF176 /* Pearl-Cocos2D.strings in Resources */,
 				DAC52A9213CE35DE00A23373 /* Default@2x.png in Resources */,
 				DAC52A9413CE35DE00A23373 /* Default~ipad.png in Resources */,
-				DA16EC8D13CE398D00F5D800 /* Go.caf in Resources */,
-				DA16EC8F13CE398D00F5D800 /* Level_Down.caf in Resources */,
-				DA16EC9113CE398D00F5D800 /* Level_Up.caf in Resources */,
-				DA16EC9313CE398D00F5D800 /* Next_Player.caf in Resources */,
+				DAC10D6213CE3CC800A546E4 /* Level_Down.caf in Resources */,
+				DAC10D6413CE3CC800A546E4 /* Level_Up.caf in Resources */,
+				DAC10D6613CE3CC800A546E4 /* Next_Player.caf in Resources */,
+				DAC10D7C13CE3DBB00A546E4 /* Go.caf in Resources */,
+				DAC10D7E13CE3DBB00A546E4 /* Level_Down.caf in Resources */,
+				DAC10D8013CE3DBB00A546E4 /* Level_Up.caf in Resources */,
+				DAC10D8213CE3DBB00A546E4 /* Next_Player.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5251,44 +5243,60 @@
 			name = "Pearl-Cocos2D.strings";
 			sourceTree = "<group>";
 		};
-		DAC22E3E129ED345001D545B /* Go.caf */ = {
+		DAC10D5913CE3CC800A546E4 /* Level_Down.caf */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DAC22E3F129ED345001D545B /* English */,
-				DA16EC8813CE398D00F5D800 /* Arabic */,
-			);
-			name = Go.caf;
-			path = ../English.lproj;
-			sourceTree = "<group>";
-		};
-		DAC22E44129ED345001D545B /* Level_Down.caf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DAC22E45129ED345001D545B /* English */,
-				DA16EC8913CE398D00F5D800 /* Arabic */,
 			);
 			name = Level_Down.caf;
-			path = ../English.lproj;
-			sourceTree = "<group>";
+			path = /Users/lhunath/Documents/workspace/lyndir/Gorillas/Gorillas/Resources/Audio;
+			sourceTree = "<absolute>";
 		};
-		DAC22E46129ED345001D545B /* Level_Up.caf */ = {
+		DAC10D5B13CE3CC800A546E4 /* Level_Up.caf */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DAC22E47129ED345001D545B /* English */,
-				DA16EC8A13CE398D00F5D800 /* Arabic */,
 			);
 			name = Level_Up.caf;
-			path = ../English.lproj;
-			sourceTree = "<group>";
+			path = /Users/lhunath/Documents/workspace/lyndir/Gorillas/Gorillas/Resources/Audio;
+			sourceTree = "<absolute>";
 		};
-		DAC22E4A129ED345001D545B /* Next_Player.caf */ = {
+		DAC10D5D13CE3CC800A546E4 /* Next_Player.caf */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DAC22E4B129ED345001D545B /* English */,
-				DA16EC8B13CE398D00F5D800 /* Arabic */,
 			);
 			name = Next_Player.caf;
-			path = ../English.lproj;
+			path = /Users/lhunath/Documents/workspace/lyndir/Gorillas/Gorillas/Resources/Audio;
+			sourceTree = "<absolute>";
+		};
+		DAC10D7313CE3DBB00A546E4 /* Go.caf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAC10D7413CE3DBB00A546E4 /* English */,
+			);
+			name = Go.caf;
+			sourceTree = "<group>";
+		};
+		DAC10D7513CE3DBB00A546E4 /* Level_Down.caf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAC10D7613CE3DBB00A546E4 /* English */,
+			);
+			name = Level_Down.caf;
+			sourceTree = "<group>";
+		};
+		DAC10D7713CE3DBB00A546E4 /* Level_Up.caf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAC10D7813CE3DBB00A546E4 /* English */,
+			);
+			name = Level_Up.caf;
+			sourceTree = "<group>";
+		};
+		DAC10D7913CE3DBB00A546E4 /* Next_Player.caf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAC10D7A13CE3DBB00A546E4 /* English */,
+			);
+			name = Next_Player.caf;
 			sourceTree = "<group>";
 		};
 		DAC52A8D13CE35DE00A23373 /* Default@2x.png */ = {
