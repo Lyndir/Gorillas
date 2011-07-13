@@ -31,9 +31,7 @@
 #import "ccMacros.h"
 
 
-static NSString *PHContextNotifier  = @"PH.notifier";
-static NSString *PHContextCharts    = @"PH.charts";
-//static NSString *PHContextCommunity = @"PH.community";
+static NSString *PHPlacementMoreGames  = @"more_games";
 
 @interface CCDirector (Reveal)
 
@@ -51,7 +49,10 @@ static NSString *PHContextCharts    = @"PH.charts";
 @property (nonatomic, readwrite, retain) ModelsConfigurationLayer       *modelsConfigLayer;
 
 @property (nonatomic, readwrite, retain) NetController                  *netController;
-@property (nonatomic, readwrite, retain) UIView                         *notifierView;
+@property (nonatomic, readwrite, retain) PHNotificationView             *notifierView;
+
+- (NSString *)phToken;
+- (NSString *)phSecret;
 
 @end
 
@@ -110,8 +111,9 @@ static NSString *PHContextCharts    = @"PH.charts";
     
     // PlayHaven setup.
     @try {
-        //[PlayHaven preloadWithDelegate:self];
-        //[PlayHaven loadChartsNotifierWithDelegate:self context:PHContextNotifier];
+        [[PHPublisherOpenRequest requestForApp:[self phToken] secret:[self phSecret]] send];
+        self.notifierView = [[[PHNotificationView alloc] initWithApp:[self phToken] secret:[self phSecret]
+                                                           placement:PHPlacementMoreGames] autorelease];
     }
     @catch (NSException *exception) {
         err(@"PlayHaven exception: %@", exception);
@@ -125,8 +127,8 @@ static NSString *PHContextCharts    = @"PH.charts";
 #if ! TARGET_IPHONE_SIMULATOR
         }
         @catch (NSException * e) {
-            NSLog(@"=== Exception Occurred! ===");
-            NSLog(@"Name: %@; Reason: %@; Context: %@.\n", [e name], [e reason], [e userInfo]);
+            err(@"=== Exception Occurred! ===");
+            err(@"Name: %@; Reason: %@; Context: %@.\n", [e name], [e reason], [e userInfo]);
             [self.hudLayer message:[e reason] duration:5 isImportant:YES];
         }
 #endif
@@ -207,7 +209,8 @@ static NSString *PHContextCharts    = @"PH.charts";
 
 - (void)moreGames {
     
-    [PlayHaven loadChartsWithDelegate:self context:PHContextCharts];
+    [[PHPublisherContentRequest requestForApp:[self phToken] secret:[self phSecret]
+                                    placement:PHPlacementMoreGames delegate:self] send];
 }
 
 
@@ -244,6 +247,11 @@ static NSString *PHContextCharts    = @"PH.charts";
         if (layer == self.mainMenuLayer) {
             self.notifierView.center = ccp(100, 325);
             [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
+#if DEBUG
+            [self.notifierView test];
+#else
+            [self.notifierView refresh];
+#endif
         }
     }
 
@@ -269,66 +277,42 @@ static NSString *PHContextCharts    = @"PH.charts";
 }
 
 
-#pragma mark - PHPreloadDelegate
+#pragma mark - PlayHavenSDK
 
--(NSString *)playhavenPublisherToken {
+static NSDictionary *playHavenInfo = nil;
+
+- (NSString *)phToken {
     
-    return nil;//[[NSDictionary dictionaryWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"PlayHaven" withExtension:@"plist"]] valueForKeyPath:@"Token"];
+    if (playHavenInfo == nil)
+        playHavenInfo = [[NSDictionary alloc]initWithContentsOfURL:
+                         [[NSBundle mainBundle] URLForResource:@"PlayHaven" withExtension:@"plist"]];
+    
+    return [playHavenInfo valueForKeyPath:@"Token"];
 }
 
--(BOOL)shouldTestPlayHaven {
+- (NSString *)phSecret {
     
-#ifdef DEBUG
-    return YES;
-#else
-    return NO;
-#endif
+    return [playHavenInfo valueForKeyPath:@"Secret"];
 }
 
--(void)playhavenDidFinishPreloading {
+-(void)request:(PHPublisherContentRequest *)request contentWillDisplay:(PHContent *)content {
     
+    [[CCDirector sharedDirector] pause];
 }
 
--(void)playhavenPreloadDidFailWithError:(NSString *)message {
+-(void)requestContentDidDismiss:(PHPublisherContentRequest *)request {
     
-    err(@"Playhaven preload failed with error: %@", message);
-}
-
--(PHLogLevel *)playhavenDebugLogLevel {
-    
-    return [self shouldTestPlayHaven]? [PHLogLevel logLevelDebug]: [PHLogLevel logLevelWarn];
-}
-
-
-#pragma mark - PHRequestDelegate
-
-- (void)playhaven:(UIView *)view didLoadWithContext:(id)contextValue {
-    
-    if (contextValue == PHContextNotifier) {
-        [self.notifierView removeFromSuperview];
-        self.notifierView = view;
-        
-        if ([self isLayerShowing:self.mainMenuLayer])
-            [[CCDirector sharedDirector].openGLView addSubview:view];
-    }
-    
-    if (contextValue == PHContextCharts) {
-        [[CCDirector sharedDirector].openGLView addSubview:view];
-        [[CCDirector sharedDirector] pause];
-    }
-}
-
-- (void)playhaven:(UIView *)view didFailWithError:(NSString *)message context:(id)contextValue {
-    
-    err(@"Playhaven context: %@, failed with error: %@", contextValue, message);
-    
-    [view removeFromSuperview];
     [[CCDirector sharedDirector] resume];
 }
 
-- (void)playhaven:(UIView *)view wasDismissedWithContext:(id)contextValue {
+-(void)request:(PHPublisherContentRequest *)request didFailWithError:(NSError *)error {
     
-    [view removeFromSuperview];
+    err(@"PlayHavenSDK request: %@, couldn't load content: %@", request, error);
+}
+
+-(void)request:(PHPublisherContentRequest *)request contentDidFailWithError:(NSError *)error {
+    
+    err(@"PlayHavenSDK request: %@, couldn't load view: %@", request, error);
     [[CCDirector sharedDirector] resume];
 }
 

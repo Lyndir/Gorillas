@@ -31,10 +31,10 @@
 #import "ModelsConfigurationLayer.h"
 #import "GHUDLayer.h"
 #import "NetController.h"
-#import "PlayHaven.h"
+#import "PlayHavenSDK.h"
 
 
-@interface GorillasAppDelegate : AbstractCocos2DAppDelegate <PHPreloadDelegate, PHRequestDelegate> {
+@interface GorillasAppDelegate : AbstractCocos2DAppDelegate <PHPublisherContentRequestDelegate> {
     
 @private
     GameLayer                                                       *_gameLayer;
@@ -45,7 +45,7 @@
     ModelsConfigurationLayer                                        *_modelsConfigLayer;
     
     NetController                                                   *_netController;
-    UIView                                                          *_notifierView;
+    PHNotificationView                                              *_notifierView;
 }
 
 @property (nonatomic, readonly, retain) GameLayer                   *gameLayer;
