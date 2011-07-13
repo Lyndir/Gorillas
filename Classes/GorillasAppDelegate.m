@@ -112,8 +112,6 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     // PlayHaven setup.
     @try {
         [[PHPublisherOpenRequest requestForApp:[self phToken] secret:[self phSecret]] send];
-        self.notifierView = [[[PHNotificationView alloc] initWithApp:[self phToken] secret:[self phSecret]
-                                                           placement:PHPlacementMoreGames] autorelease];
     }
     @catch (NSException *exception) {
         err(@"PlayHaven exception: %@", exception);
@@ -239,13 +237,17 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 - (void)didPushLayer:(ShadeLayer *)layer hidden:(BOOL)hidden {
     
     self.gameLayer.paused = YES;
+    
+    if (!self.notifierView)
+        self.notifierView = [[[PHNotificationView alloc] initWithApp:[self phToken] secret:[self phSecret]
+                                                           placement:PHPlacementMoreGames] autorelease];
 
     if (self.notifierView.superview && layer != self.mainMenuLayer)
         [self.notifierView removeFromSuperview];
     
     else if (self.notifierView) {
         if (layer == self.mainMenuLayer) {
-            self.notifierView.center = ccp(100, 325);
+            self.notifierView.center = ccp(380, 260);
             [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
 #if DEBUG
             [self.notifierView test];
@@ -297,6 +299,8 @@ static NSDictionary *playHavenInfo = nil;
 
 -(void)request:(PHPublisherContentRequest *)request contentWillDisplay:(PHContent *)content {
     
+    [self.notifierView clear];
+
     [[CCDirector sharedDirector] pause];
 }
 
