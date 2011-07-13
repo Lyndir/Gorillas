@@ -1,8 +1,5 @@
-# Secret stuff
-/Resources/PlayHaven.plist
-
 # Encoded audio.
-/Resources/Audio/*/*flac
+/Gorillas/Resources/Audio/*/*flac
 
 # OS-Specific junk.
 .DS_Store

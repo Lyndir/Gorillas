@@ -142,10 +142,7 @@ typedef enum {
 /**
  * Pearl Configuration
  */
-#define PEARL
-#define PEARL_UIKIT
-#define PEARL_MEDIA
-#define PEARL_COCOS2D
+#import "Pearl-Prefix.pch"
 
 /**
  * Global Dependencies.
@@ -153,10 +150,6 @@ typedef enum {
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import "cocos2d.h"
-    #import "Pearl.h"
-    #import "Pearl-UIKit.h"
-    #import "Pearl-Media.h"
-    #import "Pearl-Cocos2D.h"
     #import "GorillasConfig.h"
 
     /**
