@@ -64,51 +64,49 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 @synthesize notifierView = _notifierView;
 
 + (void)initialize {
-    
+
     [[Logger get] setAutoprintLevel:LogLevelDebug];
     [GorillasConfig get];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+
     [super application:application didFinishLaunchingWithOptions:launchOptions];
-    [((RootViewController *) self.window.rootViewController) supportInterfaceOrientation:UIInterfaceOrientationLandscapeRight];
-    [((RootViewController *) self.window.rootViewController) supportInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
-    
+
     // Game Center setup.
     self.netController = [[NetController new] autorelease];
     [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
         if (error)
             wrn(@"Game Center unavailable: %@", error);
-        
+
         [self.mainMenuLayer reset];
     }];
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
         [self.gameLayer performSelectorOnMainThread:@selector(stopGame) withObject:nil waitUntilDone:YES];
-        
+
         if (acceptedInvite)
             [self.netController performSelectorOnMainThread:@selector(beginInvite:) withObject:acceptedInvite waitUntilDone:NO];
-        
+
         else if(playersToInvite)
             [self performSelectorOnMainThread:@selector(showMainMenuForPlayers:) withObject:playersToInvite waitUntilDone:NO];
     };
-    
+
 	// Build the splash scene.
     CCScene *splashScene = [CCScene node];
     CCSprite *splash = [Splash node];
     [splashScene addChild:splash];
-    
+
     // Build the game scene.
 	self.gameLayer = [GameLayer node];
     CCSprite *frame = [CCSprite spriteWithFile:@"frame.png"];
     frame.anchorPoint = CGPointZero;
     [self.uiLayer addChild:frame z:1];
     [self.uiLayer addChild:self.gameLayer];
-	
+
     // Show the splash screen, this starts the main loop in the current thread.
     [[CCDirector sharedDirector] pushScene:splashScene];
     [self showMainMenu];
-    
+
     // PlayHaven setup.
     @try {
         [[PHPublisherOpenRequest requestForApp:[self phToken] secret:[self phSecret]] send];
@@ -116,7 +114,7 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     @catch (NSException *exception) {
         err(@"PlayHaven exception: %@", exception);
     }
-    
+
     do {
 #if ! TARGET_IPHONE_SIMULATOR
         @try {
@@ -131,27 +129,27 @@ static NSString *PHPlacementMoreGames  = @"more_games";
         }
 #endif
     } while ([[CCDirector sharedDirector] runningScene]);
-    
+
     return NO;
 }
 
 
 -(GHUDLayer *) hudLayer {
-    
+
     if(!_hudLayer)
         _hudLayer = [[GHUDLayer alloc] init];
-    
+
     return (GHUDLayer *)super.hudLayer;
 }
 
 
 - (void)hudMenuPressed {
-    
+
     [self showMainMenu];
 }
 
 -(void) showMainMenu {
-    
+
     if(!self.mainMenuLayer)
         self.mainMenuLayer = [MainMenuLayer node];
 
@@ -160,74 +158,74 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 
 
 -(void) showMainMenuForPlayers:(NSArray *)aPlayersToInvite {
-    
+
     if(!self.mainMenuLayer)
         self.mainMenuLayer = [MainMenuLayer node];
     self.mainMenuLayer.playersToInvite = aPlayersToInvite;
-    
+
     [self pushLayer:self.mainMenuLayer];
 }
 
 
 -(void) showConfiguration {
-    
+
     if(!self.configLayer)
         self.configLayer = [ConfigurationSectionLayer node];
-    
+
     [self pushLayer:self.configLayer];
 }
 
 
 -(void) showGameConfiguration {
-    
+
     if(!self.gameConfigLayer)
         self.gameConfigLayer = [GameConfigurationLayer node];
-    
+
     [self pushLayer:self.gameConfigLayer];
 }
 
 
 -(void) showAVConfiguration {
-    
+
     if(!self.avConfigLayer)
         self.avConfigLayer = [AVConfigurationLayer node];
-    
+
     [self pushLayer:self.avConfigLayer];
 }
 
 
 -(void) showModelsConfiguration {
-    
+
     if(!self.modelsConfigLayer)
         self.modelsConfigLayer = [ModelsConfigurationLayer node];
-    
+
     [self pushLayer:self.modelsConfigLayer];
 }
 
 
 - (void)moreGames {
-    
+
     [[PHPublisherContentRequest requestForApp:[self phToken] secret:[self phSecret]
                                     placement:PHPlacementMoreGames delegate:self] send];
 }
 
 
 - (void)pushLayer: (ShadeLayer *)layer hidden:(BOOL)hidden {
-    
+
     [self.gameLayer setPaused:YES];
-    
+
     [super pushLayer:layer hidden:hidden];
 }
 
 - (void)didUpdateConfigForKey:(SEL)configKey fromValue:(id)value {
-    
+
     [super didUpdateConfigForKey:configKey fromValue:value];
-    
+
     if (configKey == @selector(cityTheme)) {
         dbg(@"City Theme changed to: %@", [GorillasConfig get].cityTheme);
         [[[CityTheme getThemes] objectForKey:[GorillasConfig get].cityTheme] apply];
     }
-    
+
     if (configKey == @selector(playerModel)) {
         dbg(@"Model changed");
         [self.gameLayer reset];
@@ -235,16 +233,16 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 }
 
 - (void)didPushLayer:(ShadeLayer *)layer hidden:(BOOL)hidden {
-    
+
     self.gameLayer.paused = YES;
-    
+
     if (!self.notifierView)
         self.notifierView = [[[PHNotificationView alloc] initWithApp:[self phToken] secret:[self phSecret]
                                                            placement:PHPlacementMoreGames] autorelease];
 
     if (self.notifierView.superview && layer != self.mainMenuLayer)
         [self.notifierView removeFromSuperview];
-    
+
     else if (self.notifierView) {
         if (layer == self.mainMenuLayer) {
             self.notifierView.center = ccp(380, 260);
@@ -261,20 +259,20 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 }
 
 - (void)didPopLayer:(ShadeLayer *)layer anyLeft:(BOOL)anyLeft {
-     
+
     if (self.notifierView.superview && layer == self.mainMenuLayer)
         [self.notifierView removeFromSuperview];
-     
+
     else if (self.notifierView) {
         if ([self isLayerShowing:self.mainMenuLayer]) {
             self.notifierView.center = ccp(100, 330);
             [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
         }
     }
- 
+
     if (!anyLeft)
         self.gameLayer.paused = NO;
-    
+
     [super didPopLayer:layer anyLeft:anyLeft];
 }
 
@@ -284,38 +282,38 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 static NSDictionary *playHavenInfo = nil;
 
 - (NSString *)phToken {
-    
+
     if (playHavenInfo == nil)
         playHavenInfo = [[NSDictionary alloc]initWithContentsOfURL:
                          [[NSBundle mainBundle] URLForResource:@"PlayHaven" withExtension:@"plist"]];
-    
+
     return [playHavenInfo valueForKeyPath:@"Token"];
 }
 
 - (NSString *)phSecret {
-    
+
     return [playHavenInfo valueForKeyPath:@"Secret"];
 }
 
 -(void)request:(PHPublisherContentRequest *)request contentWillDisplay:(PHContent *)content {
-    
+
     [self.notifierView clear];
 
     [[CCDirector sharedDirector] pause];
 }
 
 -(void)requestContentDidDismiss:(PHPublisherContentRequest *)request {
-    
+
     [[CCDirector sharedDirector] resume];
 }
 
 -(void)request:(PHPublisherContentRequest *)request didFailWithError:(NSError *)error {
-    
+
     err(@"PlayHavenSDK request: %@, couldn't load content: %@", request, error);
 }
 
 -(void)request:(PHPublisherContentRequest *)request contentDidFailWithError:(NSError *)error {
-    
+
     err(@"PlayHavenSDK request: %@, couldn't load view: %@", request, error);
     [[CCDirector sharedDirector] resume];
 }
@@ -331,9 +329,9 @@ static NSDictionary *playHavenInfo = nil;
 
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
-    
+
     [super applicationDidReceiveMemoryWarning:application];
-    
+
     if(self.mainMenuLayer && ![self.mainMenuLayer parent]) {
         [self.mainMenuLayer stopAllActions];
         self.mainMenuLayer = nil;
@@ -358,20 +356,20 @@ static NSDictionary *playHavenInfo = nil;
 
 
 - (void)dealloc {
-    
+
     self.gameLayer          = nil;
     self.mainMenuLayer       = nil;
     self.configLayer        = nil;
     self.gameConfigLayer    = nil;
     self.avConfigLayer      = nil;
     self.modelsConfigLayer  = nil;
-    
+
     [super dealloc];
 }
 
 
 +(GorillasAppDelegate *) get {
-    
+
     return (GorillasAppDelegate *) [UIApplication sharedApplication].delegate;
 }
 
