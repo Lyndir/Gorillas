@@ -42,7 +42,7 @@
 
 #pragma mark Properties
 
-@synthesize paused, configuring, started, running;
+@synthesize paused, configuring, started, running, mode;
 @synthesize gorillas, activeGorilla;
 @synthesize skyLayer, panningLayer, cityLayer, windLayer, backWeather, frontWeather;
 //FIXME @synthesize scaleTimeAction;

@@ -235,6 +235,10 @@
 		DA83F0BB0F00527B00305C9F /* WindLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83F0BA0F00527B00305C9F /* WindLayer.m */; };
 		DA859C500EC4F3950036B7C0 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DA859E700EC598E10036B7C0 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
+		DA8B8B8913CF994B003B0CC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6620F95368600E5607E /* Foundation.framework */; };
+		DA8B8B9513CF9969003B0CC2 /* UIColor-Expanded.h in Headers */ = {isa = PBXBuildFile; fileRef = DA8B8B9313CF9969003B0CC2 /* UIColor-Expanded.h */; };
+		DA8B8B9613CF9969003B0CC2 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = DA8B8B9413CF9969003B0CC2 /* UIColor-Expanded.m */; };
+		DA8B8B9A13CF99B9003B0CC2 /* libuicolor-utilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8B8B8813CF994B003B0CC2 /* libuicolor-utilities.a */; };
 		DA925266132EDA6400488108 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA925265132EDA6400488108 /* Security.framework */; };
 		DA93350E13C7B5D000A53F52 /* AbstractAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = DA93308513C7B5CE00A53F52 /* AbstractAppDelegate.h */; };
 		DA93350F13C7B5D000A53F52 /* AbstractAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA93308613C7B5CE00A53F52 /* AbstractAppDelegate.m */; };
@@ -328,8 +332,6 @@
 		DA93356713C7B5D100A53F52 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA93350113C7B5D000A53F52 /* RootViewController.m */; };
 		DA93356813C7B5D100A53F52 /* SheetViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DA93350213C7B5D000A53F52 /* SheetViewController.h */; };
 		DA93356913C7B5D100A53F52 /* SheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA93350313C7B5D000A53F52 /* SheetViewController.m */; };
-		DA93356A13C7B5D100A53F52 /* UIColor-Expanded.h in Headers */ = {isa = PBXBuildFile; fileRef = DA93350413C7B5D000A53F52 /* UIColor-Expanded.h */; };
-		DA93356B13C7B5D100A53F52 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = DA93350513C7B5D000A53F52 /* UIColor-Expanded.m */; };
 		DA93356C13C7B5D100A53F52 /* UIImage_Scaling.h in Headers */ = {isa = PBXBuildFile; fileRef = DA93350613C7B5D000A53F52 /* UIImage_Scaling.h */; };
 		DA93356D13C7B5D100A53F52 /* UIImage_Scaling.m in Sources */ = {isa = PBXBuildFile; fileRef = DA93350713C7B5D000A53F52 /* UIImage_Scaling.m */; };
 		DA93356E13C7B5D100A53F52 /* UIUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = DA93350813C7B5D000A53F52 /* UIUtils.h */; };
@@ -697,6 +699,13 @@
 			remoteGlobalIDString = DA3B9389127B6D6A009196E8;
 			remoteInfo = cocos2d;
 		};
+		DA8B8B9813CF99AA003B0CC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA8B8B8713CF994B003B0CC2;
+			remoteInfo = "uicolor-utilities";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -822,6 +831,9 @@
 		DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillaLayer.m; sourceTree = "<group>"; };
 		DA859E6E0EC598E10036B7C0 /* BananaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaLayer.h; sourceTree = "<group>"; };
 		DA859E6F0EC598E10036B7C0 /* BananaLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BananaLayer.m; sourceTree = "<group>"; };
+		DA8B8B8813CF994B003B0CC2 /* libuicolor-utilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libuicolor-utilities.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA8B8B9313CF9969003B0CC2 /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-Expanded.h"; sourceTree = "<group>"; };
+		DA8B8B9413CF9969003B0CC2 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Expanded.m"; sourceTree = "<group>"; };
 		DA925265132EDA6400488108 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		DA93308513C7B5CE00A53F52 /* AbstractAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractAppDelegate.h; sourceTree = "<group>"; };
 		DA93308613C7B5CE00A53F52 /* AbstractAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractAppDelegate.m; sourceTree = "<group>"; };
@@ -854,7 +866,6 @@
 		DA9330A513C7B5CE00A53F52 /* Remove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Remove.m; sourceTree = "<group>"; };
 		DA9330A613C7B5CE00A53F52 /* CCDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDebug.h; sourceTree = "<group>"; };
 		DA9330A713C7B5CE00A53F52 /* CCDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDebug.m; sourceTree = "<group>"; };
-		DA9330A813C7B5CE00A53F52 /* Dependencies.README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Dependencies.README; sourceTree = "<group>"; };
 		DA9330A913C7B5CE00A53F52 /* Pearl-Cocos2D-Dependencies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pearl-Cocos2D-Dependencies.h"; sourceTree = "<group>"; };
 		DA9330AA13C7B5CE00A53F52 /* Pearl-Cocos2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pearl-Cocos2D.h"; sourceTree = "<group>"; };
 		DA9330AC13C7B5CE00A53F52 /* aim.body.0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aim.body.0.png; sourceTree = "<group>"; };
@@ -1957,8 +1968,6 @@
 		DA93350113C7B5D000A53F52 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		DA93350213C7B5D000A53F52 /* SheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SheetViewController.h; sourceTree = "<group>"; };
 		DA93350313C7B5D000A53F52 /* SheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheetViewController.m; sourceTree = "<group>"; };
-		DA93350413C7B5D000A53F52 /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-Expanded.h"; sourceTree = "<group>"; };
-		DA93350513C7B5D000A53F52 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Expanded.m"; sourceTree = "<group>"; };
 		DA93350613C7B5D000A53F52 /* UIImage_Scaling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImage_Scaling.h; sourceTree = "<group>"; };
 		DA93350713C7B5D000A53F52 /* UIImage_Scaling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_Scaling.m; sourceTree = "<group>"; };
 		DA93350813C7B5D000A53F52 /* UIUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIUtils.h; sourceTree = "<group>"; };
@@ -2266,6 +2275,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA8B8B9A13CF99B9003B0CC2 /* libuicolor-utilities.a in Frameworks */,
 				DA0DA09413CCF1FD00B1D188 /* libPlayHaven.a in Frameworks */,
 				DA7640A313B3D97300A02611 /* libcocos2d-iphone.a in Frameworks */,
 				DA7640A413B3D97300A02611 /* libPearl.a in Frameworks */,
@@ -2326,6 +2336,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DA8B8B8513CF994B003B0CC2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA8B8B8913CF994B003B0CC2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -2349,6 +2367,7 @@
 				DA3B938A127B6D6A009196E8 /* libcocos2d-iphone.a */,
 				DA7640A213B3D96500A02611 /* libPearl.a */,
 				DA0EA01113CCF06900BB7666 /* libPlayHaven.a */,
+				DA8B8B8813CF994B003B0CC2 /* libuicolor-utilities.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2627,6 +2646,16 @@
 			path = Audio;
 			sourceTree = "<group>";
 		};
+		DA8B8B9713CF9972003B0CC2 /* uicolor-utilities */ = {
+			isa = PBXGroup;
+			children = (
+				DA8B8B9313CF9969003B0CC2 /* UIColor-Expanded.h */,
+				DA8B8B9413CF9969003B0CC2 /* UIColor-Expanded.m */,
+			);
+			name = "uicolor-utilities";
+			path = "Pearl/External/uicolor-utilities";
+			sourceTree = "<group>";
+		};
 		DA93308413C7B5CE00A53F52 /* Pearl */ = {
 			isa = PBXGroup;
 			children = (
@@ -2685,7 +2714,6 @@
 				DA9330A313C7B5CE00A53F52 /* Actions */,
 				DA9330A613C7B5CE00A53F52 /* CCDebug.h */,
 				DA9330A713C7B5CE00A53F52 /* CCDebug.m */,
-				DA9330A813C7B5CE00A53F52 /* Dependencies.README */,
 				DA9330A913C7B5CE00A53F52 /* Pearl-Cocos2D-Dependencies.h */,
 				DA9330AA13C7B5CE00A53F52 /* Pearl-Cocos2D.h */,
 				DA9330AB13C7B5CE00A53F52 /* Resources */,
@@ -2835,8 +2863,6 @@
 				DA93350113C7B5D000A53F52 /* RootViewController.m */,
 				DA93350213C7B5D000A53F52 /* SheetViewController.h */,
 				DA93350313C7B5D000A53F52 /* SheetViewController.m */,
-				DA93350413C7B5D000A53F52 /* UIColor-Expanded.h */,
-				DA93350513C7B5D000A53F52 /* UIColor-Expanded.m */,
 				DA93350613C7B5D000A53F52 /* UIImage_Scaling.h */,
 				DA93350713C7B5D000A53F52 /* UIImage_Scaling.m */,
 				DA93350813C7B5D000A53F52 /* UIUtils.h */,
@@ -4107,6 +4133,7 @@
 				DAC0379D13CE317D003FAE6D /* PlayHavenSDK */,
 				DA9336C513C9028300A53F52 /* FontLabel */,
 				DA93357813C9027700A53F52 /* cocos2d-iphone */,
+				DA8B8B9713CF9972003B0CC2 /* uicolor-utilities */,
 				DA76403513B3D8CE00A02611 /* jrswizzle */,
 			);
 			path = External;
@@ -4333,7 +4360,6 @@
 				DA93356513C7B5D100A53F52 /* Pearl-UIKit.h in Headers */,
 				DA93356613C7B5D100A53F52 /* RootViewController.h in Headers */,
 				DA93356813C7B5D100A53F52 /* SheetViewController.h in Headers */,
-				DA93356A13C7B5D100A53F52 /* UIColor-Expanded.h in Headers */,
 				DA93356C13C7B5D100A53F52 /* UIImage_Scaling.h in Headers */,
 				DA93356E13C7B5D100A53F52 /* UIUtils.h in Headers */,
 				DA93357013C7B5D100A53F52 /* ValidatingTextField.h in Headers */,
@@ -4448,6 +4474,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DA8B8B8613CF994B003B0CC2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA8B8B9513CF9969003B0CC2 /* UIColor-Expanded.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -4499,6 +4533,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				DA8B8B9913CF99AA003B0CC2 /* PBXTargetDependency */,
 				DA3B9667127C1E7D009196E8 /* PBXTargetDependency */,
 			);
 			name = Pearl;
@@ -4543,6 +4578,23 @@
 			productReference = DA4769F80FDD7334002E74F8 /* Gorillas Lite.app */;
 			productType = "com.apple.product-type.application";
 		};
+		DA8B8B8713CF994B003B0CC2 /* uicolor-utilities */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DA8B8B9013CF994C003B0CC2 /* Build configuration list for PBXNativeTarget "uicolor-utilities" */;
+			buildPhases = (
+				DA8B8B8413CF994B003B0CC2 /* Sources */,
+				DA8B8B8513CF994B003B0CC2 /* Frameworks */,
+				DA8B8B8613CF994B003B0CC2 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "uicolor-utilities";
+			productName = "uicolor-utilities";
+			productReference = DA8B8B8813CF994B003B0CC2 /* libuicolor-utilities.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -4582,6 +4634,7 @@
 				DA3B92C0127B6D21009196E8 /* Pearl */,
 				DA3B9389127B6D6A009196E8 /* cocos2d-iphone */,
 				DA0EA01013CCF06900BB7666 /* PlayHaven */,
+				DA8B8B8713CF994B003B0CC2 /* uicolor-utilities */,
 			);
 		};
 /* End PBXProject section */
@@ -4972,7 +5025,6 @@
 				DA93356413C7B5D100A53F52 /* LayoutView.m in Sources */,
 				DA93356713C7B5D100A53F52 /* RootViewController.m in Sources */,
 				DA93356913C7B5D100A53F52 /* SheetViewController.m in Sources */,
-				DA93356B13C7B5D100A53F52 /* UIColor-Expanded.m in Sources */,
 				DA93356D13C7B5D100A53F52 /* UIImage_Scaling.m in Sources */,
 				DA93356F13C7B5D100A53F52 /* UIUtils.m in Sources */,
 				DA93357113C7B5D100A53F52 /* ValidatingTextField.m in Sources */,
@@ -5112,6 +5164,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DA8B8B8413CF994B003B0CC2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA8B8B9613CF9969003B0CC2 /* UIColor-Expanded.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -5139,6 +5199,11 @@
 			isa = PBXTargetDependency;
 			target = DA3B9389127B6D6A009196E8 /* cocos2d-iphone */;
 			targetProxy = DA3B9666127C1E7D009196E8 /* PBXContainerItemProxy */;
+		};
+		DA8B8B9913CF99AA003B0CC2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA8B8B8713CF994B003B0CC2 /* uicolor-utilities */;
+			targetProxy = DA8B8B9813CF99AA003B0CC2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -5564,6 +5629,22 @@
 			};
 			name = Distribution;
 		};
+		DA8B8B9113CF994C003B0CC2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "";
+				GCC_WARN_MISSING_PARENTHESES = NO;
+			};
+			name = Debug;
+		};
+		DA8B8B9213CF994C003B0CC2 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "";
+				GCC_WARN_MISSING_PARENTHESES = NO;
+			};
+			name = Distribution;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -5617,6 +5698,15 @@
 			buildConfigurations = (
 				DA4769F40FDD7334002E74F8 /* Debug */,
 				DA4769F70FDD7334002E74F8 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Distribution;
+		};
+		DA8B8B9013CF994C003B0CC2 /* Build configuration list for PBXNativeTarget "uicolor-utilities" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA8B8B9113CF994C003B0CC2 /* Debug */,
+				DA8B8B9213CF994C003B0CC2 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Distribution;

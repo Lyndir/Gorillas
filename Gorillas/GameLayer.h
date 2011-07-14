@@ -58,6 +58,7 @@
 @property (nonatomic, readwrite) BOOL                       configuring;
 @property (nonatomic, readwrite) BOOL                       started;
 @property (nonatomic, readwrite) BOOL                       running;
+@property (nonatomic, readonly) GorillasMode                mode;
 @property (nonatomic, readonly, getter=isSinglePlayer) BOOL singlePlayer;
 
 @property (nonatomic, readonly) NSMutableArray              *gorillas;

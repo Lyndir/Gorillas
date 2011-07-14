@@ -95,6 +95,7 @@
     [self schedule:@selector(addInfo:)];
     
     // Must reset before entering the scene; others' onEnter depends on us being done.
+    buildings = nil;
     [self reset];
     
     return self;
@@ -130,8 +131,11 @@
         [explosions release];
     }
     if (buildings) {
-        [self removeChild:buildings cleanup:YES];
-        [buildings release];
+        for (NSUInteger b = 0; b < 4; ++b) {
+            [self removeChild:buildings[b] cleanup:YES];
+            [buildings[b] release];
+        }
+        free(buildings);
     }
     
     // Construct city.
@@ -139,8 +143,11 @@
     [self addChild:holes z:-1];
     explosions = [[ExplosionsLayer alloc] init];
     [self addChild:explosions z:4];
-    buildings = [[BuildingsLayer alloc] init];
-    [self addChild:buildings z:1];
+    buildings = malloc(sizeof(BuildingsLayer*) * 4);
+    for (NSUInteger b = 0; b < 4; ++b) {
+        buildings[b] = [[BuildingsLayer alloc] initWithWidth:0 heightRatio:0 lightRatio:-(float)b/5.0f];
+        [self addChild:buildings[b] z:4-b];
+    }
 }
 
 
@@ -606,7 +613,7 @@
 
 -(BOOL) hitsBuilding:(CGPoint)pos {
     
-    if ([buildings hitsBuilding:pos]) {
+    if ([buildings[0] hitsBuilding:pos]) {
 
         // A building was hit, but if it's in an explosion crater we
         // need to let the banana continue flying.
@@ -644,8 +651,8 @@
     // Position our gorillas.
     // Find indexA: The left boundary of allowed gorilla indexes.
     NSUInteger indexA = 0;
-    for(NSUInteger b = 0; b < buildings.buildingCount; ++b) {
-        CGPoint fieldPoint = [buildings convertToWorldSpace:CGPointMake(buildings.buildings[b].x, 0)];
+    for(NSUInteger b = 0; b < buildings[0].buildingCount; ++b) {
+        CGPoint fieldPoint = [buildings[0] convertToWorldSpace:CGPointMake(buildings[0].buildings[b].x, 0)];
         fieldPoint = [self convertToNodeSpace:fieldPoint];
         
         if(fieldPoint.x >= 0) {
@@ -691,7 +698,7 @@
     }
     [gorillasQueue release];
     for(NSUInteger i = 0; i < [gorillas count]; ++i) {
-        Building building = buildings.buildings[[(NSNumber *) [gorillaIndexes objectAtIndex:i] unsignedIntegerValue]];
+        Building building = buildings[0].buildings[[(NSNumber *) [gorillaIndexes objectAtIndex:i] unsignedIntegerValue]];
         GorillaLayer *gorilla = [gorillas objectAtIndex:i];
         
         gorilla.position = ccp(building.x + building.size.width / 2, building.size.height + gorilla.contentSize.height / 2);
@@ -764,11 +771,11 @@
 
 -(CGRect) fieldInSpaceOf:(CCNode *)node {
     
-    Building firstBuilding = buildings.buildings[0];
-    Building lastBuilding = buildings.buildings[buildings.buildingCount - 1];
+    Building firstBuilding = buildings[0].buildings[0];
+    Building lastBuilding = buildings[0].buildings[buildings[0].buildingCount - 1];
 
-    CGPoint bottomLeft = [buildings convertToWorldSpace:CGPointMake(firstBuilding.x, 0)];
-    CGPoint topRight = [buildings convertToWorldSpace:CGPointMake(lastBuilding.x + lastBuilding.size.width, 0)];
+    CGPoint bottomLeft = [buildings[0] convertToWorldSpace:CGPointMake(firstBuilding.x, 0)];
+    CGPoint topRight = [buildings[0] convertToWorldSpace:CGPointMake(lastBuilding.x + lastBuilding.size.width, 0)];
     topRight.y = [CCDirector sharedDirector].winSize.height * 2.0f;
     
     if (node != nil) {
@@ -788,8 +795,12 @@
     [msgLabel release];
     msgLabel = nil;
     
-    [buildings release];
-    buildings = nil;
+    if (buildings) {
+        for (NSUInteger b = 0; b < 4; ++b)
+            [buildings[b] release];
+        free(buildings);
+        buildings = nil;
+    }
     
     [holes release];
     holes = nil;

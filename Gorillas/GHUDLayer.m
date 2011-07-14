@@ -129,6 +129,11 @@
         [self.livesLayer setVisible:NO];
 }
 
+- (int64_t)score {
+
+    return [[GorillasConfig get] scoreForMode:[GorillasAppDelegate get].gameLayer.mode];
+}
+
 - (float)throwSkill {
     
     return _throwSkill;

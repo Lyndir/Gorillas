@@ -45,7 +45,6 @@
     self.model          = GorillasProjectileModelBanana;
     
     self.banana         = [CCSprite spriteWithFile:[self modelFile]];
-    self.banana.scale   = GorillasModelScale(5, self.banana.texture.contentSizeInPixels.width);
     self.banana.visible = NO;
     self.banana.tag     = GorillasTagBananaNotFlying;
     
@@ -65,8 +64,9 @@
 -(CCSprite *)bananaForThrowFrom:(GorillaLayer *)gorilla {
     
     [self setModel:gorilla.projectileModel type:gorilla.type];
-    [self.banana setPosition:gorilla.position];
-    
+    self.banana.position = gorilla.position;
+    self.banana.scale = gorilla.scale;
+
     return self.banana;
 }
 
