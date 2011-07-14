@@ -145,8 +145,12 @@
     [self addChild:explosions z:4];
     buildings = malloc(sizeof(BuildingsLayer*) * 4);
     for (NSUInteger b = 0; b < 4; ++b) {
-        buildings[b] = [[BuildingsLayer alloc] initWithWidth:0 heightRatio:0 lightRatio:-(float)b/5.0f];
-        [self addChild:buildings[b] z:4-b];
+        float lightRatio = -(b / 6.0f);
+        if (b)
+            lightRatio -= 0.5f;
+        
+        buildings[b] = [[BuildingsLayer alloc] initWithWidthRatio:(5 - b) / 5.0f heightRatio:1 + (b / 2.0f) lightRatio:lightRatio];
+        [self addChild:buildings[b] z:b? -1-b: 1];
     }
 }
 

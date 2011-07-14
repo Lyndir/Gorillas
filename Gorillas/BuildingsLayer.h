@@ -42,8 +42,7 @@ typedef struct BuildingVertex {
 @interface BuildingsLayer : CCLayer <Resettable> {
 
 @private
-    CGFloat                                         buildingWidthFixed;
-    float                                           buildingHeightRatio, lightRatio;
+    float                                           buildingWidthRatio, buildingHeightRatio, lightRatio;
     
     NSUInteger                                      buildingCount, windowCount;
     Building                                        *buildings;
@@ -55,7 +54,7 @@ typedef struct BuildingVertex {
 @property (nonatomic, readonly) Building            *buildings;
 @property (nonatomic, readonly) NSUInteger          buildingCount;
 
-- (id) initWithWidth:(CGFloat)w heightRatio:(float)h lightRatio:(float)lightRatio;
+- (id) initWithWidthRatio:(CGFloat)w heightRatio:(float)h lightRatio:(float)lightRatio;
 -(void) reset;
 
 -(BOOL) hitsBuilding:(CGPoint)pos;

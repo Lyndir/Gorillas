@@ -31,19 +31,19 @@
 
 - (id) init {
 
-    if (!(self = [self initWithWidth:0 heightRatio:0 lightRatio:0]))
+    if (!(self = [self initWithWidthRatio:1 heightRatio:1 lightRatio:0]))
         return nil;
     
 	return self;
 }
 
 
-- (id) initWithWidth:(CGFloat)w heightRatio:(float)h lightRatio:(float)l {
+- (id) initWithWidthRatio:(CGFloat)w heightRatio:(float)h lightRatio:(float)l {
     
 	if (!(self = [super init]))
         return self;
 
-    buildingWidthFixed      = w;
+    buildingWidthRatio      = w;
     buildingHeightRatio     = h;
     lightRatio              = l;
     
@@ -76,7 +76,6 @@
     GorillasConfig *config          = [GorillasConfig get];
     BOOL visualFx                   = [config.visualFx boolValue];
 
-    const ccColor4B buildingColor   = ccc4lighten([config buildingColor], lightRatio);
     const ccColor4B wColor0         = ccc4lighten(ccc4l([[GorillasConfig get].windowColorOff longValue]), lightRatio);
     const ccColor4B wColor1         = ccc4lighten(ccc4l([[GorillasConfig get].windowColorOn longValue]), lightRatio);
     ccColor4B wColor10;
@@ -88,7 +87,7 @@
     const NSUInteger fixedFloors    = [config.fixedFloors unsignedIntValue];
     const NSInteger varFloors       = [config.varFloors unsignedIntValue];
     const CGSize winSize            = [CCDirector sharedDirector].winSize;
-    const CGFloat buildingWidth     = buildingWidthFixed? buildingWidthFixed: winSize.width / [config.buildingAmount unsignedIntValue];
+    const CGFloat buildingWidth     = buildingWidthRatio * (winSize.width / [config.buildingAmount unsignedIntValue]);
     CGFloat wWidth                  = buildingWidth / ([config.windowAmount unsignedIntValue] * 2 + 1);
     CGFloat wPad                    = wWidth;
     CGFloat wHeight                 = wWidth * 2;
@@ -104,11 +103,9 @@
         buildings[b].x              = b * buildingWidth - buildingWidth * (buildingCount - [config.buildingAmount unsignedIntValue]) / 2;
         
         // Building's size.
-        NSInteger addFloors;
-        if (buildingHeightRatio || !varFloors)
-            addFloors               = varFloors * buildingHeightRatio;
-        else
-            addFloors               = gameRandom() % varFloors;
+        NSInteger addFloors = 0;
+        if (varFloors)
+            addFloors               = buildingHeightRatio * (gameRandom() % varFloors);
         buildings[b].size           = CGSizeMake(buildingWidth - 1, (fixedFloors + addFloors) * floorHeight + wPad);
 
         // Building's windows.
@@ -117,7 +114,7 @@
         windowCount                 += buildings[b].windowCount;
 
         // Building's color.
-        buildings[b].frontColor     = buildingColor;
+        buildings[b].frontColor     = ccc4lighten([config buildingColor], lightRatio);
         buildings[b].backColor.r    = (GLubyte)(buildings[b].frontColor.r * 0.2f);
         buildings[b].backColor.g    = (GLubyte)(buildings[b].frontColor.g * 0.2f);
         buildings[b].backColor.b    = (GLubyte)(buildings[b].frontColor.b * 0.2f);
