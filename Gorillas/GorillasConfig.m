@@ -277,6 +277,11 @@
                                    reason:@"Unsupported game mode." userInfo:nil];
 }
 
++ (NSString *)categoryForMode:(GorillasMode)mode {
+    
+    return [NSString stringWithFormat:@"com.lyndir.lhunath.gorillas.%@", [GorillasConfig nameForMode:mode]];
+}
+
 + (NSString *)nameForLevel:(NSNumber *)aLevel {
 
     int levelIndex = (int)([aLevel floatValue] * [[self get].levelNames count]);
@@ -299,14 +304,12 @@
 
 #pragma mark User Status
 
--(void)recordScore:(long long)scoreValue forMode:(GorillasMode)mode {
+-(int64_t)recordScoreDelta:(int64_t)scoreDelta forMode:(GorillasMode)mode {
 
-    NSString *category = [NSString stringWithFormat:@"com.lyndir.lhunath.gorillas.%@", [GorillasConfig nameForMode:mode]];
+    NSString *category = [GorillasConfig categoryForMode:mode];
 
-    if(scoreValue < 0)
-        scoreValue = 0;
     GKScore *score = [[[GKScore alloc] initWithCategory:category] autorelease];
-    score.value = scoreValue;
+    score.value = ((GKScore *)[self.scores objectForKey:category]).value + scoreDelta;
 
     NSMutableDictionary *newScores = [self.scores mutableCopy];
     [newScores setObject:score forKey:category];
@@ -317,11 +320,13 @@
         if (error)
             err(@"Error reporting score: %@", error);
     }];
+    
+    return score.value;
 }
 
--(long long)scoreForMode:(GorillasMode)mode {
+-(int64_t)scoreForMode:(GorillasMode)mode {
 
-    NSString *category = [GorillasConfig nameForMode:mode];
+    NSString *category = [GorillasConfig categoryForMode:mode];
 
     return ((GKScore *)[self.scores objectForKey:category]).value;
 }

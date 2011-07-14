@@ -72,7 +72,9 @@
 }
 
 
--(void) updateHudWithNewScore:(int)newScore skill:(float)throwSkill wasGood:(BOOL)wasGood {
+- (void)reset {
+    
+    [super reset];
     
     int lives = [GorillasAppDelegate get].gameLayer.activeGorilla.lives;
     
@@ -91,9 +93,10 @@
     [self.infiniteLives setVisible:lives < 0];
 
     // Put score on HUD.
-    if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureScore])
-        [self updateHudWithNewScore:newScore wasGood:YES];
-    else {
+    if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureScore]) {
+        [self.scoreCount setVisible:YES];
+        [self.scoreSprite setVisible:YES];
+    } else {
         [self.scoreCount setVisible:NO];
         [self.scoreSprite setVisible:NO];
     }
@@ -101,8 +104,8 @@
     // Put skill on HUD.
     if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureSkill]) {
         float skill = [[GorillasConfig get].skill floatValue];
-        if(throwSkill)
-            skill = skill / 2 + throwSkill;
+        if (self.throwSkill)
+            skill = skill / 2 + self.throwSkill;
         
         NSString *prefix = @"", *suffix = @"%";
         if ([l(@"menu.config.direction", "ltr") isEqualToString:@"rtl"]) {
@@ -126,10 +129,15 @@
         [self.livesLayer setVisible:NO];
 }
 
--(void) updateHudWithNewScore:(int)newScore wasGood:(BOOL)wasGood {
+- (float)throwSkill {
     
-    [self.scoreCount setString:[NSString stringWithFormat:@"%02d", newScore]];
-    [self updateHudWasGood:wasGood];
+    return _throwSkill;
+}
+
+- (void)setThrowSkill:(float)throwSkill {
+    
+    _throwSkill = throwSkill;
+    [self reset];
 }
 
 -(void) dealloc {

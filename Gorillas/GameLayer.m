@@ -116,11 +116,11 @@
 
 -(void) configureGameWithMode:(GorillasMode)_mode randomCity:(BOOL)aRandomCity
                     playerIDs:(NSArray *)playerIDs localHumans:(NSUInteger)localHumans ais:(NSUInteger)_ais {
-
+    
     configuring     = YES;
     if(activeGorilla)
         [self stopGame];
-
+    
     mode            = _mode;
     randomCity      = aRandomCity;
     humans          = localHumans + [playerIDs count];
@@ -156,7 +156,7 @@
     // Add AIs to the game.
     for (NSUInteger i = 0; i < ais; ++i)
         [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeAI playerID:nil]];
-
+    
     configuring     = NO;
 }
 
@@ -247,13 +247,14 @@
             }
             
             if (considderMiss) {
-                int score = [[GorillasConfig get].level floatValue] * [[GorillasConfig get].missScore intValue];
+                int64_t scoreDelta = [[GorillasConfig get].level floatValue] * [[GorillasConfig get].missScore intValue];
                 
-                [[GorillasConfig get] recordScore:[[GorillasConfig get] scoreForMode:mode] + score forMode:mode];
-                [[GorillasAppDelegate get].hudLayer updateHudWithNewScore:score skill:0 wasGood:YES];
-                
-                if(score)
-                    [cityLayer message:[NSString stringWithFormat:@"%+d", score] on:cityLayer.bananaLayer.banana];
+                if(scoreDelta) {
+                    [[GorillasConfig get] recordScoreDelta:scoreDelta forMode:mode];
+                    [[GorillasAppDelegate get].hudLayer highlightGood:scoreDelta > 0];
+                    
+                    [cityLayer message:[NSString stringWithFormat:@"%+d", scoreDelta] on:cityLayer.bananaLayer.banana];
+                }
             }
             
             break;
@@ -267,7 +268,7 @@
                                                                activeGorilla.name, cityLayer.hitGorilla.name]
                                                      duration:4 isImportant:NO];
             
-            int score = 0;
+            int64_t scoreDelta = 0;
             BOOL cheer = NO;
             if([activeGorilla human]) {
                 // Human hits ...
@@ -277,14 +278,14 @@
                     if([self isEnabled:GorillasFeatureTeam]
                        || cityLayer.hitGorilla == activeGorilla)
                         // In team mode or when suiciding, deduct score.
-                        score = [GorillasConfig get].deathScore;
+                        scoreDelta = [GorillasConfig get].deathScore;
                     else
                         cheer = YES;
                 }
                 
                 else {
                     // ... AI.  Score boost.
-                    score = [[GorillasConfig get].killScore intValue];
+                    scoreDelta = [[GorillasConfig get].killScore intValue];
                     cheer = YES;
                 }
             } else {
@@ -294,7 +295,7 @@
                     // ... Human.
                     if(![self isEnabled:GorillasFeatureTeam])
                         // In team mode, deduct score.
-                        score = [GorillasConfig get].deathScore;
+                        scoreDelta = [GorillasConfig get].deathScore;
                     
                     cheer = YES;
                 } else {
@@ -322,23 +323,23 @@
                     skill *= [[GorillasConfig get].bonusOneShot floatValue];
                 }
                 
-                if(score)
-                    score += (score / abs(score)) * [[GorillasConfig get].bonusSkill floatValue] * skill;
+                if(scoreDelta)
+                    scoreDelta += (Sign(scoreDelta)) * [[GorillasConfig get].bonusSkill floatValue] * skill;
             }
             
             // Update Level.
             if([self isEnabled:GorillasFeatureLevel]) {
-                score *= [[GorillasConfig get].level floatValue];
+                scoreDelta *= [[GorillasConfig get].level floatValue];
                 
                 NSString *oldLevel = [GorillasConfig nameForLevel:[GorillasConfig get].level];
-                if(score > 0)
+                if(scoreDelta > 0)
                     [[GorillasConfig get] levelUp];
                 else
                     [[GorillasConfig get] levelDown];
                 
                 // Message in case we level up.
                 if(![oldLevel isEqualToString:[GorillasConfig nameForLevel:[GorillasConfig get].level]]) {
-                    if(score > 0) {
+                    if(scoreDelta > 0) {
                         [[GorillasAppDelegate get].uiLayer message:l(@"messages.level.up", @"Level Up!")];
                         if ([[GorillasConfig get].voice boolValue])
                             [[GorillasAudioController get] playEffectNamed:@"Level_Up"];
@@ -351,11 +352,11 @@
             }
             
             // Update score.
-            if([self isEnabled:GorillasFeatureScore] && score) {
-                [[GorillasConfig get] recordScore:[[GorillasConfig get] scoreForMode:mode] + score forMode:mode];
+            if([self isEnabled:GorillasFeatureScore] && scoreDelta) {
+                [[GorillasConfig get] recordScoreDelta:scoreDelta forMode:mode];
                 
-                [[[GorillasAppDelegate get] hudLayer] updateHudWithNewScore:score skill:0 wasGood:YES];
-                [cityLayer message:[NSString stringWithFormat:@"%+d", score] on:cityLayer.hitGorilla];
+                [[[GorillasAppDelegate get] hudLayer] highlightGood:scoreDelta > 0];
+                [cityLayer message:[NSString stringWithFormat:@"%+d", scoreDelta] on:cityLayer.hitGorilla];
             }
             
             // If gorilla did something benefitial: cheer or dance.
@@ -546,7 +547,7 @@
                         backWeather.emissionRate    = 60;
                         backWeather.startSizeVar    = 0.5f;
                         backWeather.startSize       = 1;
-
+                        
                         frontWeather                = [[CCParticleRain alloc] init];
                         frontWeather.emissionRate   = 60;
                         frontWeather.startSizeVar   = 1.5f;
@@ -559,7 +560,7 @@
                         backWeather.emissionRate    = 3;
                         backWeather.startSizeVar    = 2;
                         backWeather.startSize       = 2;
-
+                        
                         frontWeather                = [[CCParticleSnow alloc] init];
                         frontWeather.speed          = 10;
                         frontWeather.emissionRate   = 3;
@@ -576,14 +577,14 @@
                 backWeather.posVar          = ccp(field.size.width / 2, backWeather.posVar.y);
                 backWeather.position        = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
                 [panningLayer addChild:backWeather z:-1 /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:ccp(self.contentSize.width / 2,
-                                                    self.contentSize.height / 2)*/];
+                                                         self.contentSize.height / 2)*/];
                 [windLayer registerSystem:backWeather affectAngle:YES];
-
+                
                 frontWeather.positionType   = kCCPositionTypeGrouped;
                 frontWeather.posVar         = ccp(field.size.width / 2, frontWeather.posVar.y);
                 frontWeather.position       = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
                 [panningLayer addChild:frontWeather /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:ccp(self.contentSize.width / 2,
-                                                    self.contentSize.height / 2)*/];
+                                                     self.contentSize.height / 2)*/];
                 [windLayer registerSystem:frontWeather affectAngle:YES];
             }
         }

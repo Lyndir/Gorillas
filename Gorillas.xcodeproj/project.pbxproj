@@ -580,6 +580,8 @@
 		DAC10D8013CE3DBB00A546E4 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D7713CE3DBB00A546E4 /* Level_Up.caf */; };
 		DAC10D8113CE3DBB00A546E4 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D7913CE3DBB00A546E4 /* Next_Player.caf */; };
 		DAC10D8213CE3DBB00A546E4 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D7913CE3DBB00A546E4 /* Next_Player.caf */; };
+		DAC10D8813CEC51000A546E4 /* MathUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = DAC10D8313CEC51000A546E4 /* MathUtils.h */; };
+		DAC10D8913CEC51000A546E4 /* MathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC10D8413CEC51000A546E4 /* MathUtils.m */; };
 		DAC52A9113CE35DE00A23373 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC52A8D13CE35DE00A23373 /* Default@2x.png */; };
 		DAC52A9213CE35DE00A23373 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC52A8D13CE35DE00A23373 /* Default@2x.png */; };
 		DAC52A9313CE35DE00A23373 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC52A8F13CE35DE00A23373 /* Default~ipad.png */; };
@@ -2201,6 +2203,9 @@
 		DAC10D7613CE3DBB00A546E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Gorillas/Resources/English.lproj/Level_Down.caf; sourceTree = SOURCE_ROOT; };
 		DAC10D7813CE3DBB00A546E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Gorillas/Resources/English.lproj/Level_Up.caf; sourceTree = SOURCE_ROOT; };
 		DAC10D7A13CE3DBB00A546E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Gorillas/Resources/English.lproj/Next_Player.caf; sourceTree = SOURCE_ROOT; };
+		DAC10D8313CEC51000A546E4 /* MathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathUtils.h; sourceTree = "<group>"; };
+		DAC10D8413CEC51000A546E4 /* MathUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MathUtils.m; sourceTree = "<group>"; };
+		DAC10D8713CEC51000A546E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Pearl.strings; sourceTree = "<group>"; };
 		DAC52A8E13CE35DE00A23373 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = "Gorillas/Resources/English.lproj/Default@2x.png"; sourceTree = SOURCE_ROOT; };
 		DAC52A9013CE35DE00A23373 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = "Gorillas/Resources/English.lproj/Default~ipad.png"; sourceTree = SOURCE_ROOT; };
 		DACA4E6C0EB3AEA40096F970 /* BuildingsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingsLayer.h; sourceTree = "<group>"; };
@@ -2327,8 +2332,8 @@
 		080E96DDFE201D6D7F000001 /* Gorillas */ = {
 			isa = PBXGroup;
 			children = (
-				29B97317FDCFA39411CA2CEA /* Resources */,
 				DAC0378D13CE2FBD003FAE6D /* Supporting Files */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
 				DA2282270EE1A38A00BA53D2 /* Backend */,
 				DA2282250EE1A2F100BA53D2 /* Actions */,
 				DA2282260EE1A30300BA53D2 /* Video */,
@@ -2357,7 +2362,6 @@
 				DABF1FF40EB2703B002C32BF /* External */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				DA3B971A127C3787009196E8 /* libz.dylib */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -2376,6 +2380,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DA3B971A127C3787009196E8 /* libz.dylib */,
 				DAE4EAC31389B2E2001FECE7 /* SystemConfiguration.framework */,
 				DAE4EABE1389ACFC001FECE7 /* libicucore.dylib */,
 				DA925265132EDA6400488108 /* Security.framework */,
@@ -2625,6 +2630,9 @@
 		DA93308413C7B5CE00A53F52 /* Pearl */ = {
 			isa = PBXGroup;
 			children = (
+				DAC10D8513CEC51000A546E4 /* Resources */,
+				DAC10D8313CEC51000A546E4 /* MathUtils.h */,
+				DAC10D8413CEC51000A546E4 /* MathUtils.m */,
 				DAFEF9730ED847D40019F7EC /* Strings.h */,
 				DAFEF9730ED847D40019F7EA /* Strings.m */,
 				DAFEF9730ED847D40019F7E8 /* PearlStrings.h */,
@@ -4092,13 +4100,13 @@
 		DABF1FF40EB2703B002C32BF /* External */ = {
 			isa = PBXGroup;
 			children = (
-				DAC0379D13CE317D003FAE6D /* PlayHavenSDK */,
-				DA9336C513C9028300A53F52 /* FontLabel */,
-				DA93357813C9027700A53F52 /* cocos2d-iphone */,
 				DA93308413C7B5CE00A53F52 /* Pearl */,
 				DA9330A013C7B5CE00A53F52 /* Pearl-Cocos2D */,
 				DA93310013C7B5CE00A53F52 /* Pearl-Media */,
 				DA93310413C7B5CE00A53F52 /* Pearl-UIKit */,
+				DAC0379D13CE317D003FAE6D /* PlayHavenSDK */,
+				DA9336C513C9028300A53F52 /* FontLabel */,
+				DA93357813C9027700A53F52 /* cocos2d-iphone */,
 				DA76403513B3D8CE00A02611 /* jrswizzle */,
 			);
 			path = External;
@@ -4176,6 +4184,14 @@
 				DAC037FF13CE317E003FAE6D /* SBJsonWriter.m */,
 			);
 			path = JSON;
+			sourceTree = "<group>";
+		};
+		DAC10D8513CEC51000A546E4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DAC10D8613CEC51000A546E4 /* Pearl.strings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		DAC22E0C129ED31F001D545B /* Voice */ = {
@@ -4327,6 +4343,7 @@
 				DAFEF9730ED847D40019F7ED /* Strings.h in Headers */,
 				DAFEF9730ED847D40019F7F1 /* PearlCocos2DStrings.h in Headers */,
 				DA16EC8713CE378400F5D800 /* Pearl-Prefix.pch in Headers */,
+				DAC10D8813CEC51000A546E4 /* MathUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4964,6 +4981,7 @@
 				DAFEF9730ED847D40019F7E7 /* PearlStrings.m in Sources */,
 				DAFEF9730ED847D40019F7EB /* Strings.m in Sources */,
 				DAFEF9730ED847D40019F7EF /* PearlCocos2DStrings.m in Sources */,
+				DAC10D8913CEC51000A546E4 /* MathUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5297,6 +5315,14 @@
 				DAC10D7A13CE3DBB00A546E4 /* English */,
 			);
 			name = Next_Player.caf;
+			sourceTree = "<group>";
+		};
+		DAC10D8613CEC51000A546E4 /* Pearl.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAC10D8713CEC51000A546E4 /* English */,
+			);
+			name = Pearl.strings;
 			sourceTree = "<group>";
 		};
 		DAC52A8D13CE35DE00A23373 /* Default@2x.png */ = {
