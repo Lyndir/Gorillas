@@ -219,9 +219,9 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     [super pushLayer:layer hidden:hidden];
 }
 
-- (void)didUpdateConfigForKey:(SEL)configKey {
+- (void)didUpdateConfigForKey:(SEL)configKey fromValue:(id)value {
     
-    [super didUpdateConfigForKey:configKey];
+    [super didUpdateConfigForKey:configKey fromValue:value];
     
     if (configKey == @selector(cityTheme)) {
         dbg(@"City Theme changed to: %@", [GorillasConfig get].cityTheme);
