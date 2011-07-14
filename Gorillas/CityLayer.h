@@ -41,7 +41,7 @@
     CCLabelTTF          *msgLabel, *infoLabel;
     BarSprite           *aimSprite;
     
-    BuildingsLayer      *buildings;
+    BuildingsLayer      **buildings;
     HolesLayer          *holes;
     ExplosionsLayer     *explosions;
 

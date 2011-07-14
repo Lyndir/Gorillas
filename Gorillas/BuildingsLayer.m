@@ -31,20 +31,21 @@
 
 - (id) init {
 
-    if (!(self = [self initWithWidth:0 heightRatio:0]))
+    if (!(self = [self initWithWidth:0 heightRatio:0 lightRatio:0]))
         return nil;
     
 	return self;
 }
 
 
-- (id) initWithWidth:(float)w heightRatio:(float)h {
+- (id) initWithWidth:(CGFloat)w heightRatio:(float)h lightRatio:(float)l {
     
 	if (!(self = [super init]))
         return self;
 
     buildingWidthFixed      = w;
     buildingHeightRatio     = h;
+    lightRatio              = l;
     
     buildingsVertexBuffer   = 0;
     buildingsIndicesBuffer  = 0;
@@ -75,8 +76,9 @@
     GorillasConfig *config          = [GorillasConfig get];
     BOOL visualFx                   = [config.visualFx boolValue];
 
-    const ccColor4B wColor0         = ccc4l([[GorillasConfig get].windowColorOff longValue]);
-    const ccColor4B wColor1         = ccc4l([[GorillasConfig get].windowColorOn longValue]);
+    const ccColor4B buildingColor   = ccc4lighten([config buildingColor], lightRatio);
+    const ccColor4B wColor0         = ccc4lighten(ccc4l([[GorillasConfig get].windowColorOff longValue]), lightRatio);
+    const ccColor4B wColor1         = ccc4lighten(ccc4l([[GorillasConfig get].windowColorOn longValue]), lightRatio);
     ccColor4B wColor10;
     wColor10.r                      = (wColor0.r + wColor1.r) / 2;
     wColor10.g                      = (wColor0.g + wColor1.g) / 2;
@@ -115,7 +117,7 @@
         windowCount                 += buildings[b].windowCount;
 
         // Building's color.
-        buildings[b].frontColor     = [config buildingColor];
+        buildings[b].frontColor     = buildingColor;
         buildings[b].backColor.r    = (GLubyte)(buildings[b].frontColor.r * 0.2f);
         buildings[b].backColor.g    = (GLubyte)(buildings[b].frontColor.g * 0.2f);
         buildings[b].backColor.b    = (GLubyte)(buildings[b].frontColor.b * 0.2f);

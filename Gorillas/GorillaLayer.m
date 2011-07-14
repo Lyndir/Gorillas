@@ -85,8 +85,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     self.textureRect        = CGRectFromCGPointAndCGSize(CGPointZero, self.texture.contentSize);
     self.bobber             = [CCSprite spriteWithFile:@"bobber.png"];
     self.bobber.visible     = NO;
-    self.bobber.position    = ccp(0, self.texture.pixelsHigh);
-    self.bobber.isRelativeAnchorPoint = NO;
+    self.bobber.position = ccp(self.contentSize.width / 2, self.contentSize.height + self.bobber.contentSize.height);
     [self.bobber runAction:[CCRepeatForever actionWithAction:[CCSequence actions:
                                                               [CCEaseSineInOut actionWithAction:
                                                                [CCMoveBy actionWithDuration:0.7f position:ccp(0, 15)]],
@@ -132,7 +131,8 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     
     [self stopAllActions];
     
-    self.scale      = GorillasModelScale(2, self.texture.contentSizeInPixels.width);
+    self.bobber.position = ccp(self.contentSize.width / 2, self.contentSize.height + self.bobber.contentSize.height);
+    self.scale      = GorillasModelScale(2, self.bobber.texture.contentSizeInPixels.width);
     self.active     = NO;
     self.ready      = NO;
     self.lives      = self.initialLives;
