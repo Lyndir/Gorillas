@@ -314,8 +314,6 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
                          [ShadeTo actionWithDuration:0.5f color:ccc4l(0xFF0000FF)],
                          [ShadeTo actionWithDuration:0.5f color:ccc4l(0xFFFFFFFF)],
                          nil]];
-    
-    [[GorillasAppDelegate get].hudLayer updateHudWithNewScore:0 skill:0 wasGood:YES];
 }
 
 
@@ -344,7 +342,6 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     _active = isActive;
     
     [self.bobber setVisible:self.active];
-    [[GorillasAppDelegate get].hudLayer updateHudWithNewScore:0 skill:0 wasGood:YES];
 }
 
 - (void)setConnectionState:(GKPlayerConnectionState)aConnectionState {

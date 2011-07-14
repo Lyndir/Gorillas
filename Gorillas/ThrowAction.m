@@ -110,12 +110,14 @@
     
     if(gameLayer.singlePlayer && gameLayer.activeGorilla.human)
         // Singleplayer game with human turn is still running; update the skill counter.
-        [[GorillasAppDelegate get].hudLayer updateHudWithNewScore:0 skill:self.elapsed / 10 wasGood:YES];
+        [GorillasAppDelegate get].hudLayer.throwSkill = self.elapsed / 10;
 }
 
 
 -(void) stop {
     
+    [GorillasAppDelegate get].hudLayer.throwSkill = 0;
+
     // self.target.position = [guaranteed time-independant end point of the throw]
     [self.target setVisible:NO];
     

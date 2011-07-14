@@ -132,8 +132,8 @@
 -(void)                                                 levelUp;
 -(void)                                                 levelDown;
 
--(void)recordScore:(long long)scoreValue forMode:(GorillasMode)mode;
--(long long)scoreForMode:(GorillasMode)mode;
+-(int64_t)recordScoreDelta:(int64_t)scoreDelta forMode:(GorillasMode)mode;
+-(int64_t)scoreForMode:(GorillasMode)mode;
 
 +(GorillasConfig *)                                     get;
 
@@ -141,6 +141,7 @@
 
 +(NSString *)descriptionForMode:(GorillasMode)mode;
 +(NSArray *)descriptionsForModes;
++(NSString *)categoryForMode:(GorillasMode)mode;
 +(NSString *)nameForMode:(GorillasMode)mode;
 
 @end
