@@ -324,12 +324,12 @@
                 }
                 
                 if(scoreDelta)
-                    scoreDelta += (Sign(scoreDelta)) * [[GorillasConfig get].bonusSkill floatValue] * skill;
+                    scoreDelta += (int64_t)((Sign(scoreDelta)) * [[GorillasConfig get].bonusSkill floatValue] * skill);
             }
             
             // Update Level.
             if([self isEnabled:GorillasFeatureLevel]) {
-                scoreDelta *= [[GorillasConfig get].level floatValue];
+                scoreDelta *= (int64_t)[[GorillasConfig get].level floatValue];
                 
                 NSString *oldLevel = [GorillasConfig nameForLevel:[GorillasConfig get].level];
                 if(scoreDelta > 0)
@@ -452,6 +452,7 @@
 	if (!(self = [super init]))
 		return self;
     
+    mode = GorillasModeClassic;
     running = NO;
     
     CCActionInterval *l     = [CCMoveBy actionWithDuration:.05f position:ccp(-3, 0)];
