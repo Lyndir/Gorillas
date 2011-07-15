@@ -309,7 +309,7 @@
     NSString *category = [GorillasConfig categoryForMode:mode];
 
     GKScore *score = [[[GKScore alloc] initWithCategory:category] autorelease];
-    score.value = ((GKScore *)[self.scores objectForKey:category]).value + scoreDelta;
+    score.value = MAX(0, ((GKScore *)[self.scores objectForKey:category]).value + scoreDelta);
 
     NSMutableDictionary *newScores = [self.scores mutableCopy];
     [newScores setObject:score forKey:category];

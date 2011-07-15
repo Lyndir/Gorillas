@@ -31,21 +31,15 @@
 #import "BarSprite.h"
 #import "BuildingsLayer.h"
 
-#define _DEBUG_ 0
-
-@interface CityLayer : CCLayer <Resettable, CCTargetedTouchDelegate> {
+@interface CityLayer : CCParallaxNode <Resettable> {
 
 @private
-    PanAction           *panAction;
-    CCLabelTTF          *angleLabel, *strengthLabel;
-    CCLabelTTF          *msgLabel, *infoLabel;
-    BarSprite           *aimSprite;
+    CCLabelTTF          *msgLabel;
     
     BuildingsLayer      **buildings;
     HolesLayer          *holes;
     ExplosionsLayer     *explosions;
 
-    CGPoint             aim;
     BananaLayer         *bananaLayer;
     GorillaLayer        *hitGorilla;
     
@@ -66,14 +60,11 @@
 #endif
 }
 
-@property (nonatomic, readwrite) CGPoint aim;
 @property (nonatomic, readonly) BananaLayer *bananaLayer;
 @property (nonatomic, readonly) GorillaLayer *hitGorilla;
 
 -(void) beginGame;
 -(void) endGame;
-
--(BOOL) mayThrow;
 
 -(BOOL) hitsGorilla: (CGPoint)pos;
 -(BOOL) hitsBuilding: (CGPoint)pos;

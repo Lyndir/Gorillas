@@ -27,6 +27,7 @@
 #import "GorillasAppDelegate.h"
 #import "Remove.h"
 #import "CityTheme.h"
+#import "InteractionLayer.h"
 
 
 @interface GameLayer ()
@@ -476,6 +477,7 @@
     [panningLayer addChild:skyLayer z:-5];
     [panningLayer addChild:light z:-1];
     [self addChild:panningLayer z:0];
+    [self addChild:[InteractionLayer node]];
     
     windLayer               = [[WindLayer alloc] init];
     windLayer.position      = ccp(self.contentSize.width / 2, self.contentSize.height - 15);

@@ -76,8 +76,9 @@
     GorillasConfig *config          = [GorillasConfig get];
     BOOL visualFx                   = [config.visualFx boolValue];
 
-    const ccColor4B wColor0         = ccc4lighten(ccc4l([[GorillasConfig get].windowColorOff longValue]), lightRatio);
-    const ccColor4B wColor1         = ccc4lighten(ccc4l([[GorillasConfig get].windowColorOn longValue]), lightRatio);
+    const ccColor4B skyColor        = ccc4l([config.skyColor longValue]);
+    const ccColor4B wColor0         = ccc4shade(ccc4lighten(ccc4l([config.windowColorOff longValue]), lightRatio), skyColor, MAX(0, -lightRatio / 2));
+    const ccColor4B wColor1         = ccc4shade(ccc4lighten(ccc4l([config.windowColorOn longValue]), lightRatio), skyColor, MAX(0, -lightRatio / 2));
     ccColor4B wColor10;
     wColor10.r                      = (wColor0.r + wColor1.r) / 2;
     wColor10.g                      = (wColor0.g + wColor1.g) / 2;
@@ -114,7 +115,7 @@
         windowCount                 += buildings[b].windowCount;
 
         // Building's color.
-        buildings[b].frontColor     = ccc4lighten([config buildingColor], lightRatio);
+        buildings[b].frontColor     = ccc4shade(ccc4lighten([config buildingColor], lightRatio), skyColor, MAX(0, -lightRatio / 2));
         buildings[b].backColor.r    = (GLubyte)(buildings[b].frontColor.r * 0.2f);
         buildings[b].backColor.g    = (GLubyte)(buildings[b].frontColor.g * 0.2f);
         buildings[b].backColor.b    = (GLubyte)(buildings[b].frontColor.b * 0.2f);

@@ -33,17 +33,14 @@
 
 @interface CityLayer (Private)
 
-- (void)addInfo:(ccTime)dt;
-- (void)zoomOut;
-- (void)showAim;
 - (void)endGameCallback;
-
+-(void) addChild: (CCNode*) child z:(NSInteger)z parallaxRatio:(CGPoint)ratio positionOffset:(CGPoint)offset;
 @end
 
 
 @implementation CityLayer
 
-@synthesize aim, bananaLayer, hitGorilla;
+@synthesize bananaLayer, hitGorilla;
 
 
 -(id) init {
@@ -51,6 +48,11 @@
     
     if (!(self = [super init]))
 		return self;
+
+    CGSize s = [[CCDirector sharedDirector] winSize];
+    anchorPoint_ = ccp(0.5f, 0.5f);
+    [self setContentSize:s];
+    self.isRelativeAnchorPoint = NO;
 
 #if _DEBUG_
     dbgTraceStep    = 10;
@@ -63,36 +65,10 @@
     dbgAIVect       = malloc(sizeof(CGPoint) * dbgAIMaxInd);
 #endif
     
-    self.isTouchEnabled = YES;
-    
     throwHints      = [[NSMutableArray alloc] initWithCapacity:2];
 
-    self.aim        = CGPointZero;
     holes           = nil;
     explosions      = nil;
-
-    aimSprite       = [[BarSprite alloc] initWithHead:@"aim.head.png" body:@"aim.body.%d.png" withFrames:16 tail:@"aim.tail.png" animatedTargetting:YES];
-    aimSprite.textureSize = CGSizeMake(aimSprite.textureSize.width / 2, aimSprite.textureSize.height / 2);
-    [self addChild:aimSprite z:2];
-    
-    angleLabel      = [[CCLabelTTF alloc] initWithString:@"0" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
-                                                fontName:[GorillasConfig get].fixedFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
-    strengthLabel   = [[CCLabelTTF alloc] initWithString:@"0" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
-                                                fontName:[GorillasConfig get].fixedFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
-    infoLabel       = [[CCLabelTTF alloc] initWithString:@"∡\n⊿" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
-                                           fontName:[GorillasConfig get].symbolicFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
-    [infoLabel addChild:angleLabel];
-    [infoLabel addChild:strengthLabel];
-    
-    CGSize winSize  = [CCDirector sharedDirector].winSize;
-    angleLabel.position     = ccp(45, 72);
-    strengthLabel.position  = ccp(45, 52);
-    angleLabel.scale        = 0.5f;
-    strengthLabel.scale     = 0.5f;
-    infoLabel.position      = ccp(5 + infoLabel.contentSize.width / 2,
-                                  winSize.height - infoLabel.contentSize.height / 2 - 5);
-    infoLabel.visible = NO;
-    [self schedule:@selector(addInfo:)];
     
     // Must reset before entering the scene; others' onEnter depends on us being done.
     buildings = nil;
@@ -101,18 +77,9 @@
     return self;
 }
 
+-(void) addChild: (CCNode*) child z:(NSInteger)z {
 
--(void) addInfo:(ccTime)dt {
-
-    if (!infoLabel.parent)
-        [[GorillasAppDelegate get].uiLayer addChild:infoLabel z:9];
-    [self unschedule:@selector(addInfo:)];
-}
-
-
--(void) registerWithTouchDispatcher {
-
-    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+    [self addChild:child z:z parallaxRatio:ccp(1.0f, 1.0f) positionOffset:child.position];
 }
 
 
@@ -145,12 +112,12 @@
     [self addChild:explosions z:4];
     buildings = malloc(sizeof(BuildingsLayer*) * 4);
     for (NSUInteger b = 0; b < 4; ++b) {
-        float lightRatio = -(b / 6.0f);
+        float lightRatio = -(b / 4.0f);
         if (b)
             lightRatio -= 0.5f;
         
         buildings[b] = [[BuildingsLayer alloc] initWithWidthRatio:(5 - b) / 5.0f heightRatio:1 + (b / 2.0f) lightRatio:lightRatio];
-        [self addChild:buildings[b] z:b? -1-b: 1];
+        [self addChild:buildings[b] z:b? -1-b: 1 parallaxRatio:ccp((5 - b) / 5.0f, (10 - b) / 10.0f) positionOffset:CGPointZero];
     }
 }
 
@@ -256,139 +223,6 @@
                 DrawLinesTo(fromPx, &toPx, 1, ccc4l([[GorillasConfig get].windowColorOff longValue] & 0xffffff33), 3);
         }
     }
-}
-
-
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-
-    if([[event allTouches] count] != 1)
-        // Ignore: multiple fingers on the screen.
-        return NO;
-    
-    if(![self mayThrow])
-        // State doesn't allow throwing right now.
-        return NO;
-    
-    CGPoint p = [self convertTouchToNodeSpace:[[event allTouches] anyObject]];
-    
-    if([[[GorillasAppDelegate get] hudLayer] hitsHud:p])
-        // Ignore when moving/clicking over/on HUD.
-        return NO;
-    
-    if(!CGPointEqualToPoint(aim, CGPointZero))
-        // Has already began.
-        return NO;
-        
-    self.aim = ccpSub(p, self.position);
-
-    return YES;
-}
-
-
-- (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    
-    if([[event allTouches] count] != 1) {
-        // Cancel when: multiple fingers hit the screen.
-        self.aim = CGPointZero;
-        return;
-    }
-
-    CGPoint p = [self convertTouchToNodeSpace:[[event allTouches] anyObject]];
-    if([[[GorillasAppDelegate get] hudLayer] hitsHud:p]) {
-        // Ignore when moving/clicking over/on HUD.
-        return;
-    }
-
-    CGPoint wp = [[GorillasAppDelegate get].gameLayer convertTouchToNodeSpace:[[event allTouches] anyObject]];
-    if (fabsf(wp.y - [CCDirector sharedDirector].winSize.height) < 20)
-        [self performSelector:@selector(zoomOut) withObject:nil afterDelay:3];
-    else
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(zoomOut) object:nil];
-    
-    self.aim = ccpSub(p, [self position]);
-}
-
-
-- (void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
-    
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(zoomOut) object:nil];
-
-    self.aim = CGPointZero;
-}
-
-
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(zoomOut) object:nil];
-    
-    if([[event allTouches] count] != 1) {
-        // Cancel when: multiple fingers hit the screen.
-        self.aim = CGPointZero;
-        return;
-    }
-    
-    CGPoint p = [self convertTouchToNodeSpace:[[event allTouches] anyObject]];
-    
-    if([[[GorillasAppDelegate get] hudLayer] hitsHud:p]
-       || CGPointEqualToPoint(aim, CGPointZero)
-       || ![self mayThrow]) {
-        // Cancel when: released over HUD, no aim vector, state doesn't allow throwing.
-        self.aim = CGPointZero;
-        return;
-    }
-    
-    GorillaLayer *activeGorilla = [GorillasAppDelegate get].gameLayer.activeGorilla;
-    CGSize winSize = [CCDirector sharedDirector].winSize;
-    CGPoint r0 = activeGorilla.position;
-    CGPoint v = ccpSub(aim, r0); // Velocity = Vector from origin to aim point.
-    v = ccp(v.x / winSize.width, v.y / winSize.height); // Normalize velocity so it's resolution-independant.
-    self.aim = CGPointZero;
-    
-    // Notify the network controller.
-    [[GorillasAppDelegate get].netController sendThrowWithNormalizedVelocity:v];
-    
-    [[ThrowController get] throwFrom:activeGorilla normalizedVelocity:v];
-}
-
-
-- (void)setAim:(CGPoint)anAim {
-    
-    aim = aimSprite.target  = anAim;
-    
-    if (CGPointEqualToPoint(aim, CGPointZero)) {
-        infoLabel.visible   = NO;
-        return;
-    }
-    
-    CGPoint gorillaPosition = [GorillasAppDelegate get].gameLayer.activeGorilla.position;
-    CGPoint relAim = ccpSub(aim, gorillaPosition);
-    CGPoint worldAim = [self convertToWorldSpace:relAim];
-
-    aimSprite.position = gorillaPosition;
-
-    [angleLabel setString:[NSString stringWithFormat:@"%0.0f", CC_RADIANS_TO_DEGREES(ccpToAngle(worldAim))]];
-    [strengthLabel setString:[NSString stringWithFormat:@"%0.0f", ccpLength(worldAim)]];
-    infoLabel.visible = YES;
-}
-
-
--(void) zoomOut {
-
-    PanningLayer *panningLayer = [GorillasAppDelegate get].gameLayer.panningLayer;
-    [panningLayer scaleTo:panningLayer.scale * 0.9f limited:YES];
-}
-
-
--(BOOL) mayThrow {
-
-    dbg(@"mayThrow? !throwing(%d) && active(%d) && alive(%d) && human(%d) && local(%d) && !paused(%d)",
-        [bananaLayer throwing], [[GorillasAppDelegate get].gameLayer.activeGorilla active], [[GorillasAppDelegate get].gameLayer.activeGorilla alive], [[GorillasAppDelegate get].gameLayer.activeGorilla human], [[GorillasAppDelegate get].gameLayer.activeGorilla local], [GorillasAppDelegate get].gameLayer.paused);
-    return ![bananaLayer throwing] &&
-    [[GorillasAppDelegate get].gameLayer.activeGorilla active] &&
-    [[GorillasAppDelegate get].gameLayer.activeGorilla alive] &&
-    [[GorillasAppDelegate get].gameLayer.activeGorilla human] &&
-    [[GorillasAppDelegate get].gameLayer.activeGorilla local] &&
-    ![GorillasAppDelegate get].gameLayer.paused;
 }
 
 
@@ -637,7 +471,7 @@
         if([throwHints count] < [gorillas count]) {
             CCSprite *hint = [CCSprite spriteWithFile:@"fire.png"];
             [throwHints addObject:hint];
-            [self addChild:hint];
+            [self addChild:hint z:0];
         }
         
         else
@@ -792,9 +626,6 @@
 
 
 -(void) dealloc {
-    
-    [panAction release];
-    panAction = nil;
     
     [msgLabel release];
     msgLabel = nil;
