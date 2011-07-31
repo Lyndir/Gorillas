@@ -31,7 +31,7 @@
 
 + (NetMessageElectHost *)electHostWithPlayerIDs:(NSArray *)aPlayerIDs {
     
-    return [[self alloc] initWithPlayerIDs:aPlayerIDs];
+    return [[[self alloc] initWithPlayerIDs:aPlayerIDs] autorelease];
 }
 
 - (id)initWithPlayerIDs:(NSArray *)aPlayerIDs {

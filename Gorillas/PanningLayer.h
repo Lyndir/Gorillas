@@ -31,8 +31,7 @@
 @private
     CGFloat initialScale;
     CGFloat initialDist;
-    CCScaleTo *scaleAction;
-    MovingTo *scrollAction;
+    AutoTween *tween;
 }
 
 -(void) scaleTo:(CGFloat)newScale;

@@ -48,7 +48,7 @@
 
 -(void) onEnter {
     
-    [vibrationI setSelectedIndex:([[GorillasConfig get].vibration boolValue] && [DeviceUtils isIPhone])? 1: 0];
+    [[self itemForConfig:@selector(vibrate)] setSelectedIndex:([[GorillasConfig get].vibration boolValue] && [DeviceUtils isIPhone])? 1: 0];
     
     [super onEnter];
 }

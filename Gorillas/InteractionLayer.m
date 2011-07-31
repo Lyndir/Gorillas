@@ -84,41 +84,33 @@
     [self unschedule:@selector(addInfo:)];
 }
 
+- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 
--(void) registerWithTouchDispatcher {
-    
-    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
-}
-
-
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    
     if([[event allTouches] count] != 1)
         // Ignore: multiple fingers on the screen.
-        return NO;
+        return;
     
     if(![self mayThrow])
         // State doesn't allow throwing right now.
-        return NO;
+        return;
     
     CGPoint p = [self convertTouchToNodeSpace:[[event allTouches] anyObject]];
     
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:p])
         // Ignore when moving/clicking over/on HUD.
-        return NO;
+        return;
     
     if(!CGPointEqualToPoint(aim, CGPointZero))
         // Has already began.
-        return NO;
+        return;
     
     self.aim = ccpSub(p, self.position);
     
-    return YES;
+    return;
 }
 
+- (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 
-- (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    
     if([[event allTouches] count] != 1) {
         // Cancel when: multiple fingers hit the screen.
         self.aim = CGPointZero;
@@ -140,27 +132,26 @@
     self.aim = ccpSub(p, [self position]);
 }
 
+- (void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 
-- (void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
-    
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(zoomOut) object:nil];
     
     self.aim = CGPointZero;
 }
 
 
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    
+- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(zoomOut) object:nil];
-    
+
     if([[event allTouches] count] != 1) {
         // Cancel when: multiple fingers hit the screen.
         self.aim = CGPointZero;
         return;
     }
-    
+
     CGPoint p = [self convertTouchToNodeSpace:[[event allTouches] anyObject]];
-    
+
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:p]
        || CGPointEqualToPoint(aim, CGPointZero)
        || ![self mayThrow]) {
@@ -168,17 +159,17 @@
         self.aim = CGPointZero;
         return;
     }
-    
+
     GorillaLayer *activeGorilla = [GorillasAppDelegate get].gameLayer.activeGorilla;
     CGSize winSize = [CCDirector sharedDirector].winSize;
     CGPoint r0 = activeGorilla.position;
     CGPoint v = ccpSub(aim, r0); // Velocity = Vector from origin to aim point.
     v = ccp(v.x / winSize.width, v.y / winSize.height); // Normalize velocity so it's resolution-independant.
     self.aim = CGPointZero;
-    
+
     // Notify the network controller.
     [[GorillasAppDelegate get].netController sendThrowWithNormalizedVelocity:v];
-    
+
     [[ThrowController get] throwFrom:activeGorilla normalizedVelocity:v];
 }
 
@@ -207,7 +198,7 @@
 -(void) zoomOut {
     
     PanningLayer *panningLayer = [GorillasAppDelegate get].gameLayer.panningLayer;
-    [panningLayer scaleTo:panningLayer.scale * 0.9f limited:YES];
+    [panningLayer scaleTo:panningLayer.scale * 0.9f];
 }
 
 
