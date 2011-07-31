@@ -29,7 +29,6 @@
 @interface AVConfigurationLayer : GConfigMenuLayer <MenuDelegate, ConfigMenuDelegate> {
 
 @private
-    CCMenuItemToggle *audioI, *soundFxI, *voiceI, *visualFxI, *vibrationI;
 }
 
 @end

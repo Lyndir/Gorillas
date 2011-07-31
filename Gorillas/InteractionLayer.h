@@ -24,7 +24,7 @@
 
 #import "BarSprite.h"
 
-@interface InteractionLayer : CCLayer <CCTargetedTouchDelegate> {
+@interface InteractionLayer : CCLayer {
     
 @private
     CCLabelTTF          *angleLabel, *strengthLabel, *infoLabel;

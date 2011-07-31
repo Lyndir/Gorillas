@@ -38,42 +38,39 @@
     
     self.isTouchEnabled = YES;
     initialDist         = -1;
+
+    [self runAction:tween = [[AutoTween alloc] initWithDuration:0.2f]];
     
     return self;
 }
 
 
 -(void) registerWithTouchDispatcher {
-    
+
     [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
 
 
 -(void) reset {
-    
-    if (self.scale != 1) {
-        if (scaleAction)
-            [self stopAction:[scaleAction autorelease]];
-        
-        [self runAction:scaleAction = [[CCScaleTo alloc] initWithDuration:[[GorillasConfig get].transitionDuration floatValue] scale:1.0f]];
-    }
+
+    [self scaleTo:1.0f];
 }
 
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    
+
     if([[event allTouches] count] != 2)
         return NO;
     
     NSArray *touchesArray = [[event allTouches] allObjects];
-    UITouch *from = [touchesArray objectAtIndex:0];
-    UITouch *to = [touchesArray objectAtIndex:1];
-    CGPoint pFrom = [from locationInView: [from view]];
-    CGPoint pTo = [to locationInView: [to view]];
-    
+    UITouch *fromTouch = [touchesArray objectAtIndex:0];
+    UITouch *toTouch = [touchesArray objectAtIndex:1];
+    CGPoint from  = [fromTouch locationInView: [fromTouch view]];
+    CGPoint to  = [toTouch locationInView: [toTouch view]];
+
     initialScale = self.scale;
-    initialDist = fabsf(pFrom.y - pTo.y);
-    
+    initialDist = ccpDistance(from, to);
+
     return YES;
 }
 
@@ -87,26 +84,20 @@
         return;
 
     NSArray *touchesArray = [[event allTouches] allObjects];
-    UITouch *from = [touchesArray objectAtIndex:0];
-    UITouch *to = [touchesArray objectAtIndex:1];
-    CGPoint pFrom = [from locationInView: [from view]];
-    CGPoint pTo = [to locationInView: [to view]];
-    
-    CGFloat newDist = fabsf(pFrom.y - pTo.y);
+    UITouch *fromTouch = [touchesArray objectAtIndex:0];
+    UITouch *toTouch = [touchesArray objectAtIndex:1];
+    CGPoint from  = [fromTouch locationInView: [fromTouch view]];
+    CGPoint to  = [toTouch locationInView: [toTouch view]];
+
+    CGFloat newDist = ccpDistance(from, to);
     CGFloat newScale = initialScale * (newDist / initialDist);
-    CGFloat limitedScale = fmaxf(fminf(newScale, 1.1f), 0.8f);
-    if(limitedScale != newScale) {
-        newScale = limitedScale;
-        initialDist = newDist;
-        initialScale = newScale;
-    }
-    
-    [self scaleTo:newScale limited:YES];
+
+    [self scaleTo:newScale];
 }
 
 
 - (void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
-    
+
     if(initialDist < 0)
         return;
     
@@ -116,17 +107,17 @@
 
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-    
+
     if(initialDist < 0)
         return;
-    
+
     initialDist = -1;
 }
 
 
 -(void) scaleTo:(CGFloat)newScale {
     
-    [self scaleTo:newScale limited:NO];
+    [self scaleTo:newScale limited:YES];
 }
 
 
@@ -134,15 +125,8 @@
     
     if (limited)
         newScale = fmaxf(fminf(newScale, 1.1f), 0.8f);
-    
-    CGFloat duration = [[GorillasConfig get].transitionDuration floatValue];
-    if(scaleAction != nil && ![scaleAction isDone]) {
-        duration -= [scaleAction elapsed];
-        [self stopAction:scaleAction];
-    }
-    [scaleAction release];
-    [self runAction:scaleAction = [[CCScaleTo alloc] initWithDuration:duration
-                                                                scale:newScale]];
+
+    [tween tweenKeyPath:@"scale" to:newScale];
 }
 
 
@@ -188,32 +172,19 @@
         // Restore position.
         self.position = savePosition;
     }
-    
-    // Stop the current scroll.
-    ccTime scrollActionElapsed = [scrollAction isDone]? 0: scrollAction.elapsed;
-    
-    // Scroll to current point should take initial duration minus what has already elapsed to scroll to approach previous points.
-    if(!scrollAction || [scrollAction isDone]) {
-        if(scrollAction)
-            [self stopAction: scrollAction];
-        [scrollAction release];
-        
-        [self runAction:(scrollAction = [[MovingTo alloc] initWithDuration:[[GorillasConfig get].gameScrollDuration floatValue] - scrollActionElapsed
-                                                                  position:pos])];
-    }
-    else
-        [scrollAction updatePosition:pos];
+
+    [tween tweenKeyPath:@"position" to:pos.x
+              valueSize:sizeof(CGPoint) valueOffset:offsetof(CGPoint, x)];
+    [tween tweenKeyPath:@"position" to:pos.y
+              valueSize:sizeof(CGPoint) valueOffset:offsetof(CGPoint, y)];
 }
 
 
 -(void) dealloc {
-    
-    [scrollAction release];
-    scrollAction = nil;
-    
-    [scaleAction release];
-    scaleAction = nil;
-    
+
+    [tween release];
+    tween = nil;
+
     [super dealloc];
 }
 

@@ -28,8 +28,6 @@
 @interface GameConfigurationLayer : GConfigMenuLayer <MenuDelegate, ConfigMenuDelegate> {
     
 @private
-    CCMenuItemToggle          *themeI, *levelI, *replayI, *followI;
-    CCMenuItemFont            *gravityI;
 }
 
 @end

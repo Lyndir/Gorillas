@@ -371,7 +371,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
 
 - (void) applyZoom {
     
-    [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:self.zoom limited:YES];
+    [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:self.zoom];
 }
 
 

@@ -28,9 +28,8 @@
 @interface WindLayer : CCLayer <CCRGBAProtocol, Resettable> {
 
 @private
-    float           wind, bar;
-    float           windIncrement;
-    ccTime          elapsed, incrementDuration;
+    float           wind;
+    ccTime          incrementDuration;
     
     NSMutableArray  *systems, *affectAngles;
     CCSprite          *head, *body, *tail;

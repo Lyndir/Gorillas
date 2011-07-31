@@ -473,12 +473,12 @@
     light.opacity = 0x55;
     panningLayer            = [[PanningLayer alloc] init];
     panningLayer.position   = CGPointZero;
+    [panningLayer addChild:[InteractionLayer node]];
     [panningLayer addChild:cityLayer z:0];
     [panningLayer addChild:skyLayer z:-5];
     [panningLayer addChild:light z:-1];
     [self addChild:panningLayer z:0];
-    [self addChild:[InteractionLayer node]];
-    
+
     windLayer               = [[WindLayer alloc] init];
     windLayer.position      = ccp(self.contentSize.width / 2, self.contentSize.height - 15);
     [self addChild:windLayer z:5];
@@ -597,7 +597,7 @@
         // System is alive, let the emission rate evolve.
         float rate = [backWeather emissionRate] + (gameRandomFor(GorillasGameRandomWeather) % 40 - 15) / 10.0f;
         float max = [backWeather isKindOfClass:[CCParticleRain class]]? 200: 100;
-        rate = max; // fminf(fmaxf(0, rate), max);
+        rate = fminf(fmaxf(0, rate), max);
         
         if(gameRandomFor(GorillasGameRandomWeather) % 100 == 0)
             // 1% chance for a full stop.
@@ -647,9 +647,7 @@
     [activeGorilla release];
     activeGorilla = nil;
     
-    if([panningLayer position].x != 0 || [panningLayer position].y != 0)
-        [panningLayer runAction:[CCMoveTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
-                                                    position:CGPointZero]];
+    [panningLayer scrollToCenter:CGPointZero horizontal:YES];
     
     if (!configuring)
         [[GorillasAppDelegate get] showMainMenu];

@@ -27,6 +27,8 @@
  * Global Dependencies.
  */
 #ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+
     #import "Pearl.h"
     #import "Pearl-UIKit.h"
     #import "Pearl-Media.h"

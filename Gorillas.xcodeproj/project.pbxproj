@@ -663,6 +663,8 @@
 		DAFEF9730ED847D40019F7ED /* Strings.h in Headers */ = {isa = PBXBuildFile; fileRef = DAFEF9730ED847D40019F7EC /* Strings.h */; };
 		DAFEF9730ED847D40019F7EF /* PearlCocos2DStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9730ED847D40019F7EE /* PearlCocos2DStrings.m */; };
 		DAFEF9730ED847D40019F7F1 /* PearlCocos2DStrings.h in Headers */ = {isa = PBXBuildFile; fileRef = DAFEF9730ED847D40019F7F0 /* PearlCocos2DStrings.h */; };
+		DAFEF9730ED847D40019F7F3 /* AutoTween.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9730ED847D40019F7F2 /* AutoTween.m */; };
+		DAFEF9730ED847D40019F7F5 /* AutoTween.h in Headers */ = {isa = PBXBuildFile; fileRef = DAFEF9730ED847D40019F7F4 /* AutoTween.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2272,6 +2274,8 @@
 		DAFEF9730ED847D40019F7EC /* Strings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
 		DAFEF9730ED847D40019F7EE /* PearlCocos2DStrings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PearlCocos2DStrings.m; sourceTree = "<group>"; };
 		DAFEF9730ED847D40019F7F0 /* PearlCocos2DStrings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PearlCocos2DStrings.h; sourceTree = "<group>"; };
+		DAFEF9730ED847D40019F7F2 /* AutoTween.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AutoTween.m; sourceTree = "<group>"; };
+		DAFEF9730ED847D40019F7F4 /* AutoTween.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AutoTween.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2732,6 +2736,8 @@
 		DA9330A313C7B5CE00A53F52 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
+				DAFEF9730ED847D40019F7F4 /* AutoTween.h */,
+				DAFEF9730ED847D40019F7F2 /* AutoTween.m */,
 				DA9330A413C7B5CE00A53F52 /* Remove.h */,
 				DA9330A513C7B5CE00A53F52 /* Remove.m */,
 			);
@@ -4376,6 +4382,7 @@
 				DAFEF9730ED847D40019F7F1 /* PearlCocos2DStrings.h in Headers */,
 				DA16EC8713CE378400F5D800 /* Pearl-Prefix.pch in Headers */,
 				DAC10D8813CEC51000A546E4 /* MathUtils.h in Headers */,
+				DAFEF9730ED847D40019F7F5 /* AutoTween.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5041,6 +5048,7 @@
 				DAFEF9730ED847D40019F7EB /* Strings.m in Sources */,
 				DAFEF9730ED847D40019F7EF /* PearlCocos2DStrings.m in Sources */,
 				DAC10D8913CEC51000A546E4 /* MathUtils.m in Sources */,
+				DAFEF9730ED847D40019F7F3 /* AutoTween.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5450,7 +5458,6 @@
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_UNROLL_LOOPS = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
@@ -5520,7 +5527,6 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
@@ -5641,6 +5647,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_MISSING_PARENTHESES = NO;
 			};
 			name = Debug;
@@ -5649,6 +5656,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_MISSING_PARENTHESES = NO;
 			};
 			name = Distribution;
