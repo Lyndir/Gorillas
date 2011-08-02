@@ -330,8 +330,8 @@
             
             // Update Level.
             if([self isEnabled:GorillasFeatureLevel]) {
-                scoreDelta *= (int64_t)[[GorillasConfig get].level floatValue];
-                
+                scoreDelta *= [[GorillasConfig get].level doubleValue];
+
                 NSString *oldLevel = [GorillasConfig nameForLevel:[GorillasConfig get].level];
                 if(scoreDelta > 0)
                     [[GorillasConfig get] levelUp];
