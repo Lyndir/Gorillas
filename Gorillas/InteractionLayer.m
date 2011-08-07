@@ -117,6 +117,10 @@
         return;
     }
     
+    if(![self mayThrow])
+        // State doesn't allow throwing right now.
+        return;
+
     CGPoint p = [self convertTouchToNodeSpace:[[event allTouches] anyObject]];
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:p]) {
         // Ignore when moving/clicking over/on HUD.

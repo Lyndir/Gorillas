@@ -160,17 +160,18 @@
 
 - (void)scores:(id)sender {
     
-    GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];
+    GKLeaderboardViewController *leaderboardController = [[[GKLeaderboardViewController alloc] init] autorelease];
     if (leaderboardController != nil) {
         leaderboardController.leaderboardDelegate = self;
         [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:leaderboardController animated:YES];
-        [leaderboardController release];
+        [[CCDirector sharedDirector] pause];
     }
 }
 
 - (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController {
     
     [[[UIApplication sharedApplication] keyWindow].rootViewController dismissModalViewControllerAnimated:YES];
+    [[CCDirector sharedDirector] resume];
 }
 
 

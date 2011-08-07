@@ -473,7 +473,7 @@
     light.opacity = 0x55;
     panningLayer            = [[PanningLayer alloc] init];
     panningLayer.position   = CGPointZero;
-    [panningLayer addChild:[InteractionLayer node]];
+    [panningLayer addChild:[InteractionLayer node] z:1];
     [panningLayer addChild:cityLayer z:0];
     [panningLayer addChild:skyLayer z:-5];
     [panningLayer addChild:light z:-1];
@@ -572,8 +572,8 @@
                         break;
                         
                     default:
-                        @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                                       reason:@"Unsupported weather type selected." userInfo:nil];
+                        err(@"Unsupported weather type selected.");
+                        return;
                 }
                 
                 backWeather.positionType    = kCCPositionTypeGrouped;
