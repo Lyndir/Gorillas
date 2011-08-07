@@ -117,7 +117,7 @@
             lightRatio -= 0.5f;
         
         buildings[b] = [[BuildingsLayer alloc] initWithWidthRatio:(5 - b) / 5.0f heightRatio:1 + (b / 2.0f) lightRatio:lightRatio];
-        [self addChild:buildings[b] z:b? -1-b: 1 parallaxRatio:ccp((5 - b) / 5.0f, (10 - b) / 10.0f) positionOffset:CGPointZero];
+        [self addChild:buildings[b] z:b? -2-b: 1 parallaxRatio:ccp((5 - b) / 5.0f, (10 - b) / 10.0f) positionOffset:CGPointZero];
     }
 }
 
@@ -295,10 +295,11 @@
         if(foundNextGorilla)
             break;
         
-        if(!startFromAfterCurrent)
+        if(!startFromAfterCurrent) {
             // Second run didn't find any gorillas -> no gorillas available.
-            @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                           reason:@"No next gorilla to be found; game should've ended in previous check." userInfo:nil];
+            err(@"No next gorilla to be found; game should've ended in previous check.");
+            return;
+        }
     }
     
     // Make sure the game hasn't ended.
@@ -510,9 +511,10 @@
     NSInteger minSpace  = (delta - 1) / 2 - ([gorillas count] - 2) * 2;
     if(minSpace < 0)
         minSpace = 0;
-    if (minSpace * ([gorillas count] - 1) > delta)
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:@"Tried to start a game with more gorillas than there's room in the field." userInfo:nil];
+    if (minSpace * ([gorillas count] - 1) > delta) {
+        err(@"Tried to start a game with more gorillas than there's room in the field.");
+        return;
+    }
 
     NSMutableArray *gorillasQueue = [gorillas mutableCopy];
     NSMutableArray *gorillaIndexes = [[NSMutableArray alloc] initWithCapacity: [gorillas count]];
@@ -540,16 +542,14 @@
         GorillaLayer *gorilla = [gorillas objectAtIndex:i];
         
         gorilla.position = ccp(building.x + building.size.width / 2, building.size.height + gorilla.contentSize.height / 2);
-        dbg(@"position: %f + %f / 2, %f + %f / 2 = %@", building.x, building.size.width, building.size.height, gorilla.contentSize.height, NSStringFromCGPoint(gorilla.position));
         [gorilla runAction:[CCFadeIn actionWithDuration:1]];
         [self addChild:gorilla z:3];
     }
     [gorillaIndexes release];
     // Add a banana to the scene.
     if(bananaLayer) {
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:@"Tried to start a game while a(n old?) banana still existed."
-                                     userInfo:nil];
+        err(@"Tried to start a game while a(n old?) banana still existed.");
+        return;
     }
     bananaLayer = [[BananaLayer alloc] init];
     [self addChild:bananaLayer z:2];

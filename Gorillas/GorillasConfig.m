@@ -243,8 +243,8 @@
             break;
     }
 
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                   reason:@"Unsupported game mode." userInfo:nil];
+    err(@"Unsupported game mode.");
+    return nil;
 }
 
 +(NSArray *)descriptionsForModes {
@@ -273,8 +273,8 @@
             break;
     }
 
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                   reason:@"Unsupported game mode." userInfo:nil];
+    err(@"Unsupported game mode.");
+    return nil;
 }
 
 + (NSString *)categoryForMode:(GorillasMode)mode {

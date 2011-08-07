@@ -50,8 +50,10 @@
     
     [super startWithTarget:aTarget];
     
-    if(![self.target conformsToProtocol:@protocol(CCRGBAProtocol)])
-        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"ShadeTo action target does not conform to CCRGBAProtocol" userInfo:nil];
+    if(![self.target conformsToProtocol:@protocol(CCRGBAProtocol)]) {
+        err(@"ShadeTo action target does not conform to CCRGBAProtocol");
+        return;
+    }
     
     startCol    = ccc3to4([(CCNode<CCRGBAProtocol> *) self.target color]);
     startCol.a  = [(CCNode<CCRGBAProtocol> *) self.target opacity];

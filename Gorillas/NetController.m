@@ -35,11 +35,11 @@
     NSAssert(![[GorillasAppDelegate get].gameLayer checkGameStillOn], @"A previous match is still running.");
     NSAssert(self.match == nil && !started, @"A previous match has not been cleaned up.");
     
-    GKMatchmakerViewController *matchVC = [[GKMatchmakerViewController alloc] initWithMatchRequest:aMatchRequest];
+    GKMatchmakerViewController *matchVC = [[[GKMatchmakerViewController alloc] initWithMatchRequest:aMatchRequest] autorelease];
     if (matchVC != nil) {
         matchVC.matchmakerDelegate = self;
         [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:matchVC animated:YES];
-        [matchVC release];
+        [[CCDirector sharedDirector] pause];
     }
 }
 
@@ -49,11 +49,11 @@
     NSAssert(![[GorillasAppDelegate get].gameLayer checkGameStillOn], @"A previous match is still running.");
     NSAssert(self.match == nil && !started, @"A previous match has not been cleaned up.");
     
-    GKMatchmakerViewController *matchVC = [[GKMatchmakerViewController alloc] initWithInvite:anInvite];
+    GKMatchmakerViewController *matchVC = [[[GKMatchmakerViewController alloc] initWithInvite:anInvite] autorelease];
     if (matchVC != nil) {
         matchVC.matchmakerDelegate = self;
         [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:matchVC animated:YES];
-        [matchVC release];
+        [[CCDirector sharedDirector] pause];
     }
 }
 
@@ -104,6 +104,7 @@
     [self endMatch];
 
     [[[UIApplication sharedApplication] keyWindow].rootViewController dismissModalViewControllerAnimated:YES];
+    [[CCDirector sharedDirector] resume];
 }
 
 // Matchmaking has failed with an error
@@ -113,6 +114,7 @@
     [self endMatch];
     
     [[[UIApplication sharedApplication] keyWindow].rootViewController dismissModalViewControllerAnimated:YES];
+    [[CCDirector sharedDirector] resume];
 }
 
 // A peer-to-peer match has been found, the game should start
@@ -137,7 +139,8 @@
             // Beginning of the game, host determined.  Start the game.
             started = YES;
             [[[UIApplication sharedApplication] keyWindow].rootViewController dismissModalViewControllerAnimated:YES];
-            
+            [[CCDirector sharedDirector] resume];
+
             // Use the host's seed for the game random.
             [[GorillasConfig get] setGameRandomSeed:self.hostElection.host.vote];
             

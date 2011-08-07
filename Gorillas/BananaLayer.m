@@ -108,8 +108,8 @@
             modelName = @"gorilla";
             break;
         default:
-            @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                           reason:@"Active banana model not implemented." userInfo:nil];
+            err(@"Active banana model not implemented.");
+            return nil;
     }
     switch (self.type) {
         case GorillasPlayerTypeAI:
@@ -119,8 +119,8 @@
             typeName = @"human";
             break;
         default:
-            @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                           reason:@"Active gorilla type not implemented." userInfo:nil];
+            err(@"Active gorilla model not implemented.");
+            return nil;
     }
     
     return [NSString stringWithFormat:@"%@-%@.png", modelName, typeName];

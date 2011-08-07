@@ -200,8 +200,7 @@
             }
         }
         if(bw != buildings[b].windowCount)
-            @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                           reason:@"Windows vertex count not the same as window amount." userInfo:nil];
+            err(@"Windows vertex count not the same as window amount.");
         
         w += bw;
     }
