@@ -303,8 +303,11 @@ static NSDictionary *localyticsInfo = nil;
 }
 
 - (NSString *)localyticsKey {
-    
-    return [[self localyticsInfo] valueForKeyPath:@"Key"];
+#if DEBUG
+    return [[self localyticsInfo] valueForKeyPath:@"Key.development"];
+#else
+    return [[self localyticsInfo] valueForKeyPath:@"Key.distribution"];
+#endif
 }
 
 
