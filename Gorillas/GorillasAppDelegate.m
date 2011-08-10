@@ -29,6 +29,7 @@
 #import "DebugLayer.h"
 #import "CityTheme.h"
 #import "ccMacros.h"
+#import "LocalyticsSession.h"
 
 
 static NSString *PHPlacementMoreGames  = @"more_games";
@@ -51,6 +52,10 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 @property (nonatomic, readwrite, retain) NetController                  *netController;
 @property (nonatomic, readwrite, retain) PHNotificationView             *notifierView;
 
+- (NSString *)localyticsInfo;
+- (NSString *)localyticsKey;
+
+- (NSString *)phInfo;
 - (NSString *)phToken;
 - (NSString *)phSecret;
 
@@ -70,6 +75,8 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [[LocalyticsSession sharedLocalyticsSession] startSession:[self localyticsKey]];
     
     [super application:application didFinishLaunchingWithOptions:launchOptions];
     
@@ -281,22 +288,48 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 }
 
 
+#pragma mark - Localytics
+
+
+static NSDictionary *localyticsInfo = nil;
+
+- (NSDictionary *)localyticsInfo {
+    
+    if (localyticsInfo == nil)
+        localyticsInfo = [[NSDictionary alloc] initWithContentsOfURL:
+                         [[NSBundle mainBundle] URLForResource:@"Localytics" withExtension:@"plist"]];
+    
+    return localyticsInfo;
+}
+
+- (NSString *)localyticsKey {
+    
+    return [[self localyticsInfo] valueForKeyPath:@"Key"];
+}
+
+
+
 #pragma mark - PlayHavenSDK
 
 static NSDictionary *playHavenInfo = nil;
 
-- (NSString *)phToken {
+- (NSDictionary *)phInfo {
     
     if (playHavenInfo == nil)
-        playHavenInfo = [[NSDictionary alloc]initWithContentsOfURL:
+        playHavenInfo = [[NSDictionary alloc] initWithContentsOfURL:
                          [[NSBundle mainBundle] URLForResource:@"PlayHaven" withExtension:@"plist"]];
     
-    return [playHavenInfo valueForKeyPath:@"Token"];
+    return playHavenInfo;
+}
+
+- (NSString *)phToken {
+    
+    return [[self phInfo] valueForKeyPath:@"Token"];
 }
 
 - (NSString *)phSecret {
     
-    return [playHavenInfo valueForKeyPath:@"Secret"];
+    return [[self phInfo] valueForKeyPath:@"Secret"];
 }
 
 -(void)request:(PHPublisherContentRequest *)request contentWillDisplay:(PHContent *)content {
@@ -322,6 +355,29 @@ static NSDictionary *playHavenInfo = nil;
     [[CCDirector sharedDirector] resume];
 }
 
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    
+    [[LocalyticsSession sharedLocalyticsSession] close];
+	[[LocalyticsSession sharedLocalyticsSession] upload];
+    
+    [super applicationDidEnterBackground:application];
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+
+ 	[[LocalyticsSession sharedLocalyticsSession] resume];
+	[[LocalyticsSession sharedLocalyticsSession] upload];
+    
+    [super applicationWillEnterForeground:application];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    
+    [[LocalyticsSession sharedLocalyticsSession] close];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
+    
+    [super applicationWillTerminate:application];
+}
 
 -(void) applicationWillResignActive:(UIApplication *)application {
     
