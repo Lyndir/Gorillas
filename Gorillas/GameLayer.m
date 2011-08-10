@@ -134,9 +134,9 @@
       @"mode",
       [NSNumber numberWithUnsignedInt:localHumans],
       @"localHumans",
-      [playerIDs count],
+      [NSNumber numberWithUnsignedInt:[playerIDs count]],
       @"remoteHumans",
-      ais,
+      [NSNumber numberWithUnsignedInt:ais],
       @"ais",
       nil]];
 

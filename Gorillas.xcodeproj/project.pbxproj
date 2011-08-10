@@ -194,6 +194,8 @@
 		DA571E2313F337B100D50DF2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA571E2213F337B100D50DF2 /* SystemConfiguration.framework */; };
 		DA571E2513F337BA00D50DF2 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA571E2413F337BA00D50DF2 /* libicucore.dylib */; };
 		DA571E2713F337DC00D50DF2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA571E2613F337DC00D50DF2 /* Security.framework */; };
+		DA571E2913F3427100D50DF2 /* Localytics.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA571E2813F3426700D50DF2 /* Localytics.plist */; };
+		DA571E2A13F3427200D50DF2 /* Localytics.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA571E2813F3426700D50DF2 /* Localytics.plist */; };
 		DA5C1F3A0F829FDE007B1085 /* gorilla-ai-DD.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5C1F1A0F829FDE007B1085 /* gorilla-ai-DD.png */; };
 		DA5C1F3B0F829FDE007B1085 /* gorilla-ai-DU.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5C1F1B0F829FDE007B1085 /* gorilla-ai-DU.png */; };
 		DA5C1F3C0F829FDE007B1085 /* gorilla-ai-UD.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5C1F1C0F829FDE007B1085 /* gorilla-ai-UD.png */; };
@@ -797,6 +799,7 @@
 		DA571E2213F337B100D50DF2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DA571E2413F337BA00D50DF2 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		DA571E2613F337DC00D50DF2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		DA571E2813F3426700D50DF2 /* Localytics.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Localytics.plist; sourceTree = "<group>"; };
 		DA5C1F1A0F829FDE007B1085 /* gorilla-ai-DD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gorilla-ai-DD.png"; path = "png/gorilla-ai-DD.png"; sourceTree = "<group>"; };
 		DA5C1F1B0F829FDE007B1085 /* gorilla-ai-DU.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gorilla-ai-DU.png"; path = "png/gorilla-ai-DU.png"; sourceTree = "<group>"; };
 		DA5C1F1C0F829FDE007B1085 /* gorilla-ai-UD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gorilla-ai-UD.png"; path = "png/gorilla-ai-UD.png"; sourceTree = "<group>"; };
@@ -2597,6 +2600,7 @@
 		DA571E0413F3332200D50DF2 /* Localytics */ = {
 			isa = PBXGroup;
 			children = (
+				DA571E2813F3426700D50DF2 /* Localytics.plist */,
 				DA571E0D13F3339E00D50DF2 /* LocalyticsDatabase.h */,
 				DA571E0E13F3339E00D50DF2 /* LocalyticsDatabase.m */,
 				DA571E0F13F3339E00D50DF2 /* LocalyticsSession.h */,
@@ -4863,6 +4867,7 @@
 				DAC10D7D13CE3DBB00A546E4 /* Level_Down.caf in Resources */,
 				DAC10D7F13CE3DBB00A546E4 /* Level_Up.caf in Resources */,
 				DAC10D8113CE3DBB00A546E4 /* Next_Player.caf in Resources */,
+				DA571E2913F3427100D50DF2 /* Localytics.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4981,6 +4986,7 @@
 				DAC10D7E13CE3DBB00A546E4 /* Level_Down.caf in Resources */,
 				DAC10D8013CE3DBB00A546E4 /* Level_Up.caf in Resources */,
 				DAC10D8213CE3DBB00A546E4 /* Next_Player.caf in Resources */,
+				DA571E2A13F3427200D50DF2 /* Localytics.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
