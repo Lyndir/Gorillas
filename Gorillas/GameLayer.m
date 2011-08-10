@@ -28,6 +28,7 @@
 #import "Remove.h"
 #import "CityTheme.h"
 #import "InteractionLayer.h"
+#import "LocalyticsSession.h"
 
 
 @interface GameLayer ()
@@ -127,6 +128,18 @@
     humans          = localHumans + [playerIDs count];
     ais             = _ais;
     
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"New Game" attributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [GorillasConfig nameForMode:mode],
+      @"mode",
+      [NSNumber numberWithUnsignedInt:localHumans],
+      @"localHumans",
+      [playerIDs count],
+      @"remoteHumans",
+      ais,
+      @"ais",
+      nil]];
+
     // Create gorillas array.
     [gorillas removeAllObjects];
     if(!gorillas)
