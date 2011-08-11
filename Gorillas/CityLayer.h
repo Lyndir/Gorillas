@@ -39,6 +39,7 @@
     BuildingsLayer      **buildings;
     HolesLayer          *holes;
     ExplosionsLayer     *explosions;
+    CCLayer             *nonParallaxLayer;
 
     BananaLayer         *bananaLayer;
     GorillaLayer        *hitGorilla;

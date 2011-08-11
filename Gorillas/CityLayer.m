@@ -27,14 +27,13 @@
 #import "ExplosionsLayer.h"
 #import "GorillasAppDelegate.h"
 #import "ShadeTo.h"
-#import "Remove.h"
 #import "GLUtils.h"
 
 
 @interface CityLayer (Private)
 
 - (void)endGameCallback;
--(void) addChild: (CCNode*) child z:(NSInteger)z parallaxRatio:(CGPoint)ratio positionOffset:(CGPoint)offset;
+
 @end
 
 
@@ -72,6 +71,7 @@
     
     // Must reset before entering the scene; others' onEnter depends on us being done.
     buildings = nil;
+    [self addChild:nonParallaxLayer = [[CCLayer alloc] init] z:1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:CGPointZero];
     [self reset];
     
     return self;
@@ -79,7 +79,7 @@
 
 -(void) addChild: (CCNode*) child z:(NSInteger)z {
 
-    [self addChild:child z:z parallaxRatio:ccp(1.0f, 1.0f) positionOffset:child.position];
+    [nonParallaxLayer addChild:child z:z];
 }
 
 
@@ -90,16 +90,16 @@
     [self stopAllActions];
     
     if (holes) {
-        [self removeChild:holes cleanup:YES];
+        [holes removeFromParentAndCleanup:YES];
         [holes release];
     }
     if (explosions) {
-        [self removeChild:explosions cleanup:YES];
+        [explosions removeFromParentAndCleanup:YES];
         [explosions release];
     }
     if (buildings) {
         for (NSUInteger b = 0; b < 4; ++b) {
-            [self removeChild:buildings[b] cleanup:YES];
+            [buildings[b] removeFromParentAndCleanup:YES];
             [buildings[b] release];
         }
         free(buildings);
@@ -107,9 +107,9 @@
     
     // Construct city.
     holes = [[HolesLayer alloc] init];
-    [self addChild:holes z:-1];
+    [nonParallaxLayer addChild:holes z:-1];
     explosions = [[ExplosionsLayer alloc] init];
-    [self addChild:explosions z:4];
+    [nonParallaxLayer addChild:explosions z:4];
     buildings = malloc(sizeof(BuildingsLayer*) * 4);
     for (NSUInteger b = 0; b < 4; ++b) {
         float lightRatio = -(b / 4.0f);
@@ -117,29 +117,32 @@
             lightRatio -= 0.5f;
         
         buildings[b] = [[BuildingsLayer alloc] initWithWidthRatio:(5 - b) / 5.0f heightRatio:1 + (b / 2.0f) lightRatio:lightRatio];
-        [self addChild:buildings[b] z:b? -2-b: 1 parallaxRatio:ccp((5 - b) / 5.0f, (10 - b) / 10.0f) positionOffset:CGPointZero];
+        if (b)
+            [self addChild:buildings[b] z:-2-b parallaxRatio:ccp((5 - b) / 5.0f, (10 - b) / 10.0f) positionOffset:CGPointZero];
+        else
+            [nonParallaxLayer addChild:buildings[b] z:1];
     }
 }
 
 
 -(void) message:(NSString *)msg on:(CCNode *)node {
-    
-    if(msgLabel)
+
+    if(msgLabel) {
         [msgLabel stopAllActions];
+        [msgLabel setString:msg];
+    }
 
     else {
-        msgLabel = [[CCLabelTTF alloc] initWithString:@""
+        msgLabel = [[CCLabelTTF alloc] initWithString:msg
                                       dimensions:CGSizeMake(1000, [[GorillasConfig get].fontSize intValue] + 5)
                                        alignment:UITextAlignmentCenter
                                         fontName:[GorillasConfig get].fixedFontName
                                         fontSize:[[GorillasConfig get].fontSize intValue]];
     
-        [self addChild:msgLabel z:9];
+        [nonParallaxLayer addChild:msgLabel z:9];
     }
     
-    [msgLabel setString:msg];
-    [msgLabel setPosition:ccp([node position].x,
-                              [node position].y + [node contentSize].height)];
+    [msgLabel setPosition:ccp([node position].x, [node position].y + [node contentSize].height + [[GorillasConfig get].fontSize intValue])];
     
     // Make sure label remains on screen.
     CGSize winSize = [CCDirector sharedDirector].winSize;
@@ -472,11 +475,13 @@
         if([throwHints count] < [gorillas count]) {
             CCSprite *hint = [CCSprite spriteWithFile:@"fire.png"];
             [throwHints addObject:hint];
-            [self addChild:hint z:0];
+            [nonParallaxLayer addChild:hint z:0];
         }
         
-        else
+        else {
+            [[throwHints lastObject] removeFromParentAndCleanup:YES];
             [throwHints removeLastObject];
+        }
     }
 
     // Reset throw history & throw hints.
@@ -543,7 +548,7 @@
         
         gorilla.position = ccp(building.x + building.size.width / 2, building.size.height + gorilla.contentSize.height / 2);
         [gorilla runAction:[CCFadeIn actionWithDuration:1]];
-        [self addChild:gorilla z:3];
+        [nonParallaxLayer addChild:gorilla z:3];
     }
     [gorillaIndexes release];
     // Add a banana to the scene.
@@ -552,7 +557,7 @@
         return;
     }
     bananaLayer = [[BananaLayer alloc] init];
-    [self addChild:bananaLayer z:2];
+    [nonParallaxLayer addChild:bananaLayer z:2];
     
     [[GorillasAppDelegate get].gameLayer began];
 }
@@ -564,7 +569,7 @@
     hitGorilla = nil;
     
     if(bananaLayer) {
-        [self removeChild:bananaLayer cleanup:YES];
+        [bananaLayer removeFromParentAndCleanup:YES];
         [bananaLayer release];
         bananaLayer = nil;
     }
