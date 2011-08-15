@@ -47,7 +47,7 @@
 
 -(void) registerWithTouchDispatcher {
 
-    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:NO];
 }
 
 
@@ -59,17 +59,7 @@
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
 
-    if([[event allTouches] count] != 2)
-        return NO;
-    
-    NSArray *touchesArray = [[event allTouches] allObjects];
-    UITouch *fromTouch = [touchesArray objectAtIndex:0];
-    UITouch *toTouch = [touchesArray objectAtIndex:1];
-    CGPoint from  = [fromTouch locationInView: [fromTouch view]];
-    CGPoint to  = [toTouch locationInView: [toTouch view]];
-
-    initialScale = self.scale;
-    initialDist = ccpDistance(from, to);
+    initialDist = -1;
 
     return YES;
 }
@@ -80,19 +70,21 @@
     if([[event allTouches] count] != 2)
         return;
     
-    if(initialDist < 0)
-        return;
-
     NSArray *touchesArray = [[event allTouches] allObjects];
     UITouch *fromTouch = [touchesArray objectAtIndex:0];
     UITouch *toTouch = [touchesArray objectAtIndex:1];
     CGPoint from  = [fromTouch locationInView: [fromTouch view]];
     CGPoint to  = [toTouch locationInView: [toTouch view]];
+    
+    if (initialDist < 0) {
+        initialDist = ccpDistance(from, to);
+        initialScale = self.scale;
+    } else {
+        CGFloat newDist = ccpDistance(from, to);
+        CGFloat newScale = initialScale * (newDist / initialDist);
 
-    CGFloat newDist = ccpDistance(from, to);
-    CGFloat newScale = initialScale * (newDist / initialDist);
-
-    [self scaleTo:newScale];
+        [self scaleTo:newScale];
+    }
 }
 
 

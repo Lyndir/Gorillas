@@ -124,7 +124,7 @@
     [currModelSprite setModel:[[modelSprites objectAtIndex:currModel] unsignedIntValue]];
     [nextModelSprite setModel:[[modelSprites objectAtIndex:nextModel] unsignedIntValue]];
     
-    [currModelSprite cheer];
+    [currModelSprite danceHit];
     [GorillasConfig get].playerModel = [NSNumber numberWithUnsignedInt:[currModelSprite model]];
     
     [modelCurr setString:[modelTitles objectAtIndex:currModel]];

@@ -79,8 +79,9 @@
 -(BOOL) human;
 -(BOOL) local;
 -(BOOL) hitsGorilla: (CGPoint)pos;
--(void) cheer;
--(void) dance;
+-(void) danceHit;
+-(void) danceKill;
+-(void) danceVictory;
 -(void) threw:(CGPoint)aim;
 -(void) applyZoom;
 -(void) kill;

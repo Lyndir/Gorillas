@@ -21,3 +21,5 @@
 
 # Gorillas Stuff
 /promocodes
+/sendipa/*
+!/sendipa/sendipa.conf

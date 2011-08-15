@@ -88,10 +88,8 @@
 		DA0AA58F13B29C85005759F8 /* menu-main-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0AA58113B29C85005759F8 /* menu-main-hd.png */; };
 		DA0AA59113B29C9E005759F8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0AA59013B29C9E005759F8 /* Icon.png */; };
 		DA0AA59213B29C9E005759F8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0AA59013B29C9E005759F8 /* Icon.png */; };
-		DA0AA59513B29CF9005759F8 /* iTunesArtwork-lite.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0AA59313B29CF9005759F8 /* iTunesArtwork-lite.png */; };
-		DA0AA59613B29CF9005759F8 /* iTunesArtwork-lite.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0AA59313B29CF9005759F8 /* iTunesArtwork-lite.png */; };
-		DA0AA59713B29CF9005759F8 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0AA59413B29CF9005759F8 /* iTunesArtwork.png */; };
-		DA0AA59813B29CF9005759F8 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0AA59413B29CF9005759F8 /* iTunesArtwork.png */; };
+		DA0AA59713B29CF9005759F8 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = DA0AA59413B29CF9005759F8 /* iTunesArtwork */; };
+		DA0AA59813B29CF9005759F8 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = DA0AA59413B29CF9005759F8 /* iTunesArtwork */; };
 		DA0DA09413CCF1FD00B1D188 /* libPlayHaven.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0EA01113CCF06900BB7666 /* libPlayHaven.a */; };
 		DA0DA09513CCF20200B1D188 /* libPlayHaven.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0EA01113CCF06900BB7666 /* libPlayHaven.a */; };
 		DA0DD66A0F95368600E5607E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6610F95368600E5607E /* UIKit.framework */; };
@@ -748,8 +746,7 @@
 		DA0AA58013B29C85005759F8 /* menu-back-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-back-hd.png"; path = "png/menu-back-hd.png"; sourceTree = "<group>"; };
 		DA0AA58113B29C85005759F8 /* menu-main-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-main-hd.png"; path = "png/menu-main-hd.png"; sourceTree = "<group>"; };
 		DA0AA59013B29C9E005759F8 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = png/Icon.png; sourceTree = "<group>"; };
-		DA0AA59313B29CF9005759F8 /* iTunesArtwork-lite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iTunesArtwork-lite.png"; path = "png/iTunesArtwork-lite.png"; sourceTree = "<group>"; };
-		DA0AA59413B29CF9005759F8 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iTunesArtwork.png; path = png/iTunesArtwork.png; sourceTree = "<group>"; };
+		DA0AA59413B29CF9005759F8 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = text; name = iTunesArtwork; path = png/iTunesArtwork; sourceTree = "<group>"; };
 		DA0DD6610F95368600E5607E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DA0DD6620F95368600E5607E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DA0DD6630F95368600E5607E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -2615,8 +2612,7 @@
 		DA5F1BD30EE74CE80041691E /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				DA0AA59313B29CF9005759F8 /* iTunesArtwork-lite.png */,
-				DA0AA59413B29CF9005759F8 /* iTunesArtwork.png */,
+				DA0AA59413B29CF9005759F8 /* iTunesArtwork */,
 				DA0AA59013B29C9E005759F8 /* Icon.png */,
 				DA0AA57B13B29C84005759F8 /* Icon-72.png */,
 				DA0AA57C13B29C84005759F8 /* Icon-Small-50.png */,
@@ -4586,7 +4582,6 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
-				DAE38A881004D33B0023D941 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -4828,8 +4823,7 @@
 				DA0AA58C13B29C85005759F8 /* menu-back-hd.png in Resources */,
 				DA0AA58E13B29C85005759F8 /* menu-main-hd.png in Resources */,
 				DA0AA59113B29C9E005759F8 /* Icon.png in Resources */,
-				DA0AA59513B29CF9005759F8 /* iTunesArtwork-lite.png in Resources */,
-				DA0AA59713B29CF9005759F8 /* iTunesArtwork.png in Resources */,
+				DA0AA59713B29CF9005759F8 /* iTunesArtwork in Resources */,
 				DA03B67813CA3D04009DF176 /* score.png in Resources */,
 				DA03B67A13CA3D0A009DF176 /* menu.png in Resources */,
 				DA03B67C13CA3D2A009DF176 /* aim.body.0.png in Resources */,
@@ -4947,8 +4941,7 @@
 				DA0AA58D13B29C85005759F8 /* menu-back-hd.png in Resources */,
 				DA0AA58F13B29C85005759F8 /* menu-main-hd.png in Resources */,
 				DA0AA59213B29C9E005759F8 /* Icon.png in Resources */,
-				DA0AA59613B29CF9005759F8 /* iTunesArtwork-lite.png in Resources */,
-				DA0AA59813B29CF9005759F8 /* iTunesArtwork.png in Resources */,
+				DA0AA59813B29CF9005759F8 /* iTunesArtwork in Resources */,
 				DA03B67913CA3D05009DF176 /* score.png in Resources */,
 				DA03B67B13CA3D0A009DF176 /* menu.png in Resources */,
 				DA03B68E13CA3D2B009DF176 /* aim.body.0.png in Resources */,
@@ -5006,19 +4999,6 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"$TARGET_BUILD_DIR\"\nif [[ \"$CONFIGURATION\" = Distribution ]]; then\n    if [[ \"$TARGET_NAME\" = *\"Lite\"* ]]; then\n        mv \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork-lite.png\" \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"\n    else\n        mv \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork.png\" \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"\n    fi\nfi\nrm \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"*.png\n";
 			showEnvVarsInLog = 0;
-		};
-		DAE38A881004D33B0023D941 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "cd \"$TARGET_BUILD_DIR\"\nif [[ \"$CONFIGURATION\" = Distribution ]]; then\n    if [[ \"$TARGET_NAME\" = *\"Lite\"* ]]; then\n        mv \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork-lite.png\" \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"\n    else\n        mv \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork.png\" \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"\n    fi\nfi\nrm \"$UNLOCALIZED_RESOURCES_FOLDER_PATH/iTunesArtwork\"*.png\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -5634,7 +5614,6 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
-				CODE_SIGN_ENTITLEMENTS = Resources/Entitlements.plist;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = YES;

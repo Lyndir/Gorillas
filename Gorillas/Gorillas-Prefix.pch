@@ -14,9 +14,6 @@
  *  If not, see <http://stuff.lhunath.com/COPYING>.
  */
 
-//#define DEBUG 0
-//#undefine _DEBUG_
-
 
 /**
  * Gorillas Node Tags.
