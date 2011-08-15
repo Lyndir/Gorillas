@@ -53,8 +53,8 @@
     [self setContentSize:s];
     self.isRelativeAnchorPoint = NO;
 
-#if _DEBUG_
-    dbgTraceStep    = 10;
+#if DEBUG_COLLISION
+    dbgTraceStep    = 5;
     dbgPathMaxInd   = 50;
     dbgPathCurInd   = 0;
     dbgPath         = malloc(sizeof(CGPoint) * dbgPathMaxInd);
@@ -98,7 +98,7 @@
         [explosions release];
     }
     if (buildings) {
-        for (NSUInteger b = 0; b < 4; ++b) {
+        for (NSUInteger b = 0; b < buildingsCount; ++b) {
             [buildings[b] removeFromParentAndCleanup:YES];
             [buildings[b] release];
         }
@@ -110,8 +110,9 @@
     [nonParallaxLayer addChild:holes z:-1];
     explosions = [[ExplosionsLayer alloc] init];
     [nonParallaxLayer addChild:explosions z:4];
-    buildings = malloc(sizeof(BuildingsLayer*) * 4);
-    for (NSUInteger b = 0; b < 4; ++b) {
+    buildingsCount = [[GorillasConfig get].visualFx boolValue]? 4: 1;
+    buildings = malloc(sizeof(BuildingsLayer*) * buildingsCount);
+    for (NSUInteger b = 0; b < buildingsCount; ++b) {
         float lightRatio = -(b / 4.0f);
         if (b)
             lightRatio -= 0.5f;
@@ -180,8 +181,8 @@
 
     CGPoint winSizePx = ccpFromSize([CCDirector sharedDirector].winSizeInPixels);
     
-#if _DEBUG_
-    CGPoint winSize = ccpFromSize([CCDirector sharedDirector].winSize);
+#if DEBUG_COLLISION
+    CGSize winSize = [CCDirector sharedDirector].winSize;
     CGRect field = [self fieldInSpaceOf:self];
     int pCount = (field.size.width / dbgTraceStep + 1)
                 * (winSize.height / dbgTraceStep + 1);
@@ -194,7 +195,7 @@
             CGPoint pos = ccp(x, y);
 
             BOOL hg = NO, he = NO;
-            he = [holes hitsHoleWorld:pos];
+            he = [holes isHoleAtWorld:pos];
 
             for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
                 if((hg = [gorilla hitsGorilla:pos]))
@@ -341,7 +342,7 @@
         // Throw at where we aimed.
         [[ThrowController get] throwFrom:[GorillasAppDelegate get].gameLayer.activeGorilla normalizedVelocity:v];
         
-#if _DEBUG_
+#if DEBUG_COLLISION
         dbgAI[dbgAICurInd] = [GorillasAppDelegate get].gameLayer.activeGorilla;
         dbgAIVect[dbgAICurInd] = v;
         dbgAICurInd = (dbgAICurInd + 1) % dbgAIMaxInd;
@@ -401,7 +402,7 @@
     ccTime t = 5 * 100 / g;
 
     // Level-based error.
-    NSUInteger rtError = (NSUInteger) ((1 - l) * [CCDirector sharedDirector].winSize.width / 4);
+    NSUInteger rtError = (NSUInteger) ((1 - l) * [CCDirector sharedDirector].winSize.width / 2);
     rt = ccp(rt.x + gameRandom() % rtError - rtError / 2, rt.y + gameRandom() % rtError - rtError / 2);
     t = (gameRandom() % (int) ((t / 2) * l * 10)) / 10.0f + (t / 2);
 
@@ -422,7 +423,7 @@
 
 -(BOOL) hitsGorilla:(CGPoint)pos {
 
-#if _DEBUG_
+#if DEBUG_COLLISION
     dbgPath[dbgPathCurInd] = pos;
     dbgPathCurInd = (dbgPathCurInd + 1) % dbgPathMaxInd;
 #endif
@@ -455,12 +456,10 @@
 
 -(BOOL) hitsBuilding:(CGPoint)pos {
     
-    if ([buildings[0] hitsBuilding:pos]) {
-
+    if ([buildings[0] hitsBuilding:pos])
         // A building was hit, but if it's in an explosion crater we
         // need to let the banana continue flying.
         return ![holes isHoleAtWorld:[self convertToWorldSpace:pos]];
-    }
     
     return NO;
 }
@@ -583,7 +582,7 @@
         [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:[GorillasAppDelegate get].gameLayer.activeGorilla.position
                                                               horizontal:YES];
         [self runAction:[CCSequence actions:
-                  [CCDelayTime actionWithDuration:1],
+                  [CCDelayTime actionWithDuration:5.2f],
                   [CCCallFunc actionWithTarget:self selector:@selector(endGameCallback)],
                   nil]];
     }
@@ -629,6 +628,11 @@
     return CGRectMake(bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
 }
 
+- (BuildingsLayer *)buildingLayer {
+    
+    return buildings[0];
+}
+
 
 -(void) dealloc {
     
@@ -660,7 +664,7 @@
     free(throwHistory);
     throwHistory = nil;
     
-#if _DEBUG_
+#if DEBUG_COLLISION
     free(dbgPath);
     free(dbgAI);
     free(dbgAIVect);

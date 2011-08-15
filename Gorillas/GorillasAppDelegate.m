@@ -70,7 +70,9 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 
 + (void)initialize {
     
+#if DEBUG
     [[Logger get] setAutoprintLevel:LogLevelDebug];
+#endif
     [GorillasConfig get];
 }
 

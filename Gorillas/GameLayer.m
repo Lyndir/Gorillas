@@ -283,7 +283,7 @@
                                                      duration:4 isImportant:NO];
             
             int64_t scoreDelta = 0;
-            BOOL cheer = NO;
+            BOOL dance = NO;
             if([activeGorilla human]) {
                 // Human hits ...
                 
@@ -294,13 +294,13 @@
                         // In team mode or when suiciding, deduct score.
                         scoreDelta = [GorillasConfig get].deathScore;
                     else
-                        cheer = YES;
+                        dance = YES;
                 }
                 
                 else {
                     // ... AI.  Score boost.
                     scoreDelta = [[GorillasConfig get].killScore intValue];
-                    cheer = YES;
+                    dance = YES;
                 }
             } else {
                 // AI hits ...
@@ -311,12 +311,12 @@
                         // In team mode, deduct score.
                         scoreDelta = [GorillasConfig get].deathScore;
                     
-                    cheer = YES;
+                    dance = YES;
                 } else {
                     // ... AI.
                     if(![self isEnabled:GorillasFeatureTeam] && cityLayer.hitGorilla != activeGorilla)
                         // Not in team and not suiciding.
-                        cheer = YES;
+                        dance = YES;
                 }
             }
             
@@ -373,14 +373,6 @@
                 [cityLayer message:[NSString stringWithFormat:@"%+d", scoreDelta] on:cityLayer.hitGorilla];
             }
             
-            // If gorilla did something benefitial: cheer or dance.
-            if(cheer) {
-                if ([cityLayer.hitGorilla alive])
-                    [activeGorilla cheer];
-                else
-                    [activeGorilla dance];
-            }
-            
             // Check whether any gorillas are left.
             int liveGorillaCount = 0;
             GorillaLayer *liveGorilla = nil;
@@ -389,6 +381,16 @@
                     liveGorillaCount++;
                     liveGorilla = _gorilla;
                 }
+            
+            // If gorilla did something benefitial: cheer or dance.
+            if(dance) {
+                if ([cityLayer.hitGorilla alive])
+                    [activeGorilla danceHit];
+                else if (liveGorillaCount > 2)
+                    [activeGorilla danceKill];
+                else
+                    [activeGorilla danceVictory];
+            }
             
             // If 0 or 1 gorillas left; show who won and stop the game.
             if(liveGorillaCount < 2) {

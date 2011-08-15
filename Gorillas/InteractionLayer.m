@@ -187,11 +187,11 @@
         return;
     }
     
-    CGPoint gorillaPosition = [GorillasAppDelegate get].gameLayer.activeGorilla.position;
+    CGPoint gorillaPosition = aimSprite.position = [self convertToNodeSpace:
+                                                    [[GorillasAppDelegate get].gameLayer.cityLayer.buildingLayer convertToWorldSpace:
+                                                     [GorillasAppDelegate get].gameLayer.activeGorilla.position]];
     CGPoint relAim = ccpSub(aim, gorillaPosition);
     CGPoint worldAim = [self convertToWorldSpace:relAim];
-    
-    aimSprite.position = gorillaPosition;
     
     [angleLabel setString:[NSString stringWithFormat:@"%0.0f", CC_RADIANS_TO_DEGREES(ccpToAngle(worldAim))]];
     [strengthLabel setString:[NSString stringWithFormat:@"%0.0f", ccpLength(worldAim)]];

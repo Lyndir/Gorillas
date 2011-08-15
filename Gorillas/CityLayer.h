@@ -31,12 +31,16 @@
 #import "BarSprite.h"
 #import "BuildingsLayer.h"
 
+#define DEBUG_COLLISION 0
+
 @interface CityLayer : CCParallaxNode <Resettable> {
 
 @private
     CCLabelTTF          *msgLabel;
     
     BuildingsLayer      **buildings;
+    NSUInteger          buildingsCount;
+    
     HolesLayer          *holes;
     ExplosionsLayer     *explosions;
     CCLayer             *nonParallaxLayer;
@@ -47,7 +51,7 @@
     CGPoint             *throwHistory;
     NSMutableArray      *throwHints;
     
-#ifdef _DEBUG_
+#if DEBUG_COLLISION
     NSUInteger          dbgTraceStep;
     NSUInteger          dbgPathMaxInd;
     NSUInteger          dbgPathCurInd;
@@ -59,6 +63,7 @@
 #endif
 }
 
+@property (nonatomic, readonly) BuildingsLayer *buildingLayer;
 @property (nonatomic, readonly) BananaLayer *bananaLayer;
 @property (nonatomic, readonly) GorillaLayer *hitGorilla;
 

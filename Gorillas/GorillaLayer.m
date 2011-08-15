@@ -85,7 +85,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     self.textureRect        = CGRectFromCGPointAndCGSize(CGPointZero, self.texture.contentSize);
     self.bobber             = [CCSprite spriteWithFile:@"bobber.png"];
     self.bobber.visible     = NO;
-    self.bobber.position = ccp(self.contentSize.width / 2, self.contentSize.height + self.bobber.contentSize.height);
+    self.bobber.position = ccp(0, self.contentSize.height);
     [self.bobber runAction:[CCRepeatForever actionWithAction:[CCSequence actions:
                                                               [CCEaseSineInOut actionWithAction:
                                                                [CCMoveBy actionWithDuration:0.7f position:ccp(0, 15)]],
@@ -104,7 +104,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
             self.player = [GKLocalPlayer localPlayer];
             self.connectionState = GKPlayerStateConnected;
         }
-
+    
     // By default, a gorilla has 1 life, unless features say otherwise.
     self.initialLives = 1;
     if(self.human && [[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesPl])
@@ -131,7 +131,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     
     [self stopAllActions];
     
-    self.bobber.position = ccp(self.contentSize.width / 2, self.contentSize.height + self.bobber.contentSize.height);
+    self.bobber.position = ccp(self.contentSize.width / 2, self.contentSize.height + self.bobber.contentSize.height / 2);
     self.scale      = GorillasModelScale(2, self.bobber.texture.contentSizeInPixels.width);
     self.active     = NO;
     self.ready      = NO;
@@ -177,9 +177,11 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
 }
 
 
--(void) cheer {
+-(void) danceHit {
     
     [self runAction:[CCSequence actions:
+                     [CCCallFunc actionWithTarget:self selector:@selector(dd)],
+                     [CCDelayTime actionWithDuration:0.2f],
                      [CCCallFunc actionWithTarget:self selector:@selector(uu)],
                      [CCDelayTime actionWithDuration:0.4f],
                      [CCCallFunc actionWithTarget:self selector:@selector(dd)],
@@ -191,19 +193,53 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
 }
 
 
--(void) dance {
+-(void) danceKill {
     
     [self runAction:[CCSequence actions:
+                     [CCCallFunc actionWithTarget:self selector:@selector(dd)],
+                     [CCDelayTime actionWithDuration:0.2f],
+                     [CCRepeat actionWithAction:[CCSequence actions:
+                                                 [CCCallFunc actionWithTarget:self selector:@selector(ud)],
+                                                 [CCDelayTime actionWithDuration:0.2f],
+                                                 [CCCallFunc actionWithTarget:self selector:@selector(du)],
+                                                 [CCDelayTime actionWithDuration:0.4f],
+                                                 nil]
+                                          times:6],
+                     [CCCallFunc actionWithTarget:self selector:@selector(uu)],
+                     [CCDelayTime actionWithDuration:0.5f],
+                     [CCCallFunc actionWithTarget:self selector:@selector(dd)],
+                     nil]];
+}
+
+
+-(void) danceVictory {
+    
+    [self runAction:[CCSequence actions:
+                     [CCCallFunc actionWithTarget:self selector:@selector(dd)],
+                     [CCDelayTime actionWithDuration:0.2f],
+                     [CCRepeat actionWithAction:[CCSequence actions:
+                                                 [CCCallFunc actionWithTarget:self selector:@selector(du)],
+                                                 [CCDelayTime actionWithDuration:0.6f],
+                                                 [CCCallFunc actionWithTarget:self selector:@selector(dd)],
+                                                 [CCDelayTime actionWithDuration:0.2f],
+                                                 nil]
+                                          times:2],
+                     [CCCallFunc actionWithTarget:self selector:@selector(uu)],
+                     [CCDelayTime actionWithDuration:0.4f],
                      [CCRepeat actionWithAction:[CCSequence actions:
                                                  [CCCallFunc actionWithTarget:self selector:@selector(ud)],
                                                  [CCDelayTime actionWithDuration:0.2f],
                                                  [CCCallFunc actionWithTarget:self selector:@selector(du)],
                                                  [CCDelayTime actionWithDuration:0.2f],
                                                  nil]
-                                          times:8],
-                     [CCCallFunc actionWithTarget:self selector:@selector(uu)],
-                     [CCDelayTime actionWithDuration:0.5f],
-                     [CCCallFunc actionWithTarget:self selector:@selector(dd)],
+                                          times:4],
+                     [CCRepeat actionWithAction:[CCSequence actions:
+                                                 [CCCallFunc actionWithTarget:self selector:@selector(uu)],
+                                                 [CCDelayTime actionWithDuration:0.5f],
+                                                 [CCCallFunc actionWithTarget:self selector:@selector(dd)],
+                                                 [CCDelayTime actionWithDuration:0.2f],
+                                                 nil]
+                                          times:2],
                      nil]];
 }
 
@@ -358,7 +394,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
                 self.bobber.color       = ccc3l(0x00FF00);
             else
                 self.bobber.color       = ccc3l(0xFFFF00);
-
+            
             break;
         }
         case GKPlayerStateDisconnected: {
@@ -396,7 +432,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
 -(void) draw {
     
     [super draw];
-
+    
     if(self.lives <= 0)
         return;
     
@@ -406,17 +442,16 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     if(!self.human && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesAi])
         return;
     
-    CGFloat barX = self.contentSize.width / self.scale / 2;
-    CGFloat barY = self.contentSize.height / self.scale + 10;
-    CGFloat barW = 40;
-    CGPoint lines[4] = {
+    const CGFloat barX = self.contentSize.width / self.scale / 2;
+    const CGFloat barY = self.contentSize.height / self.scale + 10;
+    const CGFloat barW = 40;
+    const CGPoint lines[4] = {
         ccp(barX - barW / 2, barY),
         ccp(barX - barW / 2 + barW * self.lives / self.initialLives, barY),
         ccp(barX - barW / 2 + barW * self.lives / self.initialLives, barY),
         ccp(barX - barW / 2 + barW, barY),
     };
-    
-    GLubyte o = self.active? 0xFF: 0x33;
+    const GLubyte o = self.active? 0xFF: 0x33;
     
     if ([[GorillasConfig get].visualFx boolValue]) {
         DrawBoxFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[1], ccp(0, 3)), ccc4l(0xCCFFCC00 | o), ccc4l(0x33CC3300 | o));
