@@ -29,22 +29,23 @@
 
 
 @implementation ThrowAction
-@synthesize v = _v, r0 = _r0;
-@synthesize spinAction = _spinAction, smoke = _smoke;
+@synthesize v = _v, r0 = _r0, needsReplay = _needsReplay;
+@synthesize smoke = _smoke;
 
-+(ThrowAction *) actionWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration {
++(ThrowAction *) actionWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration needsReplay:(BOOL)aNeedsReplay {
     
-    return [[[ThrowAction alloc] initWithVelocity:velocity duration:aDuration] autorelease];
+    return [[[ThrowAction alloc] initWithVelocity:velocity duration:aDuration needsReplay:aNeedsReplay] autorelease];
 }
 
 
--(ThrowAction *) initWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration {
+-(ThrowAction *) initWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration needsReplay:(BOOL)aNeedsReplay {
     
     // De-normalize the velocity back to our resolution.
     if(!(self = [super initWithDuration:aDuration]))
         return self;
     
-    self.v = velocity;
+    self.v                  = velocity;
+    self.needsReplay        = aNeedsReplay;
     
     self.smoke = [CCParticleMeteor node];
     self.smoke.positionType = kCCPositionTypeGrouped;
@@ -67,14 +68,6 @@
     [super startWithTarget:aTarget];
     self.r0 = [(CCNode*)self.target position];
     
-    if(self.spinAction) {
-        [self.spinAction.target stopAction:self.spinAction];
-        self.spinAction = nil;
-    }
-    
-    [self.target runAction:
-     self.spinAction = [CCRepeat actionWithAction:[CCRotateBy actionWithDuration:1 angle:360]
-                                            times:(int)self.duration + 1]];
     [self.target setVisible:YES];
     [self.target setTag:GorillasTagBananaFlying];
     
@@ -121,12 +114,10 @@
     // self.target.position = [guaranteed time-independant end point of the throw]
     [self.target setVisible:NO];
     
-    self.smoke.emissionRate  = 0;
+    if (self.needsReplay)
+        [self.smoke resetSystem];
+    self.smoke.emissionRate = 0;
     [[GorillasAppDelegate get].gameLayer.windLayer unregisterSystem:self.smoke];
-    [self.spinAction.target stopAction:self.spinAction];
-    
-    [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:CGPointZero horizontal:NO];
-    [[GorillasAppDelegate get].gameLayer scaleTimeTo:1.0f duration:0.5f];
 
     [super stop];
     
@@ -137,7 +128,6 @@
 -(void) dealloc {
     
     self.smoke = nil;
-    self.spinAction = nil;
     
     [super dealloc];
 }

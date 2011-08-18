@@ -39,12 +39,20 @@ typedef struct {
 
 @interface ThrowController : NSObject {
 
-    Throw                               _throw;
-    CCSprite                            *_banana;
+    GorillaLayer                            *_gorilla;
+    Throw                                   _throw;
+    CCSprite                                *_banana;
+    CGPoint                                 _velocity;
+    ccTime                                  _duration;
+    BOOL                                    _needReplay;
 }
 
-@property (nonatomic, assign) Throw     throw;
-@property (nonatomic, assign) CCSprite  *banana;
+@property (nonatomic, retain) GorillaLayer  *gorilla;
+@property (nonatomic, assign) Throw         throw;
+@property (nonatomic, retain) CCSprite      *banana;
+@property (nonatomic, assign) CGPoint       velocity;
+@property (nonatomic, assign) ccTime        duration;
+@property (nonatomic, assign) BOOL          needReplay;
 
 -(void) nextTurn;
 -(void) throwEnded;

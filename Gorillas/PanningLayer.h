@@ -32,6 +32,7 @@
     CGFloat initialScale;
     CGFloat initialDist;
     AutoTween *tween;
+    CGFloat targetScale;
 }
 
 -(void) scaleTo:(CGFloat)newScale;

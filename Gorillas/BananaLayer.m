@@ -76,6 +76,7 @@
     [super onEnter];
     
     [self addChild:self.banana];
+    [self.banana runAction:[CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:1 angle:360]]];
 }
 
 

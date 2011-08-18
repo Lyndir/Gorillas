@@ -108,7 +108,7 @@
             skill = skill / 2 + self.throwSkill;
         
         NSString *prefix = @"", *suffix = @"%";
-        if ([l(@"menu.config.direction", "ltr") isEqualToString:@"rtl"]) {
+        if ([l(@"menu.config.direction") isEqualToString:@"rtl"]) {
             prefix = @"%";
             suffix = @"";
         }

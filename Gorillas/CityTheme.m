@@ -153,7 +153,7 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:20
                                         gravity:100
-                   ], l(@"theme.classic", @"Classic"),
+                   ], l(@"theme.classic"),
                   
                   [CityTheme themeWithVarFloors:12
                                     fixedFloors:4
@@ -174,7 +174,7 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:30
                                         gravity:60
-                   ], l(@"theme.aliengreen", @"Alien Retro"),
+                   ], l(@"theme.aliengreen"),
                   
                   [CityTheme themeWithVarFloors:28
                                     fixedFloors:6
@@ -195,7 +195,7 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:10
                                         gravity:40
-                   ], l(@"theme.classic.aliendark", @"Alien Skies"),
+                   ], l(@"theme.classic.aliendark"),
                   
                   [CityTheme themeWithVarFloors:17
                                     fixedFloors:7
@@ -216,7 +216,7 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:40
                                         gravity:140
-                   ], l(@"theme.classiclarge", @"Metropolis"),
+                   ], l(@"theme.classiclarge"),
                   
                   [CityTheme themeWithVarFloors:18
                                     fixedFloors:3
@@ -237,7 +237,7 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:15
                                         gravity:80
-                   ], l(@"theme.warm", @"Summer"),
+                   ], l(@"theme.warm"),
                   
                   nil];
     }
@@ -268,7 +268,7 @@ static NSDictionary *themes = nil;
 
 +(NSString *) defaultThemeName {
     
-    return l(@"theme.classic", @"Classic");
+    return l(@"theme.classic");
 }
 
 

@@ -87,6 +87,11 @@
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
     GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
     
+    if ([GorillasAppDelegate get].gameLayer.running)
+        [self setBackButtonTarget:self selector:@selector(back)];
+    else
+        [self setBackButtonTarget:nil selector:nil];
+    
     if ([[configurationI subItems] count] > gameConfigurationIndex)
         [configurationI setSelectedIndex:gameConfigurationIndex];
     [descriptionT setString:gameConfiguration.description];

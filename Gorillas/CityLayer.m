@@ -390,7 +390,7 @@
             [hint runAction:[CCFadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue] opacity:0x00]];
         }
     
-    // Record throw history & start the actual throw.
+    // Record throw history.
     throwHistory[[[GorillasAppDelegate get].gameLayer.gorillas indexOfObject:gorilla]] = v;
 }
 

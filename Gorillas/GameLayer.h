@@ -51,7 +51,8 @@
     CCParticleSystem                                        *backWeather, *frontWeather;
     WindLayer                                               *windLayer;
     CCAction                                                *shakeAction;
-    //FIXME ScaleTime                                       *scaleTimeAction;
+    AutoTween                                               *scaleTimeAction;
+    float                                                   speed;
 }
 
 @property (nonatomic, readwrite, getter=isPaused) BOOL      paused;
@@ -71,13 +72,14 @@
 @property (nonatomic, readonly) CCParticleSystem            *frontWeather;
 @property (nonatomic, readonly) WindLayer                   *windLayer;
 
-//FIXME @property (nonatomic, readonly) ScaleTime           *scaleTimeAction;
+@property (nonatomic, readonly) AutoTween                   *scaleTimeAction;
+@property (nonatomic, readwrite) float                      speed;
 
 -(void) shake;
 -(BOOL) isEnabled:(GorillasFeature)feature;
 -(void) configureGameWithMode:(GorillasMode)nMode randomCity:(BOOL)aRandomCity
                     playerIDs:(NSArray *)playerIDs localHumans:(NSUInteger)localHumans ais:(NSUInteger)ais;
--(void) scaleTimeTo:(float)aTimeScale duration:(ccTime)aDuration;
+-(void) scaleTimeTo:(float)aTimeScale;
 
 -(void) updateStateForThrow:(Throw)throw withSkill:(float)throwSkill;
 -(BOOL) checkGameStillOn;

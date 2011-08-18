@@ -337,7 +337,7 @@
 }
 -(void) levelDown {
 
-    self.level = [NSNumber numberWithFloat:fminf(0.9f, fmaxf(0.1f, [self.level floatValue] + [self.levelProgress floatValue]))];
+    self.level = [NSNumber numberWithFloat:fminf(0.9f, fmaxf(0.1f, [self.level floatValue] - [self.levelProgress floatValue]))];
 }
 
 
