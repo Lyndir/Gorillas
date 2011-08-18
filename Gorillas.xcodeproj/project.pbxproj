@@ -175,6 +175,12 @@
 		DA4769F00FDD7334002E74F8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD7A00F9536E600E5607E /* QuartzCore.framework */; };
 		DA4769F10FDD7334002E74F8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA120920FDD26F700AA1E28 /* AVFoundation.framework */; };
 		DA4B227A127CC83800C1748F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B971A127C3787009196E8 /* libz.dylib */; };
+		DA4BF9B613FDB1D70058D9B1 /* banana-ai-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4BF9B413FDB1D70058D9B1 /* banana-ai-hd.png */; };
+		DA4BF9B713FDB1D70058D9B1 /* banana-ai-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4BF9B413FDB1D70058D9B1 /* banana-ai-hd.png */; };
+		DA4BF9B813FDB1D70058D9B1 /* banana-human-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4BF9B513FDB1D70058D9B1 /* banana-human-hd.png */; };
+		DA4BF9B913FDB1D70058D9B1 /* banana-human-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4BF9B513FDB1D70058D9B1 /* banana-human-hd.png */; };
+		DA4BF9BB13FDB2300058D9B1 /* bobber-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4BF9BA13FDB2300058D9B1 /* bobber-hd.png */; };
+		DA4BF9BC13FDB2300058D9B1 /* bobber-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4BF9BA13FDB2300058D9B1 /* bobber-hd.png */; };
 		DA4E5D0C0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
 		DA571E0313F3332200D50DF2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6620F95368600E5607E /* Foundation.framework */; };
 		DA571E1413F3339E00D50DF2 /* LocalyticsDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = DA571E0D13F3339E00D50DF2 /* LocalyticsDatabase.h */; };
@@ -801,6 +807,9 @@
 		DA3B94F8127B7407009196E8 /* GHUDLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUDLayer.m; sourceTree = "<group>"; };
 		DA3B971A127C3787009196E8 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		DA4769F80FDD7334002E74F8 /* Gorillas Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA4BF9B413FDB1D70058D9B1 /* banana-ai-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "banana-ai-hd.png"; path = "png/banana-ai-hd.png"; sourceTree = "<group>"; };
+		DA4BF9B513FDB1D70058D9B1 /* banana-human-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "banana-human-hd.png"; path = "png/banana-human-hd.png"; sourceTree = "<group>"; };
+		DA4BF9BA13FDB2300058D9B1 /* bobber-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bobber-hd.png"; path = "png/bobber-hd.png"; sourceTree = "<group>"; };
 		DA4E5D070F7FE5B9007BE3B9 /* GorillasAudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillasAudioController.h; sourceTree = "<group>"; };
 		DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillasAudioController.m; sourceTree = "<group>"; };
 		DA571E0213F3332200D50DF2 /* libLocalytics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLocalytics.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2642,6 +2651,9 @@
 		DA5F1BD30EE74CE80041691E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DA4BF9BA13FDB2300058D9B1 /* bobber-hd.png */,
+				DA4BF9B413FDB1D70058D9B1 /* banana-ai-hd.png */,
+				DA4BF9B513FDB1D70058D9B1 /* banana-human-hd.png */,
 				DA7BDFE013FA86A00046DCCD /* gorilla-ai-DD-hd.png */,
 				DA7BDFE113FA86A00046DCCD /* gorilla-ai-DU-hd.png */,
 				DA7BDFE213FA86A00046DCCD /* gorilla-ai-UD-hd.png */,
@@ -4912,6 +4924,9 @@
 				DA7BDFF813FA86A00046DCCD /* gorilla-human-UD-hd.png in Resources */,
 				DA7BDFFA13FA86A00046DCCD /* gorilla-human-UU-hd.png in Resources */,
 				DA7BDFFC13FA86A00046DCCD /* gorilla-human-UU~.png in Resources */,
+				DA4BF9B613FDB1D70058D9B1 /* banana-ai-hd.png in Resources */,
+				DA4BF9B813FDB1D70058D9B1 /* banana-human-hd.png in Resources */,
+				DA4BF9BB13FDB2300058D9B1 /* bobber-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5040,6 +5055,9 @@
 				DA7BDFF913FA86A00046DCCD /* gorilla-human-UD-hd.png in Resources */,
 				DA7BDFFB13FA86A00046DCCD /* gorilla-human-UU-hd.png in Resources */,
 				DA7BDFFD13FA86A00046DCCD /* gorilla-human-UU~.png in Resources */,
+				DA4BF9B713FDB1D70058D9B1 /* banana-ai-hd.png in Resources */,
+				DA4BF9B913FDB1D70058D9B1 /* banana-human-hd.png in Resources */,
+				DA4BF9BC13FDB2300058D9B1 /* bobber-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
