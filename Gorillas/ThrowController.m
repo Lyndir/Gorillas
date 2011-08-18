@@ -103,7 +103,7 @@
         dbg(@"Throw: %@ -> %@, v = %@ ends after t = %f, condition: %d",
             NSStringFromCGPoint(gorilla.position), NSStringFromCGPoint(self.throw.endPoint), NSStringFromCGPoint(self.velocity),
             self.throw.duration, self.throw.endCondition);
-    if (self.throw.endCondition == ThrowEndHitGorilla)
+    if (self.throw.endCondition == ThrowEndHitGorilla && [GorillasConfig get].replay)
         self.needReplay = YES;
     
     [self doThrowIsReplay:NO];
