@@ -82,7 +82,7 @@
 -(void) danceHit;
 -(void) danceKill;
 -(void) danceVictory;
--(void) threw:(CGPoint)aim;
+-(void) threw:(CGPoint)v;
 -(void) applyZoom;
 -(void) kill;
 -(void) killDead;

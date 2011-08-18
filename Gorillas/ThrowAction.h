@@ -30,17 +30,17 @@
 @private
     CGPoint                                     _v;
     CGPoint                                     _r0;
+    BOOL                                        _needsReplay;
     
-    CCActionInterval                            *_spinAction;
     CCParticleSystem                            *_smoke;
 }
 
 @property (nonatomic, assign) CGPoint           v;
 @property (nonatomic, assign) CGPoint           r0;
-@property (nonatomic, retain) CCActionInterval  *spinAction;
+@property (nonatomic, assign) BOOL              needsReplay;
 @property (nonatomic, retain) CCParticleSystem  *smoke;
 
-+(ThrowAction *) actionWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration;
--(ThrowAction *) initWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration;
++(ThrowAction *) actionWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration needsReplay:(BOOL)aNeedsReplay;
+-(ThrowAction *) initWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration needsReplay:(BOOL)aNeedsReplay;
 
 @end

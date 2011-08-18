@@ -38,29 +38,32 @@
     
     self.isTouchEnabled = YES;
     initialDist         = -1;
-
-    [self runAction:tween = [[AutoTween alloc] initWithDuration:0.2f]];
+    
+    [self runAction:tween = [[AutoTween alloc] initWithDuration:0.5f]];
+    tween.tag           = kCCActionTagIgnoreSpeed;
+    
+    targetScale         = self.scale;
     
     return self;
 }
 
 
 -(void) registerWithTouchDispatcher {
-
+    
     [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:NO];
 }
 
 
 -(void) reset {
-
+    
     [self scaleTo:1.0f];
 }
 
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-
+    
     initialDist = -1;
-
+    
     return YES;
 }
 
@@ -82,14 +85,14 @@
     } else {
         CGFloat newDist = ccpDistance(from, to);
         CGFloat newScale = initialScale * (newDist / initialDist);
-
+        
         [self scaleTo:newScale];
     }
 }
 
 
 - (void)ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event {
-
+    
     if(initialDist < 0)
         return;
     
@@ -99,10 +102,10 @@
 
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
-
+    
     if(initialDist < 0)
         return;
-
+    
     initialDist = -1;
 }
 
@@ -117,8 +120,8 @@
     
     if (limited)
         newScale = fmaxf(fminf(newScale, 1.1f), 0.8f);
-
-    [tween tweenKeyPath:@"scale" to:newScale];
+    
+    [tween tweenKeyPath:@"scale" to:targetScale = newScale];
 }
 
 
@@ -127,8 +130,10 @@
     CGPoint pos = r;
     if (!CGPointEqualToPoint(r, CGPointZero)) {
         // Save and reset position so it doesn't affect coordinate space conversions.
-        CGPoint savePosition = self.position;
-        self.position = CGPointZero;
+        CGPoint savePosition    = self.position;
+        CGFloat saveScale       = self.scale;
+        self.position           = CGPointZero;
+        self.scale              = targetScale;
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
         GameLayer *gameLayer    = [GorillasAppDelegate get].gameLayer;
@@ -139,18 +144,18 @@
         CGFloat left            = field.origin.x;
         CGFloat right           = field.origin.x + field.size.width;
         CGFloat bottom          = field.origin.y;
-        CGFloat top             = field.origin.y + field.size.height;
+        CGFloat top             = CGFLOAT_MAX;
         
         // Limit the camera center (in world coordinates) inside the field.
         r                       = [cityLayer convertToWorldSpace:r];
         CGPoint middle          = ccp(winSize.width / 2, winSize.height / 2);
-        CGPoint min             = ccpAdd(ccp(left, bottom), middle);
-        CGPoint max             = ccpSub(ccp(right, top), middle);
         
-        if(horizontal)
+        if(horizontal) {
+            CGPoint min             = ccpAdd(ccp(left, bottom), middle);
+            CGPoint max             = ccpSub(ccp(right, top), middle);
             r                   = ccp(fmaxf(fminf(r.x, max.x), min.x),
                                       fmaxf(fminf(r.y, max.y), min.y));
-        else {
+        } else {
             r.x                 = middle.x;
             if(r.y < middle.y * 2 * 0.8f)
                 r.y             = middle.y;
@@ -160,11 +165,12 @@
         pos                     = ccpSub(ccp(self.contentSize.width / 2,
                                              self.contentSize.height / 2),
                                          [self.parent convertToNodeSpace:r]);
-
+        
         // Restore position.
-        self.position = savePosition;
+        self.position           = savePosition;
+        self.scale              = saveScale;
     }
-
+    
     [tween tweenKeyPath:@"position" to:pos.x
               valueSize:sizeof(CGPoint) valueOffset:offsetof(CGPoint, x)];
     [tween tweenKeyPath:@"position" to:pos.y
@@ -173,10 +179,10 @@
 
 
 -(void) dealloc {
-
+    
     [tween release];
     tween = nil;
-
+    
     [super dealloc];
 }
 

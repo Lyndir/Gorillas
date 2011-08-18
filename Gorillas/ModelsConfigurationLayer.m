@@ -48,13 +48,13 @@
     modelTitles = [[NSMutableArray alloc] initWithCapacity:2];
 
     [modelSprites addObject:[NSNumber numberWithUnsignedInt:GorillasPlayerModelGorilla]];
-    [modelTitles addObject:l(@"model.gorilla", @"Mean Gorilla")];
+    [modelTitles addObject:l(@"model.gorilla")];
 
     [modelSprites addObject:[NSNumber numberWithUnsignedInt:GorillasPlayerModelEasterBunny]];
-    [modelTitles addObject:l(@"model.bunny", @"Easter Bunny")];
+    [modelTitles addObject:l(@"model.bunny")];
     
     [modelSprites addObject:[NSNumber numberWithUnsignedInt:GorillasPlayerModelBanana]];
-    [modelTitles addObject:l(@"model.banana", @"Vengeful Banana")];
+    [modelTitles addObject:l(@"model.banana")];
     
     
     // Controls.

@@ -47,7 +47,7 @@
 @synthesize paused, configuring, started, running, mode;
 @synthesize gorillas, activeGorilla;
 @synthesize skyLayer, panningLayer, cityLayer, windLayer, backWeather, frontWeather;
-//FIXME @synthesize scaleTimeAction;
+@synthesize scaleTimeAction, speed;
 
 -(BOOL) isSinglePlayer {
     
@@ -78,9 +78,9 @@
     
     if(running) {
         if(paused)
-            [[GorillasAppDelegate get].uiLayer message:l(@"messages.paused", @"Paused")];
+            [[GorillasAppDelegate get].uiLayer message:l(@"messages.paused")];
         else
-            [[GorillasAppDelegate get].uiLayer message:l(@"messages.unpaused", @"Unpaused")];
+            [[GorillasAppDelegate get].uiLayer message:l(@"messages.unpaused")];
     }
 }
 
@@ -91,12 +91,12 @@
     
     if(paused) {
         if(running)
-            [self scaleTimeTo:0 duration:0.5f];
+            [self scaleTimeTo:0];
         [[GorillasAppDelegate get] hideHud];
         [windLayer runAction:[CCFadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
                                                   opacity:0x00]];
     } else {
-        [self scaleTimeTo:1.0f duration:1.0f];
+        [self scaleTimeTo:1.0f];
         [[GorillasAppDelegate get] popAllLayers];
         [[GorillasAppDelegate get] revealHud];
         [windLayer runAction:[CCFadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
@@ -105,14 +105,9 @@
 }
 
 
-- (void)scaleTimeTo:(float)aTimeScale duration:(ccTime)aDuration {
+- (void)scaleTimeTo:(float)aTimeScale {
     
-    /*FIXME    if (scaleTimeAction)
-     [self stopAction:scaleTimeAction];
-     [scaleTimeAction release];
-     
-     scaleTimeAction = [[ScaleTime actionWithTimeScaleTarget:aTimeScale duration:aDuration] retain];
-     [self runAction:scaleTimeAction scaleTime:NO];*/
+    [scaleTimeAction tweenKeyPath:@"speed" to:aTimeScale];
 }
 
 
@@ -333,7 +328,7 @@
                 
                 // Apply oneshot bonus.
                 if(activeGorilla.turns == 0) {
-                    [[GorillasAppDelegate get].uiLayer message:l(@"messages.oneshot", @"Oneshot!")];
+                    [[GorillasAppDelegate get].uiLayer message:l(@"messages.oneshot")];
                     skill *= [[GorillasConfig get].bonusOneShot floatValue];
                 }
                 
@@ -354,11 +349,11 @@
                 // Message in case we level up.
                 if(![oldLevel isEqualToString:[GorillasConfig nameForLevel:[GorillasConfig get].level]]) {
                     if(scoreDelta > 0) {
-                        [[GorillasAppDelegate get].uiLayer message:l(@"messages.level.up", @"Level Up!")];
+                        [[GorillasAppDelegate get].uiLayer message:l(@"messages.level.up")];
                         if ([[GorillasConfig get].voice boolValue])
                             [[GorillasAudioController get] playEffectNamed:@"Level_Up"];
                     } else {
-                        [[GorillasAppDelegate get].uiLayer message:l(@"messages.level.down", @"Level Down")];
+                        [[GorillasAppDelegate get].uiLayer message:l(@"messages.level.down")];
                         if ([[GorillasConfig get].voice boolValue])
                             [[GorillasAudioController get] playEffectNamed:@"Level_Down"];
                     }
@@ -395,10 +390,9 @@
             // If 0 or 1 gorillas left; show who won and stop the game.
             if(liveGorillaCount < 2) {
                 if(liveGorillaCount == 1)
-                    [[[GorillasAppDelegate get] hudLayer] message:[NSString stringWithFormat:l(@"messages.wins", @"%@ wins!"),
-                                                                   [liveGorilla name]] duration:4 isImportant:NO];
+                    [[[GorillasAppDelegate get] hudLayer] message:l(@"messages.wins", [liveGorilla name]) duration:4 isImportant:NO];
                 else
-                    [[[GorillasAppDelegate get] hudLayer] message:l(@"messages.tie", @"Tie!") duration:4 isImportant:NO];
+                    [[[GorillasAppDelegate get] hudLayer] message:l(@"messages.tie") duration:4 isImportant:NO];
             }
             
             // Reset the wind.
@@ -468,6 +462,7 @@
 	if (!(self = [super init]))
 		return self;
     
+    speed = 1.0f;
     mode = GorillasModeClassic;
     running = NO;
     
@@ -497,6 +492,10 @@
     windLayer               = [[WindLayer alloc] init];
     windLayer.position      = ccp(self.contentSize.width / 2, self.contentSize.height - 15);
     [self addChild:windLayer z:5];
+    
+    scaleTimeAction         = [[AutoTween alloc] initWithDuration:0.5f];
+    scaleTimeAction.tag     = kCCActionTagIgnoreSpeed;
+    [self runAction:scaleTimeAction];
     
     paused = YES;
     

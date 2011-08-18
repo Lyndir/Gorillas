@@ -244,9 +244,9 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
 }
 
 
--(void) threw:(CGPoint)aim {
+-(void) threw:(CGPoint)v {
     
-    if(aim.x > 0)
+    if(v.x > 0)
         [self ud];
     else
         [self du];

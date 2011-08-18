@@ -28,14 +28,30 @@
 
 #define minDiff 4
 
+@interface ThrowController ()
+
+- (void)doThrowIsReplay:(BOOL)isReplay;
+- (void)skipThrow:(id)sender;
+
+@end
 
 @implementation ThrowController
-@synthesize throw = _throw, banana = _banana;
+@synthesize throw = _throw, banana = _banana, gorilla = _gorilla, velocity = _velocity, duration = _duration, needReplay = _needReplay;
 
 -(void) throwEnded {
     
+    [[GorillasAppDelegate get].gameLayer scaleTimeTo:1.0f];
+    [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:CGPointZero horizontal:YES];
+    [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:1.0f limited:YES];
+
     self.banana.tag = GorillasTagBananaNotFlying;
     self.banana     = nil;
+    
+    if (self.needReplay) {
+        self.needReplay = NO;
+        [self doThrowIsReplay:YES];
+        return;
+    }
     
     // If the throw ended with a hit, explode.
     if (self.throw.endCondition == ThrowEndHitGorilla)
@@ -52,7 +68,7 @@
             ++liveHumans;
     
     if([GorillasAppDelegate get].gameLayer.activeGorilla.human && liveHumans > 1) {
-        [[GorillasAppDelegate get].uiLayer message:l(@"message.nextplayer", @"Next player ..")];
+        [[GorillasAppDelegate get].uiLayer message:l(@"message.nextplayer")];
         
         if ([[GorillasConfig get].voice boolValue])
             [[GorillasAudioController get] playEffectNamed:@"Next_Player"];
@@ -66,35 +82,54 @@
 
 -(void) nextTurn {
     
-    [[GorillasAppDelegate get].hudLayer dismissMessage];
-    
     [[GorillasAppDelegate get].gameLayer.cityLayer nextGorilla];
 }
 
 - (void)throwFrom:(GorillaLayer *)gorilla normalizedVelocity:(CGPoint)velocity {
     
+    self.gorilla = gorilla;
+    
     // De-normalize velocity.
-    CGPoint v = ccpCompMult(velocity, ccpFromSize([CCDirector sharedDirector].winSize));
-
+    self.velocity = ccpCompMult(velocity, ccpFromSize([CCDirector sharedDirector].winSize));
+    
     // Determine projectile.
-    self.banana = [[GorillasAppDelegate get].gameLayer.cityLayer.bananaLayer bananaForThrowFrom:gorilla];
     [GorillasAppDelegate get].gameLayer.cityLayer.bananaLayer.clearedGorilla = NO;
-
+    
     // Determine throw endpoint.
-    ccTime t = 0;
-    while (! (self.throw = [ThrowController calculateThrowFrom:gorilla.position withVelocity:v afterTime:t]).endCondition)
-        t += 0.01f;
+    self.duration = 0;
+    while (! (self.throw = [ThrowController calculateThrowFrom:gorilla.position withVelocity:self.velocity afterTime:self.duration]).endCondition)
+        self.duration += 0.01f;
     if (self.throw.endCondition)
         dbg(@"Throw: %@ -> %@, v = %@ ends after t = %f, condition: %d",
-            NSStringFromCGPoint(gorilla.position), NSStringFromCGPoint(self.throw.endPoint), NSStringFromCGPoint(v),
+            NSStringFromCGPoint(gorilla.position), NSStringFromCGPoint(self.throw.endPoint), NSStringFromCGPoint(self.velocity),
             self.throw.duration, self.throw.endCondition);
+    if (self.throw.endCondition == ThrowEndHitGorilla)
+        self.needReplay = YES;
     
-    [GorillasAppDelegate get].gameLayer.cityLayer.bananaLayer.clearedGorilla = NO;
+    [self doThrowIsReplay:NO];
+}
+
+- (void)doThrowIsReplay:(BOOL)isReplay {
     
     // Begin throw.
-    [gorilla threw:v];
-    [self.banana runAction:[ThrowAction actionWithVelocity:v duration:t]];
-    [[GorillasAppDelegate get].gameLayer.cityLayer throwFrom:gorilla withVelocity:v];
+    [GorillasAppDelegate get].gameLayer.cityLayer.bananaLayer.clearedGorilla = NO;
+    [self.gorilla threw:self.velocity];
+    self.banana = [[GorillasAppDelegate get].gameLayer.cityLayer.bananaLayer bananaForThrowFrom:self.gorilla];
+    [self.banana runAction:[ThrowAction actionWithVelocity:self.velocity duration:self.duration needsReplay:self.needReplay]];
+    
+    if (isReplay) {
+        [[GorillasAppDelegate get].gameLayer scaleTimeTo:0.5f];
+        [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:1.5f limited:NO];
+        [[GorillasAppDelegate get].hudLayer message:l(@"message.killreplay") isImportant:YES];
+        [[GorillasAppDelegate get].hudLayer setButtonImage:@"skip.png" callback:self :@selector(skipThrow:)];
+    } else
+        [[GorillasAppDelegate get].gameLayer.cityLayer throwFrom:self.gorilla withVelocity:self.velocity];
+}
+
+- (void)skipThrow:(id)sender {
+    
+    [self.banana stopAllActions];
+    [self throwEnded];
 }
 
 + (Throw)calculateThrowFrom:(CGPoint)r0 withVelocity:(CGPoint)v afterTime:(ccTime)t {
