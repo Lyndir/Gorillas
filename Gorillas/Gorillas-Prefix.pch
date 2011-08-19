@@ -64,7 +64,7 @@ typedef enum {
     GorillasModeBootCamp    = GorillasFeatureCheat,
     
     /** Classic Game.               */
-    GorillasModeClassic     = GorillasFeatureScore      | GorillasFeatureLevel,
+    GorillasModeClassic     = GorillasFeatureScore,
     
     /** Dynamic Game.               */
     GorillasModeDynamic     = GorillasFeatureSkill      | GorillasFeatureScore      | GorillasFeatureLevel,

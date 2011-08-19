@@ -69,6 +69,8 @@
 #define cLevelProgress                  NSStringFromSelector(@selector(levelProgress))
 
 
+@class GorillaLayer;
+
 @interface GorillasConfig : Config {
 
 @private
@@ -124,9 +126,6 @@
 @property (nonatomic, readwrite, retain) NSNumber       *replay;
 @property (nonatomic, readwrite, retain) NSNumber       *followThrow;
 
-@property (nonatomic, readonly) NSString                *offMessage;
-@property (nonatomic, readonly) NSString                *hitMessage;
-
 -(ccColor4B)                                            buildingColor;
 
 -(void)                                                 levelUp;
@@ -134,6 +133,9 @@
 
 -(int64_t)recordScoreDelta:(int64_t)scoreDelta forMode:(GorillasMode)mode;
 -(int64_t)scoreForMode:(GorillasMode)mode;
+
+-(NSString *) messageForOff;
+-(NSString *) messageForHitBy:(GorillaLayer *)byGorilla on:(GorillaLayer *)onGorilla;
 
 +(GorillasConfig *)                                     get;
 

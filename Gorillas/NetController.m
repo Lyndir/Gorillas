@@ -57,15 +57,17 @@
     }
 }
 
-- (void)endMatch {
-    
-    started = NO;
+- (void)endMatchForced:(BOOL)forced {
 
-    [self.hostElection cleanup];
-    self.hostElection = nil;
+    if (started || forced) {
+        started = NO;
+
+        [self.hostElection cleanup];
+        self.hostElection = nil;
     
-    [self.match disconnect];
-    self.match = nil;
+        [self.match disconnect];
+        self.match = nil;
+    }
 }
 
 - (void)sendBecameReady {
@@ -93,7 +95,7 @@
     if (![self.match sendDataToAllPlayers:[NSKeyedArchiver archivedDataWithRootObject:message]
                              withDataMode:GKMatchSendDataReliable error:&error] || error) {
         err(@"Failed to send message: %@, error: %@", message, error);
-        [self endMatch];
+        [self endMatchForced:YES];
         return;
     }
 }
@@ -101,7 +103,7 @@
 // The user has cancelled matchmaking
 - (void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController {
     
-    [self endMatch];
+    [self endMatchForced:YES];
 
     [[[UIApplication sharedApplication] keyWindow].rootViewController dismissModalViewControllerAnimated:YES];
     [[CCDirector sharedDirector] resume];
@@ -111,7 +113,7 @@
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
     
     err(@"Matchmaker failed: %@", error);
-    [self endMatch];
+    [self endMatchForced:YES];
     
     [[[UIApplication sharedApplication] keyWindow].rootViewController dismissModalViewControllerAnimated:YES];
     [[CCDirector sharedDirector] resume];
@@ -137,7 +139,6 @@
         
         if (!started && self.hostElection.host) {
             // Beginning of the game, host determined.  Start the game.
-            started = YES;
             [[[UIApplication sharedApplication] keyWindow].rootViewController dismissModalViewControllerAnimated:YES];
             [[CCDirector sharedDirector] resume];
 
@@ -149,6 +150,8 @@
             
             [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode randomCity:YES
                                                              playerIDs:self.hostElection.orderedPlayerIDs localHumans:1 ais:gameConfiguration.multiplayerAICount];
+            
+            started = YES;
             [[GorillasAppDelegate get].gameLayer startGame];
         }
     }
@@ -197,7 +200,7 @@
             if (![self.match sendDataToAllPlayers:[NSKeyedArchiver archivedDataWithRootObject:self.hostElection]
                                      withDataMode:GKMatchSendDataReliable error:&error] || error) {
                 err(@"Failed to send our host election: %@", error);
-                [self endMatch];
+                [self endMatchForced:YES];
                 return;
             }
         }

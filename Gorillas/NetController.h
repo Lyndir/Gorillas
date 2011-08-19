@@ -24,7 +24,7 @@
 - (void)beginRequest:(GKMatchRequest *)aMatchRequest;
 - (void)beginInvite:(GKInvite *)anInvite;
 
-- (void)endMatch;
+- (void)endMatchForced:(BOOL)forced;
 
 - (void)sendBecameReady;
 - (void)sendThrowWithNormalizedVelocity:(CGPoint)velocity;

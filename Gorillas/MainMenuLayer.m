@@ -97,6 +97,7 @@
     [descriptionT setString:gameConfiguration.description];
     singlePlayerI.isEnabled = gameConfiguration.singleplayerAICount;
     multiPlayerI.isEnabled = gameConfiguration.multiplayerHumanCount && [GKLocalPlayer localPlayer].authenticated;
+    hotSeatI.isEnabled = gameConfiguration.multiplayerHumanCount;
 }
 
 

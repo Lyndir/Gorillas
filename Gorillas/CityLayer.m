@@ -258,7 +258,7 @@
     
     // Active gorilla's turn is over.
     ++[GorillasAppDelegate get].gameLayer.activeGorilla.turns;
-    [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:NO];
+    [GorillasAppDelegate get].gameLayer.activeGorilla.active = NO;
     
     // Activate the next gorilla.
     // Look for the next live gorilla; first try the next gorilla AFTER the current.
@@ -312,8 +312,11 @@
         return;
     }
     
-    // Scale to the active gorilla's saved scale.
-    [[GorillasAppDelegate get].gameLayer.activeGorilla setActive:YES];
+    // Scale to the new active gorilla's saved scale.
+    [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:[GorillasAppDelegate get].gameLayer.activeGorilla.zoom];
+    
+    // New active gorilla's turn starts.
+    [GorillasAppDelegate get].gameLayer.activeGorilla.active = YES;
 
     // AI throw.
     if ([GorillasAppDelegate get].gameLayer.activeGorilla.alive && ![GorillasAppDelegate get].gameLayer.activeGorilla.human) {
