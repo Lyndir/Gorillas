@@ -57,10 +57,9 @@
 
 -(BOOL) isEnabled:(GorillasFeature)feature {
     
-    // Make an exception for Score:
-    if (feature == GorillasFeatureScore) {
-        // Score is disabled if not single player AND not in team mode (non-team multiplayer), even if the feature is enabled.
-        if (!self.singlePlayer && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureTeam])
+    if (!self.singlePlayer) {
+        if (feature == GorillasFeatureScore || feature == GorillasFeatureSkill || feature == GorillasFeatureLevel)
+            // Features not supported in multiplayer.
             return NO;
     }
     
@@ -115,8 +114,8 @@
                     playerIDs:(NSArray *)playerIDs localHumans:(NSUInteger)localHumans ais:(NSUInteger)_ais {
     
     configuring     = YES;
-    if(activeGorilla)
-        [self stopGame];
+
+    [self stopGame];
     
     mode            = _mode;
     randomCity      = aRandomCity;
@@ -210,12 +209,13 @@
     
     if (randomCity)
         [GorillasConfig get].cityTheme = [[CityTheme getThemeNames] objectAtIndex:gameRandom() % [[CityTheme getThemeNames] count]];
-    
+    else
+        [self reset];
+
     // When there are AIs in the game, show their difficulity.
     if (ais)
         [[GorillasAppDelegate get].uiLayer message:[GorillasConfig nameForLevel:[GorillasConfig get].level]];
     
-    [self reset];
     self.started = YES;
     
     [self.cityLayer beginGame];
@@ -229,7 +229,7 @@
             return;
             
         case ThrowEndOffScreen:
-            [[[GorillasAppDelegate get] hudLayer] message:[GorillasConfig get].offMessage
+            [[[GorillasAppDelegate get] hudLayer] message:[[GorillasConfig get] messageForOff]
                                                  duration:4 isImportant:NO];
         case ThrowEndHitBuilding: {
             // Either hit building or threw off screen.
@@ -273,8 +273,7 @@
             [cityLayer.hitGorilla kill];
             
             if (!cityLayer.hitGorilla.alive)
-                [[[GorillasAppDelegate get] hudLayer] message:[NSString stringWithFormat:[GorillasConfig get].hitMessage,
-                                                               activeGorilla.name, cityLayer.hitGorilla.name]
+                [[[GorillasAppDelegate get] hudLayer] message:[[GorillasConfig get] messageForHitBy:activeGorilla on:cityLayer.hitGorilla]
                                                      duration:4 isImportant:NO];
             
             int64_t scoreDelta = 0;
@@ -440,7 +439,7 @@
     humans = 0;
     ais = 0;
     
-    [[GorillasAppDelegate get].netController endMatch];
+    [[GorillasAppDelegate get].netController endMatchForced:NO];
     
     [self endGame];
 }

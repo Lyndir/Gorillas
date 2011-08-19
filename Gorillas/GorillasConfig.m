@@ -24,6 +24,7 @@
 
 #import "CityTheme.h"
 #import "GorillasAppDelegate.h"
+#import "GorillaLayer.h"
 
 
 @implementation GorillasConfig
@@ -70,7 +71,7 @@
                            [GameConfiguration configurationWithName:l(@"menu.config.gametype.dynamic")
                                                         description:l(@"menu.config.gametype.dynamic.desc")
                                                                mode:GorillasModeDynamic
-                                                singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:4],
+                                                singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:0],
                            [GameConfiguration configurationWithName:l(@"menu.config.gametype.team")
                                                         description:l(@"menu.config.gametype.team.desc")
                                                                mode:GorillasModeTeam
@@ -82,15 +83,15 @@
                            nil];
 
     offMessages         = [[NSArray alloc] initWithObjects:
-                           l(@"menu.config.message.off.1"),
-                           l(@"menu.config.message.off.2"),
+                           @"menu.config.message.off.1",
+                           @"menu.config.message.off.2",
                            nil];
 
     hitMessages         = [[NSArray alloc] initWithObjects:
-                           l(@"menu.config.message.hit.1"),
-                           l(@"menu.config.message.hit.2"),
-                           l(@"menu.config.message.hit.3"),
-                           l(@"menu.config.message.hit.4"),
+                           @"menu.config.message.hit.1",
+                           @"menu.config.message.hit.2",
+                           @"menu.config.message.hit.3",
+                           @"menu.config.message.hit.4",
                            nil];
 
     NSDictionary *themes = [CityTheme getThemes];
@@ -208,13 +209,13 @@
 }
 
 
--(NSString *) offMessage {
+-(NSString *) messageForOff {
 
-    return [offMessages objectAtIndex:gameRandom() % offMessages.count];
+    return l([offMessages objectAtIndex:gameRandom() % offMessages.count]);
 }
--(NSString *) hitMessage {
+-(NSString *) messageForHitBy:(GorillaLayer *)byGorilla on:(GorillaLayer *)onGorilla {
 
-    return [hitMessages objectAtIndex:gameRandom() % hitMessages.count];
+    return l([hitMessages objectAtIndex:gameRandom() % hitMessages.count], byGorilla, onGorilla);
 }
 
 

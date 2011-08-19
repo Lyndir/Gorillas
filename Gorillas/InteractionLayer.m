@@ -29,7 +29,6 @@
 @interface InteractionLayer (Private)
 
 - (void)addInfo:(ccTime)dt;
-- (void)zoomOut;
 - (void)showAim;
 - (void)endGameCallback;
 
@@ -127,26 +126,16 @@
         return;
     }
     
-    CGPoint wp = [[GorillasAppDelegate get].gameLayer convertTouchToNodeSpace:[[event allTouches] anyObject]];
-    if (fabsf(wp.y - [CCDirector sharedDirector].winSize.height) < 20)
-        [self performSelector:@selector(zoomOut) withObject:nil afterDelay:3];
-    else
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(zoomOut) object:nil];
-    
     self.aim = ccpSub(p, [self position]);
 }
 
 - (void)ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(zoomOut) object:nil];
     
     self.aim = CGPointZero;
 }
 
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(zoomOut) object:nil];
 
     if([[event allTouches] count] != 1) {
         // Cancel when: multiple fingers hit the screen.
@@ -196,13 +185,6 @@
     [angleLabel setString:[NSString stringWithFormat:@"%0.0f", CC_RADIANS_TO_DEGREES(ccpToAngle(worldAim))]];
     [strengthLabel setString:[NSString stringWithFormat:@"%0.0f", ccpLength(worldAim)]];
     infoLabel.visible = YES;
-}
-
-
--(void) zoomOut {
-    
-    PanningLayer *panningLayer = [GorillasAppDelegate get].gameLayer.panningLayer;
-    [panningLayer scaleTo:panningLayer.scale * 0.9f];
 }
 
 
