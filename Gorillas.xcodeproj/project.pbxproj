@@ -216,6 +216,8 @@
 		DA5C1F6F0F829FFD007B1085 /* bunny-human-DU.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5C1F4F0F829FFD007B1085 /* bunny-human-DU.png */; };
 		DA5C1F700F829FFD007B1085 /* bunny-human-UD.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5C1F500F829FFD007B1085 /* bunny-human-UD.png */; };
 		DA5C1F710F829FFD007B1085 /* bunny-human-UU.png in Resources */ = {isa = PBXBuildFile; fileRef = DA5C1F510F829FFD007B1085 /* bunny-human-UU.png */; };
+		DA5C2F9113FF2A3500AB736E /* PHReward.h in Headers */ = {isa = PBXBuildFile; fileRef = DA5C2F8F13FF2A3500AB736E /* PHReward.h */; };
+		DA5C2F9213FF2A3500AB736E /* PHReward.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5C2F9013FF2A3500AB736E /* PHReward.m */; };
 		DA61451613299376009DBC56 /* Bilbao-Poster-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA61451513299376009DBC56 /* Bilbao-Poster-Black.ttf */; };
 		DA61451713299376009DBC56 /* Bilbao-Poster-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA61451513299376009DBC56 /* Bilbao-Poster-Black.ttf */; };
 		DA61451F13299590009DBC56 /* AppleGothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA61451E13299590009DBC56 /* AppleGothic.ttf */; };
@@ -752,6 +754,13 @@
 			remoteGlobalIDString = DA8B8B8713CF994B003B0CC2;
 			remoteInfo = "uicolor-utilities";
 		};
+		DA9D972413FF89170030BA1A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA571E0113F3332200D50DF2;
+			remoteInfo = Localytics;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -842,6 +851,8 @@
 		DA5C1F4F0F829FFD007B1085 /* bunny-human-DU.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bunny-human-DU.png"; path = "png/bunny-human-DU.png"; sourceTree = "<group>"; };
 		DA5C1F500F829FFD007B1085 /* bunny-human-UD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bunny-human-UD.png"; path = "png/bunny-human-UD.png"; sourceTree = "<group>"; };
 		DA5C1F510F829FFD007B1085 /* bunny-human-UU.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bunny-human-UU.png"; path = "png/bunny-human-UU.png"; sourceTree = "<group>"; };
+		DA5C2F8F13FF2A3500AB736E /* PHReward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PHReward.h; path = src/PHReward.h; sourceTree = "<group>"; };
+		DA5C2F9013FF2A3500AB736E /* PHReward.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PHReward.m; path = src/PHReward.m; sourceTree = "<group>"; };
 		DA61451513299376009DBC56 /* Bilbao-Poster-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Bilbao-Poster-Black.ttf"; sourceTree = "<group>"; };
 		DA61451E13299590009DBC56 /* AppleGothic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleGothic.ttf; sourceTree = "<group>"; };
 		DA69A35013CB974000A614D4 /* Arabic */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Arabic; path = Arabic.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -4283,6 +4294,8 @@
 		DAC0379D13CE317D003FAE6D /* PlayHavenSDK */ = {
 			isa = PBXGroup;
 			children = (
+				DA5C2F8F13FF2A3500AB736E /* PHReward.h */,
+				DA5C2F9013FF2A3500AB736E /* PHReward.m */,
 				DAC037F413CE317E003FAE6D /* JSON */,
 				DAC0380613CE317E003FAE6D /* NSObject+QueryComponents.h */,
 				DAC0380713CE317E003FAE6D /* NSObject+QueryComponents.m */,
@@ -4433,6 +4446,7 @@
 				DAC0386D13CE317E003FAE6D /* PHURLLoaderView.h in Headers */,
 				DAC0386F13CE317E003FAE6D /* PlayHavenSDK.h in Headers */,
 				DAC0387013CE317E003FAE6D /* UIDevice+HardwareString.h in Headers */,
+				DA5C2F9113FF2A3500AB736E /* PHReward.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4638,6 +4652,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				DA9D972513FF89170030BA1A /* PBXTargetDependency */,
 				DA0DA0DF13CCF64D00B1D188 /* PBXTargetDependency */,
 				DA3B963B127C1DC0009196E8 /* PBXTargetDependency */,
 			);
@@ -5147,6 +5162,7 @@
 				DAC0386C13CE317E003FAE6D /* PHURLLoader.m in Sources */,
 				DAC0386E13CE317E003FAE6D /* PHURLLoaderView.m in Sources */,
 				DAC0387113CE317E003FAE6D /* UIDevice+HardwareString.m in Sources */,
+				DA5C2F9213FF2A3500AB736E /* PHReward.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5389,6 +5405,11 @@
 			isa = PBXTargetDependency;
 			target = DA8B8B8713CF994B003B0CC2 /* uicolor-utilities */;
 			targetProxy = DA8B8B9813CF99AA003B0CC2 /* PBXContainerItemProxy */;
+		};
+		DA9D972513FF89170030BA1A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA571E0113F3332200D50DF2 /* Localytics */;
+			targetProxy = DA9D972413FF89170030BA1A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
