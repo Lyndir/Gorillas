@@ -215,7 +215,7 @@
 }
 -(NSString *) messageForHitBy:(GorillaLayer *)byGorilla on:(GorillaLayer *)onGorilla {
 
-    return l([hitMessages objectAtIndex:gameRandom() % hitMessages.count], byGorilla, onGorilla);
+    return l([hitMessages objectAtIndex:gameRandom() % hitMessages.count], byGorilla.name, onGorilla.name);
 }
 
 

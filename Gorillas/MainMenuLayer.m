@@ -145,7 +145,7 @@
     GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
     
     [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode randomCity:NO
-                                                     playerIDs:nil localHumans:2 ais:gameConfiguration.singleplayerAICount];
+                                                     playerIDs:nil localHumans:2 ais:gameConfiguration.multiplayerAICount];
     [[GorillasAppDelegate get].gameLayer startGame];
 }
 
