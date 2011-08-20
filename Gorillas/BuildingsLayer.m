@@ -98,6 +98,8 @@
     windowCount                     = 0;
     buildingCount                   = [config.buildingAmount unsignedIntValue] * 3;
     free(buildings);
+    if (!buildingCount)
+        return;
     buildings = malloc(sizeof(Building) * buildingCount);
     for (NSUInteger b = 0; b < buildingCount; ++b) {
         // Building's position.
