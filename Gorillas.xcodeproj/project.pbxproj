@@ -4776,6 +4776,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = Lyndir;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Gorillas" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -5618,12 +5619,10 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = NO;
 			};
 			name = Debug;
@@ -5636,6 +5635,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -5679,7 +5679,6 @@
 				INFOPLIST_FILE = "${TARGET_NAME}/${TARGET_NAME}-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
 				LINKER_DISPLAYS_MANGLED_NAMES = YES;
-				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = iphoneos;
@@ -5698,14 +5697,14 @@
 			};
 			name = Debug;
 		};
-		DA0EA01913CCF06A00BB7666 /* Distribution */ = {
+		DA0EA01913CCF06A00BB7666 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "";
 			};
-			name = Distribution;
+			name = Release;
 		};
-		DA16C3750EEC575C00E46246 /* Distribution */ = {
+		DA16C3750EEC575C00E46246 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -5713,6 +5712,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = YES;
@@ -5751,19 +5751,18 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "${TARGET_NAME}/${TARGET_NAME}-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
-				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "${TARGET_NAME}";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALIDATE_PRODUCT = YES;
 				VERSION_INFO_BUILDER = lhunath;
 				ZERO_LINK = NO;
 			};
-			name = Distribution;
+			name = Release;
 		};
-		DA16C3760EEC575C00E46246 /* Distribution */ = {
+		DA16C3760EEC575C00E46246 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -5774,7 +5773,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = NO;
 			};
-			name = Distribution;
+			name = Release;
 		};
 		DA3B92C2127B6D21009196E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -5782,11 +5781,11 @@
 			};
 			name = Debug;
 		};
-		DA3B92C5127B6D21009196E8 /* Distribution */ = {
+		DA3B92C5127B6D21009196E8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 			};
-			name = Distribution;
+			name = Release;
 		};
 		DA3B938B127B6D6A009196E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -5799,7 +5798,7 @@
 			};
 			name = Debug;
 		};
-		DA3B938E127B6D6A009196E8 /* Distribution */ = {
+		DA3B938E127B6D6A009196E8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "";
@@ -5808,12 +5807,11 @@
 				GCC_WARN_SIGN_COMPARE = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = NO;
 			};
-			name = Distribution;
+			name = Release;
 		};
 		DA4769F40FDD7334002E74F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "Gorillas/Gorillas-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = LITE;
 				INFOPLIST_FILE = "Gorillas/GorillasLite-Info.plist";
@@ -5821,15 +5819,13 @@
 					"-ObjC",
 					"-all_load",
 				);
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = NO;
 			};
 			name = Debug;
 		};
-		DA4769F70FDD7334002E74F8 /* Distribution */ = {
+		DA4769F70FDD7334002E74F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PREFIX_HEADER = "Gorillas/Gorillas-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = LITE;
 				INFOPLIST_FILE = "Gorillas/GorillasLite-Info.plist";
@@ -5837,10 +5833,9 @@
 					"-ObjC",
 					"-all_load",
 				);
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = NO;
 			};
-			name = Distribution;
+			name = Release;
 		};
 		DA571E0B13F3332200D50DF2 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -5850,13 +5845,13 @@
 			};
 			name = Debug;
 		};
-		DA571E0C13F3332200D50DF2 /* Distribution */ = {
+		DA571E0C13F3332200D50DF2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "";
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 			};
-			name = Distribution;
+			name = Release;
 		};
 		DA8B8B9113CF994C003B0CC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -5867,14 +5862,138 @@
 			};
 			name = Debug;
 		};
-		DA8B8B9213CF994C003B0CC2 /* Distribution */ = {
+		DA8B8B9213CF994C003B0CC2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_MISSING_PARENTHESES = NO;
 			};
-			name = Distribution;
+			name = Release;
+		};
+		DAA5143A13FFAD0900325033 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEPLOYMENT_POSTPROCESSING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_FAST_MATH = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
+				GCC_STRICT_ALIASING = YES;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GCC_WARN_ABOUT_INVALID_OFFSETOF_MACRO = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_POINTER_SIGNEDNESS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VALUE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "${TARGET_NAME}/${TARGET_NAME}-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSION_INFO_BUILDER = lhunath;
+				ZERO_LINK = NO;
+			};
+			name = Profile;
+		};
+		DAA5143B13FFAD0900325033 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				SKIP_INSTALL = NO;
+			};
+			name = Profile;
+		};
+		DAA5143C13FFAD0900325033 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "Gorillas/Gorillas-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = LITE;
+				INFOPLIST_FILE = "Gorillas/GorillasLite-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				SKIP_INSTALL = NO;
+			};
+			name = Profile;
+		};
+		DAA5143D13FFAD0900325033 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Profile;
+		};
+		DAA5143E13FFAD0900325033 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_SIGN_COMPARE = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = NO;
+			};
+			name = Profile;
+		};
+		DAA5143F13FFAD0900325033 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "";
+			};
+			name = Profile;
+		};
+		DAA5144013FFAD0900325033 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_MISSING_PARENTHESES = NO;
+			};
+			name = Profile;
+		};
+		DAA5144113FFAD0900325033 /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "";
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
+			};
+			name = Profile;
 		};
 /* End XCBuildConfiguration section */
 
@@ -5883,73 +6002,81 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
-				DA16C3760EEC575C00E46246 /* Distribution */,
+				DA16C3760EEC575C00E46246 /* Release */,
+				DAA5143B13FFAD0900325033 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Distribution;
+			defaultConfigurationName = Release;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Gorillas" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
-				DA16C3750EEC575C00E46246 /* Distribution */,
+				DA16C3750EEC575C00E46246 /* Release */,
+				DAA5143A13FFAD0900325033 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Distribution;
+			defaultConfigurationName = Release;
 		};
 		DA0EA01613CCF06A00BB7666 /* Build configuration list for PBXNativeTarget "PlayHaven" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA0EA01713CCF06A00BB7666 /* Debug */,
-				DA0EA01913CCF06A00BB7666 /* Distribution */,
+				DA0EA01913CCF06A00BB7666 /* Release */,
+				DAA5143F13FFAD0900325033 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Distribution;
+			defaultConfigurationName = Release;
 		};
 		DA3B9385127B6D51009196E8 /* Build configuration list for PBXNativeTarget "Pearl" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA3B92C2127B6D21009196E8 /* Debug */,
-				DA3B92C5127B6D21009196E8 /* Distribution */,
+				DA3B92C5127B6D21009196E8 /* Release */,
+				DAA5143D13FFAD0900325033 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Distribution;
+			defaultConfigurationName = Release;
 		};
 		DA3B938F127B6DA8009196E8 /* Build configuration list for PBXNativeTarget "cocos2d-iphone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA3B938B127B6D6A009196E8 /* Debug */,
-				DA3B938E127B6D6A009196E8 /* Distribution */,
+				DA3B938E127B6D6A009196E8 /* Release */,
+				DAA5143E13FFAD0900325033 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Distribution;
+			defaultConfigurationName = Release;
 		};
 		DA4769F30FDD7334002E74F8 /* Build configuration list for PBXNativeTarget "Gorillas Lite" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA4769F40FDD7334002E74F8 /* Debug */,
-				DA4769F70FDD7334002E74F8 /* Distribution */,
+				DA4769F70FDD7334002E74F8 /* Release */,
+				DAA5143C13FFAD0900325033 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Distribution;
+			defaultConfigurationName = Release;
 		};
 		DA571E0A13F3332200D50DF2 /* Build configuration list for PBXNativeTarget "Localytics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA571E0B13F3332200D50DF2 /* Debug */,
-				DA571E0C13F3332200D50DF2 /* Distribution */,
+				DA571E0C13F3332200D50DF2 /* Release */,
+				DAA5144113FFAD0900325033 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Distribution;
+			defaultConfigurationName = Release;
 		};
 		DA8B8B9013CF994C003B0CC2 /* Build configuration list for PBXNativeTarget "uicolor-utilities" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DA8B8B9113CF994C003B0CC2 /* Debug */,
-				DA8B8B9213CF994C003B0CC2 /* Distribution */,
+				DA8B8B9213CF994C003B0CC2 /* Release */,
+				DAA5144013FFAD0900325033 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Distribution;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
