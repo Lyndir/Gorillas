@@ -45,6 +45,7 @@ typedef struct {
     CGPoint                                 _velocity;
     ccTime                                  _duration;
     BOOL                                    _needReplay;
+    BOOL                                    _wasReplay;
 }
 
 @property (nonatomic, retain) GorillaLayer  *gorilla;
@@ -53,6 +54,7 @@ typedef struct {
 @property (nonatomic, assign) CGPoint       velocity;
 @property (nonatomic, assign) ccTime        duration;
 @property (nonatomic, assign) BOOL          needReplay;
+@property (nonatomic, assign) BOOL          wasReplay;
 
 -(void) nextTurn;
 -(void) throwEnded;

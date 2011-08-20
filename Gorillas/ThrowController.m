@@ -36,7 +36,8 @@
 @end
 
 @implementation ThrowController
-@synthesize throw = _throw, banana = _banana, gorilla = _gorilla, velocity = _velocity, duration = _duration, needReplay = _needReplay;
+@synthesize throw = _throw, banana = _banana, gorilla = _gorilla, velocity = _velocity, duration = _duration;
+@synthesize needReplay = _needReplay, wasReplay = _wasReplay;
 
 -(void) throwEnded {
     
@@ -46,6 +47,9 @@
 
     self.banana.tag = GorillasTagBananaNotFlying;
     self.banana     = nil;
+    
+    if (self.wasReplay)
+        [[GorillasAppDelegate get].hudLayer dismissMessage];
     
     if (self.needReplay) {
         self.needReplay = NO;
@@ -103,13 +107,17 @@
         dbg(@"Throw: %@ -> %@, v = %@ ends after t = %f, condition: %d",
             NSStringFromCGPoint(gorilla.position), NSStringFromCGPoint(self.throw.endPoint), NSStringFromCGPoint(self.velocity),
             self.throw.duration, self.throw.endCondition);
-    if (self.throw.endCondition == ThrowEndHitGorilla && [GorillasConfig get].replay)
+    if (self.throw.endCondition == ThrowEndHitGorilla
+        && [GorillasAppDelegate get].gameLayer.cityLayer.hitGorilla.lives == 1
+        && [GorillasConfig get].replay)
         self.needReplay = YES;
     
     [self doThrowIsReplay:NO];
 }
 
 - (void)doThrowIsReplay:(BOOL)isReplay {
+    
+    self.wasReplay = isReplay;
     
     // Begin throw.
     [GorillasAppDelegate get].gameLayer.cityLayer.bananaLayer.clearedGorilla = NO;
@@ -127,6 +135,11 @@
 }
 
 - (void)skipThrow:(id)sender {
+    
+    if (!self.wasReplay) {
+        [[GorillasAppDelegate get].hudLayer dismissMessage];
+        return;
+    }
     
     [self.banana stopAllActions];
     [self throwEnded];
