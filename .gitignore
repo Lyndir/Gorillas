@@ -17,6 +17,8 @@
 # Xcode IDE
 /*.xcodeproj/*
 !/*.xcodeproj/*.pbxproj
+!/*.xcodeproj/xcshareddata
+!/*.xcodeproj/xcshareddata/*
 /build
 
 # Gorillas Stuff
