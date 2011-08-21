@@ -87,7 +87,7 @@
     body.position   = ccp(0, 0);
     tail.position   = ccp(-wind * windRange, 0);
     body.scaleX     = wind * windRange * 2 / body.contentSize.width;
-    head.rotation   = wind > 0? 180: 0;
+    head.rotation   = wind < 0? 180: 0;
     
     @synchronized(self) {
         for(NSUInteger i = 0; i < [systems count]; ++i) {
