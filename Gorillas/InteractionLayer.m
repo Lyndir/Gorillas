@@ -161,7 +161,8 @@
     self.aim = CGPointZero;
 
     // Notify the network controller.
-    [[GorillasAppDelegate get].netController sendThrowWithNormalizedVelocity:v];
+    if ([GorillasAppDelegate get].netController.match)
+        [[GorillasAppDelegate get].netController sendThrowWithNormalizedVelocity:v];
 
     [[ThrowController get] throwFrom:activeGorilla normalizedVelocity:v];
 }
