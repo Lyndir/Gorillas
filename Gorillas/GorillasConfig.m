@@ -326,6 +326,9 @@
 }
 
 -(int64_t)scoreForMode:(GorillasMode)mode {
+    
+    if (!mode)
+        return 0;
 
     NSString *category = [GorillasConfig categoryForMode:mode];
 

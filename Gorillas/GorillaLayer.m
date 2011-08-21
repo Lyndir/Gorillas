@@ -442,25 +442,31 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     if(!self.human && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesAi])
         return;
     
-    const CGFloat barX = self.contentSize.width / self.scale / 2;
-    const CGFloat barY = self.contentSize.height / self.scale + 10;
-    const CGFloat barW = 40;
+    const CGFloat barX = self.contentSizeInPixels.width     * -0.2f;
+    const CGFloat barY = self.contentSizeInPixels.height    * 1.2f;
+    const CGFloat barW = self.contentSizeInPixels.width     * 1.4f;
     const CGPoint lines[4] = {
-        ccp(barX - barW / 2, barY),
-        ccp(barX - barW / 2 + barW * self.lives / self.initialLives, barY),
-        ccp(barX - barW / 2 + barW * self.lives / self.initialLives, barY),
-        ccp(barX - barW / 2 + barW, barY),
+        ccp(barX, barY),
+        ccp(barX + barW * self.lives / self.initialLives, barY),
+        ccp(barX + barW * self.lives / self.initialLives, barY),
+        ccp(barX + barW, barY),
     };
-    const GLubyte o = self.active? 0xFF: 0x33;
+    const GLubyte o = self.active? 0xFF: 0x66;
     
     if ([[GorillasConfig get].visualFx boolValue]) {
-        DrawBoxFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[1], ccp(0, 3)), ccc4l(0xCCFFCC00 | o), ccc4l(0x33CC3300 | o));
-        DrawBoxFrom(ccpAdd(lines[2], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc4l(0xFFCCCC00 | o), ccc4l(0xCC333300 | o));
+        DrawBoxFrom(ccpAdd(lines[0], ccp(0, self.contentSizeInPixels.height * -0.1f)),
+                    ccpAdd(lines[1], ccp(0, self.contentSizeInPixels.height * 0.1f)),
+                    ccc4l(0xCCFFCC00 | o), ccc4l(0x33CC3300 | o));
+        DrawBoxFrom(ccpAdd(lines[2], ccp(0, self.contentSizeInPixels.height * -0.1f)),
+                    ccpAdd(lines[3], ccp(0, self.contentSizeInPixels.height * 0.1f)),
+                    ccc4l(0xFFCCCC00 | o), ccc4l(0xCC333300 | o));
     }
     else
         DrawLines(lines, _healthColors, 4, 6);
     
-    DrawBorderFrom(ccpAdd(lines[0], ccp(0, -3)), ccpAdd(lines[3], ccp(0, 3)), ccc4l(0xCCCC3300 | (o - 0x33)), 1);
+    DrawBorderFrom(ccpAdd(lines[0], ccp(0, self.contentSizeInPixels.height * -0.1f)),
+                   ccpAdd(lines[3], ccp(0, self.contentSizeInPixels.height * 0.1f)),
+                   ccc4l(0xCCCC3300 | (o - 0x33)), 1);
 }
 
 

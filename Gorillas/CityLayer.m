@@ -515,23 +515,23 @@
     }
     // Distribute gorillas.
     NSUInteger delta    = indexB - indexA;
-    NSInteger minSpace  = (delta - 1) / 2 - ([gorillas count] - 2) * 2;
-    if(minSpace < 0)
-        minSpace = 0;
-    if (minSpace * ([gorillas count] - 1) > delta) {
+    if ([gorillas count] > delta) {
         err(@"Tried to start a game with more gorillas than there's room in the field.");
         return;
     }
 
+    NSInteger minSpace  = ((delta / [gorillas count]) /* share per gorilla */ - 1) /* gorilla's building */ / 2 /* padding on each side */;
     NSMutableArray *gorillasQueue = [gorillas mutableCopy];
     NSMutableArray *gorillaIndexes = [[NSMutableArray alloc] initWithCapacity: [gorillas count]];
     while ([gorillasQueue count]) {
         NSUInteger index = indexA + gameRandom() % (delta + 1);
         BOOL validIndex = YES;
         
+        // Make sure gorillas aren't too close to the edge.
         if (index - minSpace <= indexA && index + minSpace >= indexB)
             validIndex = NO;
-        
+
+        // Make sure gorillas aren't too close together.
         for (NSNumber *gorillasIndex in gorillaIndexes)
             if (abs([gorillasIndex unsignedIntegerValue] - index) <= minSpace) {
                 validIndex = NO;

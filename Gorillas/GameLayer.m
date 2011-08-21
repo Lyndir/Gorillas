@@ -439,7 +439,8 @@
     humans = 0;
     ais = 0;
     
-    [[GorillasAppDelegate get].netController endMatchForced:NO];
+    if ([GorillasAppDelegate get].netController.match)
+        [[GorillasAppDelegate get].netController endMatchForced:NO];
     
     [self endGame];
 }
