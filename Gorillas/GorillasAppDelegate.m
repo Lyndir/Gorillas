@@ -91,13 +91,16 @@ static NSString *PHPlacementMoreGames  = @"more_games";
         [self.mainMenuLayer reset];
     }];
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
-        [self.gameLayer performSelectorOnMainThread:@selector(stopGame) withObject:nil waitUntilDone:YES];
         
         if (acceptedInvite)
-            [self.netController performSelectorOnMainThread:@selector(beginInvite:) withObject:acceptedInvite waitUntilDone:NO];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.netController beginInvite:acceptedInvite];
+            });
         
         else if(playersToInvite)
-            [self performSelectorOnMainThread:@selector(showMainMenuForPlayers:) withObject:playersToInvite waitUntilDone:NO];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showMainMenuForPlayers:playersToInvite];
+            });
     };
     
 	// Build the splash scene.

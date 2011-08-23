@@ -52,7 +52,7 @@
     WindLayer                                               *windLayer;
     CCAction                                                *shakeAction;
     AutoTween                                               *scaleTimeAction;
-    float                                                   speed;
+    float                                                   timeScale;
 }
 
 @property (nonatomic, readwrite, getter=isPaused) BOOL      paused;
@@ -73,7 +73,7 @@
 @property (nonatomic, readonly) WindLayer                   *windLayer;
 
 @property (nonatomic, readonly) AutoTween                   *scaleTimeAction;
-@property (nonatomic, readwrite) float                      speed;
+@property (nonatomic, readwrite) float                      timeScale;
 
 -(void) shake;
 -(BOOL) isEnabled:(GorillasFeature)feature;

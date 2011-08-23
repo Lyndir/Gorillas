@@ -164,6 +164,7 @@
     if ([GorillasAppDelegate get].netController.match)
         [[GorillasAppDelegate get].netController sendThrowWithNormalizedVelocity:v];
 
+    activeGorilla.active = NO;
     [[ThrowController get] throwFrom:activeGorilla normalizedVelocity:v];
 }
 
