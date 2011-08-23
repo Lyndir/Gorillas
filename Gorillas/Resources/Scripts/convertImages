@@ -63,7 +63,7 @@ emit "Converting iTunesArtwork"
 
 echo
 emit "Converting @2x/-hd artwork"
-    for file in !(Icon*){@2x,-hd}.png; do
+    for file in {,lite/}!(Icon*){@2x,-hd}.png; do
         [[ -e $file ]] || continue
 
         if [[ $file = Default* ]]; then
