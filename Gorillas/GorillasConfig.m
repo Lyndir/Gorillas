@@ -68,6 +68,7 @@
                                                         description:l(@"menu.config.gametype.classic.desc")
                                                                mode:GorillasModeClassic
                                                 singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:4],
+#if ! LITE
                            [GameConfiguration configurationWithName:l(@"menu.config.gametype.dynamic")
                                                         description:l(@"menu.config.gametype.dynamic.desc")
                                                                mode:GorillasModeDynamic
@@ -80,6 +81,7 @@
                                                         description:l(@"menu.config.gametype.lms.desc")
                                                                mode:GorillasModeLMS
                                                 singleplayerAICount:3 multiplayerAICount:3 multiplayerHumanCount:3],
+#endif
                            nil];
 
     offMessages         = [[NSArray alloc] initWithObjects:

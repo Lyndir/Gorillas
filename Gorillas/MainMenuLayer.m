@@ -34,6 +34,7 @@
 - (void)startMulti:(id)sender;
 - (void)startHotSeat:(id)sender;
 - (void)gameConfiguration:(id)sender;
+- (void)upgrade:(id)sender;
 - (void)settings:(id)sender;
 - (void)scores:(id)sender;
 - (void)moreGames:(id)sender;
@@ -48,25 +49,42 @@
     
     if (!(self = [super initWithDelegate:self logo:nil items:
                   [MenuItemSpacer spacerSmall],
+#if ! LITE
                   [multiPlayerI     = [MenuItemBlock itemWithSize:100 target:self selector:@selector(startMulti:)] retain],
+#endif
                   [singlePlayerI    = [MenuItemBlock itemWithSize:100 target:self selector:@selector(startSingle:)] retain],
+#if ! LITE
                   [hotSeatI         = [MenuItemBlock itemWithSize:100 target:self selector:@selector(startHotSeat:)] retain],
+#endif
                   [configurationI   = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)] retain],
                   [descriptionT     = [MenuItemTitle itemFromString:@"description"] retain],
                   [MenuItemSpacer spacerSmall],
+#if LITE
+                  [MenuItemBlock itemWithSize:50 target:self selector:@selector(upgrade:)],
+#else
                   [MenuItemBlock itemWithSize:50 target:self selector:@selector(settings:)],
                   [MenuItemBlock itemWithSize:50 target:self selector:@selector(scores:)],
+#endif
                   [MenuItemBlock itemWithSize:50 target:self selector:@selector(moreGames:)],
                   nil]))
         return self;
     
     self.itemCounts = [NSArray arrayWithObjects:
                        [NSNumber numberWithInt:1],
+#if LITE
+                       [NSNumber numberWithInt:1],
+#else
                        [NSNumber numberWithInt:3],
+#endif
                        [NSNumber numberWithInt:1],
                        [NSNumber numberWithInt:1],
                        [NSNumber numberWithInt:1],
-                       [NSNumber numberWithInt:3], nil];
+#if LITE
+                       [NSNumber numberWithInt:2],
+#else
+                       [NSNumber numberWithInt:3],
+#endif
+                       nil];
     self.layout = MenuLayoutCustomColumns;
     
     self.background = [CCSprite spriteWithFile:@"menu-main.png"];
@@ -155,6 +173,13 @@
     [GorillasConfig get].activeGameConfigurationIndex = [NSNumber numberWithUnsignedInt:
                                                          ([[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue] + 1)
                                                          % [[GorillasConfig get].gameConfigurations count]];
+}
+
+
+- (void)upgrade:(id)sender {
+    
+    [[UIApplication sharedApplication] openURL:
+     [NSURL URLWithString:@"itms://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=302275459&mt=8&s=143441"]];
 }
 
 
