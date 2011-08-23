@@ -47,7 +47,7 @@
 @synthesize paused, configuring, started, running, mode;
 @synthesize gorillas, activeGorilla;
 @synthesize skyLayer, panningLayer, cityLayer, windLayer, backWeather, frontWeather;
-@synthesize scaleTimeAction, speed;
+@synthesize scaleTimeAction, timeScale;
 
 -(BOOL) isSinglePlayer {
     
@@ -106,7 +106,7 @@
 
 - (void)scaleTimeTo:(float)aTimeScale {
     
-    [scaleTimeAction tweenKeyPath:@"speed" to:aTimeScale];
+    [scaleTimeAction tweenKeyPath:@"timeScale" to:aTimeScale];
 }
 
 
@@ -462,7 +462,7 @@
 	if (!(self = [super init]))
 		return self;
     
-    speed = 1.0f;
+    timeScale = 1.0f;
     mode = GorillasModeClassic;
     running = NO;
     
@@ -494,7 +494,7 @@
     [self addChild:windLayer z:5];
     
     scaleTimeAction         = [[AutoTween alloc] initWithDuration:0.5f];
-    scaleTimeAction.tag     = kCCActionTagIgnoreSpeed;
+    scaleTimeAction.tag     = kCCActionTagIgnoreTimeScale;
     [self runAction:scaleTimeAction];
     
     paused = YES;
@@ -593,15 +593,13 @@
                 backWeather.positionType    = kCCPositionTypeGrouped;
                 backWeather.posVar          = ccp(field.size.width / 2, backWeather.posVar.y);
                 backWeather.position        = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
-                [panningLayer addChild:backWeather z:-1 /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:ccp(self.contentSize.width / 2,
-                                                         self.contentSize.height / 2)*/];
+                [panningLayer addChild:backWeather z:-1];
                 [windLayer registerSystem:backWeather affectAngle:YES];
                 
                 frontWeather.positionType   = kCCPositionTypeGrouped;
                 frontWeather.posVar         = ccp(field.size.width / 2, frontWeather.posVar.y);
                 frontWeather.position       = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
-                [panningLayer addChild:frontWeather /*parallaxRatio:ccp(1.3f, 1.8f) positionOffset:ccp(self.contentSize.width / 2,
-                                                     self.contentSize.height / 2)*/];
+                [panningLayer addChild:frontWeather];
                 [windLayer registerSystem:frontWeather affectAngle:YES];
             }
         }

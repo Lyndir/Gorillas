@@ -40,7 +40,7 @@
     initialDist         = -1;
     
     [self runAction:tween = [[AutoTween alloc] initWithDuration:0.5f]];
-    tween.tag           = kCCActionTagIgnoreSpeed;
+    tween.tag           = kCCActionTagIgnoreTimeScale;
     
     targetScale         = self.scale;
     
