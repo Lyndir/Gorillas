@@ -736,6 +736,13 @@
 			remoteGlobalIDString = DA0EA01013CCF06900BB7666;
 			remoteInfo = PlayHaven;
 		};
+		DA1B29DA1404CDF200206024 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA571E0113F3332200D50DF2;
+			remoteInfo = Localytics;
+		};
 		DA3B963A127C1DC0009196E8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -2428,15 +2435,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA571E2713F337DC00D50DF2 /* Security.framework in Frameworks */,
-				DA571E2513F337BA00D50DF2 /* libicucore.dylib in Frameworks */,
-				DA571E2313F337B100D50DF2 /* SystemConfiguration.framework in Frameworks */,
 				DA571E1F13F3378200D50DF2 /* libLocalytics.a in Frameworks */,
-				DA571E2013F3378200D50DF2 /* libuicolor-utilities.a in Frameworks */,
 				DA571E1E13F3377100D50DF2 /* libsqlite3.dylib in Frameworks */,
-				DA3B9656127C1DF7009196E8 /* libcocos2d-iphone.a in Frameworks */,
+				DA571E2013F3378200D50DF2 /* libuicolor-utilities.a in Frameworks */,
 				DA0DA09513CCF20200B1D188 /* libPlayHaven.a in Frameworks */,
+				DA3B9656127C1DF7009196E8 /* libcocos2d-iphone.a in Frameworks */,
 				DA7640A513B3D97C00A02611 /* libPearl.a in Frameworks */,
+				DA571E2313F337B100D50DF2 /* SystemConfiguration.framework in Frameworks */,
+				DA571E2513F337BA00D50DF2 /* libicucore.dylib in Frameworks */,
+				DA571E2713F337DC00D50DF2 /* Security.framework in Frameworks */,
 				DA4769EB0FDD7334002E74F8 /* UIKit.framework in Frameworks */,
 				DA4769EC0FDD7334002E74F8 /* Foundation.framework in Frameworks */,
 				DA4769ED0FDD7334002E74F8 /* CoreGraphics.framework in Frameworks */,
@@ -4760,6 +4767,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				DA1B29DB1404CDF200206024 /* PBXTargetDependency */,
 				DA0DA0E113CCF65A00B1D188 /* PBXTargetDependency */,
 				DA3B9653127C1DF4009196E8 /* PBXTargetDependency */,
 			);
@@ -5414,6 +5422,11 @@
 			target = DA0EA01013CCF06900BB7666 /* PlayHaven */;
 			targetProxy = DA0DA0E013CCF65A00B1D188 /* PBXContainerItemProxy */;
 		};
+		DA1B29DB1404CDF200206024 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA571E0113F3332200D50DF2 /* Localytics */;
+			targetProxy = DA1B29DA1404CDF200206024 /* PBXContainerItemProxy */;
+		};
 		DA3B963B127C1DC0009196E8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DA3B92C0127B6D21009196E8 /* Pearl */;
@@ -5658,10 +5671,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
@@ -5735,10 +5745,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -5908,10 +5915,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
