@@ -82,6 +82,7 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     
     [super application:application didFinishLaunchingWithOptions:launchOptions];
     
+#if ! LITE
     // Game Center setup.
     self.netController = [[NetController new] autorelease];
     [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
@@ -102,6 +103,7 @@ static NSString *PHPlacementMoreGames  = @"more_games";
                 [self showMainMenuForPlayers:playersToInvite];
             });
     };
+#endif
     
 	// Build the splash scene.
     CCScene *splashScene = [CCScene node];

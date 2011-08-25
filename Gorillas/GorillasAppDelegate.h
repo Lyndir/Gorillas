@@ -44,7 +44,9 @@
     AVConfigurationLayer                                            *_avConfigLayer;
     ModelsConfigurationLayer                                        *_modelsConfigLayer;
     
+#if ! LITE
     NetController                                                   *_netController;
+#endif
     PHNotificationView                                              *_notifierView;
 }
 
@@ -56,7 +58,9 @@
 @property (nonatomic, readonly, retain) ModelsConfigurationLayer    *modelsConfigLayer;
 @property (nonatomic, readonly, retain) GHUDLayer                   *hudLayer;
 
+#if ! LITE
 @property (nonatomic, readonly, retain) NetController               *netController;
+#endif
 
 -(void) showMainMenu;
 -(void) showMainMenuForPlayers:(NSArray *)aPlayersToInvite;

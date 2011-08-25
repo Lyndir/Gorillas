@@ -439,8 +439,10 @@
     humans = 0;
     ais = 0;
     
+#if ! LITE
     if ([GorillasAppDelegate get].netController.match)
         [[GorillasAppDelegate get].netController endMatchForced:NO];
+#endif
     
     [self endGame];
 }
@@ -645,9 +647,11 @@
     
     [self setPausedSilently:NO];
     
+#if ! LITE
     if ([GorillasAppDelegate get].netController.match)
         [[GorillasAppDelegate get].netController sendBecameReady];
     else
+#endif
         [self.cityLayer nextGorilla];
 }
 

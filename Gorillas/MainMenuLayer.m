@@ -140,6 +140,7 @@
 
 -(void) startMulti: (id) sender {
     
+#if ! LITE
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
     GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
     
@@ -154,6 +155,7 @@
     matchRequest.playersToInvite = self.playersToInvite;
     
     [[GorillasAppDelegate get].netController beginRequest:matchRequest];
+#endif
 }
 
 
