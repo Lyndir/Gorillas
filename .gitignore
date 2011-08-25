@@ -19,6 +19,9 @@
 !/*.xcodeproj/*.pbxproj
 !/*.xcodeproj/xcshareddata
 !/*.xcodeproj/xcshareddata/*
+!/*.xcodeproj/project.xcworkspace
+!/*.xcodeproj/project.xcworkspace/*
+/*.xcodeproj/project.xcworkspace/xcuserdata
 /build
 
 # Gorillas Stuff
