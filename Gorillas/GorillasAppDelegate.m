@@ -312,6 +312,8 @@ static NSDictionary *localyticsInfo = nil;
 - (NSString *)localyticsKey {
 #if DEBUG
     return [[self localyticsInfo] valueForKeyPath:@"Key.development"];
+#elif LITE
+    return [[self localyticsInfo] valueForKeyPath:@"Key.distribution.lite"];
 #else
     return [[self localyticsInfo] valueForKeyPath:@"Key.distribution"];
 #endif
