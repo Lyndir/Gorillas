@@ -27,8 +27,15 @@
 int main(int argc, char *argv[]) {
     
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    int retVal = UIApplicationMain(argc, argv, nil, @"GorillasAppDelegate");
-    [pool release];
-    
-    return retVal;
+    @try {
+        return UIApplicationMain(argc, argv, nil, @"GorillasAppDelegate");
+    }
+    @catch (NSException *exception) {
+        ftl(@"=== Exception Occurred! ===");
+        ftl(@"Name: %@; Reason: %@; Context: %@; Stack:\n%@", exception.name, exception.reason, exception.userInfo,
+            [exception callStackSymbols]);
+    }
+    @finally {
+        [pool release];
+    }
 }

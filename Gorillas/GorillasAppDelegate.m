@@ -76,11 +76,28 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     [GorillasConfig get];
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (void)preSetup {
     
-    [[LocalyticsSession sharedLocalyticsSession] startSession:[self localyticsKey]];
+    @try {
+        [[LocalyticsSession sharedLocalyticsSession] startSession:[self localyticsKey]];
+        [[Logger get] registerListener:^BOOL(LogMessage *message) {
+            if (message.level > LogLevelInfo)
+                [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Problem" attributes:
+                 [NSDictionary dictionaryWithObjectsAndKeys:
+                  [message levelDescription],
+                  @"level",
+                  message.message,
+                  @"message",
+                  nil]];
+            
+            return YES;
+        }];
+    }
+    @catch (NSException *exception) {
+        err(@"Localytics exception: %@", exception);
+    }
     
-    [super application:application didFinishLaunchingWithOptions:launchOptions];
+    [super preSetup];
     
 #if ! LITE
     // Game Center setup.
@@ -129,6 +146,7 @@ static NSString *PHPlacementMoreGames  = @"more_games";
         err(@"PlayHaven exception: %@", exception);
     }
     
+    [NSException raise:NSInternalInconsistencyException format:@"Moo, %@", @"cow"];
     do {
 #if ! TARGET_IPHONE_SIMULATOR
         @try {
@@ -136,15 +154,14 @@ static NSString *PHPlacementMoreGames  = @"more_games";
             [[CCDirector sharedDirector] startAnimation];
 #if ! TARGET_IPHONE_SIMULATOR
         }
-        @catch (NSException * e) {
+        @catch (NSException *exception) {
             err(@"=== Exception Occurred! ===");
-            err(@"Name: %@; Reason: %@; Context: %@.\n", [e name], [e reason], [e userInfo]);
-            [self.hudLayer message:[e reason] duration:5 isImportant:YES];
+            err(@"Name: %@; Reason: %@; Context: %@; Stack:\n%@", exception.name, exception.reason, exception.userInfo,
+                [exception callStackSymbols]);
+            [self.hudLayer message:exception.reason duration:5 isImportant:YES];
         }
 #endif
     } while ([[CCDirector sharedDirector] runningScene]);
-    
-    return NO;
 }
 
 
