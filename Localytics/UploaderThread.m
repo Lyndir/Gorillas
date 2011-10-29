@@ -38,15 +38,6 @@ static UploaderThread *_sharedUploaderThread = nil;
 	return _sharedUploaderThread;
 }
 
-#pragma mark Object Initialization
-- (UploaderThread *)init {
-	[super init];
-	self.isUploading = false;
-	self.uploadConnection = nil;
-	
-	return self;
-}
-
 #pragma mark Class Methods
 - (void)uploaderThreadwithApplicationKey:(NSString *)localyticsApplicationKey {
 	
@@ -83,7 +74,7 @@ static UploaderThread *_sharedUploaderThread = nil;
     }
 
 	NSData *requestData = [blobString dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *myString = [[NSString alloc] initWithData:requestData encoding:NSUTF8StringEncoding];
+    NSString *myString = [[[NSString alloc] initWithData:requestData encoding:NSUTF8StringEncoding] autorelease];
     [self logMessage:@"Upload data:"];
     [self logMessage:myString];
     
@@ -223,7 +214,7 @@ static UploaderThread *_sharedUploaderThread = nil;
 */
 - (void) logMessage:(NSString *)message {
     if(DO_LOCALYTICS_LOGGING) {
-		printf("(localytics uploader) %s\n", [message UTF8String]);
+		NSLog(@"(localytics uploader) %s\n", [message UTF8String]);
     }
 }
 
@@ -252,7 +243,7 @@ static UploaderThread *_sharedUploaderThread = nil;
 	return UINT_MAX;
 }
 
-- (void)release {
+- (oneway void)release {
 	// ignore release commands
 }
 
