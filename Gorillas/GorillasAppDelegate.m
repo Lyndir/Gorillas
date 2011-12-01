@@ -146,7 +146,6 @@ static NSString *PHPlacementMoreGames  = @"more_games";
         err(@"PlayHaven exception: %@", exception);
     }
     
-    [NSException raise:NSInternalInconsistencyException format:@"Moo, %@", @"cow"];
     do {
 #if ! TARGET_IPHONE_SIMULATOR
         @try {
@@ -155,9 +154,7 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 #if ! TARGET_IPHONE_SIMULATOR
         }
         @catch (NSException *exception) {
-            err(@"=== Exception Occurred! ===");
-            err(@"Name: %@; Reason: %@; Context: %@; Stack:\n%@", exception.name, exception.reason, exception.userInfo,
-                [exception callStackSymbols]);
+            err(@"Game exception: %@", exception);
             [self.hudLayer message:exception.reason duration:5 isImportant:YES];
         }
 #endif
@@ -375,12 +372,12 @@ static NSDictionary *playHavenInfo = nil;
 
 -(void)request:(PHPublisherContentRequest *)request didFailWithError:(NSError *)error {
     
-    err(@"PlayHavenSDK request: %@, couldn't load content: %@", request, error);
+    wrn(@"PlayHavenSDK request: %@, couldn't load content: %@", request, error);
 }
 
 -(void)request:(PHPublisherContentRequest *)request contentDidFailWithError:(NSError *)error {
     
-    err(@"PlayHavenSDK request: %@, couldn't load view: %@", request, error);
+    wrn(@"PlayHavenSDK request: %@, couldn't load view: %@", request, error);
     [[CCDirector sharedDirector] resume];
 }
 
