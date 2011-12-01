@@ -321,7 +321,7 @@
 
     [score reportScoreWithCompletionHandler:^(NSError *error) {
         if (error)
-            err(@"Error reporting score: %@", error);
+            wrn(@"Error reporting score: %@", error);
     }];
     
     return score.value;

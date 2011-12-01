@@ -31,9 +31,7 @@ int main(int argc, char *argv[]) {
         return UIApplicationMain(argc, argv, nil, @"GorillasAppDelegate");
     }
     @catch (NSException *exception) {
-        ftl(@"=== Exception Occurred! ===");
-        ftl(@"Name: %@; Reason: %@; Context: %@; Stack:\n%@", exception.name, exception.reason, exception.userInfo,
-            [exception callStackSymbols]);
+        ftl(@"Game exception: %@", exception);
     }
     @finally {
         [pool release];
