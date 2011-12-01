@@ -22,6 +22,7 @@
 #define PEARL_UIKIT
 #define PEARL_MEDIA
 #define PEARL_COCOS2D
+#define PEARL_WITH_CRASHKIT
 
 /**
  * Global Dependencies.

@@ -27,13 +27,8 @@
 int main(int argc, char *argv[]) {
     
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    @try {
-        return UIApplicationMain(argc, argv, nil, @"GorillasAppDelegate");
-    }
-    @catch (NSException *exception) {
-        ftl(@"Game exception: %@", exception);
-    }
-    @finally {
-        [pool release];
-    }
+    int retVal = UIApplicationMain(argc, argv, nil, @"GorillasAppDelegate");
+    [pool release];
+    
+    return retVal;
 }

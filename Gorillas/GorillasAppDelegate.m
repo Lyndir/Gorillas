@@ -81,7 +81,7 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     @try {
         [[LocalyticsSession sharedLocalyticsSession] startSession:[self localyticsKey]];
         [[Logger get] registerListener:^BOOL(LogMessage *message) {
-            if (message.level > LogLevelInfo)
+            if (message.level >= LogLevelError)
                 [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Problem" attributes:
                  [NSDictionary dictionaryWithObjectsAndKeys:
                   [message levelDescription],
@@ -98,6 +98,30 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     }
     
     [super preSetup];
+    
+	// Build the splash scene.
+    CCScene *splashScene = [CCScene node];
+    CCSprite *splash = [Splash node];
+    [splashScene addChild:splash];
+    
+    // Build the game scene.
+	self.gameLayer = [GameLayer node];
+    CCSprite *frame = [CCSprite spriteWithFile:@"frame.png"];
+    frame.anchorPoint = CGPointZero;
+    [self.uiLayer addChild:frame z:1];
+    [self.uiLayer addChild:self.gameLayer];
+    
+    // Show the splash screen, this starts the main loop in the current thread.
+    [[CCDirector sharedDirector] runWithScene:splashScene];
+    [self showMainMenu];
+    
+    // PlayHaven setup.
+    @try {
+        [[PHPublisherOpenRequest requestForApp:[self phToken] secret:[self phSecret]] send];
+    }
+    @catch (NSException *exception) {
+        err(@"PlayHaven exception: %@", exception);
+    }
     
 #if ! LITE
     // Game Center setup.
@@ -121,44 +145,6 @@ static NSString *PHPlacementMoreGames  = @"more_games";
             });
     };
 #endif
-    
-	// Build the splash scene.
-    CCScene *splashScene = [CCScene node];
-    CCSprite *splash = [Splash node];
-    [splashScene addChild:splash];
-    
-    // Build the game scene.
-	self.gameLayer = [GameLayer node];
-    CCSprite *frame = [CCSprite spriteWithFile:@"frame.png"];
-    frame.anchorPoint = CGPointZero;
-    [self.uiLayer addChild:frame z:1];
-    [self.uiLayer addChild:self.gameLayer];
-    
-    // Show the splash screen, this starts the main loop in the current thread.
-    [[CCDirector sharedDirector] pushScene:splashScene];
-    [self showMainMenu];
-    
-    // PlayHaven setup.
-    @try {
-        [[PHPublisherOpenRequest requestForApp:[self phToken] secret:[self phSecret]] send];
-    }
-    @catch (NSException *exception) {
-        err(@"PlayHaven exception: %@", exception);
-    }
-    
-    do {
-#if ! TARGET_IPHONE_SIMULATOR
-        @try {
-#endif
-            [[CCDirector sharedDirector] startAnimation];
-#if ! TARGET_IPHONE_SIMULATOR
-        }
-        @catch (NSException *exception) {
-            err(@"Game exception: %@", exception);
-            [self.hudLayer message:exception.reason duration:5 isImportant:YES];
-        }
-#endif
-    } while ([[CCDirector sharedDirector] runningScene]);
 }
 
 
