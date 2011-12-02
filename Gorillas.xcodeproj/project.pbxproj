@@ -235,6 +235,10 @@
 		DA711DCE128DF40800EDB885 /* NetMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DC8128DF40800EDB885 /* NetMessage.m */; };
 		DA711DF1128EA44700EDB885 /* NetController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DF0128EA44700EDB885 /* NetController.m */; };
 		DA711DF4128EA44700EDB885 /* NetController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA711DF0128EA44700EDB885 /* NetController.m */; };
+		DA721A1114895BE100C2BAAD /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA721A0D14895BCE00C2BAAD /* libTestFlight.a */; };
+		DA721A1214895BE100C2BAAD /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA721A0D14895BCE00C2BAAD /* libTestFlight.a */; };
+		DA721A1514895E5100C2BAAD /* TestFlight.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA721A1414895E5100C2BAAD /* TestFlight.plist */; };
+		DA721A1614895E5100C2BAAD /* TestFlight.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA721A1414895E5100C2BAAD /* TestFlight.plist */; };
 		DA7547F80EAB66D40083EC7C /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7547F50EAB66D40083EC7C /* GameLayer.m */; };
 		DA75CF7B12A123B60051EF09 /* frame-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA75CF7912A123B60051EF09 /* frame-hd.png */; };
 		DA75CF7C12A123B60051EF09 /* frame.png in Resources */ = {isa = PBXBuildFile; fileRef = DA75CF7A12A123B60051EF09 /* frame.png */; };
@@ -885,6 +889,9 @@
 		DA711DC8128DF40800EDB885 /* NetMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetMessage.m; sourceTree = "<group>"; };
 		DA711DEF128EA44700EDB885 /* NetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetController.h; sourceTree = "<group>"; };
 		DA711DF0128EA44700EDB885 /* NetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetController.m; sourceTree = "<group>"; };
+		DA721A0D14895BCE00C2BAAD /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		DA721A1014895BCE00C2BAAD /* TestFlight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		DA721A1414895E5100C2BAAD /* TestFlight.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TestFlight.plist; sourceTree = "<group>"; };
 		DA7547F40EAB66D40083EC7C /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
 		DA7547F50EAB66D40083EC7C /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		DA75CF7912A123B60051EF09 /* frame-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "frame-hd.png"; path = "png/frame-hd.png"; sourceTree = "<group>"; };
@@ -2400,6 +2407,7 @@
 				DAA120930FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */,
 				DA4B227A127CC83800C1748F /* libz.dylib in Frameworks */,
 				DA9BD564128B465E00B854A7 /* GameKit.framework in Frameworks */,
+				DA721A1114895BE100C2BAAD /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2448,6 +2456,7 @@
 				DA4769F10FDD7334002E74F8 /* AVFoundation.framework in Frameworks */,
 				DA3B9720127C37B3009196E8 /* libz.dylib in Frameworks */,
 				DA9BD580128B466D00B854A7 /* GameKit.framework in Frameworks */,
+				DA721A1214895BE100C2BAAD /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2502,8 +2511,9 @@
 				080E96DDFE201D6D7F000001 /* Gorillas */,
 				DA16EC8513CE378400F5D800 /* Pearl */,
 				DA0EA01313CCF06900BB7666 /* PlayHaven */,
-				DABF1FF40EB2703B002C32BF /* External */,
 				DA571E0413F3332200D50DF2 /* Localytics */,
+				DA721A1314895E5100C2BAAD /* TestFlight */,
+				DABF1FF40EB2703B002C32BF /* External */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -2771,6 +2781,23 @@
 				DACC158F0F61F2FB0078A0D8 /* infinite-shape.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		DA721A0C14895BCE00C2BAAD /* TestFlightSDK */ = {
+			isa = PBXGroup;
+			children = (
+				DA721A0D14895BCE00C2BAAD /* libTestFlight.a */,
+				DA721A1014895BCE00C2BAAD /* TestFlight.h */,
+			);
+			path = TestFlightSDK;
+			sourceTree = "<group>";
+		};
+		DA721A1314895E5100C2BAAD /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				DA721A1414895E5100C2BAAD /* TestFlight.plist */,
+			);
+			path = TestFlight;
 			sourceTree = "<group>";
 		};
 		DA76403513B3D8CE00A02611 /* jrswizzle */ = {
@@ -4308,6 +4335,7 @@
 				DA93310013C7B5CE00A53F52 /* Pearl-Media */,
 				DA93310413C7B5CE00A53F52 /* Pearl-UIKit */,
 				DAC0379D13CE317D003FAE6D /* PlayHavenSDK */,
+				DA721A0C14895BCE00C2BAAD /* TestFlightSDK */,
 				DA9336C513C9028300A53F52 /* FontLabel */,
 				DA93357813C9027700A53F52 /* cocos2d-iphone */,
 				DA8B8B9713CF9972003B0CC2 /* uicolor-utilities */,
@@ -4976,6 +5004,7 @@
 				DA03BE28140130F9001906B2 /* arrow.body-hd.png in Resources */,
 				DA03BE2A140130F9001906B2 /* arrow.head-hd.png in Resources */,
 				DA03BE2D1401333E001906B2 /* bonk-hd.png in Resources */,
+				DA721A1514895E5100C2BAAD /* TestFlight.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5112,6 +5141,7 @@
 				DA03BE9714045CFD001906B2 /* iTunesArtwork in Resources */,
 				DA03BE9B1404624C001906B2 /* menu-main-hd.png in Resources */,
 				DA03BE9C1404624C001906B2 /* menu-main.png in Resources */,
+				DA721A1614895E5100C2BAAD /* TestFlight.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5637,6 +5667,10 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/TestFlightSDK\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -5784,6 +5818,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/TestFlightSDK\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -5836,6 +5874,10 @@
 					"${inherited}",
 				);
 				INFOPLIST_FILE = "Gorillas/GorillasLite-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/TestFlightSDK\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -5853,6 +5895,10 @@
 					"${inherited}",
 				);
 				INFOPLIST_FILE = "Gorillas/GorillasLite-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/TestFlightSDK\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -5956,6 +6002,10 @@
 		DAA5143B13FFAD0900325033 /* Profile */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/TestFlightSDK\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -5973,6 +6023,10 @@
 					"${inherited}",
 				);
 				INFOPLIST_FILE = "Gorillas/GorillasLite-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/External/TestFlightSDK\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",

@@ -30,6 +30,7 @@
 #import "CityTheme.h"
 #import "ccMacros.h"
 #import "LocalyticsSession.h"
+#import "TestFlight.h"
 
 
 static NSString *PHPlacementMoreGames  = @"more_games";
@@ -51,6 +52,9 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 
 @property (nonatomic, readwrite, retain) NetController                  *netController;
 @property (nonatomic, readwrite, retain) PHNotificationView             *notifierView;
+ 
+- (NSString *)testFlightInfo;
+- (NSString *)testFlightToken;
 
 - (NSString *)localyticsInfo;
 - (NSString *)localyticsKey;
@@ -123,15 +127,20 @@ static NSString *PHPlacementMoreGames  = @"more_games";
         err(@"PlayHaven exception: %@", exception);
     }
     
-#if ! LITE
     // Game Center setup.
-    self.netController = [[NetController new] autorelease];
+    [TestFlight takeOff:[self testFlightToken]];
+    [TestFlight addCustomEnvironmentInformation:@"Anonymous" forKey:@"username"];
     [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
         if (error)
             wrn(@"Game Center unavailable: %@", error);
         
-        [self.mainMenuLayer reset];
+        [TestFlight addCustomEnvironmentInformation:[GKLocalPlayer localPlayer].alias forKey:@"username"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.mainMenuLayer reset];
+        });
     }];
+#if ! LITE
+    self.netController = [[NetController new] autorelease];
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
         
         if (acceptedInvite)
@@ -293,6 +302,27 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     
     [super didPopLayer:layer anyLeft:anyLeft];
 }
+
+
+#pragma mark - TestFlight
+
+
+static NSDictionary *testFlightInfo = nil;
+
+- (NSDictionary *)testFlightInfo {
+    
+    if (testFlightInfo == nil)
+        testFlightInfo = [[NSDictionary alloc] initWithContentsOfURL:
+                          [[NSBundle mainBundle] URLForResource:@"TestFlight" withExtension:@"plist"]];
+    
+    return testFlightInfo;
+}
+
+- (NSString *)testFlightToken {
+
+    return [[self testFlightInfo] valueForKeyPath:@"Team Token"];
+}
+
 
 
 #pragma mark - Localytics
