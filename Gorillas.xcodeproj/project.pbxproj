@@ -650,15 +650,8 @@
 		DACF1CD00F687839001EF5F9 /* hole.pvr in Resources */ = {isa = PBXBuildFile; fileRef = DACF1CCA0F687839001EF5F9 /* hole.pvr */; };
 		DACF1CD10F687839001EF5F9 /* smoke.pvr in Resources */ = {isa = PBXBuildFile; fileRef = DACF1CCB0F687839001EF5F9 /* smoke.pvr */; };
 		DACFEC210EE96AA300A0D08E /* CityTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = DACFEC200EE96AA300A0D08E /* CityTheme.m */; };
-		DADFA028148773E2002D591A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6620F95368600E5607E /* Foundation.framework */; };
-		DADFA03E14877449002D591A /* CrashController.h in Headers */ = {isa = PBXBuildFile; fileRef = DADFA03414877449002D591A /* CrashController.h */; };
-		DADFA03F14877449002D591A /* CrashController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADFA03514877449002D591A /* CrashController.m */; };
-		DADFA04214877449002D591A /* CrashLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = DADFA03814877449002D591A /* CrashLogger.h */; };
-		DADFA04314877449002D591A /* CrashLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = DADFA03914877449002D591A /* CrashLogger.m */; };
 		DADFA04A14877CD2002D591A /* libcocos2d-iphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B938A127B6D6A009196E8 /* libcocos2d-iphone.a */; };
-		DADFA04B14877CD2002D591A /* libCrashKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DADFA027148773E2002D591A /* libCrashKit.a */; };
 		DADFA04C14877CD2002D591A /* libuicolor-utilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8B8B8813CF994B003B0CC2 /* libuicolor-utilities.a */; };
-		DADFA04E14877DB1002D591A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DADFA04D14877DB1002D591A /* MessageUI.framework */; };
 		DAE487410FEE767A00E9017C /* banana-ai-DD.png in Resources */ = {isa = PBXBuildFile; fileRef = DAE487350FEE767A00E9017C /* banana-ai-DD.png */; };
 		DAE487420FEE767A00E9017C /* banana-ai-DU.png in Resources */ = {isa = PBXBuildFile; fileRef = DAE487360FEE767A00E9017C /* banana-ai-DU.png */; };
 		DAE487430FEE767A00E9017C /* banana-ai-UD.png in Resources */ = {isa = PBXBuildFile; fileRef = DAE487370FEE767A00E9017C /* banana-ai-UD.png */; };
@@ -782,13 +775,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = DA571E0113F3332200D50DF2;
 			remoteInfo = Localytics;
-		};
-		DADFA04814877CBD002D591A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DADFA026148773E2002D591A;
-			remoteInfo = CrashKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -2351,12 +2337,6 @@
 		DACF1CCB0F687839001EF5F9 /* smoke.pvr */ = {isa = PBXFileReference; lastKnownFileType = file; name = smoke.pvr; path = pvr/smoke.pvr; sourceTree = "<group>"; };
 		DACFEC1F0EE96AA300A0D08E /* CityTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityTheme.h; sourceTree = "<group>"; };
 		DACFEC200EE96AA300A0D08E /* CityTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityTheme.m; sourceTree = "<group>"; };
-		DADFA027148773E2002D591A /* libCrashKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCrashKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		DADFA03414877449002D591A /* CrashController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashController.h; sourceTree = "<group>"; };
-		DADFA03514877449002D591A /* CrashController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashController.m; sourceTree = "<group>"; };
-		DADFA03814877449002D591A /* CrashLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrashLogger.h; sourceTree = "<group>"; };
-		DADFA03914877449002D591A /* CrashLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrashLogger.m; sourceTree = "<group>"; };
-		DADFA04D14877DB1002D591A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		DAE487350FEE767A00E9017C /* banana-ai-DD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "banana-ai-DD.png"; path = "png/banana-ai-DD.png"; sourceTree = "<group>"; };
 		DAE487360FEE767A00E9017C /* banana-ai-DU.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "banana-ai-DU.png"; path = "png/banana-ai-DU.png"; sourceTree = "<group>"; };
 		DAE487370FEE767A00E9017C /* banana-ai-UD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "banana-ai-UD.png"; path = "png/banana-ai-UD.png"; sourceTree = "<group>"; };
@@ -2404,7 +2384,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DADFA04E14877DB1002D591A /* MessageUI.framework in Frameworks */,
 				DA571E2113F3378800D50DF2 /* libLocalytics.a in Frameworks */,
 				DA571E1C13F3376000D50DF2 /* libsqlite3.dylib in Frameworks */,
 				DA0DA09413CCF1FD00B1D188 /* libPlayHaven.a in Frameworks */,
@@ -2437,7 +2416,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DADFA04A14877CD2002D591A /* libcocos2d-iphone.a in Frameworks */,
-				DADFA04B14877CD2002D591A /* libCrashKit.a in Frameworks */,
 				DADFA04C14877CD2002D591A /* libuicolor-utilities.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2489,14 +2467,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DADFA024148773E2002D591A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DADFA028148773E2002D591A /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -2522,7 +2492,6 @@
 				DA0EA01113CCF06900BB7666 /* libPlayHaven.a */,
 				DA8B8B8813CF994B003B0CC2 /* libuicolor-utilities.a */,
 				DA571E0213F3332200D50DF2 /* libLocalytics.a */,
-				DADFA027148773E2002D591A /* libCrashKit.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2555,7 +2524,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DADFA04D14877DB1002D591A /* MessageUI.framework */,
 				DA571E2613F337DC00D50DF2 /* Security.framework */,
 				DA571E2413F337BA00D50DF2 /* libicucore.dylib */,
 				DA571E2213F337B100D50DF2 /* SystemConfiguration.framework */,
@@ -4335,7 +4303,6 @@
 		DABF1FF40EB2703B002C32BF /* External */ = {
 			isa = PBXGroup;
 			children = (
-				DADFA03314877449002D591A /* CrashKit */,
 				DA93308413C7B5CE00A53F52 /* Pearl */,
 				DA9330A013C7B5CE00A53F52 /* Pearl-Cocos2D */,
 				DA93310013C7B5CE00A53F52 /* Pearl-Media */,
@@ -4448,18 +4415,6 @@
 				DA1816480F0E24F50064F470 /* Menus */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		DADFA03314877449002D591A /* CrashKit */ = {
-			isa = PBXGroup;
-			children = (
-				DADFA03414877449002D591A /* CrashController.h */,
-				DADFA03514877449002D591A /* CrashController.m */,
-				DADFA03814877449002D591A /* CrashLogger.h */,
-				DADFA03914877449002D591A /* CrashLogger.m */,
-			);
-			name = CrashKit;
-			path = Pearl/External/CrashKit/Classes;
 			sourceTree = "<group>";
 		};
 		DAE488810FEED7F600E9017C /* Music */ = {
@@ -4711,15 +4666,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DADFA025148773E2002D591A /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DADFA03E14877449002D591A /* CrashController.h in Headers */,
-				DADFA04214877449002D591A /* CrashLogger.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -4771,7 +4717,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				DADFA04914877CBD002D591A /* PBXTargetDependency */,
 				DA8B8B9913CF99AA003B0CC2 /* PBXTargetDependency */,
 				DA3B9667127C1E7D009196E8 /* PBXTargetDependency */,
 			);
@@ -4851,23 +4796,6 @@
 			productReference = DA8B8B8813CF994B003B0CC2 /* libuicolor-utilities.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		DADFA026148773E2002D591A /* CrashKit */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DADFA032148773E2002D591A /* Build configuration list for PBXNativeTarget "CrashKit" */;
-			buildPhases = (
-				DADFA023148773E2002D591A /* Sources */,
-				DADFA024148773E2002D591A /* Frameworks */,
-				DADFA025148773E2002D591A /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CrashKit;
-			productName = CrashKit;
-			productReference = DADFA027148773E2002D591A /* libCrashKit.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -4910,7 +4838,6 @@
 				DA0EA01013CCF06900BB7666 /* PlayHaven */,
 				DA8B8B8713CF994B003B0CC2 /* uicolor-utilities */,
 				DA571E0113F3332200D50DF2 /* Localytics */,
-				DADFA026148773E2002D591A /* CrashKit */,
 			);
 		};
 /* End PBXProject section */
@@ -5468,15 +5395,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DADFA023148773E2002D591A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DADFA03F14877449002D591A /* CrashController.m in Sources */,
-				DADFA04314877449002D591A /* CrashLogger.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -5519,11 +5437,6 @@
 			isa = PBXTargetDependency;
 			target = DA571E0113F3332200D50DF2 /* Localytics */;
 			targetProxy = DA9D972413FF89170030BA1A /* PBXContainerItemProxy */;
-		};
-		DADFA04914877CBD002D591A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DADFA026148773E2002D591A /* CrashKit */;
-			targetProxy = DADFA04814877CBD002D591A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -6109,33 +6022,6 @@
 			};
 			name = Profile;
 		};
-		DADFA02F148773E2002D591A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DSTROOT = /tmp/CrashKit.dst;
-				GCC_PREFIX_HEADER = "";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		DADFA030148773E2002D591A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DSTROOT = /tmp/CrashKit.dst;
-				GCC_PREFIX_HEADER = "";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		DADFA031148773E2002D591A /* Profile */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DSTROOT = /tmp/CrashKit.dst;
-				GCC_PREFIX_HEADER = "";
-				SKIP_INSTALL = YES;
-			};
-			name = Profile;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -6215,16 +6101,6 @@
 				DA8B8B9113CF994C003B0CC2 /* Debug */,
 				DA8B8B9213CF994C003B0CC2 /* Release */,
 				DAA5144013FFAD0900325033 /* Profile */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DADFA032148773E2002D591A /* Build configuration list for PBXNativeTarget "CrashKit" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DADFA02F148773E2002D591A /* Debug */,
-				DADFA030148773E2002D591A /* Release */,
-				DADFA031148773E2002D591A /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -102,8 +102,6 @@
 
     [self.defaults
      registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-                       @"gorillas@lyndir.com",                                     cCrashReportsEmail,
-                       
                        [CityTheme defaultThemeName],                               cCityTheme,
 
                        [NSNumber numberWithInteger:    [theme varFloors]],         cVarFloors,
