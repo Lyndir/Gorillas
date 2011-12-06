@@ -31,6 +31,7 @@
 #import "ccMacros.h"
 #import "LocalyticsSession.h"
 #import "TestFlight.h"
+#import <Crashlytics/Crashlytics.h>
 
 
 static NSString *PHPlacementMoreGames  = @"more_games";
@@ -82,6 +83,8 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 
 - (void)preSetup {
     
+    [Crashlytics startWithAPIKey:@"aa135d981000035c047c01f297b02539d4faca71"];
+    
     @try {
         [[LocalyticsSession sharedLocalyticsSession] startSession:[self localyticsKey]];
         [[Logger get] registerListener:^BOOL(LogMessage *message) {
@@ -128,13 +131,13 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     }
     
     // Game Center setup.
-    [TestFlight takeOff:[self testFlightToken]];
-    [TestFlight addCustomEnvironmentInformation:@"Anonymous" forKey:@"username"];
+    /*[TestFlight takeOff:[self testFlightToken]];
+    [TestFlight addCustomEnvironmentInformation:@"Anonymous" forKey:@"username"];*/
     [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
         if (error)
             wrn(@"Game Center unavailable: %@", error);
         
-        [TestFlight addCustomEnvironmentInformation:[GKLocalPlayer localPlayer].alias forKey:@"username"];
+        //[TestFlight addCustomEnvironmentInformation:[GKLocalPlayer localPlayer].alias forKey:@"username"];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.mainMenuLayer reset];
         });
