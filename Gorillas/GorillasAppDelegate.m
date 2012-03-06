@@ -52,7 +52,6 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 @property (nonatomic, readwrite, retain) ModelsConfigurationLayer       *modelsConfigLayer;
 
 @property (nonatomic, readwrite, retain) NetController                  *netController;
-@property (nonatomic, readwrite, retain) PHNotificationView             *notifierView;
  
 - (NSString *)testFlightInfo;
 - (NSString *)testFlightToken;
@@ -71,7 +70,6 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 @synthesize mainMenuLayer = _mainMenuLayer;
 @synthesize configLayer = _configLayer, gameConfigLayer = _gameConfigLayer, avConfigLayer = _avConfigLayer, modelsConfigLayer = _modelsConfigLayer;
 @synthesize netController = _netController;
-@synthesize notifierView = _notifierView;
 
 + (void)initialize {
     
@@ -83,8 +81,11 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 
 - (void)preSetup {
     
+    dbg(@"Initializing Crashlytics");
+    [Crashlytics sharedInstance].debugMode = YES;
     [Crashlytics startWithAPIKey:@"aa135d981000035c047c01f297b02539d4faca71"];
     
+    /*
     @try {
         [[LocalyticsSession sharedLocalyticsSession] startSession:[self localyticsKey]];
         [[Logger get] registerListener:^BOOL(LogMessage *message) {
@@ -103,6 +104,7 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     @catch (NSException *exception) {
         err(@"Localytics exception: %@", exception);
     }
+     */
     
     [super preSetup];
     
@@ -121,14 +123,6 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     // Show the splash screen, this starts the main loop in the current thread.
     [[CCDirector sharedDirector] runWithScene:splashScene];
     [self showMainMenu];
-    
-    // PlayHaven setup.
-    @try {
-        [[PHPublisherOpenRequest requestForApp:[self phToken] secret:[self phSecret]] send];
-    }
-    @catch (NSException *exception) {
-        err(@"PlayHaven exception: %@", exception);
-    }
     
     // Game Center setup.
     /*[TestFlight takeOff:[self testFlightToken]];
@@ -229,13 +223,6 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 }
 
 
-- (void)moreGames {
-    
-    [[PHPublisherContentRequest requestForApp:[self phToken] secret:[self phSecret]
-                                    placement:PHPlacementMoreGames delegate:self] send];
-}
-
-
 - (void)pushLayer: (ShadeLayer *)layer hidden:(BOOL)hidden {
     
     [self.gameLayer setPaused:YES];
@@ -262,43 +249,10 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     
     self.gameLayer.paused = YES;
     
-    if (!self.notifierView)
-        self.notifierView = [[[PHNotificationView alloc] initWithApp:[self phToken] secret:[self phSecret]
-                                                           placement:PHPlacementMoreGames] autorelease];
-    
-    if (self.notifierView.superview && layer != self.mainMenuLayer)
-        [self.notifierView removeFromSuperview];
-    
-    else if (self.notifierView) {
-        if (layer == self.mainMenuLayer) {
-            self.notifierView.center = ccp(380, 260);
-            [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
-#if DEBUG
-            [self.notifierView test];
-#else
-            [self.notifierView refresh];
-#endif
-        }
-    }
-    
     [super didPushLayer:layer hidden:hidden];
 }
 
 - (void)didPopLayer:(ShadeLayer *)layer anyLeft:(BOOL)anyLeft {
-    
-    if (self.notifierView.superview && layer == self.mainMenuLayer)
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.notifierView removeFromSuperview];
-        });
-    
-    else if (self.notifierView) {
-        if ([self isLayerShowing:self.mainMenuLayer]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.notifierView.center = ccp(100, 330);
-                [[CCDirector sharedDirector].openGLView addSubview:self.notifierView];
-            });
-        }
-    }
     
     if (!anyLeft)
         self.gameLayer.paused = NO;
@@ -375,29 +329,6 @@ static NSDictionary *playHavenInfo = nil;
 - (NSString *)phSecret {
     
     return [[self phInfo] valueForKeyPath:@"Secret"];
-}
-
--(void)request:(PHPublisherContentRequest *)request contentWillDisplay:(PHContent *)content {
-    
-    [self.notifierView clear];
-    
-    [[CCDirector sharedDirector] pause];
-}
-
--(void)requestContentDidDismiss:(PHPublisherContentRequest *)request {
-    
-    [[CCDirector sharedDirector] resume];
-}
-
--(void)request:(PHPublisherContentRequest *)request didFailWithError:(NSError *)error {
-    
-    wrn(@"PlayHavenSDK request: %@, couldn't load content: %@", request, error);
-}
-
--(void)request:(PHPublisherContentRequest *)request contentDidFailWithError:(NSError *)error {
-    
-    wrn(@"PlayHavenSDK request: %@, couldn't load view: %@", request, error);
-    [[CCDirector sharedDirector] resume];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {

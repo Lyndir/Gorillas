@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.9.9.4</string>
+	<string>0.9.9.8</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleSupportedPlatforms</key>
@@ -25,7 +25,7 @@
 		<string>iPhoneOS</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>0009.09.04</string>
+	<string>0009.09.08</string>
 	<key>CrashlyticsAPIKey</key>
 	<string>aa135d981000035c047c01f297b02539d4faca71</string>
 	<key>DTCompiler</key>
@@ -41,11 +41,11 @@
 	<key>DTSDKName</key>
 	<string>iphoneos5.0</string>
 	<key>DTXcode</key>
-	<string>0421</string>
+	<string>0420</string>
 	<key>DTXcodeBuild</key>
-	<string>4D502</string>
+	<string>4D199</string>
 	<key>MinimumOSVersion</key>
-	<string>3.2</string>
+	<string>3.1</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
