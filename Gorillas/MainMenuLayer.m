@@ -210,7 +210,6 @@
 
 - (void)moreGames:(id)sender {
 
-    [[GorillasAppDelegate get] moreGames];
 }
 
 
