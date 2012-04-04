@@ -23,55 +23,13 @@
 //
 
 #import "GameConfiguration.h"
-#import "Config.h"
-#import "Logger.h"
-
-#define cCityTheme                      NSStringFromSelector(@selector(cityTheme))
-#define cVarFloors                      NSStringFromSelector(@selector(varFloors))
-#define cFixedFloors                    NSStringFromSelector(@selector(fixedFloors))
-#define cBuildingAmount                 NSStringFromSelector(@selector(buildingAmount))
-#define cBuildingSpeed                  NSStringFromSelector(@selector(buildingSpeed))
-#define cBuildingColors                 NSStringFromSelector(@selector(buildingColors))
-
-#define cWindowAmount                   NSStringFromSelector(@selector(windowAmount))
-#define cWindowColorOn                  NSStringFromSelector(@selector(windowColorOn))
-#define cWindowColorOff                 NSStringFromSelector(@selector(windowColorOff))
-
-#define cSkyColor                       NSStringFromSelector(@selector(skyColor))
-#define cStarColor                      NSStringFromSelector(@selector(starColor))
-#define cStarSpeed                      NSStringFromSelector(@selector(starSpeed))
-#define cStarAmount                     NSStringFromSelector(@selector(starAmount))
-
-#define cLives                          NSStringFromSelector(@selector(lives))
-#define cWindModifier                   NSStringFromSelector(@selector(windModifier))
-#define cGravity                        NSStringFromSelector(@selector(gravity))
-#define cMinGravity                     NSStringFromSelector(@selector(minGravity))
-#define cMaxGravity                     NSStringFromSelector(@selector(maxGravity))
-
-#define cGameScrollDuration             NSStringFromSelector(@selector(gameScrollDuration))
-
-#define cActiveGameConfigurationIndex   NSStringFromSelector(@selector(activeGameConfigurationIndex))
-#define cMode                           NSStringFromSelector(@selector(mode))
-#define cMissScore                      NSStringFromSelector(@selector(missScore))
-#define cKillScore                      NSStringFromSelector(@selector(killScore))
-#define cBonusOneShot                   NSStringFromSelector(@selector(bonusOneShot))
-#define cBonusSkill                     NSStringFromSelector(@selector(bonusSkill))
-#define cDeathScoreRatio                NSStringFromSelector(@selector(deathScoreRatio))
-
-#define cReplay                         NSStringFromSelector(@selector(replay))
-#define cFollowThrow                    NSStringFromSelector(@selector(followThrow))
-
-#define cPlayerModel                    NSStringFromSelector(@selector(playerModel))
-#define cScores                         NSStringFromSelector(@selector(scores))
-#define cSkill                          NSStringFromSelector(@selector(skill))
-#define cLevel                          NSStringFromSelector(@selector(level))
-#define cLevelNames                     NSStringFromSelector(@selector(levelNames))
-#define cLevelProgress                  NSStringFromSelector(@selector(levelProgress))
+#import "PearlConfig.h"
+#import "PearlLogger.h"
 
 
 @class GorillaLayer;
 
-@interface GorillasConfig : Config {
+@interface GorillasConfig : PearlConfig {
 
 @private
     NSArray                                             *updateTriggers;

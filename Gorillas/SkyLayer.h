@@ -22,10 +22,10 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "Resettable.h"
+#import "PearlResettable.h"
 
 
-@interface SkyLayer : CCParallaxNode <Resettable> {
+@interface SkyLayer : CCParallaxNode <PearlResettable> {
 
 @private
     ccColor4B               skyColor;

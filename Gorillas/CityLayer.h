@@ -25,15 +25,15 @@
 #import "PanAction.h"
 #import "GorillaLayer.h"
 #import "BananaLayer.h"
-#import "Resettable.h"
+#import "PearlResettable.h"
 #import "ExplosionsLayer.h"
 #import "HolesLayer.h"
-#import "BarSprite.h"
+#import "PearlCCBarSprite.h"
 #import "BuildingsLayer.h"
 
 #define DEBUG_COLLISION 0
 
-@interface CityLayer : CCParallaxNode <Resettable> {
+@interface CityLayer : CCParallaxNode <PearlResettable> {
 
 @private
     CCLabelTTF          *msgLabel;

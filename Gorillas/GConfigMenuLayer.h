@@ -6,10 +6,10 @@
 //  Copyright 2010 lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "ConfigMenuLayer.h"
+#import "PearlCCConfigMenuLayer.h"
 
 
-@interface GConfigMenuLayer : ConfigMenuLayer {
+@interface GConfigMenuLayer : PearlCCConfigMenuLayer {
 
 }
 

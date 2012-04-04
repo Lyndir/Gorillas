@@ -25,7 +25,7 @@
 #import "GorillaLayer.h"
 #import "GorillasAppDelegate.h"
 #import "ShadeTo.h"
-#import "Remove.h"
+#import "PearlCCRemove.h"
 
 
 @interface GorillaLayer ()
@@ -343,7 +343,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
         [self stopAllActions];
         [self runAction:[CCSequence actions:
                          [CCFadeTo actionWithDuration:0.5f opacity:0x00],
-                         [Remove action],
+                         [PearlCCRemove action],
                          nil]];
     } else
         [self runAction:[CCSequence actions:

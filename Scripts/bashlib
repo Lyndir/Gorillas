@@ -18,9 +18,9 @@
 # ___________________________________________________________________________ #
 #                                                                             #
 #                                                                             #
-# Copyright 2007, lhunath                                                     #
-#   * http://lhunath.lyndir.com                                               #
-#   * Maarten Billemont.                                                      #
+# Copyright 2007-2011, lhunath                                                #
+#   * http://www.lhunath.com                                                  #
+#   * Maarten Billemont                                                       #
 #                                                                             #
 
 
@@ -30,8 +30,15 @@
 # |                                         .:: GLOBAL CONFIGURATION ::. |
 # |______________________________________________________________________|
 
-shopt -s extglob
+# Unset all exported functions.  Exported functions are evil.
+while read _ _ func; do
+    command unset -f "$func"
+done < <(command declare -Fx)
 
+{
+shopt -s extglob
+shopt -s globstar
+} 2>/dev/null ||:
 
 
 
@@ -42,47 +49,48 @@ shopt -s extglob
 # |______________________________________________________________________|
 
 # Variables for global internal operation.
-export bobber=(     '.' 'o' 'O' 'o' )
-export spinner=(    '-' \\  '|' '/' )
-export crosser=(    '+' 'x' '+' 'x' )
-export runner=(     '> >'           \
-                    '>> '           \
-                    '>>>'           \
-                    ' >>'           )
+bobber=(     '.' 'o' 'O' 'o' )
+spinner=(    '-' \\  '|' '/' )
+crosser=(    '+' 'x' '+' 'x' )
+runner=(     '> >'           \
+             '>> '           \
+             '>>>'           \
+             ' >>'           )
 
 # Variables for terminal requests.
-export hide=$(      tput vi       2>/dev/null )
-export show=$(      tput vs       2>/dev/null )
-export save=$(      tput sc       2>/dev/null )
-export load=$(      tput rc       2>/dev/null )
-export bold=$(      tput bold     2>/dev/null )
-export reset=$(     tput sgr0     2>/dev/null )
-#export blink=$(    tput blink    2>/dev/null )
-export italic=$(    tput sitm     2>/dev/null )
-export red=$(       tput setaf 1  2>/dev/null )
-export green=$(     tput setaf 2  2>/dev/null )
-export yellow=$(    tput setaf 3  2>/dev/null )
-export blue=$(      tput setaf 4  2>/dev/null )
-export magenta=$(   tput setaf 5  2>/dev/null )
-export cyan=$(      tput setaf 6  2>/dev/null )
-export white=$(     tput setaf 7  2>/dev/null )
-export default=$(   tput op       2>/dev/null )
-export eed=$(       tput ed       2>/dev/null )
-export eel=$(       tput el       2>/dev/null )
-export ebl=$(       tput el1      2>/dev/null )
-export ewl=$(       tput el       2>/dev/null ;
-                    tput el1      2>/dev/null )
-export draw=$(      tput enacs    2>/dev/null ;
-                    tput smacs    2>/dev/null ;
-                    tput acsc     2>/dev/null ;
-                    tput rmacs    2>/dev/null )
-export back=$'\b'
-
-# Monochrome terminals don't need these.
-[[ $TERM = *-m ]] && {
-    red=; green=; yellow=; blue=; magenta=; cyan=; white=
-    bold=; italic=; blink=; default=; reset=
+[[ -t 1 ]] && {
+    salt=$(     tput smcup  || tput ti      )
+    ealt=$(     tput rmcup  || tput te      )
+    hide=$(     tput civis  || tput vi      )
+    show=$(     tput cvvis  || tput vs      )
+    save=$(     tput sc                     )
+    load=$(     tput rc                     )
+    bold=$(     tput bold   || tput md      )
+    reset=$(    tput sgr0   || tput me      )
+    #blink=$(   tput blink  || tput mb      )
+    italic=$(   tput sitm   || tput ZH      )
+[[ $TERM != *-m ]] && {
+    red=$(      tput setaf 1|| tput AF 1    )
+    green=$(    tput setaf 2|| tput AF 2    )
+    yellow=$(   tput setaf 3|| tput AF 3    )
+    blue=$(     tput setaf 4|| tput AF 4    )
+    magenta=$(  tput setaf 5|| tput AF 5    )
+    cyan=$(     tput setaf 6|| tput AF 6    )
 }
+    white=$(    tput setaf 7|| tput AF 7    )
+    default=$(  tput op                     )
+    eed=$(      tput ed     || tput cd      )   # Erase to end of display
+    eel=$(      tput el     || tput ce      )   # Erase to end of line
+    ebl=$(      tput el1    || tput cb      )   # Erase to beginning of line
+    ewl=$eel$ebl                                # Erase whole line
+    draw=$(     tput -S <<< '   enacs
+                                smacs
+                                acsc
+                                rmacs' || { \
+                tput eA; tput as;
+                tput ac; tput ae;         } )   # Drawing characters
+    back=$'\b'
+} 2>/dev/null ||:
 
 
 
@@ -94,6 +102,59 @@ export back=$'\b'
 # |______________________________________________________________________|
 
 
+
+#  ______________________________________________________________________
+# |__ Chr _______________________________________________________________|
+#
+#       chr decimal
+#
+# Outputs the character that has the given decimal ASCII value.
+#
+chr() {
+    printf \\"$(printf '%03o' "$1")"
+} # _____________________________________________________________________
+
+
+
+#  ______________________________________________________________________
+# |__ Ord _______________________________________________________________|
+#
+#       ord character
+#
+# Outputs the decimal ASCII value of the given character.
+#
+ord() {
+    printf %d "'$1"
+} # _____________________________________________________________________
+
+
+
+#  ______________________________________________________________________
+# |__ Hex _______________________________________________________________|
+#
+#       hex character
+#
+# Outputs the hexadecimal ASCII value of the given character.
+#
+hex() { 
+  printf '%x' "'$1"
+} # _____________________________________________________________________
+
+
+
+#  ______________________________________________________________________
+# |__ Unhex _______________________________________________________________|
+#
+#       unhex character
+#
+# Outputs the character that has the given decimal ASCII value.
+#
+unhex() {
+  printf \\x"$1"
+} # _____________________________________________________________________
+
+
+
 #  ______________________________________________________________________
 # |__ Exists ____________________________________________________________|
 #
@@ -103,7 +164,6 @@ export back=$'\b'
 # by the current user.
 #
 exists() {
-
     [[ -x $(type -P "$1" 2>/dev/null) ]]
 } # _____________________________________________________________________
 
@@ -114,17 +174,225 @@ exists() {
 #
 #       eol message
 #
-# Return the message with termination punctuation added.
+# Return termination punctuation for a message, if necessary.
 #
 eol() {
-
-    local eol='..'
-    local text=$1
-
-    [[ $text = *[\!\?.,:\;\|] ]] && eol=
-
-    printf "%s%s\n" "$text" "$eol"
+    : #[[ $1 && $1 != *[\!\?.,:\;\|] ]] && printf .. ||:
 } # _____________________________________________________________________
+
+
+
+#  ______________________________________________________________________
+# |__ CLoc ______________________________________________________________|
+#
+#       cloc
+#
+# Outputs the current cursor location as two space-separated numbers: row column
+#
+cloc() {
+    local old=$(stty -g)
+    trap 'stty "$old"' RETURN
+    stty raw
+
+    # If the tty has input waiting then we can't read back its response.  We'd only break and pollute the tty input buffer.
+    read -t 0 < /dev/tty 2>/dev/null && return 1
+
+    printf '\e[6n' > /dev/tty
+    IFS='[;' read -dR _ row col < /dev/tty
+    printf '%d %d' "$row" "$col"
+} # _____________________________________________________________________
+
+
+
+#  ______________________________________________________________________
+# |__ readwhile ______________________________________________________________|
+#
+#       readwhile command [args]
+#
+# Outputs the characters typed by the user into the terminal's input buffer while running the given command.
+#
+readwhile() {
+    local old=$(stty -g) in result REPLY
+    trap 'stty "$old"' RETURN
+    stty raw
+
+    "$@"
+    result=$?
+
+    while read -t 0; do
+        IFS= read -rd '' -n1 && in+=$REPLY
+    done
+    printf %s "$in"
+
+    return $result
+} # _____________________________________________________________________
+
+
+
+#  ___________________________________________________________________________
+# |__ pushqueue ______________________________________________________________|
+#
+#       pushqueue element ...
+#
+# Pushes the given arguments as elements onto the queue.
+#
+pushqueue() {
+    [[ $_queue ]] || {
+        coproc _queue {
+            while IFS= read -r -d ''; do
+                printf '%s\0' "$REPLY"
+            done
+        }
+    }
+
+    printf '%s\0' "$@" >&"${_queue[1]}"
+} # _____________________________________________________________________
+
+
+
+#  __________________________________________________________________________
+# |__ popqueue ______________________________________________________________|
+#
+#       popqueue
+#
+# Pops one element off the queue.
+# If no elements are available on the queue, this command fails with exit code 1.
+#
+popqueue() {
+    local REPLY
+    [[ $_queue ]] && read -t0 <&"${_queue[0]}" || return
+    IFS= read -r -d '' <&"${_queue[0]}"
+    printf %s "$REPLY"
+} # _____________________________________________________________________
+
+
+
+#  ______________________________________________________________________
+# |__ Latest ____________________________________________________________|
+#
+#       latest [file...]
+#
+# Output the argument that represents the file with the latest modification time.
+#
+latest() (
+    shopt -s nullglob
+    local file latest=$1
+    for file; do
+        [[ $file -nt $latest ]] && latest=$file
+    done
+    printf '%s\n' "$latest"
+)
+
+
+#  ______________________________________________________________________
+# |__ Logging ___________________________________________________________|
+#
+#       log [level] [format] [arguments...]
+#
+# Log an event at a certain importance level.  The event is expressed as a printf(1) format argument.
+# The current exit code remains unaffected by the execution of this function.
+#
+log() {
+    local exitcode=$? level=$1 supported=0 end=$'\n' type=msg conMsg= logMsg= format= colorFormat= date= info= args=() colorArgs=()
+
+    # Handle options.
+    [[ $1 = -p ]] && {
+        shift
+        level=$1
+        end='.. '
+        type=startProgress
+    }
+    [[ $1 = -P ]] && {
+        shift
+        level=$1
+        type=doneProgress
+    }
+    shift
+    format=$1
+    args=( "${@:2}" )
+
+    # Level-specific settings.
+    case $level in
+        DBG)    (( supported = _logVerbosity >= 3 ))
+                color=$blue ;;
+        INF)    (( supported = _logVerbosity >= 2 ))
+                color=$white ;;
+        WRN)    (( supported = _logVerbosity >= 1 ))
+                color=$yellow ;;
+        ERR)    (( supported = _logVerbosity >= 0 ))
+                color=$red ;;
+        FTL)    (( supported = 1 ))
+                color=$bold$red ;;
+        *)
+                log FTL "Log level %s does not exist" "$level"
+                exit 1 ;;
+    esac
+    (( ! supported )) && return "$exitcode"
+
+    # Generate the log message.
+    date=$(date +"${_logDate:-%H:%M}")
+    case $type in
+        msg|startProgress)
+            printf -v logMsg "[%s %-3s] $format$end" "$date" "$level" "${args[@]}"
+            if (( _logColor )); then
+                colorFormat=$(sed -e "s/$(requote "$reset")/$reset$color/g" -e "s/%[^a-z]*[a-z]/$reset$bold$color&$reset$color/g" <<< "$format")
+                colorArgs=("${args[@]//$reset/$reset$bold$color}")
+                printf -v conMsg "[%s %-3s] $color$colorFormat$reset$end" "$date" "$level" "${colorArgs[@]}"
+            else
+                conMsg=$logMsg
+            fi
+        ;;
+
+        doneProgress)
+            case $exitcode in
+                0)  info=${format:+$(printf " ($format)" "${args[@]}")}
+                    printf -v logMsg "done%s.\n" "$info"
+                    if (( _logColor )); then
+                        printf -v conMsg "${green}${bold}done${reset}%s.\n" "$info"
+                    else
+                        conMsg=$logMsg
+                    fi
+                ;;
+
+                *)  info=${format:+$(printf ": $format" "${args[@]}")}
+                    printf -v logMsg "error(%d%s).\n" "$exitcode" "$info"
+                    if (( _logColor )); then
+                        printf -v conMsg "${red}error${reset}(${bold}${red}%d${reset}%s).\n" "$exitcode" "$info"
+                    else
+                        conMsg=$logMsg
+                    fi
+                ;;
+            esac
+        ;;
+    esac
+
+    # Output the log message.
+    printf '%s' "$conMsg"
+    [[ $_logFile && ! -e $_logFile ]] && touch "$_logFile"
+    [[ -w $_logFile ]] \
+        && printf '%s' "$logMsg" >> "$_logFile"
+
+    return $exitcode
+}
+dbg() { log DBG "$@"; }
+inf() { log INF "$@"; }
+wrn() { log WRN "$@"; }
+err() { log ERR "$@"; }
+ftl() { log FTL "$@"; }
+plog() { log -p "$@"; }
+golp() { log -P "$@" "$golp"; }
+pdbg() { plog DBG "$@"; }
+pinf() { plog INF "$@"; }
+pwrn() { plog WRN "$@"; }
+perr() { plog ERR "$@"; }
+pftl() { plog FTL "$@"; }
+gbdp() { golp=$gbdp golp DBG "$@"; }
+fnip() { golp=$fnip golp INF "$@"; }
+nrwp() { golp=$nrwp golp WRN "$@"; }
+rrep() { golp=$rrep golp ERR "$@"; }
+ltfp() { golp=$ltfp golp FTL "$@"; }
+{ _logColor=${_logColor:-$([[ -t 2 ]] && echo 1)} _logVerbosity=2; } 2>&1
+# _______________________________________________________________________
 
 
 
@@ -159,12 +427,6 @@ eol() {
 # displayed.
 #
 emit() {
-
-   # Check usage.
-    (( ! $# )) || getArgs -q :h "$@" && {
-        emit -y 'Please specify a message as argument.'
-        return 1
-    }
 
     # Proxy call to spinner.
     [[ $# -eq 1 && $1 = -+([0-9]) ]] \
@@ -215,7 +477,7 @@ emit() {
     local text= origtext=
     for arg; do [[ $arg = -- ]] && break; origtext+="$arg "; done
     origtext=${origtext%% }
-    (( noeol )) && text=$origtext || text=$(eol "$origtext")$'\n'
+    (( noeol )) && text=$origtext || text=$origtext$reset$(eol "$origtext")$'\n'
 
     
     # Trim off everything up to --
@@ -239,10 +501,10 @@ emit() {
         spinPid=$!
 
         # Execute the command for the spinner if one is given.
-        sleep .01 # Let the spinner initialize itself properly first.
+        #fsleep 1 # Let the spinner initialize itself properly first. # Can probably remove this now that we echo > spinPipe?
         if   (( $# == 1 )); then command=$1
         elif (( $# >  1 )); then command=$(printf '%q ' "$@")
-        else return; fi
+        else return 0; fi
 
         eval "$command" >/dev/null \
             && spinner -0 \
@@ -291,6 +553,15 @@ spinner() {
         return 1
     }
 
+    # Initialize spinner vars.
+    # Make sure monitor mode is off or we won't be able to trap INT properly.
+    local monitor=0; [[ $- = *m* ]] && monitor=1
+    local done=
+
+    # Place the trap for interrupt signals.
+    trap 'done="${red}failed"' USR2
+    trap 'done="${green}done"' USR1
+
     # Initialize the vars.
     local pid=${spinPid:-$!}
     local graphics=( "${bobber[@]}" )
@@ -322,8 +593,8 @@ spinner() {
             esac
         elif [[ $pid ]]; then
             [[ $arg = 0 ]] \
-                && kill -USR1 $pid \
-                || kill -USR2 $pid
+                && kill -USR1 $pid 2>/dev/null \
+                || kill -USR2 $pid 2>/dev/null
             
             trap - INT
             wait $pid 2>/dev/null
@@ -343,22 +614,13 @@ spinner() {
     [[ ${styles[2]} ]] && textstyle=${styles[2]}
     [[ ${styles[3]} ]] && textcolor=${styles[3]}
 
-    # Initialize spinner vars.
-    # Make sure monitor mode is off or we won't be able to trap INT properly.
-    local monitor=0; [[ $- = *m* ]] && monitor=1
-    local done="${green}done"
-
-    # Place the trap for interrupt signals.
-    trap 'done="${red}failed"; break' USR2
-    trap 'break' USR1
-
     # Figure out what FD to use for our messages.
     [[ -t 1 ]]; local fd=$(( $? + 1 ))
 
     # Make reset codes restore the initial font.
     local font=$reset$textstyle$textcolor
     origtext=$font${origtext//$reset/$font}
-    (( noeol )) && text=$origtext || text=$(eol "$origtext")
+    (( noeol )) && text=$origtext || text=$origtext$reset$(eol "$origtext")
 
     # Spinner initial status.
     printf "\r$save$eel$reset $style$color* %s$reset" "$text"       >&$fd
@@ -367,15 +629,15 @@ spinner() {
     # Render the spinner.
     set +m
     local i=0
-    while true; do
-        IFS= read -r -d '' newtext
+    while [[ ! $done ]]; do
+        IFS= read -r -d '' newtext || true
         newtext=${newtext%%$'\n'}; newtext=${newtext##*$'\n'}
         if [[ $newtext = +* ]]; then
             newtext="$origtext [${newtext#+}]"
         fi
         if [[ $newtext ]]; then
             newtext="$font${newtext//$reset/$font}"
-            (( noeol )) && text=$newtext || text=$(eol "$newtext")
+            (( noeol )) && text=$newtext || text=$newtext$reset$(eol "$newtext")
         fi
 
         if (( output ))
@@ -390,10 +652,10 @@ spinner() {
                 "${graphics[i++ % 4]}" "$text"                      >&$fd
         fi
 
-        sleep .25 # Four iterations make one second.
+        fsleep .25 # Four iterations make one second.
 
         # Cancel when calling script disappears.
-        kill -0 $$ >/dev/null || { done="${red}aborted"; break; }
+        kill -0 $$ >/dev/null || done="${red}aborted"
     done
 
     # Get rid of the spinner traps.
@@ -476,7 +738,7 @@ report() {
 #  ______________________________________________________________________
 # |__ Ask _______________________________________________________________|
 #
-#       ask [-optionchars] message...
+#       ask [-optionchars|+default] message...
 #
 # Ask a question and read the user's reply to it.
 #
@@ -484,7 +746,7 @@ report() {
 #
 # You may use the options to switch into key mode.  In key mode, only a
 # single character is read.  The valid characters are specified in the
-# options.  A capital option character makes that option the default.
+# optionchars.  A capital option character makes that option the default.
 #
 # If the reply character in key mode was not amoungst the provided options
 # the default is assumed instead.  If no default was given, an exit code
@@ -498,6 +760,10 @@ report() {
 # code of 0 is returned.
 #
 # You can specify the -# option to make ask hide the user's input.
+#
+# If you prefix the first argument with a + instead of a -, the remaining
+# argument is taken as the default string value and returned when no input
+# was received.  In this case, the exit code is 0 either way.
 #
 ask() {
    
@@ -555,7 +821,7 @@ ask() {
         done
         REPLY=$reply
     else
-        read ${options:+-n1} ${silent:+-s}
+        read -e ${options:+-n1} ${silent:+-s}
     fi
     [[ $options && $REPLY ]] || (( silent )) && printf "\n"         >&$fd
 
@@ -576,6 +842,7 @@ ask() {
         REPLY=$default
     done
 } # _____________________________________________________________________
+
 
 
 #  ______________________________________________________________________
@@ -610,104 +877,94 @@ trim() {
     done
 } # _____________________________________________________________________
 
+
+
 #  ______________________________________________________________________
-# |__ SWait _____________________________________________________________|
+# |__ Reverse ___________________________________________________________|
 #
-#       swait pid...
+#       reverse [-0] [elements ...] [<<< elements]
 #
-# Wait for the given PID(s).  The PID does not need to be a child of the
-# running shell.  Note that relying on PIDs always introduces race conditions
-# which may be potentially harmful and sometimes even a security issue.
+# Reverse the order of the given elements.  Elements are read from command
+# arguments or standard input if no element arguments are given.
+# They are reversed and output on standard output.
 #
-# This implementation requires the necessary permissions to send signals
-# to the PID(s) provided.
+# If the -0 option is given, input and output are delimited by NUL bytes.
+# Otherwise, they are delimited by newlines.
 #
-swait() {
+reverse() {
+   
+    # Initialize the vars.
+    local elements delimitor=$'\n'
 
-    # Check usage.
-    (( ! $# )) || getArgs -q :h "$@" && {
-        emit -y 'Please provide one or more PIDs to wait for as argument.'
-        return 1
-    }
+    # Parse the options.
+    while [[ $1 = -* ]]; do
+        case $1 in
+            -0) delimitor=$'\0' ;;
+            --) shift; break ;;
+        esac
+        shift
+    done
 
-    # Time to wait.
-    local pid
-    for pid; do
-        while kill -0 $pid 2>/dev/null
-        do sleep .1; done
+    # Get the elements.
+    elements=( "$@" )
+    if (( ! ${#elements[@]} )); then
+        while IFS= read -r -d "$delimitor"; do
+            elements+=("$REPLY")
+        done
+    fi
+
+    # Iterate in reverse order.
+    for (( i=${#elements[@]} - 1; i >=0; --i )); do
+        printf '%s%s' "${elements[i]}" "$delimitor"
     done
 } # _____________________________________________________________________
 
 
+
 #  ______________________________________________________________________
-# |__ SKill _____________________________________________________________|
+# |__ Mutex _____________________________________________________________|
 #
-#       skill [-v] pid...
+#       mutex file
 #
-# Kill the given PID(s) in a smart manner.
+# Open a mutual exclusion lock on the file, unless another process already owns one.
 #
-# All attempts will be made to use the least destructive signal to terminate
-# the given process(es).  These signals will be sent in order:
+# If the file is already locked by another process, the operation fails.
+# This function defines a lock on a file as having a file descriptor open to the file.
+# This function uses FD 9 to open a lock on the file.  To release the lock, close FD 9:
+# exec 9>&-
 #
-# SIGPIPE, SIGHUP, SIGINT, SIGTERM, SIGKILL
-#
-#   -v  Be verbose and report how persistant we had to be to kill the process.
-#   -w  If we cannot kill the process with any signal, wait for it to end
-#       before returning.
-#
-skill() {
+mutex() {
+    local file=${1:-${BASH_SOURCE[-1]}} pid pids
+    [[ -e $file ]] || err "No such file: $file" || return
 
-    # Check usage.
-    (( ! $# )) || getArgs -q :h "$@" && {
-        emit -y 'Please provide the PID to terminate as argument.'
-        return 1
-    }
+    exec 9>>"$file"
+    { pids=$(fuser -f "$file"); } 2>&- 9>&-
+    for pid in $pids; do
+        [[ $pid = $$ ]] && continue
 
-    # Initialize the defaults.
-    local arg
-    local wait=0
-    local verbose=0
-
-    # Parse the options.
-    for arg in $(getArgs vw "$@"); do
-        case $arg in
-            v) verbose=1    ;;
-            w) wait=1       ;;
-        esac
+        exec 9>&-
+        return 1 # Locked by a pid.
     done
+}
 
-    # Trim off the options.
-    while [[ $1 = -* ]]; do shift; done
 
-    # Figure out what FD to use for our messages.
-    [[ -t 1 ]]; local fd=$(( $? + 1 ))
 
-    # On to the killing.
-    {
-        # Does it even exist?
-        kill -0 $1 || { (( verbose )) && emit "$1 is already gone."; return; }
+#  ______________________________________________________________________
+# |__ FSleep _____________________________________________________________|
+#
+#       fsleep time
+#
+# Wait for the given amount of seconds.  The amount of seconds may be
+# fractional.
+#
+# This implementation solves the problem portably, assuming that either
+# bash 4.x or a fractional sleep(1) is available.
+#
+fsleep() {
 
-        # Ask application to quit - make sure it isn't stopped.
-        (( verbose )) && emit -ng "Being nice .."
-        kill -QUIT $1; kill -CONT $1
-        sleep .3; kill -0 $1 || { (( verbose )) && echo; return; }  >&$fd
-
-        # Insist.
-        (( verbose )) && emit -ng "Insisting .."
-        kill -PIPE $1; kill -HUP $1; kill -INT $1
-        sleep .3; kill -0 $1 || { (( verbose )) && echo; return; }  >&$fd
-
-        # Be somewhat rude.
-        (( verbose )) && emit -ny "Being rude .."
-        kill -TERM $1
-        sleep 2; kill -0 $1 || { (( verbose )) && echo; return; }   >&$fd
-
-        # Be vicious.
-        (( verbose )) && emit -nr "Being vicious .."
-        kill -KILL $1; (( wait )) && wait $1
-
-        (( verbose )) && echo                                       >&$fd
-    } 2>/dev/null
+    local fifo=${TMPDIR:-/tmp}/.fsleep.$$
+    trap 'rm -f "$fifo"' RETURN
+    mkfifo "$fifo" && { read -t "$1" <> "$fifo" 2>/dev/null || sleep "$1"; }
 } # _____________________________________________________________________
 
 
@@ -784,7 +1041,7 @@ getArgs() {
 
     # Any arguments found?
     (( count )) && printf "%s" "$OPTARGS"
-    (( found ))
+    return $(( ! found ))
 } # _____________________________________________________________________
 
 
@@ -817,6 +1074,8 @@ showHelp() {
     local appName=$1; shift
     local appDesc=${1//+([[:space:]])/ }; shift
     local appAuthor=$1; shift
+    local cols=$(tput cols)
+    (( cols = ${cols:-80} - 10 ))
 
     # Figure out what FD to use for our messages.
     [[ -t 1 ]]; local fd=$(( $? + 1 ))
@@ -825,7 +1084,7 @@ showHelp() {
     printf "$reset$bold\n"                                          >&$fd
     printf "\t\t%s\n" "$appName"                                    >&$fd
     printf "$reset\n"                                               >&$fd
-    printf "%s\n" "$appDesc" | fmt -w 70 | sed $'s/^/\t/'           >&$fd
+    printf "%s\n" "$appDesc" | fmt -w "$cols" | sed $'s/^/\t/'      >&$fd
     printf "\t   $reset$bold~ $reset$bold%s\n" "$appAuthor"         >&$fd
     printf "$reset\n"                                               >&$fd
 
@@ -834,7 +1093,7 @@ showHelp() {
         local optName=$1; shift
         local optDesc=$1; shift
         printf "    %s\t" "$optName"
-        printf "%s\n" "${optDesc//+( )/ }" | fmt -w 70 | sed $'1!s/^/ \t/'
+        printf "%s\n" "${optDesc//+( )/ }" | fmt -w "$cols" | sed $'1!s/^/ \t/'
         printf "\n"
     done | column -t -s $'\t' \
          | sed "s/^\(    [^ ]*\)/$bold$green\1$reset/"              >&$fd
@@ -860,30 +1119,48 @@ showHelp() {
 quote() {
 
     # Initialize the defaults.
-    local arg escape=0 first=1
+    local arg escape=0 quotedArgs=()
 
     # Parse the options.
     while [[ $1 = -* ]]; do
         case $1 in
             -e) escape=1    ;;
+            --) shift; break ;;
         esac
         shift
     done
 
     # Print out each argument, quoting it properly.
     for arg; do
-        (( ! first )) && printf " " || first=0
-
         if (( escape )); then
-            printf "%q"     "$arg"
+            quotedArgs+=("$(printf "%q"     "$arg")")
         else
-            printf "'%s'"   "${arg//"'"/"\\'"}"
+            quotedArgs+=("$(printf "'%s'"   "${arg//"'"/"\\'"}")")
         fi
     done
 
-    printf "\n"
+    printf '%s\n' "$(IFS=' '; echo "${quotedArgs[*]}")"
 } # _____________________________________________________________________
 
+
+
+#  ______________________________________________________________________
+# |__ ReQuote __________________________________________________________|
+#
+#       requote [string]
+#
+# Output a single string where the first argument is escaped
+# for safe usage as a literal in a regular expression.
+#
+requote() {
+
+    # Initialize the defaults.
+    local char
+
+    printf '%s' "$1" | while IFS= read -r -d '' -n1 char; do
+        printf '[%s]' "$char"
+    done
+} # _____________________________________________________________________
 
 
 
@@ -965,7 +1242,7 @@ shorten() {
 inArray() {
 
     # Check usage.
-    (( $# < 2 )) || getArgs -q :h "$@" && {
+    (( $# < 1 )) || getArgs -q :h "$@" && {
         emit -y 'Please provide the element to search for and the array' \
                 'to search through.'
         return 1
@@ -984,131 +1261,33 @@ inArray() {
 
 
 #  ______________________________________________________________________
-# |__ Map _______________________________________________________________|
+# |__ xpathNodes ________________________________________________________|
 #
-#       map name key [ value ]
+#       xpathNodes query [filename]
 #
-# Retrieve a mapping of a key from the map with the given name or modify
-# the map by assigning a new value for the given key.
+# Outputs every xpath node that matches the query on a separate line.
+# Leading and trailing whitespace is always stripped.
 #
-#   name    A string denoting the name of the map that holds the key.
-#   key     A string denoting the key of the mapping.
-#   value   An optional string denoting the new value for the given key.
+#   filename    The path to the file that contains the document to run the query on.
+#   query       The XPath query to run on the document.
 #
-# When no value is specified, the current value for the given key is returned.
-#
-# When no value and no key is specified, all known keys for the given map are
-# returned.
-#
-map() {
-    # Parse the options.
-    local quiet=
-    [[ $1 = -q ]] && { quiet=1; shift; }
+xpathNodes() {
+    local query=$1 filename=$2
+    [[ $filename ]] || filename=<(cat)
 
-    # Initialize the defaults.
-    local mapName=$1
-    local mapKey=$2
-    local mapValue=$3
-    local mapIndex
-    local keyIndex
-    local arg
-
-    if (( $# > 2 )); then
-        if ! mapIndex=$(_findMapNameIndex -q "$mapName"); then
-            _mapNames+=( "$mapName" )
-            (( mapIndex = ${#_mapNames[@]} - 1 ))
+    {
+        if xpath -e / <(echo '<a></a>') >/dev/null 2>&1; then
+            xpath -e "$query" "$filename" 2>&1
+        else
+            xpath "$filename" "$query" 2>&1
         fi
+    } | {
+        read
+        sed -ne $'s/-- NODE --/\\\n/g' -e 's/^[[:space:]]*\(.*[^[:space:]]\)[[:space:]]*$/\1/p'
+    }
 
-        if ! keyIndex=$(_findMapKeyIndex -q "$mapIndex" "$mapKey"); then
-            _mapKeys+=( "$mapIndex-$mapKey" )
-            (( keyIndex = ${#_mapKeys[@]} - 1 ))
-        fi
-
-        _mapValues[keyIndex]=$mapValue
-    elif (( $# == 2 )); then
-        if
-            mapIndex=$(_findMapNameIndex ${quiet:+-q} "$mapName") && \
-            keyIndex=$(_findMapKeyIndex ${quiet:+-q} "$mapIndex" "$mapKey")
-        then
-            printf "%s\n" "${_mapValues[keyIndex]}"
-        fi
-    elif (( $# == 1 )); then
-        if 
-            mapIndex=$(_findMapNameIndex ${quiet:+-q} "$mapName")
-        then
-            for keyIndex in "${!_mapKeys[@]}"; do
-                if [[ ${_mapKeys[keyIndex]} = $mapIndex-* ]]; then
-                    printf "%s\n" "${_mapKeys[keyIndex]#*-}"
-                fi
-            done
-        fi
-    fi
-} # _____________________________________________________________________
-
-
-
-#  ______________________________________________________________________
-# |__ Map - Find Index of Map Name _____________________________________|
-#
-#       _findMapNameIndex name
-#
-# Returns the index of the map with the given name.
-# For internal use only.
-#
-_findMapNameIndex() {
-
-    # Parse arguments.
-    local quiet=0
-    [[ $1 = -q ]] && { quiet=1; shift; }
-
-    # Initialize argument names.
-    local mapName=$1
-
-    if  # Find the map name.
-        (( ${#_mapNames[@]} )) &&
-        for mapIndex in "${!_mapNames[@]}"; do
-            [[ ${_mapNames[mapIndex]} = $mapName ]] && break
-        done
-    then
-        printf "%s\n" "$mapIndex"
-    else
-        (( quiet )) || emit -r "There is no map named '$mapName'."
-        return 1
-    fi
-} # _____________________________________________________________________
-
-
-
-#  ______________________________________________________________________
-# |__ Map - Find Index of Map Key ______________________________________|
-#
-#       _findMapKeyIndex mapIndex key
-#
-# Returns the index of the given key in the map with the given index.
-# For internal use only.
-#
-_findMapKeyIndex() {
-
-    # Parse arguments.
-    local quiet=0
-    [[ $1 = -q ]] && { quiet=1; shift; }
-
-    # Initialize argument names.
-    local mapIndex=$1
-    local mapKey=$2
-
-    if  # Find the map key.
-        (( ${#_mapKeys[@]} )) &&
-        for keyIndex in "${!_mapKeys[@]}"; do
-            [[ ${_mapKeys[keyIndex]} = $mapIndex-$mapKey ]] && break
-        done
-    then
-        printf "%s\n" "$keyIndex"
-    else
-        (( quiet )) || emit -r "The map '$mapName' does not contain a key '$mapKey'."
-        return 1
-    fi
-} # _____________________________________________________________________
+    return "${PIPESTATUS[0]}"
+}
 
 
 

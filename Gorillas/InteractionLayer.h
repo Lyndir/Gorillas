@@ -22,13 +22,13 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "BarSprite.h"
+#import "PearlCCBarSprite.h"
 
 @interface InteractionLayer : CCLayer {
     
 @private
     CCLabelTTF          *angleLabel, *strengthLabel, *infoLabel;
-    BarSprite           *aimSprite;
+    PearlCCBarSprite    *aimSprite;
     
     CGPoint             aim;
 }

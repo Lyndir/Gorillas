@@ -78,7 +78,7 @@
     [currModelSprite setPosition:ccp(winSize.width / 2, winSize.height / 2)];
     [nextModelSprite setPosition:ccp(winSize.width / 2 + winSize.width, winSize.height / 2)];
 
-    swipeLayer = [[SwipeLayer alloc] initWithTarget:self selector:@selector(swiped:)];
+    swipeLayer = [[PearlCCSwipeLayer alloc] initWithTarget:self selector:@selector(swiped:)];
     [self addChild:swipeLayer];
     [swipeLayer addChild:prevModelSprite];
     [swipeLayer addChild:currModelSprite];

@@ -23,7 +23,7 @@
 //
 
 
-#import "Resettable.h"
+#import "PearlResettable.h"
 
 
 typedef struct Building {
@@ -39,7 +39,7 @@ typedef struct BuildingVertex {
     ccColor4B   backColor;
 } BuildingVertex;
 
-@interface BuildingsLayer : CCLayer <Resettable> {
+@interface BuildingsLayer : CCLayer <PearlResettable> {
 
 @private
     float                                           buildingWidthRatio, buildingHeightRatio, lightRatio;

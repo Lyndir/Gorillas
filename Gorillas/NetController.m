@@ -9,7 +9,7 @@
 #import <unistd.h>
 
 #import "NetController.h"
-#import "StringUtils.h"
+#import "PearlStringUtils.h"
 #import "GorillasAppDelegate.h"
 #import "CityTheme.h"
 

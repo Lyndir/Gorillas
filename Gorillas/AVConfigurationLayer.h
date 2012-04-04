@@ -22,11 +22,11 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "ShadeLayer.h"
-#import "Resettable.h"
+#import "PearlCCShadeLayer.h"
+#import "PearlResettable.h"
 
 
-@interface AVConfigurationLayer : GConfigMenuLayer <MenuDelegate, ConfigMenuDelegate> {
+@interface AVConfigurationLayer : GConfigMenuLayer <PearlCCMenuDelegate, PearlCCConfigMenuDelegate> {
 
 @private
 }

@@ -39,7 +39,7 @@
     self.isTouchEnabled = YES;
     initialDist         = -1;
     
-    [self runAction:tween = [[AutoTween alloc] initWithDuration:0.5f]];
+    [self runAction:tween = [[PearlCCAutoTween alloc] initWithDuration:0.5f]];
     tween.tag           = kCCActionTagIgnoreTimeScale;
     
     targetScale         = self.scale;

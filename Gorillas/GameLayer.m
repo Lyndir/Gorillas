@@ -25,7 +25,7 @@
 
 #import "GameLayer.h"
 #import "GorillasAppDelegate.h"
-#import "Remove.h"
+#import "PearlCCRemove.h"
 #import "CityTheme.h"
 #import "InteractionLayer.h"
 #import "LocalyticsSession.h"
@@ -208,7 +208,7 @@
     }
     
     if (randomCity)
-        [GorillasConfig get].cityTheme = [[CityTheme getThemeNames] objectAtIndex:gameRandom() % [[CityTheme getThemeNames] count]];
+        [GorillasConfig get].cityTheme = [[CityTheme getThemeNames] objectAtIndex:PearlGameRandom() % [[CityTheme getThemeNames] count]];
     else
         [self reset];
 
@@ -495,7 +495,7 @@
     windLayer.position      = ccp(self.contentSize.width / 2, self.contentSize.height - 15);
     [self addChild:windLayer z:5];
     
-    scaleTimeAction         = [[AutoTween alloc] initWithDuration:0.5f];
+    scaleTimeAction         = [[PearlCCAutoTween alloc] initWithDuration:0.5f];
     scaleTimeAction.tag     = kCCActionTagIgnoreTimeScale;
     [self runAction:scaleTimeAction];
     
@@ -557,10 +557,10 @@
             
             CGRect field = [cityLayer fieldInSpaceOf:panningLayer];
             
-            if ([[GorillasConfig get].visualFx boolValue] && gameRandomFor(GorillasGameRandomWeather) % 100 == 0) {
+            if ([[GorillasConfig get].visualFx boolValue] && PearlGameRandomFor(GorillasGameRandomWeather) % 100 == 0) {
                 // 1% chance to start snow/rain when weather is enabled.
                 
-                switch (gameRandomFor(GorillasGameRandomWeather) % 2) {
+                switch (PearlGameRandomFor(GorillasGameRandomWeather) % 2) {
                     case 0:
                         backWeather                 = [[CCParticleRain alloc] init];
                         backWeather.emissionRate    = 60;
@@ -609,11 +609,11 @@
     
     else {
         // System is alive, let the emission rate evolve.
-        float rate = [backWeather emissionRate] + (gameRandomFor(GorillasGameRandomWeather) % 40 - 15) / 10.0f;
+        float rate = [backWeather emissionRate] + (PearlGameRandomFor(GorillasGameRandomWeather) % 40 - 15) / 10.0f;
         float max = [backWeather isKindOfClass:[CCParticleRain class]]? 200: 100;
         rate = fminf(fmaxf(0, rate), max);
         
-        if(gameRandomFor(GorillasGameRandomWeather) % 100 == 0)
+        if(PearlGameRandomFor(GorillasGameRandomWeather) % 100 == 0)
             // 1% chance for a full stop.
             rate = 0;
         

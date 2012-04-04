@@ -27,7 +27,7 @@
 #import "ExplosionsLayer.h"
 #import "GorillasAppDelegate.h"
 #import "ShadeTo.h"
-#import "GLUtils.h"
+#import "PearlGLUtils.h"
 
 
 @interface CityLayer (Private)
@@ -333,7 +333,7 @@
         }
 
         // Pick a random target from the enemies.
-        GorillaLayer *target = [enemies objectAtIndex:gameRandom() % [enemies count]];
+        GorillaLayer *target = [enemies objectAtIndex:PearlGameRandom() % [enemies count]];
         [enemies release];
         
         // Aim at the target.
@@ -406,8 +406,8 @@
 
     // Level-based error.
     NSUInteger rtError = (NSUInteger) ((1 - l) * [CCDirector sharedDirector].winSize.width / 2);
-    rt = ccp(rt.x + gameRandom() % rtError - rtError / 2, rt.y + gameRandom() % rtError - rtError / 2);
-    t = (gameRandom() % (int) ((t / 2) * l * 10)) / 10.0f + (t / 2);
+    rt = ccp(rt.x + PearlGameRandom() % rtError - rtError / 2, rt.y + PearlGameRandom() % rtError - rtError / 2);
+    t = (PearlGameRandom() % (int) ((t / 2) * l * 10)) / 10.0f + (t / 2);
 
     // Velocity vector to hit rt in t seconds.
     CGPoint v = ccp((rt.x - r0.x) / t,
@@ -524,7 +524,7 @@
     NSMutableArray *gorillasQueue = [gorillas mutableCopy];
     NSMutableArray *gorillaIndexes = [[NSMutableArray alloc] initWithCapacity: [gorillas count]];
     while ([gorillasQueue count]) {
-        NSUInteger index = indexA + gameRandom() % (delta + 1);
+        NSUInteger index = indexA + PearlGameRandom() % (delta + 1);
         BOOL validIndex = YES;
         
         // Make sure gorillas aren't too close to the edge.

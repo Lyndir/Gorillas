@@ -23,7 +23,7 @@
 //
 
 #import "GMenuLayer.h"
-#import "SwipeLayer.h"
+#import "PearlCCSwipeLayer.h"
 #import "GorillaLayer.h"
 
 @interface ModelsConfigurationLayer : GMenuLayer {
@@ -31,7 +31,7 @@
 @private
     CCMenuItemFont *modelCurr, *modelNext;
     
-    SwipeLayer *swipeLayer;
+    PearlCCSwipeLayer *swipeLayer;
     
     GorillaLayer *prevModelSprite, *currModelSprite, *nextModelSprite;
     NSMutableArray *modelSprites, *modelTitles;

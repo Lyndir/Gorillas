@@ -22,12 +22,12 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "ActivitySprite.h"
+#import "PearlCCActivitySprite.h"
 #import <GameKit/GameKit.h>
-#import "Resettable.h"
+#import "PearlResettable.h"
 
 
-@interface GorillaLayer : CCSprite <Resettable> {
+@interface GorillaLayer : CCSprite <PearlResettable> {
 
 @private
     NSString                                                        *_name;

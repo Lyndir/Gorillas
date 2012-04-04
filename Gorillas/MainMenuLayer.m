@@ -24,8 +24,8 @@
 
 #import "MainMenuLayer.h"
 #import "GorillasAppDelegate.h"
-#import "MenuItemSpacer.h"
-#import "MenuItemTitle.h"
+#import "PearlCCMenuItemSpacer.h"
+#import "PearlCCMenuItemTitle.h"
 
 
 @interface MainMenuLayer ()
@@ -48,24 +48,24 @@
 - (id) init {
     
     if (!(self = [super initWithDelegate:self logo:nil items:
-                  [MenuItemSpacer spacerSmall],
+                  [PearlCCMenuItemSpacer spacerSmall],
 #if ! LITE
-                  [multiPlayerI     = [MenuItemBlock itemWithSize:100 target:self selector:@selector(startMulti:)] retain],
+                  [multiPlayerI     = [PearlCCMenuItemBlock itemWithSize:100 target:self selector:@selector(startMulti:)] retain],
 #endif
-                  [singlePlayerI    = [MenuItemBlock itemWithSize:100 target:self selector:@selector(startSingle:)] retain],
+                  [singlePlayerI    = [PearlCCMenuItemBlock itemWithSize:100 target:self selector:@selector(startSingle:)] retain],
 #if ! LITE
-                  [hotSeatI         = [MenuItemBlock itemWithSize:100 target:self selector:@selector(startHotSeat:)] retain],
+                  [hotSeatI         = [PearlCCMenuItemBlock itemWithSize:100 target:self selector:@selector(startHotSeat:)] retain],
 #endif
                   [configurationI   = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)] retain],
-                  [descriptionT     = [MenuItemTitle itemFromString:@"description"] retain],
-                  [MenuItemSpacer spacerSmall],
+                  [descriptionT     = [PearlCCMenuItemTitle itemFromString:@"description"] retain],
+                  [PearlCCMenuItemSpacer spacerSmall],
 #if LITE
-                  [MenuItemBlock itemWithSize:50 target:self selector:@selector(upgrade:)],
+                  [PearlCCMenuItemBlock itemWithSize:50 target:self selector:@selector(upgrade:)],
 #else
-                  [MenuItemBlock itemWithSize:50 target:self selector:@selector(settings:)],
-                  [MenuItemBlock itemWithSize:50 target:self selector:@selector(scores:)],
+                  [PearlCCMenuItemBlock itemWithSize:50 target:self selector:@selector(settings:)],
+                  [PearlCCMenuItemBlock itemWithSize:50 target:self selector:@selector(scores:)],
 #endif
-                  [MenuItemBlock itemWithSize:50 target:self selector:@selector(moreGames:)],
+                  [PearlCCMenuItemBlock itemWithSize:50 target:self selector:@selector(moreGames:)],
                   nil]))
         return self;
     
@@ -85,7 +85,7 @@
                        [NSNumber numberWithInt:3],
 #endif
                        nil];
-    self.layout = MenuLayoutCustomColumns;
+    self.layout = PearlCCMenuLayoutCustomColumns;
     
     self.background = [CCSprite spriteWithFile:@"menu-main.png"];
     

@@ -6,10 +6,10 @@
 //  Copyright 2010 lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "MenuLayer.h"
+#import "PearlCCMenuLayer.h"
 
 
-@interface GMenuLayer : MenuLayer {
+@interface GMenuLayer : PearlCCMenuLayer {
 
 }
 

@@ -30,7 +30,7 @@
 #import <GameKit/GameKit.h>
 
 
-@interface GameLayer : CCLayer <Resettable> {
+@interface GameLayer : CCLayer <PearlResettable> {
 
 @private
     BOOL                                                    paused;
@@ -51,7 +51,7 @@
     CCParticleSystem                                        *backWeather, *frontWeather;
     WindLayer                                               *windLayer;
     CCAction                                                *shakeAction;
-    AutoTween                                               *scaleTimeAction;
+    PearlCCAutoTween                                        *scaleTimeAction;
     float                                                   timeScale;
 }
 
@@ -72,7 +72,7 @@
 @property (nonatomic, readonly) CCParticleSystem            *frontWeather;
 @property (nonatomic, readonly) WindLayer                   *windLayer;
 
-@property (nonatomic, readonly) AutoTween                   *scaleTimeAction;
+@property (nonatomic, readonly) PearlCCAutoTween            *scaleTimeAction;
 @property (nonatomic, readwrite) float                      timeScale;
 
 -(void) shake;

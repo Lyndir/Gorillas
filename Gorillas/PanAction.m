@@ -23,7 +23,7 @@
 //
 
 #import "PanAction.h"
-#import "Resettable.h"
+#import "PearlResettable.h"
 
 
 @implementation PanAction
@@ -54,7 +54,7 @@
     [super update: dt];
     
     if ([self isDone]) {
-        CCNode<Resettable> *firstNode = [subNodes objectAtIndex:0];
+        CCNode<PearlResettable> *firstNode = [subNodes objectAtIndex:0];
         CCNode *lastNode = [subNodes lastObject];
         
         float x = [lastNode position].x + [lastNode contentSize].width + padding;

@@ -103,14 +103,14 @@ static float flameRadius;
 
 -(void) addExplosionAtWorld:(CGPoint)worldPos hitsGorilla:(BOOL) hitsGorilla {
     
-    BOOL heavy = hitsGorilla || (gameRandomFor(GorillasGameRandomExplosions) % 100 > 90);
+    BOOL heavy = hitsGorilla || (PearlGameRandomFor(GorillasGameRandomExplosions) % 100 > 90);
 
     if([[GorillasConfig get].soundFx boolValue])
         [GorillasAudioController playEffect:[ExplosionsLayer explosionEffect:heavy]];
 
     [[GorillasAppDelegate get].gameLayer shake];
     
-    int explosionParticles = gameRandomFor(GorillasGameRandomExplosions) % 50 + 300;
+    int explosionParticles = PearlGameRandomFor(GorillasGameRandomExplosions) % 50 + 300;
     if(heavy)
         explosionParticles += 400;
     
@@ -235,7 +235,7 @@ static float flameRadius;
         }
     }
     
-    NSUInteger t = (gameRandomFor(GorillasGameRandomExplosions) % flameVariantion) + (heavy? 1: 0) * flameVariantion;
+    NSUInteger t = (PearlGameRandomFor(GorillasGameRandomExplosions) % flameVariantion) + (heavy? 1: 0) * flameVariantion;
     dbg(@"flame: %d", t);
     return flameTypes[t];
 }
@@ -264,7 +264,7 @@ static float flameRadius;
     else
         // Pick an effect that is not 0 (see above) and not the same as the last effect.
         do {
-            chosenEffect = gameRandomFor(GorillasGameRandomExplosions) % explosionEffects;
+            chosenEffect = PearlGameRandomFor(GorillasGameRandomExplosions) % explosionEffects;
         } while(chosenEffect == lastEffect || chosenEffect == 0);
     
     lastEffect = chosenEffect;

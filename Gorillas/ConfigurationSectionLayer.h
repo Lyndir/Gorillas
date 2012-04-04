@@ -22,11 +22,11 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "Resettable.h"
+#import "PearlResettable.h"
 #import "GMenuLayer.h"
 
 
-@interface ConfigurationSectionLayer : GMenuLayer <Resettable, MenuDelegate> {
+@interface ConfigurationSectionLayer : GMenuLayer <PearlResettable, PearlCCMenuDelegate> {
 
 }
 

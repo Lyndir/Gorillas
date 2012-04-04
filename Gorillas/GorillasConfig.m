@@ -102,33 +102,33 @@
 
     [self.defaults
      registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-                       [CityTheme defaultThemeName],                               cCityTheme,
+                       [CityTheme defaultThemeName],                               NSStringFromSelector(@selector(cityTheme)),
 
-                       [NSNumber numberWithInteger:    [theme varFloors]],         cVarFloors,
-                       [NSNumber numberWithInteger:    [theme fixedFloors]],       cFixedFloors,
-                       [NSNumber numberWithInteger:    [theme buildingAmount]],    cBuildingAmount,
-                       [NSNumber numberWithInteger:    1],                         cBuildingSpeed,
-                       [theme buildingColors],                                     cBuildingColors,
+                       [NSNumber numberWithInteger:    [theme varFloors]],         NSStringFromSelector(@selector(varFloors)),
+                       [NSNumber numberWithInteger:    [theme fixedFloors]],       NSStringFromSelector(@selector(fixedFloors)),
+                       [NSNumber numberWithInteger:    [theme buildingAmount]],    NSStringFromSelector(@selector(buildingAmount)),
+                       [NSNumber numberWithInteger:    1],                         NSStringFromSelector(@selector(buildingSpeed)),
+                       [theme buildingColors],                                     NSStringFromSelector(@selector(buildingColors)),
 
-                       [NSNumber numberWithInteger:    [theme windowAmount]],      cWindowAmount,
-                       [NSNumber numberWithLong:       [theme windowColorOn]],     cWindowColorOn,
-                       [NSNumber numberWithLong:       [theme windowColorOff]],    cWindowColorOff,
+                       [NSNumber numberWithInteger:    [theme windowAmount]],      NSStringFromSelector(@selector(windowAmount)),
+                       [NSNumber numberWithLong:       [theme windowColorOn]],     NSStringFromSelector(@selector(windowColorOn)),
+                       [NSNumber numberWithLong:       [theme windowColorOff]],    NSStringFromSelector(@selector(windowColorOff)),
 
-                       [NSNumber numberWithLong:       [theme skyColor]],          cSkyColor,
-                       [NSNumber numberWithLong:       [theme starColor]],         cStarColor,
-                       [NSNumber numberWithInteger:    10],                        cStarSpeed,
-                       [NSNumber numberWithInteger:    [theme starAmount]],        cStarAmount,
+                       [NSNumber numberWithLong:       [theme skyColor]],          NSStringFromSelector(@selector(skyColor)),
+                       [NSNumber numberWithLong:       [theme starColor]],         NSStringFromSelector(@selector(starColor)),
+                       [NSNumber numberWithInteger:    10],                        NSStringFromSelector(@selector(starSpeed)),
+                       [NSNumber numberWithInteger:    [theme starAmount]],        NSStringFromSelector(@selector(starAmount)),
 
-                       [NSNumber numberWithInteger:    3],                         cLives,
-                       [NSNumber numberWithFloat:      [theme windModifier]],      cWindModifier,
-                       [NSNumber numberWithInteger:    [theme gravity]],           cGravity,
-                       [NSNumber numberWithInteger:    30],                        cMinGravity,
-                       [NSNumber numberWithInteger:    150],                       cMaxGravity,
+                       [NSNumber numberWithInteger:    3],                         NSStringFromSelector(@selector(lives)),
+                       [NSNumber numberWithFloat:      [theme windModifier]],      NSStringFromSelector(@selector(windModifier)),
+                       [NSNumber numberWithInteger:    [theme gravity]],           NSStringFromSelector(@selector(gravity)),
+                       [NSNumber numberWithInteger:    30],                        NSStringFromSelector(@selector(minGravity)),
+                       [NSNumber numberWithInteger:    150],                       NSStringFromSelector(@selector(maxGravity)),
 
-                       [NSNumber numberWithFloat:      0.5f],                      cGameScrollDuration,
+                       [NSNumber numberWithFloat:      0.5f],                      NSStringFromSelector(@selector(gameScrollDuration)),
 
-                       [NSNumber numberWithBool:       YES],                       cReplay,
-                       [NSNumber numberWithBool:       YES],                       cFollowThrow,
+                       [NSNumber numberWithBool:       YES],                       NSStringFromSelector(@selector(replay)),
+                       [NSNumber numberWithBool:       YES],                       NSStringFromSelector(@selector(followThrow)),
 
                        [NSArray arrayWithObjects:
                         @"Fighting_Gorillas.mp3",
@@ -139,7 +139,7 @@
                         @"sequential",
                         @"random",
                         @"",
-                        nil],                                                      cTracks,
+                        nil],                                                      NSStringFromSelector(@selector(tracks)),
                        [NSArray arrayWithObjects:
                         l(@"menu.config.song.fighting_gorillas"),
                         l(@"menu.config.song.flow_square"),
@@ -149,49 +149,49 @@
                         l(@"menu.config.song.sequential"),
                         l(@"menu.config.song.random"),
                         l(@"menu.config.song.off"),
-                        nil],                                                      cTrackNames,
+                        nil],                                                      NSStringFromSelector(@selector(trackNames)),
 
-                       [NSNumber numberWithInteger:    1],                         cActiveGameConfigurationIndex,
-                       [NSNumber numberWithUnsignedInt:GorillasModeBootCamp],      cMode,
-                       [NSNumber numberWithInteger:    -5],                        cMissScore,
-                       [NSNumber numberWithInteger:    50],                        cKillScore,
-                       [NSNumber numberWithFloat:      2],                         cBonusOneShot,
-                       [NSNumber numberWithFloat:      50],                        cBonusSkill,
-                       [NSNumber numberWithInteger:    5],                         cDeathScoreRatio,
+                       [NSNumber numberWithInteger:    1],                         NSStringFromSelector(@selector(activeGameConfigurationIndex)),
+                       [NSNumber numberWithUnsignedInt:GorillasModeBootCamp],      NSStringFromSelector(@selector(mode)),
+                       [NSNumber numberWithInteger:    -5],                        NSStringFromSelector(@selector(missScore)),
+                       [NSNumber numberWithInteger:    50],                        NSStringFromSelector(@selector(killScore)),
+                       [NSNumber numberWithFloat:      2],                         NSStringFromSelector(@selector(bonusOneShot)),
+                       [NSNumber numberWithFloat:      50],                        NSStringFromSelector(@selector(bonusSkill)),
+                       [NSNumber numberWithInteger:    5],                         NSStringFromSelector(@selector(deathScoreRatio)),
 
-                       [NSNumber numberWithUnsignedInt:GorillasPlayerModelGorilla],cPlayerModel,
-                       [NSDictionary dictionary],                                  cScores,
-                       [NSNumber numberWithInteger:    0],                         cSkill,
-                       [NSNumber numberWithFloat:      0.3f],                      cLevel,
-                       levelNames,                                                 cLevelNames,
-                       [NSNumber numberWithFloat:      0.03f],                     cLevelProgress,
+                       [NSNumber numberWithUnsignedInt:GorillasPlayerModelGorilla],NSStringFromSelector(@selector(playerModel)),
+                       [NSDictionary dictionary],                                  NSStringFromSelector(@selector(scores)),
+                       [NSNumber numberWithInteger:    0],                         NSStringFromSelector(@selector(skill)),
+                       [NSNumber numberWithFloat:      0.3f],                      NSStringFromSelector(@selector(level)),
+                       levelNames,                                                 NSStringFromSelector(@selector(levelNames)),
+                       [NSNumber numberWithFloat:      0.03f],                     NSStringFromSelector(@selector(levelProgress)),
 
                        nil]];
 
     updateTriggers  = [[NSArray alloc] initWithObjects:
-                       cLargeFontSize,
-                       cSmallFontSize,
-                       cFontSize,
-                       cFontName,
-                       cFixedFontName,
-                       cCityTheme,
-                       cGravity,
-                       cSoundFx,
-                       cVoice,
-                       cVibration,
-                       cVisualFx,
-                       cReplay,
-                       cFollowThrow,
-                       cTracks,
-                       cTrackNames,
-                       cCurrentTrack,
-                       cLevel,
-                       cLevelNames,
+                       NSStringFromSelector(@selector(largeFontSize)),
+                       NSStringFromSelector(@selector(smallFontSize)),
+                       NSStringFromSelector(@selector(fontSize)),
+                       NSStringFromSelector(@selector(fontName)),
+                       NSStringFromSelector(@selector(fixedFontName)),
+                       NSStringFromSelector(@selector(cityTheme)),
+                       NSStringFromSelector(@selector(gravity)),
+                       NSStringFromSelector(@selector(soundFx)),
+                       NSStringFromSelector(@selector(voice)),
+                       NSStringFromSelector(@selector(vibration)),
+                       NSStringFromSelector(@selector(visualFx)),
+                       NSStringFromSelector(@selector(replay)),
+                       NSStringFromSelector(@selector(followThrow)),
+                       NSStringFromSelector(@selector(tracks)),
+                       NSStringFromSelector(@selector(trackNames)),
+                       NSStringFromSelector(@selector(currentTrack)),
+                       NSStringFromSelector(@selector(level)),
+                       NSStringFromSelector(@selector(levelNames)),
                        nil
                        ];
-    [self.resetTriggers setObject:@"gameLayer.skyLayer" forKey:cVisualFx];
-    [self.resetTriggers setObject:@"mainMenuLayer" forKey:cActiveGameConfigurationIndex];
-    [self.resetTriggers setObject:@"customGameLayer" forKey:cMode];
+    [self.resetTriggers setObject:@"gameLayer.skyLayer" forKey:NSStringFromSelector(@selector(visualFx))];
+    [self.resetTriggers setObject:@"mainMenuLayer"      forKey:NSStringFromSelector(@selector(activeGameConfigurationIndex))];
+    [self.resetTriggers setObject:@"customGameLayer"    forKey:NSStringFromSelector(@selector(mode))];
 
     return self;
 }
@@ -213,17 +213,17 @@
 
 -(NSString *) messageForOff {
 
-    return l([offMessages objectAtIndex:gameRandom() % offMessages.count]);
+    return l([offMessages objectAtIndex:PearlGameRandom() % offMessages.count]);
 }
 -(NSString *) messageForHitBy:(GorillaLayer *)byGorilla on:(GorillaLayer *)onGorilla {
 
-    return l([hitMessages objectAtIndex:gameRandom() % hitMessages.count], byGorilla.name, onGorilla.name);
+    return l([hitMessages objectAtIndex:PearlGameRandom() % hitMessages.count], byGorilla.name, onGorilla.name);
 }
 
 
 -(ccColor4B) buildingColor {
 
-    return ccc4l([[self.buildingColors objectAtIndex:gameRandom() % [self.buildingColors count]] longValue]);
+    return ccc4l([[self.buildingColors objectAtIndex:PearlGameRandom() % [self.buildingColors count]] longValue]);
 }
 
 

@@ -22,10 +22,10 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "Resettable.h"
+#import "PearlResettable.h"
 
 
-@interface WindLayer : CCLayer <CCRGBAProtocol, Resettable> {
+@interface WindLayer : CCLayer <CCRGBAProtocol, PearlResettable> {
 
 @private
     float           wind;
