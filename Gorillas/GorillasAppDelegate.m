@@ -59,10 +59,6 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 - (NSString *)localyticsInfo;
 - (NSString *)localyticsKey;
 
-- (NSString *)phInfo;
-- (NSString *)phToken;
-- (NSString *)phSecret;
-
 @end
 
 @implementation GorillasAppDelegate
@@ -307,29 +303,6 @@ static NSDictionary *localyticsInfo = nil;
 }
 
 
-
-#pragma mark - PlayHavenSDK
-
-static NSDictionary *playHavenInfo = nil;
-
-- (NSDictionary *)phInfo {
-    
-    if (playHavenInfo == nil)
-        playHavenInfo = [[NSDictionary alloc] initWithContentsOfURL:
-                         [[NSBundle mainBundle] URLForResource:@"PlayHaven" withExtension:@"plist"]];
-    
-    return playHavenInfo;
-}
-
-- (NSString *)phToken {
-    
-    return [[self phInfo] valueForKeyPath:@"Token"];
-}
-
-- (NSString *)phSecret {
-    
-    return [[self phInfo] valueForKeyPath:@"Secret"];
-}
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     

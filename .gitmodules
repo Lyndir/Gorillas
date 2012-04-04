@@ -1,6 +1,3 @@
 [submodule "External/Pearl"]
 	path = External/Pearl
 	url = git://github.com/Lyndir/Pearl.git
-[submodule "External/PlayHavenSDK"]
-	path = External/PlayHavenSDK
-	url = git://github.com/playhaven/sdk-ios.git
