@@ -22,16 +22,16 @@
 //  Copyright, lhunath (Maarten Billemont) 2008. All rights reserved.
 //
 
-#import "Resettable.h"
+#import "PearlResettable.h"
 #import "MovingTo.h"
 
 
-@interface PanningLayer : CCLayer <Resettable> {
+@interface PanningLayer : CCLayer <PearlResettable> {
 
 @private
     CGFloat initialScale;
     CGFloat initialDist;
-    AutoTween *tween;
+    PearlCCAutoTween *tween;
     CGFloat targetScale;
 }
 

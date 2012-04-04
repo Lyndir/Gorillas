@@ -23,10 +23,10 @@
 //
 
 #import "GorillasAppDelegate.h"
-#import "RootViewController.h"
-#import "Splash.h"
-#import "Resettable.h"
-#import "DebugLayer.h"
+#import "PearlRootViewController.h"
+#import "PearlCCSplash.h"
+#import "PearlResettable.h"
+#import "PearlCCDebugLayer.h"
 #import "CityTheme.h"
 #import "ccMacros.h"
 #import "LocalyticsSession.h"
@@ -70,7 +70,7 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 + (void)initialize {
     
 #if DEBUG
-    [[Logger get] setAutoprintLevel:LogLevelDebug];
+    [[PearlLogger get] setAutoprintLevel:PearlLogLevelDebug];
 #endif
     [GorillasConfig get];
 }
@@ -106,7 +106,7 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     
 	// Build the splash scene.
     CCScene *splashScene = [CCScene node];
-    CCSprite *splash = [Splash node];
+    CCSprite *splash = [PearlCCSplash node];
     [splashScene addChild:splash];
     
     // Build the game scene.
@@ -219,7 +219,7 @@ static NSString *PHPlacementMoreGames  = @"more_games";
 }
 
 
-- (void)pushLayer: (ShadeLayer *)layer hidden:(BOOL)hidden {
+- (void)pushLayer: (PearlCCShadeLayer *)layer hidden:(BOOL)hidden {
     
     [self.gameLayer setPaused:YES];
     
@@ -241,14 +241,14 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     }
 }
 
-- (void)didPushLayer:(ShadeLayer *)layer hidden:(BOOL)hidden {
+- (void)didPushLayer:(PearlCCShadeLayer *)layer hidden:(BOOL)hidden {
     
     self.gameLayer.paused = YES;
     
     [super didPushLayer:layer hidden:hidden];
 }
 
-- (void)didPopLayer:(ShadeLayer *)layer anyLeft:(BOOL)anyLeft {
+- (void)didPopLayer:(PearlCCShadeLayer *)layer anyLeft:(BOOL)anyLeft {
     
     if (!anyLeft)
         self.gameLayer.paused = NO;

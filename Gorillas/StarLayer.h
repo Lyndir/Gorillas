@@ -22,9 +22,9 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "Resettable.h"
+#import "PearlResettable.h"
 
-@interface StarLayer : CCLayer <Resettable> {
+@interface StarLayer : CCLayer <PearlResettable> {
 
 @private
     float       depth;

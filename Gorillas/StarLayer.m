@@ -70,8 +70,8 @@
     starVertices = malloc(sizeof(glPoint) * starCount);
     
     for (NSUInteger s = 0; s < starCount; ++s) {
-        starVertices[s].p   = ccp(gameRandomFor(GorillasGameRandomStars) % (long) fieldPx.size.width + fieldPx.origin.x,
-                                  gameRandomFor(GorillasGameRandomStars) % (long) fieldPx.size.height + fieldPx.origin.y);
+        starVertices[s].p   = ccp(PearlGameRandomFor(GorillasGameRandomStars) % (long) fieldPx.size.width + fieldPx.origin.x,
+                                  PearlGameRandomFor(GorillasGameRandomStars) % (long) fieldPx.size.height + fieldPx.origin.y);
         starVertices[s].c   = starColor;
         starVertices[s].s   = starSize;
     }
@@ -93,7 +93,7 @@
     for (NSUInteger s = 0; s < starCount; ++s)
         if (starVertices[s].p.x < fieldPx.origin.x)
             starVertices[s].p.x = fieldPx.size.width + fieldPx.origin.x
-                                - ((int)(10000 * speed * dt) % gameRandomFor(GorillasGameRandomStars)) / 10000.0f;
+                                - ((int)(10000 * speed * dt) % PearlGameRandomFor(GorillasGameRandomStars)) / 10000.0f;
         else
             starVertices[s].p.x -= dt * speed;
 

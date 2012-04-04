@@ -22,10 +22,10 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "HUDLayer.h"
+#import "PearlCCHUDLayer.h"
 
 
-@interface GHUDLayer : HUDLayer {
+@interface GHUDLayer : PearlCCHUDLayer {
 
 @private
     CCSprite                                            *_skillSprite;

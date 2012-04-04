@@ -108,7 +108,7 @@
         // Building's size.
         NSInteger addFloors = 0;
         if (varFloors)
-            addFloors               = buildingHeightRatio * (gameRandom() % varFloors);
+            addFloors               = buildingHeightRatio * (PearlGameRandom() % varFloors);
         buildings[b].size           = CGSizeMake(buildingWidth - 1, (fixedFloors + addFloors) * floorHeightPt + wPadPt);
         
         // Building's windows.

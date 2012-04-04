@@ -47,6 +47,8 @@
                                         // when it returns to foreground.
 	@private
 	#pragma mark Member Variables
+    dispatch_queue_t _queue;                // Queue of Localytics block objects.
+    dispatch_group_t _criticalGroup;        // Group of blocks the must complete before backgrounding.
 	NSString *_sessionUUID;                 // Unique identifier for this session.
 	NSString *_applicationKey;              // Unique identifier for the instrumented application
     NSTimeInterval _lastSessionStartTimestamp;  // The start time of the most recent session.
@@ -61,6 +63,8 @@
 	BOOL _sessionHasBeenOpen;               // Whether or not this session has ever been open.
 }
 
+@property dispatch_queue_t queue;
+@property dispatch_group_t criticalGroup;
 @property BOOL isSessionOpen;
 @property BOOL hasInitialized;		
 @property float backgroundSessionTimeout;
@@ -112,7 +116,7 @@
  opted out is if setOptIn(false) has been called before this.  This function should only be
  used to pre-populate a checkbox in an options menu.  It is not recommended that an application
  branch based on Localytics instrumentation because this creates an additional test case.  If
- the app is opted out, all localytics calls will return immediately.
+ the app is opted out, all subsequent Localytics calls will return immediately.
  @result true if the user is opted in, false otherwise.
  */
 - (BOOL)isOptedIn;
@@ -196,5 +200,17 @@
  will just get uploaded the next time the app comes up.
  */
 - (void)upload;
+
+/*!
+ @method setCustomDimension
+ @abstract (ENTERPRISE ONLY) Sets the value of a custom dimension. Custom dimensions are dimensions
+ which contain user defined data unlike the predefined dimensions such as carrier, model, and country.
+ Once a value for a custom dimension is set, the device it was set on will continue to upload that value
+ until the value is changed. To clear a value pass nil as the value. 
+ The proper use of custom dimensions involves defining a dimension with less than ten distinct possible
+ values and assigning it to one of the four available custom dimensions. Once assigned this definition should
+ never be changed without changing the App Key otherwise old installs of the application will pollute new data.
+ */
+- (void)setCustomDimension:(int)dimension value:(NSString *)value;
 
 @end

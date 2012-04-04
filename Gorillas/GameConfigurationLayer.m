@@ -25,7 +25,7 @@
 #import "GameConfigurationLayer.h"
 #import "GorillasAppDelegate.h"
 #import "CityTheme.h"
-#import "StringUtils.h"
+#import "PearlStringUtils.h"
 
 
 @implementation GameConfigurationLayer
@@ -42,7 +42,7 @@
                   nil]))
         return self;
         
-    self.layout = MenuLayoutColumns;
+    self.layout = PearlCCMenuLayoutColumns;
     
     return self;
 }

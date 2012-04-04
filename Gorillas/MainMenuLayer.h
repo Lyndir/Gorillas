@@ -22,13 +22,13 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "Resettable.h"
+#import "PearlResettable.h"
 #import "GameConfiguration.h"
 #import "GMenuLayer.h"
 #import <GameKit/GameKit.h>
 
 
-@interface MainMenuLayer : GMenuLayer <Resettable, MenuDelegate, GKLeaderboardViewControllerDelegate> {
+@interface MainMenuLayer : GMenuLayer <PearlResettable, PearlCCMenuDelegate, GKLeaderboardViewControllerDelegate> {
     
 @private
     CCMenuItemToggle                                *configurationI;

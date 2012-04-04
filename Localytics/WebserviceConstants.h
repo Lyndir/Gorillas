@@ -44,6 +44,7 @@
 #define PARAM_APP_KEY               @"au"		// Localytics Application ID
 #define PARAM_DEVICE_UUID           @"du"		// Device UUID
 #define PARAM_DEVICE_UUID_HASHED    @"udid"     // Hashed version of the UUID
+#define PARAM_DEVICE_MAC            @"wmac"     // Hashed version of the device Mac
 #define PARAM_INSTALL_ID            @"iu"       // Install ID
 #define PARAM_JAILBROKEN            @"j"        // Jailbroken (boolean)
 #define PARAM_LIBRARY_VERSION       @"lv"		// Client Version

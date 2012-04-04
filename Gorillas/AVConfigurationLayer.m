@@ -41,14 +41,14 @@
                  nil]))
         return self;
         
-    self.layout = MenuLayoutColumns;
+    self.layout = PearlCCMenuLayoutColumns;
     
     return self;
 }
 
 -(void) onEnter {
     
-    [[self itemForConfig:@selector(vibrate)] setSelectedIndex:([[GorillasConfig get].vibration boolValue] && [DeviceUtils isIPhone])? 1: 0];
+    [[self itemForConfig:@selector(vibrate)] setSelectedIndex:([[GorillasConfig get].vibration boolValue] && [PearlDeviceUtils isIPhone])? 1: 0];
     
     [super onEnter];
 }

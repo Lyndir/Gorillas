@@ -22,7 +22,7 @@
 //  Copyright, lhunath (Maarten Billemont) 2008. All rights reserved.
 //
 
-#import "AbstractCocos2DAppDelegate.h"
+#import "PearlCocos2DAppDelegate.h"
 #import "GameLayer.h"
 #import "MainMenuLayer.h"
 #import "ConfigurationSectionLayer.h"
@@ -33,7 +33,7 @@
 #import "NetController.h"
 
 
-@interface GorillasAppDelegate : AbstractCocos2DAppDelegate {
+@interface GorillasAppDelegate : PearlCocos2DAppDelegate {
     
 @private
     GameLayer                                                       *_gameLayer;
