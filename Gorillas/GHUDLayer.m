@@ -28,7 +28,7 @@
 
 @interface GHUDLayer ()
 
-@property (nonatomic, readwrite, retain) CCSprite       *skillSprite;
+@property (nonatomic, readwrite, retain) CCLabelAtlas   *skillSprite;
 @property (nonatomic, readwrite, retain) CCLabelAtlas   *skillCount;
 @property (nonatomic, readwrite, retain) CCLayer        *livesLayer;
 @property (nonatomic, readwrite, retain) CCSprite       *infiniteLives;
@@ -50,7 +50,8 @@
         return self;
 
     // Score.
-    self.skillSprite = [CCSprite spriteWithFile:@"skill.png"];
+    self.skillSprite = [CCLabelAtlas labelWithString:@"Skill"
+                                         charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
     self.skillCount = [CCLabelAtlas labelWithString:@""
                                         charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
     [self.skillSprite setPosition:ccp(self.contentSize.width / 2, self.contentSize.height / 2)];

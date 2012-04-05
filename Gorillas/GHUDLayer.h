@@ -28,14 +28,14 @@
 @interface GHUDLayer : PearlCCHUDLayer {
 
 @private
-    CCSprite                                            *_skillSprite;
+    CCLabelAtlas                                        *_skillSprite;
     CCLabelAtlas                                        *_skillCount;
     CCLayer                                             *_livesLayer;
     CCSprite                                            *_infiniteLives;
     float                                               _throwSkill;
 }
 
-@property (nonatomic, readonly, retain) CCSprite        *skillSprite;
+@property (nonatomic, readonly, retain) CCLabelAtlas    *skillSprite;
 @property (nonatomic, readonly, retain) CCLabelAtlas    *skillCount;
 @property (nonatomic, readonly, retain) CCLayer         *livesLayer;
 @property (nonatomic, readonly, retain) CCSprite        *infiniteLives;
