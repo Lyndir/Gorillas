@@ -49,7 +49,7 @@
     
     self.aim        = CGPointZero;
     
-    aimSprite       = [[PearlCCBarSprite alloc] initWithHead:@"aim.head.png" body:@"aim.body.%d.png" withFrames:16 tail:@"aim.tail.png" animatedTargetting:YES];
+    aimSprite       = [[PearlCCBarSprite alloc] initWithHead:@"aim.head.png" body:@"aim.body.%02d.png" withFrames:16 tail:@"aim.tail.png" animatedTargetting:YES];
     aimSprite.textureSize = CGSizeMake(aimSprite.textureSize.width / 2, aimSprite.textureSize.height / 2);
     [self addChild:aimSprite z:2];
     
