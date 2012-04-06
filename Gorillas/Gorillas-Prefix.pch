@@ -134,7 +134,7 @@ typedef enum {
 /**
  * Cocos2D Configuration
  */
-#define CC_FONT_LABEL_SUPPORT   1
+#define CC_ENABLE_DEPRECATED    0
 
 /**
  * Pearl Configuration
