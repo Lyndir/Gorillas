@@ -31,7 +31,7 @@
     
     glPoint     *starVertices;
     GLuint      starVertexBuffer;
-    NSUInteger  starCount;
+    GLsizei  starCount;
 }
 
 

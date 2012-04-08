@@ -38,6 +38,7 @@
     starVertexBuffer    = 0;
     starCount           = -1;
     depth               = aDepth;
+    self.shaderProgram  = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColorSize];
     
     return self;
 }
@@ -55,21 +56,21 @@
 
 -(void) reset {
     
-    if (starCount == [[GorillasConfig get].starAmount unsignedIntValue])
+    if (starCount == [[GorillasConfig get].starAmount intValue])
         return;
 
     CGRect fieldPx      = CC_RECT_POINTS_TO_PIXELS([[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self]);
-    starCount           = [[GorillasConfig get].starAmount unsignedIntValue];
-    ccColor4B starColor = ccc4l([[GorillasConfig get].starColor longValue]);
+    starCount           = [[GorillasConfig get].starAmount intValue];
+    ccColor4B starColor = ccc4l([[GorillasConfig get].starColor unsignedLongValue]);
     starColor.r         *= depth;
     starColor.g         *= depth;
     starColor.b         *= depth;
     CGFloat starSize    = fmaxf(1.0f, maxStarSize * depth);
     
     free(starVertices);
-    starVertices = malloc(sizeof(glPoint) * starCount);
+    starVertices = malloc(sizeof(glPoint) * (unsigned)starCount);
     
-    for (NSUInteger s = 0; s < starCount; ++s) {
+    for (NSInteger s = 0; s < starCount; ++s) {
         starVertices[s].p   = ccp(PearlGameRandomFor(GorillasGameRandomStars) % (long) fieldPx.size.width + fieldPx.origin.x,
                                   PearlGameRandomFor(GorillasGameRandomStars) % (long) fieldPx.size.height + fieldPx.origin.y);
         starVertices[s].c   = starColor;
@@ -80,7 +81,7 @@
     glDeleteBuffers(1, &starVertexBuffer);
     glGenBuffers(1, &starVertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(glPoint) * starCount, starVertices, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, (signed)sizeof(glPoint) * starCount, starVertices, GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
@@ -90,7 +91,7 @@
     CGRect fieldPx      = CC_RECT_POINTS_TO_PIXELS([[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self]);
     NSInteger speed     = [[GorillasConfig get].starSpeed integerValue];
     
-    for (NSUInteger s = 0; s < starCount; ++s)
+    for (NSInteger s = 0; s < starCount; ++s)
         if (starVertices[s].p.x < fieldPx.origin.x)
             starVertices[s].p.x = fieldPx.size.width + fieldPx.origin.x
                                 - ((int)(10000 * speed * dt) % PearlGameRandomFor(GorillasGameRandomStars)) / 10000.0f;
@@ -98,34 +99,45 @@
             starVertices[s].p.x -= dt * speed;
 
     glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(glPoint) * starCount, starVertices, GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, (signed)sizeof(glPoint) * starCount, starVertices, GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 
 -(void) draw {
-    
-	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-    //glEnableClientState(GL_COLOR_ARRAY);
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
-    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	glDisable(GL_TEXTURE_2D);
+
+    [super draw];
+
+    CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"StarLayer - draw");
+   	CC_NODE_DRAW_SETUP();
+
+//	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+//    //glEnableClientState(GL_COLOR_ARRAY);
+//    //glEnableClientState(GL_VERTEX_ARRAY);
+//    glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
+//    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+//	glDisable(GL_TEXTURE_2D);
+    ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color);
 
     // Stars.
     glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
-    glVertexPointer(2, GL_FLOAT, sizeof(glPoint), 0);
-    glPointSizePointerOES(GL_FLOAT, sizeof(glPoint), (GLvoid *) sizeof(CGPoint));
-    glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(glPoint), (GLvoid *) (sizeof(CGPoint) + sizeof(GLfloat)));
-    
+    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, p));
+    glVertexAttribPointer(kCCVertexAttrib_Size, 1, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, s));
+//    glPointSizePointerOES(GL_FLOAT, sizeof(glPoint), (GLvoid *) sizeof(CGPoint));
+    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, c));
+
     glDrawArrays(GL_POINTS, 0, starCount);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    //glDisableClientState(GL_VERTEX_ARRAY);
-    //glDisableClientState(GL_COLOR_ARRAY);
-    glDisableClientState(GL_POINT_SIZE_ARRAY_OES);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glEnable(GL_TEXTURE_2D);
+//    //glDisableClientState(GL_VERTEX_ARRAY);
+//    //glDisableClientState(GL_COLOR_ARRAY);
+//    glDisableClientState(GL_POINT_SIZE_ARRAY_OES);
+//    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+//    glEnable(GL_TEXTURE_2D);
+
+    CHECK_GL_ERROR_DEBUG();
+    CC_INCREMENT_GL_DRAWS(1);
+   	CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"StarLayer - draw");
 }
 
 

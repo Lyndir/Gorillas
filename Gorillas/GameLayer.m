@@ -63,7 +63,7 @@
             return NO;
     }
     
-    return mode & feature;
+    return mode & feature? YES: NO;
 }
 
 
@@ -256,7 +256,7 @@
             }
             
             if (considderMiss) {
-                int64_t scoreDelta = [[GorillasConfig get].level floatValue] * [[GorillasConfig get].missScore intValue];
+                int64_t scoreDelta = (int64_t) ([[GorillasConfig get].level floatValue] * [[GorillasConfig get].missScore intValue]);
                 
                 if(scoreDelta) {
                     [[GorillasConfig get] recordScoreDelta:scoreDelta forMode:mode];
@@ -511,8 +511,7 @@
     
     [self setPausedSilently:YES];
     
-    if ([[GorillasConfig get].visualFx boolValue])
-        [self schedule:@selector(updateWeather:) interval:1];
+    [self schedule:@selector(updateWeather:) interval:1];
     [self schedule:@selector(randomEncounter:) interval:1];
 }
 
@@ -526,11 +525,6 @@
 
 
 -(void) updateWeather:(ccTime)dt {
-    
-    if (![[GorillasConfig get].visualFx boolValue] && backWeather.active) {
-        [backWeather stopSystem];
-        [frontWeather stopSystem];
-    }
     
     if (!backWeather.emissionRate) {
         // If not emitting ..
@@ -557,7 +551,7 @@
             
             CGRect field = [cityLayer fieldInSpaceOf:panningLayer];
             
-            if ([[GorillasConfig get].visualFx boolValue] && PearlGameRandomFor(GorillasGameRandomWeather) % 100 == 0) {
+            if (PearlGameRandomFor(GorillasGameRandomWeather) % 100 == 0) {
                 // 1% chance to start snow/rain when weather is enabled.
                 
                 switch (PearlGameRandomFor(GorillasGameRandomWeather) % 2) {

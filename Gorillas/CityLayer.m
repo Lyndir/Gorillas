@@ -68,9 +68,10 @@
 
     holes           = nil;
     explosions      = nil;
-    
+
     // Must reset before entering the scene; others' onEnter depends on us being done.
     buildings = nil;
+    buildingsCount = 4;
     [self addChild:nonParallaxLayer = [[CCLayer alloc] init] z:1 parallaxRatio:ccp(1.0f, 1.0f) positionOffset:CGPointZero];
     [self reset];
     
@@ -110,7 +111,6 @@
     [nonParallaxLayer addChild:holes z:-1];
     explosions = [[ExplosionsLayer alloc] init];
     [nonParallaxLayer addChild:explosions z:4];
-    buildingsCount = [[GorillasConfig get].visualFx boolValue]? 4: 1;
     buildings = malloc(sizeof(BuildingsLayer*) * buildingsCount);
     for (NSUInteger b = 0; b < buildingsCount; ++b) {
         float lightRatio = -(b / 4.0f);
@@ -119,7 +119,7 @@
         
         buildings[b] = [[BuildingsLayer alloc] initWithWidthRatio:(5 - b) / 5.0f heightRatio:1 + (b / 2.0f) lightRatio:lightRatio];
         if (b)
-            [self addChild:buildings[b] z:-2-b parallaxRatio:ccp((5 - b) / 5.0f, (10 - b) / 10.0f) positionOffset:CGPointZero];
+            [self addChild:buildings[b] z:-2 - (NSInteger)b parallaxRatio:ccp((5 - b) / 5.0f, (10 - b) / 10.0f) positionOffset:CGPointZero];
         else
             [nonParallaxLayer addChild:buildings[b] z:1];
     }
@@ -179,6 +179,11 @@
 
 -(void) draw {
 
+    [super draw];
+
+    CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"CityLayer - draw");
+   	CC_NODE_DRAW_SETUP();
+
     CGPoint winSizePx = ccpFromSize([CCDirector sharedDirector].winSizeInPixels);
     
 #if DEBUG_COLLISION
@@ -223,10 +228,17 @@
             CGPoint fromPx = ccpMult(gorilla.position, CC_CONTENT_SCALE_FACTOR()); /* pt to px */;
             CGPoint toPx   = ccpAdd(fromPx, ccpCompMult(throwHistory[i], winSizePx));
             
-            if(!CGPointEqualToPoint(toPx, CGPointZero))
-                DrawLinesTo(fromPx, &toPx, 1, ccc4l([[GorillasConfig get].windowColorOff longValue] & 0xffffff33), 3);
+            if(!CGPointEqualToPoint(toPx, CGPointZero)) {
+                ccColor4B color = ccc4l([[GorillasConfig get].windowColorOff unsignedLongValue] & 0xffffff33UL);
+                ccDrawColor4F(color.r, color.g, color.b, color.a);
+                ccDrawLine(fromPx, toPx); // make 3 wide
+            }
         }
     }
+
+    CHECK_GL_ERROR_DEBUG();
+    CC_INCREMENT_GL_DRAWS(1);
+   	CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"CityLayer - draw");
 }
 
 
@@ -333,7 +345,7 @@
         }
 
         // Pick a random target from the enemies.
-        GorillaLayer *target = [enemies objectAtIndex:PearlGameRandom() % [enemies count]];
+        GorillaLayer *target = [enemies objectAtIndex:(unsigned)PearlGameRandom() % [enemies count]];
         [enemies release];
         
         // Aim at the target.
@@ -405,7 +417,7 @@
     ccTime t = 5 * 100 / g;
 
     // Level-based error.
-    NSUInteger rtError = (NSUInteger) ((1 - l) * [CCDirector sharedDirector].winSize.width / 2);
+    NSInteger rtError = (NSInteger)((1 - l) * [CCDirector sharedDirector].winSize.width / 2);
     rt = ccp(rt.x + PearlGameRandom() % rtError - rtError / 2, rt.y + PearlGameRandom() % rtError - rtError / 2);
     t = (PearlGameRandom() % (int) ((t / 2) * l * 10)) / 10.0f + (t / 2);
 
@@ -520,11 +532,11 @@
         return;
     }
 
-    NSInteger minSpace  = ((delta / [gorillas count]) /* share per gorilla */ - 1) /* gorilla's building */ / 2 /* padding on each side */;
+    NSUInteger minSpace  = ((delta / [gorillas count]) /* share per gorilla */ - 1) /* gorilla's building */ / 2 /* padding on each side */;
     NSMutableArray *gorillasQueue = [gorillas mutableCopy];
     NSMutableArray *gorillaIndexes = [[NSMutableArray alloc] initWithCapacity: [gorillas count]];
     while ([gorillasQueue count]) {
-        NSUInteger index = indexA + PearlGameRandom() % (delta + 1);
+        NSUInteger index = indexA + (unsigned)PearlGameRandom() % (delta + 1);
         BOOL validIndex = YES;
         
         // Make sure gorillas aren't too close to the edge.
@@ -533,7 +545,7 @@
 
         // Make sure gorillas aren't too close together.
         for (NSNumber *gorillasIndex in gorillaIndexes)
-            if (abs([gorillasIndex unsignedIntegerValue] - index) <= minSpace) {
+            if (ABS([gorillasIndex unsignedIntegerValue] - index) <= minSpace) {
                 validIndex = NO;
                 break;
             }

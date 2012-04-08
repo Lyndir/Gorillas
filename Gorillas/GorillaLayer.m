@@ -120,8 +120,8 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     }
     
     _healthColors    = malloc(sizeof(ccColor4B) * 4);
-    _healthColors[0] = _healthColors[1] = ccc4l(0xFF33CC33);
-    _healthColors[2] = _healthColors[3] = ccc4l(0xFF3333CC);
+    _healthColors[0] = _healthColors[1] = ccc4l(0xFF33CC33L);
+    _healthColors[2] = _healthColors[3] = ccc4l(0xFF3333CCL);
     
     return self;
 }
@@ -430,8 +430,11 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
 
 
 -(void) draw {
-    
+
     [super draw];
+
+    CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"GorillaLayer - draw");
+   	CC_NODE_DRAW_SETUP();
     
     if(self.lives <= 0)
         return;
@@ -442,9 +445,11 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     if(!self.human && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesAi])
         return;
     
-    const CGFloat barX = self.contentSizeInPixels.width     * -0.2f;
-    const CGFloat barY = self.contentSizeInPixels.height    * 1.2f;
-    const CGFloat barW = self.contentSizeInPixels.width     * 1.4f;
+    CGSize size = CC_SIZE_POINTS_TO_PIXELS(self.contentSize);
+    
+    const CGFloat barX = size.width     * -0.2f;
+    const CGFloat barY = size.height    * 1.2f;
+    const CGFloat barW = size.width     * 1.4f;
     const CGPoint lines[4] = {
         ccp(barX, barY),
         ccp(barX + barW * self.lives / self.initialLives, barY),
@@ -453,20 +458,33 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     };
     const GLubyte o = self.active? 0xFF: 0x66;
     
-    if ([[GorillasConfig get].visualFx boolValue]) {
-        DrawBoxFrom(ccpAdd(lines[0], ccp(0, self.contentSizeInPixels.height * -0.1f)),
-                    ccpAdd(lines[1], ccp(0, self.contentSizeInPixels.height * 0.1f)),
-                    ccc4l(0xCCFFCC00 | o), ccc4l(0x33CC3300 | o));
-        DrawBoxFrom(ccpAdd(lines[2], ccp(0, self.contentSizeInPixels.height * -0.1f)),
-                    ccpAdd(lines[3], ccp(0, self.contentSizeInPixels.height * 0.1f)),
-                    ccc4l(0xFFCCCC00 | o), ccc4l(0xCC333300 | o));
-    }
-    else
-        DrawLines(lines, _healthColors, 4, 6);
+        CGPoint from = ccpAdd(lines[0], ccp(0, size.height * -0.1f));
+        CGPoint to = ccpAdd(lines[1], ccp(0, size.height * 0.1f));
+        Vertex remainingHealthVertices[4] = {
+            { .p = { from.x, from.y }, .c = ccc4l(0xCCFFCC00 | o) },
+            { .p = { to.x, from.y }, .c = ccc4l(0xCCFFCC00 | o) },
+            { .p = { from.x, to.y }, .c = ccc4l(0x33CC3300 | o) },
+            { .p = { to.x, to.y }, .c = ccc4l(0x33CC3300 | o) },
+        };
+        PearlGLDraw(GL_TRIANGLE_STRIP, remainingHealthVertices, 4);
+
+        from = ccpAdd(lines[2], ccp(0, size.height * -0.1f));
+        to = ccpAdd(lines[3], ccp(0, size.height * 0.1f));
+        Vertex depletedHealthVertices[4] = {
+            { .p = { from.x, from.y }, .c = ccc4l(0xFFCCCC00 | o) },
+            { .p = { to.x, from.y }, .c = ccc4l(0xFFCCCC00 | o) },
+            { .p = { from.x, to.y }, .c = ccc4l(0xCC333300 | o) },
+            { .p = { to.x, to.y }, .c = ccc4l(0xCC333300 | o) },
+        };
+        PearlGLDraw(GL_TRIANGLE_STRIP, depletedHealthVertices, 4);
     
-    DrawBorderFrom(ccpAdd(lines[0], ccp(0, self.contentSizeInPixels.height * -0.1f)),
-                   ccpAdd(lines[3], ccp(0, self.contentSizeInPixels.height * 0.1f)),
-                   ccc4l(0xCCCC3300 | (o - 0x33)), 1);
+    PearlGLDrawBorderFrom(ccpAdd(lines[0], ccp(0, size.height * -0.1f)),
+                   ccpAdd(lines[3], ccp(0, size.height * 0.1f)),
+                   ccc4l(0xCCCC3300 | (o - 0x33)));
+
+    CHECK_GL_ERROR_DEBUG();
+    CC_INCREMENT_GL_DRAWS(1);
+   	CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"GorillaLayer - draw");
 }
 
 

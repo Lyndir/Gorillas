@@ -37,22 +37,22 @@ static NSDictionary *themes = nil;
 
 
 +(CityTheme *) themeWithVarFloors:(NSUInteger) nVarFloors
-                      fixedFloors: (NSUInteger) nFixedFloors
-                   buildingAmount: (NSUInteger) nBuildingAmount
-                   buildingColors: (NSArray *) nBuildingColors
+                      fixedFloors:(NSUInteger) nFixedFloors
+                   buildingAmount:(NSUInteger) nBuildingAmount
+                   buildingColors:(NSArray *) nBuildingColors
 
-                     windowAmount: (NSUInteger) nWindowAmount
-                    windowColorOn: (long) nWindowColorOn
-                   windowColorOff: (long) nWindowColorOff
+                     windowAmount:(NSUInteger) nWindowAmount
+                    windowColorOn:(unsigned long) nWindowColorOn
+                   windowColorOff:(unsigned long) nWindowColorOff
 
-                         skyColor: (long) nSkyColor
-                        starColor: (long) nStarColor
-                       starAmount: (NSUInteger) nStarAmount
+                         skyColor:(unsigned long) nSkyColor
+                        starColor:(unsigned long) nStarColor
+                       starAmount:(NSUInteger) nStarAmount
 
-                     windModifier: (float) nWindModifier
-                          gravity: (NSUInteger) nGravity {
+                     windModifier:(float) nWindModifier
+                          gravity:(NSUInteger) nGravity {
     
-    return [[[CityTheme alloc] initWithVarFloors:(NSUInteger) nVarFloors
+    return [[[CityTheme alloc] initWithVarFloors:(NSUInteger)nVarFloors
                                      fixedFloors:nFixedFloors
                                   buildingAmount:nBuildingAmount
                                   buildingColors:nBuildingColors
@@ -72,11 +72,11 @@ static NSDictionary *themes = nil;
          buildingColors:(NSArray *) nBuildingColors
 
            windowAmount:(NSUInteger) nWindowAmount
-          windowColorOn:(long) nWindowColorOn
-         windowColorOff:(long) nWindowColorOff
+          windowColorOn:(unsigned long) nWindowColorOn
+         windowColorOff:(unsigned long) nWindowColorOff
 
-               skyColor:(long) nSkyColor
-              starColor:(long) nStarColor
+               skyColor:(unsigned long) nSkyColor
+              starColor:(unsigned long) nStarColor
              starAmount:(NSUInteger) nStarAmount
 
            windModifier:(float) nWindModifier
@@ -115,11 +115,11 @@ static NSDictionary *themes = nil;
     config.buildingColors = buildingColors;
     
     config.windowAmount = [NSNumber numberWithUnsignedInt:windowAmount];
-    config.windowColorOn = [NSNumber numberWithLong:windowColorOn];
-    config.windowColorOff = [NSNumber numberWithLong:windowColorOff];
+    config.windowColorOn = [NSNumber numberWithUnsignedLong:windowColorOn];
+    config.windowColorOff = [NSNumber numberWithUnsignedLong:windowColorOff];
     
-    config.skyColor = [NSNumber numberWithLong:skyColor];
-    config.starColor = [NSNumber numberWithLong:starColor];
+    config.skyColor = [NSNumber numberWithUnsignedLong:skyColor];
+    config.starColor = [NSNumber numberWithUnsignedLong:starColor];
     config.starAmount = [NSNumber numberWithUnsignedInt:starAmount];
     
     config.windModifier = [NSNumber numberWithFloat:windModifier];
@@ -138,17 +138,17 @@ static NSDictionary *themes = nil;
                                     fixedFloors:4
                                  buildingAmount:10
                                  buildingColors:[NSArray arrayWithObjects:
-                                                 [NSNumber numberWithLong:0xb70000ff],
-                                                 [NSNumber numberWithLong:0x00b7b7ff],
-                                                 [NSNumber numberWithLong:0xb7b7b7ff],
+                                                 [NSNumber numberWithUnsignedLong:0xb70000ffUL],
+                                                 [NSNumber numberWithUnsignedLong:0x00b7b7ffUL],
+                                                 [NSNumber numberWithUnsignedLong:0xb7b7b7ffUL],
                                                  nil]
                    
                                    windowAmount:6
-                                  windowColorOn:0xffffb7ff
-                                 windowColorOff:0x676767ff
+                                  windowColorOn:0xffffb7ffUL
+                                 windowColorOff:0x676767ffUL
                    
-                                       skyColor:0x0000b7ff
-                                      starColor:0xb7b700ff
+                                       skyColor:0x0000b7ffUL
+                                      starColor:0xb7b700ffUL
                                      starAmount:50
                    
                                    windModifier:20
@@ -159,17 +159,17 @@ static NSDictionary *themes = nil;
                                     fixedFloors:4
                                  buildingAmount:12
                                  buildingColors:[NSArray arrayWithObjects:
-                                                 [NSNumber numberWithLong:0x6EA665ff],
-                                                 [NSNumber numberWithLong:0xD9961Aff],
-                                                 [NSNumber numberWithLong:0x1DB6F2ff],
+                                                 [NSNumber numberWithUnsignedLong:0x6EA665ffUL],
+                                                 [NSNumber numberWithUnsignedLong:0xD9961AffUL],
+                                                 [NSNumber numberWithUnsignedLong:0x1DB6F2ffUL],
                                                  nil]
                    
                                    windowAmount:6
-                                  windowColorOn:0xF2D129ff
-                                 windowColorOff:0xD98723ff
+                                  windowColorOn:0xF2D129ffUL
+                                 windowColorOff:0xD98723ffUL
                    
-                                       skyColor:0x1E3615ff
-                                      starColor:0xF2D129ff
+                                       skyColor:0x1E3615ffUL
+                                      starColor:0xF2D129ffUL
                                      starAmount:150
                    
                                    windModifier:30
@@ -180,17 +180,17 @@ static NSDictionary *themes = nil;
                                     fixedFloors:6
                                  buildingAmount:14
                                  buildingColors:[NSArray arrayWithObjects:
-                                                 [NSNumber numberWithLong:0x1B1F1Eff],
-                                                 [NSNumber numberWithLong:0xCFB370ff],
-                                                 [NSNumber numberWithLong:0xC4C7BCff],
+                                                 [NSNumber numberWithUnsignedLong:0x1B1F1EffUL],
+                                                 [NSNumber numberWithUnsignedLong:0xCFB370ffUL],
+                                                 [NSNumber numberWithUnsignedLong:0xC4C7BCffUL],
                                                  nil]
                    
                                    windowAmount:6
-                                  windowColorOn:0xFFF1BFff
-                                 windowColorOff:0x39464Aff
+                                  windowColorOn:0xFFF1BFffUL
+                                 windowColorOff:0x39464AffUL
                    
-                                       skyColor:0x0B0F0Eff
-                                      starColor:0xFFF1BFff
+                                       skyColor:0x0B0F0EffUL
+                                      starColor:0xFFF1BFffUL
                                      starAmount:250
                    
                                    windModifier:10
@@ -201,17 +201,17 @@ static NSDictionary *themes = nil;
                                     fixedFloors:7
                                  buildingAmount:20
                                  buildingColors:[NSArray arrayWithObjects:
-                                                 [NSNumber numberWithLong:0xb70000ff],
-                                                 [NSNumber numberWithLong:0x00b7b7ff],
-                                                 [NSNumber numberWithLong:0xb7b7b7ff],
+                                                 [NSNumber numberWithUnsignedLong:0xb70000ffUL],
+                                                 [NSNumber numberWithUnsignedLong:0x00b7b7ffUL],
+                                                 [NSNumber numberWithUnsignedLong:0xb7b7b7ffUL],
                                                  nil]
                    
                                    windowAmount:6
-                                  windowColorOn:0xffffb7ff
-                                 windowColorOff:0x676767ff
+                                  windowColorOn:0xffffb7ffUL
+                                 windowColorOff:0x676767ffUL
                    
-                                       skyColor:0x0000b7ff
-                                      starColor:0xb7b700ff
+                                       skyColor:0x0000b7ffUL
+                                      starColor:0xb7b700ffUL
                                      starAmount:150
                    
                                    windModifier:40
@@ -222,17 +222,17 @@ static NSDictionary *themes = nil;
                                     fixedFloors:3
                                  buildingAmount:10
                                  buildingColors:[NSArray arrayWithObjects:
-                                                 [NSNumber numberWithLong:0x465902ff],
-                                                 [NSNumber numberWithLong:0xA9BF04ff],
-                                                 [NSNumber numberWithLong:0xF29F05ff],
+                                                 [NSNumber numberWithUnsignedLong:0x465902ffUL],
+                                                 [NSNumber numberWithUnsignedLong:0xA9BF04ffUL],
+                                                 [NSNumber numberWithUnsignedLong:0xF29F05ffUL],
                                                  nil]
                    
                                    windowAmount:6
-                                  windowColorOn:0xF2E3B3ff
-                                 windowColorOff:0xBF4904ff
+                                  windowColorOn:0xF2E3B3ffUL
+                                 windowColorOff:0xBF4904ffUL
                    
-                                       skyColor:0x021343ff
-                                      starColor:0xF2E3B3ff
+                                       skyColor:0x021343ffUL
+                                      starColor:0xF2E3B3ffUL
                                      starAmount:100
                    
                                    windModifier:15

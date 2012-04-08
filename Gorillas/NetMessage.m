@@ -63,7 +63,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     
-    [aCoder encodeInteger:self.vote forKey:@"vote"];
+    [aCoder encodeInteger:(signed)self.vote forKey:@"vote"];
 }
 
 - (void)addVote:(NetMessageElectHost *)aVoteMessage fromPlayer:(NSString *)aPlayerID {

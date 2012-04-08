@@ -46,6 +46,12 @@
 	<true/>
 	<key>NSHumanReadableCopyright</key>
 	<string>© 2009, Maarten Billemont</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>AppleGothic.ttf</string>
+		<string>Bilbao-Poster-Black.ttf</string>
+		<string>Apple Symbols.ttf</string>
+	</array>
 	<key>UIApplicationExitsOnSuspend</key>
 	<true/>
 	<key>UIInterfaceOrientation</key>

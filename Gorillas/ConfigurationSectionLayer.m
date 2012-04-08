@@ -41,11 +41,11 @@
 -(id) init {
 
     if (!(self = [super initWithDelegate:self logo:nil items:
-                  [CCMenuItemFont itemFromString:l(@"menu.gameplay")
+                  [CCMenuItemFont itemWithString:l(@"menu.gameplay")
                                           target:self selector:@selector(game:)],
-                  [CCMenuItemFont itemFromString:l(@"menu.av")
+                  [CCMenuItemFont itemWithString:l(@"menu.av")
                                           target:self selector:@selector(av:)],
-                  [CCMenuItemFont itemFromString:l(@"menu.models")
+                  [CCMenuItemFont itemWithString:l(@"menu.models")
                                           target:self selector:@selector(models:)],
                   nil]))
         return nil;

@@ -110,7 +110,7 @@ static float flameRadius;
 
     [[GorillasAppDelegate get].gameLayer shake];
     
-    int explosionParticles = PearlGameRandomFor(GorillasGameRandomExplosions) % 50 + 300;
+    NSUInteger explosionParticles = (NSUInteger)(PearlGameRandomFor(GorillasGameRandomExplosions) % 50 + 300);
     if(heavy)
         explosionParticles += 400;
     
@@ -140,22 +140,34 @@ static float flameRadius;
 
 -(void) draw {
 
+    CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"ExplosionsLayer - draw");
+   	CC_NODE_DRAW_SETUP();
+
     if(positionsPx) {
         NSUInteger f = 0;
         CGPoint prevFlamePos = CGPointZero;
         for(CCParticleSystem *flame in flames) {
             CGPoint translatePx = ccpSub(positionsPx[f], prevFlamePos);
             prevFlamePos = positionsPx[f];
-            
-            glTranslatef(translatePx.x, translatePx.y, 0);
+
+            kmGLMatrixMode(KM_GL_MODELVIEW);
+            kmGLTranslatef(translatePx.x, translatePx.y, 0);
+            ccSetProjectionMatrixDirty();
+
             [flame draw];
             
             ++f;
         }
-        glTranslatef(-prevFlamePos.x, -prevFlamePos.y, 0);
+        kmGLMatrixMode(KM_GL_MODELVIEW);
+        kmGLTranslatef(-prevFlamePos.x, -prevFlamePos.y, 0);
+        ccSetProjectionMatrixDirty();
     }
-    
+
     [super draw];
+
+    CHECK_GL_ERROR_DEBUG();
+    CC_INCREMENT_GL_DRAWS(1);
+   	CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"ExplosionsLayer - draw");
 }
 
 
@@ -182,7 +194,7 @@ static float flameRadius;
     BOOL hitsGorilla    = [explosion tag] & GorillasExplosionHitGorilla;
     BOOL heavy          = [explosion tag] & GorillasExplosionHeavy;
     
-    if(!hitsGorilla && [GorillasConfig get].visualFx) {
+    if(!hitsGorilla) {
         CCParticleSystem *flame = [self flameWithRadius:[self size] / 2 heavy:heavy];
 
         positionsPx = realloc(positionsPx, sizeof(CGPoint) * (flames.count + 1));
@@ -212,7 +224,7 @@ static float flameRadius;
         
         for (NSUInteger type = 0; type < flameVariantion * 2; ++type) {
             BOOL typeIsHeavy = !(type < flameVariantion);
-            int flameParticles = typeIsHeavy? 80: 60;
+            NSUInteger flameParticles = typeIsHeavy? 80: 60;
             
             CCParticleSystem *flame   = [[CCParticleFire alloc] initWithTotalParticles:flameParticles];
             
@@ -243,20 +255,20 @@ static float flameRadius;
 
 +(SystemSoundID) explosionEffect: (BOOL)heavy {
     
-    static NSUInteger lastEffect = -1;
-    static NSUInteger explosionEffects = 0;
+    static NSInteger lastEffect = -1;
+    static NSInteger explosionEffects = 0;
     static SystemSoundID* explosionEffect = nil;
     
     if(explosionEffect == nil) {
         explosionEffects = 4;
-        explosionEffect = malloc(sizeof(SystemSoundID) * explosionEffects);
+        explosionEffect = malloc(sizeof(SystemSoundID) * (unsigned)explosionEffects);
         
-        for(NSUInteger i = 0; i < explosionEffects; ++i)
+        for(NSInteger i = 0; i < explosionEffects; ++i)
             explosionEffect[i] = [GorillasAudioController loadEffectWithName:[NSString stringWithFormat:@"explosion%d.caf", i]];
     }
 
     // Pick a random effect.
-    NSUInteger chosenEffect;
+    NSInteger chosenEffect;
     if(heavy) 
         // Effect 0 is reserved for heavy explosions.
         chosenEffect = 0;

@@ -62,10 +62,10 @@
 
 -(void) update: (ccTime) dt {
     
-    [(id<CCRGBAProtocol>)self.target setColor:ccc3((int)(startCol.r * (1-dt) + endCol.r * dt),
-                                                   (int)(startCol.g * (1-dt) + endCol.g * dt),
-                                                   (int)(startCol.b * (1-dt) + endCol.b * dt))];
-    [(id<CCRGBAProtocol>)self.target setOpacity:(int)(startCol.a * (1-dt) + endCol.a * dt)];
+    [(id<CCRGBAProtocol>)self.target setColor:ccc3((GLubyte)(startCol.r * (1-dt) + endCol.r * dt),
+                                                   (GLubyte)(startCol.g * (1-dt) + endCol.g * dt),
+                                                   (GLubyte)(startCol.b * (1-dt) + endCol.b * dt))];
+    [(id<CCRGBAProtocol>)self.target setOpacity:(GLubyte)(startCol.a * (1-dt) + endCol.a * dt)];
 }
 
 

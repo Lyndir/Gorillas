@@ -158,6 +158,11 @@
 
 /*-(void) draw {
 
+    [super draw];
+
+    CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"WindLayer - draw");
+   	CC_NODE_DRAW_SETUP();
+
     float windRange = (5 * [[GorillasConfig get] windModifier]);
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     
@@ -171,6 +176,10 @@
         prev = ccpAdd(prev, ccp((wind < 0? -1: 1) * 3,      +3    )),
     };
     drawLinesTo(from, by, 4, color, 2);
+
+    CHECK_GL_ERROR_DEBUG();
+    CC_INCREMENT_GL_DRAWS(1);
+   	CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"WindLayer - draw");
 }*/
 
 
