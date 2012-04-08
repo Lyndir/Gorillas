@@ -32,67 +32,75 @@
 
 
 -(id) init {
-    
+
     if (!(self = [super init]))
 		return self;
-    
+
     stars = [[NSMutableArray alloc] init];
-    
+
     for (NSUInteger j = 0; j < 3; ++j) {
         float depth = j / 9.0f + 0.3f;
-        
+
         StarLayer *starLayer =  [[StarLayer alloc] initWidthDepth:j / 4.0f + 0.5f];
         [stars addObject: starLayer];
 
         [self addChild:starLayer z:1 parallaxRatio:ccp(depth, depth) positionOffset:ccp(self.contentSize.width / 2,
                                                                                         self.contentSize.height / 2)];
-        
+
         [starLayer release];
     }
-    
+
     return self;
 }
 
 
 - (void)onEnter {
-    
+
     [self reset];
-    
+
     [super onEnter];
 }
 
 
 -(void) reset {
 
-    skyColor = ccc4l([[GorillasConfig get].skyColor longValue]);
-    fancySky = [[GorillasConfig get].visualFx boolValue];
+    skyColor = ccc4l([[GorillasConfig get].skyColor unsignedLongValue]);
 
     CGRect field = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self];
     fromPx  = ccpMult(ccp(field.origin.x, field.origin.y), CC_CONTENT_SCALE_FACTOR());
     toPx    = ccpMult(ccp(field.origin.x + field.size.width, field.origin.y + field.size.height), CC_CONTENT_SCALE_FACTOR());
-    
+
     for(StarLayer *starLayer in stars)
         [starLayer reset];
 }
 
 
 -(void) draw {
-    
-    if(fancySky)
-        DrawBoxFrom(fromPx, toPx, skyColor, ccc4l(0x000000ff));
-    
-    else {
-        glClearColor(skyColor.r / (float)0xff, skyColor.g / (float)0xff, skyColor.b / (float)0xff, skyColor.a / (float)0xff);
-        glClear(GL_COLOR_BUFFER_BIT);
-    }
+
+    [super draw];
+
+    CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"SkyLayer - draw");
+   	CC_NODE_DRAW_SETUP();
+
+    Vertex vertices[4] = {
+            { .p = { fromPx.x, fromPx.y }, .c = skyColor },
+            { .p = { toPx.x, fromPx.y }, .c = skyColor },
+            { .p = { fromPx.x, toPx.y }, .c = ccc4l(0x000000ff) },
+            { .p = { toPx.x, toPx.y }, .c = ccc4l(0x000000ff) },
+    };
+    PearlGLDraw(GL_TRIANGLE_STRIP, vertices, 4);
+
+    CHECK_GL_ERROR_DEBUG();
+    CC_INCREMENT_GL_DRAWS(1);
+   	CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"SkyLayer - draw");
 }
 
 
 -(void) dealloc {
-    
+
     [stars release];
     stars = nil;
-    
+
     [super dealloc];
 }
 

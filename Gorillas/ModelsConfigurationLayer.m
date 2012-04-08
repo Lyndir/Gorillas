@@ -59,16 +59,16 @@
     
     // Controls.
     [CCMenuItemFont setFontSize:15];
-    modelNext = [[CCMenuItemFont itemFromString:@"                              "
+    modelNext = [[CCMenuItemFont itemWithString:@"                              "
                                        target:self selector:@selector(next:)] retain];
     [CCMenuItemFont setFontSize:26];
-    modelCurr = [[CCMenuItemFont itemFromString:@"                              "] retain];
+    modelCurr = [[CCMenuItemFont itemWithString:@"                              "] retain];
     [modelCurr setIsEnabled:NO];
     CCMenu *modelMenu = [CCMenu menuWithItems:modelCurr, modelNext, nil];
     [modelMenu alignItemsHorizontally];
     [modelMenu setPosition:ccp(modelMenu.position.x, self.contentSize.height - self.padding.top - 50)];
     [self addChild:modelMenu];
-    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize intValue]];
+    [CCMenuItemFont setFontSize:[[GorillasConfig get].fontSize unsignedIntValue]];
     
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     prevModelSprite = [[GorillaLayer alloc] initWithType:GorillasPlayerTypeHuman playerID:nil];
@@ -105,7 +105,7 @@
 
 -(void) swiped:(BOOL)forward {
     
-    model = (model + [modelSprites count] + (forward? 1: -1)) % [modelSprites count];
+    model = (model + [modelSprites count] + (forward? 1U: -1U)) % [modelSprites count];
     
     [self flipPage];
 }

@@ -72,7 +72,6 @@
     [self.target setTag:GorillasTagBananaFlying];
     
     [[GorillasAppDelegate get].gameLayer.windLayer registerSystem:self.smoke affectAngle:NO];
-    if ([[GorillasConfig get].visualFx boolValue]) {
         self.smoke.emissionRate = 30;
         self.smoke.startSize    = 15.0f * [(CCNode*)self.target scale];
         self.smoke.startSizeVar = 5.0f * [(CCNode*)self.target scale];
@@ -80,7 +79,6 @@
             [[self.target parent] addChild:self.smoke];
         else
             [self.smoke resetSystem];
-    }
 }
 
 
@@ -94,12 +92,9 @@
                                 horizontal:[[GorillasConfig get].followThrow boolValue]];
     
     // Update smoke.
-    if([[GorillasConfig get].visualFx boolValue]) {
         self.smoke.angle = atan2f(self.smoke.sourcePosition.y - [(CCNode*)self.target position].y,
                                   self.smoke.sourcePosition.x - [(CCNode*)self.target position].x) / (float)M_PI * 180.0f;
         self.smoke.sourcePosition = [(CCNode*)self.target position];
-    } else if(self.smoke.emissionRate)
-        self.smoke.emissionRate = 0;
     
     if(gameLayer.singlePlayer && gameLayer.activeGorilla.human)
         // Singleplayer game with human turn is still running; update the skill counter.

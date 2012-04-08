@@ -33,11 +33,11 @@
     NSArray                                         *buildingColors;
     
     NSUInteger                                      windowAmount;
-    long                                            windowColorOn;
-    long                                            windowColorOff;
+    unsigned long                                   windowColorOn;
+    unsigned long                                   windowColorOff;
     
-    long                                            skyColor;
-    long                                            starColor;
+    unsigned long                                   skyColor;
+    unsigned long                                   starColor;
     NSUInteger                                      starAmount;
     
     float                                           windModifier;
@@ -50,11 +50,11 @@
 @property (nonatomic, readonly, assign) NSArray     *buildingColors;
 
 @property (nonatomic, readonly) NSUInteger          windowAmount;
-@property (nonatomic, readonly) long                windowColorOn;
-@property (nonatomic, readonly) long                windowColorOff;
+@property (nonatomic, readonly) unsigned long       windowColorOn;
+@property (nonatomic, readonly) unsigned long       windowColorOff;
 
-@property (nonatomic, readonly) long                skyColor;
-@property (nonatomic, readonly) long                starColor;
+@property (nonatomic, readonly) unsigned long       skyColor;
+@property (nonatomic, readonly) unsigned long       starColor;
 @property (nonatomic, readonly) NSUInteger          starAmount;
 
 @property (nonatomic, readonly) float               windModifier;
@@ -68,11 +68,11 @@
                    buildingColors:(NSArray *) nBuildingColors
 
                      windowAmount:(NSUInteger) nWindowAmount
-                    windowColorOn:(long) nWindowColorOn
-                   windowColorOff:(long) nWindowColorOff
+                    windowColorOn:(unsigned long) nWindowColorOn
+                   windowColorOff:(unsigned long) nWindowColorOff
 
-                         skyColor:(long) nSkyColor
-                        starColor:(long) nStarColor
+                         skyColor:(unsigned long) nSkyColor
+                        starColor:(unsigned long) nStarColor
                        starAmount:(NSUInteger) nStarAmount
 
                      windModifier:(float) nWindModifier
@@ -83,11 +83,11 @@
          buildingColors:(NSArray *) nBuildingColors
 
            windowAmount:(NSUInteger) nWindowAmount
-          windowColorOn:(long) nWindowColorOn
-         windowColorOff:(long) nWindowColorOff
+          windowColorOn:(unsigned long) nWindowColorOn
+         windowColorOff:(unsigned long) nWindowColorOff
 
-               skyColor:(long) nSkyColor
-              starColor:(long) nStarColor
+               skyColor:(unsigned long) nSkyColor
+              starColor:(unsigned long) nStarColor
              starAmount:(NSUInteger) nStarAmount
 
            windModifier:(float) nWindModifier

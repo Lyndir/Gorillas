@@ -233,6 +233,14 @@
 		DA579B3A152DF884001BEF40 /* snapclick.caf in Resources */ = {isa = PBXBuildFile; fileRef = DA579B19152DF884001BEF40 /* snapclick.caf */; };
 		DA579B3B152DF884001BEF40 /* wheel.png in Resources */ = {isa = PBXBuildFile; fileRef = DA579B1A152DF884001BEF40 /* wheel.png */; };
 		DA579B3C152DF884001BEF40 /* wheel.png in Resources */ = {isa = PBXBuildFile; fileRef = DA579B1A152DF884001BEF40 /* wheel.png */; };
+		DA59654515320E3700EA071C /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = DA59654115320E3700EA071C /* fire.png */; };
+		DA59654615320E3700EA071C /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = DA59654115320E3700EA071C /* fire.png */; };
+		DA59654715320E3700EA071C /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA59654215320E3700EA071C /* fps_images-hd.png */; };
+		DA59654815320E3700EA071C /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA59654215320E3700EA071C /* fps_images-hd.png */; };
+		DA59654915320E3700EA071C /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA59654315320E3700EA071C /* fps_images-ipadhd.png */; };
+		DA59654A15320E3700EA071C /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA59654315320E3700EA071C /* fps_images-ipadhd.png */; };
+		DA59654B15320E3700EA071C /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = DA59654415320E3700EA071C /* fps_images.png */; };
+		DA59654C15320E3700EA071C /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = DA59654415320E3700EA071C /* fps_images.png */; };
 		DA61451613299376009DBC56 /* Bilbao-Poster-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA61451513299376009DBC56 /* Bilbao-Poster-Black.ttf */; };
 		DA61451713299376009DBC56 /* Bilbao-Poster-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA61451513299376009DBC56 /* Bilbao-Poster-Black.ttf */; };
 		DA61451F13299590009DBC56 /* AppleGothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA61451E13299590009DBC56 /* AppleGothic.ttf */; };
@@ -1086,6 +1094,10 @@
 		DA579B14152DF884001BEF40 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "Pearl-Cocos2D.strings"; sourceTree = "<group>"; };
 		DA579B19152DF884001BEF40 /* snapclick.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = snapclick.caf; sourceTree = "<group>"; };
 		DA579B1A152DF884001BEF40 /* wheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wheel.png; sourceTree = "<group>"; };
+		DA59654115320E3700EA071C /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fire.png; path = "External/Pearl/External/cocos2d-iphone/Resources/Images/fire.png"; sourceTree = SOURCE_ROOT; };
+		DA59654215320E3700EA071C /* fps_images-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-hd.png"; path = "External/Pearl/External/cocos2d-iphone/Resources/Fonts/fps_images-hd.png"; sourceTree = SOURCE_ROOT; };
+		DA59654315320E3700EA071C /* fps_images-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-ipadhd.png"; path = "External/Pearl/External/cocos2d-iphone/Resources/Fonts/fps_images-ipadhd.png"; sourceTree = SOURCE_ROOT; };
+		DA59654415320E3700EA071C /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = "External/Pearl/External/cocos2d-iphone/Resources/Fonts/fps_images.png"; sourceTree = SOURCE_ROOT; };
 		DA61451513299376009DBC56 /* Bilbao-Poster-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Bilbao-Poster-Black.ttf"; sourceTree = "<group>"; };
 		DA61451E13299590009DBC56 /* AppleGothic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleGothic.ttf; sourceTree = "<group>"; };
 		DA6C17CC0EC0F698006D43BD /* ExplosionsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplosionsLayer.h; sourceTree = "<group>"; };
@@ -1772,6 +1784,10 @@
 		DA5F1BD30EE74CE80041691E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DA59654115320E3700EA071C /* fire.png */,
+				DA59654215320E3700EA071C /* fps_images-hd.png */,
+				DA59654315320E3700EA071C /* fps_images-ipadhd.png */,
+				DA59654415320E3700EA071C /* fps_images.png */,
 				DABA306B152DFF6A00BE0D2A /* aim.body.00-hd.png */,
 				DABA306C152DFF6A00BE0D2A /* aim.body.00.png */,
 				DABA306D152DFF6A00BE0D2A /* aim.body.01-hd.png */,
@@ -2831,6 +2847,10 @@
 				DABA315E152DFF6B00BE0D2A /* menu-back.png in Resources */,
 				DABA3160152DFF6B00BE0D2A /* menu-main-hd.png in Resources */,
 				DABA3162152DFF6B00BE0D2A /* menu-main.png in Resources */,
+				DA59654515320E3700EA071C /* fire.png in Resources */,
+				DA59654715320E3700EA071C /* fps_images-hd.png in Resources */,
+				DA59654915320E3700EA071C /* fps_images-ipadhd.png in Resources */,
+				DA59654B15320E3700EA071C /* fps_images.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2963,6 +2983,10 @@
 				DABA315F152DFF6B00BE0D2A /* menu-back.png in Resources */,
 				DABA3161152DFF6B00BE0D2A /* menu-main-hd.png in Resources */,
 				DABA3163152DFF6B00BE0D2A /* menu-main.png in Resources */,
+				DA59654615320E3700EA071C /* fire.png in Resources */,
+				DA59654815320E3700EA071C /* fps_images-hd.png in Resources */,
+				DA59654A15320E3700EA071C /* fps_images-ipadhd.png in Resources */,
+				DA59654C15320E3700EA071C /* fps_images.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3316,10 +3340,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
@@ -3384,10 +3405,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
@@ -3577,10 +3595,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;

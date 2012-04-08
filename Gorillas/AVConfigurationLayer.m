@@ -36,7 +36,6 @@
                  @selector(music),
                  @selector(soundFx),
                  @selector(voice),
-                 @selector(visualFx),
                  @selector(vibrate),
                  nil]))
         return self;
@@ -61,8 +60,6 @@
         return l(@"menu.choose.fx.sound");
     if (setting == @selector(voice))
         return l(@"menu.choose.fx.voice");
-    if (setting == @selector(visualFx))
-        return l(@"menu.choose.fx.visual");
     if (setting == @selector(vibrate))
         return l(@"menu.choose.fx.vibration");
     

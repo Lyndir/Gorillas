@@ -89,8 +89,8 @@
     }
     
     // Toggle the visibility of the lives depending on how many are left.
-    for(int l = 1; l < (int)[[self.livesLayer children] count]; ++l)
-        [[[self.livesLayer children] objectAtIndex:l] setVisible:l - 1 < lives];
+    for(NSUInteger l = 1; l < [[self.livesLayer children] count]; ++l)
+        [[[self.livesLayer children] objectAtIndex:l] setVisible:(int)l - 1 < lives];
     [self.infiniteLives setVisible:lives < 0];
 
     // Put score on HUD.

@@ -50,7 +50,7 @@
 
 -(void) registerWithTouchDispatcher {
     
-    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:NO];
+    [[CCDirector sharedDirector].touchDispatcher addTargetedDelegate:self priority:0 swallowsTouches:NO];
 }
 
 

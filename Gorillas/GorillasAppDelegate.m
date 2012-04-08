@@ -34,14 +34,6 @@
 #import <Crashlytics/Crashlytics.h>
 
 
-static NSString *PHPlacementMoreGames  = @"more_games";
-
-@interface CCDirector (Reveal)
-
--(void) startAnimation;
-
-@end
-
 @interface GorillasAppDelegate ()
 
 @property (nonatomic, readwrite, retain) GameLayer                      *gameLayer;
@@ -83,8 +75,8 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     
     @try {
         [[LocalyticsSession sharedLocalyticsSession] startSession:[self localyticsKey]];
-        [[Logger get] registerListener:^BOOL(LogMessage *message) {
-            if (message.level >= LogLevelError)
+        [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
+            if (message.level >= PearlLogLevelError)
                 [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Problem" attributes:
                  [NSDictionary dictionaryWithObjectsAndKeys:
                   [message levelDescription],
@@ -115,7 +107,7 @@ static NSString *PHPlacementMoreGames  = @"more_games";
     [self.uiLayer addChild:self.gameLayer];
     
     // Show the splash screen, this starts the main loop in the current thread.
-    [[CCDirector sharedDirector] runWithScene:splashScene];
+    [[CCDirector sharedDirector] pushScene:splashScene];
     [self showMainMenu];
     
     // Game Center setup.
