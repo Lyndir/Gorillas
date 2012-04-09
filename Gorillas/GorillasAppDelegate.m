@@ -68,10 +68,14 @@
 }
 
 - (void)preSetup {
-    
+
+    dbg(@"Initializing TestFlight");
+    [TestFlight takeOff:[self testFlightToken]];
+    [TestFlight addCustomEnvironmentInformation:@"Anonymous" forKey:@"username"];
+
     dbg(@"Initializing Crashlytics");
     [Crashlytics sharedInstance].debugMode = YES;
-    [Crashlytics startWithAPIKey:@"aa135d981000035c047c01f297b02539d4faca71"];
+    [Crashlytics startWithAPIKey:@"aa135d981000035c047c01f297b02539d4faca71"]; // TODO: Make secret
     
     @try {
         [[LocalyticsSession sharedLocalyticsSession] startSession:[self localyticsKey]];
@@ -111,8 +115,6 @@
     [self showMainMenu];
     
     // Game Center setup.
-    [TestFlight takeOff:[self testFlightToken]];
-    [TestFlight addCustomEnvironmentInformation:@"Anonymous" forKey:@"username"];
     [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
         if (error)
             wrn(@"Game Center unavailable: %@", error);

@@ -281,6 +281,10 @@
 		DA925266132EDA6400488108 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA925265132EDA6400488108 /* Security.framework */; };
 		DA9BD564128B465E00B854A7 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9BD563128B465E00B854A7 /* GameKit.framework */; };
 		DA9BD580128B466D00B854A7 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9BD563128B465E00B854A7 /* GameKit.framework */; };
+		DA9ECAE81533090F00F38A88 /* PearlGLShaderPointSize_frag.h in Headers */ = {isa = PBXBuildFile; fileRef = DA9ECAE41533090F00F38A88 /* PearlGLShaderPointSize_frag.h */; };
+		DA9ECAE91533090F00F38A88 /* PearlGLShaderPointSize_vert.h in Headers */ = {isa = PBXBuildFile; fileRef = DA9ECAE51533090F00F38A88 /* PearlGLShaderPointSize_vert.h */; };
+		DA9ECAEA1533090F00F38A88 /* PearlGLShaderPointSprite_frag.h in Headers */ = {isa = PBXBuildFile; fileRef = DA9ECAE61533090F00F38A88 /* PearlGLShaderPointSprite_frag.h */; };
+		DA9ECAEB1533090F00F38A88 /* PearlGLShaderPointSprite_vert.h in Headers */ = {isa = PBXBuildFile; fileRef = DA9ECAE71533090F00F38A88 /* PearlGLShaderPointSprite_vert.h */; };
 		DAA0BE0A148D71B300E6C79C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA0BE09148D71B300E6C79C /* Crashlytics.framework */; };
 		DAA0BE0B148D71B400E6C79C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA0BE09148D71B300E6C79C /* Crashlytics.framework */; };
 		DAA120930FDD26F700AA1E28 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA120920FDD26F700AA1E28 /* AVFoundation.framework */; };
@@ -500,6 +504,8 @@
 		DAF4D8161280D8170012132B /* MovingTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF4D8131280D8170012132B /* MovingTo.m */; };
 		DAF4D8181280D8170012132B /* MovingTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF4D8131280D8170012132B /* MovingTo.m */; };
 		DAFEF9730ED847D40019F7E5 /* ThrowAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* ThrowAction.m */; };
+		DAFEF9730ED847D40019F7E7 /* PearlGLShaders.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9730ED847D40019F7E6 /* PearlGLShaders.m */; };
+		DAFEF9730ED847D40019F7E9 /* PearlGLShaders.h in Headers */ = {isa = PBXBuildFile; fileRef = DAFEF9730ED847D40019F7E8 /* PearlGLShaders.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1138,6 +1144,10 @@
 		DA8EB0DF13D0DBBB00BD4C00 /* InteractionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractionLayer.m; sourceTree = "<group>"; };
 		DA925265132EDA6400488108 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		DA9BD563128B465E00B854A7 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		DA9ECAE41533090F00F38A88 /* PearlGLShaderPointSize_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearlGLShaderPointSize_frag.h; sourceTree = "<group>"; };
+		DA9ECAE51533090F00F38A88 /* PearlGLShaderPointSize_vert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearlGLShaderPointSize_vert.h; sourceTree = "<group>"; };
+		DA9ECAE61533090F00F38A88 /* PearlGLShaderPointSprite_frag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearlGLShaderPointSprite_frag.h; sourceTree = "<group>"; };
+		DA9ECAE71533090F00F38A88 /* PearlGLShaderPointSprite_vert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearlGLShaderPointSprite_vert.h; sourceTree = "<group>"; };
 		DAA0BE09148D71B300E6C79C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		DAA120920FDD26F700AA1E28 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		DAB896DB0F480411005C1D06 /* PanningLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanningLayer.h; sourceTree = "<group>"; };
@@ -1257,6 +1267,8 @@
 		DAF4D8131280D8170012132B /* MovingTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingTo.m; sourceTree = "<group>"; };
 		DAFEF9710ED847D40019F7E5 /* ThrowAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThrowAction.h; sourceTree = "<group>"; };
 		DAFEF9720ED847D40019F7E5 /* ThrowAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThrowAction.m; sourceTree = "<group>"; };
+		DAFEF9730ED847D40019F7E6 /* PearlGLShaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PearlGLShaders.m; sourceTree = "<group>"; };
+		DAFEF9730ED847D40019F7E8 /* PearlGLShaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearlGLShaders.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1596,6 +1608,9 @@
 		DA5795C8152C7592001BEF40 /* Pearl-Cocos2D */ = {
 			isa = PBXGroup;
 			children = (
+				DA9ECAE31533090F00F38A88 /* private */,
+				DAFEF9730ED847D40019F7E8 /* PearlGLShaders.h */,
+				DAFEF9730ED847D40019F7E6 /* PearlGLShaders.m */,
 				DA5795C9152C7592001BEF40 /* Actions */,
 				DA5795CE152C7592001BEF40 /* Pearl-Cocos2D-Dependencies.h */,
 				DA5795CF152C7592001BEF40 /* Pearl-Cocos2D.h */,
@@ -1957,6 +1972,17 @@
 			path = "Pearl/External/uicolor-utilities";
 			sourceTree = "<group>";
 		};
+		DA9ECAE31533090F00F38A88 /* private */ = {
+			isa = PBXGroup;
+			children = (
+				DA9ECAE41533090F00F38A88 /* PearlGLShaderPointSize_frag.h */,
+				DA9ECAE51533090F00F38A88 /* PearlGLShaderPointSize_vert.h */,
+				DA9ECAE61533090F00F38A88 /* PearlGLShaderPointSprite_frag.h */,
+				DA9ECAE71533090F00F38A88 /* PearlGLShaderPointSprite_vert.h */,
+			);
+			path = private;
+			sourceTree = "<group>";
+		};
 		DABA3AFA152E480E00BE0D2A /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -2162,6 +2188,11 @@
 				DA579AB0152C7599001BEF40 /* PearlValidatingTextField.h in Headers */,
 				DA579AB2152C7599001BEF40 /* PearlWebViewController.h in Headers */,
 				DA579AB4152C7599001BEF40 /* UIImage_PearlScaling.h in Headers */,
+				DAFEF9730ED847D40019F7E9 /* PearlGLShaders.h in Headers */,
+				DA9ECAE81533090F00F38A88 /* PearlGLShaderPointSize_frag.h in Headers */,
+				DA9ECAE91533090F00F38A88 /* PearlGLShaderPointSize_vert.h in Headers */,
+				DA9ECAEA1533090F00F38A88 /* PearlGLShaderPointSprite_frag.h in Headers */,
+				DA9ECAEB1533090F00F38A88 /* PearlGLShaderPointSprite_vert.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3110,6 +3141,7 @@
 				DA579AB1152C7599001BEF40 /* PearlValidatingTextField.m in Sources */,
 				DA579AB3152C7599001BEF40 /* PearlWebViewController.m in Sources */,
 				DA579AB5152C7599001BEF40 /* UIImage_PearlScaling.m in Sources */,
+				DAFEF9730ED847D40019F7E7 /* PearlGLShaders.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

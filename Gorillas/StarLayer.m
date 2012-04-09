@@ -24,6 +24,7 @@
 
 #import "StarLayer.h"
 #import "GorillasAppDelegate.h"
+#import "PearlGLShaders.h"
 #define maxStarSize 2
 
 
@@ -38,7 +39,7 @@
     starVertexBuffer    = 0;
     starCount           = -1;
     depth               = aDepth;
-    self.shaderProgram  = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColorSize];
+    self.shaderProgram  = [PearlGLShaders pointSizeShader];
     
     return self;
 }
@@ -118,17 +119,19 @@
 //    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 //	glDisable(GL_TEXTURE_2D);
     ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color);
+    glEnableVertexAttribArray(kPearlGLVertexAttrib_Size);
 
     // Stars.
     glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
     glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, p));
-    glVertexAttribPointer(kCCVertexAttrib_Size, 1, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, s));
+    glVertexAttribPointer(kPearlGLVertexAttrib_Size, 1, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, s));
 //    glPointSizePointerOES(GL_FLOAT, sizeof(glPoint), (GLvoid *) sizeof(CGPoint));
     glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, c));
 
     glDrawArrays(GL_POINTS, 0, starCount);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glDisableVertexAttribArray(kPearlGLVertexAttrib_Size);
 //    //glDisableClientState(GL_VERTEX_ARRAY);
 //    //glDisableClientState(GL_COLOR_ARRAY);
 //    glDisableClientState(GL_POINT_SIZE_ARRAY_OES);

@@ -134,7 +134,8 @@ typedef enum {
 /**
  * Cocos2D Configuration
  */
-#define CC_ENABLE_DEPRECATED    0
+#define CC_ENABLE_DEPRECATED        0
+#define CC_ENABLE_GL_STATE_CACHE    1
 
 /**
  * Pearl Configuration
