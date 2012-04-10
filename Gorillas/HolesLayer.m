@@ -66,7 +66,7 @@
     holes[holeCount - 1].p = ccpMult([self convertToNodeSpace:worldPos], CC_CONTENT_SCALE_FACTOR());
     holes[holeCount - 1].c = ccc4l(0xffffffffUL);
     holes[holeCount - 1].s = texture.pixelsWide * self.scale; // Scale seems to not affect pointsize.
-    
+
 	glBindBuffer(GL_ARRAY_BUFFER, holeVertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, (GLsizei)(sizeof(glPoint) * holeCount), holes, GL_DYNAMIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -96,16 +96,16 @@
     // Blend our transarent white with DST.  If SRC, make DST transparent, hide original DST.
     glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
     ccGLBlendFunc(GL_ZERO, GL_SRC_ALPHA);
-    
+
 	ccGLBindTexture2D(texture.name);
 
 	glBindBuffer(GL_ARRAY_BUFFER, holeVertexBuffer);
     glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, p));
     glVertexAttribPointer(kPearlGLVertexAttrib_Size, 2, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, s));
-    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, c));
+    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, c));
 
 	glDrawArrays(GL_POINTS, 0, (GLsizei)holeCount);
-	
+
 	// unbind VBO buffer
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
     glDisableVertexAttribArray(kPearlGLVertexAttrib_Size);
@@ -113,7 +113,7 @@
     // Reset blend & data source.
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 //    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
+
 //    //glDisableClientState(GL_COLOR_ARRAY);
 //    //glDisableClientState(GL_VERTEX_ARRAY);
 //    glDisableClientState(GL_POINT_SIZE_ARRAY_OES);

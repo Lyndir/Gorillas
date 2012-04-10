@@ -69,6 +69,7 @@
 
 - (void)preSetup {
 
+#if ! DEBUG
     dbg(@"Initializing TestFlight");
     [TestFlight takeOff:[self testFlightToken]];
     [TestFlight addCustomEnvironmentInformation:@"Anonymous" forKey:@"username"];
@@ -76,6 +77,7 @@
     dbg(@"Initializing Crashlytics");
     [Crashlytics sharedInstance].debugMode = YES;
     [Crashlytics startWithAPIKey:@"aa135d981000035c047c01f297b02539d4faca71"]; // TODO: Make secret
+#endif
     
     @try {
         [[LocalyticsSession sharedLocalyticsSession] startSession:[self localyticsKey]];

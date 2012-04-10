@@ -54,7 +54,8 @@ static float flameRadius;
     explosions      = [[NSMutableArray alloc] initWithCapacity:10];
     flames          = [[NSMutableArray alloc] initWithCapacity:10];
     positionsPx     = nil;
-    
+
+    self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
     self.scale      = GorillasModelScale(1, [[CCTextureCache sharedTextureCache] addImage:@"hole.png"].contentSizeInPixels.width);
     
     [self schedule:@selector(gc:) interval:0.5f];
@@ -102,21 +103,21 @@ static float flameRadius;
 
 
 -(void) addExplosionAtWorld:(CGPoint)worldPos hitsGorilla:(BOOL) hitsGorilla {
-    
+
     BOOL heavy = hitsGorilla || (PearlGameRandomFor(GorillasGameRandomExplosions) % 100 > 90);
 
     if([[GorillasConfig get].soundFx boolValue])
         [GorillasAudioController playEffect:[ExplosionsLayer explosionEffect:heavy]];
 
     [[GorillasAppDelegate get].gameLayer shake];
-    
+
     NSUInteger explosionParticles = (NSUInteger)(PearlGameRandomFor(GorillasGameRandomExplosions) % 50 + 300);
     if(heavy)
         explosionParticles += 400;
-    
+
     CCParticleSystem *explosion = [[CCParticleSun alloc] initWithTotalParticles:explosionParticles];
     [[GorillasAppDelegate get].gameLayer.windLayer registerSystem:explosion affectAngle:NO];
-    
+
     explosion.positionType      = kCCPositionTypeGrouped;
     explosion.position          = CGPointZero;
     explosion.sourcePosition    = [self convertToNodeSpace:worldPos];
@@ -131,7 +132,7 @@ static float flameRadius;
                           [CCDelayTime actionWithDuration:heavy? 0.6f: 0.2f],
                           [CCCallFuncN actionWithTarget:self selector:@selector(stop:)],
                           nil]];
-    
+
     [self addChild:explosion z:1];
     [explosions addObject:explosion];
     [explosion release];
