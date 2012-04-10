@@ -510,7 +510,8 @@
     [super onEnter];
     
     [self setPausedSilently:YES];
-    
+    [[GorillasAppDelegate get] showMainMenu];
+
     [self schedule:@selector(updateWeather:) interval:1];
     [self schedule:@selector(randomEncounter:) interval:1];
 }

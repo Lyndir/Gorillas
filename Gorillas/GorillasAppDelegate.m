@@ -114,7 +114,6 @@
     
     // Show the splash screen, this starts the main loop in the current thread.
     [[CCDirector sharedDirector] pushScene:splashScene];
-    [self showMainMenu];
     
     // Game Center setup.
     [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
