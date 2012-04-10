@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 source bashlib
-cd "${0%/*}/../Images/png"
+cd "${0%/*}/../Gorillas/Resources/Images"
 
 
 emit "Converting PVRs"
@@ -63,8 +63,10 @@ emit "Converting iTunesArtwork"
 
 echo
 emit "Converting @2x/-hd artwork"
-    for file in {,lite/}!(Icon*){@2x,-hd}.png; do
+    for file in {,lite/}!(Icon*){@2x,-hd,-ipadhd}.png; do
         [[ -e $file ]] || continue
+        dest=${file/@(@2x|-hd)}
+        dest=${dest/-ipadhd/-ipad}
 
         if [[ $file = Default* ]]; then
             read width height < <(identify -format '%w %h' "$file")
@@ -74,10 +76,9 @@ emit "Converting @2x/-hd artwork"
                 emit -$?
             fi
         fi
-        if [[ "${file/@(@2x|-hd|-ipadhd)}" -ot "$file" ]]; then
-            emit "${file/@(@2x|-hd)}" --
-                    dest=${file/@(@2x|-hd)}
-                    dest=${dest/-ipadhd/-ipad}
+        echo "$file -> $dest"
+        if [[ ! -e $dest || "${file/@(@2x|-hd|-ipadhd)}" -ot "$dest" ]]; then
+            emit "$dest" --
                     convert "$file" -resize 50% "$dest"
             emit -$?
         fi
