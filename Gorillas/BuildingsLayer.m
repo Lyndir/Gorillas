@@ -23,6 +23,7 @@
 //
 
 #import "BuildingsLayer.h"
+#import "PearlGLUtils.h"
 
 @implementation BuildingsLayer
 
@@ -33,7 +34,7 @@
     
     if (!(self = [self initWithWidthRatio:1 heightRatio:1 lightRatio:0]))
         return nil;
-    
+
 	return self;
 }
 
@@ -42,7 +43,9 @@
     
 	if (!(self = [super init]))
         return self;
-    
+
+    self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
+
     buildingWidthRatio      = w;
     buildingHeightRatio     = h;
     lightRatio              = l;
@@ -146,13 +149,13 @@
                                                          buildings[b].size.height   * CC_CONTENT_SCALE_FACTOR());
         const NSUInteger bv                 = b * 4;
         const NSUInteger bi                 = b * 6;
-        
+
         buildingVertices[bv + 0].front.c    = buildingVertices[bv + 1].front.c      = buildings[b].backColor;
         buildingVertices[bv + 2].front.c    = buildingVertices[bv + 3].front.c      = buildings[b].frontColor;
         buildingVertices[bv + 0].backColor  = buildingVertices[bv + 1].backColor    = buildings[b].backColor;
         buildingVertices[bv + 2].backColor  = buildingVertices[bv + 3].backColor    = buildings[b].backColor;
-        
-        buildingVertices[bv + 0].front.p    = ccp(bx                          , 0);
+
+        buildingVertices[bv + 0].front.p    = ccp(bx           , 0);
         buildingVertices[bv + 1].front.p    = ccp(bx + bs.width, 0);
         buildingVertices[bv + 2].front.p    = ccp(bx           , 0 + bs.height);
         buildingVertices[bv + 3].front.p    = ccp(bx + bs.width, 0 + bs.height);
@@ -249,11 +252,11 @@
     ccGLBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
 
     // == DRAW BUILDING ==
-    // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
+    // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC over DST; DST_ALPHA of 0 means hide SRC, leave DST).
     glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer);
-    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(BuildingVertex), 0);
-    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(BuildingVertex), (GLvoid *) offsetof(Vertex, c));
+    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, front) + offsetof(Vertex, p));
+    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, front) + offsetof(Vertex, c));
 
     glDrawElements(GL_TRIANGLES, (GLsizei)(buildingCount * 6), GL_UNSIGNED_SHORT, 0);
     //drawBoxFrom(CGPointZero, ccp(contentSize.width, contentSize.height), buildingColor, buildingColor);
@@ -262,8 +265,8 @@
     // Bind our VBOs & colors.
     glBindBuffer(GL_ARRAY_BUFFER, windowsVertexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, windowsIndicesBuffer);
-    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, c));
-    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, c));
+    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, p));
+    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, c));
 
     // = DRAW FRONT WINDOWS =
     // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
@@ -283,8 +286,8 @@
         // Draw back of building where DST opacity is < 1.
         glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer);
-        glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(BuildingVertex), 0);
-        glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(BuildingVertex), (GLvoid *) offsetof(Vertex, c));
+        glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, front) + offsetof(Vertex, p));
+        glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, backColor));
 
         glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA);
         glDrawElements(GL_TRIANGLES, (GLsizei)(buildingCount * 6), GL_UNSIGNED_SHORT, 0);

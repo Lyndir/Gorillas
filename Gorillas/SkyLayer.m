@@ -26,6 +26,7 @@
 #import "StarLayer.h"
 #import "PanAction.h"
 #import "GorillasAppDelegate.h"
+#import "PearlGLUtils.h"
 
 
 @implementation SkyLayer
@@ -49,6 +50,8 @@
 
         [starLayer release];
     }
+
+    self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
 
     return self;
 }
@@ -85,8 +88,8 @@
     Vertex vertices[4] = {
             { .p = { fromPx.x, fromPx.y }, .c = skyColor },
             { .p = { toPx.x, fromPx.y }, .c = skyColor },
-            { .p = { fromPx.x, toPx.y }, .c = ccc4l(0x000000ff) },
-            { .p = { toPx.x, toPx.y }, .c = ccc4l(0x000000ff) },
+            { .p = { fromPx.x, toPx.y }, .c = ccc4(0x00, 0x00, 0x00, 0xff) },
+            { .p = { toPx.x, toPx.y }, .c = ccc4(0x00, 0x00, 0x00, 0xff) },
     };
     PearlGLDraw(GL_TRIANGLE_STRIP, vertices, 4);
 

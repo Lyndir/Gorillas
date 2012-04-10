@@ -186,10 +186,10 @@
     
     if ([[GorillasConfig get].vibration boolValue])
         [GorillasAudioController vibrate];
-    
+
     if (![shakeAction isDone])
         [cityLayer stopAction:shakeAction];
-    
+
     [cityLayer runAction:shakeAction];
 }
 
@@ -488,7 +488,7 @@
     [panningLayer addChild:[InteractionLayer node] z:1];
     [panningLayer addChild:cityLayer z:0];
     [panningLayer addChild:skyLayer z:-5];
-    [panningLayer addChild:light z:-1];
+//    [panningLayer addChild:light z:-1]; FIXME, city lights
     [self addChild:panningLayer z:0];
 
     windLayer               = [[WindLayer alloc] init];

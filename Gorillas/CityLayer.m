@@ -52,6 +52,7 @@
     anchorPoint_ = ccp(0.5f, 0.5f);
     [self setContentSize:s];
     self.isRelativeAnchorPoint = NO;
+    self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
 
 #if DEBUG_COLLISION
     dbgTraceStep    = 5;
@@ -112,15 +113,15 @@
     explosions = [[ExplosionsLayer alloc] init];
     [nonParallaxLayer addChild:explosions z:4];
     buildings = malloc(sizeof(BuildingsLayer*) * buildingsCount);
-    for (NSUInteger b = 0; b < buildingsCount; ++b) {
+    for (NSInteger b = (signed)buildingsCount - 1; b >= 0; --b) {
         float lightRatio = -(b / 4.0f);
         if (b)
             lightRatio -= 0.5f;
-        
+
         buildings[b] = [[BuildingsLayer alloc] initWithWidthRatio:(5 - b) / 5.0f heightRatio:1 + (b / 2.0f) lightRatio:lightRatio];
-        if (b)
-            [self addChild:buildings[b] z:-2 - (NSInteger)b parallaxRatio:ccp((5 - b) / 5.0f, (10 - b) / 10.0f) positionOffset:CGPointZero];
-        else
+//        if (b)
+//            [self addChild:buildings[b] z:-2 - (NSInteger)b parallaxRatio:ccp((5 - b) / 5.0f, (10 - b) / 10.0f) positionOffset:CGPointZero];
+//        else
             [nonParallaxLayer addChild:buildings[b] z:1];
     }
 }
