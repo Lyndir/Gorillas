@@ -208,9 +208,9 @@
                     break;
             
             if(hg)
-                hgp[hgc++] = ccpMult(pos, CC_CONTENT_SCALE_FACTOR()); /* pt to px */
+                hgp[hgc++] = pos; //ccpMult(pos, CC_CONTENT_SCALE_FACTOR()); /* pt to px */
             else if(he)
-                hep[hec++] = ccpMult(pos, CC_CONTENT_SCALE_FACTOR()); /* pt to px */
+                hep[hec++] = pos; //ccpMult(pos, CC_CONTENT_SCALE_FACTOR()); /* pt to px */
         }
     
     DrawPointsAt(hgp, hgc, ccc4l(0x00FF00FF));
@@ -226,7 +226,7 @@
             if(![gorilla alive])
                 continue;
             
-            CGPoint fromPx = ccpMult(gorilla.position, CC_CONTENT_SCALE_FACTOR()); /* pt to px */;
+            CGPoint fromPx = gorilla.position; // ccpMult(gorilla.position, CC_CONTENT_SCALE_FACTOR()); /* pt to px */;
             CGPoint toPx   = ccpAdd(fromPx, ccpCompMult(throwHistory[i], winSizePx));
             
             if(!CGPointEqualToPoint(toPx, CGPointZero)) {

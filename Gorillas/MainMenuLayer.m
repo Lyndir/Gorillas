@@ -50,27 +50,27 @@
     if (!(self = [super initWithDelegate:self logo:nil items:
                   [PearlCCMenuItemSpacer spacerSmall],
 #if ! LITE
-                  [multiPlayerI     = [PearlCCMenuItemBlock itemWithSize:100 target:self selector:@selector(startMulti:)] retain],
+                  [multiPlayerI     = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(startMulti:)] retain],
 #endif
-                  [singlePlayerI    = [PearlCCMenuItemBlock itemWithSize:100 target:self selector:@selector(startSingle:)] retain],
+                  [singlePlayerI    = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(startSingle:)] retain],
 #if ! LITE
-                  [hotSeatI         = [PearlCCMenuItemBlock itemWithSize:100 target:self selector:@selector(startHotSeat:)] retain],
+                  [hotSeatI         = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(startHotSeat:)] retain],
 #endif
                   [configurationI   = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)] retain],
-                  [descriptionT     = [PearlCCMenuItemTitle itemFromString:@"description"] retain],
-                  [PearlCCMenuItemSpacer spacerSmall],
+                  [descriptionT     = [PearlCCMenuItemTitle itemWithString:@"description"] retain],
+                  [PearlCCMenuItemSpacer spacerNormal],
 #if LITE
-                  [PearlCCMenuItemBlock itemWithSize:50 target:self selector:@selector(upgrade:)],
+                  [PearlCCMenuItemBlock itemWithSize:50 * [PearlDeviceUtils uiScale] target:self selector:@selector(upgrade:)],
+                  [PearlCCMenuItemBlock itemWithSize:50 * [PearlDeviceUtils uiScale] target:self selector:@selector(scores:)],
 #else
-                  [PearlCCMenuItemBlock itemWithSize:50 target:self selector:@selector(settings:)],
-                  [PearlCCMenuItemBlock itemWithSize:50 target:self selector:@selector(scores:)],
+                  [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(settings:)],
+                  [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(scores:)],
 #endif
-                  [PearlCCMenuItemBlock itemWithSize:50 target:self selector:@selector(moreGames:)],
                   nil]))
         return self;
     
     self.itemCounts = [NSArray arrayWithObjects:
-                       [NSNumber numberWithInt:1],
+                                       [NSNumber numberWithInt:1],
 #if LITE
                        [NSNumber numberWithInt:1],
 #else
@@ -82,7 +82,7 @@
 #if LITE
                        [NSNumber numberWithInt:2],
 #else
-                       [NSNumber numberWithInt:3],
+                       [NSNumber numberWithInt:2],
 #endif
                        nil];
     self.layout = PearlCCMenuLayoutCustomColumns;

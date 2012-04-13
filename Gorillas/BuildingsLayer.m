@@ -138,15 +138,15 @@
     GLushort *windowIndices                 = malloc(sizeof(GLushort)           /* size of an index */
                                                      * 6                        /* amount of indexes per window */
                                                      * windowCount              /* amount of windows in all buildings */);
-    const CGFloat wPadPx = wPadPt * CC_CONTENT_SCALE_FACTOR();
-    const CGFloat wWidthPx = wWidthPt * CC_CONTENT_SCALE_FACTOR();
-    const CGFloat wHeightPx = wHeightPt * CC_CONTENT_SCALE_FACTOR();
-    const CGFloat floorHeightPx = floorHeightPt * CC_CONTENT_SCALE_FACTOR();
+    const CGFloat wPadPx = wPadPt; // * CC_CONTENT_§_FACTOR();
+    const CGFloat wWidthPx = wWidthPt; // * CC_CONTENT_SCALE_FACTOR();
+    const CGFloat wHeightPx = wHeightPt; // * CC_CONTENT_SCALE_FACTOR();
+    const CGFloat floorHeightPx = floorHeightPt; // * CC_CONTENT_SCALE_FACTOR();
     for (NSUInteger w = 0, b = 0; b < buildingCount; ++b) {
         
-        const CGFloat bx                    = buildings[b].x * CC_CONTENT_SCALE_FACTOR();
-        const CGSize bs                     = CGSizeMake(buildings[b].size.width    * CC_CONTENT_SCALE_FACTOR(),
-                                                         buildings[b].size.height   * CC_CONTENT_SCALE_FACTOR());
+        const CGFloat bx                    = buildings[b].x; // * CC_CONTENT_SCALE_FACTOR();
+        const CGSize bs                     = CGSizeMake(buildings[b].size.width, //    * CC_CONTENT_SCALE_FACTOR(),
+                                                         buildings[b].size.height); //   * CC_CONTENT_SCALE_FACTOR());
         const NSUInteger bv                 = b * 4;
         const NSUInteger bi                 = b * 6;
 

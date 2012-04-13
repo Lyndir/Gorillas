@@ -70,8 +70,8 @@
     skyColor = ccc4l([[GorillasConfig get].skyColor unsignedLongValue]);
 
     CGRect field = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self];
-    fromPx  = ccpMult(ccp(field.origin.x, field.origin.y), CC_CONTENT_SCALE_FACTOR());
-    toPx    = ccpMult(ccp(field.origin.x + field.size.width, field.origin.y + field.size.height), CC_CONTENT_SCALE_FACTOR());
+    fromPx  = ccpMult(ccp(field.origin.x, field.origin.y), 1); //CC_CONTENT_SCALE_FACTOR());
+    toPx    = ccpMult(ccp(field.origin.x + field.size.width, field.origin.y + field.size.height), 1); //CC_CONTENT_SCALE_FACTOR());
 
     for(StarLayer *starLayer in stars)
         [starLayer reset];

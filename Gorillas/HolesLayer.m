@@ -48,7 +48,7 @@
 
 -(BOOL)isHoleAtWorld: (CGPoint)worldPos {
     
-    CGPoint posPx = ccpMult([self convertToNodeSpace:worldPos], CC_CONTENT_SCALE_FACTOR());
+    CGPoint posPx = [self convertToNodeSpace:worldPos]; //ccpMult([self convertToNodeSpace:worldPos], CC_CONTENT_SCALE_FACTOR());
     CGFloat d = powf(texture.pixelsWide / 5, 2) * self.scale;
     for(NSUInteger h = 0; h < holeCount; ++h) {
         CGFloat x = holes[h].p.x - posPx.x, y = holes[h].p.y - posPx.y;
@@ -63,7 +63,7 @@
 -(void) addHoleAtWorld:(CGPoint)worldPos {
     
     holes = realloc(holes, sizeof(glPoint) * ++holeCount);
-    holes[holeCount - 1].p = ccpMult([self convertToNodeSpace:worldPos], CC_CONTENT_SCALE_FACTOR());
+    holes[holeCount - 1].p = [self convertToNodeSpace:worldPos]; //ccpMult([self convertToNodeSpace:worldPos], CC_CONTENT_SCALE_FACTOR());
     holes[holeCount - 1].c = ccc4l(0xffffffffUL);
     holes[holeCount - 1].s = texture.pixelsWide * self.scale; // Scale seems to not affect pointsize.
 
