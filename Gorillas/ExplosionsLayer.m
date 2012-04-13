@@ -121,8 +121,8 @@ static float flameRadius;
     explosion.positionType      = kCCPositionTypeGrouped;
     explosion.position          = CGPointZero;
     explosion.sourcePosition    = [self convertToNodeSpace:worldPos];
-    explosion.startSize         = (heavy? 20: 15) * self.scale;
-    explosion.startSizeVar      = 5 * self.scale;
+    explosion.startSize         = (heavy? 20: 15);// * self.scale;
+    explosion.startSizeVar      = 5; // * self.scale;
     explosion.speed             = 10;
     explosion.posVar            = ccp([self size] * 0.3f,
                                       [self size] * 0.3f);
@@ -199,7 +199,7 @@ static float flameRadius;
         CCParticleSystem *flame = [self flameWithRadius:[self size] / 2 heavy:heavy];
 
         positionsPx = realloc(positionsPx, sizeof(CGPoint) * (flames.count + 1));
-        positionsPx[flames.count] = ccpMult(explosion.sourcePosition, CC_CONTENT_SCALE_FACTOR());
+        positionsPx[flames.count] = explosion.sourcePosition; //ccpMult(explosion.sourcePosition, CC_CONTENT_SCALE_FACTOR());
         [flames addObject:flame];
     }
     

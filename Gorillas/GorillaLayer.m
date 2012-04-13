@@ -445,7 +445,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     if(!self.human && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesAi])
         return;
     
-    CGSize size = CC_SIZE_POINTS_TO_PIXELS(self.contentSize);
+    CGSize size = self.contentSize; //CC_SIZE_POINTS_TO_PIXELS(self.contentSize);
     
     const CGFloat barX = size.width     * -0.2f;
     const CGFloat barY = size.height    * 1.2f;
