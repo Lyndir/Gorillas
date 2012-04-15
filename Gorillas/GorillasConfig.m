@@ -303,23 +303,31 @@
 
 #pragma mark User Status
 
+static NSMutableDictionary *GorillasScores = nil;
+
 -(int64_t)recordScoreDelta:(int64_t)scoreDelta forMode:(GorillasMode)mode {
 
     NSString *category = [GorillasConfig categoryForMode:mode];
+    if (GorillasScores == nil) {
+        if ([self.scores isKindOfClass:[NSData class]])
+            GorillasScores = [[NSKeyedUnarchiver unarchiveObjectWithData:self.scores] retain];
+        if (!NSNullToNil(GorillasScores))
+            GorillasScores = [[NSMutableDictionary alloc] init];
+    }
 
     GKScore *score = [[[GKScore alloc] initWithCategory:category] autorelease];
-    score.value = MAX(0, ((GKScore *)[self.scores objectForKey:category]).value + scoreDelta);
+    score.value = MAX(0, ((GKScore *)[GorillasScores objectForKey:category]).value + scoreDelta);
 
-    NSMutableDictionary *newScores = [self.scores mutableCopy];
-    [newScores setObject:score forKey:category];
-    self.scores = newScores;
-    [newScores release];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        [GorillasScores setObject:score forKey:category];
+        self.scores = [NSKeyedArchiver archivedDataWithRootObject:GorillasScores];
 
-    [score reportScoreWithCompletionHandler:^(NSError *error) {
-        if (error)
-            wrn(@"Error reporting score: %@", error);
-    }];
-    
+        [score reportScoreWithCompletionHandler:^(NSError *error) {
+            if (error)
+                wrn(@"Error reporting score: %@", error);
+        }];
+    });
+
     return score.value;
 }
 
@@ -330,7 +338,7 @@
 
     NSString *category = [GorillasConfig categoryForMode:mode];
 
-    return ((GKScore *)[self.scores objectForKey:category]).value;
+    return ((GKScore *)[GorillasScores objectForKey:category]).value;
 }
 
 -(void) levelUp {

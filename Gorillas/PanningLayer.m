@@ -135,7 +135,7 @@
         self.position           = CGPointZero;
         self.scale              = targetScale;
         
-        CGSize winSize = [CCDirector sharedDirector].winSize;
+        CGSize winSize          = [CCDirector sharedDirector].winSize;
         GameLayer *gameLayer    = [GorillasAppDelegate get].gameLayer;
         CityLayer *cityLayer    = gameLayer.cityLayer;
         
@@ -162,8 +162,7 @@
         }
         
         // Start a new scroll with an updated destination point.
-        pos                     = ccpSub(ccp(self.contentSize.width / 2,
-                                             self.contentSize.height / 2),
+        pos                     = ccpSub(ccp(winSize.width / 2, winSize.height / 2),
                                          [self.parent convertToNodeSpace:r]);
         
         // Restore position.

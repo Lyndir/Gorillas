@@ -119,9 +119,9 @@
             lightRatio -= 0.5f;
 
         buildings[b] = [[BuildingsLayer alloc] initWithWidthRatio:(5 - b) / 5.0f heightRatio:1 + (b / 2.0f) lightRatio:lightRatio];
-//        if (b)
-//            [self addChild:buildings[b] z:-2 - (NSInteger)b parallaxRatio:ccp((5 - b) / 5.0f, (10 - b) / 10.0f) positionOffset:CGPointZero];
-//        else
+        if (b)
+            [self addChild:buildings[b] z:-2 - (NSInteger)b parallaxRatio:ccp((5 - b) / 5.0f, (10 - b) / 10.0f) positionOffset:CGPointZero];
+        else
             [nonParallaxLayer addChild:buildings[b] z:1];
     }
 }

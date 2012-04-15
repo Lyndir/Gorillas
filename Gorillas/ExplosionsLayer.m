@@ -98,7 +98,7 @@ static float flameRadius;
 
 -(CGFloat) size {
     
-    return 32 * self.scale;
+    return 32;
 }
 
 
@@ -121,8 +121,8 @@ static float flameRadius;
     explosion.positionType      = kCCPositionTypeGrouped;
     explosion.position          = CGPointZero;
     explosion.sourcePosition    = [self convertToNodeSpace:worldPos];
-    explosion.startSize         = (heavy? 20: 15);// * self.scale;
-    explosion.startSizeVar      = 5; // * self.scale;
+    explosion.startSize         = (heavy? 20: 15) * self.scale;
+    explosion.startSizeVar      = 5 * self.scale;
     explosion.speed             = 10;
     explosion.posVar            = ccp([self size] * 0.3f,
                                       [self size] * 0.3f);
