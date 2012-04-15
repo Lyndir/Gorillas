@@ -435,7 +435,9 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
 
     CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"GorillaLayer - draw");
    	CC_NODE_DRAW_SETUP();
-    
+    [[[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor] use];
+   	[[[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor] setUniformForModelViewProjectionMatrix];
+
     if(self.lives <= 0)
         return;
     

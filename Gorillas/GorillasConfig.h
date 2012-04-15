@@ -72,7 +72,7 @@
 @property (nonatomic, readwrite, retain) NSNumber       *activeGameConfigurationIndex;
 @property (nonatomic, readwrite, retain) NSNumber       *mode;
 @property (nonatomic, readwrite, retain) NSNumber       *playerModel;
-@property (nonatomic, readwrite, retain) NSDictionary   *scores;
+@property (nonatomic, readwrite, retain) NSData         *scores;
 @property (nonatomic, readwrite, retain) NSNumber       *skill;
 @property (nonatomic, readwrite, retain) NSNumber       *missScore;
 @property (nonatomic, readwrite, retain) NSNumber       *killScore;
