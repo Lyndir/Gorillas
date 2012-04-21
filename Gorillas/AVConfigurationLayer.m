@@ -36,7 +36,7 @@
                  @selector(music),
                  @selector(soundFx),
                  @selector(voice),
-                 @selector(vibrate),
+                 @selector(vibration),
                  nil]))
         return self;
         
@@ -47,7 +47,7 @@
 
 -(void) onEnter {
     
-    [[self itemForConfig:@selector(vibrate)] setSelectedIndex:([[GorillasConfig get].vibration boolValue] && [PearlDeviceUtils isIPhone])? 1: 0];
+    [[self itemForConfig:@selector(vibration)] setSelectedIndex:([[GorillasConfig get].vibration boolValue] && [PearlDeviceUtils isIPhone])? 1: 0];
     
     [super onEnter];
 }
@@ -60,7 +60,7 @@
         return l(@"menu.choose.fx.sound");
     if (setting == @selector(voice))
         return l(@"menu.choose.fx.voice");
-    if (setting == @selector(vibrate))
+    if (setting == @selector(vibration))
         return l(@"menu.choose.fx.vibration");
     
     return nil;

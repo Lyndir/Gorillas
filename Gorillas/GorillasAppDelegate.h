@@ -28,7 +28,6 @@
 #import "ConfigurationSectionLayer.h"
 #import "GameConfigurationLayer.h"
 #import "AVConfigurationLayer.h"
-#import "ModelsConfigurationLayer.h"
 #import "GHUDLayer.h"
 #import "NetController.h"
 
@@ -41,7 +40,6 @@
     ConfigurationSectionLayer                                       *_configLayer;
     GameConfigurationLayer                                          *_gameConfigLayer;
     AVConfigurationLayer                                            *_avConfigLayer;
-    ModelsConfigurationLayer                                        *_modelsConfigLayer;
     
 #if ! LITE
     NetController                                                   *_netController;
@@ -53,7 +51,6 @@
 @property (nonatomic, readonly, retain) ConfigurationSectionLayer   *configLayer;
 @property (nonatomic, readonly, retain) GameConfigurationLayer      *gameConfigLayer;
 @property (nonatomic, readonly, retain) AVConfigurationLayer        *avConfigLayer;
-@property (nonatomic, readonly, retain) ModelsConfigurationLayer    *modelsConfigLayer;
 @property (nonatomic, readonly, retain) GHUDLayer                   *hudLayer;
 
 #if ! LITE
@@ -65,7 +62,6 @@
 -(void) showConfiguration;
 -(void) showGameConfiguration;
 -(void) showAVConfiguration;
--(void) showModelsConfiguration;
 
 +(GorillasAppDelegate *) get;
 
