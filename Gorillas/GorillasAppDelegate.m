@@ -41,7 +41,6 @@
 @property (nonatomic, readwrite, retain) ConfigurationSectionLayer      *configLayer;
 @property (nonatomic, readwrite, retain) GameConfigurationLayer         *gameConfigLayer;
 @property (nonatomic, readwrite, retain) AVConfigurationLayer           *avConfigLayer;
-@property (nonatomic, readwrite, retain) ModelsConfigurationLayer       *modelsConfigLayer;
 
 @property (nonatomic, readwrite, retain) NetController                  *netController;
  
@@ -56,7 +55,7 @@
 @implementation GorillasAppDelegate
 @synthesize gameLayer = _gameLayer;
 @synthesize mainMenuLayer = _mainMenuLayer;
-@synthesize configLayer = _configLayer, gameConfigLayer = _gameConfigLayer, avConfigLayer = _avConfigLayer, modelsConfigLayer = _modelsConfigLayer;
+@synthesize configLayer = _configLayer, gameConfigLayer = _gameConfigLayer, avConfigLayer = _avConfigLayer;
 @synthesize netController = _netController;
 
 + (void)initialize {
@@ -203,15 +202,6 @@
 }
 
 
--(void) showModelsConfiguration {
-    
-    if(!self.modelsConfigLayer)
-        self.modelsConfigLayer = [ModelsConfigurationLayer node];
-    
-    [self pushLayer:self.modelsConfigLayer];
-}
-
-
 - (void)pushLayer: (PearlCCShadeLayer *)layer hidden:(BOOL)hidden {
     
     [self.gameLayer setPaused:YES];
@@ -226,11 +216,6 @@
     if (configKey == @selector(cityTheme)) {
         dbg(@"City Theme changed to: %@", [GorillasConfig get].cityTheme);
         [[[CityTheme getThemes] objectForKey:[GorillasConfig get].cityTheme] apply];
-    }
-    
-    if (configKey == @selector(playerModel)) {
-        dbg(@"Model changed");
-        [self.gameLayer reset];
     }
 }
 
@@ -350,10 +335,6 @@ static NSDictionary *localyticsInfo = nil;
         [self.avConfigLayer stopAllActions];
         self.avConfigLayer = nil;
     }
-    if(self.modelsConfigLayer && ![self.modelsConfigLayer parent]) {
-        [self.modelsConfigLayer stopAllActions];
-        self.modelsConfigLayer = nil;
-    }
 }
 
 
@@ -364,7 +345,6 @@ static NSDictionary *localyticsInfo = nil;
     self.configLayer        = nil;
     self.gameConfigLayer    = nil;
     self.avConfigLayer      = nil;
-    self.modelsConfigLayer  = nil;
     
     [super dealloc];
 }

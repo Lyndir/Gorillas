@@ -423,20 +423,9 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
 }
 
 
--(CGSize) contentSize {
-    
-    return CGSizeMake([super contentSize].width * [self scale], [super contentSize].height * [self scale]);
-}
-
-
 -(void) draw {
 
     [super draw];
-
-    CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"GorillaLayer - draw");
-   	CC_NODE_DRAW_SETUP();
-    [[[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor] use];
-   	[[[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor] setUniformForModelViewProjectionMatrix];
 
     if(self.lives <= 0)
         return;
@@ -446,6 +435,11 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     
     if(!self.human && ![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesAi])
         return;
+    
+    CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"GorillaLayer - draw");
+   	CC_NODE_DRAW_SETUP();
+    [[[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor] use];
+   	[[[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor] setUniformForModelViewProjectionMatrix];
     
     CGSize size = self.contentSize; //CC_SIZE_POINTS_TO_PIXELS(self.contentSize);
     

@@ -30,7 +30,6 @@
 
 - (void)game:(id)sender;
 - (void)av:(id)sender;
-- (void)models:(id)sender;
 - (void)back:(id)selector;
 
 @end
@@ -45,8 +44,6 @@
                                           target:self selector:@selector(game:)],
                   [CCMenuItemFont itemWithString:l(@"menu.av")
                                           target:self selector:@selector(av:)],
-                  [CCMenuItemFont itemWithString:l(@"menu.models")
-                                          target:self selector:@selector(models:)],
                   nil]))
         return nil;
 
@@ -75,12 +72,6 @@
 -(void) av: (id) sender {
 
     [[GorillasAppDelegate get] showAVConfiguration];
-}
-
-
--(void) models: (id) sender {
-
-    [[GorillasAppDelegate get] showModelsConfiguration];
 }
 
 

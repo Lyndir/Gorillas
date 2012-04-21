@@ -21,6 +21,12 @@
 		DA0DD7750F95369B00E5607E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD7720F95369B00E5607E /* OpenGLES.framework */; };
 		DA0DD7900F9536D800E5607E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD78D0F9536D800E5607E /* AudioToolbox.framework */; };
 		DA0DD7A30F9536E600E5607E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD7A00F9536E600E5607E /* QuartzCore.framework */; };
+		DA0EC380153AEBC3001A2576 /* fps_images-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0EC37D153AEBC3001A2576 /* fps_images-ipad.png */; };
+		DA0EC381153AEBC3001A2576 /* fps_images-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0EC37D153AEBC3001A2576 /* fps_images-ipad.png */; };
+		DA0EC382153AEBC3001A2576 /* menu-back-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0EC37E153AEBC3001A2576 /* menu-back-ipad.png */; };
+		DA0EC383153AEBC3001A2576 /* menu-back-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0EC37E153AEBC3001A2576 /* menu-back-ipad.png */; };
+		DA0EC384153AEBC3001A2576 /* menu-back-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0EC37F153AEBC3001A2576 /* menu-back-ipadhd.png */; };
+		DA0EC385153AEBC3001A2576 /* menu-back-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA0EC37F153AEBC3001A2576 /* menu-back-ipadhd.png */; };
 		DA16C5190EEC856200E46246 /* ShadeTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DA16C5180EEC856200E46246 /* ShadeTo.m */; };
 		DA16EC8713CE378400F5D800 /* Pearl-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = DA16EC8613CE378400F5D800 /* Pearl-Prefix.pch */; };
 		DA1816260F0E227C0064F470 /* ConfigurationSectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816250F0E227C0064F470 /* ConfigurationSectionLayer.m */; };
@@ -59,7 +65,6 @@
 		DA4769A40FDD7334002E74F8 /* GameConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = DA79D79F0F59531100D36C7C /* GameConfiguration.m */; };
 		DA4769A80FDD7334002E74F8 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
 		DA4769A90FDD7334002E74F8 /* ThrowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA021E430F84A0F0007CED57 /* ThrowController.m */; };
-		DA4769AA0FDD7334002E74F8 /* ModelsConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7B091E0F85562500B3118E /* ModelsConfigurationLayer.m */; };
 		DA4769EB0FDD7334002E74F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6610F95368600E5607E /* UIKit.framework */; };
 		DA4769EC0FDD7334002E74F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6620F95368600E5607E /* Foundation.framework */; };
 		DA4769ED0FDD7334002E74F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6630F95368600E5607E /* CoreGraphics.framework */; };
@@ -275,7 +280,6 @@
 		DA7ABFBB12823135006A2E71 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA7ABFB312823135006A2E71 /* InfoPlist.strings */; };
 		DA7ABFE412823377006A2E71 /* Apple Symbols.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA7ABFDB12823377006A2E71 /* Apple Symbols.ttf */; };
 		DA7ABFEA12823377006A2E71 /* Apple Symbols.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA7ABFDB12823377006A2E71 /* Apple Symbols.ttf */; };
-		DA7B09210F85562500B3118E /* ModelsConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7B091E0F85562500B3118E /* ModelsConfigurationLayer.m */; };
 		DA83F0BB0F00527B00305C9F /* WindLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83F0BA0F00527B00305C9F /* WindLayer.m */; };
 		DA859C500EC4F3950036B7C0 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DA859E700EC598E10036B7C0 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
@@ -753,6 +757,9 @@
 		DA0DD7720F95369B00E5607E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		DA0DD78D0F9536D800E5607E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DA0DD7A00F9536E600E5607E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DA0EC37D153AEBC3001A2576 /* fps_images-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fps_images-ipad.png"; sourceTree = "<group>"; };
+		DA0EC37E153AEBC3001A2576 /* menu-back-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-back-ipad.png"; sourceTree = "<group>"; };
+		DA0EC37F153AEBC3001A2576 /* menu-back-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-back-ipadhd.png"; sourceTree = "<group>"; };
 		DA16C5170EEC855900E46246 /* ShadeTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadeTo.h; sourceTree = "<group>"; };
 		DA16C5180EEC856200E46246 /* ShadeTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadeTo.m; sourceTree = "<group>"; };
 		DA16EC8613CE378400F5D800 /* Pearl-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pearl-Prefix.pch"; sourceTree = "<group>"; };
@@ -968,8 +975,6 @@
 		DA7ABCE81282308A006A2E71 /* English */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = English; path = en.lproj/splash.png; sourceTree = "<group>"; };
 		DA7ABFB612823135006A2E71 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DA7ABFDB12823377006A2E71 /* Apple Symbols.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple Symbols.ttf"; sourceTree = "<group>"; };
-		DA7B091D0F85562500B3118E /* ModelsConfigurationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelsConfigurationLayer.h; sourceTree = "<group>"; };
-		DA7B091E0F85562500B3118E /* ModelsConfigurationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelsConfigurationLayer.m; sourceTree = "<group>"; };
 		DA83F0B90F00527B00305C9F /* WindLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindLayer.h; sourceTree = "<group>"; };
 		DA83F0BA0F00527B00305C9F /* WindLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindLayer.m; sourceTree = "<group>"; };
 		DA859C4E0EC4F3950036B7C0 /* GorillaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillaLayer.h; sourceTree = "<group>"; };
@@ -1536,8 +1541,6 @@
 			children = (
 				DA1816240F0E227C0064F470 /* ConfigurationSectionLayer.h */,
 				DA1816250F0E227C0064F470 /* ConfigurationSectionLayer.m */,
-				DA7B091D0F85562500B3118E /* ModelsConfigurationLayer.h */,
-				DA7B091E0F85562500B3118E /* ModelsConfigurationLayer.m */,
 				DA34006E0EB516F400B68C06 /* GameConfigurationLayer.h */,
 				DA34006F0EB516F400B68C06 /* GameConfigurationLayer.m */,
 				DA1816450F0E24D80064F470 /* AVConfigurationLayer.h */,
@@ -1871,6 +1874,9 @@
 		DA5F1BD30EE74CE80041691E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DA0EC37D153AEBC3001A2576 /* fps_images-ipad.png */,
+				DA0EC37E153AEBC3001A2576 /* menu-back-ipad.png */,
+				DA0EC37F153AEBC3001A2576 /* menu-back-ipadhd.png */,
 				DA59654115320E3700EA071C /* fire.png */,
 				DA59654215320E3700EA071C /* fps_images-hd.png */,
 				DA59654315320E3700EA071C /* fps_images-ipadhd.png */,
@@ -2975,6 +2981,9 @@
 				DA59654B15320E3700EA071C /* fps_images.png in Resources */,
 				DA5934601534F4DE0060D09A /* menu-main-ipad.png in Resources */,
 				DA5934621534F4DE0060D09A /* menu-main-ipadhd.png in Resources */,
+				DA0EC380153AEBC3001A2576 /* fps_images-ipad.png in Resources */,
+				DA0EC382153AEBC3001A2576 /* menu-back-ipad.png in Resources */,
+				DA0EC384153AEBC3001A2576 /* menu-back-ipadhd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3113,6 +3122,9 @@
 				DA59654C15320E3700EA071C /* fps_images.png in Resources */,
 				DA5934671534F51F0060D09A /* menu-main-ipad.png in Resources */,
 				DA5934691534F51F0060D09A /* menu-main-ipadhd.png in Resources */,
+				DA0EC381153AEBC3001A2576 /* fps_images-ipad.png in Resources */,
+				DA0EC383153AEBC3001A2576 /* menu-back-ipad.png in Resources */,
+				DA0EC385153AEBC3001A2576 /* menu-back-ipadhd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3179,7 +3191,6 @@
 				DA79D7A40F59531100D36C7C /* GameConfiguration.m in Sources */,
 				DA4E5D0C0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */,
 				DA021E460F84A0F0007CED57 /* ThrowController.m in Sources */,
-				DA7B09210F85562500B3118E /* ModelsConfigurationLayer.m in Sources */,
 				DA3B94FB127B7407009196E8 /* GHUDLayer.m in Sources */,
 				DAF4D8161280D8170012132B /* MovingTo.m in Sources */,
 				DA711DCC128DF40800EDB885 /* NetMessage.m in Sources */,
@@ -3283,7 +3294,6 @@
 				DA4769A40FDD7334002E74F8 /* GameConfiguration.m in Sources */,
 				DA4769A80FDD7334002E74F8 /* GorillasAudioController.m in Sources */,
 				DA4769A90FDD7334002E74F8 /* ThrowController.m in Sources */,
-				DA4769AA0FDD7334002E74F8 /* ModelsConfigurationLayer.m in Sources */,
 				DA3B94FE127B7407009196E8 /* GHUDLayer.m in Sources */,
 				DAF4D8181280D8170012132B /* MovingTo.m in Sources */,
 				DA711DCE128DF40800EDB885 /* NetMessage.m in Sources */,
@@ -4099,6 +4109,7 @@
 				DA9BF18B1538C58B00EEAAF8 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DA9BF30F1538C5E400EEAAF8 /* Build configuration list for PBXNativeTarget "kazmath" */ = {
 			isa = XCConfigurationList;
@@ -4108,6 +4119,7 @@
 				DA9BF3121538C5E400EEAAF8 /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
