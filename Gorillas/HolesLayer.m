@@ -37,7 +37,7 @@
     holes       = nil;
     holeCount   = 0;
     
-    self.scale  = GorillasModelScale(1, texture.contentSizeInPixels.width);
+    self.scale  = GorillasModelScale(1.2f, texture.contentSize.width);
     self.shaderProgram = [PearlGLShaders pointSpriteShader];
 
     glGenBuffers(1, &holeVertexBuffer);
@@ -49,7 +49,7 @@
 -(BOOL)isHoleAtWorld: (CGPoint)worldPos {
     
     CGPoint posPx = [self convertToNodeSpace:worldPos]; //ccpMult([self convertToNodeSpace:worldPos], CC_CONTENT_SCALE_FACTOR());
-    CGFloat d = powf(texture.pixelsWide / 5, 2) * self.scale;
+    CGFloat d = powf(texture.contentSize.width / 4, 2);
     for(NSUInteger h = 0; h < holeCount; ++h) {
         CGFloat x = holes[h].p.x - posPx.x, y = holes[h].p.y - posPx.y;
         if ((powf(x, 2) + powf(y, 2)) < d)
@@ -57,7 +57,7 @@
     }
     
     return NO;
-}
+} 
 
 
 -(void) addHoleAtWorld:(CGPoint)worldPos {
@@ -65,7 +65,7 @@
     holes = realloc(holes, sizeof(glPoint) * ++holeCount);
     holes[holeCount - 1].p = [self convertToNodeSpace:worldPos]; //ccpMult([self convertToNodeSpace:worldPos], CC_CONTENT_SCALE_FACTOR());
     holes[holeCount - 1].c = ccc4l(0xffffffffUL);
-    holes[holeCount - 1].s = texture.pixelsWide * self.scale; // Scale seems to not affect pointsize.
+    holes[holeCount - 1].s = texture.contentSize.width * self.scale * CC_CONTENT_SCALE_FACTOR(); // Scale seems to not affect pointsize.
 
 	glBindBuffer(GL_ARRAY_BUFFER, holeVertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, (GLsizei)(sizeof(glPoint) * holeCount), holes, GL_DYNAMIC_DRAW);

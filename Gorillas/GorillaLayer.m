@@ -132,7 +132,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     [self stopAllActions];
     
     self.bobber.position = ccp(self.contentSize.width / 2, self.contentSize.height + self.bobber.contentSize.height / 2);
-    self.scale      = GorillasModelScale(2, self.bobber.texture.contentSizeInPixels.width);
+    self.scale      = GorillasModelScale(2, self.bobber.texture.contentSize.width);
     self.active     = NO;
     self.ready      = NO;
     self.lives      = self.initialLives;
@@ -416,10 +416,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     if(![self alive])
         return NO;
     
-    return  pos.x >= self.position.x - self.contentSize.width  / 2 &&
-    pos.y >= self.position.y - self.contentSize.height / 2 &&
-    pos.x <= self.position.x + self.contentSize.width  / 2 &&
-    pos.y <= self.position.y + self.contentSize.height / 2;
+    return ABS(pos.x - self.position.x) <= self.contentSize.width / 3 && ABS(pos.y - self.position.y) <= self.contentSize.height / 3;
 }
 
 

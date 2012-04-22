@@ -53,7 +53,7 @@ emit "Converting iTunesArtwork"
     for size in "${!icons[@]}"; do
         file=${icons[size]}
 
-        if [[ $file -ot "iTunesArtwork.png" ]]; then
+        if [[ "iTunesArtwork.png" -nt $file ]]; then
             emit "$file ($size px)" --
                     convert "iTunesArtwork.png" -resize "${size}x${size}" "$file"
             emit -$?
@@ -76,8 +76,7 @@ emit "Converting @2x/-hd artwork"
                 emit -$?
             fi
         fi
-        echo "$file -> $dest"
-        if [[ ! -e $dest || "${file/@(@2x|-hd|-ipadhd)}" -ot "$dest" ]]; then
+        if [[ ! -e $dest || "$file" -nt "$dest" ]]; then
             emit "$dest" --
                     convert "$file" -resize 50% "$dest"
             emit -$?

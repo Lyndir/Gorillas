@@ -480,16 +480,16 @@
     skyLayer                = [[SkyLayer alloc] init];
     CCSprite *light = [CCSprite spriteWithFile:@"fire.png"];
     light.position = ccp(240, -500);
-    light.scale = 100;
+    light.scale = 150;
     light.color = ccc3(0xff, 0xff, 0);
     light.opacity = 0x55;
     panningLayer            = [[PanningLayer alloc] init];
     panningLayer.position   = CGPointZero;
     [panningLayer addChild:[InteractionLayer node] z:1];
     [panningLayer addChild:cityLayer z:0];
-    [panningLayer addChild:skyLayer z:-5];
-//    [panningLayer addChild:light z:-1]; FIXME, city lights
+    [panningLayer addChild:light z:-1];
     [self addChild:panningLayer z:0];
+    [self addChild:skyLayer z:-5];
 
     windLayer               = [[WindLayer alloc] init];
     windLayer.position      = ccp(self.contentSize.width / 2, self.contentSize.height - 15);

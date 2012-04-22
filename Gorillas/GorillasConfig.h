@@ -109,10 +109,10 @@
 /**
  * Utility for scaling Gorillas models.
  */
-static inline float GorillasModelScale(const float amountPerBuildingWidth, const float modelPixelsWide) {
+static inline float GorillasModelScale(const float amountPerBuildingWidth, const float modelWide) {
     
-    dbg(@"winWidthPx: %f, buildings: %f, amountPerBuildingWidth: %f, modelPixelsWide: %f => %f", [CCDirector sharedDirector].winSizeInPixels.width, [[GorillasConfig get].buildingAmount floatValue], amountPerBuildingWidth, modelPixelsWide, [CCDirector sharedDirector].winSizeInPixels.width / [[GorillasConfig get].buildingAmount floatValue]
-        / amountPerBuildingWidth / modelPixelsWide);
-    return [CCDirector sharedDirector].winSizeInPixels.width / [[GorillasConfig get].buildingAmount floatValue]
-            / amountPerBuildingWidth / modelPixelsWide;
+    dbg(@"winWidthPx: %f, buildings: %f, amountPerBuildingWidth: %f, modelWide: %f => %f", [CCDirector sharedDirector].winSize.width, [[GorillasConfig get].buildingAmount floatValue], amountPerBuildingWidth, modelWide, [CCDirector sharedDirector].winSize.width / [[GorillasConfig get].buildingAmount floatValue]
+        / amountPerBuildingWidth / modelWide);
+    return [CCDirector sharedDirector].winSize.width / [[GorillasConfig get].buildingAmount floatValue]
+            / amountPerBuildingWidth / modelWide;
 }

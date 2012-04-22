@@ -69,10 +69,7 @@
 
     skyColor = ccc4l([[GorillasConfig get].skyColor unsignedLongValue]);
 
-    CGRect field = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self];
-    fromPx  = ccpMult(ccp(field.origin.x, field.origin.y), 1); //CC_CONTENT_SCALE_FACTOR());
-    toPx    = ccpMult(ccp(field.origin.x + field.size.width, field.origin.y + field.size.height), 1); //CC_CONTENT_SCALE_FACTOR());
-
+    self.contentSize = [CCDirector sharedDirector].winSize;
     for(StarLayer *starLayer in stars)
         [starLayer reset];
 }
@@ -86,10 +83,10 @@
    	CC_NODE_DRAW_SETUP();
 
     Vertex vertices[4] = {
-            { .p = { fromPx.x, fromPx.y }, .c = skyColor },
-            { .p = { toPx.x, fromPx.y }, .c = skyColor },
-            { .p = { fromPx.x, toPx.y }, .c = ccc4(0x00, 0x00, 0x00, 0xff) },
-            { .p = { toPx.x, toPx.y }, .c = ccc4(0x00, 0x00, 0x00, 0xff) },
+            { .p = { 0,                         0 },                        .c = skyColor },
+            { .p = { self.contentSize.width,    0 },                        .c = skyColor },
+            { .p = { 0,                         self.contentSize.height },  .c = ccc4(0x00, 0x00, 0x00, 0xff) },
+            { .p = { self.contentSize.width,    self.contentSize.height },  .c = ccc4(0x00, 0x00, 0x00, 0xff) },
     };
     PearlGLDraw(GL_TRIANGLE_STRIP, vertices, 4);
 

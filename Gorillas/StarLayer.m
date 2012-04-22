@@ -60,7 +60,6 @@
     if (starCount == [[GorillasConfig get].starAmount intValue])
         return;
 
-    CGRect fieldPx      = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self]; //CC_RECT_POINTS_TO_PIXELS([[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self]);
     starCount           = [[GorillasConfig get].starAmount intValue];
     ccColor4B starColor = ccc4l([[GorillasConfig get].starColor unsignedLongValue]);
     starColor.r         *= depth;
@@ -71,14 +70,14 @@
     free(starVertices);
     starVertices = malloc(sizeof(glPoint) * (unsigned)starCount);
     
+    CGSize winSize      = [CCDirector sharedDirector].winSize;
     for (NSInteger s = 0; s < starCount; ++s) {
-        starVertices[s].p   = ccp(PearlGameRandomFor(GorillasGameRandomStars) % (long) fieldPx.size.width + fieldPx.origin.x,
-                                  PearlGameRandomFor(GorillasGameRandomStars) % (long) fieldPx.size.height + fieldPx.origin.y);
+        starVertices[s].p   = ccp(PearlGameRandomFor(GorillasGameRandomStars) % (int)winSize.width,
+                                  PearlGameRandomFor(GorillasGameRandomStars) % (int)winSize.height);
         starVertices[s].c   = starColor;
         starVertices[s].s   = starSize;
     }
     
-    // Push our window data into the VBO.
     glDeleteBuffers(1, &starVertexBuffer);
     glGenBuffers(1, &starVertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
@@ -89,15 +88,15 @@
 
 -(void) update:(ccTime)dt {
 
-    CGRect fieldPx      = [[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self]; //CC_RECT_POINTS_TO_PIXELS([[GorillasAppDelegate get].gameLayer.cityLayer fieldInSpaceOf:self]);
+    CGSize winSize      = [CCDirector sharedDirector].winSize;
     NSInteger speed     = [[GorillasConfig get].starSpeed integerValue];
     
-    for (NSInteger s = 0; s < starCount; ++s)
-        if (starVertices[s].p.x < fieldPx.origin.x)
-            starVertices[s].p.x = fieldPx.size.width + fieldPx.origin.x
-                                - ((int)(10000 * speed * dt) % PearlGameRandomFor(GorillasGameRandomStars)) / 10000.0f;
-        else
-            starVertices[s].p.x -= dt * speed;
+    for (NSInteger s = 0; s < starCount; ++s) {
+        starVertices[s].p.x -= dt * speed;
+        
+        if (starVertices[s].p.x < 0)
+            starVertices[s].p.x = winSize.width + PearlGameRandomFor(GorillasGameRandomStars) % (int)winSize.width / 7;
+    }
 
     glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, (signed)sizeof(glPoint) * starCount, starVertices, GL_DYNAMIC_DRAW);

@@ -56,7 +56,7 @@ static float flameRadius;
     positionsPx     = nil;
 
     self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
-    self.scale      = GorillasModelScale(1, [[CCTextureCache sharedTextureCache] addImage:@"hole.png"].contentSizeInPixels.width);
+    self.scale      = GorillasModelScale(1, [[CCTextureCache sharedTextureCache] addImage:@"hole.png"].contentSize.width);
     
     [self schedule:@selector(gc:) interval:0.5f];
     [self schedule:@selector(step:)];
@@ -98,7 +98,7 @@ static float flameRadius;
 
 -(CGFloat) size {
     
-    return 32;
+    return [[CCTextureCache sharedTextureCache] addImage:@"hole.png"].contentSize.width / 4;
 }
 
 
@@ -114,6 +114,7 @@ static float flameRadius;
     NSUInteger explosionParticles = (NSUInteger)(PearlGameRandomFor(GorillasGameRandomExplosions) % 50 + 300);
     if(heavy)
         explosionParticles += 400;
+    explosionParticles *= [self scale];
 
     CCParticleSystem *explosion = [[CCParticleSun alloc] initWithTotalParticles:explosionParticles];
     [[GorillasAppDelegate get].gameLayer.windLayer registerSystem:explosion affectAngle:NO];
@@ -121,8 +122,8 @@ static float flameRadius;
     explosion.positionType      = kCCPositionTypeGrouped;
     explosion.position          = CGPointZero;
     explosion.sourcePosition    = [self convertToNodeSpace:worldPos];
-    explosion.startSize         = (heavy? 20: 15) * self.scale;
-    explosion.startSizeVar      = 5 * self.scale;
+    explosion.startSize         = (heavy? 20: 15) / self.scale;
+    explosion.startSizeVar      = 5 / self.scale;
     explosion.speed             = 10;
     explosion.posVar            = ccp([self size] * 0.3f,
                                       [self size] * 0.3f);
@@ -225,14 +226,14 @@ static float flameRadius;
         
         for (NSUInteger type = 0; type < flameVariantion * 2; ++type) {
             BOOL typeIsHeavy = !(type < flameVariantion);
-            NSUInteger flameParticles = typeIsHeavy? 80: 60;
+            NSUInteger flameParticles = (NSUInteger)((typeIsHeavy? 120: 90) * [self scale]);
             
             CCParticleSystem *flame   = [[CCParticleFire alloc] initWithTotalParticles:flameParticles];
             
             flame.position          = CGPointZero;
             //flames.angleVar       = 90;
-            flame.startSize         = typeIsHeavy? 10: 5;
-            flame.startSizeVar      = 5;
+            flame.startSize         = (typeIsHeavy? 5: 3) / [self scale];
+            flame.startSizeVar      = 3 / [self scale];
             flame.posVar            = ccp(radius, radius);
             flame.speed             = 8;
             flame.speedVar          = 10;
