@@ -185,8 +185,6 @@
     CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"CityLayer - draw");
    	CC_NODE_DRAW_SETUP();
 
-    CGPoint winSizePx = ccpFromSize([CCDirector sharedDirector].winSizeInPixels);
-    
 #if DEBUG_COLLISION
     CGSize winSize = [CCDirector sharedDirector].winSize;
     CGRect field = [self fieldInSpaceOf:self];
@@ -221,13 +219,15 @@
 #endif
     
     if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureCheat]) {
+        CGPoint winSize = ccpFromSize([CCDirector sharedDirector].winSize);
+        
         for(NSUInteger i = 0; i < [[GorillasAppDelegate get].gameLayer.gorillas count]; ++i) {
             GorillaLayer *gorilla = [[GorillasAppDelegate get].gameLayer.gorillas objectAtIndex:i];
             if(![gorilla alive])
                 continue;
             
             CGPoint fromPx = gorilla.position; // ccpMult(gorilla.position, CC_CONTENT_SCALE_FACTOR()); /* pt to px */;
-            CGPoint toPx   = ccpAdd(fromPx, ccpCompMult(throwHistory[i], winSizePx));
+            CGPoint toPx   = ccpAdd(fromPx, ccpCompMult(throwHistory[i], winSize));
             
             if(!CGPointEqualToPoint(toPx, CGPointZero)) {
                 ccColor4B color = ccc4l([[GorillasConfig get].windowColorOff unsignedLongValue] & 0xffffff33UL);
@@ -560,8 +560,9 @@
     for(NSUInteger i = 0; i < [gorillas count]; ++i) {
         Building building = buildings[0].buildings[[(NSNumber *) [gorillaIndexes objectAtIndex:i] unsignedIntegerValue]];
         GorillaLayer *gorilla = [gorillas objectAtIndex:i];
+        CGSize gorillaSize = CGSizeMake(gorilla.contentSize.width * gorilla.scale, gorilla.contentSize.height * gorilla.scale);
         
-        gorilla.position = ccp(building.x + building.size.width / 2, building.size.height + gorilla.contentSize.height / 2);
+        gorilla.position = ccp(building.x + building.size.width / 2, building.size.height + gorillaSize.height / 2);
         [gorilla runAction:[CCFadeIn actionWithDuration:1]];
         [nonParallaxLayer addChild:gorilla z:3];
     }

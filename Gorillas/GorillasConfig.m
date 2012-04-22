@@ -116,7 +116,7 @@
 
                        [NSNumber numberWithUnsignedLong:[theme skyColor]],         NSStringFromSelector(@selector(skyColor)),
                        [NSNumber numberWithUnsignedLong:[theme starColor]],        NSStringFromSelector(@selector(starColor)),
-                       [NSNumber numberWithInteger:    10],                        NSStringFromSelector(@selector(starSpeed)),
+                       [NSNumber numberWithInteger:     2],                        NSStringFromSelector(@selector(starSpeed)),
                        [NSNumber numberWithUnsignedInt:[theme starAmount]],        NSStringFromSelector(@selector(starAmount)),
 
                        [NSNumber numberWithInteger:    3],                         NSStringFromSelector(@selector(lives)),

@@ -30,8 +30,6 @@
 @private
     ccColor4B               skyColor;
 
-    CGPoint                 fromPx, toPx;
-    
     NSMutableArray          *stars;
 }
 
