@@ -96,7 +96,7 @@
                                   self.smoke.sourcePosition.x - [(CCNode*)self.target position].x) / (float)M_PI * 180.0f;
         self.smoke.sourcePosition = [(CCNode*)self.target position];
     
-    if(gameLayer.singlePlayer && gameLayer.activeGorilla.human)
+    if(gameLayer.singlePlayer && gameLayer.activeGorilla.human && [gameLayer isEnabled:GorillasFeatureSkill])
         // Singleplayer game with human turn is still running; update the skill counter.
         [GorillasAppDelegate get].hudLayer.throwSkill = self.elapsed / 10;
 }

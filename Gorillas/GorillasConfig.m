@@ -317,9 +317,9 @@ static NSMutableDictionary *GorillasScores = nil;
 
     GKScore *score = [[[GKScore alloc] initWithCategory:category] autorelease];
     score.value = MAX(0, ((GKScore *)[GorillasScores objectForKey:category]).value + scoreDelta);
+    [GorillasScores setObject:score forKey:category];
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [GorillasScores setObject:score forKey:category];
         self.scores = [NSKeyedArchiver archivedDataWithRootObject:GorillasScores];
 
         [score reportScoreWithCompletionHandler:^(NSError *error) {
