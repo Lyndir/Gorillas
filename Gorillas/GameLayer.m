@@ -133,6 +133,8 @@
       [NSNumber numberWithUnsignedInt:ais],
       @"ais",
       nil]];
+    
+    [[GorillasAppDelegate get].hudLayer reset];
 
     // Create gorillas array.
     [gorillas removeAllObjects];

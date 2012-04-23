@@ -50,11 +50,11 @@
         return self;
 
     // Score.
-    self.skillSprite = [CCLabelAtlas labelWithString:@"Skill"
+    self.skillSprite = [CCLabelAtlas labelWithString:@"Skill:"
                                          charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
     self.skillCount = [CCLabelAtlas labelWithString:@""
                                         charMapFile:@"bonk.png" itemWidth:13 itemHeight:26 startCharMap:' '];
-    [self.skillSprite setPosition:ccp(self.contentSize.width / 2, self.contentSize.height / 2)];
+    [self.skillSprite setPosition:ccp(150, 0)];
     [self.skillCount setPosition:ccp(230, 0)];
     [self addChild:self.skillSprite];
     [self addChild:self.skillCount];
