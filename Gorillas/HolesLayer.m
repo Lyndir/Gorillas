@@ -113,6 +113,8 @@
     // Reset blend & data source.
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 //    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    ccGLBlendFunc( CC_BLEND_SRC, CC_BLEND_DST );
+
 
 //    //glDisableClientState(GL_COLOR_ARRAY);
 //    //glDisableClientState(GL_VERTEX_ARRAY);
