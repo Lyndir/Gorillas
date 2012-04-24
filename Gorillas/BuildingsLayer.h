@@ -31,6 +31,7 @@ typedef struct Building {
     CGSize      size;
     NSUInteger  windowCount;
     ccColor4B   frontColor;
+    ccColor4B   topColor;
     ccColor4B   backColor;
 } Building;
 

@@ -483,7 +483,7 @@
     CCSprite *light = [CCSprite spriteWithFile:@"fire.png"];
     light.position = ccp(240, -500);
     light.scale = 150;
-    light.color = ccc3(0xff, 0xff, 0);
+    light.color = ccc3(0xff, 0xff, 0xcc);
     light.opacity = 0x55;
     panningLayer            = [[PanningLayer alloc] init];
     panningLayer.position   = CGPointZero;

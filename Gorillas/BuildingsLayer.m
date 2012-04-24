@@ -118,11 +118,9 @@
         windowCount                 += buildings[b].windowCount;
         
         // Building's color.
-        buildings[b].frontColor     = ccc4shade(ccc4lighten([config buildingColor], lightRatio), skyColor, MAX(0, -lightRatio / 2));
-        buildings[b].backColor.r    = (GLubyte)(buildings[b].frontColor.r * 0.2f);
-        buildings[b].backColor.g    = (GLubyte)(buildings[b].frontColor.g * 0.2f);
-        buildings[b].backColor.b    = (GLubyte)(buildings[b].frontColor.b * 0.2f);
-        buildings[b].backColor.a    = (GLubyte)(buildings[b].frontColor.a * 1.0f);
+        buildings[b].frontColor     = ccc4lighten(ccc4shade([config buildingColor], skyColor, -lightRatio), lightRatio / 3);
+        buildings[b].topColor       = ccc4lighten(buildings[b].frontColor, -buildings[b].size.height / (winSize.height * 1.5f));
+        buildings[b].backColor      = ccc4lighten(buildings[b].frontColor, -0.8f);
     }
     
     // Build vertex arrays.
@@ -150,8 +148,8 @@
         const NSUInteger bv                 = b * 4;
         const NSUInteger bi                 = b * 6;
 
-        buildingVertices[bv + 0].front.c    = buildingVertices[bv + 1].front.c      = buildings[b].backColor;
-        buildingVertices[bv + 2].front.c    = buildingVertices[bv + 3].front.c      = buildings[b].frontColor;
+        buildingVertices[bv + 0].front.c    = buildingVertices[bv + 1].front.c      = buildings[b].frontColor;
+        buildingVertices[bv + 2].front.c    = buildingVertices[bv + 3].front.c      = buildings[b].topColor;
         buildingVertices[bv + 0].backColor  = buildingVertices[bv + 1].backColor    = buildings[b].backColor;
         buildingVertices[bv + 2].backColor  = buildingVertices[bv + 3].backColor    = buildings[b].backColor;
 
@@ -237,10 +235,10 @@
 -(void) draw {
 
     [super draw];
-
+    
     CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"BuildingsLayer - draw");
    	CC_NODE_DRAW_SETUP();
-
+    
 //	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
 //    //glEnableClientState(GL_VERTEX_ARRAY);
 //    //glEnableClientState(GL_COLOR_ARRAY);
@@ -295,13 +293,14 @@
 
 //    // Turn off state.
 //    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    ccGLBlendFunc( CC_BLEND_SRC, CC_BLEND_DST );
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 //    //glDisableClientState(GL_COLOR_ARRAY);
 //    //glDisableClientState(GL_VERTEX_ARRAY);
 //    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 //	glEnable(GL_TEXTURE_2D);
-
+    
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
    	CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"BuildingsLayer - draw");

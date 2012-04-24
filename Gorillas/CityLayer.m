@@ -114,9 +114,7 @@
     [nonParallaxLayer addChild:explosions z:4];
     buildings = malloc(sizeof(BuildingsLayer*) * buildingsCount);
     for (NSInteger b = (signed)buildingsCount - 1; b >= 0; --b) {
-        float lightRatio = -(b / 4.0f);
-        if (b)
-            lightRatio -= 0.5f;
+        float lightRatio = MAX(-1, -((float)b / buildingsCount) * 1.5f);
 
         buildings[b] = [[BuildingsLayer alloc] initWithWidthRatio:(5 - b) / 5.0f heightRatio:1 + (b / 2.0f) lightRatio:lightRatio];
         if (b)
