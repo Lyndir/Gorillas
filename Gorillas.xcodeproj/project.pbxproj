@@ -2685,8 +2685,8 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
-				DA59345D1534CD1E0060D09A /* ShellScript */,
-				DAA0BE08148D70CD00E6C79C /* ShellScript */,
+				DA59345D1534CD1E0060D09A /* Run Script: GIT version -> Info.plist */,
+				DAA0BE08148D70CD00E6C79C /* Run Script: Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -2722,6 +2722,8 @@
 				DA47694E0FDD7334002E74F8 /* Resources */,
 				DA47697F0FDD7334002E74F8 /* Sources */,
 				DA4769EA0FDD7334002E74F8 /* Frameworks */,
+				DAE2A39B1547F1FB00589827 /* Run Script: GIT version -> Info.plist */,
+				DAE2A39A1547F1E700589827 /* Run Script: Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -3137,13 +3139,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		DA59345D1534CD1E0060D09A /* ShellScript */ = {
+		DA59345D1534CD1E0060D09A /* Run Script: GIT version -> Info.plist */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script: GIT version -> Info.plist";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3151,18 +3154,49 @@
 			shellScript = "PATH+=:/usr/libexec\n\nsetPlistWithKey() {\n    local key=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Set :$key $value\" \"$plist\"\n}\ngetPlistWithKey() {\n    local key=$1 plist=${2:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Print :$key\" \"$plist\"\n}\nsetSettingWithTitle() {\n    local i title=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Settings.bundle/Root.plist\"}\n    \n    for (( i=0; 1; ++i )); do\n        PlistBuddy -c \"Print :PreferenceSpecifiers:$i\" \"$plist\" &>/dev/null || break\n        echo \"Checking preference specifier $i\"\n    \n        [[ $(PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Title\" \"$plist\" 2>/dev/null) = $title ]] || continue\n    \n        echo \"Correct title, setting value.\"\n        PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue $value\" \"$plist\"\n        break\n    done\n}\n\nbuild=$(git describe --tags --always --dirty --long)\ntag=$(git describe --tags | sed 's/-\\([^-]*\\)-[^-]*$/.\\1/')\n\nsetPlistWithKey CFBundleVersion \"$build\"\nsetPlistWithKey CFBundleShortVersionString \"$tag\"\n\nsetSettingWithTitle \"Build\" \"$build\"\nsetSettingWithTitle \"Version\" \"$tag\"\nsetSettingWithTitle \"Copyright\" \"$(getPlistWithKey NSHumanReadableCopyright)\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DAA0BE08148D70CD00E6C79C /* ShellScript */ = {
+		DAA0BE08148D70CD00E6C79C /* Run Script: Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script: Crashlytics";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ./Crashlytics.framework/run;
+			shellScript = ./Crashlytics/Crashlytics.framework/run;
+			showEnvVarsInLog = 0;
+		};
+		DAE2A39A1547F1E700589827 /* Run Script: Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script: Crashlytics";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = ./Crashlytics/Crashlytics.framework/run;
+			showEnvVarsInLog = 0;
+		};
+		DAE2A39B1547F1FB00589827 /* Run Script: GIT version -> Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script: GIT version -> Info.plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/bin/bash -e";
+			shellScript = "PATH+=:/usr/libexec\n\nsetPlistWithKey() {\n    local key=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Set :$key $value\" \"$plist\"\n}\ngetPlistWithKey() {\n    local key=$1 plist=${2:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Print :$key\" \"$plist\"\n}\nsetSettingWithTitle() {\n    local i title=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Settings.bundle/Root.plist\"}\n    \n    for (( i=0; 1; ++i )); do\n    PlistBuddy -c \"Print :PreferenceSpecifiers:$i\" \"$plist\" &>/dev/null || break\n    echo \"Checking preference specifier $i\"\n    \n    [[ $(PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Title\" \"$plist\" 2>/dev/null) = $title ]] || continue\n    \n    echo \"Correct title, setting value.\"\n    PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue $value\" \"$plist\"\n    break\n    done\n}\n\nbuild=$(git describe --tags --always --dirty --long)\ntag=$(git describe --tags | sed 's/-\\([^-]*\\)-[^-]*$/.\\1/')\n\nsetPlistWithKey CFBundleVersion \"$build\"\nsetPlistWithKey CFBundleShortVersionString \"$tag\"\n\nsetSettingWithTitle \"Build\" \"$build\"\nsetSettingWithTitle \"Version\" \"$tag\"\nsetSettingWithTitle \"Copyright\" \"$(getPlistWithKey NSHumanReadableCopyright)\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
