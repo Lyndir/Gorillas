@@ -35,7 +35,7 @@
 -(id) init {
 
     if (!(self = [super init]))
-		return self;
+        return self;
 
     stars = [[NSMutableArray alloc] init];
 
@@ -80,7 +80,7 @@
     [super draw];
 
     CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"SkyLayer - draw");
-   	CC_NODE_DRAW_SETUP();
+       CC_NODE_DRAW_SETUP();
 
     Vertex vertices[4] = {
             { .p = { 0,                         0 },                        .c = skyColor },
@@ -92,7 +92,7 @@
 
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
-   	CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"SkyLayer - draw");
+       CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"SkyLayer - draw");
 }
 
 

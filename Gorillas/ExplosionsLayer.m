@@ -143,7 +143,7 @@ static float flameRadius;
 -(void) draw {
 
     CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"ExplosionsLayer - draw");
-   	CC_NODE_DRAW_SETUP();
+       CC_NODE_DRAW_SETUP();
 
     if(positionsPx) {
         NSUInteger f = 0;
@@ -169,7 +169,7 @@ static float flameRadius;
 
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
-   	CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"ExplosionsLayer - draw");
+       CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"ExplosionsLayer - draw");
 }
 
 

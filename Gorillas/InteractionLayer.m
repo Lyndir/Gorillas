@@ -43,7 +43,7 @@
 -(id) init {
     
     if (!(self = [super init]))
-		return self;
+        return self;
     
     self.isTouchEnabled = YES;
     

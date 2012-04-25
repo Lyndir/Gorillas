@@ -33,7 +33,7 @@
 
 -(id) initWidthDepth:(float)aDepth {
     
-	if (!(self = [super init]))
+    if (!(self = [super init]))
         return self;
     
     starVertexBuffer    = 0;
@@ -109,14 +109,14 @@
     [super draw];
 
     CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"StarLayer - draw");
-   	CC_NODE_DRAW_SETUP();
+       CC_NODE_DRAW_SETUP();
 
-//	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+//    // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
 //    //glEnableClientState(GL_COLOR_ARRAY);
 //    //glEnableClientState(GL_VERTEX_ARRAY);
 //    glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
 //    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-//	glDisable(GL_TEXTURE_2D);
+//    glDisable(GL_TEXTURE_2D);
     ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color);
     glEnableVertexAttribArray(kPearlGLVertexAttrib_Size);
 
@@ -138,7 +138,7 @@
 
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
-   	CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"StarLayer - draw");
+       CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"StarLayer - draw");
 }
 
 

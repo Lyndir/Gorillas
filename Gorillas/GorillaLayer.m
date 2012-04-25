@@ -434,9 +434,9 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
         return;
     
     CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"GorillaLayer - draw");
-   	CC_NODE_DRAW_SETUP();
+       CC_NODE_DRAW_SETUP();
     [[[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor] use];
-   	[[[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor] setUniformForModelViewProjectionMatrix];
+       [[[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor] setUniformForModelViewProjectionMatrix];
     
     CGSize size = self.contentSize; //CC_SIZE_POINTS_TO_PIXELS(self.contentSize);
     
@@ -477,7 +477,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
 
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
-   	CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"GorillaLayer - draw");
+       CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"GorillaLayer - draw");
 }
 
 

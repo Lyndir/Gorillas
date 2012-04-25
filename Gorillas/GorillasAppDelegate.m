@@ -132,13 +132,13 @@
     
     [super preSetup];
     
-	// Build the splash scene.
+    // Build the splash scene.
     CCScene *splashScene = [CCScene node];
     CCSprite *splash = [PearlCCSplash node];
     [splashScene addChild:splash];
     
     // Build the game scene.
-	self.gameLayer = [GameLayer node];
+    self.gameLayer = [GameLayer node];
     CCSprite *frame = [CCSprite spriteWithFile:@"frame.png"];
     frame.anchorPoint = CGPointZero;
     [self.uiLayer addChild:frame z:1];
@@ -339,15 +339,15 @@ static NSDictionary *localyticsInfo = nil;
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     
     [[LocalyticsSession sharedLocalyticsSession] close];
-	[[LocalyticsSession sharedLocalyticsSession] upload];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
     
     [super applicationDidEnterBackground:application];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     
- 	[[LocalyticsSession sharedLocalyticsSession] resume];
-	[[LocalyticsSession sharedLocalyticsSession] upload];
+     [[LocalyticsSession sharedLocalyticsSession] resume];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
     
     [super applicationWillEnterForeground:application];
 }
