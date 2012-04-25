@@ -43,9 +43,12 @@
 @property (nonatomic, readwrite, retain) AVConfigurationLayer           *avConfigLayer;
 
 @property (nonatomic, readwrite, retain) NetController                  *netController;
- 
+
 - (NSString *)testFlightInfo;
 - (NSString *)testFlightToken;
+
+- (NSString *)crashlyticsInfo;
+- (NSString *)crashlyticsAPIKey;
 
 - (NSString *)localyticsInfo;
 - (NSString *)localyticsKey;
@@ -60,42 +63,72 @@
 
 + (void)initialize {
     
+    [GorillasConfig get];
 #if DEBUG
     [[PearlLogger get] setAutoprintLevel:PearlLogLevelDebug];
 #endif
-    [GorillasConfig get];
 }
 
 - (void)preSetup {
-
-#if ! DEBUG
-    dbg(@"Initializing TestFlight");
-    [TestFlight takeOff:[self testFlightToken]];
-    [TestFlight addCustomEnvironmentInformation:@"Anonymous" forKey:@"username"];
-
-    dbg(@"Initializing Crashlytics");
-    [Crashlytics sharedInstance].debugMode = YES;
-    [Crashlytics startWithAPIKey:@"aa135d981000035c047c01f297b02539d4faca71"]; // TODO: Make secret
-#endif
     
-    @try {
-        [[LocalyticsSession sharedLocalyticsSession] startSession:[self localyticsKey]];
-        [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
-            if (message.level >= PearlLogLevelError)
-                [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Problem" attributes:
-                 [NSDictionary dictionaryWithObjectsAndKeys:
-                  [message levelDescription],
-                  @"level",
-                  message.message,
-                  @"message",
-                  nil]];
-            
-            return YES;
-        }];
-    }
-    @catch (NSException *exception) {
-        err(@"Localytics exception: %@", exception);
-    }
+#if ! DEBUG
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        @try {
+            NSString *token = [self testFlightToken];
+            if ([token length]) {
+                dbg(@"Initializing TestFlight");
+                [TestFlight addCustomEnvironmentInformation:@"Anonymous" forKey:@"username"];
+                [TestFlight setOptions:[NSDictionary dictionaryWithObjectsAndKeys:
+                                        [NSNumber numberWithBool:NO],   @"logToConsole",
+                                        [NSNumber numberWithBool:NO],   @"logToSTDERR",
+                                        nil]];
+                [TestFlight takeOff:token];
+                [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
+                    if (message.level >= PearlLogLevelInfo)
+                        TFLog(@"%@", message);
+                    
+                    return YES;
+                }];
+            }
+        }
+        @catch (NSException *exception) {
+            err(@"TestFlight: %@", exception);
+        }
+        @try {
+            NSString *apiKey = [self crashlyticsAPIKey];
+            if ([apiKey length]) {
+                dbg(@"Initializing Crashlytics");
+                //[Crashlytics sharedInstance].debugMode = YES;
+                [Crashlytics startWithAPIKey:apiKey afterDelay:0];
+            }
+        }
+        @catch (NSException *exception) {
+            err(@"Crashlytics: %@", exception);
+        }
+        @try {
+            NSString *key = [self localyticsKey];
+            if ([key length]) {
+                dbg(@"Initializing Localytics");
+                [[LocalyticsSession sharedLocalyticsSession] startSession:key];
+                [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
+                    if (message.level >= PearlLogLevelError)
+                        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Problem" attributes:
+                         [NSDictionary dictionaryWithObjectsAndKeys:
+                          [message levelDescription],
+                          @"level",
+                          message.message,
+                          @"message",
+                          nil]];
+                    
+                    return YES;
+                }];
+            }
+        }
+        @catch (NSException *exception) {
+            err(@"Localytics exception: %@", exception);
+        }
+    });
+#endif
     
     [super preSetup];
     
@@ -250,8 +283,28 @@ static NSDictionary *testFlightInfo = nil;
 }
 
 - (NSString *)testFlightToken {
+    
+    return NSNullToNil([[self testFlightInfo] valueForKeyPath:@"Team Token"]);
+}
 
-    return [[self testFlightInfo] valueForKeyPath:@"Team Token"];
+
+#pragma mark - Crashlytics
+
+
+static NSDictionary *crashlyticsInfo = nil;
+
+- (NSDictionary *)crashlyticsInfo {
+    
+    if (crashlyticsInfo == nil)
+        crashlyticsInfo = [[NSDictionary alloc] initWithContentsOfURL:
+                           [[NSBundle mainBundle] URLForResource:@"Crashlytics" withExtension:@"plist"]];
+    
+    return crashlyticsInfo;
+}
+
+- (NSString *)crashlyticsAPIKey {
+    
+    return NSNullToNil([[self crashlyticsInfo] valueForKeyPath:@"API Key"]);
 }
 
 
@@ -265,18 +318,19 @@ static NSDictionary *localyticsInfo = nil;
     
     if (localyticsInfo == nil)
         localyticsInfo = [[NSDictionary alloc] initWithContentsOfURL:
-                         [[NSBundle mainBundle] URLForResource:@"Localytics" withExtension:@"plist"]];
+                          [[NSBundle mainBundle] URLForResource:@"Localytics" withExtension:@"plist"]];
     
     return localyticsInfo;
 }
 
 - (NSString *)localyticsKey {
+    
 #if DEBUG
-    return [[self localyticsInfo] valueForKeyPath:@"Key.development"];
+    return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.development"]);
 #elif LITE
-    return [[self localyticsInfo] valueForKeyPath:@"Key.distribution.lite"];
+    return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution.lite"]);
 #else
-    return [[self localyticsInfo] valueForKeyPath:@"Key.distribution"];
+    return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution"]);
 #endif
 }
 
@@ -291,7 +345,7 @@ static NSDictionary *localyticsInfo = nil;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-
+    
  	[[LocalyticsSession sharedLocalyticsSession] resume];
 	[[LocalyticsSession sharedLocalyticsSession] upload];
     
