@@ -147,7 +147,7 @@
         @catch (NSException *exception) {
             err(@"Localytics: %@", exception);
         }
-    })
+    });
 #endif
     
     [[GorillasAppDelegate get].hudLayer reset];
