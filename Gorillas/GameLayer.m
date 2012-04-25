@@ -29,6 +29,7 @@
 #import "CityTheme.h"
 #import "InteractionLayer.h"
 #import "LocalyticsSession.h"
+#import "TestFlight.h"
 
 
 @interface GameLayer ()
@@ -114,7 +115,7 @@
                     playerIDs:(NSArray *)playerIDs localHumans:(NSUInteger)localHumans ais:(NSUInteger)_ais {
     
     configuring     = YES;
-
+    
     [self stopGame];
     
     mode            = _mode;
@@ -122,20 +123,35 @@
     humans          = localHumans + [playerIDs count];
     ais             = _ais;
     
-    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"New Game" attributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      [GorillasConfig nameForMode:mode],
-      @"mode",
-      [NSNumber numberWithUnsignedInt:localHumans],
-      @"localHumans",
-      [NSNumber numberWithUnsignedInt:[playerIDs count]],
-      @"remoteHumans",
-      [NSNumber numberWithUnsignedInt:ais],
-      @"ais",
-      nil]];
+#if ! DEBUG
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        @try {
+            [TestFlight passCheckpoint:str(@"GorillasNewGame_", [GorillasConfig nameForMode:mode])];
+        }
+        @catch (NSException *exception) {
+            err(@"TestFlight: %@", exception);
+        }
+        @try {
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"New Game" attributes:
+             [NSDictionary dictionaryWithObjectsAndKeys:
+              [GorillasConfig nameForMode:mode],
+              @"mode",
+              [NSNumber numberWithUnsignedInt:localHumans],
+              @"localHumans",
+              [NSNumber numberWithUnsignedInt:[playerIDs count]],
+              @"remoteHumans",
+              [NSNumber numberWithUnsignedInt:ais],
+              @"ais",
+              nil]];
+        }
+        @catch (NSException *exception) {
+            err(@"Localytics: %@", exception);
+        }
+    })
+#endif
     
     [[GorillasAppDelegate get].hudLayer reset];
-
+    
     // Create gorillas array.
     [gorillas removeAllObjects];
     if(!gorillas)
@@ -149,6 +165,7 @@
         for (NSString *playerID in playerIDs)
             [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeHuman playerID:playerID]];
         
+#if ! LITE
         [GKPlayer loadPlayersForIdentifiers:playerIDs withCompletionHandler:^(NSArray *players, NSError *error) {
             if (error)
                 err(@"While loading player information: %@", error);
@@ -158,6 +175,7 @@
                     if ([gorilla.playerID isEqualToString:player.playerID])
                         gorilla.player = player;
         }];
+#endif
     }
     else
         for (NSUInteger i = 0; i < humans; ++i)
@@ -188,10 +206,10 @@
     
     if ([[GorillasConfig get].vibration boolValue])
         [GorillasAudioController vibrate];
-
+    
     if (![shakeAction isDone])
         [cityLayer stopAction:shakeAction];
-
+    
     [cityLayer runAction:shakeAction];
 }
 
@@ -213,7 +231,7 @@
         [GorillasConfig get].cityTheme = [[CityTheme getThemeNames] objectAtIndex:PearlGameRandom() % [[CityTheme getThemeNames] count]];
     else
         [self reset];
-
+    
     // When there are AIs in the game, show their difficulity.
     if (ais)
         [[GorillasAppDelegate get].uiLayer message:[GorillasConfig nameForLevel:[GorillasConfig get].level]];
@@ -340,7 +358,7 @@
             // Update Level.
             if([self isEnabled:GorillasFeatureLevel]) {
                 scoreDelta *= [[GorillasConfig get].level doubleValue];
-
+                
                 NSString *oldLevel = [GorillasConfig nameForLevel:[GorillasConfig get].level];
                 if(scoreDelta > 0)
                     [[GorillasConfig get] levelUp];
@@ -492,7 +510,7 @@
     [panningLayer addChild:light z:-1];
     [self addChild:panningLayer z:0];
     [self addChild:skyLayer z:-5];
-
+    
     windLayer               = [[WindLayer alloc] init];
     windLayer.position      = ccp(self.contentSize.width / 2, self.contentSize.height - 15);
     [self addChild:windLayer z:5];
@@ -513,7 +531,7 @@
     
     [self setPausedSilently:YES];
     [[GorillasAppDelegate get] showMainMenu];
-
+    
     [self schedule:@selector(updateWeather:) interval:1];
     [self schedule:@selector(randomEncounter:) interval:1];
 }
