@@ -35,13 +35,13 @@
     if (!(self = [self initWithWidthRatio:1 heightRatio:1 lightRatio:0]))
         return nil;
 
-	return self;
+    return self;
 }
 
 
 - (id) initWithWidthRatio:(CGFloat)w heightRatio:(float)h lightRatio:(float)l {
     
-	if (!(self = [super init]))
+    if (!(self = [super init]))
         return self;
 
     self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
@@ -58,7 +58,7 @@
     // Must reset before onEnter.  Others' onEnter depends on us being done.
     [self reset];
     
-	return self;
+    return self;
 }
 
 
@@ -237,13 +237,13 @@
     [super draw];
     
     CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"BuildingsLayer - draw");
-   	CC_NODE_DRAW_SETUP();
+       CC_NODE_DRAW_SETUP();
     
-//	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+//    // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
 //    //glEnableClientState(GL_VERTEX_ARRAY);
 //    //glEnableClientState(GL_COLOR_ARRAY);
-//	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-//	glDisable(GL_TEXTURE_2D);
+//    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+//    glDisable(GL_TEXTURE_2D);
     ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color);
 
     // Drawing Front Side.
@@ -299,11 +299,11 @@
 //    //glDisableClientState(GL_COLOR_ARRAY);
 //    //glDisableClientState(GL_VERTEX_ARRAY);
 //    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-//	glEnable(GL_TEXTURE_2D);
+//    glEnable(GL_TEXTURE_2D);
     
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
-   	CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"BuildingsLayer - draw");
+       CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"BuildingsLayer - draw");
 }
 
 

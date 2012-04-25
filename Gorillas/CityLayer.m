@@ -46,7 +46,7 @@
     dbg(@"CityLayer init");
     
     if (!(self = [super init]))
-		return self;
+        return self;
 
     CGSize s = [[CCDirector sharedDirector] winSize];
     anchorPoint_ = ccp(0.5f, 0.5f);
@@ -181,7 +181,7 @@
     [super draw];
 
     CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"CityLayer - draw");
-   	CC_NODE_DRAW_SETUP();
+       CC_NODE_DRAW_SETUP();
 
 #if DEBUG_COLLISION
     CGSize winSize = [CCDirector sharedDirector].winSize;
@@ -237,7 +237,7 @@
 
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
-   	CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"CityLayer - draw");
+       CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"CityLayer - draw");
 }
 
 

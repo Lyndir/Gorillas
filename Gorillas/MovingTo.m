@@ -12,17 +12,17 @@
 @implementation MovingTo
 
 - (id)initWithDuration:(ccTime)t position:(CGPoint)p {
-	if(!(self = [super initWithDuration:t position:p]))
+    if(!(self = [super initWithDuration:t position:p]))
         return self;
     
-	return self;
+    return self;
 }
 
 - (void)updatePosition:(CGPoint)pos {
 
     endPosition_ = pos;
-	startPosition_ = [(CCNode*)target_ position];
-	delta_ = ccpSub( endPosition_, startPosition_ );
+    startPosition_ = [(CCNode*)target_ position];
+    delta_ = ccpSub( endPosition_, startPosition_ );
     elapsed_ = 0;
 }
 

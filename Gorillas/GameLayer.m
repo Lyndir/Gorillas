@@ -481,8 +481,8 @@
 
 -(id) init {
     
-	if (!(self = [super init]))
-		return self;
+    if (!(self = [super init]))
+        return self;
     
     timeScale = 1.0f;
     mode = GorillasModeClassic;

@@ -32,7 +32,7 @@
 -(id) init {
     
     if (!(self = [super init]))
-		return self;
+        return self;
     
     self.anchorPoint    = ccp(0.5f, 0.0f);
     
