@@ -47,13 +47,13 @@
     
     if (!(self = [super init]))
         return self;
-
+    
     CGSize s = [[CCDirector sharedDirector] winSize];
     anchorPoint_ = ccp(0.5f, 0.5f);
     [self setContentSize:s];
-    self.isRelativeAnchorPoint = NO;
+    self.ignoreAnchorPointForPosition = YES;
     self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
-
+    
 #if DEBUG_COLLISION
     dbgTraceStep    = 5;
     dbgPathMaxInd   = 50;
@@ -66,10 +66,10 @@
 #endif
     
     throwHints      = [[NSMutableArray alloc] initWithCapacity:2];
-
+    
     holes           = nil;
     explosions      = nil;
-
+    
     // Must reset before entering the scene; others' onEnter depends on us being done.
     buildings = nil;
     buildingsCount = 4;
@@ -80,14 +80,14 @@
 }
 
 -(void) addChild: (CCNode*) child z:(NSInteger)z {
-
+    
     [nonParallaxLayer addChild:child z:z];
 }
 
 
 -(void) reset {
     dbg(@"CityLayer reset");
-
+    
     // Clean up.
     [self stopAllActions];
     
@@ -115,7 +115,7 @@
     buildings = malloc(sizeof(BuildingsLayer*) * buildingsCount);
     for (NSInteger b = (signed)buildingsCount - 1; b >= 0; --b) {
         float lightRatio = MAX(-1, -((float)b / buildingsCount) * 1.5f);
-
+        
         buildings[b] = [[BuildingsLayer alloc] initWithWidthRatio:(5 - b) / 5.0f heightRatio:1 + (b / 2.0f) lightRatio:lightRatio];
         if (b)
             [self addChild:buildings[b] z:-2 - (NSInteger)b parallaxRatio:ccp((5 - b) / 5.0f, (10 - b) / 10.0f) positionOffset:CGPointZero];
@@ -126,19 +126,19 @@
 
 
 -(void) message:(NSString *)msg on:(CCNode *)node {
-
+    
     if(msgLabel) {
         [msgLabel stopAllActions];
         [msgLabel setString:msg];
     }
-
+    
     else {
         msgLabel = [[CCLabelTTF alloc] initWithString:msg
-                                      dimensions:CGSizeMake(1000, [[GorillasConfig get].fontSize intValue] + 5)
-                                       alignment:UITextAlignmentCenter
-                                        fontName:[GorillasConfig get].fixedFontName
-                                        fontSize:[[GorillasConfig get].fontSize intValue]];
-    
+                                           dimensions:CGSizeMake(1000, [[GorillasConfig get].fontSize intValue] + 5)
+                                           hAlignment:kCCTextAlignmentCenter
+                                             fontName:[GorillasConfig get].fixedFontName
+                                             fontSize:[[GorillasConfig get].fontSize intValue]];
+        
         [nonParallaxLayer addChild:msgLabel z:9];
     }
     
@@ -177,17 +177,17 @@
 
 
 -(void) draw {
-
+    
     [super draw];
-
+    
     CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"CityLayer - draw");
-       CC_NODE_DRAW_SETUP();
-
+    CC_NODE_DRAW_SETUP();
+    
 #if DEBUG_COLLISION
     CGSize winSize = [CCDirector sharedDirector].winSize;
     CGRect field = [self fieldInSpaceOf:self];
     int pCount = (field.size.width / dbgTraceStep + 1)
-                * (winSize.height / dbgTraceStep + 1);
+    * (winSize.height / dbgTraceStep + 1);
     CGPoint *hgp = malloc(sizeof(CGPoint) * pCount);
     CGPoint *hep = malloc(sizeof(CGPoint) * pCount);
     NSUInteger hgc = 0, hec = 0;
@@ -195,10 +195,10 @@
     for(float x = field.origin.x; x < field.origin.x + field.size.width; x += dbgTraceStep)
         for(float y = field.origin.y; y < field.origin.y + field.size.height; y += dbgTraceStep) {
             CGPoint pos = ccp(x, y);
-
+            
             BOOL hg = NO, he = NO;
             he = [holes isHoleAtWorld:pos];
-
+            
             for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
                 if((hg = [gorilla hitsGorilla:pos]))
                     break;
@@ -234,10 +234,10 @@
             }
         }
     }
-
+    
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
-       CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"CityLayer - draw");
+    CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"CityLayer - draw");
 }
 
 
@@ -257,7 +257,7 @@
         [[GorillasAppDelegate get].gameLayer endGame];
         return;
     }
-
+    
     // Schedule to retry later if game is paused.
     if ([GorillasAppDelegate get].gameLayer.paused) {
         [self schedule:@selector(tryNextGorilla:) interval:0.1f];
@@ -279,7 +279,7 @@
         BOOL reachedCurrent = NO;
         
         for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas) {
-        
+            
             if(gorilla == [GorillasAppDelegate get].gameLayer.activeGorilla)
                 reachedCurrent = YES;
             
@@ -328,12 +328,12 @@
     
     // New active gorilla's turn starts.
     [GorillasAppDelegate get].gameLayer.activeGorilla.active = YES;
-
+    
     // AI throw.
     if ([GorillasAppDelegate get].gameLayer.activeGorilla.alive && ![GorillasAppDelegate get].gameLayer.activeGorilla.human) {
         // Active gorilla is a live AI.
         NSMutableArray *enemies = [[GorillasAppDelegate get].gameLayer.gorillas mutableCopy];
-
+        
         // Exclude from enemy list: Dead gorillas, Self, AIs when in team mode.
         for (GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas) {
             if (![gorilla alive]
@@ -342,7 +342,7 @@
                     && ![gorilla human]))
                 [enemies removeObject:gorilla];
         }
-
+        
         // Pick a random target from the enemies.
         GorillaLayer *target = [enemies objectAtIndex:(unsigned)PearlGameRandom() % [enemies count]];
         [enemies release];
@@ -350,9 +350,9 @@
         // Aim at the target.
         CGPoint r0 = [GorillasAppDelegate get].gameLayer.activeGorilla.position;
         CGPoint v = [self calculateThrowFrom:r0
-                                         to:target.position
-                                 errorLevel:[[GorillasConfig get].level floatValue]];
-
+                                          to:target.position
+                                  errorLevel:[[GorillasConfig get].level floatValue]];
+        
         // Throw at where we aimed.
         [[ThrowController get] throwFrom:[GorillasAppDelegate get].gameLayer.activeGorilla normalizedVelocity:v];
         
@@ -366,7 +366,7 @@
     // Throw hints.
     for (NSUInteger i = 0; i < [[GorillasAppDelegate get].gameLayer.gorillas count]; ++i) {
         GorillaLayer *gorilla = [[GorillasAppDelegate get].gameLayer.gorillas objectAtIndex:i];
-
+        
         BOOL hintGorilla = YES;
         
         if (![[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureCheat])
@@ -381,15 +381,15 @@
         
         if(hintGorilla) {
             CGPoint v = [self calculateThrowFrom:[[GorillasAppDelegate get].gameLayer.activeGorilla position]
-                                             to:[gorilla position] errorLevel:0.9f];
-
+                                              to:[gorilla position] errorLevel:0.9f];
+            
             [hint setOpacity:0];
             [hint setPosition:ccpAdd([GorillasAppDelegate get].gameLayer.activeGorilla.position, v)];
             [hint runAction:[CCRepeatForever actionWithAction:[CCSequence actions:
-                                                             [CCDelayTime actionWithDuration:5],
-                                                             [CCFadeTo actionWithDuration:3 opacity:0x55],
-                                                             [CCFadeTo actionWithDuration:3 opacity:0x00],
-                                                             nil]]];
+                                                               [CCDelayTime actionWithDuration:5],
+                                                               [CCFadeTo actionWithDuration:3 opacity:0x55],
+                                                               [CCFadeTo actionWithDuration:3 opacity:0x00],
+                                                               nil]]];
         }
     }
 }
@@ -410,42 +410,42 @@
 
 
 -(CGPoint) calculateThrowFrom:(CGPoint)r0 to:(CGPoint)rt errorLevel:(CGFloat)l {
-
+    
     float g = [[GorillasConfig get].gravity unsignedIntValue];
     float w = [[[[GorillasAppDelegate get] gameLayer] windLayer] wind];
     ccTime t = 5 * 100 / g;
-
+    
     // Level-based error.
     NSInteger rtError = (NSInteger)((1 - l) * [CCDirector sharedDirector].winSize.width / 2);
     rt = ccp(rt.x + PearlGameRandom() % rtError - rtError / 2, rt.y + PearlGameRandom() % rtError - rtError / 2);
     t = (PearlGameRandom() % (int) ((t / 2) * l * 10)) / 10.0f + (t / 2);
-
+    
     // Velocity vector to hit rt in t seconds.
     CGPoint v = ccp((rt.x - r0.x) / t,
-                   (g * t * t - 2 * r0.y + 2 * rt.y) / (2 * t));
-
+                    (g * t * t - 2 * r0.y + 2 * rt.y) / (2 * t));
+    
     // Wind-based modifier.
     v.x -= w * t * [[GorillasConfig get].windModifier floatValue];
     
     // Normalize velocity so it's resolution-independant.
     CGSize winSize = [CCDirector sharedDirector].winSize;
     v = ccp(v.x / winSize.width, v.y / winSize.height);
-
+    
     return v;
 }
 
 
 -(BOOL) hitsGorilla:(CGPoint)pos {
-
+    
 #if DEBUG_COLLISION
     dbgPath[dbgPathCurInd] = pos;
     dbgPathCurInd = (dbgPathCurInd + 1) % dbgPathMaxInd;
 #endif
-
+    
     // Figure out if a gorilla was hit.
     for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
         if([gorilla hitsGorilla:pos]) {
-
+            
             if(gorilla == [GorillasAppDelegate get].gameLayer.activeGorilla && !bananaLayer.clearedGorilla)
                 // Disregard this hit on active gorilla because the banana didn't clear him yet.
                 continue;
@@ -453,10 +453,10 @@
             // A gorilla was hit.
             [hitGorilla release];
             hitGorilla = [gorilla retain];
-
+            
             return YES;
         }
-        
+    
         else
             // No hit.
             if(gorilla == [GorillasAppDelegate get].gameLayer.activeGorilla)
@@ -496,7 +496,7 @@
             [throwHints removeLastObject];
         }
     }
-
+    
     // Reset throw history & throw hints.
     free(throwHistory);
     throwHistory = malloc(sizeof(CGPoint) * [gorillas count]);
@@ -530,7 +530,7 @@
         err(@"Tried to start a game with more gorillas than there's room in the field.");
         return;
     }
-
+    
     NSUInteger minSpace  = ((delta / [gorillas count]) /* share per gorilla */ - 1) /* gorilla's building */ / 2 /* padding on each side */;
     NSMutableArray *gorillasQueue = [gorillas mutableCopy];
     NSMutableArray *gorillaIndexes = [[NSMutableArray alloc] initWithCapacity: [gorillas count]];
@@ -541,7 +541,7 @@
         // Make sure gorillas aren't too close to the edge.
         if (index - minSpace <= indexA && index + minSpace >= indexB)
             validIndex = NO;
-
+        
         // Make sure gorillas aren't too close together.
         for (NSNumber *gorillasIndex in gorillaIndexes)
             if (ABS([gorillasIndex unsignedIntegerValue] - index) <= minSpace) {
@@ -587,19 +587,19 @@
         [bananaLayer release];
         bananaLayer = nil;
     }
-
+    
     NSUInteger runningActions = 0;
     for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
         if((runningActions = [gorilla numberOfRunningActions]))
             break;
-
+    
     if(runningActions && ![GorillasAppDelegate get].gameLayer.configuring) {
         [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:[GorillasAppDelegate get].gameLayer.activeGorilla.position
                                                               horizontal:YES];
         [self runAction:[CCSequence actions:
-                  [CCDelayTime actionWithDuration:5.2f],
-                  [CCCallFunc actionWithTarget:self selector:@selector(endGameCallback)],
-                  nil]];
+                         [CCDelayTime actionWithDuration:5.2f],
+                         [CCCallFunc actionWithTarget:self selector:@selector(endGameCallback)],
+                         nil]];
     }
     else
         [self endGameCallback];
@@ -614,7 +614,7 @@
     
     [[GorillasAppDelegate get].gameLayer ended];
 }
- 
+
 
 -(void) explodeAt: (CGPoint)point isGorilla:(BOOL)isGorilla {
     
@@ -630,7 +630,7 @@
     
     Building firstBuilding = buildings[0].buildings[0];
     Building lastBuilding = buildings[0].buildings[buildings[0].buildingCount - 1];
-
+    
     CGPoint bottomLeft = [buildings[0] convertToWorldSpace:CGPointMake(firstBuilding.x, 0)];
     CGPoint topRight = [buildings[0] convertToWorldSpace:CGPointMake(lastBuilding.x + lastBuilding.size.width, 0)];
     topRight.y = [CCDirector sharedDirector].winSize.height * 2.0f;
@@ -663,7 +663,7 @@
     
     [holes release];
     holes = nil;
-
+    
     [explosions release];
     explosions = nil;
     

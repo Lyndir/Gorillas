@@ -53,11 +53,11 @@
     aimSprite.textureSize = CGSizeMake(aimSprite.textureSize.width / 2, aimSprite.textureSize.height / 2);
     [self addChild:aimSprite z:2];
     
-    angleLabel      = [[CCLabelTTF alloc] initWithString:@"0" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
+    angleLabel      = [[CCLabelTTF alloc] initWithString:@"0" dimensions:CGSizeMake(100, 100) hAlignment:kCCTextAlignmentLeft
                                                 fontName:[GorillasConfig get].fixedFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
-    strengthLabel   = [[CCLabelTTF alloc] initWithString:@"0" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
+    strengthLabel   = [[CCLabelTTF alloc] initWithString:@"0" dimensions:CGSizeMake(100, 100) hAlignment:kCCTextAlignmentLeft
                                                 fontName:[GorillasConfig get].fixedFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
-    infoLabel       = [[CCLabelTTF alloc] initWithString:@"∡\n⊿" dimensions:CGSizeMake(100, 100) alignment:UITextAlignmentLeft
+    infoLabel       = [[CCLabelTTF alloc] initWithString:@"∡\n⊿" dimensions:CGSizeMake(100, 100) hAlignment:kCCTextAlignmentLeft
                                                 fontName:[GorillasConfig get].symbolicFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
     [infoLabel addChild:angleLabel];
     [infoLabel addChild:strengthLabel];

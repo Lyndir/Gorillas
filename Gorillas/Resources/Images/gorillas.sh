@@ -1,0 +1,1 @@
+for file in gorilla_*_?-?.png; do IFS=_-. read _ _ l r _ <<< "$file"; convert -verbose "$file" -auto-gamma -resize 128 "gorilla-human-${l^^}${r^^}-hd.png"; convert -verbose "gorilla-human-${l^^}${r^^}-hd.png" -auto-gamma -colorspace Gray "gorilla-ai-${l^^}${r^^}-hd.png"; done
