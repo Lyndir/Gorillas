@@ -51,6 +51,7 @@
 		<string>AppleGothic.ttf</string>
 		<string>Bilbao-Poster-Black.ttf</string>
 		<string>Apple Symbols.ttf</string>
+		<string>Bonk.ttf</string>
 	</array>
 	<key>UIApplicationExitsOnSuspend</key>
 	<true/>

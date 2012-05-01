@@ -416,7 +416,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     if(![self alive])
         return NO;
     
-    return ABS(pos.x - self.position.x) <= self.contentSize.width / 3 && ABS(pos.y - self.position.y) <= self.contentSize.height / 3;
+    return ABS(pos.x - self.position.x) <= self.contentSize.width / 4 && ABS(pos.y - self.position.y) <= self.contentSize.height / 4;
 }
 
 
