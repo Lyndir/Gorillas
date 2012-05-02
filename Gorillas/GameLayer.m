@@ -471,7 +471,7 @@
 -(void) endGame {
     
     running = NO;
-    [self setPausedSilently:NO];
+    //[self setPausedSilently:NO];
     
     [cityLayer endGame];
 }

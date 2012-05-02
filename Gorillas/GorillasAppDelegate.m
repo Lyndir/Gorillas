@@ -194,7 +194,10 @@
     if(!self.mainMenuLayer)
         self.mainMenuLayer = [MainMenuLayer node];
     
-    [self pushLayer:self.mainMenuLayer];
+    if (![self isLastLayerShowing] || ![self isLayerShowing:self.mainMenuLayer]) {
+        [self popAllLayers];
+        [self pushLayer:self.mainMenuLayer];
+    }
 }
 
 
