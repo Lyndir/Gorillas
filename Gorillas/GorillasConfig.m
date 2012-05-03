@@ -68,7 +68,7 @@
                                                         description:l(@"menu.config.gametype.classic.desc")
                                                                mode:GorillasModeClassic
                                                 singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:4],
-#if ! LITE
+#ifndef LITE
                            [GameConfiguration configurationWithName:l(@"menu.config.gametype.dynamic")
                                                         description:l(@"menu.config.gametype.dynamic.desc")
                                                                mode:GorillasModeDynamic

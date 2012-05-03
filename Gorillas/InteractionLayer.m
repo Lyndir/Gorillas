@@ -160,7 +160,7 @@
     v = ccp(v.x / winSize.width, v.y / winSize.height); // Normalize velocity so it's resolution-independant.
     self.aim = CGPointZero;
 
-#if ! LITE
+#ifndef LITE
     // Notify the network controller.
     if ([GorillasAppDelegate get].netController.match)
         [[GorillasAppDelegate get].netController sendThrowWithNormalizedVelocity:v];
