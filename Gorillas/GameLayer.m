@@ -123,7 +123,7 @@
     humans          = localHumans + [playerIDs count];
     ais             = _ais;
     
-#if ! DEBUG
+#ifndef DEBUG
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         @try {
             [TestFlight passCheckpoint:str(@"GorillasNewGame_", [GorillasConfig nameForMode:mode])];
@@ -165,7 +165,7 @@
         for (NSString *playerID in playerIDs)
             [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeHuman playerID:playerID]];
         
-#if ! LITE
+#ifndef LITE
         [GKPlayer loadPlayersForIdentifiers:playerIDs withCompletionHandler:^(NSArray *players, NSError *error) {
             if (error)
                 err(@"While loading player information: %@", error);
@@ -459,7 +459,7 @@
     humans = 0;
     ais = 0;
     
-#if ! LITE
+#ifndef LITE
     if ([GorillasAppDelegate get].netController.match)
         [[GorillasAppDelegate get].netController endMatchForced:NO];
 #endif
@@ -662,7 +662,7 @@
     
     [self setPausedSilently:NO];
     
-#if ! LITE
+#ifndef LITE
     if ([GorillasAppDelegate get].netController.match)
         [[GorillasAppDelegate get].netController sendBecameReady];
     else

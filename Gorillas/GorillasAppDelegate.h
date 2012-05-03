@@ -41,7 +41,7 @@
     GameConfigurationLayer                                          *_gameConfigLayer;
     AVConfigurationLayer                                            *_avConfigLayer;
     
-#if ! LITE
+#ifndef LITE
     NetController                                                   *_netController;
 #endif
 }
@@ -53,7 +53,7 @@
 @property (nonatomic, readonly, retain) AVConfigurationLayer        *avConfigLayer;
 @property (nonatomic, readonly, retain) GHUDLayer                   *hudLayer;
 
-#if ! LITE
+#ifndef LITE
 @property (nonatomic, readonly, retain) NetController               *netController;
 #endif
 

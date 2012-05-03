@@ -64,14 +64,14 @@
 + (void)initialize {
     
     [GorillasConfig get];
-#if DEBUG
+#ifdef DEBUG
     [[PearlLogger get] setAutoprintLevel:PearlLogLevelDebug];
 #endif
 }
 
 - (void)preSetup {
     
-#if ! DEBUG
+#ifndef DEBUG
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         @try {
             NSString *token = [self testFlightToken];
@@ -157,7 +157,7 @@
             [self.mainMenuLayer reset];
         });
     }];
-#if ! LITE
+#ifndef LITE
     self.netController = [[NetController new] autorelease];
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
         
@@ -328,9 +328,9 @@ static NSDictionary *localyticsInfo = nil;
 
 - (NSString *)localyticsKey {
     
-#if DEBUG
+#ifdef DEBUG
     return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.development"]);
-#elif LITE
+#elif defined(LITE)
     return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution.lite"]);
 #else
     return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution"]);
@@ -349,7 +349,7 @@ static NSDictionary *localyticsInfo = nil;
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     
-     [[LocalyticsSession sharedLocalyticsSession] resume];
+    [[LocalyticsSession sharedLocalyticsSession] resume];
     [[LocalyticsSession sharedLocalyticsSession] upload];
     
     [super applicationWillEnterForeground:application];

@@ -49,17 +49,17 @@
     
     if (!(self = [super initWithDelegate:self logo:nil items:
                   [PearlCCMenuItemSpacer spacerSmall],
-#if ! LITE
+#ifndef LITE
                   [multiPlayerI     = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(startMulti:)] retain],
 #endif
                   [singlePlayerI    = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(startSingle:)] retain],
-#if ! LITE
+#ifndef LITE
                   [hotSeatI         = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(startHotSeat:)] retain],
 #endif
                   [configurationI   = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)] retain],
                   [descriptionT     = [PearlCCMenuItemTitle itemWithString:@"description"] retain],
                   [PearlCCMenuItemSpacer spacerNormal],
-#if LITE
+#ifdef LITE
                   [PearlCCMenuItemBlock itemWithSize:50 * [PearlDeviceUtils uiScale] target:self selector:@selector(upgrade:)],
                   [PearlCCMenuItemBlock itemWithSize:50 * [PearlDeviceUtils uiScale] target:self selector:@selector(scores:)],
 #else
@@ -71,7 +71,7 @@
     
     self.itemCounts = [NSArray arrayWithObjects:
                                        [NSNumber numberWithInt:1],
-#if LITE
+#ifdef LITE
                        [NSNumber numberWithInt:1],
 #else
                        [NSNumber numberWithInt:3],
@@ -79,7 +79,7 @@
                        [NSNumber numberWithInt:1],
                        [NSNumber numberWithInt:1],
                        [NSNumber numberWithInt:1],
-#if LITE
+#ifdef LITE
                        [NSNumber numberWithInt:2],
 #else
                        [NSNumber numberWithInt:2],
@@ -140,7 +140,7 @@
 
 -(void) startMulti: (id) sender {
     
-#if ! LITE
+#ifndef LITE
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
     GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
     

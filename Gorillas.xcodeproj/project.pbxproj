@@ -2965,9 +2965,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Gorillas" */;
 			buildPhases = (
-				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				1D60588D0D05DD3D006BFB54 /* Resources */,
 				DA59345D1534CD1E0060D09A /* Run Script: GIT version -> Info.plist */,
 				DAA0BE08148D70CD00E6C79C /* Run Script: Crashlytics */,
 			);
@@ -3586,7 +3586,7 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
+			shellPath = "/bin/bash -e";
 			shellScript = "Crashlytics/Crashlytics.framework/run \"$(/usr/libexec/PlistBuddy -c \"Print :'API Key'\" Crashlytics/Crashlytics.plist)\"";
 			showEnvVarsInLog = 0;
 		};
@@ -4040,7 +4040,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DEBUGGING_SYMBOLS = full;
 				GCC_FAST_MATH = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -4052,7 +4051,6 @@
 					"CC_ENABLE_GL_STATE_CACHE=1",
 				);
 				GCC_STRICT_ALIASING = NO;
-				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -4113,11 +4111,10 @@
 					"$(inherited)",
 					"CC_ENABLE_DEPRECATED=0",
 					"CC_ENABLE_GL_STATE_CACHE=1",
-					NS_BLOCK_ASSERTIONS,
-					NDEBUG,
+					"NS_BLOCK_ASSERTIONS=1",
+					"NDEBUG=1",
 				);
 				GCC_STRICT_ALIASING = YES;
-				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -4354,7 +4351,6 @@
 					"CC_ENABLE_GL_STATE_CACHE=1",
 				);
 				GCC_STRICT_ALIASING = YES;
-				GCC_THUMB_SUPPORT = NO;
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
