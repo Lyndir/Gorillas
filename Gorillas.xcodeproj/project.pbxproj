@@ -73,6 +73,10 @@
 		DA4769F00FDD7334002E74F8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD7A00F9536E600E5607E /* QuartzCore.framework */; };
 		DA4769F10FDD7334002E74F8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAA120920FDD26F700AA1E28 /* AVFoundation.framework */; };
 		DA4B227A127CC83800C1748F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3B971A127C3787009196E8 /* libz.dylib */; };
+		DA4DA1531562888A00F6F596 /* Pearl.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4DA1521562888A00F6F596 /* Pearl.m */; };
+		DA4DA1551562889E00F6F596 /* Pearl-Cocos2D.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4DA1541562889E00F6F596 /* Pearl-Cocos2D.m */; };
+		DA4DA157156288AA00F6F596 /* Pearl-Media.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4DA156156288AA00F6F596 /* Pearl-Media.m */; };
+		DA4DA159156288B400F6F596 /* Pearl-UIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4DA158156288B400F6F596 /* Pearl-UIKit.m */; };
 		DA4E5D0C0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */; };
 		DA571E0313F3332200D50DF2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6620F95368600E5607E /* Foundation.framework */; };
 		DA571E1413F3339E00D50DF2 /* LocalyticsDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = DA571E0D13F3339E00D50DF2 /* LocalyticsDatabase.h */; };
@@ -119,8 +123,6 @@
 		DA579A5A152C7599001BEF40 /* PearlStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5795BF152C7592001BEF40 /* PearlStrings.m */; };
 		DA579A5B152C7599001BEF40 /* PearlStringUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = DA5795C0152C7592001BEF40 /* PearlStringUtils.h */; };
 		DA579A5C152C7599001BEF40 /* PearlStringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5795C1152C7592001BEF40 /* PearlStringUtils.m */; };
-		DA579A5D152C7599001BEF40 /* PearlWebUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = DA5795C2152C7592001BEF40 /* PearlWebUtils.h */; };
-		DA579A5E152C7599001BEF40 /* PearlWebUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5795C3152C7592001BEF40 /* PearlWebUtils.m */; };
 		DA579A5F152C7599001BEF40 /* PearlCCAutoTween.h in Headers */ = {isa = PBXBuildFile; fileRef = DA5795CA152C7592001BEF40 /* PearlCCAutoTween.h */; };
 		DA579A60152C7599001BEF40 /* PearlCCAutoTween.m in Sources */ = {isa = PBXBuildFile; fileRef = DA5795CB152C7592001BEF40 /* PearlCCAutoTween.m */; };
 		DA579A61152C7599001BEF40 /* PearlCCRemove.h in Headers */ = {isa = PBXBuildFile; fileRef = DA5795CC152C7592001BEF40 /* PearlCCRemove.h */; };
@@ -926,6 +928,10 @@
 		DA3B94F8127B7407009196E8 /* GHUDLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUDLayer.m; sourceTree = "<group>"; };
 		DA3B971A127C3787009196E8 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		DA4769F80FDD7334002E74F8 /* Gorillas Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gorillas Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA4DA1521562888A00F6F596 /* Pearl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pearl.m; sourceTree = "<group>"; };
+		DA4DA1541562889E00F6F596 /* Pearl-Cocos2D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Pearl-Cocos2D.m"; sourceTree = "<group>"; };
+		DA4DA156156288AA00F6F596 /* Pearl-Media.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Pearl-Media.m"; sourceTree = "<group>"; };
+		DA4DA158156288B400F6F596 /* Pearl-UIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Pearl-UIKit.m"; sourceTree = "<group>"; };
 		DA4E5D070F7FE5B9007BE3B9 /* GorillasAudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillasAudioController.h; sourceTree = "<group>"; };
 		DA4E5D080F7FE5B9007BE3B9 /* GorillasAudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillasAudioController.m; sourceTree = "<group>"; };
 		DA571E0213F3332200D50DF2 /* libLocalytics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLocalytics.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -970,8 +976,6 @@
 		DA5795BF152C7592001BEF40 /* PearlStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PearlStrings.m; sourceTree = "<group>"; };
 		DA5795C0152C7592001BEF40 /* PearlStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearlStringUtils.h; sourceTree = "<group>"; };
 		DA5795C1152C7592001BEF40 /* PearlStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PearlStringUtils.m; sourceTree = "<group>"; };
-		DA5795C2152C7592001BEF40 /* PearlWebUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearlWebUtils.h; sourceTree = "<group>"; };
-		DA5795C3152C7592001BEF40 /* PearlWebUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PearlWebUtils.m; sourceTree = "<group>"; };
 		DA5795C4152C7592001BEF40 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		DA5795CA152C7592001BEF40 /* PearlCCAutoTween.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearlCCAutoTween.h; sourceTree = "<group>"; };
 		DA5795CB152C7592001BEF40 /* PearlCCAutoTween.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PearlCCAutoTween.m; sourceTree = "<group>"; };
@@ -1864,6 +1868,7 @@
 				DA5795AA152C7592001BEF40 /* NSString_PearlSEL.h */,
 				DA5795AB152C7592001BEF40 /* NSString_PearlSEL.m */,
 				DA5795AC152C7592001BEF40 /* Pearl.h */,
+				DA4DA1521562888A00F6F596 /* Pearl.m */,
 				DA5795AD152C7592001BEF40 /* PearlAbstractStrings.h */,
 				DA5795AE152C7592001BEF40 /* PearlAbstractStrings.m */,
 				DA5795AF152C7592001BEF40 /* PearlCodeUtils.h */,
@@ -1885,8 +1890,6 @@
 				DA5795BF152C7592001BEF40 /* PearlStrings.m */,
 				DA5795C0152C7592001BEF40 /* PearlStringUtils.h */,
 				DA5795C1152C7592001BEF40 /* PearlStringUtils.m */,
-				DA5795C2152C7592001BEF40 /* PearlWebUtils.h */,
-				DA5795C3152C7592001BEF40 /* PearlWebUtils.m */,
 				DA579AF0152C7611001BEF40 /* Resources */,
 				DA5795C4152C7592001BEF40 /* README */,
 			);
@@ -1903,6 +1906,7 @@
 				DA5795C9152C7592001BEF40 /* Actions */,
 				DA5795CE152C7592001BEF40 /* Pearl-Cocos2D-Dependencies.h */,
 				DA5795CF152C7592001BEF40 /* Pearl-Cocos2D.h */,
+				DA4DA1541562889E00F6F596 /* Pearl-Cocos2D.m */,
 				DA5795D0152C7592001BEF40 /* PearlCCDebug.h */,
 				DA5795D1152C7592001BEF40 /* PearlCCDebug.m */,
 				DA5795D2152C7592001BEF40 /* PearlCocos2DAppDelegate.h */,
@@ -2010,6 +2014,7 @@
 			isa = PBXGroup;
 			children = (
 				DA579630152C7592001BEF40 /* Pearl-Media.h */,
+				DA4DA156156288AA00F6F596 /* Pearl-Media.m */,
 				DA579631152C7592001BEF40 /* PearlAudioController.h */,
 				DA579632152C7592001BEF40 /* PearlAudioController.m */,
 			);
@@ -2022,6 +2027,7 @@
 			children = (
 				DA579634152C7592001BEF40 /* Pearl-UIKit-Dependencies.h */,
 				DA579635152C7592001BEF40 /* Pearl-UIKit.h */,
+				DA4DA158156288B400F6F596 /* Pearl-UIKit.m */,
 				DA579636152C7592001BEF40 /* PearlAlert.h */,
 				DA579637152C7592001BEF40 /* PearlAlert.m */,
 				DA579638152C7592001BEF40 /* PearlAppDelegate.h */,
@@ -2748,7 +2754,6 @@
 				DA579A58152C7599001BEF40 /* PearlResettable.h in Headers */,
 				DA579A59152C7599001BEF40 /* PearlStrings.h in Headers */,
 				DA579A5B152C7599001BEF40 /* PearlStringUtils.h in Headers */,
-				DA579A5D152C7599001BEF40 /* PearlWebUtils.h in Headers */,
 				DA579A5F152C7599001BEF40 /* PearlCCAutoTween.h in Headers */,
 				DA579A61152C7599001BEF40 /* PearlCCRemove.h in Headers */,
 				DA579A63152C7599001BEF40 /* Pearl-Cocos2D-Dependencies.h in Headers */,
@@ -3680,7 +3685,6 @@
 				DA579A57152C7599001BEF40 /* PearlObjectUtils.m in Sources */,
 				DA579A5A152C7599001BEF40 /* PearlStrings.m in Sources */,
 				DA579A5C152C7599001BEF40 /* PearlStringUtils.m in Sources */,
-				DA579A5E152C7599001BEF40 /* PearlWebUtils.m in Sources */,
 				DA579A60152C7599001BEF40 /* PearlCCAutoTween.m in Sources */,
 				DA579A62152C7599001BEF40 /* PearlCCRemove.m in Sources */,
 				DA579A66152C7599001BEF40 /* PearlCCDebug.m in Sources */,
@@ -3723,6 +3727,10 @@
 				DA579AB3152C7599001BEF40 /* PearlWebViewController.m in Sources */,
 				DA579AB5152C7599001BEF40 /* UIImage_PearlScaling.m in Sources */,
 				DAFEF9730ED847D40019F7E7 /* PearlGLShaders.m in Sources */,
+				DA4DA1531562888A00F6F596 /* Pearl.m in Sources */,
+				DA4DA1551562889E00F6F596 /* Pearl-Cocos2D.m in Sources */,
+				DA4DA157156288AA00F6F596 /* Pearl-Media.m in Sources */,
+				DA4DA159156288B400F6F596 /* Pearl-UIKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4034,6 +4042,7 @@
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -4080,7 +4089,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "External/Pearl/External/cocos2d-iphone/external/kazmath/include";
 				INFOPLIST_FILE = "${TARGET_NAME}/${TARGET_NAME}-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LINKER_DISPLAYS_MANGLED_NAMES = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -4100,6 +4109,7 @@
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -4144,7 +4154,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "External/Pearl/External/cocos2d-iphone/external/kazmath/include";
 				INFOPLIST_FILE = "${TARGET_NAME}/${TARGET_NAME}-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -4181,6 +4191,7 @@
 		DA3B92C2127B6D21009196E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"External/Pearl/External/cocos2d-iphone/cocos2d/**",
@@ -4192,6 +4203,7 @@
 		DA3B92C5127B6D21009196E8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"External/Pearl/External/cocos2d-iphone/cocos2d/**",
@@ -4338,6 +4350,7 @@
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -4380,7 +4393,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "External/Pearl/External/cocos2d-iphone/external/kazmath/include";
 				INFOPLIST_FILE = "${TARGET_NAME}/${TARGET_NAME}-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -4446,6 +4459,7 @@
 		DAA5143D13FFAD0900325033 /* Profile */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PREFIX_HEADER = "${TARGET_NAME}/${TARGET_NAME}-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"External/Pearl/External/cocos2d-iphone/cocos2d/**",

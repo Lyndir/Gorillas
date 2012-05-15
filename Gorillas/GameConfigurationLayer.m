@@ -50,15 +50,15 @@
 - (NSString *)labelForSetting:(SEL)setting {
     
     if (setting == @selector(cityTheme))
-        return l(@"menu.choose.theme");
+        return PearlLocalize(@"menu.choose.theme");
     if (setting == @selector(gravity))
-        return l(@"menu.choose.gravity");
+        return PearlLocalize(@"menu.choose.gravity");
     if (setting == @selector(level))
-        return l(@"menu.choose.level");
+        return PearlLocalize(@"menu.choose.level");
     if (setting == @selector(replay))
-        return l(@"menu.choose.replays");
+        return PearlLocalize(@"menu.choose.replays");
     if (setting == @selector(followThrow))
-        return l(@"menu.choose.follow");
+        return PearlLocalize(@"menu.choose.follow");
     
     return nil;
 }

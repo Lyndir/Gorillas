@@ -107,7 +107,7 @@
             skill = skill / 2 + self.throwSkill;
         
         NSString *prefix = @"", *suffix = @"%";
-        if ([l(@"menu.config.direction") isEqualToString:@"rtl"]) {
+        if ([PearlLocalize(@"menu.config.direction") isEqualToString:@"rtl"]) {
             prefix = @"%";
             suffix = @"";
         }

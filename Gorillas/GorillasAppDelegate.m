@@ -273,11 +273,9 @@
 
 #pragma mark - TestFlight
 
-
-static NSDictionary *testFlightInfo = nil;
-
 - (NSDictionary *)testFlightInfo {
     
+    static NSDictionary *testFlightInfo = nil;
     if (testFlightInfo == nil)
         testFlightInfo = [[NSDictionary alloc] initWithContentsOfURL:
                           [[NSBundle mainBundle] URLForResource:@"TestFlight" withExtension:@"plist"]];
@@ -287,17 +285,15 @@ static NSDictionary *testFlightInfo = nil;
 
 - (NSString *)testFlightToken {
     
-    return NSNullToNil([[self testFlightInfo] valueForKeyPath:@"Team Token"]);
+    return NullToNil([[self testFlightInfo] valueForKeyPath:@"Team Token"]);
 }
 
 
 #pragma mark - Crashlytics
 
-
-static NSDictionary *crashlyticsInfo = nil;
-
 - (NSDictionary *)crashlyticsInfo {
     
+    static NSDictionary *crashlyticsInfo = nil;
     if (crashlyticsInfo == nil)
         crashlyticsInfo = [[NSDictionary alloc] initWithContentsOfURL:
                            [[NSBundle mainBundle] URLForResource:@"Crashlytics" withExtension:@"plist"]];
@@ -307,18 +303,16 @@ static NSDictionary *crashlyticsInfo = nil;
 
 - (NSString *)crashlyticsAPIKey {
     
-    return NSNullToNil([[self crashlyticsInfo] valueForKeyPath:@"API Key"]);
+    return NullToNil([[self crashlyticsInfo] valueForKeyPath:@"API Key"]);
 }
 
 
 
 #pragma mark - Localytics
 
-
-static NSDictionary *localyticsInfo = nil;
-
 - (NSDictionary *)localyticsInfo {
     
+    static NSDictionary *localyticsInfo = nil;
     if (localyticsInfo == nil)
         localyticsInfo = [[NSDictionary alloc] initWithContentsOfURL:
                           [[NSBundle mainBundle] URLForResource:@"Localytics" withExtension:@"plist"]];
@@ -329,11 +323,11 @@ static NSDictionary *localyticsInfo = nil;
 - (NSString *)localyticsKey {
     
 #ifdef DEBUG
-    return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.development"]);
+    return NullToNil([[self localyticsInfo] valueForKeyPath:@"Key.development"]);
 #elif defined(LITE)
-    return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution.lite"]);
+    return NullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution.lite"]);
 #else
-    return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution"]);
+    return NullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution"]);
 #endif
 }
 

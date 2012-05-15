@@ -40,9 +40,9 @@
 -(id) init {
 
     if (!(self = [super initWithDelegate:self logo:nil items:
-                  [CCMenuItemFont itemWithString:l(@"menu.gameplay")
+                  [CCMenuItemFont itemWithString:PearlLocalize(@"menu.gameplay")
                                           target:self selector:@selector(game:)],
-                  [CCMenuItemFont itemWithString:l(@"menu.av")
+                  [CCMenuItemFont itemWithString:PearlLocalize(@"menu.av")
                                           target:self selector:@selector(av:)],
                   nil]))
         return nil;

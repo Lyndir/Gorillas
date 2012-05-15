@@ -72,7 +72,7 @@
             ++liveHumans;
     
     if([GorillasAppDelegate get].gameLayer.activeGorilla.human && liveHumans > 1) {
-        [[GorillasAppDelegate get].uiLayer message:l(@"message.nextplayer")];
+        [[GorillasAppDelegate get].uiLayer message:PearlLocalize(@"message.nextplayer")];
         
         if ([[GorillasConfig get].voice boolValue])
             [[GorillasAudioController get] playEffectNamed:@"Next_Player"];
@@ -128,7 +128,7 @@
     if (isReplay) {
         [[GorillasAppDelegate get].gameLayer scaleTimeTo:0.5f];
         [[GorillasAppDelegate get].gameLayer.panningLayer scaleTo:1.5f limited:NO];
-        [[GorillasAppDelegate get].hudLayer message:l(@"message.killreplay") isImportant:YES];
+        [[GorillasAppDelegate get].hudLayer message:PearlLocalize(@"message.killreplay") isImportant:YES];
         [[GorillasAppDelegate get].hudLayer setButtonTitle:@"Skip" callback:self :@selector(skipThrow:)];
     } else
         [[GorillasAppDelegate get].gameLayer.cityLayer throwFrom:self.gorilla withVelocity:self.velocity];
