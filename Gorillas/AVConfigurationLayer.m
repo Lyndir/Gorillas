@@ -55,13 +55,13 @@
 - (NSString *)labelForSetting:(SEL)setting {
 
     if (setting == @selector(music))
-        return l(@"menu.choose.fx.music");
+        return PearlLocalize(@"menu.choose.fx.music");
     if (setting == @selector(soundFx))
-        return l(@"menu.choose.fx.sound");
+        return PearlLocalize(@"menu.choose.fx.sound");
     if (setting == @selector(voice))
-        return l(@"menu.choose.fx.voice");
+        return PearlLocalize(@"menu.choose.fx.voice");
     if (setting == @selector(vibration))
-        return l(@"menu.choose.fx.vibration");
+        return PearlLocalize(@"menu.choose.fx.vibration");
     
     return nil;
 }

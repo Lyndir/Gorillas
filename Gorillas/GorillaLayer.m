@@ -96,7 +96,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     
     self.playerID           = aPlayerId;
     self.connectionState    = self.playerID ? GKPlayerStateConnected: GKPlayerStateUnknown;
-    self.name = l(@"names.n", self.globalIndex + 1);
+    self.name = PearlLocalize(@"names.n", self.globalIndex + 1);
     if (!self.playerID)
         self.connectionState = GKPlayerStateConnected;
     else

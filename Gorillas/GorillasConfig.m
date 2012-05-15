@@ -49,36 +49,36 @@
         return self;
 
     NSArray *levelNames = [NSArray arrayWithObjects:
-                           l(@"menu.config.level.one"),
-                           l(@"menu.config.level.two"),
-                           l(@"menu.config.level.three"),
-                           l(@"menu.config.level.four"),
-                           l(@"menu.config.level.five"),
-                           l(@"menu.config.level.six"),
-                           l(@"menu.config.level.seven"),
-                           l(@"menu.config.level.eight"),
+                           PearlLocalize(@"menu.config.level.one"),
+                           PearlLocalize(@"menu.config.level.two"),
+                           PearlLocalize(@"menu.config.level.three"),
+                           PearlLocalize(@"menu.config.level.four"),
+                           PearlLocalize(@"menu.config.level.five"),
+                           PearlLocalize(@"menu.config.level.six"),
+                           PearlLocalize(@"menu.config.level.seven"),
+                           PearlLocalize(@"menu.config.level.eight"),
                            nil];
 
     gameConfigurations  = [[NSArray alloc] initWithObjects:
-                           [GameConfiguration configurationWithName:l(@"menu.config.gametype.bootcamp")
-                                                        description:l(@"menu.config.gametype.bootcamp.desc")
+                           [GameConfiguration configurationWithName:PearlLocalize(@"menu.config.gametype.bootcamp")
+                                                        description:PearlLocalize(@"menu.config.gametype.bootcamp.desc")
                                                                mode:GorillasModeBootCamp
                                                 singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:0],
-                           [GameConfiguration configurationWithName:l(@"menu.config.gametype.classic")
-                                                        description:l(@"menu.config.gametype.classic.desc")
+                           [GameConfiguration configurationWithName:PearlLocalize(@"menu.config.gametype.classic")
+                                                        description:PearlLocalize(@"menu.config.gametype.classic.desc")
                                                                mode:GorillasModeClassic
                                                 singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:4],
 #ifndef LITE
-                           [GameConfiguration configurationWithName:l(@"menu.config.gametype.dynamic")
-                                                        description:l(@"menu.config.gametype.dynamic.desc")
+                           [GameConfiguration configurationWithName:PearlLocalize(@"menu.config.gametype.dynamic")
+                                                        description:PearlLocalize(@"menu.config.gametype.dynamic.desc")
                                                                mode:GorillasModeDynamic
                                                 singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:0],
-                           [GameConfiguration configurationWithName:l(@"menu.config.gametype.team")
-                                                        description:l(@"menu.config.gametype.team.desc")
+                           [GameConfiguration configurationWithName:PearlLocalize(@"menu.config.gametype.team")
+                                                        description:PearlLocalize(@"menu.config.gametype.team.desc")
                                                                mode:GorillasModeTeam
                                                 singleplayerAICount:0 multiplayerAICount:2 multiplayerHumanCount:2],
-                           [GameConfiguration configurationWithName:l(@"menu.config.gametype.lms")
-                                                        description:l(@"menu.config.gametype.lms.desc")
+                           [GameConfiguration configurationWithName:PearlLocalize(@"menu.config.gametype.lms")
+                                                        description:PearlLocalize(@"menu.config.gametype.lms.desc")
                                                                mode:GorillasModeLMS
                                                 singleplayerAICount:3 multiplayerAICount:3 multiplayerHumanCount:3],
 #endif
@@ -141,14 +141,14 @@
                         @"",
                         nil],                                                      NSStringFromSelector(@selector(tracks)),
                        [NSArray arrayWithObjects:
-                        l(@"menu.config.song.fighting_gorillas"),
-                        l(@"menu.config.song.flow_square"),
-                        l(@"menu.config.song.happy_fun_ball"),
-                        l(@"menu.config.song.man_or_machine"),
-                        l(@"menu.config.song.rc_car"),
-                        l(@"menu.config.song.sequential"),
-                        l(@"menu.config.song.random"),
-                        l(@"menu.config.song.off"),
+                        PearlLocalize(@"menu.config.song.fighting_gorillas"),
+                        PearlLocalize(@"menu.config.song.flow_square"),
+                        PearlLocalize(@"menu.config.song.happy_fun_ball"),
+                        PearlLocalize(@"menu.config.song.man_or_machine"),
+                        PearlLocalize(@"menu.config.song.rc_car"),
+                        PearlLocalize(@"menu.config.song.sequential"),
+                        PearlLocalize(@"menu.config.song.random"),
+                        PearlLocalize(@"menu.config.song.off"),
                         nil],                                                      NSStringFromSelector(@selector(trackNames)),
 
                        [NSNumber numberWithInteger:    1],                         NSStringFromSelector(@selector(activeGameConfigurationIndex)),
@@ -211,11 +211,11 @@
 
 -(NSString *) messageForOff {
 
-    return l([offMessages objectAtIndex:(NSUInteger)((unsigned)PearlGameRandom() % offMessages.count)]);
+    return PearlLocalize([offMessages objectAtIndex:(NSUInteger)((unsigned)PearlGameRandom() % offMessages.count)]);
 }
 -(NSString *) messageForHitBy:(GorillaLayer *)byGorilla on:(GorillaLayer *)onGorilla {
 
-    return l([hitMessages objectAtIndex:(unsigned)PearlGameRandom() % hitMessages.count], byGorilla.name, onGorilla.name);
+    return PearlLocalize([hitMessages objectAtIndex:(unsigned)PearlGameRandom() % hitMessages.count], byGorilla.name, onGorilla.name);
 }
 
 
@@ -231,15 +231,15 @@
 
     switch (mode) {
         case GorillasModeBootCamp:
-            return l(@"menu.config.gametype.bootcamp");
+            return PearlLocalize(@"menu.config.gametype.bootcamp");
         case GorillasModeClassic:
-            return l(@"menu.config.gametype.classic");
+            return PearlLocalize(@"menu.config.gametype.classic");
         case GorillasModeDynamic:
-            return l(@"menu.config.gametype.dynamic");
+            return PearlLocalize(@"menu.config.gametype.dynamic");
         case GorillasModeTeam:
-            return l(@"menu.config.gametype.team");
+            return PearlLocalize(@"menu.config.gametype.team");
         case GorillasModeLMS:
-            return l(@"menu.config.gametype.lms");
+            return PearlLocalize(@"menu.config.gametype.lms");
         case GorillasModeCount:
             break;
     }
@@ -311,7 +311,7 @@ static NSMutableDictionary *GorillasScores = nil;
     if (GorillasScores == nil) {
         if ([self.scores isKindOfClass:[NSData class]])
             GorillasScores = [[NSKeyedUnarchiver unarchiveObjectWithData:self.scores] retain];
-        if (!NSNullToNil(GorillasScores))
+        if (!NullToNil(GorillasScores))
             GorillasScores = [[NSMutableDictionary alloc] init];
     }
 

@@ -78,9 +78,9 @@
     
     if(running) {
         if(paused)
-            [[GorillasAppDelegate get].uiLayer message:l(@"messages.paused")];
+            [[GorillasAppDelegate get].uiLayer message:PearlLocalize(@"messages.paused")];
         else
-            [[GorillasAppDelegate get].uiLayer message:l(@"messages.unpaused")];
+            [[GorillasAppDelegate get].uiLayer message:PearlLocalize(@"messages.unpaused")];
     }
 }
 
@@ -347,7 +347,7 @@
                 
                 // Apply oneshot bonus.
                 if(activeGorilla.turns == 0) {
-                    [[GorillasAppDelegate get].uiLayer message:l(@"messages.oneshot")];
+                    [[GorillasAppDelegate get].uiLayer message:PearlLocalize(@"messages.oneshot")];
                     skill *= [[GorillasConfig get].bonusOneShot floatValue];
                 }
                 
@@ -368,11 +368,11 @@
                 // Message in case we level up.
                 if(![oldLevel isEqualToString:[GorillasConfig nameForLevel:[GorillasConfig get].level]]) {
                     if(scoreDelta > 0) {
-                        [[GorillasAppDelegate get].uiLayer message:l(@"messages.level.up")];
+                        [[GorillasAppDelegate get].uiLayer message:PearlLocalize(@"messages.level.up")];
                         if ([[GorillasConfig get].voice boolValue])
                             [[GorillasAudioController get] playEffectNamed:@"Level_Up"];
                     } else {
-                        [[GorillasAppDelegate get].uiLayer message:l(@"messages.level.down")];
+                        [[GorillasAppDelegate get].uiLayer message:PearlLocalize(@"messages.level.down")];
                         if ([[GorillasConfig get].voice boolValue])
                             [[GorillasAudioController get] playEffectNamed:@"Level_Down"];
                     }
@@ -409,9 +409,9 @@
             // If 0 or 1 gorillas left; show who won and stop the game.
             if(liveGorillaCount < 2) {
                 if(liveGorillaCount == 1)
-                    [[[GorillasAppDelegate get] hudLayer] message:l(@"messages.wins", [liveGorilla name]) duration:4 isImportant:NO];
+                    [[[GorillasAppDelegate get] hudLayer] message:PearlLocalize(@"messages.wins", [liveGorilla name]) duration:4 isImportant:NO];
                 else
-                    [[[GorillasAppDelegate get] hudLayer] message:l(@"messages.tie") duration:4 isImportant:NO];
+                    [[[GorillasAppDelegate get] hudLayer] message:PearlLocalize(@"messages.tie") duration:4 isImportant:NO];
             }
             
             // Reset the wind.
