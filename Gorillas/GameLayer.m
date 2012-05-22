@@ -126,7 +126,7 @@
 #ifndef DEBUG
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         @try {
-            [TestFlight passCheckpoint:str(@"GorillasNewGame_", [GorillasConfig nameForMode:mode])];
+            [TestFlight passCheckpoint:PearlString(@"GorillasNewGame_", [GorillasConfig nameForMode:mode])];
         }
         @catch (NSException *exception) {
             err(@"TestFlight: %@", exception);
