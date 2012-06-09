@@ -84,14 +84,14 @@
                                         nil]];
                 [TestFlight takeOff:token];
                 [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
-                    if (message.level >= PearlLogLevelInfo)
+                    if (message.level >= PearlLogLevelDebug)
                         TFLog(@"%@", message);
                     
                     return YES;
                 }];
             }
         }
-        @catch (NSException *exception) {
+        @catch (id exception) {
             err(@"TestFlight: %@", exception);
         }
         @try {
@@ -100,9 +100,16 @@
                 dbg(@"Initializing Crashlytics");
                 //[Crashlytics sharedInstance].debugMode = YES;
                 [Crashlytics startWithAPIKey:apiKey afterDelay:0];
+                [[Crashlytics sharedInstance] setUserName:@"Anonymous"];
+                [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
+                    if (message.level >= PearlLogLevelDebug)
+                        CLSLog(@"%@", message);
+                    
+                    return YES;
+                }];
             }
         }
-        @catch (NSException *exception) {
+        @catch (id exception) {
             err(@"Crashlytics: %@", exception);
         }
         @try {
@@ -124,7 +131,7 @@
                 }];
             }
         }
-        @catch (NSException *exception) {
+        @catch (id exception) {
             err(@"Localytics exception: %@", exception);
         }
     });
@@ -153,6 +160,7 @@
             wrn(@"Game Center unavailable: %@", error);
         
         [TestFlight addCustomEnvironmentInformation:[GKLocalPlayer localPlayer].alias forKey:@"username"];
+        [[Crashlytics sharedInstance] setUserName:[GKLocalPlayer localPlayer].alias];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.mainMenuLayer reset];
         });
