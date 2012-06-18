@@ -127,15 +127,24 @@ void CLSNSLog(NSString *format, ...);
 - (void)setUserName:(NSString *)name;
 - (void)setUserEmail:(NSString *)email;
 
++ (void)setUserIdentifier:(NSString *)identifier;
++ (void)setUserName:(NSString *)name;
++ (void)setUserEmail:(NSString *)email;
+
 /**
  *
  * Set a value for a key to be associated with your crash data.
  *
  **/
-- (void)setValue:(id)value forKey:(NSString *)key;
+- (void)setObjectValue:(id)value forKey:(NSString *)key;
 - (void)setIntValue:(int)value forKey:(NSString *)key;
 - (void)setBoolValue:(BOOL)value forKey:(NSString *)key;
 - (void)setFloatValue:(float)value forKey:(NSString *)key;
+
++ (void)setObjectValue:(id)value forKey:(NSString *)key;
++ (void)setIntValue:(int)value forKey:(NSString *)key;
++ (void)setBoolValue:(BOOL)value forKey:(NSString *)key;
++ (void)setFloatValue:(float)value forKey:(NSString *)key;
 
 @end
 

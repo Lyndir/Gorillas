@@ -71,71 +71,84 @@
 
 - (void)preSetup {
     
-#ifndef DEBUG
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        @try {
-            NSString *token = [self testFlightToken];
-            if ([token length]) {
-                dbg(@"Initializing TestFlight");
-                [TestFlight addCustomEnvironmentInformation:@"Anonymous" forKey:@"username"];
-                [TestFlight setOptions:[NSDictionary dictionaryWithObjectsAndKeys:
-                                        [NSNumber numberWithBool:NO],   @"logToConsole",
-                                        [NSNumber numberWithBool:NO],   @"logToSTDERR",
-                                        nil]];
-                [TestFlight takeOff:token];
-                [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
-                    if (message.level >= PearlLogLevelDebug)
-                        TFLog(@"%@", message);
-                    
-                    return YES;
-                }];
-            }
-        }
-        @catch (id exception) {
-            err(@"TestFlight: %@", exception);
-        }
-        @try {
-            NSString *apiKey = [self crashlyticsAPIKey];
-            if ([apiKey length]) {
-                dbg(@"Initializing Crashlytics");
-                //[Crashlytics sharedInstance].debugMode = YES;
-                [Crashlytics startWithAPIKey:apiKey afterDelay:0];
-                [[Crashlytics sharedInstance] setUserName:@"Anonymous"];
-                [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
-                    if (message.level >= PearlLogLevelDebug)
-                        CLSLog(@"%@", message);
-                    
-                    return YES;
-                }];
-            }
-        }
-        @catch (id exception) {
-            err(@"Crashlytics: %@", exception);
-        }
-        @try {
-            NSString *key = [self localyticsKey];
-            if ([key length]) {
-                dbg(@"Initializing Localytics");
-                [[LocalyticsSession sharedLocalyticsSession] startSession:key];
-                [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
-                    if (message.level >= PearlLogLevelError)
-                        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Problem" attributes:
-                         [NSDictionary dictionaryWithObjectsAndKeys:
-                          [message levelDescription],
-                          @"level",
-                          message.message,
-                          @"message",
-                          nil]];
-                    
-                    return YES;
-                }];
-            }
-        }
-        @catch (id exception) {
-            err(@"Localytics exception: %@", exception);
-        }
-    });
+    @try {
+        NSString *token = [self testFlightToken];
+        if ([token length]) {
+            inf(@"Initializing TestFlight");
+            [TestFlight addCustomEnvironmentInformation:@"Anonymous" forKey:@"username"];
+#ifdef APPSTORE
+            [TestFlight setDeviceIdentifier:[PearlKeyChain deviceIdentifier]];
+#else
+            [TestFlight setDeviceIdentifier:[(id)[UIDevice currentDevice] uniqueIdentifier]];
 #endif
+            [TestFlight setOptions:[NSDictionary dictionaryWithObjectsAndKeys:
+                                    [NSNumber numberWithBool:NO],   @"logToConsole",
+                                    [NSNumber numberWithBool:NO],   @"logToSTDERR",
+                                    nil]];
+            [TestFlight takeOff:token];
+            [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
+#ifdef APPSTORE
+                if (message.level >= PearlLogLevelInfo)
+                    TFLog(@"%@", message);
+#else
+                if (message.level >= PearlLogLevelDebug)
+                    TFLog(@"%@", message);
+#endif
+                
+                return YES;
+            }];
+        }
+    }
+    @catch (id exception) {
+        err(@"TestFlight: %@", exception);
+    }
+    @try {
+        NSString *apiKey = [self crashlyticsAPIKey];
+        if ([apiKey length]) {
+            dbg(@"Initializing Crashlytics");
+#ifndef APPSTORE
+            [Crashlytics sharedInstance].debugMode = YES;
+#endif
+            [Crashlytics startWithAPIKey:apiKey afterDelay:0];
+            [[Crashlytics sharedInstance] setUserName:@"Anonymous"];
+            [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
+#ifdef APPSTORE
+                if (message.level >= PearlLogLevelInfo)
+                    CLSLog(@"%@", message);
+#else
+                if (message.level >= PearlLogLevelDebug)
+                    CLSLog(@"%@", message);
+#endif
+                
+                return YES;
+            }];
+        }
+    }
+    @catch (id exception) {
+        err(@"Crashlytics: %@", exception);
+    }
+    @try {
+        NSString *key = [self localyticsKey];
+        if ([key length]) {
+            dbg(@"Initializing Localytics");
+            [[LocalyticsSession sharedLocalyticsSession] startSession:key];
+            [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
+                if (message.level >= PearlLogLevelError)
+                    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Problem" attributes:
+                     [NSDictionary dictionaryWithObjectsAndKeys:
+                      [message levelDescription],
+                      @"level",
+                      message.message,
+                      @"message",
+                      nil]];
+                
+                return YES;
+            }];
+        }
+    }
+    @catch (id exception) {
+        err(@"Localytics exception: %@", exception);
+    }
     
     [super preSetup];
     
@@ -159,6 +172,7 @@
         if (error)
             wrn(@"Game Center unavailable: %@", error);
         
+        dbg(@"Local player alias: %@", [GKLocalPlayer localPlayer].alias);
         [TestFlight addCustomEnvironmentInformation:[GKLocalPlayer localPlayer].alias forKey:@"username"];
         [[Crashlytics sharedInstance] setUserName:[GKLocalPlayer localPlayer].alias];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -293,7 +307,7 @@
 
 - (NSString *)testFlightToken {
     
-    return NullToNil([[self testFlightInfo] valueForKeyPath:@"Team Token"]);
+    return NSNullToNil([[self testFlightInfo] valueForKeyPath:@"Team Token"]);
 }
 
 
@@ -311,7 +325,7 @@
 
 - (NSString *)crashlyticsAPIKey {
     
-    return NullToNil([[self crashlyticsInfo] valueForKeyPath:@"API Key"]);
+    return NSNullToNil([[self crashlyticsInfo] valueForKeyPath:@"API Key"]);
 }
 
 
@@ -331,11 +345,11 @@
 - (NSString *)localyticsKey {
     
 #ifdef DEBUG
-    return NullToNil([[self localyticsInfo] valueForKeyPath:@"Key.development"]);
+    return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.development"]);
 #elif defined(LITE)
-    return NullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution.lite"]);
+    return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution.lite"]);
 #else
-    return NullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution"]);
+    return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution"]);
 #endif
 }
 

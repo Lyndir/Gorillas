@@ -102,6 +102,8 @@
 
     [self.defaults
      registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
+                       [NSNumber numberWithBool:YES],                              NSStringFromSelector(@selector(askForReviews)),
+                       
                        [CityTheme defaultThemeName],                               NSStringFromSelector(@selector(cityTheme)),
 
                        [NSNumber numberWithUnsignedInt:[theme varFloors]],         NSStringFromSelector(@selector(varFloors)),
@@ -311,7 +313,7 @@ static NSMutableDictionary *GorillasScores = nil;
     if (GorillasScores == nil) {
         if ([self.scores isKindOfClass:[NSData class]])
             GorillasScores = [[NSKeyedUnarchiver unarchiveObjectWithData:self.scores] retain];
-        if (!NullToNil(GorillasScores))
+        if (!NSNullToNil(GorillasScores))
             GorillasScores = [[NSMutableDictionary alloc] init];
     }
 
