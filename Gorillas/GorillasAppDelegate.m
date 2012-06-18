@@ -76,9 +76,7 @@
         if ([token length]) {
             inf(@"Initializing TestFlight");
             [TestFlight addCustomEnvironmentInformation:@"Anonymous" forKey:@"username"];
-#ifdef APPSTORE
-            [TestFlight setDeviceIdentifier:[PearlKeyChain deviceIdentifier]];
-#else
+#ifndef APPSTORE
             [TestFlight setDeviceIdentifier:[(id)[UIDevice currentDevice] uniqueIdentifier]];
 #endif
             [TestFlight setOptions:[NSDictionary dictionaryWithObjectsAndKeys:
