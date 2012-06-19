@@ -311,8 +311,9 @@ static NSMutableDictionary *GorillasScores = nil;
 
     NSString *category = [GorillasConfig categoryForMode:mode];
     if (GorillasScores == nil) {
-        if ([self.scores isKindOfClass:[NSData class]])
-            GorillasScores = [[NSKeyedUnarchiver unarchiveObjectWithData:self.scores] retain];
+        NSData *scores = self.scores;
+        if ([scores isKindOfClass:[NSData class]])
+            GorillasScores = [[NSKeyedUnarchiver unarchiveObjectWithData:scores] retain];
         if (!NSNullToNil(GorillasScores))
             GorillasScores = [[NSMutableDictionary alloc] init];
     }

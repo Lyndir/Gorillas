@@ -109,7 +109,7 @@
             self.throw.duration, self.throw.endCondition);
     if (self.throw.endCondition == ThrowEndHitGorilla
         && [GorillasAppDelegate get].gameLayer.cityLayer.hitGorilla.lives == 1
-        && [GorillasConfig get].replay)
+        && [[GorillasConfig get].replay boolValue])
         self.needReplay = YES;
     
     [self doThrowIsReplay:NO];
