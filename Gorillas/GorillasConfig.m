@@ -281,8 +281,12 @@
 }
 
 + (NSString *)categoryForMode:(GorillasMode)mode {
-    
-    return [NSString stringWithFormat:@"com.lyndir.lhunath.gorillas.%@", [GorillasConfig nameForMode:mode]];
+
+#ifdef LITE
+    return @"grp.com.lyndir.lhunath.gorillas.Lite";
+#else
+    return [NSString stringWithFormat:@"grp.com.lyndir.lhunath.gorillas.%@", [GorillasConfig nameForMode:mode]];
+#endif
 }
 
 + (NSString *)nameForLevel:(NSNumber *)aLevel {
