@@ -126,7 +126,7 @@
 #ifndef DEBUG
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         @try {
-            [TestFlight passCheckpoint:PearlString(@"GorillasNewGame_", [GorillasConfig nameForMode:mode])];
+            [TestFlight passCheckpoint:PearlString(@"GorillasNewGame_%@", [GorillasConfig nameForMode:mode])];
         }
         @catch (NSException *exception) {
             err(@"TestFlight: %@", exception);
@@ -282,7 +282,7 @@
                     [[GorillasConfig get] recordScoreDelta:scoreDelta forMode:mode];
                     [[GorillasAppDelegate get].hudLayer highlightGood:scoreDelta > 0];
                     
-                    [cityLayer message:[NSString stringWithFormat:@"%+d", scoreDelta] on:cityLayer.bananaLayer.banana];
+                    [cityLayer message:[NSString stringWithFormat:@"%+lld", scoreDelta] on:cityLayer.bananaLayer.banana];
                 }
             }
             
@@ -384,7 +384,7 @@
                 [[GorillasConfig get] recordScoreDelta:scoreDelta forMode:mode];
                 
                 [[[GorillasAppDelegate get] hudLayer] highlightGood:scoreDelta > 0];
-                [cityLayer message:[NSString stringWithFormat:@"%+d", scoreDelta] on:cityLayer.hitGorilla];
+                [cityLayer message:[NSString stringWithFormat:@"%+lld", scoreDelta] on:cityLayer.hitGorilla];
             }
             
             // Check whether any gorillas are left.
