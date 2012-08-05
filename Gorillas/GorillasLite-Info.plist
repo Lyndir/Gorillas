@@ -12,6 +12,12 @@
 	<array>
 		<string>Icon.png</string>
 		<string>Icon@2x.png</string>
+		<string>Default-Landscape~ipad.png</string>
+		<string>Default-Landscape@2x~ipad.png</string>
+		<string>Default-Portrait@2x~ipad.png</string>
+		<string>Default-Portrait~ipad.png</string>
+		<string>Icon-72@2x.png</string>
+		<string>Icon-72.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -21,9 +27,15 @@
 			<array>
 				<string>Icon.png</string>
 				<string>Icon@2x.png</string>
+				<string>Default-Landscape~ipad.png</string>
+				<string>Default-Landscape@2x~ipad.png</string>
+				<string>Default-Portrait@2x~ipad.png</string>
+				<string>Default-Portrait~ipad.png</string>
+				<string>Icon-72@2x.png</string>
+				<string>Icon-72.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
-			<false/>
+			<true/>
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
@@ -35,21 +47,30 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.4.3</string>
+	<string>[auto]</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>143</string>
+	<string>[auto]</string>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
 	<string>© 2009, Maarten Billemont</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>AppleGothic.ttf</string>
+		<string>Bilbao-Poster-Black.ttf</string>
+		<string>Apple Symbols.ttf</string>
+		<string>Bonk.ttf</string>
+	</array>
 	<key>UIApplicationExitsOnSuspend</key>
 	<true/>
 	<key>UIInterfaceOrientation</key>
 	<string>UIInterfaceOrientationLandscapeRight</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UIStatusBarStyle</key>

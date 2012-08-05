@@ -804,31 +804,21 @@
 		DABA3146152DFF6B00BE0D2A /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30AF152DFF6B00BE0D2A /* hole.png */; };
 		DABA3147152DFF6B00BE0D2A /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30AF152DFF6B00BE0D2A /* hole.png */; };
 		DABA3148152DFF6B00BE0D2A /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B0152DFF6B00BE0D2A /* Icon-72.png */; };
-		DABA3149152DFF6B00BE0D2A /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B0152DFF6B00BE0D2A /* Icon-72.png */; };
 		DABA314A152DFF6B00BE0D2A /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B1152DFF6B00BE0D2A /* Icon-Small-50.png */; };
-		DABA314B152DFF6B00BE0D2A /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B1152DFF6B00BE0D2A /* Icon-Small-50.png */; };
 		DABA314C152DFF6B00BE0D2A /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B2152DFF6B00BE0D2A /* Icon-Small.png */; };
-		DABA314D152DFF6B00BE0D2A /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B2152DFF6B00BE0D2A /* Icon-Small.png */; };
 		DABA314E152DFF6B00BE0D2A /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B3152DFF6B00BE0D2A /* Icon-Small@2x.png */; };
-		DABA314F152DFF6B00BE0D2A /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B3152DFF6B00BE0D2A /* Icon-Small@2x.png */; };
 		DABA3150152DFF6B00BE0D2A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B4152DFF6B00BE0D2A /* Icon.png */; };
-		DABA3151152DFF6B00BE0D2A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B4152DFF6B00BE0D2A /* Icon.png */; };
 		DABA3152152DFF6B00BE0D2A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B5152DFF6B00BE0D2A /* Icon@2x.png */; };
-		DABA3153152DFF6B00BE0D2A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B5152DFF6B00BE0D2A /* Icon@2x.png */; };
 		DABA3154152DFF6B00BE0D2A /* infinite-shape-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B6152DFF6B00BE0D2A /* infinite-shape-hd.png */; };
 		DABA3155152DFF6B00BE0D2A /* infinite-shape-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B6152DFF6B00BE0D2A /* infinite-shape-hd.png */; };
 		DABA3156152DFF6B00BE0D2A /* infinite-shape.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B7152DFF6B00BE0D2A /* infinite-shape.png */; };
 		DABA3157152DFF6B00BE0D2A /* infinite-shape.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B7152DFF6B00BE0D2A /* infinite-shape.png */; };
 		DABA315A152DFF6B00BE0D2A /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B9152DFF6B00BE0D2A /* iTunesArtwork.png */; };
-		DABA315B152DFF6B00BE0D2A /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30B9152DFF6B00BE0D2A /* iTunesArtwork.png */; };
 		DABA315C152DFF6B00BE0D2A /* menu-back-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30BA152DFF6B00BE0D2A /* menu-back-hd.png */; };
-		DABA315D152DFF6B00BE0D2A /* menu-back-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30BA152DFF6B00BE0D2A /* menu-back-hd.png */; };
 		DABA315E152DFF6B00BE0D2A /* menu-back.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30BB152DFF6B00BE0D2A /* menu-back.png */; };
 		DABA315F152DFF6B00BE0D2A /* menu-back.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30BB152DFF6B00BE0D2A /* menu-back.png */; };
 		DABA3160152DFF6B00BE0D2A /* menu-main-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30BC152DFF6B00BE0D2A /* menu-main-hd.png */; };
-		DABA3161152DFF6B00BE0D2A /* menu-main-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30BC152DFF6B00BE0D2A /* menu-main-hd.png */; };
 		DABA3162152DFF6B00BE0D2A /* menu-main.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30BD152DFF6B00BE0D2A /* menu-main.png */; };
-		DABA3163152DFF6B00BE0D2A /* menu-main.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30BD152DFF6B00BE0D2A /* menu-main.png */; };
 		DAC10D6113CE3CC800A546E4 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D5913CE3CC800A546E4 /* Level_Down.caf */; };
 		DAC10D6213CE3CC800A546E4 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D5913CE3CC800A546E4 /* Level_Down.caf */; };
 		DAC10D6313CE3CC800A546E4 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D5B13CE3CC800A546E4 /* Level_Up.caf */; };
@@ -846,10 +836,25 @@
 		DACA4E6E0EB3AEA40096F970 /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingsLayer.m */; };
 		DACA4E8D0EB3B0E10096F970 /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
 		DACFEC210EE96AA300A0D08E /* CityTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = DACFEC200EE96AA300A0D08E /* CityTheme.m */; };
-		DAD3123F1551835800A3F9ED /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD3123D1551835800A3F9ED /* Default-Landscape.png */; };
-		DAD312401551835800A3F9ED /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD3123D1551835800A3F9ED /* Default-Landscape.png */; };
-		DAD312411551835800A3F9ED /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD3123E1551835800A3F9ED /* Default-Landscape@2x.png */; };
-		DAD312421551835800A3F9ED /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD3123E1551835800A3F9ED /* Default-Landscape@2x.png */; };
+		DAD4ACAB15CEBC6B00047FEC /* menu-back-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA30BA152DFF6B00BE0D2A /* menu-back-hd.png */; };
+		DAD4ACB415CEBFF500047FEC /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACAE15CEBFF300047FEC /* Icon-72.png */; };
+		DAD4ACB515CEBFF500047FEC /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACAF15CEBFF300047FEC /* Icon-Small-50.png */; };
+		DAD4ACB615CEBFF500047FEC /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACB015CEBFF400047FEC /* Icon-Small.png */; };
+		DAD4ACB715CEBFF500047FEC /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACB115CEBFF400047FEC /* Icon-Small@2x.png */; };
+		DAD4ACB815CEBFF500047FEC /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACB215CEBFF400047FEC /* Icon.png */; };
+		DAD4ACB915CEBFF500047FEC /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACB315CEBFF400047FEC /* Icon@2x.png */; };
+		DAD4ACD215CF1B8000047FEC /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACD015CF1B7F00047FEC /* Default-Landscape@2x~ipad.png */; };
+		DAD4ACD315CF1B8000047FEC /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACD015CF1B7F00047FEC /* Default-Landscape@2x~ipad.png */; };
+		DAD4ACD415CF1B8000047FEC /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACD115CF1B8000047FEC /* Default-Landscape~ipad.png */; };
+		DAD4ACD515CF1B8000047FEC /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACD115CF1B8000047FEC /* Default-Landscape~ipad.png */; };
+		DAD4ACDC15CF1C3700047FEC /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACDA15CF1C3600047FEC /* Default-Portrait@2x~ipad.png */; };
+		DAD4ACDD15CF1C3700047FEC /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACDA15CF1C3600047FEC /* Default-Portrait@2x~ipad.png */; };
+		DAD4ACDE15CF1C3700047FEC /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACDB15CF1C3700047FEC /* Default-Portrait~ipad.png */; };
+		DAD4ACDF15CF1C3700047FEC /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACDB15CF1C3700047FEC /* Default-Portrait~ipad.png */; };
+		DAD4ACE615CF1D4F00047FEC /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACE415CF1D4E00047FEC /* Icon-72@2x.png */; };
+		DAD4ACE715CF1D4F00047FEC /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACE515CF1D4E00047FEC /* Icon-Small-50@2x.png */; };
+		DAD4ACEA15CF1D6C00047FEC /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACE815CF1D6B00047FEC /* Icon-72@2x.png */; };
+		DAD4ACEB15CF1D6C00047FEC /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAD4ACE915CF1D6C00047FEC /* Icon-Small-50@2x.png */; };
 		DADFA04C14877CD2002D591A /* libuicolor-utilities.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8B8B8813CF994B003B0CC2 /* libuicolor-utilities.a */; };
 		DAE2A3821547EC8D00589827 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE2A3801547EC8D00589827 /* Crashlytics.framework */; };
 		DAE2A3831547EC8D00589827 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE2A3801547EC8D00589827 /* Crashlytics.framework */; };
@@ -1551,8 +1556,20 @@
 		DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillasConfig.m; sourceTree = "<group>"; };
 		DACFEC1F0EE96AA300A0D08E /* CityTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityTheme.h; sourceTree = "<group>"; };
 		DACFEC200EE96AA300A0D08E /* CityTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityTheme.m; sourceTree = "<group>"; };
-		DAD3123D1551835800A3F9ED /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
-		DAD3123E1551835800A3F9ED /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x.png"; sourceTree = "<group>"; };
+		DAD4ACAE15CEBFF300047FEC /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		DAD4ACAF15CEBFF300047FEC /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		DAD4ACB015CEBFF400047FEC /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		DAD4ACB115CEBFF400047FEC /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		DAD4ACB215CEBFF400047FEC /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		DAD4ACB315CEBFF400047FEC /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		DAD4ACD015CF1B7F00047FEC /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		DAD4ACD115CF1B8000047FEC /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		DAD4ACDA15CF1C3600047FEC /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		DAD4ACDB15CF1C3700047FEC /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		DAD4ACE415CF1D4E00047FEC /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		DAD4ACE515CF1D4E00047FEC /* Icon-Small-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50@2x.png"; sourceTree = "<group>"; };
+		DAD4ACE815CF1D6B00047FEC /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		DAD4ACE915CF1D6C00047FEC /* Icon-Small-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50@2x.png"; sourceTree = "<group>"; };
 		DAE2A3801547EC8D00589827 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		DAE2A3811547EC8D00589827 /* Crashlytics.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Crashlytics.plist; sourceTree = "<group>"; };
 		DAE2A38A1547ECE700589827 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
@@ -1752,6 +1769,14 @@
 		DA03BE9414045CFD001906B2 /* lite */ = {
 			isa = PBXGroup;
 			children = (
+				DAD4ACE815CF1D6B00047FEC /* Icon-72@2x.png */,
+				DAD4ACE915CF1D6C00047FEC /* Icon-Small-50@2x.png */,
+				DAD4ACAE15CEBFF300047FEC /* Icon-72.png */,
+				DAD4ACAF15CEBFF300047FEC /* Icon-Small-50.png */,
+				DAD4ACB015CEBFF400047FEC /* Icon-Small.png */,
+				DAD4ACB115CEBFF400047FEC /* Icon-Small@2x.png */,
+				DAD4ACB215CEBFF400047FEC /* Icon.png */,
+				DAD4ACB315CEBFF400047FEC /* Icon@2x.png */,
 				DA5934641534F51F0060D09A /* menu-main-ipad.png */,
 				DA5934651534F51F0060D09A /* menu-main-ipadhd.png */,
 				DA03BE991404624C001906B2 /* menu-main-hd.png */,
@@ -2141,8 +2166,12 @@
 		DA5F1BD30EE74CE80041691E /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				DAD3123D1551835800A3F9ED /* Default-Landscape.png */,
-				DAD3123E1551835800A3F9ED /* Default-Landscape@2x.png */,
+				DAD4ACE415CF1D4E00047FEC /* Icon-72@2x.png */,
+				DAD4ACE515CF1D4E00047FEC /* Icon-Small-50@2x.png */,
+				DAD4ACDA15CF1C3600047FEC /* Default-Portrait@2x~ipad.png */,
+				DAD4ACDB15CF1C3700047FEC /* Default-Portrait~ipad.png */,
+				DAD4ACD015CF1B7F00047FEC /* Default-Landscape@2x~ipad.png */,
+				DAD4ACD115CF1B8000047FEC /* Default-Landscape~ipad.png */,
 				DA58B7B9155181310008CBA6 /* Default.png */,
 				DA58B7BA155181310008CBA6 /* Default@2x.png */,
 				DA58B7BC155181320008CBA6 /* splash-hd.png */,
@@ -3073,9 +3102,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DA4769F30FDD7334002E74F8 /* Build configuration list for PBXNativeTarget "Gorillas Lite" */;
 			buildPhases = (
-				DA47694E0FDD7334002E74F8 /* Resources */,
 				DA47697F0FDD7334002E74F8 /* Sources */,
 				DA4769EA0FDD7334002E74F8 /* Frameworks */,
+				DA47694E0FDD7334002E74F8 /* Resources */,
 				DAE2A39B1547F1FB00589827 /* Run Script: GIT version -> Info.plist */,
 				DAE2A39A1547F1E700589827 /* Run Script: Crashlytics */,
 			);
@@ -3412,8 +3441,12 @@
 				DA58B7C8155181340008CBA6 /* splash-ipad.png in Resources */,
 				DA58B7CA155181340008CBA6 /* splash-ipadhd.png in Resources */,
 				DA58B7CC155181340008CBA6 /* splash.png in Resources */,
-				DAD3123F1551835800A3F9ED /* Default-Landscape.png in Resources */,
-				DAD312411551835800A3F9ED /* Default-Landscape@2x.png in Resources */,
+				DAD4ACD215CF1B8000047FEC /* Default-Landscape@2x~ipad.png in Resources */,
+				DAD4ACD415CF1B8000047FEC /* Default-Landscape~ipad.png in Resources */,
+				DAD4ACDC15CF1C3700047FEC /* Default-Portrait@2x~ipad.png in Resources */,
+				DAD4ACDE15CF1C3700047FEC /* Default-Portrait~ipad.png in Resources */,
+				DAD4ACE615CF1D4F00047FEC /* Icon-72@2x.png in Resources */,
+				DAD4ACE715CF1D4F00047FEC /* Icon-Small-50@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3522,19 +3555,9 @@
 				DABA3141152DFF6B00BE0D2A /* gorilla-shape.png in Resources */,
 				DABA3145152DFF6B00BE0D2A /* hole-hd.png in Resources */,
 				DABA3147152DFF6B00BE0D2A /* hole.png in Resources */,
-				DABA3149152DFF6B00BE0D2A /* Icon-72.png in Resources */,
-				DABA314B152DFF6B00BE0D2A /* Icon-Small-50.png in Resources */,
-				DABA314D152DFF6B00BE0D2A /* Icon-Small.png in Resources */,
-				DABA314F152DFF6B00BE0D2A /* Icon-Small@2x.png in Resources */,
-				DABA3151152DFF6B00BE0D2A /* Icon.png in Resources */,
-				DABA3153152DFF6B00BE0D2A /* Icon@2x.png in Resources */,
 				DABA3155152DFF6B00BE0D2A /* infinite-shape-hd.png in Resources */,
 				DABA3157152DFF6B00BE0D2A /* infinite-shape.png in Resources */,
-				DABA315B152DFF6B00BE0D2A /* iTunesArtwork.png in Resources */,
-				DABA315D152DFF6B00BE0D2A /* menu-back-hd.png in Resources */,
 				DABA315F152DFF6B00BE0D2A /* menu-back.png in Resources */,
-				DABA3161152DFF6B00BE0D2A /* menu-main-hd.png in Resources */,
-				DABA3163152DFF6B00BE0D2A /* menu-main.png in Resources */,
 				DA59654615320E3700EA071C /* fire.png in Resources */,
 				DA59654815320E3700EA071C /* fps_images-hd.png in Resources */,
 				DA59654A15320E3700EA071C /* fps_images-ipadhd.png in Resources */,
@@ -3623,8 +3646,19 @@
 				DA58B7C9155181340008CBA6 /* splash-ipad.png in Resources */,
 				DA58B7CB155181340008CBA6 /* splash-ipadhd.png in Resources */,
 				DA58B7CD155181340008CBA6 /* splash.png in Resources */,
-				DAD312401551835800A3F9ED /* Default-Landscape.png in Resources */,
-				DAD312421551835800A3F9ED /* Default-Landscape@2x.png in Resources */,
+				DAD4ACAB15CEBC6B00047FEC /* menu-back-hd.png in Resources */,
+				DAD4ACB415CEBFF500047FEC /* Icon-72.png in Resources */,
+				DAD4ACB515CEBFF500047FEC /* Icon-Small-50.png in Resources */,
+				DAD4ACB615CEBFF500047FEC /* Icon-Small.png in Resources */,
+				DAD4ACB715CEBFF500047FEC /* Icon-Small@2x.png in Resources */,
+				DAD4ACB815CEBFF500047FEC /* Icon.png in Resources */,
+				DAD4ACB915CEBFF500047FEC /* Icon@2x.png in Resources */,
+				DAD4ACD315CF1B8000047FEC /* Default-Landscape@2x~ipad.png in Resources */,
+				DAD4ACD515CF1B8000047FEC /* Default-Landscape~ipad.png in Resources */,
+				DAD4ACDD15CF1C3700047FEC /* Default-Portrait@2x~ipad.png in Resources */,
+				DAD4ACDF15CF1C3700047FEC /* Default-Portrait~ipad.png in Resources */,
+				DAD4ACEA15CF1D6C00047FEC /* Icon-72@2x.png in Resources */,
+				DAD4ACEB15CF1D6C00047FEC /* Icon-Small-50@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3673,7 +3707,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = ./Crashlytics/Crashlytics.framework/run;
+			shellScript = "Crashlytics/Crashlytics.framework/run \"$(/usr/libexec/PlistBuddy -c \"Print :'API Key'\" Crashlytics/Crashlytics.plist)\"";
 			showEnvVarsInLog = 0;
 		};
 		DAE2A39B1547F1FB00589827 /* Run Script: GIT version -> Info.plist */ = {
@@ -3688,7 +3722,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = "/bin/bash -e";
-			shellScript = "PATH+=:/usr/libexec\n\nsetPlistWithKey() {\n    local key=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Set :$key $value\" \"$plist\"\n}\ngetPlistWithKey() {\n    local key=$1 plist=${2:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Print :$key\" \"$plist\"\n}\nsetSettingWithTitle() {\n    local i title=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Settings.bundle/Root.plist\"}\n    \n    for (( i=0; 1; ++i )); do\n    PlistBuddy -c \"Print :PreferenceSpecifiers:$i\" \"$plist\" &>/dev/null || break\n    echo \"Checking preference specifier $i\"\n    \n    [[ $(PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Title\" \"$plist\" 2>/dev/null) = $title ]] || continue\n    \n    echo \"Correct title, setting value.\"\n    PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue $value\" \"$plist\"\n    break\n    done\n}\n\nbuild=$(git describe --tags --always --dirty --long)\ntag=$(git describe --tags | sed 's/-\\([^-]*\\)-[^-]*$/.\\1/')\n\nsetPlistWithKey CFBundleVersion \"$build\"\nsetPlistWithKey CFBundleShortVersionString \"$tag\"\n\nsetSettingWithTitle \"Build\" \"$build\"\nsetSettingWithTitle \"Version\" \"$tag\"\nsetSettingWithTitle \"Copyright\" \"$(getPlistWithKey NSHumanReadableCopyright)\"\n";
+			shellScript = "PATH+=:/usr/libexec\n\naddPlistWithKey() {\n    local key=$1 type=$2 value=$3 plist=${4:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Delete :'$key'\" \"$plist\" || true\n    PlistBuddy -c \"Add :'$key' '$type' '$value'\" \"$plist\"\n}\nsetPlistWithKey() {\n    local key=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Set :'$key' '$value'\" \"$plist\"\n}\ngetPlistWithKey() {\n    local key=$1 plist=${2:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Print :'$key'\" \"$plist\"\n}\nsetSettingWithTitle() {\n    local i title=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Settings.bundle/Root.plist\"}\n    \n    for (( i=0; 1; ++i )); do\n        PlistBuddy -c \"Print :PreferenceSpecifiers:$i\" \"$plist\" &>/dev/null || break\n        echo \"Checking preference specifier $i\"\n    \n        [[ $(PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Title\" \"$plist\" 2>/dev/null) = $title ]] || continue\n    \n        echo \"Correct title, setting value.\"\n        PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue $value\" \"$plist\"\n        break\n    done\n}\n\ndescription=$(git describe --always --dirty --long)\nbuild=${description%-g*} build=${build//-/.}\ntag=${description%%-*}\n\naddPlistWithKey GITDescription string \"$description\"\nsetPlistWithKey CFBundleVersion \"$build\"\nsetPlistWithKey CFBundleShortVersionString \"$tag\"\n\nsetSettingWithTitle \"Build\" \"$build\"\nsetSettingWithTitle \"Version\" \"$tag\"\nsetSettingWithTitle \"Copyright\" \"$(getPlistWithKey NSHumanReadableCopyright)\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -4106,13 +4140,11 @@
 					"External/Pearl/External/cocos2d-iphone/cocos2d/**",
 					"External/Pearl/External/cocos2d-iphone/external/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestFlight\"",
 				);
 				SKIP_INSTALL = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -4126,6 +4158,8 @@
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont (DWGU95U4ZD)";
 				COPY_PHASE_STRIP = NO;
@@ -4180,7 +4214,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -4194,6 +4228,8 @@
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -4244,7 +4280,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D2878A22-D82B-4E3A-8401-DA9F7ACA9926";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -4262,13 +4298,11 @@
 					"External/Pearl/External/cocos2d-iphone/cocos2d/**",
 					"External/Pearl/External/cocos2d-iphone/external/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestFlight\"",
 				);
 				SKIP_INSTALL = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -4318,10 +4352,6 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/TestFlight\"",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
 				SKIP_INSTALL = NO;
 			};
 			name = Debug;
@@ -4347,10 +4377,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestFlight\"",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
 				);
 				SKIP_INSTALL = NO;
 			};
@@ -4436,6 +4462,8 @@
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Maarten Billemont (DWGU95U4ZD)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -4483,7 +4511,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3FA8425E-3131-42D8-B104-3F1FF49E1A8C";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Profile;
 		};
@@ -4500,13 +4528,11 @@
 					"External/Pearl/External/cocos2d-iphone/cocos2d/**",
 					"External/Pearl/External/cocos2d-iphone/external/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestFlight\"",
 				);
 				SKIP_INSTALL = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Profile;
 		};
@@ -4531,10 +4557,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestFlight\"",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
 				);
 				SKIP_INSTALL = NO;
 			};
@@ -4576,6 +4598,8 @@
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN__ARC_BRIDGE_CAST_NONARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Maarten Billemont";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -4626,7 +4650,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D2878A22-D82B-4E3A-8401-DA9F7ACA9926";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "App Store";
@@ -4644,13 +4668,11 @@
 					"External/Pearl/External/cocos2d-iphone/cocos2d/**",
 					"External/Pearl/External/cocos2d-iphone/external/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestFlight\"",
 				);
 				SKIP_INSTALL = NO;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "App Store";
 		};
@@ -4675,10 +4697,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestFlight\"",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
 				);
 				SKIP_INSTALL = NO;
 			};
