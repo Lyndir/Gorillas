@@ -78,7 +78,7 @@
 
 - (NSUInteger)indexForSetting:(SEL)setting value:(id)value {
     
-    dbg(@"setting %s is now %@", setting, value);
+    dbg(@"Setting %@ is now %@.", NSStringFromSelector(setting), value);
     if (setting == @selector(cityTheme))
         return [[CityTheme getThemeNames] indexOfObject:value];
     if (setting == @selector(gravity))

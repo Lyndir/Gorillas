@@ -65,7 +65,7 @@
     
     [GorillasConfig get];
 #ifdef DEBUG
-    [[PearlLogger get] setAutoprintLevel:PearlLogLevelDebug];
+    [[PearlLogger get] setPrintLevel:PearlLogLevelDebug];
 #endif
 }
 
@@ -134,10 +134,8 @@
                 if (message.level >= PearlLogLevelError)
                     [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Problem" attributes:
                      [NSDictionary dictionaryWithObjectsAndKeys:
-                      [message levelDescription],
-                      @"level",
-                      message.message,
-                      @"message",
+                      [[NSString alloc] initWithUTF8String:PearlLogLevelStr(message.level)], @"level",
+                      message.message, @"message",
                       nil]];
                 
                 return YES;
