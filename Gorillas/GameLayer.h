@@ -30,7 +30,7 @@
 #import <GameKit/GameKit.h>
 
 
-@interface GameLayer : CCLayer <PearlResettable> {
+@interface GameLayer : CCLayer <PearlResettable, CCTimeScalable> {
 
 @private
     BOOL                                                    paused;

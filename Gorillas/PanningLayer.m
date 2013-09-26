@@ -36,7 +36,7 @@
     
     self.anchorPoint    = ccp(0.5f, 0.0f);
     
-    self.isTouchEnabled = YES;
+    self.touchEnabled   = YES;
     initialDist         = -1;
     
     [self runAction:tween = [[PearlCCAutoTween alloc] initWithDuration:0.5f]];

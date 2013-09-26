@@ -67,7 +67,7 @@
     
         if(!cancelled) {
             CCNode *newFirstNode = [subNodes objectAtIndex:0];
-            delta_ = ccp(-[newFirstNode contentSize].width - padding, 0);
+            _positionDelta = ccp(-[newFirstNode contentSize].width - padding, 0);
             [self startWithTarget:self.target];
         }
     }

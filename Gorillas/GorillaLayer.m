@@ -82,7 +82,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     self.globalIndex        = nextGlobalIndex++;
     self.zoom               = 1;
     self.texture            = [[CCTextureCache sharedTextureCache] addImage:[self modelFileWithArmsUpLeft:NO right:NO]];
-    self.textureRect        = CGRectFromCGPointAndCGSize(CGPointZero, self.texture.contentSize);
+    self.textureRect        = CGRectFromOriginWithSize(CGPointZero, self.texture.contentSize);
     self.bobber             = [CCSprite spriteWithFile:@"bobber.png"];
     self.bobber.visible     = NO;
     self.bobber.position = ccp(0, self.contentSize.height);
@@ -119,7 +119,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
             self.initialLives = -1;
     }
     
-    _healthColors    = malloc(sizeof(ccColor4B) * 4);
+    _healthColors    = calloc(4, sizeof(ccColor4B));
     _healthColors[0] = _healthColors[1] = ccc4l(0xFF33CC33L);
     _healthColors[2] = _healthColors[3] = ccc4l(0xFF3333CCL);
     
@@ -436,7 +436,7 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"GorillaLayer - draw");
        CC_NODE_DRAW_SETUP();
     [[[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor] use];
-       [[[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor] setUniformForModelViewProjectionMatrix];
+       [[[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor] setUniformsForBuiltins];
     
     CGSize size = self.contentSize; //CC_SIZE_POINTS_TO_PIXELS(self.contentSize);
     

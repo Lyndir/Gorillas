@@ -45,7 +45,7 @@
     if (!(self = [super init]))
         return self;
     
-    self.isTouchEnabled = YES;
+    self.touchEnabled = YES;
     
     self.aim        = CGPointZero;
     
@@ -53,12 +53,17 @@
     aimSprite.textureSize = CGSizeMake(aimSprite.textureSize.width / 2, aimSprite.textureSize.height / 2);
     [self addChild:aimSprite z:2];
     
-    angleLabel      = [[CCLabelTTF alloc] initWithString:@"0" dimensions:CGSizeMake(100, 100) hAlignment:kCCTextAlignmentLeft
-                                                fontName:[GorillasConfig get].fixedFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
-    strengthLabel   = [[CCLabelTTF alloc] initWithString:@"0" dimensions:CGSizeMake(100, 100) hAlignment:kCCTextAlignmentLeft
-                                                fontName:[GorillasConfig get].fixedFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
-    infoLabel       = [[CCLabelTTF alloc] initWithString:@"∡\n⊿" dimensions:CGSizeMake(100, 100) hAlignment:kCCTextAlignmentLeft
-                                                fontName:[GorillasConfig get].symbolicFontName fontSize:[[GorillasConfig get].smallFontSize intValue]];
+    angleLabel      = [[CCLabelTTF alloc]
+            initWithString:@"0" fontName:[GorillasConfig get].fixedFontName fontSize:[[GorillasConfig get].smallFontSize intValue]
+                dimensions:CGSizeMake( 100, 100 ) hAlignment:kCCTextAlignmentLeft];
+    strengthLabel   = [[CCLabelTTF alloc] initWithString:@"0"
+                                                fontName:[GorillasConfig get].fixedFontName
+                                                fontSize:[[GorillasConfig get].smallFontSize intValue]
+                                              dimensions:CGSizeMake( 100, 100 ) hAlignment:kCCTextAlignmentLeft];
+    infoLabel       = [[CCLabelTTF alloc] initWithString:@"∡\n⊿"
+                                                fontName:[GorillasConfig get].symbolicFontName
+                                                fontSize:[[GorillasConfig get].smallFontSize intValue]
+                                              dimensions:CGSizeMake( 100, 100 ) hAlignment:kCCTextAlignmentLeft];
     [infoLabel addChild:angleLabel];
     [infoLabel addChild:strengthLabel];
     

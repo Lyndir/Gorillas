@@ -35,9 +35,9 @@
 }
 
 
--(ShadeTo *) initWithDuration:(ccTime)_duration color:(ccColor4B)_color {
+-(ShadeTo *) initWithDuration:(ccTime)aDuration color:(ccColor4B)_color {
     
-    if(!(self = [super initWithDuration: _duration]))
+    if(!(self = [super initWithDuration:aDuration]))
         return self;
     
     endCol = _color;

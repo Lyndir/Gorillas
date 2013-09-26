@@ -221,7 +221,7 @@ static float flameRadius;
     }
     
     if(!flameTypes) {
-        flameTypes  = malloc(sizeof(CCParticleSystem *) * 2 * flameVariantion);
+        flameTypes  = calloc(2 * flameVariantion, sizeof(CCParticleSystem *));
         flameRadius = radius;
         
         for (NSUInteger type = 0; type < flameVariantion * 2; ++type) {
@@ -263,7 +263,7 @@ static float flameRadius;
     
     if(explosionEffect == nil) {
         explosionEffects = 4;
-        explosionEffect = malloc(sizeof(SystemSoundID) * (unsigned)explosionEffects);
+        explosionEffect = calloc((unsigned)explosionEffects, sizeof(SystemSoundID));
         
         for(NSInteger i = 0; i < explosionEffects; ++i)
             explosionEffect[i] = [GorillasAudioController loadEffectWithName:[NSString stringWithFormat:@"explosion%d.caf", i]];

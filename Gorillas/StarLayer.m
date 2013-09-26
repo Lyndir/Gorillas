@@ -27,15 +27,19 @@
 #import "PearlGLShaders.h"
 #define maxStarSize 2
 
+@interface StarLayer()
 
-@implementation StarLayer
+@property(nonatomic) BOOL dirty;
+@end
 
+@implementation StarLayer { GLuint starVertexObject; }
 
 -(id) initWidthDepth:(float)aDepth {
-    
+
     if (!(self = [super init]))
         return self;
     
+    starVertexObject    = 0;
     starVertexBuffer    = 0;
     starCount           = -1;
     depth               = aDepth;
@@ -68,7 +72,7 @@
     CGFloat starSize    = fmaxf(1.0f, maxStarSize * depth);
     
     free(starVertices);
-    starVertices = malloc(sizeof(glPoint) * (unsigned)starCount);
+    starVertices = calloc((unsigned)starCount, sizeof(glPoint));
     
     CGSize winSize      = [CCDirector sharedDirector].winSize;
     for (NSInteger s = 0; s < starCount; ++s) {
@@ -77,12 +81,26 @@
         starVertices[s].c   = starColor;
         starVertices[s].s   = starSize;
     }
-    
+
+    glDeleteVertexArrays( 1, &starVertexObject );
+    glGenVertexArrays( 1, &starVertexObject );
+    ccGLBindVAO( starVertexObject );
     glDeleteBuffers(1, &starVertexBuffer);
     glGenBuffers(1, &starVertexBuffer);
+//    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color );
+//    glEnableVertexAttribArray( kPearlGLVertexAttrib_Size );
     glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, (signed)sizeof(glPoint) * starCount, starVertices, GL_DYNAMIC_DRAW);
+    glEnableVertexAttribArray( kCCVertexAttrib_Position );
+    glVertexAttribPointer( kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *)offsetof(glPoint, p));
+    glEnableVertexAttribArray( kPearlGLVertexAttrib_Size );
+    glVertexAttribPointer( kPearlGLVertexAttrib_Size, 1, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *)offsetof(glPoint, s));
+    glEnableVertexAttribArray( kCCVertexAttrib_Color );
+    glVertexAttribPointer( kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(glPoint), (GLvoid *)offsetof(glPoint, c));
+    ccGLBindVAO( 0 );
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glDisableVertexAttribArray( kPearlGLVertexAttrib_Size );
+    CHECK_GL_ERROR_DEBUG();
 }
 
 
@@ -97,10 +115,8 @@
         if (starVertices[s].p.x < 0)
             starVertices[s].p.x = winSize.width + PearlGameRandomFor(GorillasGameRandomStars) % (int)winSize.width / 7;
     }
-
-    glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, (signed)sizeof(glPoint) * starCount, starVertices, GL_DYNAMIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    
+    self.dirty = YES;
 }
 
 
@@ -109,43 +125,53 @@
     [super draw];
 
     CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"StarLayer - draw");
-       CC_NODE_DRAW_SETUP();
+    if (self.dirty) {
+        glBindBuffer( GL_ARRAY_BUFFER, starVertexBuffer );
+        glBufferData( GL_ARRAY_BUFFER, (signed)sizeof(glPoint) * starCount, starVertices, GL_DYNAMIC_DRAW );
+        glBindBuffer( GL_ARRAY_BUFFER, 0 );
+        self.dirty = NO;
+    }
 
-//    // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-//    //glEnableClientState(GL_COLOR_ARRAY);
-//    //glEnableClientState(GL_VERTEX_ARRAY);
-//    glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
-//    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-//    glDisable(GL_TEXTURE_2D);
-    ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color);
-    glEnableVertexAttribArray(kPearlGLVertexAttrib_Size);
+    CC_NODE_DRAW_SETUP();
+    ccGLBindVAO( starVertexObject );
 
-    // Stars.
-    glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
-    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, p));
-    glVertexAttribPointer(kPearlGLVertexAttrib_Size, 1, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, s));
-    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, c));
+////    // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+////    //glEnableClientState(GL_COLOR_ARRAY);
+////    //glEnableClientState(GL_VERTEX_ARRAY);
+////    glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
+////    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+////    glDisable(GL_TEXTURE_2D);
+//    ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color);
+//    glEnableVertexAttribArray( kPearlGLVertexAttrib_Size );
+//
+//    // Stars.
+//    glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
+//    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, p));
+//    glVertexAttribPointer(kPearlGLVertexAttrib_Size, 1, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, s));
+//    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, c));
 
     glDrawArrays(GL_POINTS, 0, starCount);
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glDisableVertexAttribArray(kPearlGLVertexAttrib_Size);
-//    //glDisableClientState(GL_VERTEX_ARRAY);
-//    //glDisableClientState(GL_COLOR_ARRAY);
-//    glDisableClientState(GL_POINT_SIZE_ARRAY_OES);
-//    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-//    glEnable(GL_TEXTURE_2D);
+//    glBindBuffer(GL_ARRAY_BUFFER, 0);
+//    glDisableVertexAttribArray(kPearlGLVertexAttrib_Size);
+////    //glDisableClientState(GL_VERTEX_ARRAY);
+////    //glDisableClientState(GL_COLOR_ARRAY);
+////    glDisableClientState(GL_POINT_SIZE_ARRAY_OES);
+////    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+////    glEnable(GL_TEXTURE_2D);
 
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
-       CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"StarLayer - draw");
+    CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"StarLayer - draw");
 }
 
 
 -(void) dealloc {
 
+    glDeleteVertexArrays( 1, &starVertexObject );
     glDeleteBuffers(1, &starVertexBuffer);
     starVertexBuffer = 0;
+    CHECK_GL_ERROR_DEBUG();
     
     free(starVertices);
     starVertices = nil;

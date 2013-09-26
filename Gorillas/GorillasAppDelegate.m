@@ -70,15 +70,37 @@
 }
 
 - (void)preSetup {
-    
+
+    @try {
+        NSString *apiKey = [self crashlyticsAPIKey];
+        if ([apiKey length]) {
+            dbg(@"Initializing Crashlytics");
+#ifndef APPSTORE
+            [Crashlytics sharedInstance].debugMode = YES;
+#endif
+            [Crashlytics startWithAPIKey:apiKey afterDelay:0];
+            [[Crashlytics sharedInstance] setUserName:@"Anonymous"];
+            [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
+#ifdef APPSTORE
+                if (message.level >= PearlLogLevelInfo)
+                    CLSLog(@"%@", message);
+#else
+                if (message.level >= PearlLogLevelDebug)
+                    CLSLog( @"%@", message );
+#endif
+
+                return YES;
+            }];
+        }
+    }
+    @catch (id exception) {
+        err(@"Crashlytics: %@", exception);
+    }
     @try {
         NSString *token = [self testFlightToken];
         if ([token length]) {
             inf(@"Initializing TestFlight");
             [TestFlight addCustomEnvironmentInformation:@"Anonymous" forKey:@"username"];
-#ifndef APPSTORE
-            [TestFlight setDeviceIdentifier:[(id)[UIDevice currentDevice] uniqueIdentifier]];
-#endif
             [TestFlight setOptions:[NSDictionary dictionaryWithObjectsAndKeys:
                                     [NSNumber numberWithBool:NO],   @"logToConsole",
                                     [NSNumber numberWithBool:NO],   @"logToSTDERR",
@@ -101,31 +123,6 @@
         err(@"TestFlight: %@", exception);
     }
     @try {
-        NSString *apiKey = [self crashlyticsAPIKey];
-        if ([apiKey length]) {
-            dbg(@"Initializing Crashlytics");
-#ifndef APPSTORE
-            [Crashlytics sharedInstance].debugMode = YES;
-#endif
-            [Crashlytics startWithAPIKey:apiKey afterDelay:0];
-            [[Crashlytics sharedInstance] setUserName:@"Anonymous"];
-            [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
-#ifdef APPSTORE
-                if (message.level >= PearlLogLevelInfo)
-                    CLSLog(@"%@", message);
-#else
-                if (message.level >= PearlLogLevelDebug)
-                    CLSLog(@"%@", message);
-#endif
-                
-                return YES;
-            }];
-        }
-    }
-    @catch (id exception) {
-        err(@"Crashlytics: %@", exception);
-    }
-    @try {
         NSString *key = [self localyticsKey];
         if ([key length]) {
             dbg(@"Initializing Localytics");
@@ -145,7 +142,7 @@
     @catch (id exception) {
         err(@"Localytics exception: %@", exception);
     }
-    
+
     [super preSetup];
     
     // Build the splash scene.
@@ -159,22 +156,23 @@
     frame.anchorPoint = CGPointZero;
     [self.uiLayer addChild:frame z:1];
     [self.uiLayer addChild:self.gameLayer];
-    
+    [[GorillasAppDelegate get] showMainMenu];
+
     // Show the splash screen, this starts the main loop in the current thread.
     [[CCDirector sharedDirector] pushScene:splashScene];
     
     // Game Center setup.
-    [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
-        if (error)
-            wrn(@"Game Center unavailable: %@", error);
-        
-        dbg(@"Local player alias: %@", [GKLocalPlayer localPlayer].alias);
-        [TestFlight addCustomEnvironmentInformation:[GKLocalPlayer localPlayer].alias forKey:@"username"];
-        [[Crashlytics sharedInstance] setUserName:[GKLocalPlayer localPlayer].alias];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.mainMenuLayer reset];
-        });
-    }];
+//    [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
+//        if (error)
+//            wrn(@"Game Center unavailable: %@", error);
+//
+//        dbg(@"Local player alias: %@", [GKLocalPlayer localPlayer].alias);
+//        [TestFlight addCustomEnvironmentInformation:[GKLocalPlayer localPlayer].alias forKey:@"username"];
+//        [[Crashlytics sharedInstance] setUserName:[GKLocalPlayer localPlayer].alias];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.mainMenuLayer reset];
+//        });
+//    }];
 #ifndef LITE
     self.netController = [[NetController new] autorelease];
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {

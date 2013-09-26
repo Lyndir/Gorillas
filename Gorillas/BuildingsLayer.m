@@ -25,7 +25,9 @@
 #import "BuildingsLayer.h"
 #import "PearlGLUtils.h"
 
-@implementation BuildingsLayer
+@implementation BuildingsLayer { GLuint buildingsVertexObject[2];
+    GLuint windowsVertexObject;
+}
 
 @synthesize buildings, buildingCount;
 
@@ -50,8 +52,11 @@
     buildingHeightRatio     = h;
     lightRatio              = l;
     
+    buildingsVertexObject[0]= 0;
+    buildingsVertexObject[1]= 0;
     buildingsVertexBuffer   = 0;
     buildingsIndicesBuffer  = 0;
+    windowsVertexObject     = 0;
     windowsVertexBuffer     = 0;
     windowsIndicesBuffer    = 0;
     
@@ -102,7 +107,7 @@
     free(buildings);
     if (!buildingCount)
         return;
-    buildings = malloc(sizeof(Building) * buildingCount);
+    buildings = calloc(buildingCount, sizeof(Building));
     for (NSUInteger b = 0; b < buildingCount; ++b) {
         // Building's position.
         buildings[b].x              = b * buildingWidth - buildingWidth * (buildingCount - [config.buildingAmount unsignedIntValue]) / 2;
@@ -124,18 +129,18 @@
     }
     
     // Build vertex arrays.
-    BuildingVertex *buildingVertices        = malloc(sizeof(BuildingVertex)     /* size of a vertex */
-                                                     * 4                        /* amount of vertices per building */
-                                                     * buildingCount            /* amount of buildings */);
-    GLushort *buildingIndices               = malloc(sizeof(GLushort)           /* size of an index */
-                                                     * 6                        /* amount of indexes per window */
-                                                     * buildingCount            /* amount of windows in all buildings */);
-    Vertex *windowVertices                  = malloc(sizeof(Vertex)             /* size of a vertex */
-                                                     * 4                        /* amount of vertices per window */
-                                                     * windowCount              /* amount of windows in all buildings */);
-    GLushort *windowIndices                 = malloc(sizeof(GLushort)           /* size of an index */
-                                                     * 6                        /* amount of indexes per window */
-                                                     * windowCount              /* amount of windows in all buildings */);
+    BuildingVertex *buildingVertices        = calloc(4                          /* amount of vertices per building */
+                                                     * buildingCount            /* amount of buildings */,
+                                                     sizeof(BuildingVertex)     /* size of a vertex */);
+    GLushort *buildingIndices               = calloc(6                          /* amount of indexes per window */
+                                                     * buildingCount            /* amount of windows in all buildings */,
+                                                     sizeof(GLushort)           /* size of an index */);
+    Vertex *windowVertices                  = calloc(4                          /* amount of vertices per window */
+                                                     * windowCount              /* amount of windows in all buildings */,
+                                                     sizeof(Vertex)             /* size of a vertex */);
+    GLushort *windowIndices                 = calloc(6                          /* amount of indexes per window */
+                                                     * windowCount              /* amount of windows in all buildings */,
+                                                     sizeof(GLushort)           /* size of an index */);
     const CGFloat wPadPx = wPadPt; // * CC_CONTENT_§_FACTOR();
     const CGFloat wWidthPx = wWidthPt; // * CC_CONTENT_SCALE_FACTOR();
     const CGFloat wHeightPx = wHeightPt; // * CC_CONTENT_SCALE_FACTOR();
@@ -205,28 +210,66 @@
         w += bw;
     }
     
-    // Push our window data into VBOs.
-    glDeleteBuffers(1, &buildingsVertexBuffer);
-    glDeleteBuffers(1, &buildingsIndicesBuffer);
+    // Push our building data into VAO.
+    glDeleteVertexArrays( 2, &buildingsVertexObject[0] );
+    glGenVertexArrays( 2, &buildingsVertexObject[0] );
+    ccGLBindVAO( buildingsVertexObject[0] );
+    glDeleteBuffers( 1, &buildingsVertexBuffer );
+    glDeleteBuffers( 1, &buildingsIndicesBuffer );
+    glGenBuffers( 1, &buildingsVertexBuffer );
+    glGenBuffers( 1, &buildingsIndicesBuffer );
+
+//    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color );
+    glBindBuffer( GL_ARRAY_BUFFER, buildingsVertexBuffer );
+    glBufferData( GL_ARRAY_BUFFER, (GLsizeiptr)(sizeof(BuildingVertex) * buildingCount * 4), buildingVertices, GL_DYNAMIC_DRAW );
+    glEnableVertexAttribArray( kCCVertexAttrib_Position );
+    glVertexAttribPointer( kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(BuildingVertex),
+            (GLvoid *)offsetof(BuildingVertex, front) + offsetof(Vertex, p));
+    glEnableVertexAttribArray( kCCVertexAttrib_Color );
+    glVertexAttribPointer( kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(BuildingVertex),
+            (GLvoid *)offsetof(BuildingVertex, front) + offsetof(Vertex, c));
+    glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer );
+    glBufferData( GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)(sizeof(GLushort) * buildingCount * 6), buildingIndices, GL_DYNAMIC_DRAW );
+
+    ccGLBindVAO( buildingsVertexObject[1] );
+    glBindBuffer( GL_ARRAY_BUFFER, buildingsVertexBuffer );
+//    glBufferData( GL_ARRAY_BUFFER, (GLsizeiptr)(sizeof(BuildingVertex) * buildingCount * 4), buildingVertices, GL_DYNAMIC_DRAW );
+    glEnableVertexAttribArray( kCCVertexAttrib_Position );
+    glVertexAttribPointer( kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(BuildingVertex),
+            (GLvoid *)offsetof(BuildingVertex, front) + offsetof(Vertex, p));
+    glEnableVertexAttribArray( kCCVertexAttrib_Color );
+    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(BuildingVertex),
+            (GLvoid *) offsetof(BuildingVertex, backColor));
+    glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer );
+//    glBufferData( GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)(sizeof(GLushort) * buildingCount * 6), buildingIndices, GL_DYNAMIC_DRAW );
+
+    // Push our window data into VAO.
+    glDeleteVertexArrays( 1, &windowsVertexObject );
+    glGenVertexArrays( 1, &windowsVertexObject );
+    ccGLBindVAO( windowsVertexObject );
     glDeleteBuffers(1, &windowsVertexBuffer);
     glDeleteBuffers(1, &windowsIndicesBuffer);
-    glGenBuffers(1, &buildingsVertexBuffer);
-    glGenBuffers(1, &buildingsIndicesBuffer);
     glGenBuffers(1, &windowsVertexBuffer);
     glGenBuffers(1, &windowsIndicesBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr)(sizeof(BuildingVertex) * buildingCount * 4), buildingVertices, GL_DYNAMIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, windowsVertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr)(sizeof(Vertex) * windowCount * 4), windowVertices, GL_DYNAMIC_DRAW);
+
+//    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color );
+    glBindBuffer( GL_ARRAY_BUFFER, windowsVertexBuffer );
+    glBufferData( GL_ARRAY_BUFFER, (GLsizeiptr)(sizeof(Vertex) * windowCount * 4), windowVertices, GL_DYNAMIC_DRAW );
+    glEnableVertexAttribArray( kCCVertexAttrib_Position );
+    glVertexAttribPointer( kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, p));
+    glEnableVertexAttribArray( kCCVertexAttrib_Color );
+    glVertexAttribPointer( kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, c));
+    glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, windowsIndicesBuffer );
+    glBufferData( GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)(sizeof(GLushort) * windowCount * 6), windowIndices, GL_DYNAMIC_DRAW );
+
+    ccGLBindVAO( 0 );
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)(sizeof(GLushort) * buildingCount * 6), buildingIndices, GL_DYNAMIC_DRAW);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, windowsIndicesBuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)(sizeof(GLushort) * windowCount * 6), windowIndices, GL_DYNAMIC_DRAW);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0 );
+    CHECK_GL_ERROR_DEBUG();
     
     // Free the client side data.
     free(buildingVertices);
+    free(buildingIndices);
     free(windowVertices);
     free(windowIndices);
 }
@@ -235,44 +278,45 @@
 -(void) draw {
 
     [super draw];
-    
+
     CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"BuildingsLayer - draw");
-       CC_NODE_DRAW_SETUP();
-    
-//    // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-//    //glEnableClientState(GL_VERTEX_ARRAY);
-//    //glEnableClientState(GL_COLOR_ARRAY);
-//    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-//    glDisable(GL_TEXTURE_2D);
-    ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color);
+    CC_NODE_DRAW_SETUP();
+    ccGLBindVAO( buildingsVertexObject[0] );
+
+////    // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+////    //glEnableClientState(GL_VERTEX_ARRAY);
+////    //glEnableClientState(GL_COLOR_ARRAY);
+////    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+////    glDisable(GL_TEXTURE_2D);
+//    ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color);
 
     // Drawing Front Side.
+    // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC over DST; DST_ALPHA of 0 means hide SRC, leave DST).
     ccGLBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
 
     // == DRAW BUILDING ==
-    // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC over DST; DST_ALPHA of 0 means hide SRC, leave DST).
-    glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer);
-    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, front) + offsetof(Vertex, p));
-    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, front) + offsetof(Vertex, c));
+//    glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
+//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer);
+//    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, front) + offsetof(Vertex, p));
+//    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, front) + offsetof(Vertex, c));
 
     glDrawElements(GL_TRIANGLES, (GLsizei)(buildingCount * 6), GL_UNSIGNED_SHORT, 0);
     //drawBoxFrom(CGPointZero, ccp(contentSize.width, contentSize.height), buildingColor, buildingColor);
 
     // == DRAW WINDOWS ==
     // Bind our VBOs & colors.
-    glBindBuffer(GL_ARRAY_BUFFER, windowsVertexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, windowsIndicesBuffer);
-    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, p));
-    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, c));
+    ccGLBindVAO( windowsVertexObject );
+//    glBindBuffer(GL_ARRAY_BUFFER, windowsVertexBuffer);
+//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, windowsIndicesBuffer);
+//    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, p));
+//    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, c));
 
     // = DRAW FRONT WINDOWS =
-    // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC, hide DST; DST_ALPHA of 0 means hide SRC, leave DST).
     glDrawElements(GL_TRIANGLES, (GLsizei)(windowCount * 6), GL_UNSIGNED_SHORT, 0);
 
     // Drawing Rear Side.
     if (buildingHeightRatio == 1) {
-        ccGLBlendFunc(GL_ONE, GL_ZERO);
+        glBlendFunc(GL_ONE, GL_ZERO);
 
         // = DRAW REAR WINDOWS =
         // Set opacity of DST to 1 where there are windows -> building back won't draw over it.
@@ -282,41 +326,45 @@
 
         // == DRAW BUILDING BACK ==
         // Draw back of building where DST opacity is < 1.
-        glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer);
-        glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, front) + offsetof(Vertex, p));
-        glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, backColor));
+        ccGLBindVAO( buildingsVertexObject[1] );
+//        glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
+//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer);
+//        glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, front) + offsetof(Vertex, p));
+//        glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, backColor));
 
-        glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA);
+        ccGLBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA);
         glDrawElements(GL_TRIANGLES, (GLsizei)(buildingCount * 6), GL_UNSIGNED_SHORT, 0);
     }
 
 //    // Turn off state.
-//    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    ccGLBlendFunc( CC_BLEND_SRC, CC_BLEND_DST );
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-//    //glDisableClientState(GL_COLOR_ARRAY);
-//    //glDisableClientState(GL_VERTEX_ARRAY);
-//    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-//    glEnable(GL_TEXTURE_2D);
+////    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+////    ccGLBlendFunc( CC_BLEND_SRC, CC_BLEND_DST );
+//    glBindBuffer(GL_ARRAY_BUFFER, 0);
+//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+////    //glDisableClientState(GL_COLOR_ARRAY);
+////    //glDisableClientState(GL_VERTEX_ARRAY);
+////    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+////    glEnable(GL_TEXTURE_2D);
     
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
-       CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"BuildingsLayer - draw");
+    CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"BuildingsLayer - draw");
 }
 
 
 -(void) dealloc {
     
-    glDeleteBuffers(2, &buildingsVertexBuffer);
-    glDeleteBuffers(2, &buildingsIndicesBuffer);
-    glDeleteBuffers(2, &windowsVertexBuffer);
-    glDeleteBuffers(2, &windowsIndicesBuffer);
+    glDeleteVertexArrays( 2, &buildingsVertexObject[0] );
+    glDeleteVertexArrays( 1, &windowsVertexObject );
+    glDeleteBuffers(1, &buildingsVertexBuffer);
+    glDeleteBuffers(1, &buildingsIndicesBuffer);
+    glDeleteBuffers(1, &windowsVertexBuffer);
+    glDeleteBuffers(1, &windowsIndicesBuffer);
     buildingsVertexBuffer   = 0;
     buildingsIndicesBuffer  = 0;
     windowsVertexBuffer     = 0;
     windowsIndicesBuffer    = 0;
+    CHECK_GL_ERROR_DEBUG();
     
     [super dealloc];
 }

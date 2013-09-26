@@ -49,7 +49,7 @@
         return self;
     
     CGSize s = [[CCDirector sharedDirector] winSize];
-    anchorPoint_ = ccp(0.5f, 0.5f);
+    _anchorPoint = ccp(0.5f, 0.5f);
     [self setContentSize:s];
     self.ignoreAnchorPointForPosition = YES;
     self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
@@ -58,11 +58,11 @@
     dbgTraceStep    = 5;
     dbgPathMaxInd   = 50;
     dbgPathCurInd   = 0;
-    dbgPath         = malloc(sizeof(CGPoint) * dbgPathMaxInd);
+    dbgPath         = calloc(dbgPathMaxInd, sizeof(CGPoint));
     dbgAIMaxInd   = 1;
     dbgAICurInd   = 0;
-    dbgAI           = malloc(sizeof(GorillaLayer *) * dbgAIMaxInd);
-    dbgAIVect       = malloc(sizeof(CGPoint) * dbgAIMaxInd);
+    dbgAI           = calloc(dbgAIMaxInd, sizeof(GorillaLayer *));
+    dbgAIVect       = calloc(dbgAIMaxInd, sizeof(CGPoint));
 #endif
     
     throwHints      = [[NSMutableArray alloc] initWithCapacity:2];
@@ -112,7 +112,8 @@
     [nonParallaxLayer addChild:holes z:-1];
     explosions = [[ExplosionsLayer alloc] init];
     [nonParallaxLayer addChild:explosions z:4];
-    buildings = malloc(sizeof(BuildingsLayer*) * buildingsCount);
+    buildings = calloc(buildingsCount, sizeof(BuildingsLayer*));
+    
     for (NSInteger b = (signed)buildingsCount - 1; b >= 0; --b) {
         float lightRatio = MAX(-1, -((float)b / buildingsCount) * 1.5f);
         
@@ -134,10 +135,10 @@
     
     else {
         msgLabel = [[CCLabelTTF alloc] initWithString:msg
-                                           dimensions:CGSizeMake(1000, [[GorillasConfig get].fontSize intValue] + 5)
-                                           hAlignment:kCCTextAlignmentCenter
                                              fontName:[GorillasConfig get].fixedFontName
-                                             fontSize:[[GorillasConfig get].fontSize intValue]];
+                                             fontSize:[[GorillasConfig get].fontSize intValue]
+                                           dimensions:CGSizeMake(1000, [[GorillasConfig get].fontSize intValue] + 5)
+                                           hAlignment:kCCTextAlignmentCenter];
         
         [nonParallaxLayer addChild:msgLabel z:9];
     }
@@ -188,8 +189,8 @@
     CGRect field = [self fieldInSpaceOf:self];
     int pCount = (field.size.width / dbgTraceStep + 1)
     * (winSize.height / dbgTraceStep + 1);
-    CGPoint *hgp = malloc(sizeof(CGPoint) * pCount);
-    CGPoint *hep = malloc(sizeof(CGPoint) * pCount);
+    CGPoint *hgp = calloc(pCount, sizeof(CGPoint));
+    CGPoint *hep = calloc(pCount, sizeof(CGPoint));
     NSUInteger hgc = 0, hec = 0;
     
     for(float x = field.origin.x; x < field.origin.x + field.size.width; x += dbgTraceStep)
@@ -499,7 +500,7 @@
     
     // Reset throw history & throw hints.
     free(throwHistory);
-    throwHistory = malloc(sizeof(CGPoint) * [gorillas count]);
+    throwHistory = calloc([gorillas count], sizeof(CGPoint));
     for(NSUInteger i = 0; i < [gorillas count]; ++i) {
         throwHistory[i] = ccp(-1, -1);
         [[throwHints objectAtIndex:i] setVisible:NO];

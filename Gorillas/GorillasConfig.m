@@ -213,11 +213,11 @@
 
 -(NSString *) messageForOff {
 
-    return PearlLocalize([offMessages objectAtIndex:(NSUInteger)((unsigned)PearlGameRandom() % offMessages.count)]);
+    return PearlLocalizeDyn([offMessages objectAtIndex:(NSUInteger)((unsigned)PearlGameRandom() % offMessages.count)]);
 }
 -(NSString *) messageForHitBy:(GorillaLayer *)byGorilla on:(GorillaLayer *)onGorilla {
 
-    return PearlLocalize([hitMessages objectAtIndex:(unsigned)PearlGameRandom() % hitMessages.count], byGorilla.name, onGorilla.name);
+    return PearlLocalizeDyn([hitMessages objectAtIndex:(unsigned)PearlGameRandom() % hitMessages.count], byGorilla.name, onGorilla.name);
 }
 
 
