@@ -219,7 +219,6 @@
     glGenBuffers( 1, &buildingsVertexBuffer );
     glGenBuffers( 1, &buildingsIndicesBuffer );
 
-//    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color );
     glBindBuffer( GL_ARRAY_BUFFER, buildingsVertexBuffer );
     glBufferData( GL_ARRAY_BUFFER, (GLsizeiptr)(sizeof(BuildingVertex) * buildingCount * 4), buildingVertices, GL_DYNAMIC_DRAW );
     glEnableVertexAttribArray( kCCVertexAttrib_Position );
@@ -233,7 +232,6 @@
 
     ccGLBindVAO( buildingsVertexObject[1] );
     glBindBuffer( GL_ARRAY_BUFFER, buildingsVertexBuffer );
-//    glBufferData( GL_ARRAY_BUFFER, (GLsizeiptr)(sizeof(BuildingVertex) * buildingCount * 4), buildingVertices, GL_DYNAMIC_DRAW );
     glEnableVertexAttribArray( kCCVertexAttrib_Position );
     glVertexAttribPointer( kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(BuildingVertex),
             (GLvoid *)offsetof(BuildingVertex, front) + offsetof(Vertex, p));
@@ -241,7 +239,6 @@
     glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(BuildingVertex),
             (GLvoid *) offsetof(BuildingVertex, backColor));
     glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer );
-//    glBufferData( GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)(sizeof(GLushort) * buildingCount * 6), buildingIndices, GL_DYNAMIC_DRAW );
 
     // Push our window data into VAO.
     glDeleteVertexArrays( 1, &windowsVertexObject );
@@ -252,7 +249,6 @@
     glGenBuffers(1, &windowsVertexBuffer);
     glGenBuffers(1, &windowsIndicesBuffer);
 
-//    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color );
     glBindBuffer( GL_ARRAY_BUFFER, windowsVertexBuffer );
     glBufferData( GL_ARRAY_BUFFER, (GLsizeiptr)(sizeof(Vertex) * windowCount * 4), windowVertices, GL_DYNAMIC_DRAW );
     glEnableVertexAttribArray( kCCVertexAttrib_Position );
@@ -281,71 +277,34 @@
 
     CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, @"BuildingsLayer - draw");
     CC_NODE_DRAW_SETUP();
-    ccGLBindVAO( buildingsVertexObject[0] );
 
-////    // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-////    //glEnableClientState(GL_VERTEX_ARRAY);
-////    //glEnableClientState(GL_COLOR_ARRAY);
-////    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-////    glDisable(GL_TEXTURE_2D);
-//    ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color);
-
-    // Drawing Front Side.
+    // = FRONT BUILDING =
     // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC over DST; DST_ALPHA of 0 means hide SRC, leave DST).
-    ccGLBlendFunc(GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA);
-
-    // == DRAW BUILDING ==
-//    glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
-//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer);
-//    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, front) + offsetof(Vertex, p));
-//    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, front) + offsetof(Vertex, c));
-
+    ccGLBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA );
+    ccGLBindVAO( buildingsVertexObject[0] );
     glDrawElements(GL_TRIANGLES, (GLsizei)(buildingCount * 6), GL_UNSIGNED_SHORT, 0);
-    //drawBoxFrom(CGPointZero, ccp(contentSize.width, contentSize.height), buildingColor, buildingColor);
 
-    // == DRAW WINDOWS ==
-    // Bind our VBOs & colors.
+    // = FRONT WINDOWS =
     ccGLBindVAO( windowsVertexObject );
-//    glBindBuffer(GL_ARRAY_BUFFER, windowsVertexBuffer);
-//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, windowsIndicesBuffer);
-//    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, p));
-//    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (GLvoid *) offsetof(Vertex, c));
-
-    // = DRAW FRONT WINDOWS =
     glDrawElements(GL_TRIANGLES, (GLsizei)(windowCount * 6), GL_UNSIGNED_SHORT, 0);
 
     // Drawing Rear Side.
     if (buildingHeightRatio == 1) {
-        glBlendFunc(GL_ONE, GL_ZERO);
 
-        // = DRAW REAR WINDOWS =
+        // = REAR WINDOWS =
         // Set opacity of DST to 1 where there are windows -> building back won't draw over it.
+        ccGLBlendFunc( GL_ONE, GL_ZERO );
         glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
         glDrawElements(GL_TRIANGLES, (GLsizei)(windowCount * 6), GL_UNSIGNED_SHORT, 0);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 
-        // == DRAW BUILDING BACK ==
+        // == REAR BUILDING =
         // Draw back of building where DST opacity is < 1.
         ccGLBindVAO( buildingsVertexObject[1] );
-//        glBindBuffer(GL_ARRAY_BUFFER, buildingsVertexBuffer);
-//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer);
-//        glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, front) + offsetof(Vertex, p));
-//        glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(BuildingVertex), (GLvoid *) offsetof(BuildingVertex, backColor));
-
         ccGLBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA);
         glDrawElements(GL_TRIANGLES, (GLsizei)(buildingCount * 6), GL_UNSIGNED_SHORT, 0);
     }
 
-//    // Turn off state.
-////    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-////    ccGLBlendFunc( CC_BLEND_SRC, CC_BLEND_DST );
-//    glBindBuffer(GL_ARRAY_BUFFER, 0);
-//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-////    //glDisableClientState(GL_COLOR_ARRAY);
-////    //glDisableClientState(GL_VERTEX_ARRAY);
-////    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-////    glEnable(GL_TEXTURE_2D);
-    
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
     CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"BuildingsLayer - draw");

@@ -156,23 +156,22 @@
     frame.anchorPoint = CGPointZero;
     [self.uiLayer addChild:frame z:1];
     [self.uiLayer addChild:self.gameLayer];
-    [[GorillasAppDelegate get] showMainMenu];
 
     // Show the splash screen, this starts the main loop in the current thread.
     [[CCDirector sharedDirector] pushScene:splashScene];
     
     // Game Center setup.
-//    [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
-//        if (error)
-//            wrn(@"Game Center unavailable: %@", error);
-//
-//        dbg(@"Local player alias: %@", [GKLocalPlayer localPlayer].alias);
-//        [TestFlight addCustomEnvironmentInformation:[GKLocalPlayer localPlayer].alias forKey:@"username"];
-//        [[Crashlytics sharedInstance] setUserName:[GKLocalPlayer localPlayer].alias];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.mainMenuLayer reset];
-//        });
-//    }];
+    [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error){
+        if (error)
+            wrn(@"Game Center unavailable: %@", error);
+
+        dbg(@"Local player alias: %@", [GKLocalPlayer localPlayer].alias);
+        [TestFlight addCustomEnvironmentInformation:[GKLocalPlayer localPlayer].alias forKey:@"username"];
+        [[Crashlytics sharedInstance] setUserName:[GKLocalPlayer localPlayer].alias];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.mainMenuLayer reset];
+        });
+    }];
 #ifndef LITE
     self.netController = [[NetController new] autorelease];
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {

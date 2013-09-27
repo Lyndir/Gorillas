@@ -106,47 +106,14 @@
     }
 
     CC_NODE_DRAW_SETUP();
-    ccGLBindVAO( holeVertexObject );
 
-////    // Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
-////    //glEnableClientState(GL_COLOR_ARRAY);
-////    //glEnableClientState(GL_VERTEX_ARRAY);
-////    glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
-////    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-////    //glEnable(GL_TEXTURE_2D);
-////    glEnable(GL_POINT_SPRITE_OES);
-//    ccGLEnableVertexAttribs(kCCVertexAttribFlag_Position | kCCVertexAttribFlag_Color);
-//    glEnableVertexAttribArray(kPearlGLVertexAttrib_Size);
-
-    // Blend our transarent white with DST.  If SRC, make DST transparent, hide original DST.
+    // Blend our transparent white with DST.  If SRC, make DST transparent, hide original DST.
     glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
     ccGLBlendFunc(GL_ZERO, GL_SRC_ALPHA);
-
     ccGLBindTexture2D(texture.name);
-
-//    glBindBuffer(GL_ARRAY_BUFFER, holeVertexBuffer);
-//    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, p));
-//    glVertexAttribPointer(kPearlGLVertexAttrib_Size, 2, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, s));
-//    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(glPoint), (GLvoid *) offsetof(glPoint, c));
-
+    ccGLBindVAO( holeVertexObject );
     glDrawArrays(GL_POINTS, 0, (GLsizei)holeCount);
-
-    // unbind VBO buffer
-//    glBindBuffer(GL_ARRAY_BUFFER, 0);
-//    glDisableVertexAttribArray(kPearlGLVertexAttrib_Size);
-
-    // Reset blend & data source.
     glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-//    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//    ccGLBlendFunc( CC_BLEND_SRC, CC_BLEND_DST );
-
-
-//    //glDisableClientState(GL_COLOR_ARRAY);
-//    //glDisableClientState(GL_VERTEX_ARRAY);
-//    glDisableClientState(GL_POINT_SIZE_ARRAY_OES);
-//    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-//    //glDisable(GL_TEXTURE_2D);
-//    glDisable(GL_POINT_SPRITE_OES);
 
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
