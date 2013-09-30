@@ -44,13 +44,13 @@
 
 @property (nonatomic, readwrite, retain) NetController                  *netController;
 
-- (NSString *)testFlightInfo;
+- (NSDictionary *)testFlightInfo;
 - (NSString *)testFlightToken;
 
-- (NSString *)crashlyticsInfo;
+- (NSDictionary *)crashlyticsInfo;
 - (NSString *)crashlyticsAPIKey;
 
-- (NSString *)localyticsInfo;
+- (NSDictionary *)localyticsInfo;
 - (NSString *)localyticsKey;
 
 @end
@@ -318,7 +318,7 @@
 
 - (NSString *)crashlyticsAPIKey {
     
-    return NSNullToNil([[self crashlyticsInfo] valueForKeyPath:@"API Key"]);
+    return NSNullToNil([self crashlyticsInfo][@"API Key"]);
 }
 
 

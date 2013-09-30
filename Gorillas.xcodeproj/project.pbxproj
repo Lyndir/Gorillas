@@ -392,6 +392,9 @@
 		DA7ABFBB12823135006A2E71 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA7ABFB312823135006A2E71 /* InfoPlist.strings */; };
 		DA7ABFE412823377006A2E71 /* Apple Symbols.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA7ABFDB12823377006A2E71 /* Apple Symbols.ttf */; };
 		DA7ABFEA12823377006A2E71 /* Apple Symbols.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA7ABFDB12823377006A2E71 /* Apple Symbols.ttf */; };
+		DA7DF6CC17F914F800F84D63 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAFFC7E917F13EB6007BB020 /* CoreText.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		DA7DF6CE17F9226F00F84D63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7DF6CD17F9226F00F84D63 /* Default-568h@2x.png */; };
+		DA7DF6CF17F9226F00F84D63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7DF6CD17F9226F00F84D63 /* Default-568h@2x.png */; };
 		DA83F0BB0F00527B00305C9F /* WindLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83F0BA0F00527B00305C9F /* WindLayer.m */; };
 		DA859C500EC4F3950036B7C0 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DA859E700EC598E10036B7C0 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
@@ -1202,6 +1205,7 @@
 		DA7ABCE41282308A006A2E71 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA7ABFB612823135006A2E71 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DA7ABFDB12823377006A2E71 /* Apple Symbols.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple Symbols.ttf"; sourceTree = "<group>"; };
+		DA7DF6CD17F9226F00F84D63 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		DA83F0B90F00527B00305C9F /* WindLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindLayer.h; sourceTree = "<group>"; };
 		DA83F0BA0F00527B00305C9F /* WindLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindLayer.m; sourceTree = "<group>"; };
 		DA859C4E0EC4F3950036B7C0 /* GorillaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillaLayer.h; sourceTree = "<group>"; };
@@ -1655,6 +1659,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA7DF6CC17F914F800F84D63 /* CoreText.framework in Frameworks */,
 				DA571E1F13F3378200D50DF2 /* libLocalytics.a in Frameworks */,
 				DA571E1E13F3377100D50DF2 /* libsqlite3.dylib in Frameworks */,
 				DA7640A513B3D97C00A02611 /* libPearl.a in Frameworks */,
@@ -2196,6 +2201,7 @@
 				DAD4ACD115CF1B8000047FEC /* Default-Landscape~ipad.png */,
 				DA58B7B9155181310008CBA6 /* Default.png */,
 				DA58B7BA155181310008CBA6 /* Default@2x.png */,
+				DA7DF6CD17F9226F00F84D63 /* Default-568h@2x.png */,
 				DA58B7BC155181320008CBA6 /* splash-hd.png */,
 				DA58B7BD155181330008CBA6 /* splash-ipad.png */,
 				DA58B7BE155181330008CBA6 /* splash-ipadhd.png */,
@@ -3478,6 +3484,7 @@
 				DAD4ACD415CF1B8000047FEC /* Default-Landscape~ipad.png in Resources */,
 				DAD4ACDC15CF1C3700047FEC /* Default-Portrait@2x~ipad.png in Resources */,
 				DAD4ACDE15CF1C3700047FEC /* Default-Portrait~ipad.png in Resources */,
+				DA7DF6CE17F9226F00F84D63 /* Default-568h@2x.png in Resources */,
 				DAD4ACE615CF1D4F00047FEC /* Icon-72@2x.png in Resources */,
 				DAD4ACE715CF1D4F00047FEC /* Icon-Small-50@2x.png in Resources */,
 			);
@@ -3690,6 +3697,7 @@
 				DAD4ACD515CF1B8000047FEC /* Default-Landscape~ipad.png in Resources */,
 				DAD4ACDD15CF1C3700047FEC /* Default-Portrait@2x~ipad.png in Resources */,
 				DAD4ACDF15CF1C3700047FEC /* Default-Portrait~ipad.png in Resources */,
+				DA7DF6CF17F9226F00F84D63 /* Default-568h@2x.png in Resources */,
 				DAD4ACEA15CF1D6C00047FEC /* Icon-72@2x.png in Resources */,
 				DAD4ACEB15CF1D6C00047FEC /* Icon-Small-50@2x.png in Resources */,
 			);
@@ -3710,7 +3718,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = "/bin/bash -e";
-			shellScript = "PATH+=:/usr/libexec\n\naddPlistWithKey() {\n    local key=$1 type=$2 value=$3 plist=${4:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Delete :'$key'\" \"$plist\" || true\n    PlistBuddy -c \"Add :'$key' '$type' '$value'\" \"$plist\"\n}\nsetPlistWithKey() {\n    local key=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Set :'$key' '$value'\" \"$plist\"\n}\ngetPlistWithKey() {\n    local key=$1 plist=${2:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Print :'$key'\" \"$plist\"\n}\nsetSettingWithTitle() {\n    local i title=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Settings.bundle/Root.plist\"}\n    \n    for (( i=0; 1; ++i )); do\n        PlistBuddy -c \"Print :PreferenceSpecifiers:$i\" \"$plist\" &>/dev/null || break\n        echo \"Checking preference specifier $i\"\n    \n        [[ $(PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Title\" \"$plist\" 2>/dev/null) = $title ]] || continue\n    \n        echo \"Correct title, setting value.\"\n        PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue $value\" \"$plist\"\n        break\n    done\n}\n\ndescription=$(git describe --always --dirty --long)\nbuild=${description%-g*} build=${build//-/.}\ntag=${description%%-*}\n\naddPlistWithKey GITDescription string \"$description\"\nsetPlistWithKey CFBundleVersion \"$build\"\nsetPlistWithKey CFBundleShortVersionString \"$tag\"\n\nsetSettingWithTitle \"Build\" \"$build\"\nsetSettingWithTitle \"Version\" \"$tag\"\nsetSettingWithTitle \"Copyright\" \"$(getPlistWithKey NSHumanReadableCopyright)\"\n";
+			shellScript = "PATH+=:/usr/libexec\n\naddPlistWithKey() {\n    local key=$1 type=$2 value=$3 plist=${4:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Delete :'$key'\" \"$plist\" 2>/dev/null || true\n    PlistBuddy -c \"Add :'$key' '$type' '$value'\" \"$plist\"\n}\nsetPlistWithKey() {\n    local key=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Set :'$key' '$value'\" \"$plist\"\n}\ngetPlistWithKey() {\n    local key=$1 plist=${2:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Print :'$key'\" \"$plist\"\n}\nsetSettingWithTitle() {\n    local i title=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Settings.bundle/Root.plist\"}\n    \n    for (( i=0; 1; ++i )); do\n        PlistBuddy -c \"Print :PreferenceSpecifiers:$i\" \"$plist\" &>/dev/null || break\n        echo \"Checking preference specifier $i\"\n    \n        [[ $(PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Title\" \"$plist\" 2>/dev/null) = $title ]] || continue\n    \n        echo \"Correct title, setting value.\"\n        PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue $value\" \"$plist\"\n        break\n    done\n}\n\ndescription=$(git describe --always --dirty --long)\nversion=${description%-g*} version=${version//-/.}\nprintf -v commit '%09d' \"$((16#${description##*-g}))\"\n\naddPlistWithKey GITDescription string \"$description\"\nsetPlistWithKey CFBundleVersion \"$version.$commit\"\nsetPlistWithKey CFBundleShortVersionString \"$version\"\n\nsetSettingWithTitle \"Build\" \"$commit\"\nsetSettingWithTitle \"Version\" \"$version\"\nsetSettingWithTitle \"Copyright\" \"$(getPlistWithKey NSHumanReadableCopyright)\"\n\nif [[ $DEPLOYMENT_LOCATION = YES ]]; then\n    # This build is a release.  Do some release checks.\n    passed=1\n    [[ $description != *-dirty ]] || \\\n        { passed=0; echo >&2 \"ERROR: Cannot release a dirty version, first commit any changes.\"; }\n    [[ $(PlistBuddy -c \"Print :'API Key'\" \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Crashlytics.plist\") ]] || \\\n        { passed=0; echo >&2 \"ERROR: Cannot release: Crashlytics API key is missing.\"; }\n    [[ $(PlistBuddy -c \"Print :'ClientID'\" \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Google+.plist\") ]] || \\\n        { passed=0; echo >&2 \"ERROR: Cannot release: Google+ ClientID is missing.\"; }\n    [[ $(PlistBuddy -c \"Print :'Key.distribution'\" \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Localytics.plist\") ]] || \\\n        { passed=0; echo >&2 \"ERROR: Cannot release: Localytics distribution key is missing.\"; }\n    (( passed )) || \\\n        { echo >&2 \"Failed to pass release checks.  Fix the above errors and re-try.  Aborting.\"; exit 1; }\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DAA0BE08148D70CD00E6C79C /* Run Script: Crashlytics */ = {
@@ -3739,7 +3747,7 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
+			shellPath = "/bin/bash -e";
 			shellScript = "Crashlytics/Crashlytics.framework/run \"$(/usr/libexec/PlistBuddy -c \"Print :'API Key'\" Crashlytics/Crashlytics.plist)\"";
 			showEnvVarsInLog = 0;
 		};
@@ -3755,7 +3763,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = "/bin/bash -e";
-			shellScript = "PATH+=:/usr/libexec\n\naddPlistWithKey() {\n    local key=$1 type=$2 value=$3 plist=${4:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Delete :'$key'\" \"$plist\" || true\n    PlistBuddy -c \"Add :'$key' '$type' '$value'\" \"$plist\"\n}\nsetPlistWithKey() {\n    local key=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Set :'$key' '$value'\" \"$plist\"\n}\ngetPlistWithKey() {\n    local key=$1 plist=${2:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Print :'$key'\" \"$plist\"\n}\nsetSettingWithTitle() {\n    local i title=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Settings.bundle/Root.plist\"}\n    \n    for (( i=0; 1; ++i )); do\n        PlistBuddy -c \"Print :PreferenceSpecifiers:$i\" \"$plist\" &>/dev/null || break\n        echo \"Checking preference specifier $i\"\n    \n        [[ $(PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Title\" \"$plist\" 2>/dev/null) = $title ]] || continue\n    \n        echo \"Correct title, setting value.\"\n        PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue $value\" \"$plist\"\n        break\n    done\n}\n\ndescription=$(git describe --always --dirty --long)\nbuild=${description%-g*} build=${build//-/.}\ntag=${description%%-*}\n\naddPlistWithKey GITDescription string \"$description\"\nsetPlistWithKey CFBundleVersion \"$build\"\nsetPlistWithKey CFBundleShortVersionString \"$tag\"\n\nsetSettingWithTitle \"Build\" \"$build\"\nsetSettingWithTitle \"Version\" \"$tag\"\nsetSettingWithTitle \"Copyright\" \"$(getPlistWithKey NSHumanReadableCopyright)\"\n";
+			shellScript = "PATH+=:/usr/libexec\n\naddPlistWithKey() {\n    local key=$1 type=$2 value=$3 plist=${4:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Delete :'$key'\" \"$plist\" 2>/dev/null || true\n    PlistBuddy -c \"Add :'$key' '$type' '$value'\" \"$plist\"\n}\nsetPlistWithKey() {\n    local key=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Set :'$key' '$value'\" \"$plist\"\n}\ngetPlistWithKey() {\n    local key=$1 plist=${2:-\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"}\n    \n    PlistBuddy -c \"Print :'$key'\" \"$plist\"\n}\nsetSettingWithTitle() {\n    local i title=$1 value=$2 plist=${3:-\"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Settings.bundle/Root.plist\"}\n    \n    for (( i=0; 1; ++i )); do\n        PlistBuddy -c \"Print :PreferenceSpecifiers:$i\" \"$plist\" &>/dev/null || break\n        echo \"Checking preference specifier $i\"\n    \n        [[ $(PlistBuddy -c \"Print :PreferenceSpecifiers:$i:Title\" \"$plist\" 2>/dev/null) = $title ]] || continue\n    \n        echo \"Correct title, setting value.\"\n        PlistBuddy -c \"Set :PreferenceSpecifiers:$i:DefaultValue $value\" \"$plist\"\n        break\n    done\n}\n\ndescription=$(git describe --always --dirty --long)\nversion=${description%-g*} version=${version//-/.}\nprintf -v commit '%09d' \"$((16#${description##*-g}))\"\n\naddPlistWithKey GITDescription string \"$description\"\nsetPlistWithKey CFBundleVersion \"$version.$commit\"\nsetPlistWithKey CFBundleShortVersionString \"$version\"\n\nsetSettingWithTitle \"Build\" \"$commit\"\nsetSettingWithTitle \"Version\" \"$version\"\nsetSettingWithTitle \"Copyright\" \"$(getPlistWithKey NSHumanReadableCopyright)\"\n\nif [[ $DEPLOYMENT_LOCATION = YES ]]; then\n    # This build is a release.  Do some release checks.\n    passed=1\n    [[ $description != *-dirty ]] || \\\n        { passed=0; echo >&2 \"ERROR: Cannot release a dirty version, first commit any changes.\"; }\n    [[ $(PlistBuddy -c \"Print :'API Key'\" \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Crashlytics.plist\") ]] || \\\n        { passed=0; echo >&2 \"ERROR: Cannot release: Crashlytics API key is missing.\"; }\n    [[ $(PlistBuddy -c \"Print :'ClientID'\" \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Google+.plist\") ]] || \\\n        { passed=0; echo >&2 \"ERROR: Cannot release: Google+ ClientID is missing.\"; }\n    [[ $(PlistBuddy -c \"Print :'Key.distribution'\" \"$BUILT_PRODUCTS_DIR/$CONTENTS_FOLDER_PATH/Localytics.plist\") ]] || \\\n        { passed=0; echo >&2 \"ERROR: Cannot release: Localytics distribution key is missing.\"; }\n    (( passed )) || \\\n        { echo >&2 \"Failed to pass release checks.  Fix the above errors and re-try.  Aborting.\"; exit 1; }\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -4167,7 +4175,6 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -4190,7 +4197,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
@@ -4259,7 +4266,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
@@ -4324,7 +4331,6 @@
 		DA16C3760EEC575C00E46246 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -4493,7 +4499,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
@@ -4554,7 +4560,6 @@
 		DAA5143B13FFAD0900325033 /* Profile */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -4629,7 +4634,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
@@ -4694,7 +4699,6 @@
 		DAB41EA8158F5E7800D509CC /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

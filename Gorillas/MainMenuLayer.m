@@ -97,7 +97,7 @@
                                                            target:self selector:@selector(appMasterPassword:)],
                                nil];
     [self.appMenu alignItemsVerticallyWithPadding:15 * [PearlDeviceUtils uiScale]];
-    [self.appMenu setPosition:CGPointMake([CCDirector sharedDirector].winSize.width * 0.91f,
+    [self.appMenu setPosition:CGPointMake([CCDirector sharedDirector].winSize.width / 2 + 195.0f * [PearlDeviceUtils uiScale],
                                           [CCDirector sharedDirector].winSize.height / 2 - 85.0f * [PearlDeviceUtils uiScale])];
 
     return self;
