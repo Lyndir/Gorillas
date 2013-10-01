@@ -31,7 +31,7 @@
 
 @synthesize gameConfigurations;
 
-@dynamic cityTheme;
+@dynamic plusEnabled, cityTheme;
 @dynamic varFloors, fixedFloors, buildingAmount, buildingSpeed, buildingColors;
 @dynamic windowAmount, windowColorOn, windowColorOff;
 @dynamic skyColor, starColor, starSpeed, starAmount;
@@ -59,30 +59,12 @@
                            PearlLocalize(@"menu.config.level.eight"),
                            nil];
 
-    gameConfigurations  = [[NSArray alloc] initWithObjects:
-                           [GameConfiguration configurationWithName:PearlLocalize(@"menu.config.gametype.bootcamp")
-                                                        description:PearlLocalize(@"menu.config.gametype.bootcamp.desc")
-                                                               mode:GorillasModeBootCamp
-                                                singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:0],
-                           [GameConfiguration configurationWithName:PearlLocalize(@"menu.config.gametype.classic")
-                                                        description:PearlLocalize(@"menu.config.gametype.classic.desc")
-                                                               mode:GorillasModeClassic
-                                                singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:4],
-#ifndef LITE
-                           [GameConfiguration configurationWithName:PearlLocalize(@"menu.config.gametype.dynamic")
-                                                        description:PearlLocalize(@"menu.config.gametype.dynamic.desc")
-                                                               mode:GorillasModeDynamic
-                                                singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:0],
-                           [GameConfiguration configurationWithName:PearlLocalize(@"menu.config.gametype.team")
-                                                        description:PearlLocalize(@"menu.config.gametype.team.desc")
-                                                               mode:GorillasModeTeam
-                                                singleplayerAICount:0 multiplayerAICount:2 multiplayerHumanCount:2],
-                           [GameConfiguration configurationWithName:PearlLocalize(@"menu.config.gametype.lms")
-                                                        description:PearlLocalize(@"menu.config.gametype.lms.desc")
-                                                               mode:GorillasModeLMS
-                                                singleplayerAICount:3 multiplayerAICount:3 multiplayerHumanCount:3],
-#endif
-                           nil];
+    [self initGameConfigurations];
+    [[NSNotificationCenter defaultCenter] addObserverForName:PearlConfigChangedNotification
+                                                      object:NSStringFromSelector( @selector(plusEnabled) ) queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      [self initGameConfigurations];
+                                                  }];
 
     offMessages         = [[NSArray alloc] initWithObjects:
                            @"menu.config.message.off.1",
@@ -104,6 +86,7 @@
      registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
                        [NSNumber numberWithBool:YES],                              NSStringFromSelector(@selector(askForReviews)),
                        
+                       [NSNumber numberWithBool:NO],                               NSStringFromSelector(@selector(plusEnabled)),
                        [CityTheme defaultThemeName],                               NSStringFromSelector(@selector(cityTheme)),
 
                        [NSNumber numberWithUnsignedInt:[theme varFloors]],         NSStringFromSelector(@selector(varFloors)),
@@ -191,16 +174,55 @@
                        nil
                        ];
     [self.resetTriggers setObject:@"mainMenuLayer"      forKey:NSStringFromSelector(@selector(activeGameConfigurationIndex))];
+    [self.resetTriggers setObject:@"mainMenuLayer"      forKey:NSStringFromSelector(@selector(plusEnabled))];
     [self.resetTriggers setObject:@"customGameLayer"    forKey:NSStringFromSelector(@selector(mode))];
 
     return self;
 }
 
+- (void)initGameConfigurations {
+
+    if ([self.plusEnabled boolValue])
+        gameConfigurations = @[
+                [GameConfiguration configurationWithName:PearlLocalize( @"menu.config.gametype.bootcamp" )
+                                             description:PearlLocalize( @"menu.config.gametype.bootcamp.desc" )
+                                                    mode:GorillasModeBootCamp
+                                     singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:0],
+                [GameConfiguration configurationWithName:PearlLocalize( @"menu.config.gametype.classic" )
+                                             description:PearlLocalize( @"menu.config.gametype.classic.desc" )
+                                                    mode:GorillasModeClassic
+                                     singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:4],
+                [GameConfiguration configurationWithName:PearlLocalize( @"menu.config.gametype.dynamic" )
+                                             description:PearlLocalize( @"menu.config.gametype.dynamic.desc" )
+                                                    mode:GorillasModeDynamic
+                                     singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:0],
+                [GameConfiguration configurationWithName:PearlLocalize( @"menu.config.gametype.team" )
+                                             description:PearlLocalize( @"menu.config.gametype.team.desc" )
+                                                    mode:GorillasModeTeam
+                                     singleplayerAICount:0 multiplayerAICount:2 multiplayerHumanCount:2],
+                [GameConfiguration configurationWithName:PearlLocalize( @"menu.config.gametype.lms" )
+                                             description:PearlLocalize( @"menu.config.gametype.lms.desc" )
+                                                    mode:GorillasModeLMS
+                                     singleplayerAICount:3 multiplayerAICount:3 multiplayerHumanCount:3],
+        ];
+    else
+        gameConfigurations = @[
+                [GameConfiguration configurationWithName:PearlLocalize( @"menu.config.gametype.bootcamp" )
+                                             description:PearlLocalize( @"menu.config.gametype.bootcamp.desc" )
+                                                    mode:GorillasModeBootCamp
+                                     singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:0],
+                [GameConfiguration configurationWithName:PearlLocalize( @"menu.config.gametype.classic" )
+                                             description:PearlLocalize( @"menu.config.gametype.classic.desc" )
+                                                    mode:GorillasModeClassic
+                                     singleplayerAICount:1 multiplayerAICount:0 multiplayerHumanCount:4],
+        ];
+}
 
 -(void) dealloc {
 
     [CityTheme forgetThemes];
 
+    self.plusEnabled = nil;
     [super dealloc];
 }
 
@@ -282,11 +304,7 @@
 
 + (NSString *)categoryForMode:(GorillasMode)mode {
 
-#ifdef LITE
-    return @"grp.com.lyndir.lhunath.gorillas.Lite";
-#else
     return [NSString stringWithFormat:@"grp.com.lyndir.lhunath.gorillas.%@", [GorillasConfig nameForMode:mode]];
-#endif
 }
 
 + (NSString *)nameForLevel:(NSNumber *)aLevel {

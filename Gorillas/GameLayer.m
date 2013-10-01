@@ -165,7 +165,6 @@
         for (NSString *playerID in playerIDs)
             [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeHuman playerID:playerID]];
         
-#ifndef LITE
         [GKPlayer loadPlayersForIdentifiers:playerIDs withCompletionHandler:^(NSArray *players, NSError *error) {
             if (error)
                 err(@"While loading player information: %@", error);
@@ -175,7 +174,6 @@
                     if ([gorilla.playerID isEqualToString:player.playerID])
                         gorilla.player = player;
         }];
-#endif
     }
     else
         for (NSUInteger i = 0; i < humans; ++i)
@@ -459,11 +457,9 @@
     humans = 0;
     ais = 0;
     
-#ifndef LITE
     if ([GorillasAppDelegate get].netController.match)
         [[GorillasAppDelegate get].netController endMatchForced:NO];
-#endif
-    
+
     [self endGame];
 }
 
@@ -662,11 +658,9 @@
     
     [self setPausedSilently:NO];
     
-#ifndef LITE
     if ([GorillasAppDelegate get].netController.match)
         [[GorillasAppDelegate get].netController sendBecameReady];
     else
-#endif
         [self.cityLayer nextGorilla];
 }
 

@@ -23,6 +23,7 @@
 //
 
 #import <CoreGraphics/CoreGraphics.h>
+#import <StoreKit/StoreKit.h>
 #import "MainMenuLayer.h"
 #import "GorillasAppDelegate.h"
 #import "PearlCCMenuItemSpacer.h"
@@ -41,73 +42,94 @@
 
 - (id) init {
 
-    if (!(self = [super initWithDelegate:self logo:nil items:
-                  [PearlCCMenuItemSpacer spacerSmall],
-#ifndef LITE
-                  [multiPlayerI     = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(startMulti:)] retain],
-#endif
-                  [singlePlayerI    = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(startSingle:)] retain],
-#ifndef LITE
-                  [hotSeatI         = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(startHotSeat:)] retain],
-#endif
-                  [configurationI   = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)] retain],
-                  [descriptionT     = [PearlCCMenuItemTitle itemWithString:@"description"] retain],
-                  [PearlCCMenuItemSpacer spacerNormal],
-#ifdef LITE
-                  [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(upgrade:)],
-                  [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(scores:)],
-#else
-                  [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(settings:)],
-                  [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(scores:)],
-#endif
-                  nil]))
+    if (!(self = [super initWithDelegate:self logo:nil items:nil]))
         return self;
 
-    self.itemCounts = [NSArray arrayWithObjects:
-                                       [NSNumber numberWithInt:1],
-#ifdef LITE
-                       [NSNumber numberWithInt:1],
-#else
-                       [NSNumber numberWithInt:3],
-#endif
-                       [NSNumber numberWithInt:1],
-                       [NSNumber numberWithInt:1],
-                       [NSNumber numberWithInt:1],
-#ifdef LITE
-                       [NSNumber numberWithInt:2],
-#else
-                       [NSNumber numberWithInt:2],
-#endif
-                       nil];
     self.layout = PearlCCMenuLayoutCustomColumns;
 
-    self.background = [CCSprite spriteWithFile:@"menu-main.png"];
+    [[GorillasAppDelegate get] addObserverBlock:^(NSString *keyPath, id object, NSDictionary *change, void *context) {
+        upgradeI.isEnabled = [GorillasAppDelegate get].plusAvailable;
+    }                                forKeyPath:@"plusAvailable" options:0 context:nil];
+
+    return self;
+}
+
+- (void)doLoad {
+
+    if ([[GorillasConfig get].plusEnabled boolValue]) {
+        self.background = [CCSprite spriteWithFile:@"menu-main-plus.png"];
+        self.itemCounts = @[ @1, @3, @1, @1, @1, @2 ];
+        self.items = @[
+                [PearlCCMenuItemSpacer spacerSmall],
+                [multiPlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
+                                                          selector:@selector(startMulti:)] retain],
+                [singlePlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
+                                                           selector:@selector(startSingle:)] retain],
+                [hotSeatI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
+                                                      selector:@selector(startHotSeat:)] retain],
+                [configurationI = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)] retain],
+                [descriptionT = [PearlCCMenuItemTitle itemWithString:@"description"] retain],
+                [PearlCCMenuItemSpacer spacerNormal],
+                [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self
+                                          selector:@selector(settings:)],
+                [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self
+                                          selector:@selector(scores:)],
+        ];
+
+        if (self.appMenu) {
+            [self.appMenu removeAllChildrenWithCleanup:YES];
+            self.appMenu = nil;
+        }
+    }
+    else {
+        self.background = [CCSprite spriteWithFile:@"menu-main.png"];
+        self.itemCounts = @[ @1, @1, @1, @1, @1, @2 ];
+        self.items = @[
+                [PearlCCMenuItemSpacer spacerSmall],
+                [singlePlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
+                                                           selector:@selector(startSingle:)] retain],
+                [configurationI = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)] retain],
+                [descriptionT = [PearlCCMenuItemTitle itemWithString:@"description"] retain],
+                [PearlCCMenuItemSpacer spacerNormal],
+                [upgradeI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(upgrade:)] retain],
+                [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(scores:
+                )],
+        ];
+        upgradeI.isEnabled = [GorillasAppDelegate get].plusAvailable;
+
+        if (!self.appMenu) {
+            self.appMenu = [CCMenu menuWithItems:
+                    [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(35.0f * [PearlDeviceUtils uiScale])
+                                                target:self selector:@selector(appDeBlock:)],
+                    [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(35.0f * [PearlDeviceUtils uiScale])
+                                                target:self selector:@selector(appMasterPassword:)],
+                    nil];
+            [self.appMenu alignItemsVerticallyWithPadding:15 * [PearlDeviceUtils uiScale]];
+            [self.appMenu setPosition:CGPointMake( [CCDirector sharedDirector].winSize.width / 2 + 195.0f * [PearlDeviceUtils uiScale],
+                    [CCDirector sharedDirector].winSize.height / 2 - 85.0f * [PearlDeviceUtils uiScale] )];
+            [self.parent addChild:self.appMenu];
+        }
+    }
 
     // Game Configuration.
-    NSMutableArray * configurationMenuItems = [NSMutableArray arrayWithCapacity:4];
+    NSMutableArray *configurationMenuItems = [NSMutableArray arrayWithCapacity:4];
     for (GameConfiguration *configuration in [GorillasConfig get].gameConfigurations)
         [configurationMenuItems addObject:[CCMenuItemFont itemWithString:configuration.name]];
     configurationI.subItems = configurationMenuItems;
     [configurationI setSelectedIndex:1];
 
-    self.appMenu = [CCMenu menuWithItems:
-                               [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(35.0f * [PearlDeviceUtils uiScale])
-                                                           target:self selector:@selector(appDeBlock:)],
-                               [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(35.0f * [PearlDeviceUtils uiScale])
-                                                           target:self selector:@selector(appMasterPassword:)],
-                               nil];
-    [self.appMenu alignItemsVerticallyWithPadding:15 * [PearlDeviceUtils uiScale]];
-    [self.appMenu setPosition:CGPointMake([CCDirector sharedDirector].winSize.width / 2 + 195.0f * [PearlDeviceUtils uiScale],
-                                          [CCDirector sharedDirector].winSize.height / 2 - 85.0f * [PearlDeviceUtils uiScale])];
-
-    return self;
+    [super doLoad];
 }
 
+-(void)reset {
 
-- (void)reset {
+    [super reset];
 
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
-    GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
+    if (gameConfigurationIndex >= [[GorillasConfig get].gameConfigurations count]) {
+        [GorillasConfig get].activeGameConfigurationIndex = @1;
+        return;
+    }
 
     if ([GorillasAppDelegate get].gameLayer.running)
         [self setBackButtonTarget:self selector:@selector(back)];
@@ -116,10 +138,12 @@
 
     if ([[configurationI subItems] count] > gameConfigurationIndex)
         [configurationI setSelectedIndex:gameConfigurationIndex];
+
+    GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
     [descriptionT setString:gameConfiguration.description];
-    singlePlayerI.isEnabled = gameConfiguration.singleplayerAICount;
+    singlePlayerI.isEnabled = gameConfiguration.singleplayerAICount > 0;
     multiPlayerI.isEnabled = gameConfiguration.multiplayerHumanCount && [GKLocalPlayer localPlayer].authenticated;
-    hotSeatI.isEnabled = gameConfiguration.multiplayerHumanCount;
+    hotSeatI.isEnabled = gameConfiguration.multiplayerHumanCount > 0;
 }
 
 
@@ -129,7 +153,8 @@
 
     [super onEnter];
 
-    [self.parent addChild:self.appMenu];
+    if (self.appMenu && !self.appMenu.parent)
+        [self.parent addChild:self.appMenu];
 }
 
 - (void)onExit {
@@ -153,7 +178,6 @@
 
 -(void) startMulti: (id) sender {
 
-#ifndef LITE
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
     GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
 
@@ -168,7 +192,6 @@
     matchRequest.playersToInvite = self.playersToInvite;
 
     [[GorillasAppDelegate get].netController beginRequest:matchRequest];
-#endif
 }
 
 
@@ -193,8 +216,7 @@
 
 - (void)upgrade:(id)sender {
 
-    [[UIApplication sharedApplication] openURL:
-     [NSURL URLWithString:@"http://itunes.apple.com/app/id302275459"]];
+    [[GorillasAppDelegate get] showUpgrade];
 }
 
 
@@ -217,11 +239,6 @@
 
     [[[UIApplication sharedApplication] keyWindow].rootViewController dismissModalViewControllerAnimated:YES];
     [[CCDirector sharedDirector] resume];
-}
-
-
-- (void)moreGames:(id)sender {
-
 }
 
 

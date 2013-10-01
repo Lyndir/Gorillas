@@ -38,7 +38,7 @@
     NSArray                                             *offMessages, *hitMessages;
 }
 
-
+@property (nonatomic, readwrite, retain) NSNumber       *plusEnabled;
 @property (nonatomic, readwrite, retain) NSString       *cityTheme;
 
 @property (nonatomic, readwrite, retain) NSNumber       *varFloors;

@@ -32,18 +32,20 @@
 #import "LocalyticsSession.h"
 #import "TestFlight.h"
 #import <Crashlytics/Crashlytics.h>
+#import <StoreKit/StoreKit.h>
 
-
-@interface GorillasAppDelegate ()
+@interface GorillasAppDelegate ()<SKProductsRequestDelegate, SKPaymentTransactionObserver>
 
 @property (nonatomic, readwrite, retain) GameLayer                      *gameLayer;
-@property (nonatomic, readwrite, retain) MainMenuLayer                   *mainMenuLayer;
+@property (nonatomic, readwrite, retain) MainMenuLayer                  *mainMenuLayer;
+@property (nonatomic, readwrite, retain) BuyPlusLayer                   *buyPlusLayer;
 @property (nonatomic, readwrite, retain) ConfigurationSectionLayer      *configLayer;
 @property (nonatomic, readwrite, retain) GameConfigurationLayer         *gameConfigLayer;
 @property (nonatomic, readwrite, retain) AVConfigurationLayer           *avConfigLayer;
-
 @property (nonatomic, readwrite, retain) NetController                  *netController;
+@property (nonatomic, readwrite, retain) NSDictionary *products;
 
+@property(nonatomic, retain) PearlAlert *purchasingActivity;
 - (NSDictionary *)testFlightInfo;
 - (NSString *)testFlightToken;
 
@@ -58,7 +60,7 @@
 @implementation GorillasAppDelegate
 @synthesize gameLayer = _gameLayer;
 @synthesize mainMenuLayer = _mainMenuLayer;
-@synthesize configLayer = _configLayer, gameConfigLayer = _gameConfigLayer, avConfigLayer = _avConfigLayer;
+@synthesize buyPlusLayer = _buyPlusLayer, configLayer = _configLayer, gameConfigLayer = _gameConfigLayer, avConfigLayer = _avConfigLayer;
 @synthesize netController = _netController;
 
 + (void)initialize {
@@ -172,7 +174,13 @@
             [self.mainMenuLayer reset];
         });
     }];
-#ifndef LITE
+
+    // StoreKit setup.
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithArray:@[ GORILLAS_PLUS ]]];
+    productsRequest.delegate = self;
+    [productsRequest start];
+
     self.netController = [[NetController new] autorelease];
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
         
@@ -186,7 +194,6 @@
                 [self showMainMenuForPlayers:playersToInvite];
             });
     };
-#endif
 }
 
 
@@ -226,11 +233,20 @@
 }
 
 
--(void) showConfiguration {
+-(void) showUpgrade {
     
+    if(!self.buyPlusLayer)
+        self.buyPlusLayer = [BuyPlusLayer node];
+    
+    [self pushLayer:self.buyPlusLayer];
+}
+
+
+-(void) showConfiguration {
+
     if(!self.configLayer)
         self.configLayer = [ConfigurationSectionLayer node];
-    
+
     [self pushLayer:self.configLayer];
 }
 
@@ -283,6 +299,56 @@
         self.gameLayer.paused = NO;
     
     [super didPopLayer:layer anyLeft:anyLeft];
+}
+
+
+#pragma mark - SKProductsRequestDelegate
+
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
+
+    BOOL plusAvailable = NO;
+    NSMutableDictionary *products = [NSMutableDictionary dictionaryWithCapacity:[response.products count]];
+    for (SKProduct *product in response.products) {
+        [products setObject:product forKey:product.productIdentifier];
+        if ([product.productIdentifier isEqualToString:GORILLAS_PLUS])
+            plusAvailable = YES;
+    }
+
+    self.products = products;
+    self.plusAvailable = plusAvailable;
+}
+
+
+#pragma mark - SKPaymentTransactionObserver
+
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions {
+
+    for (SKPaymentTransaction *transaction in transactions)
+        switch (transaction.transactionState) {
+            case SKPaymentTransactionStatePurchasing:
+                self.purchasingActivity = [PearlAlert showActivityWithTitle:PearlString( @"Purchasing %@",
+                        ((SKProduct *)[self.products objectForKey:transaction.payment.productIdentifier]).localizedTitle )];
+                break;
+            case SKPaymentTransactionStateFailed:
+                err(@"In-App Purchase failed: %@", transaction.error);
+                [self.purchasingActivity cancelAlertAnimated:YES];
+                if ([transaction.payment.productIdentifier isEqualToString:GORILLAS_PLUS])
+                    [GorillasConfig get].plusEnabled = @NO;
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                break;
+            case SKPaymentTransactionStatePurchased:
+                [self.purchasingActivity cancelAlertAnimated:YES];
+                if ([transaction.payment.productIdentifier isEqualToString:GORILLAS_PLUS])
+                    [GorillasConfig get].plusEnabled = @YES;
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                break;
+            case SKPaymentTransactionStateRestored:
+                [self.purchasingActivity cancelAlertAnimated:YES];
+                if ([transaction.originalTransaction.payment.productIdentifier isEqualToString:GORILLAS_PLUS])
+                    [GorillasConfig get].plusEnabled = @YES;
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                break;
+        }
 }
 
 
@@ -339,8 +405,6 @@
     
 #ifdef DEBUG
     return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.development"]);
-#elif defined(LITE)
-    return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution.lite"]);
 #else
     return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution"]);
 #endif
@@ -389,6 +453,10 @@
         [self.mainMenuLayer stopAllActions];
         self.mainMenuLayer = nil;
     }
+    if(self.buyPlusLayer && ![self.buyPlusLayer parent]) {
+        [self.buyPlusLayer stopAllActions];
+        self.buyPlusLayer = nil;
+    }
     if(self.configLayer && ![self.configLayer parent]) {
         [self.configLayer stopAllActions];
         self.configLayer = nil;
@@ -408,10 +476,13 @@
     
     self.gameLayer          = nil;
     self.mainMenuLayer      = nil;
+    self.buyPlusLayer       = nil;
     self.configLayer        = nil;
     self.gameConfigLayer    = nil;
     self.avConfigLayer      = nil;
-    
+
+    self.products = nil;
+    self.purchasingActivity = nil;
     [super dealloc];
 }
 

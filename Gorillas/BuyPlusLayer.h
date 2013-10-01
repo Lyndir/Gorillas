@@ -15,28 +15,19 @@
  */
 
 //
-//  MainMenuLayer.h
+//  BuyPlusLayer.h
 //  Gorillas
 //
-//  Created by Maarten Billemont on 28/02/09.
+//  Created by Maarten Billemont on 26/10/08.
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "PearlResettable.h"
-#import "GameConfiguration.h"
-#import "GMenuLayer.h"
-#import <GameKit/GameKit.h>
+#import "PearlCCMenuLayer.h"
 
 
-@interface MainMenuLayer : GMenuLayer <PearlResettable, PearlCCMenuDelegate, GKLeaderboardViewControllerDelegate> {
-    
+@interface BuyPlusLayer : PearlCCMenuLayer <PearlCCMenuDelegate> {
+
 @private
-    CCMenuItemToggle                                *configurationI;
-    CCMenuItemLabel                                 *descriptionT;
-    CCMenuItem                                      *multiPlayerI, *singlePlayerI, *hotSeatI, *upgradeI;
-    NSArray                                         *_playersToInvite;
 }
-
-@property (nonatomic, retain, readwrite) NSArray    *playersToInvite;
 
 @end
