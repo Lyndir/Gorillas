@@ -113,7 +113,7 @@
 
     // Game Configuration.
     NSMutableArray *configurationMenuItems = [NSMutableArray arrayWithCapacity:4];
-    for (GameConfiguration *configuration in [GorillasConfig get].gameConfigurations)
+    for (GameConfiguration *configuration in [[[GorillasConfig get].gameConfigurations retain] autorelease])
         [configurationMenuItems addObject:[CCMenuItemFont itemWithString:configuration.name]];
     configurationI.subItems = configurationMenuItems;
     [configurationI setSelectedIndex:1];

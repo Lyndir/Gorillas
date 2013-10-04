@@ -51,8 +51,7 @@
     self.innerRatio = 0;
     self.background = [CCSprite spriteWithFile:@"buy-plus.png"];
 
-    [[NSNotificationCenter defaultCenter] addObserverForName:PearlConfigChangedNotification
-                                                      object:NSStringFromSelector( @selector(plusEnabled) ) queue:nil
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSUserDefaultsDidChangeNotification object:nil queue:nil
                                                   usingBlock:^(NSNotification *note) {
                                                       if ([[GorillasConfig get].plusEnabled boolValue])
                                                           if ([[GorillasAppDelegate get] isLayerShowing:self])

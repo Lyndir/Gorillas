@@ -26,6 +26,11 @@
 #import "GorillasAppDelegate.h"
 #import "GorillaLayer.h"
 
+@interface GorillasConfig ()
+
+@property (nonatomic, readwrite, retain) NSArray         *gameConfigurations;
+
+@end
 
 @implementation GorillasConfig
 
@@ -60,10 +65,14 @@
                            nil];
 
     [self initGameConfigurations];
-    [[NSNotificationCenter defaultCenter] addObserverForName:PearlConfigChangedNotification
-                                                      object:NSStringFromSelector( @selector(plusEnabled) ) queue:nil
+    static BOOL plusWasEnabled;
+    plusWasEnabled = [self.plusEnabled boolValue];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NSUserDefaultsDidChangeNotification object:nil queue:nil
                                                   usingBlock:^(NSNotification *note) {
-                                                      [self initGameConfigurations];
+                                                      if (plusWasEnabled != [self.plusEnabled boolValue]) {
+                                                          plusWasEnabled = [self.plusEnabled boolValue];
+                                                          [self initGameConfigurations];
+                                                      }
                                                   }];
 
     offMessages         = [[NSArray alloc] initWithObjects:
@@ -183,7 +192,7 @@
 - (void)initGameConfigurations {
 
     if ([self.plusEnabled boolValue])
-        gameConfigurations = @[
+        self.gameConfigurations = @[
                 [GameConfiguration configurationWithName:PearlLocalize( @"menu.config.gametype.bootcamp" )
                                              description:PearlLocalize( @"menu.config.gametype.bootcamp.desc" )
                                                     mode:GorillasModeBootCamp
@@ -206,7 +215,7 @@
                                      singleplayerAICount:3 multiplayerAICount:3 multiplayerHumanCount:3],
         ];
     else
-        gameConfigurations = @[
+        self.gameConfigurations = @[
                 [GameConfiguration configurationWithName:PearlLocalize( @"menu.config.gametype.bootcamp" )
                                              description:PearlLocalize( @"menu.config.gametype.bootcamp.desc" )
                                                     mode:GorillasModeBootCamp

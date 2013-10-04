@@ -349,6 +349,7 @@
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 break;
         }
+    [GorillasConfig flush];
 }
 
 
