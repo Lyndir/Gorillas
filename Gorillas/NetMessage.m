@@ -41,10 +41,10 @@
     self.vote = arc4random();
     self.playerVotes = [NSMutableDictionary dictionaryWithCapacity:[aPlayerIDs count]];
     for (NSString *playerID in aPlayerIDs)
-        [self.playerVotes setObject:[NSNull null] forKey:playerID];
+        (self.playerVotes)[playerID] = [NSNull null];
     
     // We've got a retain cycle while we're sitting in playerVotes.
-    [self.playerVotes setObject:self forKey:[GKLocalPlayer localPlayer].playerID];
+    (self.playerVotes)[[GKLocalPlayer localPlayer].playerID] = self;
     dbg(@"init playerVotes: %@, from: %@", self.playerVotes, aPlayerIDs);
     
     return self;
@@ -67,11 +67,11 @@
 
 - (void)addVote:(NetMessageElectHost *)aVoteMessage fromPlayer:(NSString *)aPlayerID {
     
-    [self.playerVotes setObject:aVoteMessage forKey:aPlayerID];
+    (self.playerVotes)[aPlayerID] = aVoteMessage;
     
     NSUInteger voteCount = 0;
     for (NSString *anotherPlayerID in [self.playerVotes allKeys]) {
-        NetMessageElectHost *voteMessage = [self.playerVotes objectForKey:anotherPlayerID];
+        NetMessageElectHost *voteMessage = (self.playerVotes)[anotherPlayerID];
         if ((id)voteMessage == [NSNull null]) {
             dbg(@"Missing vote from: %@", anotherPlayerID);
             return;
@@ -80,8 +80,8 @@
         voteCount += voteMessage.vote;
     }
     self.orderedPlayerIDs = [[self.playerVotes allKeys] sortedArrayUsingComparator:^(id a, id b) {
-        NSUInteger voteA = [[self.playerVotes objectForKey:a] vote];
-        NSUInteger voteB = [[self.playerVotes objectForKey:b] vote];
+        NSUInteger voteA = [(self.playerVotes)[a] vote];
+        NSUInteger voteB = [(self.playerVotes)[b] vote];
         if (voteA > voteB)
             return NSOrderedAscending;
         else if (voteA == voteB)
@@ -89,8 +89,8 @@
         else
             return NSOrderedDescending;
     }];
-    self.hostID = [self.orderedPlayerIDs objectAtIndex:voteCount % [self.playerVotes count]];
-    self.host = [self.playerVotes objectForKey:self.hostID];
+    self.hostID = (self.orderedPlayerIDs)[voteCount % [self.playerVotes count]];
+    self.host = (self.playerVotes)[self.hostID];
     
     // Necessary to break the retain cycle.
     [self cleanup];

@@ -104,21 +104,21 @@ static NSDictionary *themes = nil;
     
     GorillasConfig *config = [GorillasConfig get];
     
-    config.varFloors = [NSNumber numberWithUnsignedInt:self.varFloors];
-    config.fixedFloors = [NSNumber numberWithUnsignedInt:self.fixedFloors];
-    config.buildingAmount = [NSNumber numberWithUnsignedInt:self.buildingAmount];
+    config.varFloors = @(self.varFloors);
+    config.fixedFloors = @(self.fixedFloors);
+    config.buildingAmount = @(self.buildingAmount);
     config.buildingColors = self.buildingColors;
     
-    config.windowAmount = [NSNumber numberWithUnsignedInt:self.windowAmount];
-    config.windowColorOn = [NSNumber numberWithUnsignedLong:self.windowColorOn];
-    config.windowColorOff = [NSNumber numberWithUnsignedLong:self.windowColorOff];
+    config.windowAmount = @(self.windowAmount);
+    config.windowColorOn = @(self.windowColorOn);
+    config.windowColorOff = @(self.windowColorOff);
     
-    config.skyColor = [NSNumber numberWithUnsignedLong:self.skyColor];
-    config.starColor = [NSNumber numberWithUnsignedLong:self.starColor];
-    config.starAmount = [NSNumber numberWithUnsignedInt:self.starAmount];
+    config.skyColor = @(self.skyColor);
+    config.starColor = @(self.starColor);
+    config.starAmount = @(self.starAmount);
     
-    config.windModifier = [NSNumber numberWithFloat:self.windModifier];
-    config.gravity = [NSNumber numberWithUnsignedInt:self.gravity];
+    config.windModifier = @(self.windModifier);
+    config.gravity = @(self.gravity);
     
     dbg(@"CityTheme applied");
     [[GorillasAppDelegate get].gameLayer reset];
@@ -128,15 +128,12 @@ static NSDictionary *themes = nil;
 +(NSDictionary *) getThemes {
     
     if(!themes) {
-        themes = [[NSDictionary alloc] initWithObjectsAndKeys:
-                  [CityTheme themeWithVarFloors:15
+        themes = @{PearlLocalize(@"theme.classic"): [CityTheme themeWithVarFloors:15
                                     fixedFloors:4
                                  buildingAmount:10
-                                 buildingColors:[NSArray arrayWithObjects:
-                                                 [NSNumber numberWithUnsignedLong:0xb70000ffUL],
-                                                 [NSNumber numberWithUnsignedLong:0x00b7b7ffUL],
-                                                 [NSNumber numberWithUnsignedLong:0xb7b7b7ffUL],
-                                                 nil]
+                                 buildingColors:@[@0xb70000ffUL,
+                                                 @0x00b7b7ffUL,
+                                                 @0xb7b7b7ffUL]
                    
                                    windowAmount:6
                                   windowColorOn:0xffffb7ffUL
@@ -148,16 +145,14 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:20
                                         gravity:100
-                   ], PearlLocalize(@"theme.classic"),
+                   ],
                   
-                  [CityTheme themeWithVarFloors:12
+                  PearlLocalize(@"theme.aliengreen"): [CityTheme themeWithVarFloors:12
                                     fixedFloors:4
                                  buildingAmount:12
-                                 buildingColors:[NSArray arrayWithObjects:
-                                                 [NSNumber numberWithUnsignedLong:0x6EA665ffUL],
-                                                 [NSNumber numberWithUnsignedLong:0xD9961AffUL],
-                                                 [NSNumber numberWithUnsignedLong:0x1DB6F2ffUL],
-                                                 nil]
+                                 buildingColors:@[@0x6EA665ffUL,
+                                                 @0xD9961AffUL,
+                                                 @0x1DB6F2ffUL]
                    
                                    windowAmount:6
                                   windowColorOn:0xF2D129ffUL
@@ -169,16 +164,14 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:30
                                         gravity:60
-                   ], PearlLocalize(@"theme.aliengreen"),
+                   ],
                   
-                  [CityTheme themeWithVarFloors:28
+                  PearlLocalize(@"theme.classic.aliendark"): [CityTheme themeWithVarFloors:28
                                     fixedFloors:6
                                  buildingAmount:14
-                                 buildingColors:[NSArray arrayWithObjects:
-                                                 [NSNumber numberWithUnsignedLong:0x1B1F1EffUL],
-                                                 [NSNumber numberWithUnsignedLong:0xCFB370ffUL],
-                                                 [NSNumber numberWithUnsignedLong:0xC4C7BCffUL],
-                                                 nil]
+                                 buildingColors:@[@0x1B1F1EffUL,
+                                                 @0xCFB370ffUL,
+                                                 @0xC4C7BCffUL]
                    
                                    windowAmount:6
                                   windowColorOn:0xFFF1BFffUL
@@ -190,16 +183,14 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:10
                                         gravity:40
-                   ], PearlLocalize(@"theme.classic.aliendark"),
+                   ],
                   
-                  [CityTheme themeWithVarFloors:17
+                  PearlLocalize(@"theme.classiclarge"): [CityTheme themeWithVarFloors:17
                                     fixedFloors:7
                                  buildingAmount:20
-                                 buildingColors:[NSArray arrayWithObjects:
-                                                 [NSNumber numberWithUnsignedLong:0xb70000ffUL],
-                                                 [NSNumber numberWithUnsignedLong:0x00b7b7ffUL],
-                                                 [NSNumber numberWithUnsignedLong:0xb7b7b7ffUL],
-                                                 nil]
+                                 buildingColors:@[@0xb70000ffUL,
+                                                 @0x00b7b7ffUL,
+                                                 @0xb7b7b7ffUL]
                    
                                    windowAmount:6
                                   windowColorOn:0xffffb7ffUL
@@ -211,16 +202,14 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:40
                                         gravity:140
-                   ], PearlLocalize(@"theme.classiclarge"),
+                   ],
                   
-                  [CityTheme themeWithVarFloors:18
+                  PearlLocalize(@"theme.warm"): [CityTheme themeWithVarFloors:18
                                     fixedFloors:3
                                  buildingAmount:10
-                                 buildingColors:[NSArray arrayWithObjects:
-                                                 [NSNumber numberWithUnsignedLong:0x465902ffUL],
-                                                 [NSNumber numberWithUnsignedLong:0xA9BF04ffUL],
-                                                 [NSNumber numberWithUnsignedLong:0xF29F05ffUL],
-                                                 nil]
+                                 buildingColors:@[@0x465902ffUL,
+                                                 @0xA9BF04ffUL,
+                                                 @0xF29F05ffUL]
                    
                                    windowAmount:6
                                   windowColorOn:0xF2E3B3ffUL
@@ -232,9 +221,7 @@ static NSDictionary *themes = nil;
                    
                                    windModifier:15
                                         gravity:80
-                   ], PearlLocalize(@"theme.warm"),
-                  
-                  nil];
+                   ]};
     }
     
     return themes;

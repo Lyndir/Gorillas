@@ -97,13 +97,13 @@
 
 - (void)playEffectNamed:(NSString *)bundleName {
     
-    SystemSoundID effect = [(NSNumber *) [effects objectForKey:bundleName] unsignedIntValue];
+    SystemSoundID effect = [(NSNumber *) effects[bundleName] unsignedIntValue];
     if (effect == 0) {
         effect = [GorillasAudioController loadEffectWithName:[NSString stringWithFormat:@"%@.caf", bundleName]];
         if (effect == 0)
             return;
         
-        [effects setObject:[NSNumber numberWithUnsignedInt:effect] forKey:bundleName];
+        effects[bundleName] = [NSNumber numberWithUnsignedInt:effect];
     }
     
     [GorillasAudioController playEffect:effect];

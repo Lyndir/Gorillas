@@ -76,7 +76,7 @@ static float flameRadius;
         stuffToClean = NO;
         
         if(explosions.count) {
-            CCParticleSystem *explosion = [explosions objectAtIndex:0];
+            CCParticleSystem *explosion = explosions[0];
             
             if(!explosion.particleCount && !explosion.active) {
                 [explosions removeObjectAtIndex:0];

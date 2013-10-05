@@ -147,7 +147,7 @@
             [[GorillasConfig get] setGameRandomSeed:self.hostElection.host.vote];
             
             NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
-            GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
+            GameConfiguration *gameConfiguration = ([GorillasConfig get].gameConfigurations)[gameConfigurationIndex];
             
             [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode randomCity:YES
                                                              playerIDs:self.hostElection.orderedPlayerIDs localHumans:1 ais:gameConfiguration.multiplayerAICount];

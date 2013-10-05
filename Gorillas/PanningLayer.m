@@ -74,8 +74,8 @@
         return;
     
     NSArray *touchesArray = [[event allTouches] allObjects];
-    UITouch *fromTouch = [touchesArray objectAtIndex:0];
-    UITouch *toTouch = [touchesArray objectAtIndex:1];
+    UITouch *fromTouch = touchesArray[0];
+    UITouch *toTouch = touchesArray[1];
     CGPoint from  = [fromTouch locationInView: [fromTouch view]];
     CGPoint to  = [toTouch locationInView: [toTouch view]];
     

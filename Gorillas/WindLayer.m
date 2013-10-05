@@ -96,9 +96,9 @@
     
     @synchronized(self) {
         for(NSUInteger i = 0; i < [systems count]; ++i) {
-            CCParticleSystem *system = [systems objectAtIndex:i];
+            CCParticleSystem *system = systems[i];
             
-            if([[affectAngles objectAtIndex:i] boolValue])
+            if([affectAngles[i] boolValue])
                 [system setAngle:270 + 45 * _wind];
             
             [system setGravity:ccp( _wind * 100 / [system life], [system gravity].y)];
@@ -114,7 +114,7 @@
             return;
     
         [systems addObject:system];
-        [affectAngles addObject:[NSNumber numberWithBool:affectAngle]];
+        [affectAngles addObject:@(affectAngle)];
     }
     
     if(affectAngle)

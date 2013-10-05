@@ -42,7 +42,7 @@
 
 -(PanAction *) initWithSubNodes: (NSMutableArray *)nSubNodes duration: (ccTime)nDuration padding: (int)nPadding {
 
-    CCNode *firstNode = [nSubNodes objectAtIndex:0];
+    CCNode *firstNode = nSubNodes[0];
     if(!(self = [super initWithDuration:nDuration position:ccp(-([firstNode contentSize].width + nPadding), 0)]))
         return self;
     
@@ -59,7 +59,7 @@
     [super update: dt];
     
     if ([self isDone]) {
-        CCNode<PearlResettable> *firstNode = [subNodes objectAtIndex:0];
+        CCNode<PearlResettable> *firstNode = subNodes[0];
         CCNode *lastNode = [subNodes lastObject];
         
         float x = [lastNode position].x + [lastNode contentSize].width + padding;
@@ -71,7 +71,7 @@
         [subNodes addObject:firstNode];
     
         if(!cancelled) {
-            CCNode *newFirstNode = [subNodes objectAtIndex:0];
+            CCNode *newFirstNode = subNodes[0];
             _positionDelta = ccp(-[newFirstNode contentSize].width - padding, 0);
             [self startWithTarget:self.target];
         }

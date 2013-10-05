@@ -141,7 +141,7 @@
     if ([[configurationI subItems] count] > gameConfigurationIndex)
         [configurationI setSelectedIndex:gameConfigurationIndex];
 
-    GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
+    GameConfiguration *gameConfiguration = ([GorillasConfig get].gameConfigurations)[gameConfigurationIndex];
     [descriptionT setString:gameConfiguration.description];
     singlePlayerI.isEnabled = gameConfiguration.singleplayerAICount > 0;
     multiPlayerI.isEnabled = gameConfiguration.multiplayerHumanCount && [GKLocalPlayer localPlayer].authenticated;
@@ -170,7 +170,7 @@
 -(void) startSingle: (id) sender {
 
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
-    GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
+    GameConfiguration *gameConfiguration = ([GorillasConfig get].gameConfigurations)[gameConfigurationIndex];
 
     [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode randomCity:NO
                                                      playerIDs:nil localHumans:1 ais:gameConfiguration.singleplayerAICount];
@@ -181,7 +181,7 @@
 -(void) startMulti: (id) sender {
 
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
-    GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
+    GameConfiguration *gameConfiguration = ([GorillasConfig get].gameConfigurations)[gameConfigurationIndex];
 
     if (!gameConfiguration.multiplayerHumanCount || ![GKLocalPlayer localPlayer].authenticated)
         // Multiplayer is not supported or game center is unavailable.
@@ -200,7 +200,7 @@
 -(void) startHotSeat: (id) sender {
 
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
-    GameConfiguration *gameConfiguration = [[GorillasConfig get].gameConfigurations objectAtIndex:gameConfigurationIndex];
+    GameConfiguration *gameConfiguration = ([GorillasConfig get].gameConfigurations)[gameConfigurationIndex];
 
     [[GorillasAppDelegate get].gameLayer configureGameWithMode:gameConfiguration.mode randomCity:NO
                                                      playerIDs:nil localHumans:2 ais:gameConfiguration.multiplayerAICount];
@@ -210,9 +210,8 @@
 
 - (void)gameConfiguration:(id)sender {
 
-    [GorillasConfig get].activeGameConfigurationIndex = [NSNumber numberWithUnsignedInt:
-                                                         ([[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue] + 1)
-                                                         % [[GorillasConfig get].gameConfigurations count]];
+    [GorillasConfig get].activeGameConfigurationIndex = @(([[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue] + 1)
+                                                         % [[GorillasConfig get].gameConfigurations count]);
 }
 
 

@@ -230,7 +230,7 @@
     }
     
     if (_randomCity)
-        [GorillasConfig get].cityTheme = [[CityTheme getThemeNames] objectAtIndex:PearlGameRandom() % [[CityTheme getThemeNames] count]];
+        [GorillasConfig get].cityTheme = [CityTheme getThemeNames][PearlGameRandom() % [[CityTheme getThemeNames] count]];
     else
         [self reset];
     
@@ -342,7 +342,7 @@
                 
                 if([_activeGorilla human]) {
                     // Human skill.
-                    [GorillasConfig get].skill = [NSNumber numberWithFloat:skill = fminf(0.99f, [[GorillasConfig get].skill floatValue] / 2 + throwSkill)];
+                    [GorillasConfig get].skill = @(skill = fminf(0.99f, [[GorillasConfig get].skill floatValue] / 2 + throwSkill));
                 } else
                     // AI skill.
                     skill = [[GorillasConfig get].level floatValue];

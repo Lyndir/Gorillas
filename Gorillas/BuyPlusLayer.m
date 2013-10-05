@@ -32,7 +32,7 @@
 
 -(id) init {
 
-    SKProduct *product = (SKProduct *)[[GorillasAppDelegate get].products objectForKey:GORILLAS_PLUS];
+    SKProduct *product = (SKProduct *)([GorillasAppDelegate get].products)[GORILLAS_PLUS];
     NSNumberFormatter *priceFormatter = [NSNumberFormatter new];
     [priceFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
     [priceFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -64,7 +64,7 @@
 -(void) buy: (id) sender {
 
     [[SKPaymentQueue defaultQueue] addPayment:
-            [SKPayment paymentWithProduct:[[GorillasAppDelegate get].products objectForKey:GORILLAS_PLUS]]];
+            [SKPayment paymentWithProduct:([GorillasAppDelegate get].products)[GORILLAS_PLUS]]];
 }
 
 -(void) back: (id) sender {

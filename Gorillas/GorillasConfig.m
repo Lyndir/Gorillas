@@ -53,16 +53,14 @@
     if(!(self = [super init]))
         return self;
 
-    NSArray *levelNames = [NSArray arrayWithObjects:
-                           PearlLocalize(@"menu.config.level.one"),
+    NSArray *levelNames = @[PearlLocalize(@"menu.config.level.one"),
                            PearlLocalize(@"menu.config.level.two"),
                            PearlLocalize(@"menu.config.level.three"),
                            PearlLocalize(@"menu.config.level.four"),
                            PearlLocalize(@"menu.config.level.five"),
                            PearlLocalize(@"menu.config.level.six"),
                            PearlLocalize(@"menu.config.level.seven"),
-                           PearlLocalize(@"menu.config.level.eight"),
-                           nil];
+                           PearlLocalize(@"menu.config.level.eight")];
 
     [self initGameConfigurations];
     static BOOL plusWasEnabled;
@@ -75,96 +73,85 @@
                                                       }
                                                   }];
 
-    offMessages         = [[NSArray alloc] initWithObjects:
-                           @"menu.config.message.off.1",
-                           @"menu.config.message.off.2",
-                           nil];
+    offMessages         = @[@"menu.config.message.off.1",
+                           @"menu.config.message.off.2"];
 
-    hitMessages         = [[NSArray alloc] initWithObjects:
-                           @"menu.config.message.hit.1",
+    hitMessages         = @[@"menu.config.message.hit.1",
                            @"menu.config.message.hit.2",
                            @"menu.config.message.hit.3",
-                           @"menu.config.message.hit.4",
-                           nil];
+                           @"menu.config.message.hit.4"];
 
     NSDictionary *themes = [CityTheme getThemes];
     NSString *defaultThemeName = [CityTheme defaultThemeName];
-    CityTheme *theme = [themes objectForKey:defaultThemeName];
+    CityTheme *theme = themes[defaultThemeName];
 
     [self.defaults
-     registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-                       [NSNumber numberWithBool:YES],                              NSStringFromSelector(@selector(askForReviews)),
+     registerDefaults:@{NSStringFromSelector(@selector(askForReviews)): @YES,
                        
-                       [NSNumber numberWithBool:NO],                               NSStringFromSelector(@selector(plusEnabled)),
-                       [CityTheme defaultThemeName],                               NSStringFromSelector(@selector(cityTheme)),
+                       NSStringFromSelector(@selector(plusEnabled)): @NO,
+                       NSStringFromSelector(@selector(cityTheme)): [CityTheme defaultThemeName],
 
-                       [NSNumber numberWithUnsignedInt:[theme varFloors]],         NSStringFromSelector(@selector(varFloors)),
-                       [NSNumber numberWithUnsignedInt:[theme fixedFloors]],       NSStringFromSelector(@selector(fixedFloors)),
-                       [NSNumber numberWithUnsignedInt:[theme buildingAmount]],    NSStringFromSelector(@selector(buildingAmount)),
-                       [NSNumber numberWithInteger:    1],                         NSStringFromSelector(@selector(buildingSpeed)),
-                       [theme buildingColors],                                     NSStringFromSelector(@selector(buildingColors)),
+                       NSStringFromSelector(@selector(varFloors)): @([theme varFloors]),
+                       NSStringFromSelector(@selector(fixedFloors)): @([theme fixedFloors]),
+                       NSStringFromSelector(@selector(buildingAmount)): @([theme buildingAmount]),
+                       NSStringFromSelector(@selector(buildingSpeed)): @1,
+                       NSStringFromSelector(@selector(buildingColors)): [theme buildingColors],
 
-                       [NSNumber numberWithUnsignedInt:[theme windowAmount]],      NSStringFromSelector(@selector(windowAmount)),
-                       [NSNumber numberWithUnsignedLong:[theme windowColorOn]],    NSStringFromSelector(@selector(windowColorOn)),
-                       [NSNumber numberWithUnsignedLong:[theme windowColorOff]],   NSStringFromSelector(@selector(windowColorOff)),
+                       NSStringFromSelector(@selector(windowAmount)): @([theme windowAmount]),
+                       NSStringFromSelector(@selector(windowColorOn)): @([theme windowColorOn]),
+                       NSStringFromSelector(@selector(windowColorOff)): @([theme windowColorOff]),
 
-                       [NSNumber numberWithUnsignedLong:[theme skyColor]],         NSStringFromSelector(@selector(skyColor)),
-                       [NSNumber numberWithUnsignedLong:[theme starColor]],        NSStringFromSelector(@selector(starColor)),
-                       [NSNumber numberWithInteger:     2],                        NSStringFromSelector(@selector(starSpeed)),
-                       [NSNumber numberWithUnsignedInt:[theme starAmount]],        NSStringFromSelector(@selector(starAmount)),
+                       NSStringFromSelector(@selector(skyColor)): @([theme skyColor]),
+                       NSStringFromSelector(@selector(starColor)): @([theme starColor]),
+                       NSStringFromSelector(@selector(starSpeed)): @2,
+                       NSStringFromSelector(@selector(starAmount)): @([theme starAmount]),
 
-                       [NSNumber numberWithInteger:    3],                         NSStringFromSelector(@selector(lives)),
-                       [NSNumber numberWithFloat:      [theme windModifier]],      NSStringFromSelector(@selector(windModifier)),
-                       [NSNumber numberWithUnsignedInt:[theme gravity]],           NSStringFromSelector(@selector(gravity)),
-                       [NSNumber numberWithInteger:    30],                        NSStringFromSelector(@selector(minGravity)),
-                       [NSNumber numberWithInteger:    150],                       NSStringFromSelector(@selector(maxGravity)),
+                       NSStringFromSelector(@selector(lives)): @3,
+                       NSStringFromSelector(@selector(windModifier)): @([theme windModifier]),
+                       NSStringFromSelector(@selector(gravity)): @([theme gravity]),
+                       NSStringFromSelector(@selector(minGravity)): @30,
+                       NSStringFromSelector(@selector(maxGravity)): @150,
 
-                       [NSNumber numberWithFloat:      0.5f],                      NSStringFromSelector(@selector(gameScrollDuration)),
+                       NSStringFromSelector(@selector(gameScrollDuration)): @0.5f,
 
-                       [NSNumber numberWithBool:       YES],                       NSStringFromSelector(@selector(replay)),
-                       [NSNumber numberWithBool:       YES],                       NSStringFromSelector(@selector(followThrow)),
+                       NSStringFromSelector(@selector(replay)): @YES,
+                       NSStringFromSelector(@selector(followThrow)): @YES,
 
-                       [NSArray arrayWithObjects:
-                        @"Fighting_Gorillas.mp3",
+                       NSStringFromSelector(@selector(tracks)): @[@"Fighting_Gorillas.mp3",
                         @"Flow_Square.mp3",
                         @"Happy_Fun_Ball.mp3",
                         @"Man_Or_Machine_Gorillas.mp3",
                         @"RC_Car.mp3",
                         @"sequential",
                         @"random",
-                        @"",
-                        nil],                                                      NSStringFromSelector(@selector(tracks)),
-                       [NSArray arrayWithObjects:
-                        PearlLocalize(@"menu.config.song.fighting_gorillas"),
+                        @""],
+                       NSStringFromSelector(@selector(trackNames)): @[PearlLocalize(@"menu.config.song.fighting_gorillas"),
                         PearlLocalize(@"menu.config.song.flow_square"),
                         PearlLocalize(@"menu.config.song.happy_fun_ball"),
                         PearlLocalize(@"menu.config.song.man_or_machine"),
                         PearlLocalize(@"menu.config.song.rc_car"),
                         PearlLocalize(@"menu.config.song.sequential"),
                         PearlLocalize(@"menu.config.song.random"),
-                        PearlLocalize(@"menu.config.song.off"),
-                        nil],                                                      NSStringFromSelector(@selector(trackNames)),
+                        PearlLocalize(@"menu.config.song.off")],
 
-                       [NSNumber numberWithInteger:    1],                         NSStringFromSelector(@selector(activeGameConfigurationIndex)),
-                       [NSNumber numberWithUnsignedInt:GorillasModeBootCamp],      NSStringFromSelector(@selector(mode)),
-                       [NSNumber numberWithInteger:    -5],                        NSStringFromSelector(@selector(missScore)),
-                       [NSNumber numberWithInteger:    50],                        NSStringFromSelector(@selector(killScore)),
-                       [NSNumber numberWithFloat:      2],                         NSStringFromSelector(@selector(bonusOneShot)),
-                       [NSNumber numberWithFloat:      50],                        NSStringFromSelector(@selector(bonusSkill)),
-                       [NSNumber numberWithInteger:    5],                         NSStringFromSelector(@selector(deathScoreRatio)),
+                       NSStringFromSelector(@selector(activeGameConfigurationIndex)): @1,
+                       NSStringFromSelector(@selector(mode)): @(GorillasModeBootCamp),
+                       NSStringFromSelector(@selector(missScore)): @-5,
+                       NSStringFromSelector(@selector(killScore)): @50,
+                       NSStringFromSelector(@selector(bonusOneShot)): @2.0f,
+                       NSStringFromSelector(@selector(bonusSkill)): @50.0f,
+                       NSStringFromSelector(@selector(deathScoreRatio)): @5,
 
-                       [NSNumber numberWithUnsignedInt:GorillasPlayerModelGorilla],NSStringFromSelector(@selector(playerModel)),
-                       [NSDictionary dictionary],                                  NSStringFromSelector(@selector(scores)),
-                       [NSNumber numberWithInteger:    0],                         NSStringFromSelector(@selector(skill)),
-                       [NSNumber numberWithFloat:      0.3f],                      NSStringFromSelector(@selector(level)),
-                       levelNames,                                                 NSStringFromSelector(@selector(levelNames)),
-                       [NSNumber numberWithFloat:      0.03f],                     NSStringFromSelector(@selector(levelProgress)),
+                       NSStringFromSelector(@selector(playerModel)): @(GorillasPlayerModelGorilla),
+                       NSStringFromSelector(@selector(scores)): @{},
+                       NSStringFromSelector(@selector(skill)): @0,
+                       NSStringFromSelector(@selector(level)): @0.3f,
+                       NSStringFromSelector(@selector(levelNames)): levelNames,
+                       NSStringFromSelector(@selector(levelProgress)): @0.03f}];
 
-                       nil]];
-
-    [self.resetTriggers setObject:@"mainMenuLayer"      forKey:NSStringFromSelector(@selector(activeGameConfigurationIndex))];
-    [self.resetTriggers setObject:@"mainMenuLayer"      forKey:NSStringFromSelector(@selector(plusEnabled))];
-    [self.resetTriggers setObject:@"customGameLayer"    forKey:NSStringFromSelector(@selector(mode))];
+    (self.resetTriggers)[NSStringFromSelector(@selector(activeGameConfigurationIndex))] = @"mainMenuLayer";
+    (self.resetTriggers)[NSStringFromSelector(@selector(plusEnabled))] = @"mainMenuLayer";
+    (self.resetTriggers)[NSStringFromSelector(@selector(mode))] = @"customGameLayer";
 
     return self;
 }
@@ -221,17 +208,17 @@
 
 -(NSString *) messageForOff {
 
-    return PearlLocalizeDyn([offMessages objectAtIndex:(NSUInteger)((unsigned)PearlGameRandom() % offMessages.count)]);
+    return PearlLocalizeDyn(offMessages[(NSUInteger)((unsigned)PearlGameRandom() % offMessages.count)]);
 }
 -(NSString *) messageForHitBy:(GorillaLayer *)byGorilla on:(GorillaLayer *)onGorilla {
 
-    return PearlLocalizeDyn([hitMessages objectAtIndex:(unsigned)PearlGameRandom() % hitMessages.count], byGorilla.name, onGorilla.name);
+    return PearlLocalizeDyn(hitMessages[(unsigned)PearlGameRandom() % hitMessages.count], byGorilla.name, onGorilla.name);
 }
 
 
 -(ccColor4B) buildingColor {
 
-    return ccc4l([[self.buildingColors objectAtIndex:(NSUInteger)((unsigned)PearlGameRandom() % [self.buildingColors count])] unsignedLongValue]);
+    return ccc4l([(self.buildingColors)[(NSUInteger)((unsigned)PearlGameRandom() % [self.buildingColors count])] unsignedLongValue]);
 }
 
 
@@ -295,7 +282,7 @@
 
 + (NSString *)nameForLevel:(NSNumber *)aLevel {
 
-    return [[self get].levelNames objectAtIndex:(NSUInteger)([aLevel floatValue] * [[self get].levelNames count])];
+    return ([self get].levelNames)[(NSUInteger)([aLevel floatValue] * [[self get].levelNames count])];
 }
 
 
@@ -328,7 +315,7 @@ static NSMutableDictionary *GorillasScores = nil;
 
     GKScore *score = [[GKScore alloc] initWithCategory:category];
     score.value = MAX(0, ((GKScore *)[GorillasScores objectForKey:category]).value + scoreDelta);
-    [GorillasScores setObject:score forKey:category];
+    GorillasScores[category] = score;
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         self.scores = [NSKeyedArchiver archivedDataWithRootObject:GorillasScores];
@@ -349,16 +336,16 @@ static NSMutableDictionary *GorillasScores = nil;
 
     NSString *category = [GorillasConfig categoryForMode:mode];
 
-    return ((GKScore *)[GorillasScores objectForKey:category]).value;
+    return ((GKScore *)GorillasScores[category]).value;
 }
 
 -(void) levelUp {
 
-    self.level = [NSNumber numberWithFloat:fminf(0.9f, fmaxf(0.1f, [self.level floatValue] + [self.levelProgress floatValue]))];
+    self.level = @(fminf(0.9f, fmaxf(0.1f, [self.level floatValue] + [self.levelProgress floatValue])));
 }
 -(void) levelDown {
 
-    self.level = [NSNumber numberWithFloat:fminf(0.9f, fmaxf(0.1f, [self.level floatValue] - [self.levelProgress floatValue]))];
+    self.level = @(fminf(0.9f, fmaxf(0.1f, [self.level floatValue] - [self.levelProgress floatValue])));
 }
 
 

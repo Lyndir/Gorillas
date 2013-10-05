@@ -244,7 +244,7 @@
         CGPoint winSize = ccpFromSize([CCDirector sharedDirector].winSize);
         
         for(NSUInteger i = 0; i < [[GorillasAppDelegate get].gameLayer.gorillas count]; ++i) {
-            GorillaLayer *gorilla = [[GorillasAppDelegate get].gameLayer.gorillas objectAtIndex:i];
+            GorillaLayer *gorilla = ([GorillasAppDelegate get].gameLayer.gorillas)[i];
             if(![gorilla alive])
                 continue;
             
@@ -368,7 +368,7 @@
         }
         
         // Pick a random target from the enemies.
-        GorillaLayer *target = [enemies objectAtIndex:(unsigned)PearlGameRandom() % [enemies count]];
+        GorillaLayer *target = enemies[(unsigned)PearlGameRandom() % [enemies count]];
         
         // Aim at the target.
         CGPoint r0 = [GorillasAppDelegate get].gameLayer.activeGorilla.position;
@@ -388,7 +388,7 @@
     
     // Throw hints.
     for (NSUInteger i = 0; i < [[GorillasAppDelegate get].gameLayer.gorillas count]; ++i) {
-        GorillaLayer *gorilla = [[GorillasAppDelegate get].gameLayer.gorillas objectAtIndex:i];
+        GorillaLayer *gorilla = ([GorillasAppDelegate get].gameLayer.gorillas)[i];
         
         BOOL hintGorilla = YES;
         
@@ -398,7 +398,7 @@
             || ![gorilla alive])
             hintGorilla = NO;
         
-        CCSprite *hint = [throwHints objectAtIndex:i];
+        CCSprite *hint = throwHints[i];
         [hint setVisible:hintGorilla];
         [hint stopAllActions];
         
@@ -524,7 +524,7 @@
     throwHistory = calloc([gorillas count], sizeof(CGPoint));
     for(NSUInteger i = 0; i < [gorillas count]; ++i) {
         throwHistory[i] = ccp(-1, -1);
-        [[throwHints objectAtIndex:i] setVisible:NO];
+        [throwHints[i] setVisible:NO];
     }
     
     // Position our gorillas.
@@ -573,13 +573,13 @@
             }
         
         if (validIndex) {
-            [gorillaIndexes addObject:[NSNumber numberWithUnsignedInt:index]];
+            [gorillaIndexes addObject:@(index)];
             [gorillasQueue removeLastObject];
         }
     }
     for(NSUInteger i = 0; i < [gorillas count]; ++i) {
-        Building building = firstBuildings.buildings[[(NSNumber *) [gorillaIndexes objectAtIndex:i] unsignedIntegerValue]];
-        GorillaLayer *gorilla = [gorillas objectAtIndex:i];
+        Building building = firstBuildings.buildings[[(NSNumber *) gorillaIndexes[i] unsignedIntegerValue]];
+        GorillaLayer *gorilla = gorillas[i];
         CGSize gorillaSize = CGSizeMake(gorilla.contentSize.width * gorilla.scale, gorilla.contentSize.height * gorilla.scale);
         
         gorilla.position = ccp(building.x + building.size.width / 2, building.size.height + gorillaSize.height / 2);

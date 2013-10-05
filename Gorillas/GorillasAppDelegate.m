@@ -99,10 +99,8 @@
         if ([token length]) {
             inf(@"Initializing TestFlight");
             [TestFlight addCustomEnvironmentInformation:@"Anonymous" forKey:@"username"];
-            [TestFlight setOptions:[NSDictionary dictionaryWithObjectsAndKeys:
-                                    [NSNumber numberWithBool:NO],   @"logToConsole",
-                                    [NSNumber numberWithBool:NO],   @"logToSTDERR",
-                                    nil]];
+            [TestFlight setOptions:@{@"logToConsole": @NO,
+                                    @"logToSTDERR": @NO}];
             [TestFlight takeOff:token];
             [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
 #ifdef APPSTORE
@@ -128,10 +126,8 @@
             [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
                 if (message.level >= PearlLogLevelError)
                     [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Problem" attributes:
-                     [NSDictionary dictionaryWithObjectsAndKeys:
-                      [[NSString alloc] initWithUTF8String:PearlLogLevelStr(message.level)], @"level",
-                      message.message, @"message",
-                      nil]];
+                     @{@"level": [[NSString alloc] initWithUTF8String:PearlLogLevelStr(message.level)],
+                      @"message": message.message}];
                 
                 return YES;
             }];
@@ -278,7 +274,7 @@
     
     if (configKey == @selector(cityTheme)) {
         dbg(@"City Theme changed to: %@", [GorillasConfig get].cityTheme);
-        [[[CityTheme getThemes] objectForKey:[GorillasConfig get].cityTheme] apply];
+        [[CityTheme getThemes][[GorillasConfig get].cityTheme] apply];
     }
 }
 
@@ -305,7 +301,7 @@
     BOOL plusAvailable = NO;
     NSMutableDictionary *products = [NSMutableDictionary dictionaryWithCapacity:[response.products count]];
     for (SKProduct *product in response.products) {
-        [products setObject:product forKey:product.productIdentifier];
+        products[product.productIdentifier] = product;
         if ([product.productIdentifier isEqualToString:GORILLAS_PLUS])
             plusAvailable = YES;
     }
@@ -323,7 +319,7 @@
         switch (transaction.transactionState) {
             case SKPaymentTransactionStatePurchasing:
                 self.purchasingActivity = [PearlAlert showActivityWithTitle:PearlString( @"Purchasing %@",
-                        ((SKProduct *)[self.products objectForKey:transaction.payment.productIdentifier]).localizedTitle )];
+                        ((SKProduct *)(self.products)[transaction.payment.productIdentifier]).localizedTitle )];
                 break;
             case SKPaymentTransactionStateFailed:
                 err(@"In-App Purchase failed: %@", transaction.error);

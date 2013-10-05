@@ -92,11 +92,11 @@
 - (id)valueForSetting:(SEL)setting index:(NSUInteger)index {
     
     if (setting == @selector(cityTheme))
-        return [[CityTheme getThemeNames] objectAtIndex:index];
+        return [CityTheme getThemeNames][index];
     if (setting == @selector(gravity))
-        return [NSNumber numberWithDouble:[[GorillasConfig get].minGravity doubleValue] + 10 * index];
+        return @([[GorillasConfig get].minGravity doubleValue] + 10 * index);
     if (setting == @selector(level))
-        return [NSNumber numberWithFloat:fminf(0.9f, fmaxf(0.1f, (float)index / [[GorillasConfig get].levelNames count]))];
+        return @(fminf(0.9f, fmaxf(0.1f, (float)index / [[GorillasConfig get].levelNames count])));
     
     return nil;
 }
