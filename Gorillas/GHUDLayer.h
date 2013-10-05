@@ -25,20 +25,12 @@
 #import "PearlCCHUDLayer.h"
 
 
-@interface GHUDLayer : PearlCCHUDLayer {
+@interface GHUDLayer : PearlCCHUDLayer
 
-@private
-    CCLabelAtlas                                        *_skillSprite;
-    CCLabelAtlas                                        *_skillCount;
-    CCLayer                                             *_livesLayer;
-    CCSprite                                            *_infiniteLives;
-    float                                               _throwSkill;
-}
-
-@property (nonatomic, readonly, retain) CCLabelAtlas    *skillSprite;
-@property (nonatomic, readonly, retain) CCLabelAtlas    *skillCount;
-@property (nonatomic, readonly, retain) CCLayer         *livesLayer;
-@property (nonatomic, readonly, retain) CCSprite        *infiniteLives;
+@property (nonatomic, readonly, strong) CCLabelAtlas    *skillSprite;
+@property (nonatomic, readonly, strong) CCLabelAtlas    *skillCount;
+@property (nonatomic, readonly, strong) CCLayer         *livesLayer;
+@property (nonatomic, readonly, strong) CCSprite        *infiniteLives;
 @property (nonatomic, readwrite, assign) float          throwSkill;
 
 @end

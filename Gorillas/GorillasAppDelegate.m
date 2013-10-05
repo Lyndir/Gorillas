@@ -36,16 +36,16 @@
 
 @interface GorillasAppDelegate ()<SKProductsRequestDelegate, SKPaymentTransactionObserver>
 
-@property (nonatomic, readwrite, retain) GameLayer                      *gameLayer;
-@property (nonatomic, readwrite, retain) MainMenuLayer                  *mainMenuLayer;
-@property (nonatomic, readwrite, retain) BuyPlusLayer                   *buyPlusLayer;
-@property (nonatomic, readwrite, retain) ConfigurationSectionLayer      *configLayer;
-@property (nonatomic, readwrite, retain) GameConfigurationLayer         *gameConfigLayer;
-@property (nonatomic, readwrite, retain) AVConfigurationLayer           *avConfigLayer;
-@property (nonatomic, readwrite, retain) NetController                  *netController;
-@property (nonatomic, readwrite, retain) NSDictionary *products;
+@property (nonatomic, readwrite, strong) GameLayer                      *gameLayer;
+@property (nonatomic, readwrite, strong) MainMenuLayer                  *mainMenuLayer;
+@property (nonatomic, readwrite, strong) BuyPlusLayer                   *buyPlusLayer;
+@property (nonatomic, readwrite, strong) ConfigurationSectionLayer      *configLayer;
+@property (nonatomic, readwrite, strong) GameConfigurationLayer         *gameConfigLayer;
+@property (nonatomic, readwrite, strong) AVConfigurationLayer           *avConfigLayer;
+@property (nonatomic, readwrite, strong) NetController                  *netController;
+@property (nonatomic, readwrite, strong) NSDictionary *products;
 
-@property(nonatomic, retain) PearlAlert *purchasingActivity;
+@property(nonatomic, strong) PearlAlert *purchasingActivity;
 - (NSDictionary *)testFlightInfo;
 - (NSString *)testFlightToken;
 
@@ -58,10 +58,6 @@
 @end
 
 @implementation GorillasAppDelegate
-@synthesize gameLayer = _gameLayer;
-@synthesize mainMenuLayer = _mainMenuLayer;
-@synthesize buyPlusLayer = _buyPlusLayer, configLayer = _configLayer, gameConfigLayer = _gameConfigLayer, avConfigLayer = _avConfigLayer;
-@synthesize netController = _netController;
 
 + (void)initialize {
     
@@ -181,7 +177,7 @@
     productsRequest.delegate = self;
     [productsRequest start];
 
-    self.netController = [[NetController new] autorelease];
+    self.netController = [NetController new];
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
         
         if (acceptedInvite)
@@ -473,19 +469,6 @@
 }
 
 
-- (void)dealloc {
-    
-    self.gameLayer          = nil;
-    self.mainMenuLayer      = nil;
-    self.buyPlusLayer       = nil;
-    self.configLayer        = nil;
-    self.gameConfigLayer    = nil;
-    self.avConfigLayer      = nil;
-
-    self.products = nil;
-    self.purchasingActivity = nil;
-    [super dealloc];
-}
 
 
 +(GorillasAppDelegate *) get {

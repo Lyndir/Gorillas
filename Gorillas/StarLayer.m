@@ -32,7 +32,13 @@
 @property(nonatomic) BOOL dirty;
 @end
 
-@implementation StarLayer { GLuint starVertexObject; }
+@implementation StarLayer {
+    float depth;
+    glPoint *starVertices;
+    GLuint starVertexBuffer;
+    GLsizei starCount;
+    GLuint starVertexObject;
+}
 
 -(id) initWidthDepth:(float)aDepth {
 
@@ -150,7 +156,6 @@
     free(starVertices);
     starVertices = nil;
 
-    [super dealloc];
 }
 
 

@@ -29,8 +29,10 @@
 #import "PearlGLUtils.h"
 
 
-@implementation SkyLayer
-
+@implementation SkyLayer {
+    ccColor4B skyColor;
+    NSMutableArray *stars;
+}
 
 -(id) init {
 
@@ -48,7 +50,6 @@
         [self addChild:starLayer z:1 parallaxRatio:ccp(depth, depth) positionOffset:ccp(self.contentSize.width / 2,
                                                                                         self.contentSize.height / 2)];
 
-        [starLayer release];
     }
 
     self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
@@ -98,10 +99,8 @@
 
 -(void) dealloc {
 
-    [stars release];
     stars = nil;
 
-    [super dealloc];
 }
 
 

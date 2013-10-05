@@ -461,7 +461,6 @@
 		DAE4895A0FEEE92B00E9017C /* explosion3.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAE489560FEEE92B00E9017C /* explosion3.caf */; };
 		DAE4EABF1389ACFC001FECE7 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE4EABE1389ACFC001FECE7 /* libicucore.dylib */; };
 		DAE4EAC41389B2E2001FECE7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAE4EAC31389B2E2001FECE7 /* SystemConfiguration.framework */; };
-		DAF4D8161280D8170012132B /* MovingTo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF4D8131280D8170012132B /* MovingTo.m */; };
 		DAFEF9730ED847D40019F7E5 /* ThrowAction.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9720ED847D40019F7E5 /* ThrowAction.m */; };
 		DAFEF9730ED847D40019F7E7 /* PearlGLShaders.m in Sources */ = {isa = PBXBuildFile; fileRef = DAFEF9730ED847D40019F7E6 /* PearlGLShaders.m */; };
 		DAFEF9730ED847D40019F7E9 /* PearlGLShaders.h in Headers */ = {isa = PBXBuildFile; fileRef = DAFEF9730ED847D40019F7E8 /* PearlGLShaders.h */; };
@@ -1170,8 +1169,6 @@
 		DAE489560FEEE92B00E9017C /* explosion3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion3.caf; sourceTree = "<group>"; };
 		DAE4EABE1389ACFC001FECE7 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		DAE4EAC31389B2E2001FECE7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		DAF4D8121280D8170012132B /* MovingTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingTo.h; sourceTree = "<group>"; };
-		DAF4D8131280D8170012132B /* MovingTo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingTo.m; sourceTree = "<group>"; };
 		DAFEF9710ED847D40019F7E5 /* ThrowAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThrowAction.h; sourceTree = "<group>"; };
 		DAFEF9720ED847D40019F7E5 /* ThrowAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThrowAction.m; sourceTree = "<group>"; };
 		DAFEF9730ED847D40019F7E6 /* PearlGLShaders.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PearlGLShaders.m; sourceTree = "<group>"; };
@@ -1603,8 +1600,6 @@
 				DA16C5180EEC856200E46246 /* ShadeTo.m */,
 				DAFEF9710ED847D40019F7E5 /* ThrowAction.h */,
 				DAFEF9720ED847D40019F7E5 /* ThrowAction.m */,
-				DAF4D8121280D8170012132B /* MovingTo.h */,
-				DAF4D8131280D8170012132B /* MovingTo.m */,
 			);
 			name = Actions;
 			sourceTree = "<group>";
@@ -3268,7 +3263,6 @@
 				DA4E5D0C0F7FE5B9007BE3B9 /* GorillasAudioController.m in Sources */,
 				DA021E460F84A0F0007CED57 /* ThrowController.m in Sources */,
 				DA3B94FB127B7407009196E8 /* GHUDLayer.m in Sources */,
-				DAF4D8161280D8170012132B /* MovingTo.m in Sources */,
 				DA711DCC128DF40800EDB885 /* NetMessage.m in Sources */,
 				DA711DF4128EA44700EDB885 /* NetController.m in Sources */,
 				DA75D04F12A14A150051EF09 /* GConfigMenuLayer.m in Sources */,
@@ -3606,6 +3600,7 @@
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -3764,6 +3759,7 @@
 		DA16C3760EEC575C00E46246 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -3942,6 +3938,7 @@
 		DAA5143B13FFAD0900325033 /* Profile */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -4056,6 +4053,7 @@
 		DAB41EA8158F5E7800D509CC /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",

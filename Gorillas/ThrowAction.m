@@ -29,12 +29,10 @@
 
 
 @implementation ThrowAction
-@synthesize v = _v, r0 = _r0, needsReplay = _needsReplay;
-@synthesize smoke = _smoke;
 
 +(ThrowAction *) actionWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration needsReplay:(BOOL)aNeedsReplay {
     
-    return [[[ThrowAction alloc] initWithVelocity:velocity duration:aDuration needsReplay:aNeedsReplay] autorelease];
+    return [[ThrowAction alloc] initWithVelocity:velocity duration:aDuration needsReplay:aNeedsReplay];
 }
 
 
@@ -88,8 +86,8 @@
     
     // Pan the screen.
     GameLayer *gameLayer = [GorillasAppDelegate get].gameLayer;
-    [gameLayer.panningLayer scrollToCenter:[(CCNode*)self.target position]
-                                horizontal:[[GorillasConfig get].followThrow boolValue]];
+    [gameLayer.panningLayer scrollToCenter:[(CCNode *)self.target position]
+                                 horizontal:[[GorillasConfig get].followThrow boolValue]];
     
     // Update smoke.
         self.smoke.angle = atan2f(self.smoke.sourcePosition.y - [(CCNode*)self.target position].y,
@@ -120,12 +118,6 @@
 }    
 
 
--(void) dealloc {
-    
-    self.smoke = nil;
-    
-    [super dealloc];
-}
 
 
 @end

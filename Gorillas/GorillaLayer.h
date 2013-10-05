@@ -27,35 +27,14 @@
 #import "PearlResettable.h"
 
 
-@interface GorillaLayer : CCSprite <PearlResettable> {
-
-@private
-    NSString                                                        *_name;
-    NSUInteger                                                      _teamIndex, _globalIndex;
-    
-    NSString                                                        *_playerID;
-    GKPlayer                                                        *_player;
-    GKPlayerConnectionState                                         _connectionState;
-    
-    int                                                             _initialLives, _lives;
-    BOOL                                                            _active;
-    BOOL                                                            _ready;
-    NSUInteger                                                      _turns;
-    float                                                           _zoom;
-    
-    CCSprite                                                        *_bobber;
-    ccColor4B                                                       *_healthColors;
-    
-    GorillasPlayerModel                                             _model;
-    GorillasPlayerType                                              _type;
-}
+@interface GorillaLayer : CCSprite <PearlResettable>
 
 @property (nonatomic, readonly, copy) NSString                      *name;
 @property (nonatomic, readonly, assign) NSUInteger                  teamIndex;
 @property (nonatomic, readonly, assign) NSUInteger                  globalIndex;
 
 @property (nonatomic, readonly, copy) NSString                      *playerID;
-@property (nonatomic, readwrite, retain) GKPlayer                   *player;
+@property (nonatomic, readwrite, strong) GKPlayer                   *player;
 @property (nonatomic, readwrite, assign) GKPlayerConnectionState    connectionState;
 
 @property (nonatomic, readonly, assign) int                         initialLives;
@@ -65,7 +44,7 @@
 @property (nonatomic, readwrite, assign) NSUInteger                 turns;
 @property (nonatomic, readwrite, assign) float                      zoom;
 
-@property (nonatomic, readonly, retain) CCSprite                    *bobber;
+@property (nonatomic, readonly, strong) CCSprite                    *bobber;
 @property (nonatomic, readwrite, assign) GorillasPlayerModel        model;
 @property (nonatomic, readwrite, assign) GorillasPlayerType         type;
 

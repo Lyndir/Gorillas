@@ -24,15 +24,7 @@
 
 
 
-@interface HolesLayer : CCLayer {
-
-@private
-    CCTexture2D     *texture;
-    NSUInteger      holeCount;
-    glPoint         *holes;
-    
-    GLuint          holeVertexBuffer;
-}
+@interface HolesLayer : CCLayer
 
 -(BOOL) isHoleAtWorld:(CGPoint)pos;
 -(void) addHoleAtWorld:(CGPoint)pos;

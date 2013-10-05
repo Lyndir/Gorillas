@@ -33,37 +33,8 @@
 
 #define DEBUG_COLLISION 0
 
-@interface CityLayer : CCParallaxNode <PearlResettable> {
+@interface CityLayer : CCParallaxNode <PearlResettable>
 
-@private
-    CCLabelTTF          *msgLabel;
-    
-    BuildingsLayer      **buildings;
-    NSUInteger          buildingsCount;
-    
-    HolesLayer          *holes;
-    ExplosionsLayer     *explosions;
-    CCLayer             *nonParallaxLayer;
-
-    BananaLayer         *bananaLayer;
-    GorillaLayer        *hitGorilla;
-    
-    CGPoint             *throwHistory;
-    NSMutableArray      *throwHints;
-    
-#if DEBUG_COLLISION
-    NSUInteger          dbgTraceStep;
-    NSUInteger          dbgPathMaxInd;
-    NSUInteger          dbgPathCurInd;
-    CGPoint             *dbgPath;
-    NSUInteger          dbgAIMaxInd;
-    NSUInteger          dbgAICurInd;
-    GorillaLayer        **dbgAI;
-    CGPoint             *dbgAIVect;
-#endif
-}
-
-@property (nonatomic, readonly) BuildingsLayer *buildingLayer;
 @property (nonatomic, readonly) BananaLayer *bananaLayer;
 @property (nonatomic, readonly) GorillaLayer *hitGorilla;
 
@@ -79,6 +50,7 @@
 -(void) message: (NSString *)msg on: (CCNode *)node;
 -(CGPoint) calculateThrowFrom:(CGPoint)r0 to:(CGPoint)rt errorLevel:(CGFloat)l;
 
+- (BuildingsLayer *)buildingsLayer;
 -(CGRect) fieldInSpaceOf:(CCNode *)node;
 
 @end

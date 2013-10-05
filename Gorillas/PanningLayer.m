@@ -179,10 +179,8 @@
 
 -(void) dealloc {
     
-    [tween release];
     tween = nil;
     
-    [super dealloc];
 }
 
 

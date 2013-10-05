@@ -24,11 +24,7 @@
 
 
 
-@interface ShadeTo : CCActionInterval {
-
-@private
-    ccColor4B startCol, endCol;
-}
+@interface ShadeTo : CCActionInterval
 
 +(ShadeTo *) actionWithDuration:(ccTime)_duration color:(ccColor4B)_color;
 -(ShadeTo *) initWithDuration:(ccTime)_duration color:(ccColor4B)_color;

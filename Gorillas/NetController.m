@@ -16,8 +16,8 @@
 
 @interface NetController ()
 
-@property (nonatomic, readwrite, retain) GKMatch                *match;
-@property (nonatomic, readwrite, retain) NetMessageElectHost    *hostElection;
+@property (nonatomic, readwrite, strong) GKMatch                *match;
+@property (nonatomic, readwrite, strong) NetMessageElectHost    *hostElection;
 
 - (void)sendUpdateReady;
 
@@ -26,8 +26,9 @@
 
 @end
 
-@implementation NetController
-@synthesize match = _match, hostElection = _hostElection;
+@implementation NetController {
+    BOOL started;
+}
 
 - (void)beginRequest:(GKMatchRequest *)aMatchRequest {
     
@@ -35,7 +36,7 @@
     NSAssert(![[GorillasAppDelegate get].gameLayer checkGameStillOn], @"A previous match is still running.");
     NSAssert(self.match == nil && !started, @"A previous match has not been cleaned up.");
     
-    GKMatchmakerViewController *matchVC = [[[GKMatchmakerViewController alloc] initWithMatchRequest:aMatchRequest] autorelease];
+    GKMatchmakerViewController *matchVC = [[GKMatchmakerViewController alloc] initWithMatchRequest:aMatchRequest];
     if (matchVC != nil) {
         matchVC.matchmakerDelegate = self;
         [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:matchVC animated:YES];
@@ -49,7 +50,7 @@
     NSAssert(![[GorillasAppDelegate get].gameLayer checkGameStillOn], @"A previous match is still running.");
     NSAssert(self.match == nil && !started, @"A previous match has not been cleaned up.");
     
-    GKMatchmakerViewController *matchVC = [[[GKMatchmakerViewController alloc] initWithInvite:anInvite] autorelease];
+    GKMatchmakerViewController *matchVC = [[GKMatchmakerViewController alloc] initWithInvite:anInvite];
     if (matchVC != nil) {
         matchVC.matchmakerDelegate = self;
         [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:matchVC animated:YES];

@@ -9,28 +9,18 @@
 #import <Foundation/Foundation.h>
 
 
-@interface NetMessage : NSObject <NSCoding> {
-
-}
+@interface NetMessage : NSObject <NSCoding>
 
 @end
 
 @interface NetMessageElectHost : NetMessage
-{
-    NSUInteger                                      _vote;
-
-    NSMutableDictionary                             *_playerVotes;
-    NetMessageElectHost                             *_host;
-    NSString                                        *_hostID;
-    NSArray                                         *_orderedPlayerIDs;
-}
 
 @property (nonatomic, assign) NSUInteger            vote;
 
-@property (nonatomic, retain) NSMutableDictionary   *playerVotes;
-@property (nonatomic, retain) NetMessageElectHost   *host;
-@property (nonatomic, retain) NSString              *hostID;
-@property (nonatomic, retain) NSArray               *orderedPlayerIDs;
+@property (nonatomic, strong) NSMutableDictionary   *playerVotes;
+@property (nonatomic, strong) NetMessageElectHost   *host;
+@property (nonatomic, strong) NSString              *hostID;
+@property (nonatomic, strong) NSArray               *orderedPlayerIDs;
 
 + (NetMessageElectHost *)electHostWithPlayerIDs:(NSArray *)aPlayerIDs;
 
@@ -44,33 +34,24 @@
 @end
 
 @interface NetMessageReady : NetMessage
-{
-}
 
 + (NetMessageReady *)ready;
 
 @end
 
 @interface NetMessageBecameReady : NetMessageReady
-{
-}
 
 + (NetMessageBecameReady *)ready;
 
 @end
 
 @interface NetMessageUpdateReady : NetMessageReady
-{
-}
 
 + (NetMessageUpdateReady *)ready;
 
 @end
 
 @interface NetMessageThrow : NetMessage
-{
-    CGPoint                                         _normalizedVelocity;
-}
 
 @property (nonatomic, assign) CGPoint               normalizedVelocity;
 

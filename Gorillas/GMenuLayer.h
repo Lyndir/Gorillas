@@ -9,8 +9,6 @@
 #import "PearlCCMenuLayer.h"
 
 
-@interface GMenuLayer : PearlCCMenuLayer {
-
-}
+@interface GMenuLayer : PearlCCMenuLayer
 
 @end

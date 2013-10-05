@@ -24,17 +24,10 @@
 
 
 
-@interface PanAction : CCMoveBy {
-
-@private
-    NSMutableArray *subNodes;
-    int padding;
-    BOOL cancelled;
-}
+@interface PanAction : CCMoveBy
 
 +(PanAction *) actionWithSubNodes: (NSMutableArray *)nSubNodes duration: (ccTime)nDuration padding: (int) nPadding;
 -(PanAction *) initWithSubNodes: (NSMutableArray *)nSubNodes duration: (ccTime)nDuration padding: (int)nPadding;
 -(void) cancel;
-
 
 @end

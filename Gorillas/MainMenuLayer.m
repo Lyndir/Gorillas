@@ -31,13 +31,15 @@
 
 
 @interface MainMenuLayer ()
-@property (nonatomic, retain) CCMenu *appMenu;
+@property (nonatomic, strong) CCMenu *appMenu;
 
 @end
 
-@implementation MainMenuLayer
-@synthesize playersToInvite = _playersToInvite;
-@synthesize appMenu = _appMenu;
+@implementation MainMenuLayer {
+    CCMenuItemToggle *configurationI;
+    CCMenuItemLabel *descriptionT;
+    CCMenuItem *multiPlayerI, *singlePlayerI, *hotSeatI, *upgradeI;
+}
 
 
 - (id) init {
@@ -61,14 +63,14 @@
         self.itemCounts = @[ @1, @3, @1, @1, @1, @2 ];
         self.items = @[
                 [PearlCCMenuItemSpacer spacerSmall],
-                [multiPlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
-                                                          selector:@selector(startMulti:)] retain],
-                [singlePlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
-                                                           selector:@selector(startSingle:)] retain],
-                [hotSeatI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
-                                                      selector:@selector(startHotSeat:)] retain],
-                [configurationI = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)] retain],
-                [descriptionT = [PearlCCMenuItemTitle itemWithString:@"description"] retain],
+                multiPlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
+                                                          selector:@selector(startMulti:)],
+                singlePlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
+                                                           selector:@selector(startSingle:)],
+                hotSeatI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
+                                                      selector:@selector(startHotSeat:)],
+                configurationI = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)],
+                descriptionT = [PearlCCMenuItemTitle itemWithString:@"description"],
                 [PearlCCMenuItemSpacer spacerNormal],
                 [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self
                                           selector:@selector(settings:)],
@@ -86,12 +88,12 @@
         self.itemCounts = @[ @1, @1, @1, @1, @1, @2 ];
         self.items = @[
                 [PearlCCMenuItemSpacer spacerSmall],
-                [singlePlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
-                                                           selector:@selector(startSingle:)] retain],
-                [configurationI = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)] retain],
-                [descriptionT = [PearlCCMenuItemTitle itemWithString:@"description"] retain],
+                singlePlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
+                                                           selector:@selector(startSingle:)],
+                configurationI = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)],
+                descriptionT = [PearlCCMenuItemTitle itemWithString:@"description"],
                 [PearlCCMenuItemSpacer spacerNormal],
-                [upgradeI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(upgrade:)] retain],
+                upgradeI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(upgrade:)],
                 [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(scores:
                 )],
         ];
@@ -113,7 +115,7 @@
 
     // Game Configuration.
     NSMutableArray *configurationMenuItems = [NSMutableArray arrayWithCapacity:4];
-    for (GameConfiguration *configuration in [[[GorillasConfig get].gameConfigurations retain] autorelease])
+    for (GameConfiguration *configuration in [GorillasConfig get].gameConfigurations)
         [configurationMenuItems addObject:[CCMenuItemFont itemWithString:configuration.name]];
     configurationI.subItems = configurationMenuItems;
     [configurationI setSelectedIndex:1];
@@ -185,7 +187,7 @@
         // Multiplayer is not supported or game center is unavailable.
         return;
 
-    GKMatchRequest *matchRequest = [[GKMatchRequest new] autorelease];
+    GKMatchRequest *matchRequest = [GKMatchRequest new];
     matchRequest.minPlayers = 2;
     matchRequest.maxPlayers = gameConfiguration.multiplayerHumanCount;
     matchRequest.playerGroup = gameConfiguration.mode;
@@ -227,7 +229,7 @@
 
 - (void)scores:(id)sender {
 
-    GKLeaderboardViewController *leaderboardController = [[[GKLeaderboardViewController alloc] init] autorelease];
+    GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];
     if (leaderboardController != nil) {
         leaderboardController.leaderboardDelegate = self;
         [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:leaderboardController animated:YES];
@@ -262,11 +264,6 @@
 }
 
 
--(void) dealloc {
-
-    self.appMenu = nil;
-    [super dealloc];
-}
 
 
 @end

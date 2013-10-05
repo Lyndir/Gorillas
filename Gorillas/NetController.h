@@ -10,16 +10,10 @@
 #import "NetMessage.h"
 
 
-@interface NetController : NSObject <GKMatchmakerViewControllerDelegate, GKMatchDelegate> {
+@interface NetController : NSObject <GKMatchmakerViewControllerDelegate, GKMatchDelegate>
 
-    GKMatch                                                     *_match;
-    NetMessageElectHost                                         *_hostElection;
-
-    BOOL                                                        started;
-}
-
-@property (nonatomic, readonly, retain) GKMatch                 *match;
-@property (nonatomic, readonly, retain) NetMessageElectHost     *hostElection;
+@property (nonatomic, readonly, strong) GKMatch                 *match;
+@property (nonatomic, readonly, strong) NetMessageElectHost     *hostElection;
 
 - (void)beginRequest:(GKMatchRequest *)aMatchRequest;
 - (void)beginInvite:(GKInvite *)anInvite;

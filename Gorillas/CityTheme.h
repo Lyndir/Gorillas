@@ -24,30 +24,12 @@
 
 
 
-@interface CityTheme : NSObject {
-    
-@private
-    NSUInteger                                      varFloors;
-    NSUInteger                                      fixedFloors;
-    NSUInteger                                      buildingAmount;
-    NSArray                                         *buildingColors;
-    
-    NSUInteger                                      windowAmount;
-    unsigned long                                   windowColorOn;
-    unsigned long                                   windowColorOff;
-    
-    unsigned long                                   skyColor;
-    unsigned long                                   starColor;
-    NSUInteger                                      starAmount;
-    
-    float                                           windModifier;
-    NSUInteger                                      gravity;
-}
+@interface CityTheme : NSObject
 
 @property (nonatomic, readonly) NSUInteger          varFloors;
 @property (nonatomic, readonly) NSUInteger          fixedFloors;
 @property (nonatomic, readonly) NSUInteger          buildingAmount;
-@property (nonatomic, readonly, assign) NSArray     *buildingColors;
+@property (nonatomic, readonly) NSArray     *buildingColors;
 
 @property (nonatomic, readonly) NSUInteger          windowAmount;
 @property (nonatomic, readonly) unsigned long       windowColorOn;

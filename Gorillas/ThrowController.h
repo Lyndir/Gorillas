@@ -30,27 +30,18 @@ typedef enum {
     ThrowEndHitBuilding,
     ThrowEndHitGorilla,
     ThrowEndOffScreen,
-} ThrowEnd;
+} GThrowEnd;
 typedef struct {
     CGPoint     endPoint;
-    ThrowEnd    endCondition;
+    GThrowEnd endCondition;
     ccTime      duration;
-} Throw;
+} GThrow;
 
-@interface ThrowController : NSObject {
+@interface ThrowController : NSObject
 
-    GorillaLayer                            *_gorilla;
-    Throw                                   _throw;
-    CCSprite                                *_banana;
-    CGPoint                                 _velocity;
-    ccTime                                  _duration;
-    BOOL                                    _needReplay;
-    BOOL                                    _wasReplay;
-}
-
-@property (nonatomic, retain) GorillaLayer  *gorilla;
-@property (nonatomic, assign) Throw         throw;
-@property (nonatomic, retain) CCSprite      *banana;
+@property (nonatomic, strong) GorillaLayer  *gorilla;
+@property (nonatomic, assign) GThrow         throw;
+@property (nonatomic, strong) CCSprite      *banana;
 @property (nonatomic, assign) CGPoint       velocity;
 @property (nonatomic, assign) ccTime        duration;
 @property (nonatomic, assign) BOOL          needReplay;
@@ -61,7 +52,7 @@ typedef struct {
 
 - (void)throwFrom:(GorillaLayer *)gorilla normalizedVelocity:(CGPoint)velocity;
 
-+ (Throw)calculateThrowFrom:(CGPoint)r0 withVelocity:(CGPoint)v afterTime:(ccTime)t;
++ (GThrow)calculateThrowFrom:(CGPoint)r0 withVelocity:(CGPoint)v afterTime:(ccTime)t;
 + (ThrowController *) get;
 
 @end

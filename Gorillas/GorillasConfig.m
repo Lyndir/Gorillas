@@ -28,13 +28,13 @@
 
 @interface GorillasConfig ()
 
-@property (nonatomic, readwrite, retain) NSArray         *gameConfigurations;
+@property (nonatomic, readwrite, strong) NSArray         *gameConfigurations;
 
 @end
 
-@implementation GorillasConfig
-
-@synthesize gameConfigurations;
+@implementation GorillasConfig {
+    NSArray *offMessages, *hitMessages;
+}
 
 @dynamic plusEnabled, cityTheme;
 @dynamic varFloors, fixedFloors, buildingAmount, buildingSpeed, buildingColors;
@@ -162,26 +162,6 @@
 
                        nil]];
 
-    updateTriggers  = [[NSArray alloc] initWithObjects:
-                       NSStringFromSelector(@selector(largeFontSize)),
-                       NSStringFromSelector(@selector(smallFontSize)),
-                       NSStringFromSelector(@selector(fontSize)),
-                       NSStringFromSelector(@selector(fontName)),
-                       NSStringFromSelector(@selector(fixedFontName)),
-                       NSStringFromSelector(@selector(cityTheme)),
-                       NSStringFromSelector(@selector(gravity)),
-                       NSStringFromSelector(@selector(soundFx)),
-                       NSStringFromSelector(@selector(voice)),
-                       NSStringFromSelector(@selector(vibration)),
-                       NSStringFromSelector(@selector(replay)),
-                       NSStringFromSelector(@selector(followThrow)),
-                       NSStringFromSelector(@selector(tracks)),
-                       NSStringFromSelector(@selector(trackNames)),
-                       NSStringFromSelector(@selector(currentTrack)),
-                       NSStringFromSelector(@selector(level)),
-                       NSStringFromSelector(@selector(levelNames)),
-                       nil
-                       ];
     [self.resetTriggers setObject:@"mainMenuLayer"      forKey:NSStringFromSelector(@selector(activeGameConfigurationIndex))];
     [self.resetTriggers setObject:@"mainMenuLayer"      forKey:NSStringFromSelector(@selector(plusEnabled))];
     [self.resetTriggers setObject:@"customGameLayer"    forKey:NSStringFromSelector(@selector(mode))];
@@ -230,9 +210,6 @@
 -(void) dealloc {
 
     [CityTheme forgetThemes];
-
-    self.plusEnabled = nil;
-    [super dealloc];
 }
 
 
@@ -344,12 +321,12 @@ static NSMutableDictionary *GorillasScores = nil;
     if (GorillasScores == nil) {
         NSData *scores = self.scores;
         if ([scores isKindOfClass:[NSData class]])
-            GorillasScores = [[NSKeyedUnarchiver unarchiveObjectWithData:scores] retain];
+            GorillasScores = [NSKeyedUnarchiver unarchiveObjectWithData:scores];
         if (!NSNullToNil(GorillasScores))
             GorillasScores = [[NSMutableDictionary alloc] init];
     }
 
-    GKScore *score = [[[GKScore alloc] initWithCategory:category] autorelease];
+    GKScore *score = [[GKScore alloc] initWithCategory:category];
     score.value = MAX(0, ((GKScore *)[GorillasScores objectForKey:category]).value + scoreDelta);
     [GorillasScores setObject:score forKey:category];
 

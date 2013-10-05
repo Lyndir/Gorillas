@@ -34,26 +34,17 @@
 
 static NSString *const GORILLAS_PLUS = @"com.lyndir.lhunath.Gorillas.plus";
 
-@interface GorillasAppDelegate : PearlCocos2DAppDelegate {
-    
-@private
-    GameLayer                                                       *_gameLayer;
-    MainMenuLayer                                                   *_mainMenuLayer;
-    BuyPlusLayer                                                    *_buyPlusLayer;
-    ConfigurationSectionLayer                                       *_configLayer;
-    GameConfigurationLayer                                          *_gameConfigLayer;
-    AVConfigurationLayer                                            *_avConfigLayer;
-    NetController                                                   *_netController;
-}
+@interface GorillasAppDelegate : PearlCocos2DAppDelegate
 
-@property (nonatomic, readonly, retain) GameLayer                   *gameLayer;
-@property (nonatomic, readonly, retain) MainMenuLayer               *mainMenuLayer;
-@property (nonatomic, readonly, retain) ConfigurationSectionLayer   *configLayer;
-@property (nonatomic, readonly, retain) GameConfigurationLayer      *gameConfigLayer;
-@property (nonatomic, readonly, retain) AVConfigurationLayer        *avConfigLayer;
-@property (nonatomic, readonly, retain) GHUDLayer                   *hudLayer;
-@property (nonatomic, readonly, retain) NetController               *netController;
-@property (nonatomic, readonly, retain) NSDictionary *products;
+@property (nonatomic, readonly, strong) GameLayer                   *gameLayer;
+@property (nonatomic, readonly, strong) MainMenuLayer               *mainMenuLayer;
+@property (nonatomic, readonly, strong) BuyPlusLayer               *buyPlusLayer;
+@property (nonatomic, readonly, strong) ConfigurationSectionLayer   *configLayer;
+@property (nonatomic, readonly, strong) GameConfigurationLayer      *gameConfigLayer;
+@property (nonatomic, readonly, strong) AVConfigurationLayer        *avConfigLayer;
+@property (nonatomic, readonly, strong) GHUDLayer                   *hudLayer;
+@property (nonatomic, readonly, strong) NetController               *netController;
+@property (nonatomic, readonly, strong) NSDictionary *products;
 @property (nonatomic) BOOL plusAvailable;
 
 -(void) showMainMenu;

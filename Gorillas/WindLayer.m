@@ -32,9 +32,14 @@
 
 @end
 
-@implementation WindLayer
+@implementation WindLayer {
 
-@synthesize wind;
+@private
+    ccTime incrementDuration;
+
+    NSMutableArray *systems, *affectAngles;
+    CCSprite *head, *body, *tail;
+}
 
 
 - (id) init {
@@ -74,7 +79,7 @@
 
 -(void) reset {
 
-    wind = (PearlGameRandom() % 100) / 100.0f - 0.5f;
+    _wind = (PearlGameRandom() % 100) / 100.0f - 0.5f;
 
     [self updateSystems];
 }
@@ -83,20 +88,20 @@
 -(void) updateSystems {
     
     float windRange = (3.0f * [[GorillasConfig get].windModifier floatValue]);
-    head.position   = ccp(wind * windRange, 0);
+    head.position   = ccp( _wind * windRange, 0);
     body.position   = ccp(0, 0);
-    tail.position   = ccp(-wind * windRange, 0);
-    body.scaleX     = wind * windRange * 2 / body.contentSize.width;
-    head.rotation   = wind < 0? 180: 0;
+    tail.position   = ccp(-_wind * windRange, 0);
+    body.scaleX     = _wind * windRange * 2 / body.contentSize.width;
+    head.rotation   = _wind < 0? 180: 0;
     
     @synchronized(self) {
         for(NSUInteger i = 0; i < [systems count]; ++i) {
             CCParticleSystem *system = [systems objectAtIndex:i];
             
             if([[affectAngles objectAtIndex:i] boolValue])
-                [system setAngle:270 + 45 * wind];
+                [system setAngle:270 + 45 * _wind];
             
-            [system setGravity:ccp(wind * 100 / [system life], [system gravity].y)];
+            [system setGravity:ccp( _wind * 100 / [system life], [system gravity].y)];
         }
     }
 }
@@ -113,8 +118,8 @@
     }
     
     if(affectAngle)
-        [system setAngle:270 + 45 * wind];
-    [system setGravity:ccp(wind * 100 / [system life], [system gravity].y)];
+        [system setAngle:270 + 45 * _wind];
+    [system setGravity:ccp( _wind * 100 / [system life], [system gravity].y)];
 }
 
 
@@ -216,24 +221,18 @@
 
 -(void) dealloc {
     
-    [head release];
     head = nil;
     
-    [body release];
     body = nil;
     
-    [tail release];
     tail = nil;
 
     @synchronized(self) {
-        [systems release];
         systems = nil;
         
-        [affectAngles release];
         affectAngles = nil;
     }
     
-    [super dealloc];
 }
 
 

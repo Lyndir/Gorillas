@@ -34,9 +34,6 @@
 
 @implementation BananaLayer
 
-@synthesize clearedGorilla = _clearedGorilla, banana = _banana, model = _model, type = _type;
-
-
 -(id) init {
     
     if(!(self = [super init]))
@@ -127,12 +124,6 @@
     return [NSString stringWithFormat:@"%@-%@.png", modelName, typeName];
 }
 
--(void) dealloc {
-    
-    self.banana = nil;
-    
-    [super dealloc];
-}
 
 
 @end

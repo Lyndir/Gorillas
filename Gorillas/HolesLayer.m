@@ -29,14 +29,21 @@
 @property(nonatomic) BOOL dirty;
 @end
 
-@implementation HolesLayer { GLuint holeVertexObject; }
+@implementation HolesLayer {
+    CCTexture2D *texture;
+    NSUInteger holeCount;
+    glPoint *holes;
+
+    GLuint holeVertexBuffer;
+    GLuint holeVertexObject;
+}
 
 -(id) init {
     
     if(!(self = [super init]))
         return self;
     
-    texture     = [[[CCTextureCache sharedTextureCache] addImage: @"hole.png"] retain];
+    texture     = [[CCTextureCache sharedTextureCache] addImage: @"hole.png"];
     holes       = calloc( sizeof(glPoint), 0 );
     holeCount   = 0;
     
@@ -127,7 +134,6 @@
     glDeleteBuffers(1, &holeVertexBuffer);
     CHECK_GL_ERROR_DEBUG();
     
-    [super dealloc];
 }
 
 

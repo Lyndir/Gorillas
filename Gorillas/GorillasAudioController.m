@@ -24,8 +24,11 @@
 
 #import "GorillasAudioController.h"
 
-@implementation GorillasAudioController
-
+@implementation GorillasAudioController {
+    AVAudioPlayer *audioPlayer;
+    NSString *nextTrack;
+    NSMutableDictionary *effects;
+}
 
 -(void) clickEffect {
     
@@ -78,7 +81,6 @@
         NSURL *nextUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:track ofType:nil]];
         
         if(audioPlayer != nil && ![audioPlayer.url isEqual:nextUrl]) {
-            [audioPlayer release];
             audioPlayer = nil;
         }
         
@@ -107,19 +109,6 @@
     [GorillasAudioController playEffect:effect];
 }
 
-
--(void) dealloc {
-    
-    [audioPlayer release];
-    audioPlayer = nil;
-    
-    [nextTrack release];
-    nextTrack = nil;
-    
-    [super dealloc];
-}
-
-
 +(void) vibrate {
     
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
@@ -136,7 +125,7 @@
     
     // Get the URL to the sound file to play
     CFBundleRef mainBundle = CFBundleGetMainBundle();
-    CFURLRef soundFileURLRef = CFBundleCopyResourceURL(mainBundle, (CFStringRef) bundleRef, NULL, NULL);
+    CFURLRef soundFileURLRef = CFBundleCopyResourceURL(mainBundle, (__bridge CFStringRef) bundleRef, NULL, NULL);
     
     // Create a system sound object representing the sound file
     SystemSoundID soundFileObject;

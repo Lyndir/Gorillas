@@ -30,11 +30,6 @@ static NSDictionary *themes = nil;
 
 @implementation CityTheme
 
-@synthesize varFloors, fixedFloors, buildingAmount, buildingColors;
-@synthesize windowAmount, windowColorOn, windowColorOff;
-@synthesize skyColor, starColor, starAmount;
-@synthesize windModifier, gravity;
-
 
 +(CityTheme *) themeWithVarFloors:(NSUInteger) nVarFloors
                       fixedFloors:(NSUInteger) nFixedFloors
@@ -52,7 +47,7 @@ static NSDictionary *themes = nil;
                      windModifier:(float) nWindModifier
                           gravity:(NSUInteger) nGravity {
     
-    return [[[CityTheme alloc] initWithVarFloors:(NSUInteger)nVarFloors
+    return [[CityTheme alloc] initWithVarFloors:(NSUInteger)nVarFloors
                                      fixedFloors:nFixedFloors
                                   buildingAmount:nBuildingAmount
                                   buildingColors:nBuildingColors
@@ -63,7 +58,7 @@ static NSDictionary *themes = nil;
                                        starColor:nStarColor
                                       starAmount:nStarAmount
                                     windModifier:nWindModifier
-                                         gravity:nGravity] autorelease];
+                                         gravity:nGravity];
 }
 
 -(id) initWithVarFloors:(NSUInteger) nVarFloors
@@ -85,21 +80,21 @@ static NSDictionary *themes = nil;
     if(!(self = [super init]))
         return self;
     
-    varFloors       = nVarFloors;
-    fixedFloors     = nFixedFloors;
-    buildingAmount  = nBuildingAmount;
-    buildingColors  = [nBuildingColors retain];
+    _varFloors       = nVarFloors;
+    _fixedFloors     = nFixedFloors;
+    _buildingAmount  = nBuildingAmount;
+    _buildingColors  = nBuildingColors;
     
-    windowAmount    = nWindowAmount;
-    windowColorOn   = nWindowColorOn;
-    windowColorOff  = nWindowColorOff;
+    _windowAmount    = nWindowAmount;
+    _windowColorOn   = nWindowColorOn;
+    _windowColorOff  = nWindowColorOff;
     
-    skyColor        = nSkyColor;
-    starColor       = nStarColor;
-    starAmount      = nStarAmount;
+    _skyColor        = nSkyColor;
+    _starColor       = nStarColor;
+    _starAmount      = nStarAmount;
     
-    windModifier    = nWindModifier;
-    gravity         = nGravity;
+    _windModifier    = nWindModifier;
+    _gravity         = nGravity;
     
     return self;
 }
@@ -109,21 +104,21 @@ static NSDictionary *themes = nil;
     
     GorillasConfig *config = [GorillasConfig get];
     
-    config.varFloors = [NSNumber numberWithUnsignedInt:varFloors];
-    config.fixedFloors = [NSNumber numberWithUnsignedInt:fixedFloors];
-    config.buildingAmount = [NSNumber numberWithUnsignedInt:buildingAmount];
-    config.buildingColors = buildingColors;
+    config.varFloors = [NSNumber numberWithUnsignedInt:self.varFloors];
+    config.fixedFloors = [NSNumber numberWithUnsignedInt:self.fixedFloors];
+    config.buildingAmount = [NSNumber numberWithUnsignedInt:self.buildingAmount];
+    config.buildingColors = self.buildingColors;
     
-    config.windowAmount = [NSNumber numberWithUnsignedInt:windowAmount];
-    config.windowColorOn = [NSNumber numberWithUnsignedLong:windowColorOn];
-    config.windowColorOff = [NSNumber numberWithUnsignedLong:windowColorOff];
+    config.windowAmount = [NSNumber numberWithUnsignedInt:self.windowAmount];
+    config.windowColorOn = [NSNumber numberWithUnsignedLong:self.windowColorOn];
+    config.windowColorOff = [NSNumber numberWithUnsignedLong:self.windowColorOff];
     
-    config.skyColor = [NSNumber numberWithUnsignedLong:skyColor];
-    config.starColor = [NSNumber numberWithUnsignedLong:starColor];
-    config.starAmount = [NSNumber numberWithUnsignedInt:starAmount];
+    config.skyColor = [NSNumber numberWithUnsignedLong:self.skyColor];
+    config.starColor = [NSNumber numberWithUnsignedLong:self.starColor];
+    config.starAmount = [NSNumber numberWithUnsignedInt:self.starAmount];
     
-    config.windModifier = [NSNumber numberWithFloat:windModifier];
-    config.gravity = [NSNumber numberWithUnsignedInt:gravity];
+    config.windModifier = [NSNumber numberWithFloat:self.windModifier];
+    config.gravity = [NSNumber numberWithUnsignedInt:self.gravity];
     
     dbg(@"CityTheme applied");
     [[GorillasAppDelegate get].gameLayer reset];
@@ -252,19 +247,8 @@ static NSDictionary *themes = nil;
 
 + (void)forgetThemes {
     
-    [themes release];
     themes = nil;
 }
-
-
--(void) dealloc {
-    
-    [buildingColors release];
-    buildingColors = nil;
-    
-    [super dealloc];
-}
-
 
 +(NSString *) defaultThemeName {
     

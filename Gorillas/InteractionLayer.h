@@ -24,14 +24,7 @@
 
 #import "PearlCCBarSprite.h"
 
-@interface InteractionLayer : CCLayer {
-    
-@private
-    CCLabelTTF          *angleLabel, *strengthLabel, *infoLabel;
-    PearlCCBarSprite    *aimSprite;
-    
-    CGPoint             aim;
-}
+@interface InteractionLayer : CCLayer
 
 @property (nonatomic, readwrite) CGPoint aim;
 

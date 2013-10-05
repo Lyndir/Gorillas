@@ -26,12 +26,13 @@
 #import "GorillasAppDelegate.h"
 
 
-@implementation ShadeTo
-
+@implementation ShadeTo {
+    ccColor4B startCol, endCol;
+}
 
 +(ShadeTo *) actionWithDuration:(ccTime)_duration color:(ccColor4B)_color {
     
-    return [[[ShadeTo alloc] initWithDuration:_duration color:_color] autorelease];
+    return [[ShadeTo alloc] initWithDuration:_duration color:_color];
 }
 
 
@@ -69,10 +70,6 @@
 }
 
 
--(void) dealloc {
-    
-    [super dealloc];
-}
 
 
 @end

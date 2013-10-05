@@ -26,21 +26,12 @@
 #import "GorillaLayer.h"
 
 
-@interface BananaLayer : CCLayer {
-
-@private
-    BOOL                                                _clearedGorilla;
-    
-    GorillasProjectileModel                             _model;
-    GorillasPlayerType                                  _type;
-
-    CCSprite                                            *_banana;
-}
+@interface BananaLayer : CCLayer
 
 @property (nonatomic, assign) BOOL                      clearedGorilla;
 @property (nonatomic, assign) GorillasProjectileModel   model;
 @property (nonatomic, assign) GorillasPlayerType        type;
-@property (nonatomic, retain) CCSprite                  *banana;
+@property (nonatomic, strong) CCSprite                  *banana;
 
 -(CCSprite *)bananaForThrowFrom:(GorillaLayer *)gorilla;
 -(BOOL) throwing;

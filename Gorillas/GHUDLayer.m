@@ -28,21 +28,15 @@
 
 @interface GHUDLayer ()
 
-@property (nonatomic, readwrite, retain) CCLabelAtlas   *skillSprite;
-@property (nonatomic, readwrite, retain) CCLabelAtlas   *skillCount;
-@property (nonatomic, readwrite, retain) CCLayer        *livesLayer;
-@property (nonatomic, readwrite, retain) CCSprite       *infiniteLives;
+@property (nonatomic, readwrite, strong) CCLabelAtlas   *skillSprite;
+@property (nonatomic, readwrite, strong) CCLabelAtlas   *skillCount;
+@property (nonatomic, readwrite, strong) CCLayer        *livesLayer;
+@property (nonatomic, readwrite, strong) CCSprite       *infiniteLives;
 
 @end
 
 
 @implementation GHUDLayer
-
-@synthesize skillSprite     = _skillSprite;
-@synthesize skillCount      = _skillCount;
-@synthesize livesLayer      = _livesLayer;
-@synthesize infiniteLives   = _infiniteLives;
-
 
 -(id) init {
     
@@ -133,26 +127,12 @@
     return [[GorillasConfig get] scoreForMode:[GorillasAppDelegate get].gameLayer.mode];
 }
 
-- (float)throwSkill {
-    
-    return _throwSkill;
-}
-
 - (void)setThrowSkill:(float)throwSkill {
     
     _throwSkill = throwSkill;
     [self reset];
 }
 
--(void) dealloc {
-    
-    self.skillSprite    = nil;
-    self.skillCount     = nil;
-    self.livesLayer     = nil;
-    self.infiniteLives  = nil;
-    
-    [super dealloc];
-}
 
 
 @end

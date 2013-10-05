@@ -25,15 +25,7 @@
 #import "PearlResettable.h"
 
 
-@interface WindLayer : CCLayer <CCRGBAProtocol, PearlResettable> {
-
-@private
-    float           wind;
-    ccTime          incrementDuration;
-    
-    NSMutableArray  *systems, *affectAngles;
-    CCSprite          *head, *body, *tail;
-}
+@interface WindLayer : CCLayer <CCRGBAProtocol, PearlResettable>
 
 -(void) registerSystem:(CCParticleSystem *)system affectAngle:(BOOL)affectAngle;
 -(void) unregisterSystem:(CCParticleSystem *)system;

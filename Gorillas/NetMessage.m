@@ -27,11 +27,10 @@
 @end
 
 @implementation NetMessageElectHost
-@synthesize vote = _vote, playerVotes = _playerVotes, host = _host, hostID = _hostID, orderedPlayerIDs = _orderedPlayerIDs;
 
 + (NetMessageElectHost *)electHostWithPlayerIDs:(NSArray *)aPlayerIDs {
     
-    return [[[self alloc] initWithPlayerIDs:aPlayerIDs] autorelease];
+    return [[self alloc] initWithPlayerIDs:aPlayerIDs];
 }
 
 - (id)initWithPlayerIDs:(NSArray *)aPlayerIDs {
@@ -107,15 +106,6 @@
     return [self.hostID isEqualToString:[GKLocalPlayer localPlayer].playerID];
 }
 
-- (void)dealloc {
-    
-    self.playerVotes        = nil;
-    self.host               = nil;
-    self.hostID             = nil;
-    self.orderedPlayerIDs   = nil;
-    
-    [super dealloc];
-}
 
 @end
 
@@ -123,7 +113,7 @@
 
 + (NetMessageReady *)ready {
     
-    return [[[self alloc] init] autorelease];
+    return [[self alloc] init];
 }
 
 @end
@@ -132,7 +122,7 @@
 
 + (NetMessageBecameReady *)ready {
     
-    return [[[self alloc] init] autorelease];
+    return [[self alloc] init];
 }
 
 @end
@@ -141,17 +131,16 @@
 
 + (NetMessageUpdateReady *)ready {
     
-    return [[[self alloc] init] autorelease];
+    return [[self alloc] init];
 }
 
 @end
 
 @implementation NetMessageThrow
-@synthesize normalizedVelocity = _normalizedVelocity;
 
 + (NetMessageThrow *)throwWithNormalizedVelocity:(CGPoint)aNormalizedVelocity {
     
-    return [[[self alloc] initWithNormalizedVelocity:aNormalizedVelocity] autorelease];
+    return [[self alloc] initWithNormalizedVelocity:aNormalizedVelocity];
 }
 
 - (id)initWithNormalizedVelocity:(CGPoint)aNormalizedVelocity {
@@ -181,10 +170,6 @@
     [aCoder encodeFloat:self.normalizedVelocity.y forKey:@"normalizedVelocity.y"];
 }
 
-- (void)dealloc {
-    
-    [super dealloc];
-}
 
 @end
 

@@ -37,9 +37,32 @@
 @end
 
 
-@implementation CityLayer
+@implementation CityLayer {
 
-@synthesize bananaLayer, hitGorilla;
+@private
+    CCLabelTTF *msgLabel;
+
+    NSArray /*BuildingsLayer*/ *buildings;
+    NSUInteger buildingsCount;
+
+    HolesLayer *holes;
+    ExplosionsLayer *explosions;
+    CCLayer *nonParallaxLayer;
+
+    CGPoint *throwHistory;
+    NSMutableArray *throwHints;
+
+#if DEBUG_COLLISION
+    NSUInteger          dbgTraceStep;
+    NSUInteger          dbgPathMaxInd;
+    NSUInteger          dbgPathCurInd;
+    CGPoint             *dbgPath;
+    NSUInteger          dbgAIMaxInd;
+    NSUInteger          dbgAICurInd;
+    GorillaLayer        **dbgAI;
+    CGPoint             *dbgAIVect;
+#endif
+}
 
 
 -(id) init {
@@ -93,18 +116,14 @@
     
     if (holes) {
         [holes removeFromParentAndCleanup:YES];
-        [holes release];
     }
     if (explosions) {
         [explosions removeFromParentAndCleanup:YES];
-        [explosions release];
     }
     if (buildings) {
-        for (NSUInteger b = 0; b < buildingsCount; ++b) {
-            [buildings[b] removeFromParentAndCleanup:YES];
-            [buildings[b] release];
-        }
-        free(buildings);
+        [buildings enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [obj removeFromParentAndCleanup:YES];
+        }];
     }
     
     // Construct city.
@@ -112,17 +131,21 @@
     [nonParallaxLayer addChild:holes z:-1];
     explosions = [[ExplosionsLayer alloc] init];
     [nonParallaxLayer addChild:explosions z:4];
-    buildings = calloc(buildingsCount, sizeof(BuildingsLayer*));
-    
+
+    NSMutableArray *buildingsBuilder = [NSMutableArray arrayWithCapacity:buildingsCount];
     for (NSInteger b = (signed)buildingsCount - 1; b >= 0; --b) {
         float lightRatio = MAX(-1, -((float)b / buildingsCount) * 1.5f);
+
+        BuildingsLayer *building = [[BuildingsLayer alloc] initWithWidthRatio:(5 - b) / 5.0f heightRatio:1 + (b / 2.0f)
+                                                                   lightRatio:lightRatio];
+        [buildingsBuilder addObject:building];
         
-        buildings[b] = [[BuildingsLayer alloc] initWithWidthRatio:(5 - b) / 5.0f heightRatio:1 + (b / 2.0f) lightRatio:lightRatio];
         if (b)
-            [self addChild:buildings[b] z:-2 - (NSInteger)b parallaxRatio:ccp((5 - b) / 5.0f, (10 - b) / 10.0f) positionOffset:CGPointZero];
+            [self addChild:building z:-2 - (NSInteger)b parallaxRatio:ccp((5 - b) / 5.0f, (10 - b) / 10.0f) positionOffset:CGPointZero];
         else
-            [nonParallaxLayer addChild:buildings[b] z:1];
+            [nonParallaxLayer addChild:building z:1];
     }
+    buildings = [buildingsBuilder copy];
 }
 
 
@@ -346,7 +369,6 @@
         
         // Pick a random target from the enemies.
         GorillaLayer *target = [enemies objectAtIndex:(unsigned)PearlGameRandom() % [enemies count]];
-        [enemies release];
         
         // Aim at the target.
         CGPoint r0 = [GorillasAppDelegate get].gameLayer.activeGorilla.position;
@@ -447,13 +469,12 @@
     for(GorillaLayer *gorilla in [GorillasAppDelegate get].gameLayer.gorillas)
         if([gorilla hitsGorilla:pos]) {
             
-            if(gorilla == [GorillasAppDelegate get].gameLayer.activeGorilla && !bananaLayer.clearedGorilla)
+            if(gorilla == [GorillasAppDelegate get].gameLayer.activeGorilla && !_bananaLayer.clearedGorilla)
                 // Disregard this hit on active gorilla because the banana didn't clear him yet.
                 continue;
             
             // A gorilla was hit.
-            [hitGorilla release];
-            hitGorilla = [gorilla retain];
+            _hitGorilla = gorilla;
             
             return YES;
         }
@@ -462,7 +483,7 @@
             // No hit.
             if(gorilla == [GorillasAppDelegate get].gameLayer.activeGorilla)
                 // Active gorilla was not hit -> banana cleared him.
-                bananaLayer.clearedGorilla = YES;
+                _bananaLayer.clearedGorilla = YES;
     
     // No hit.
     return NO;
@@ -471,7 +492,7 @@
 
 -(BOOL) hitsBuilding:(CGPoint)pos {
     
-    if ([buildings[0] hitsBuilding:pos])
+    if ([[buildings firstObject] hitsBuilding:pos])
         // A building was hit, but if it's in an explosion crater we
         // need to let the banana continue flying.
         return ![holes isHoleAtWorld:[self convertToWorldSpace:pos]];
@@ -509,8 +530,9 @@
     // Position our gorillas.
     // Find indexA: The left boundary of allowed gorilla indexes.
     NSUInteger indexA = 0;
-    for(NSUInteger b = 0; b < buildings[0].buildingCount; ++b) {
-        CGPoint fieldPoint = [buildings[0] convertToWorldSpace:CGPointMake(buildings[0].buildings[b].x, 0)];
+    BuildingsLayer *firstBuildings = [buildings firstObject];
+    for(NSUInteger b = 0; b < firstBuildings.buildingCount; ++b) {
+        CGPoint fieldPoint = [firstBuildings convertToWorldSpace:CGPointMake( firstBuildings.buildings[b].x, 0)];
         fieldPoint = [self convertToNodeSpace:fieldPoint];
         
         if(fieldPoint.x >= 0) {
@@ -555,9 +577,8 @@
             [gorillasQueue removeLastObject];
         }
     }
-    [gorillasQueue release];
     for(NSUInteger i = 0; i < [gorillas count]; ++i) {
-        Building building = buildings[0].buildings[[(NSNumber *) [gorillaIndexes objectAtIndex:i] unsignedIntegerValue]];
+        Building building = firstBuildings.buildings[[(NSNumber *) [gorillaIndexes objectAtIndex:i] unsignedIntegerValue]];
         GorillaLayer *gorilla = [gorillas objectAtIndex:i];
         CGSize gorillaSize = CGSizeMake(gorilla.contentSize.width * gorilla.scale, gorilla.contentSize.height * gorilla.scale);
         
@@ -565,14 +586,13 @@
         [gorilla runAction:[CCFadeIn actionWithDuration:1]];
         [nonParallaxLayer addChild:gorilla z:3];
     }
-    [gorillaIndexes release];
     // Add a banana to the scene.
-    if(bananaLayer) {
+    if(_bananaLayer) {
         err(@"Tried to start a game while a(n old?) banana still existed.");
         return;
     }
-    bananaLayer = [[BananaLayer alloc] init];
-    [nonParallaxLayer addChild:bananaLayer z:2];
+    _bananaLayer = [[BananaLayer alloc] init];
+    [nonParallaxLayer addChild:_bananaLayer z:2];
     
     [[GorillasAppDelegate get].gameLayer began];
 }
@@ -580,13 +600,11 @@
 
 -(void) endGame {
     
-    [hitGorilla release];
-    hitGorilla = nil;
+    _hitGorilla = nil;
     
-    if(bananaLayer) {
-        [bananaLayer removeFromParentAndCleanup:YES];
-        [bananaLayer release];
-        bananaLayer = nil;
+    if(_bananaLayer) {
+        [_bananaLayer removeFromParentAndCleanup:YES];
+        _bananaLayer = nil;
     }
     
     NSUInteger runningActions = 0;
@@ -596,7 +614,7 @@
     
     if(runningActions && ![GorillasAppDelegate get].gameLayer.configuring) {
         [[GorillasAppDelegate get].gameLayer.panningLayer scrollToCenter:[GorillasAppDelegate get].gameLayer.activeGorilla.position
-                                                              horizontal:YES];
+                                                               horizontal:YES];
         [self runAction:[CCSequence actions:
                          [CCDelayTime actionWithDuration:5.2f],
                          [CCCallFunc actionWithTarget:self selector:@selector(endGameCallback)],
@@ -628,12 +646,13 @@
 
 
 -(CGRect) fieldInSpaceOf:(CCNode *)node {
+
+    BuildingsLayer *firstBuildings = [buildings firstObject];
+    Building firstBuilding = firstBuildings.buildings[0];
+    Building lastBuilding = firstBuildings.buildings[firstBuildings.buildingCount - 1];
     
-    Building firstBuilding = buildings[0].buildings[0];
-    Building lastBuilding = buildings[0].buildings[buildings[0].buildingCount - 1];
-    
-    CGPoint bottomLeft = [buildings[0] convertToWorldSpace:CGPointMake(firstBuilding.x, 0)];
-    CGPoint topRight = [buildings[0] convertToWorldSpace:CGPointMake(lastBuilding.x + lastBuilding.size.width, 0)];
+    CGPoint bottomLeft = [firstBuildings convertToWorldSpace:CGPointMake(firstBuilding.x, 0)];
+    CGPoint topRight = [firstBuildings convertToWorldSpace:CGPointMake(lastBuilding.x + lastBuilding.size.width, 0)];
     topRight.y = [CCDirector sharedDirector].winSize.height * 2.0f;
     
     if (node != nil) {
@@ -644,39 +663,13 @@
     return CGRectMake(bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
 }
 
-- (BuildingsLayer *)buildingLayer {
+- (BuildingsLayer *)buildingsLayer {
     
-    return buildings[0];
+    return [buildings firstObject];
 }
 
 
 -(void) dealloc {
-    
-    [msgLabel release];
-    msgLabel = nil;
-    
-    if (buildings) {
-        for (NSUInteger b = 0; b < 4; ++b)
-            [buildings[b] release];
-        free(buildings);
-        buildings = nil;
-    }
-    
-    [holes release];
-    holes = nil;
-    
-    [explosions release];
-    explosions = nil;
-    
-    [bananaLayer release];
-    bananaLayer = nil;
-    
-    [hitGorilla release];
-    hitGorilla = nil;
-    
-    [throwHints release];
-    throwHints = nil;
-    
     free(throwHistory);
     throwHistory = nil;
     
@@ -685,8 +678,6 @@
     free(dbgAI);
     free(dbgAIVect);
 #endif
-    
-    [super dealloc];
 }
 
 

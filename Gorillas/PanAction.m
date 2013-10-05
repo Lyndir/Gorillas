@@ -26,12 +26,17 @@
 #import "PearlResettable.h"
 
 
-@implementation PanAction
+@implementation PanAction {
 
+@private
+    NSMutableArray *subNodes;
+    int padding;
+    BOOL cancelled;
+}
 
 +(PanAction *) actionWithSubNodes: (NSMutableArray *)nSubNodes duration: (ccTime)nDuration padding: (int) nPadding {
 
-    return [[[PanAction alloc] initWithSubNodes:nSubNodes duration:nDuration padding:nPadding] autorelease];
+    return [[PanAction alloc] initWithSubNodes:nSubNodes duration:nDuration padding:nPadding];
 }
 
 
@@ -41,7 +46,7 @@
     if(!(self = [super initWithDuration:nDuration position:ccp(-([firstNode contentSize].width + nPadding), 0)]))
         return self;
     
-    subNodes = [nSubNodes retain];
+    subNodes = nSubNodes;
     padding = nPadding;
     cancelled = NO;
     
@@ -78,15 +83,5 @@
     
     cancelled = YES;
 }
-
-
--(void) dealloc {
-    
-    [subNodes release];
-    subNodes = nil;
-    
-    [super dealloc];
-}
-
 
 @end

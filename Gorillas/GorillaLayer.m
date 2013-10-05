@@ -25,16 +25,14 @@
 #import "GorillaLayer.h"
 #import "GorillasAppDelegate.h"
 #import "ShadeTo.h"
-#import "PearlCCRemove.h"
 
 
 @interface GorillaLayer ()
 
 @property (nonatomic, readwrite, copy) NSString                 *name;
-@property (nonatomic, readwrite, assign) NSUInteger             teamIndex;
 @property (nonatomic, readwrite, assign) NSUInteger             globalIndex;
 
-@property (nonatomic, readwrite, retain) CCSprite               *bobber;
+@property (nonatomic, readwrite, strong) CCSprite               *bobber;
 
 @property (nonatomic, readwrite, copy) NSString                 *playerID;
 @property (nonatomic, readwrite, assign) int                    initialLives;
@@ -49,26 +47,20 @@
 
 @end
 
-static NSUInteger nextTeamIndex, nextGlobalIndex;
+static NSUInteger nextGlobalIndex;
 
-@implementation GorillaLayer
-
-@synthesize name = _name, teamIndex = _teamIndex, globalIndex = _globalIndex;
-@synthesize playerID = _playerID, player = _player, connectionState = _connectionState;
-@synthesize initialLives = _initialLives, lives = _lives, active = _active, ready = _ready, turns = _turns, zoom = _zoom;
-@synthesize bobber = _bobber, model = _model, type = _type;
-
+@implementation GorillaLayer {
+    ccColor4B *_healthColors;
+}
 
 +(void) prepareCreation {
-    
-    nextTeamIndex      = 0;
     nextGlobalIndex    = 0;
 }
 
 
 + (GorillaLayer *)gorillaWithType:(GorillasPlayerType)aType playerID:(NSString *)aPlayerId {
     
-    return [[[self alloc] initWithType:aType playerID:aPlayerId] autorelease];
+    return [[self alloc] initWithType:aType playerID:aPlayerId];
 }
 
 - (id)initWithType:(GorillasPlayerType)aType playerID:(NSString *)aPlayerId {
@@ -76,9 +68,8 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
     if(!(self = [super init]))
         return self;
     
-    self.model              = [[GorillasConfig get].playerModel unsignedIntValue];
+    self.model              = (GorillasPlayerModel)[[GorillasConfig get].playerModel unsignedIntValue];
     self.type               = aType;
-    self.teamIndex          = nextTeamIndex++;
     self.globalIndex        = nextGlobalIndex++;
     self.zoom               = 1;
     self.texture            = [[CCTextureCache sharedTextureCache] addImage:[self modelFileWithArmsUpLeft:NO right:NO]];
@@ -482,15 +473,9 @@ static NSUInteger nextTeamIndex, nextGlobalIndex;
 
 
 -(void) dealloc {
-    
-    self.name       = nil;
-    self.playerID   = nil;
-    self.bobber     = nil;
-    
     free(_healthColors);
     _healthColors = nil;
     
-    [super dealloc];
 }
 
 

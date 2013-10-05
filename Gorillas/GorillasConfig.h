@@ -29,60 +29,53 @@
 
 @class GorillaLayer;
 
-@interface GorillasConfig : PearlConfig {
+@interface GorillasConfig : PearlConfig
 
-@private
-    NSArray                                             *updateTriggers;
-    
-    NSArray                                             *gameConfigurations;
-    NSArray                                             *offMessages, *hitMessages;
-}
+@property (nonatomic, readwrite, strong) NSNumber       *plusEnabled;
+@property (nonatomic, readwrite, strong) NSString       *cityTheme;
 
-@property (nonatomic, readwrite, retain) NSNumber       *plusEnabled;
-@property (nonatomic, readwrite, retain) NSString       *cityTheme;
+@property (nonatomic, readwrite, strong) NSNumber       *varFloors;
+@property (nonatomic, readwrite, strong) NSNumber       *fixedFloors;
+@property (nonatomic, readwrite, strong) NSNumber       *buildingAmount;
+@property (nonatomic, readwrite, strong) NSNumber       *buildingSpeed;
+@property (nonatomic, readwrite, strong) NSArray        *buildingColors;
 
-@property (nonatomic, readwrite, retain) NSNumber       *varFloors;
-@property (nonatomic, readwrite, retain) NSNumber       *fixedFloors;
-@property (nonatomic, readwrite, retain) NSNumber       *buildingAmount;
-@property (nonatomic, readwrite, retain) NSNumber       *buildingSpeed;
-@property (nonatomic, readwrite, retain) NSArray        *buildingColors;
+@property (nonatomic, readwrite, strong) NSNumber       *windowAmount;
+@property (nonatomic, readwrite, strong) NSNumber       *windowColorOn;
+@property (nonatomic, readwrite, strong) NSNumber       *windowColorOff;
 
-@property (nonatomic, readwrite, retain) NSNumber       *windowAmount;
-@property (nonatomic, readwrite, retain) NSNumber       *windowColorOn;
-@property (nonatomic, readwrite, retain) NSNumber       *windowColorOff;
+@property (nonatomic, readwrite, strong) NSNumber       *skyColor;
+@property (nonatomic, readwrite, strong) NSNumber       *starColor;
+@property (nonatomic, readwrite, strong) NSNumber       *starSpeed;
+@property (nonatomic, readwrite, strong) NSNumber       *starAmount;
 
-@property (nonatomic, readwrite, retain) NSNumber       *skyColor;
-@property (nonatomic, readwrite, retain) NSNumber       *starColor;
-@property (nonatomic, readwrite, retain) NSNumber       *starSpeed;
-@property (nonatomic, readwrite, retain) NSNumber       *starAmount;
+@property (nonatomic, readwrite, strong) NSNumber       *lives;
+@property (nonatomic, readwrite, strong) NSNumber       *windModifier;
+@property (nonatomic, readwrite, strong) NSNumber       *gravity;
+@property (nonatomic, readwrite, strong) NSNumber       *minGravity;
+@property (nonatomic, readwrite, strong) NSNumber       *maxGravity;
 
-@property (nonatomic, readwrite, retain) NSNumber       *lives;
-@property (nonatomic, readwrite, retain) NSNumber       *windModifier;
-@property (nonatomic, readwrite, retain) NSNumber       *gravity;
-@property (nonatomic, readwrite, retain) NSNumber       *minGravity;
-@property (nonatomic, readwrite, retain) NSNumber       *maxGravity;
+@property (nonatomic, readwrite, strong) NSNumber       *gameScrollDuration;
 
-@property (nonatomic, readwrite, retain) NSNumber       *gameScrollDuration;
+@property (nonatomic, readwrite, strong) NSNumber       *level;
+@property (nonatomic, readwrite, strong) NSArray        *levelNames;
+@property (nonatomic, readwrite, strong) NSNumber       *levelProgress;
 
-@property (nonatomic, readwrite, retain) NSNumber       *level;
-@property (nonatomic, readwrite, retain) NSArray        *levelNames;
-@property (nonatomic, readwrite, retain) NSNumber       *levelProgress;
-
-@property (nonatomic, readonly, retain) NSArray         *gameConfigurations;
-@property (nonatomic, readwrite, retain) NSNumber       *activeGameConfigurationIndex;
-@property (nonatomic, readwrite, retain) NSNumber       *mode;
-@property (nonatomic, readwrite, retain) NSNumber       *playerModel;
-@property (nonatomic, readwrite, retain) NSData         *scores;
-@property (nonatomic, readwrite, retain) NSNumber       *skill;
-@property (nonatomic, readwrite, retain) NSNumber       *missScore;
-@property (nonatomic, readwrite, retain) NSNumber       *killScore;
-@property (nonatomic, readwrite, retain) NSNumber       *bonusOneShot;
-@property (nonatomic, readwrite, retain) NSNumber       *bonusSkill;
-@property (nonatomic, readwrite, retain) NSNumber       *deathScoreRatio;
+@property (nonatomic, readonly, strong) NSArray         *gameConfigurations;
+@property (nonatomic, readwrite, strong) NSNumber       *activeGameConfigurationIndex;
+@property (nonatomic, readwrite, strong) NSNumber       *mode;
+@property (nonatomic, readwrite, strong) NSNumber       *playerModel;
+@property (nonatomic, readwrite, strong) NSData         *scores;
+@property (nonatomic, readwrite, strong) NSNumber       *skill;
+@property (nonatomic, readwrite, strong) NSNumber       *missScore;
+@property (nonatomic, readwrite, strong) NSNumber       *killScore;
+@property (nonatomic, readwrite, strong) NSNumber       *bonusOneShot;
+@property (nonatomic, readwrite, strong) NSNumber       *bonusSkill;
+@property (nonatomic, readwrite, strong) NSNumber       *deathScoreRatio;
 @property (nonatomic, readonly) NSInteger               deathScore;
 
-@property (nonatomic, readwrite, retain) NSNumber       *replay;
-@property (nonatomic, readwrite, retain) NSNumber       *followThrow;
+@property (nonatomic, readwrite, strong) NSNumber       *replay;
+@property (nonatomic, readwrite, strong) NSNumber       *followThrow;
 
 -(ccColor4B)                                            buildingColor;
 

@@ -41,10 +41,14 @@ typedef enum {
 
 @end
 
-static CCParticleSystem **flameTypes = nil;
+static NSMutableArray /*CCParticleSystem*/ *flameTypes = nil;
 static float flameRadius;
 
-@implementation ExplosionsLayer
+@implementation ExplosionsLayer {
+    CGPoint *positionsPx;
+    NSMutableArray *explosions;
+    NSMutableArray *flames;
+}
 
 -(id) init {
 
@@ -91,7 +95,7 @@ static float flameRadius;
 
     if(flameTypes) {
         for (NSUInteger type = 0; type < flameVariantion * 2; ++type)
-            [(id)flameTypes[type] update:dt];
+            [flameTypes[type] update:dt];
     }
 }
 
@@ -136,7 +140,6 @@ static float flameRadius;
 
     [self addChild:explosion z:1];
     [explosions addObject:explosion];
-    [explosion release];
 }
 
 
@@ -212,16 +215,14 @@ static float flameRadius;
     
     if (flameTypes && flameRadius != radius) {
         [flames removeAllObjects];
-        for (NSUInteger type = 0; type < flameVariantion * 2; ++type) {
-            [[GorillasAppDelegate get].gameLayer.windLayer unregisterSystem:flameTypes[type]];
-            [flameTypes[type] release];
-        }
-        free(flameTypes);
-        flameTypes = nil;
+        for (CCParticleSystem *flameType in flameTypes)
+            [[GorillasAppDelegate get].gameLayer.windLayer unregisterSystem:flameType];
+        [flameTypes removeAllObjects];
     }
-    
-    if(!flameTypes) {
-        flameTypes  = calloc(2 * flameVariantion, sizeof(CCParticleSystem *));
+
+    if (!flameTypes)
+        flameTypes = [NSMutableArray arrayWithCapacity:flameVariantion * 2];
+    if(![flameTypes count]) {
         flameRadius = radius;
         
         for (NSUInteger type = 0; type < flameVariantion * 2; ++type) {
@@ -245,7 +246,7 @@ static float flameRadius;
             flame.emissionRate     *= 1.5f;
             
             [[GorillasAppDelegate get].gameLayer.windLayer registerSystem:flame affectAngle:NO];
-            flameTypes[type]        = flame;
+            [flameTypes addObject:flame];
         }
     }
     
@@ -284,18 +285,5 @@ static float flameRadius;
     lastEffect = chosenEffect;
     return explosionEffect[chosenEffect];
 }
-
-
--(void) dealloc {
-    
-    [explosions release];
-    explosions = nil;
-    
-    [flames release];
-    flames = nil;
-    
-    [super dealloc];
-}
-
 
 @end

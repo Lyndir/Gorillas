@@ -35,9 +35,10 @@
 @end
 
 
-@implementation InteractionLayer
-
-@synthesize aim;
+@implementation InteractionLayer {
+    CCLabelTTF *angleLabel, *strengthLabel, *infoLabel;
+    PearlCCBarSprite *aimSprite;
+}
 
 
 -(id) init {
@@ -104,7 +105,7 @@
         // Ignore when moving/clicking over/on HUD.
         return;
     
-    if(!CGPointEqualToPoint(aim, CGPointZero))
+    if(!CGPointEqualToPoint(_aim, CGPointZero))
         // Has already began.
         return;
     
@@ -151,7 +152,7 @@
     CGPoint p = [self convertTouchToNodeSpace:[[event allTouches] anyObject]];
 
     if([[[GorillasAppDelegate get] hudLayer] hitsHud:p]
-       || CGPointEqualToPoint(aim, CGPointZero)
+       || CGPointEqualToPoint( _aim, CGPointZero)
        || ![self mayThrow]) {
         // Cancel when: released over HUD, no aim vector, state doesn't allow throwing.
         self.aim = CGPointZero;
@@ -161,7 +162,7 @@
     GorillaLayer *activeGorilla = [GorillasAppDelegate get].gameLayer.activeGorilla;
     CGSize winSize = [CCDirector sharedDirector].winSize;
     CGPoint r0 = activeGorilla.position;
-    CGPoint v = ccpSub(aim, r0); // Velocity = Vector from origin to aim point.
+    CGPoint v = ccpSub( _aim, r0); // Velocity = Vector from origin to aim point.
     v = ccp(v.x / winSize.width, v.y / winSize.height); // Normalize velocity so it's resolution-independant.
     self.aim = CGPointZero;
 
@@ -175,18 +176,18 @@
 
 
 - (void)setAim:(CGPoint)anAim {
+
+    _aim = aimSprite.target  = anAim;
     
-    aim = aimSprite.target  = anAim;
-    
-    if (CGPointEqualToPoint(aim, CGPointZero)) {
+    if (CGPointEqualToPoint( _aim, CGPointZero)) {
         infoLabel.visible   = NO;
         return;
     }
     
     CGPoint gorillaPosition = aimSprite.position = [self convertToNodeSpace:
-                                                    [[GorillasAppDelegate get].gameLayer.cityLayer.buildingLayer convertToWorldSpace:
-                                                     [GorillasAppDelegate get].gameLayer.activeGorilla.position]];
-    CGPoint relAim = ccpSub(aim, gorillaPosition);
+                                                    [[GorillasAppDelegate get].gameLayer.cityLayer.buildingsLayer convertToWorldSpace:
+                                                            [GorillasAppDelegate get].gameLayer.activeGorilla.position]];
+    CGPoint relAim = ccpSub( _aim, gorillaPosition);
     CGPoint worldAim = [self convertToWorldSpace:relAim];
     
     [angleLabel setString:[NSString stringWithFormat:@"%0.0f", CC_RADIANS_TO_DEGREES(ccpToAngle(worldAim))]];

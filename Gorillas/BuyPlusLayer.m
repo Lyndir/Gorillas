@@ -33,7 +33,7 @@
 -(id) init {
 
     SKProduct *product = (SKProduct *)[[GorillasAppDelegate get].products objectForKey:GORILLAS_PLUS];
-    NSNumberFormatter *priceFormatter = [[NSNumberFormatter new] autorelease];
+    NSNumberFormatter *priceFormatter = [NSNumberFormatter new];
     [priceFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
     [priceFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     [priceFormatter setLocale:product.priceLocale];
@@ -73,10 +73,6 @@
 }
 
 
--(void) dealloc {
-    
-    [super dealloc];
-}
 
 
 @end

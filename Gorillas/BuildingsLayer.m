@@ -25,11 +25,18 @@
 #import "BuildingsLayer.h"
 #import "PearlGLUtils.h"
 
-@implementation BuildingsLayer { GLuint buildingsVertexObject[2];
+@implementation BuildingsLayer {
+
+@private
+    float buildingWidthRatio, buildingHeightRatio, lightRatio;
+
+    NSUInteger windowCount;
+
+    GLuint buildingsVertexBuffer, buildingsIndicesBuffer;
+    GLuint windowsIndicesBuffer, windowsVertexBuffer;
+    GLuint buildingsVertexObject[2];
     GLuint windowsVertexObject;
 }
-
-@synthesize buildings, buildingCount;
 
 
 - (id) init {
@@ -69,9 +76,9 @@
 
 -(BOOL) hitsBuilding:(CGPoint)pos {
     
-    for (NSUInteger b = 0; b < buildingCount; ++b)
-        if (pos.y >= 0 && pos.y <= buildings[b].size.height)
-            if (pos.x >= buildings[b].x && pos.x <= buildings[b].x + buildings[b].size.width)
+    for (NSUInteger b = 0; b < _buildingCount; ++b)
+        if (pos.y >= 0 && pos.y <= _buildings[b].size.height)
+            if (pos.x >= _buildings[b].x && pos.x <= _buildings[b].x + _buildings[b].size.width)
                 return YES;
     
     return NO;
@@ -103,37 +110,37 @@
     
     // Calculcate buildings.
     windowCount                     = 0;
-    buildingCount                   = [config.buildingAmount unsignedIntValue] * 3;
-    free(buildings);
-    if (!buildingCount)
+    _buildingCount = [config.buildingAmount unsignedIntValue] * 3;
+    free( _buildings );
+    if (!_buildingCount)
         return;
-    buildings = calloc(buildingCount, sizeof(Building));
-    for (NSUInteger b = 0; b < buildingCount; ++b) {
+    _buildings = calloc( _buildingCount, sizeof(Building));
+    for (NSUInteger b = 0; b < _buildingCount; ++b) {
         // Building's position.
-        buildings[b].x              = b * buildingWidth - buildingWidth * (buildingCount - [config.buildingAmount unsignedIntValue]) / 2;
+        _buildings[b].x              = b * buildingWidth - buildingWidth * (_buildingCount - [config.buildingAmount unsignedIntValue]) / 2;
         
         // Building's size.
         NSUInteger addFloors = 0;
         if (varFloors)
             addFloors               = (NSUInteger) (buildingHeightRatio * (((unsigned) PearlGameRandom()) % varFloors));
-        buildings[b].size           = CGSizeMake(buildingWidth - 1, (fixedFloors + addFloors) * floorHeightPt + wPadPt);
+        _buildings[b].size           = CGSizeMake(buildingWidth - 1, (fixedFloors + addFloors) * floorHeightPt + wPadPt);
         
         // Building's windows.
-        buildings[b].windowCount    = (fixedFloors + addFloors) * [config.windowAmount unsignedIntValue];
-        windowCount                 += buildings[b].windowCount;
+        _buildings[b].windowCount    = (fixedFloors + addFloors) * [config.windowAmount unsignedIntValue];
+        windowCount                 += _buildings[b].windowCount;
         
         // Building's color.
-        buildings[b].frontColor     = ccc4lighten(ccc4shade([config buildingColor], skyColor, -lightRatio), lightRatio / 3);
-        buildings[b].topColor       = ccc4lighten(buildings[b].frontColor, -buildings[b].size.height / (winSize.height * 1.5f));
-        buildings[b].backColor      = ccc4lighten(buildings[b].frontColor, -0.8f);
+        _buildings[b].frontColor     = ccc4lighten(ccc4shade([config buildingColor], skyColor, -lightRatio), lightRatio / 3);
+        _buildings[b].topColor       = ccc4lighten( _buildings[b].frontColor, -_buildings[b].size.height / (winSize.height * 1.5f));
+        _buildings[b].backColor      = ccc4lighten( _buildings[b].frontColor, -0.8f);
     }
     
     // Build vertex arrays.
     BuildingVertex *buildingVertices        = calloc(4                          /* amount of vertices per building */
-                                                     * buildingCount            /* amount of buildings */,
+                                                     * _buildingCount            /* amount of buildings */,
                                                      sizeof(BuildingVertex)     /* size of a vertex */);
     GLushort *buildingIndices               = calloc(6                          /* amount of indexes per window */
-                                                     * buildingCount            /* amount of windows in all buildings */,
+                                                     * _buildingCount            /* amount of windows in all buildings */,
                                                      sizeof(GLushort)           /* size of an index */);
     Vertex *windowVertices                  = calloc(4                          /* amount of vertices per window */
                                                      * windowCount              /* amount of windows in all buildings */,
@@ -145,18 +152,18 @@
     const CGFloat wWidthPx = wWidthPt; // * CC_CONTENT_SCALE_FACTOR();
     const CGFloat wHeightPx = wHeightPt; // * CC_CONTENT_SCALE_FACTOR();
     const CGFloat floorHeightPx = floorHeightPt; // * CC_CONTENT_SCALE_FACTOR();
-    for (NSUInteger w = 0, b = 0; b < buildingCount; ++b) {
+    for (NSUInteger w = 0, b = 0; b < _buildingCount; ++b) {
         
-        const CGFloat bx                    = buildings[b].x; // * CC_CONTENT_SCALE_FACTOR();
-        const CGSize bs                     = CGSizeMake(buildings[b].size.width, //    * CC_CONTENT_SCALE_FACTOR(),
-                                                         buildings[b].size.height); //   * CC_CONTENT_SCALE_FACTOR());
+        const CGFloat bx                    = _buildings[b].x; // * CC_CONTENT_SCALE_FACTOR();
+        const CGSize bs                     = CGSizeMake( _buildings[b].size.width, //    * CC_CONTENT_SCALE_FACTOR(),
+                                                         _buildings[b].size.height); //   * CC_CONTENT_SCALE_FACTOR());
         const NSUInteger bv                 = b * 4;
         const NSUInteger bi                 = b * 6;
 
-        buildingVertices[bv + 0].front.c    = buildingVertices[bv + 1].front.c      = buildings[b].frontColor;
-        buildingVertices[bv + 2].front.c    = buildingVertices[bv + 3].front.c      = buildings[b].topColor;
-        buildingVertices[bv + 0].backColor  = buildingVertices[bv + 1].backColor    = buildings[b].backColor;
-        buildingVertices[bv + 2].backColor  = buildingVertices[bv + 3].backColor    = buildings[b].backColor;
+        buildingVertices[bv + 0].front.c    = buildingVertices[bv + 1].front.c      = _buildings[b].frontColor;
+        buildingVertices[bv + 2].front.c    = buildingVertices[bv + 3].front.c      = _buildings[b].topColor;
+        buildingVertices[bv + 0].backColor  = buildingVertices[bv + 1].backColor    = _buildings[b].backColor;
+        buildingVertices[bv + 2].backColor  = buildingVertices[bv + 3].backColor    = _buildings[b].backColor;
 
         buildingVertices[bv + 0].front.p    = ccp(bx           , 0);
         buildingVertices[bv + 1].front.p    = ccp(bx + bs.width, 0);
@@ -171,11 +178,11 @@
         buildingIndices[bi + 5]             = (GLushort) (bv + 1);
         
         NSUInteger bw = 0, floor = 0;
-        while (bw < buildings[b].windowCount) {
+        while (bw < _buildings[b].windowCount) {
             const CGFloat y = wPadPx + floor * floorHeightPx;
             
             for (CGFloat wx = wPadPx;
-                 wx < bs.width - wWidthPx && bw < buildings[b].windowCount;
+                 wx < bs.width - wWidthPx && bw < _buildings[b].windowCount;
                  wx += wPadPx + wWidthPx) {
                 
                 // Reason we don't use gameRandom for windows:
@@ -204,7 +211,7 @@
             
             ++floor;
         }
-        if(bw != buildings[b].windowCount)
+        if(bw != _buildings[b].windowCount)
             err(@"Windows vertex count not the same as window amount.");
         
         w += bw;
@@ -220,7 +227,7 @@
     glGenBuffers( 1, &buildingsIndicesBuffer );
 
     glBindBuffer( GL_ARRAY_BUFFER, buildingsVertexBuffer );
-    glBufferData( GL_ARRAY_BUFFER, (GLsizeiptr)(sizeof(BuildingVertex) * buildingCount * 4), buildingVertices, GL_DYNAMIC_DRAW );
+    glBufferData( GL_ARRAY_BUFFER, (GLsizeiptr)(sizeof(BuildingVertex) * _buildingCount * 4), buildingVertices, GL_DYNAMIC_DRAW );
     glEnableVertexAttribArray( kCCVertexAttrib_Position );
     glVertexAttribPointer( kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(BuildingVertex),
             (GLvoid *)offsetof(BuildingVertex, front) + offsetof(Vertex, p));
@@ -228,7 +235,7 @@
     glVertexAttribPointer( kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(BuildingVertex),
             (GLvoid *)offsetof(BuildingVertex, front) + offsetof(Vertex, c));
     glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, buildingsIndicesBuffer );
-    glBufferData( GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)(sizeof(GLushort) * buildingCount * 6), buildingIndices, GL_DYNAMIC_DRAW );
+    glBufferData( GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)(sizeof(GLushort) * _buildingCount * 6), buildingIndices, GL_DYNAMIC_DRAW );
 
     ccGLBindVAO( buildingsVertexObject[1] );
     glBindBuffer( GL_ARRAY_BUFFER, buildingsVertexBuffer );
@@ -282,7 +289,7 @@
     // Blend with DST_ALPHA (DST_ALPHA of 1 means draw SRC over DST; DST_ALPHA of 0 means hide SRC, leave DST).
     ccGLBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_DST_ALPHA );
     ccGLBindVAO( buildingsVertexObject[0] );
-    glDrawElements(GL_TRIANGLES, (GLsizei)(buildingCount * 6), GL_UNSIGNED_SHORT, 0);
+    glDrawElements(GL_TRIANGLES, (GLsizei)(_buildingCount * 6), GL_UNSIGNED_SHORT, 0);
 
     // = FRONT WINDOWS =
     ccGLBindVAO( windowsVertexObject );
@@ -302,7 +309,7 @@
         // Draw back of building where DST opacity is < 1.
         ccGLBindVAO( buildingsVertexObject[1] );
         ccGLBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_DST_ALPHA);
-        glDrawElements(GL_TRIANGLES, (GLsizei)(buildingCount * 6), GL_UNSIGNED_SHORT, 0);
+        glDrawElements(GL_TRIANGLES, (GLsizei)(_buildingCount * 6), GL_UNSIGNED_SHORT, 0);
     }
 
     CHECK_GL_ERROR_DEBUG();
@@ -324,8 +331,6 @@
     windowsVertexBuffer     = 0;
     windowsIndicesBuffer    = 0;
     CHECK_GL_ERROR_DEBUG();
-    
-    [super dealloc];
 }
 
 

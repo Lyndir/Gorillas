@@ -40,17 +40,7 @@ typedef struct BuildingVertex {
     ccColor4B   backColor;
 } BuildingVertex;
 
-@interface BuildingsLayer : CCLayer <PearlResettable> {
-
-@private
-    float                                           buildingWidthRatio, buildingHeightRatio, lightRatio;
-    
-    NSUInteger                                      buildingCount, windowCount;
-    Building                                        *buildings;
-    
-    GLuint                                          buildingsVertexBuffer,  buildingsIndicesBuffer;
-    GLuint                                          windowsIndicesBuffer,   windowsVertexBuffer;
-}
+@interface BuildingsLayer : CCLayer <PearlResettable>
 
 @property (nonatomic, readonly) Building            *buildings;
 @property (nonatomic, readonly) NSUInteger          buildingCount;

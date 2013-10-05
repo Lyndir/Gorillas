@@ -24,17 +24,7 @@
 
 
 
-@interface GameConfiguration : NSObject {
-
-@private
-    NSString                                            *_name;
-    NSString                                            *_description;
-    
-    GorillasMode                                        _mode;
-    NSUInteger                                          _singleplayerAICount;
-    NSUInteger                                          _multiplayerAICount;
-    NSUInteger                                          _multiplayerHumanCount;
-}
+@interface GameConfiguration : NSObject
 
 @property (nonatomic, copy, readonly) NSString          *name;
 @property (nonatomic, copy, readonly) NSString          *description;

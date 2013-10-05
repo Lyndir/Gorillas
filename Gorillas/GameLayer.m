@@ -34,25 +34,29 @@
 
 @interface GameLayer ()
 
--(void) setPausedSilently:(BOOL)_paused;
+-(void) setPausedSilently:(BOOL)paused;
 - (void)updateWeather:(ccTime)dt;
 - (void)randomEncounter:(ccTime)dt;
 
 @end
 
-@implementation GameLayer
+@implementation GameLayer {
+
+@private
+    BOOL _randomCity;
+    NSUInteger _humans;
+    NSUInteger _ais;
+
+    CCAction *_shakeAction;
+}
+
 
 
 #pragma mark Properties
 
-@synthesize paused, configuring, started, running, mode;
-@synthesize gorillas, activeGorilla;
-@synthesize skyLayer, panningLayer, cityLayer, windLayer, backWeather, frontWeather;
-@synthesize scaleTimeAction, timeScale;
-
 -(BOOL) isSinglePlayer {
     
-    return humans == 1;
+    return _humans == 1;
 }
 
 
@@ -64,20 +68,20 @@
             return NO;
     }
     
-    return mode & feature? YES: NO;
+    return _mode & feature? YES: NO;
 }
 
 
--(void) setPaused:(BOOL)_paused {
+-(void) setPaused:(BOOL)paused {
     
     if(paused == _paused)
         // Nothing changed.
         return;
     
-    [self setPausedSilently:_paused];
+    [self setPausedSilently:paused];
     
-    if(running) {
-        if(paused)
+    if(_running) {
+        if(_paused)
             [[GorillasAppDelegate get].uiLayer message:PearlLocalize(@"messages.paused")];
         else
             [[GorillasAppDelegate get].uiLayer message:PearlLocalize(@"messages.unpaused")];
@@ -85,43 +89,43 @@
 }
 
 
--(void) setPausedSilently:(BOOL)_paused {
+-(void) setPausedSilently:(BOOL)paused {
     
-    paused = _paused;
+    _paused = paused;
     
-    if(paused) {
-        if(running)
+    if(_paused) {
+        if(_running)
             [self scaleTimeTo:0];
         [[GorillasAppDelegate get] hideHud];
-        [windLayer runAction:[CCFadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
-                                                  opacity:0x00]];
+        [_windLayer runAction:[CCFadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
+                                                   opacity:0x00]];
     } else {
         [self scaleTimeTo:1.0f];
         [[GorillasAppDelegate get] popAllLayers];
         [[GorillasAppDelegate get] revealHud];
-        [windLayer runAction:[CCFadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
-                                                  opacity:0xFF]];
+        [_windLayer runAction:[CCFadeTo actionWithDuration:[[GorillasConfig get].transitionDuration floatValue]
+                                                   opacity:0xFF]];
     }
 }
 
 
 - (void)scaleTimeTo:(float)aTimeScale {
     
-    [scaleTimeAction tweenKeyPath:@"timeScale" to:aTimeScale];
+    [_scaleTimeAction tweenKeyPath:@"timeScale" to:aTimeScale];
 }
 
 
--(void) configureGameWithMode:(GorillasMode)_mode randomCity:(BOOL)aRandomCity
-                    playerIDs:(NSArray *)playerIDs localHumans:(NSUInteger)localHumans ais:(NSUInteger)_ais {
+-(void) configureGameWithMode:(GorillasMode)aMode randomCity:(BOOL)aRandomCity
+                    playerIDs:(NSArray *)playerIDs localHumans:(NSUInteger)localHumans ais:(NSUInteger)ais {
     
-    configuring     = YES;
+    _configuring = YES;
     
     [self stopGame];
     
-    mode            = _mode;
-    randomCity      = aRandomCity;
-    humans          = localHumans + [playerIDs count];
-    ais             = _ais;
+    _mode = aMode;
+    _randomCity = aRandomCity;
+    _humans = localHumans + [playerIDs count];
+    _ais = ais;
     
 #ifndef DEBUG
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
@@ -153,9 +157,9 @@
     [[GorillasAppDelegate get].hudLayer reset];
     
     // Create gorillas array.
-    [gorillas removeAllObjects];
-    if(!gorillas)
-        gorillas = [[NSMutableArray alloc] initWithCapacity:humans + ais];
+    [_gorillas removeAllObjects];
+    if(!_gorillas)
+        _gorillas = [[NSMutableArray alloc] initWithCapacity:_humans + _ais];
     
     // Prepare.
     [GorillaLayer prepareCreation];
@@ -163,27 +167,27 @@
     // Add humans to the game.
     if (playerIDs) {
         for (NSString *playerID in playerIDs)
-            [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeHuman playerID:playerID]];
+            [_gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeHuman playerID:playerID]];
         
         [GKPlayer loadPlayersForIdentifiers:playerIDs withCompletionHandler:^(NSArray *players, NSError *error) {
             if (error)
                 err(@"While loading player information: %@", error);
             
             for (GKPlayer *player in players)
-                for (GorillaLayer *gorilla in gorillas)
+                for (GorillaLayer *gorilla in _gorillas)
                     if ([gorilla.playerID isEqualToString:player.playerID])
                         gorilla.player = player;
         }];
     }
     else
-        for (NSUInteger i = 0; i < humans; ++i)
-            [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeHuman playerID:nil]];
+        for (NSUInteger i = 0; i < _humans; ++i)
+            [_gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeHuman playerID:nil]];
     
     // Add AIs to the game.
-    for (NSUInteger i = 0; i < ais; ++i)
-        [gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeAI playerID:nil]];
+    for (NSUInteger i = 0; i < _ais; ++i)
+        [_gorillas addObject:[GorillaLayer gorillaWithType:GorillasPlayerTypeAI playerID:nil]];
     
-    configuring     = NO;
+    _configuring = NO;
 }
 
 
@@ -192,10 +196,10 @@
 -(void) reset {
     dbg(@"GameLayer reset");
     
-    [skyLayer reset];
-    [panningLayer reset];
-    [cityLayer reset];
-    [windLayer reset];
+    [_skyLayer reset];
+    [_panningLayer reset];
+    [_cityLayer reset];
+    [_windLayer reset];
     for (GorillaLayer *gorilla in self.gorillas)
         [gorilla reset];
 }
@@ -205,33 +209,33 @@
     if ([[GorillasConfig get].vibration boolValue])
         [GorillasAudioController vibrate];
     
-    if (![shakeAction isDone])
-        [cityLayer stopAction:shakeAction];
-    
-    [cityLayer runAction:shakeAction];
+    if (![_shakeAction isDone])
+        [_cityLayer stopAction:_shakeAction];
+
+    [_cityLayer runAction:_shakeAction];
 }
 
 
 -(void) startGame {
     dbg(@"GameLayer startGame");
     
-    if(!mode) {
+    if(!_mode) {
         err(@"Tried to start a game without configuring it first.");
         return;
     }
     
-    if(running) {
+    if(_running) {
         err(@"Tried to start a game while one's still running.");
         return;
     }
     
-    if (randomCity)
+    if (_randomCity)
         [GorillasConfig get].cityTheme = [[CityTheme getThemeNames] objectAtIndex:PearlGameRandom() % [[CityTheme getThemeNames] count]];
     else
         [self reset];
     
     // When there are AIs in the game, show their difficulity.
-    if (ais)
+    if (_ais)
         [[GorillasAppDelegate get].uiLayer message:[GorillasConfig nameForLevel:[GorillasConfig get].level]];
     
     self.started = YES;
@@ -239,7 +243,7 @@
     [self.cityLayer beginGame];
 }
 
--(void) updateStateForThrow:(Throw)throw withSkill:(float)throwSkill {
+-(void) updateStateForThrow:(GThrow)throw withSkill:(float)throwSkill {
     
     switch (throw.endCondition) {
         case ThrowNotEnded:
@@ -277,10 +281,10 @@
                 int64_t scoreDelta = (int64_t) ([[GorillasConfig get].level floatValue] * [[GorillasConfig get].missScore intValue]);
                 
                 if(scoreDelta) {
-                    [[GorillasConfig get] recordScoreDelta:scoreDelta forMode:mode];
+                    [[GorillasConfig get] recordScoreDelta:scoreDelta forMode:_mode];
                     [[GorillasAppDelegate get].hudLayer highlightGood:scoreDelta > 0];
                     
-                    [cityLayer message:[NSString stringWithFormat:@"%+lld", scoreDelta] on:cityLayer.bananaLayer.banana];
+                    [_cityLayer message:[NSString stringWithFormat:@"%+lld", scoreDelta] on:_cityLayer.bananaLayer.banana];
                 }
             }
             
@@ -288,21 +292,21 @@
         }
             
         case ThrowEndHitGorilla: {
-            [cityLayer.hitGorilla kill];
+            [_cityLayer.hitGorilla kill];
             
-            if (!cityLayer.hitGorilla.alive)
-                [[[GorillasAppDelegate get] hudLayer] message:[[GorillasConfig get] messageForHitBy:activeGorilla on:cityLayer.hitGorilla]
+            if (!_cityLayer.hitGorilla.alive)
+                [[[GorillasAppDelegate get] hudLayer] message:[[GorillasConfig get] messageForHitBy:_activeGorilla on:_cityLayer.hitGorilla]
                                                      duration:4 isImportant:NO];
             
             int64_t scoreDelta = 0;
             BOOL dance = NO;
-            if([activeGorilla human]) {
+            if([_activeGorilla human]) {
                 // Human hits ...
                 
-                if([cityLayer.hitGorilla human]) {
+                if([_cityLayer.hitGorilla human]) {
                     // ... Human.
                     if([self isEnabled:GorillasFeatureTeam]
-                       || cityLayer.hitGorilla == activeGorilla)
+                       || _cityLayer.hitGorilla == _activeGorilla)
                         // In team mode or when suiciding, deduct score.
                         scoreDelta = [GorillasConfig get].deathScore;
                     else
@@ -317,7 +321,7 @@
             } else {
                 // AI hits ...
                 
-                if([cityLayer.hitGorilla human]) {
+                if([_cityLayer.hitGorilla human]) {
                     // ... Human.
                     if(![self isEnabled:GorillasFeatureTeam])
                         // In team mode, deduct score.
@@ -326,7 +330,7 @@
                     dance = YES;
                 } else {
                     // ... AI.
-                    if(![self isEnabled:GorillasFeatureTeam] && cityLayer.hitGorilla != activeGorilla)
+                    if(![self isEnabled:GorillasFeatureTeam] && _cityLayer.hitGorilla != _activeGorilla)
                         // Not in team and not suiciding.
                         dance = YES;
                 }
@@ -336,7 +340,7 @@
             if([self isEnabled:GorillasFeatureSkill]) {
                 float skill = 0;
                 
-                if([activeGorilla human]) {
+                if([_activeGorilla human]) {
                     // Human skill.
                     [GorillasConfig get].skill = [NSNumber numberWithFloat:skill = fminf(0.99f, [[GorillasConfig get].skill floatValue] / 2 + throwSkill)];
                 } else
@@ -344,7 +348,7 @@
                     skill = [[GorillasConfig get].level floatValue];
                 
                 // Apply oneshot bonus.
-                if(activeGorilla.turns == 0) {
+                if(_activeGorilla.turns == 0) {
                     [[GorillasAppDelegate get].uiLayer message:PearlLocalize(@"messages.oneshot")];
                     skill *= [[GorillasConfig get].bonusOneShot floatValue];
                 }
@@ -379,16 +383,16 @@
             
             // Update score.
             if([self isEnabled:GorillasFeatureScore] && scoreDelta) {
-                [[GorillasConfig get] recordScoreDelta:scoreDelta forMode:mode];
+                [[GorillasConfig get] recordScoreDelta:scoreDelta forMode:_mode];
                 
                 [[[GorillasAppDelegate get] hudLayer] highlightGood:scoreDelta > 0];
-                [cityLayer message:[NSString stringWithFormat:@"%+lld", scoreDelta] on:cityLayer.hitGorilla];
+                [_cityLayer message:[NSString stringWithFormat:@"%+lld", scoreDelta] on:_cityLayer.hitGorilla];
             }
             
             // Check whether any gorillas are left.
             int liveGorillaCount = 0;
             GorillaLayer *liveGorilla = nil;
-            for(GorillaLayer *_gorilla in gorillas)
+            for(GorillaLayer *_gorilla in _gorillas)
                 if([_gorilla alive]) {
                     liveGorillaCount++;
                     liveGorilla = _gorilla;
@@ -396,12 +400,12 @@
             
             // If gorilla did something benefitial: cheer or dance.
             if(dance) {
-                if ([cityLayer.hitGorilla alive])
-                    [activeGorilla danceHit];
+                if ([_cityLayer.hitGorilla alive])
+                    [_activeGorilla danceHit];
                 else if (liveGorillaCount > 2)
-                    [activeGorilla danceKill];
+                    [_activeGorilla danceKill];
                 else
-                    [activeGorilla danceVictory];
+                    [_activeGorilla danceVictory];
             }
             
             // If 0 or 1 gorillas left; show who won and stop the game.
@@ -413,7 +417,7 @@
             }
             
             // Reset the wind.
-            [windLayer reset];
+            [_windLayer reset];
             
             break;
         }
@@ -423,11 +427,11 @@
 
 -(BOOL) checkGameStillOn {
     
-    if(running) {
+    if(_running) {
         // Check to see if there are any opponents left.
         NSUInteger liveGorillas = 0;
         NSUInteger liveEnemyGorillas = 0;
-        for (GorillaLayer *gorilla in gorillas) {
+        for (GorillaLayer *gorilla in _gorillas) {
             if (![gorilla alive])
                 continue;
             
@@ -435,27 +439,27 @@
             ++liveGorillas;
             
             // Gorilla is on active gorilla's team.
-            if (gorilla.human != activeGorilla.human)
+            if (gorilla.human != _activeGorilla.human)
                 ++liveEnemyGorillas;
         }
         
         if(liveGorillas < 2)
-            running = NO;
+            _running = NO;
         
         if([self isEnabled:GorillasFeatureTeam]
            && !liveEnemyGorillas)
-            running = NO;
+            _running = NO;
     }
     
-    return running;
+    return _running;
 }
 
 
 -(void) stopGame {
     
-    mode = 0;
-    humans = 0;
-    ais = 0;
+    _mode = 0;
+    _humans = 0;
+    _ais = 0;
     
     if ([GorillasAppDelegate get].netController.match)
         [[GorillasAppDelegate get].netController endMatchForced:NO];
@@ -466,10 +470,10 @@
 
 -(void) endGame {
     
-    running = NO;
+    _running = NO;
     //[self setPausedSilently:NO];
     
-    [cityLayer endGame];
+    [_cityLayer endGame];
 }
 
 
@@ -480,42 +484,42 @@
     if (!(self = [super init]))
         return self;
     
-    timeScale = 1.0f;
-    mode = GorillasModeClassic;
-    running = NO;
+    _timeScale = 1.0f;
+    _mode = GorillasModeClassic;
+    _running = NO;
     
     CCActionInterval *l     = [CCMoveBy actionWithDuration:.05f position:ccp(-3, 0)];
     CCActionInterval *r     = [CCMoveBy actionWithDuration:.05f position:ccp(6, 0)];
-    shakeAction             = [[CCSequence actions:l, r, l, l, r, l, r, l, l, nil] retain];
+    _shakeAction = [CCSequence actions:l, r, l, l, r, l, r, l, l, nil];
     
     // Set up our own layer.
     self.anchorPoint        = ccp(0.5f, 0.5f);
     
     // Sky, buildings and wind.
-    cityLayer               = [[CityLayer alloc] init];
-    skyLayer                = [[SkyLayer alloc] init];
+    _cityLayer = [[CityLayer alloc] init];
+    _skyLayer = [[SkyLayer alloc] init];
     CCSprite *light = [CCSprite spriteWithFile:@"fire.png"];
     light.position = ccp(240, -500);
     light.scale = 150;
     light.color = ccc3(0xff, 0xff, 0xcc);
     light.opacity = 0x55;
-    panningLayer            = [[PanningLayer alloc] init];
-    panningLayer.position   = CGPointZero;
-    [panningLayer addChild:[InteractionLayer node] z:1];
-    [panningLayer addChild:cityLayer z:0];
-    [panningLayer addChild:light z:-1];
-    [self addChild:panningLayer z:0];
-    [self addChild:skyLayer z:-5];
+    _panningLayer = [[PanningLayer alloc] init];
+    _panningLayer.position   = CGPointZero;
+    [_panningLayer addChild:[InteractionLayer node] z:1];
+    [_panningLayer addChild:_cityLayer z:0];
+    [_panningLayer addChild:light z:-1];
+    [self addChild:_panningLayer z:0];
+    [self addChild:_skyLayer z:-5];
     
-    windLayer               = [[WindLayer alloc] init];
-    windLayer.position      = ccp(self.contentSize.width / 2, self.contentSize.height - 15);
-    [self addChild:windLayer z:5];
+    _windLayer = [[WindLayer alloc] init];
+    _windLayer.position      = ccp(self.contentSize.width / 2, self.contentSize.height - 15);
+    [self addChild:_windLayer z:5];
     
-    scaleTimeAction         = [[PearlCCAutoTween alloc] initWithDuration:0.5f];
-    scaleTimeAction.tag     = kCCActionTagIgnoreTimeScale;
-    [self runAction:scaleTimeAction];
+    _scaleTimeAction = [[PearlCCAutoTween alloc] initWithDuration:0.5f];
+    _scaleTimeAction.tag     = kCCActionTagIgnoreTimeScale;
+    [self runAction:_scaleTimeAction];
     
-    paused = YES;
+    _paused = YES;
     
     return self;
 }
@@ -543,59 +547,57 @@
 
 -(void) updateWeather:(ccTime)dt {
     
-    if (!backWeather.emissionRate) {
+    if (!_backWeather.emissionRate) {
         // If not emitting ..
         
-        if (backWeather.active) {
+        if (_backWeather.active) {
             // Stop active system.
-            [backWeather stopSystem];
-            [frontWeather stopSystem];
+            [_backWeather stopSystem];
+            [_frontWeather stopSystem];
         }
         
-        if (backWeather.particleCount == 0) {
+        if (_backWeather.particleCount == 0) {
             // If system has no particles left alive ..
             
             // Remove & release it.
-            [windLayer unregisterSystem:backWeather];
-            [backWeather removeFromParentAndCleanup:YES];
-            [backWeather release];
-            backWeather = nil;
-            [windLayer unregisterSystem:frontWeather];
-            [frontWeather removeFromParentAndCleanup:YES];
-            [frontWeather release];
-            frontWeather = nil;
+            [_windLayer unregisterSystem:_backWeather];
+            [_backWeather removeFromParentAndCleanup:YES];
+            _backWeather = nil;
+            [_windLayer unregisterSystem:_frontWeather];
+            [_frontWeather removeFromParentAndCleanup:YES];
+            _frontWeather = nil;
             
             
-            CGRect field = [cityLayer fieldInSpaceOf:panningLayer];
+            CGRect field = [_cityLayer fieldInSpaceOf:_panningLayer];
             
             if (PearlGameRandomFor(GorillasGameRandomWeather) % 100 == 0) {
                 // 1% chance to start snow/rain when weather is enabled.
                 
                 switch (PearlGameRandomFor(GorillasGameRandomWeather) % 2) {
                     case 0:
-                        backWeather                 = [[CCParticleRain alloc] init];
-                        backWeather.emissionRate    = 60;
-                        backWeather.startSizeVar    = 0.5f;
-                        backWeather.startSize       = 1;
+                        _backWeather = [[CCParticleRain alloc] init];
+                        _backWeather.emissionRate    = 60;
+                        _backWeather.startSizeVar    = 0.5f;
+                        _backWeather.startSize       = 1;
                         
-                        frontWeather                = [[CCParticleRain alloc] init];
-                        frontWeather.emissionRate   = 60;
-                        frontWeather.startSizeVar   = 1.5f;
-                        frontWeather.startSize      = 3;
+                        _frontWeather = [[CCParticleRain alloc] init];
+                        _frontWeather.emissionRate   = 60;
+                        _frontWeather.startSizeVar   = 1.5f;
+                        _frontWeather.startSize      = 3;
                         break;
                         
                     case 1:
-                        backWeather                 = [[CCParticleSnow alloc] init];
-                        backWeather.speed           = 10;
-                        backWeather.emissionRate    = 3;
-                        backWeather.startSizeVar    = 2;
-                        backWeather.startSize       = 2;
+                        _backWeather = [[CCParticleSnow alloc] init];
+                        _backWeather.speed           = 10;
+                        _backWeather.emissionRate    = 3;
+                        _backWeather.startSizeVar    = 2;
+                        _backWeather.startSize       = 2;
                         
-                        frontWeather                = [[CCParticleSnow alloc] init];
-                        frontWeather.speed          = 10;
-                        frontWeather.emissionRate   = 3;
-                        frontWeather.startSizeVar   = 3;
-                        frontWeather.startSize      = 4;
+                        _frontWeather = [[CCParticleSnow alloc] init];
+                        _frontWeather.speed          = 10;
+                        _frontWeather.emissionRate   = 3;
+                        _frontWeather.startSizeVar   = 3;
+                        _frontWeather.startSize      = 4;
                         break;
                         
                     default:
@@ -603,40 +605,40 @@
                         return;
                 }
                 
-                backWeather.positionType    = kCCPositionTypeGrouped;
-                backWeather.posVar          = ccp(field.size.width / 2, backWeather.posVar.y);
-                backWeather.position        = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
-                [panningLayer addChild:backWeather z:-1];
-                [windLayer registerSystem:backWeather affectAngle:YES];
+                _backWeather.positionType    = kCCPositionTypeGrouped;
+                _backWeather.posVar          = ccp(field.size.width / 2, _backWeather.posVar.y);
+                _backWeather.position        = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
+                [_panningLayer addChild:_backWeather z:-1];
+                [_windLayer registerSystem:_backWeather affectAngle:YES];
                 
-                frontWeather.positionType   = kCCPositionTypeGrouped;
-                frontWeather.posVar         = ccp(field.size.width / 2, frontWeather.posVar.y);
-                frontWeather.position       = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
-                [panningLayer addChild:frontWeather];
-                [windLayer registerSystem:frontWeather affectAngle:YES];
+                _frontWeather.positionType   = kCCPositionTypeGrouped;
+                _frontWeather.posVar         = ccp(field.size.width / 2, _frontWeather.posVar.y);
+                _frontWeather.position       = ccp(field.origin.x + field.size.width / 2, field.origin.y + field.size.height); // Space above screen.
+                [_panningLayer addChild:_frontWeather];
+                [_windLayer registerSystem:_frontWeather affectAngle:YES];
             }
         }
     }
     
     else {
         // System is alive, let the emission rate evolve.
-        float rate = [backWeather emissionRate] + (PearlGameRandomFor(GorillasGameRandomWeather) % 40 - 15) / 10.0f;
-        float max = [backWeather isKindOfClass:[CCParticleRain class]]? 200: 100;
+        float rate = [_backWeather emissionRate] + (PearlGameRandomFor(GorillasGameRandomWeather) % 40 - 15) / 10.0f;
+        float max = [_backWeather isKindOfClass:[CCParticleRain class]]? 200: 100;
         rate = fminf(fmaxf(0, rate), max);
         
         if(PearlGameRandomFor(GorillasGameRandomWeather) % 100 == 0)
             // 1% chance for a full stop.
             rate = 0;
         
-        [backWeather setEmissionRate:rate];
-        [frontWeather setEmissionRate:rate];
+        [_backWeather setEmissionRate:rate];
+        [_frontWeather setEmissionRate:rate];
     }
 }
 
 
 -(void) randomEncounter:(ccTime)dt {
     
-    if(!running)
+    if(!_running)
         return;
     
     // Need to refactor some bad logic about setting projectile as cleared before this'll work.
@@ -667,49 +669,14 @@
 
 -(void) ended {
     
-    started = NO;
+    _started = NO;
+
+    _activeGorilla = nil;
     
-    [activeGorilla release];
-    activeGorilla = nil;
+    [_panningLayer scrollToCenter:CGPointZero horizontal:YES];
     
-    [panningLayer scrollToCenter:CGPointZero horizontal:YES];
-    
-    if (!configuring)
+    if (!_configuring)
         [[GorillasAppDelegate get] showMainMenu];
 }
-
-
--(void) dealloc {
-    
-    [shakeAction release];
-    shakeAction = nil;
-    
-    [skyLayer release];
-    skyLayer = nil;
-    
-    [cityLayer release];
-    cityLayer = nil;
-    
-    [backWeather release];
-    backWeather = nil;
-    
-    [frontWeather release];
-    frontWeather = nil;
-    
-    [panningLayer release];
-    panningLayer = nil;
-    
-    [windLayer release];
-    windLayer = nil;
-    
-    [gorillas release];
-    gorillas = nil;
-    
-    [activeGorilla release];
-    activeGorilla = nil;
-    
-    [super dealloc];
-}
-
 
 @end

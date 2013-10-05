@@ -9,8 +9,6 @@
 #import "PearlCCConfigMenuLayer.h"
 
 
-@interface GConfigMenuLayer : PearlCCConfigMenuLayer {
-
-}
+@interface GConfigMenuLayer : PearlCCConfigMenuLayer
 
 @end

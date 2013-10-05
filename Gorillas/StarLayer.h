@@ -24,16 +24,7 @@
 
 #import "PearlResettable.h"
 
-@interface StarLayer : CCLayer <PearlResettable> {
-
-@private
-    float       depth;
-    
-    glPoint     *starVertices;
-    GLuint      starVertexBuffer;
-    GLsizei  starCount;
-}
-
+@interface StarLayer : CCLayer <PearlResettable>
 
 #pragma mark ###############################
 #pragma mark Lifecycle

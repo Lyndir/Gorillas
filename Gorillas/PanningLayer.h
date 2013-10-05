@@ -23,7 +23,6 @@
 //
 
 #import "PearlResettable.h"
-#import "MovingTo.h"
 
 
 @interface PanningLayer : CCLayer <PearlResettable> {

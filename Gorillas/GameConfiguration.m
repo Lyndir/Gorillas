@@ -38,17 +38,13 @@
 
 @implementation GameConfiguration
 
-@synthesize name = _name, description = _description, mode = _mode;
-@synthesize singleplayerAICount = _singleplayerAICount, multiplayerAICount = _multiplayerAICount, multiplayerHumanCount = _multiplayerHumanCount;
-
-
 + (GameConfiguration *)configurationWithName:(NSString *)aName description:(NSString *)aDescription mode:(GorillasMode)aMode
                          singleplayerAICount:(NSUInteger)aSingleplayerAICount
                           multiplayerAICount:(NSUInteger)aMultiplayerAICount multiplayerHumanCount:(NSUInteger)aMultiplayerHumanCount {
     
-    return [[[GameConfiguration alloc] initWithName:aName description:aDescription mode:aMode
+    return [[GameConfiguration alloc] initWithName:aName description:aDescription mode:aMode
                                 singleplayerAICount:aSingleplayerAICount
-                                 multiplayerAICount:aMultiplayerAICount multiplayerHumanCount:aMultiplayerHumanCount] autorelease];
+                                 multiplayerAICount:aMultiplayerAICount multiplayerHumanCount:aMultiplayerHumanCount];
 }
 
 
@@ -70,13 +66,6 @@
 }
 
 
--(void) dealloc {
-
-    self.name           = nil;
-    self.description    = nil;
-    
-    [super dealloc];
-}
 
 
 @end

@@ -30,30 +30,7 @@
 #import <GameKit/GameKit.h>
 
 
-@interface GameLayer : CCLayer <PearlResettable, CCTimeScalable> {
-
-@private
-    BOOL                                                    paused;
-    BOOL                                                    configuring;
-    BOOL                                                    started;
-    BOOL                                                    running;
-    GorillasMode                                            mode;
-    BOOL                                                    randomCity;
-    NSUInteger                                              humans;
-    NSUInteger                                              ais;
-    
-    NSMutableArray                                          *gorillas;
-    GorillaLayer                                            *activeGorilla;
-
-    SkyLayer                                                *skyLayer;
-    PanningLayer                                            *panningLayer;
-    CityLayer                                               *cityLayer;
-    CCParticleSystem                                        *backWeather, *frontWeather;
-    WindLayer                                               *windLayer;
-    CCAction                                                *shakeAction;
-    PearlCCAutoTween                                        *scaleTimeAction;
-    float                                                   timeScale;
-}
+@interface GameLayer : CCLayer <PearlResettable, CCTimeScalable>
 
 @property (nonatomic, readwrite, getter=isPaused) BOOL      paused;
 @property (nonatomic, readwrite) BOOL                       configuring;
@@ -63,7 +40,7 @@
 @property (nonatomic, readonly, getter=isSinglePlayer) BOOL singlePlayer;
 
 @property (nonatomic, readonly) NSMutableArray              *gorillas;
-@property (nonatomic, readwrite, retain) GorillaLayer       *activeGorilla;
+@property (nonatomic, readwrite, strong) GorillaLayer       *activeGorilla;
 
 @property (nonatomic, readonly) SkyLayer                    *skyLayer;
 @property (nonatomic, readonly) PanningLayer                *panningLayer;
@@ -81,7 +58,7 @@
                     playerIDs:(NSArray *)playerIDs localHumans:(NSUInteger)localHumans ais:(NSUInteger)ais;
 -(void) scaleTimeTo:(float)aTimeScale;
 
--(void) updateStateForThrow:(Throw)throw withSkill:(float)throwSkill;
+-(void) updateStateForThrow:(GThrow)throw withSkill:(float)throwSkill;
 -(BOOL) checkGameStillOn;
 -(void) startGame;
 /** Invoked when we want to stop playing. */

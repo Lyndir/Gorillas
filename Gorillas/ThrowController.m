@@ -36,8 +36,6 @@
 @end
 
 @implementation ThrowController
-@synthesize throw = _throw, banana = _banana, gorilla = _gorilla, velocity = _velocity, duration = _duration;
-@synthesize needReplay = _needReplay, wasReplay = _wasReplay;
 
 -(void) throwEnded {
     
@@ -145,7 +143,7 @@
     [self throwEnded];
 }
 
-+ (Throw)calculateThrowFrom:(CGPoint)r0 withVelocity:(CGPoint)v afterTime:(ccTime)t {
++ (GThrow)calculateThrowFrom:(CGPoint)r0 withVelocity:(CGPoint)v afterTime:(ccTime)t {
     
     GameLayer *gameLayer = [GorillasAppDelegate get].gameLayer;
     CityLayer *cityLayer = gameLayer.cityLayer;
@@ -165,7 +163,7 @@
     float top = field.origin.y + field.size.height;
     
     // Figure out whether banana went off screen or hit something.
-    ThrowEnd endCondition = 0;
+    GThrowEnd endCondition = ThrowNotEnded;
     if ([cityLayer hitsBuilding:r])
         endCondition = ThrowEndHitBuilding;
     else if ([cityLayer hitsGorilla:r])
@@ -173,7 +171,7 @@
     else if (r.x < min || r.x > max || r.y < 0   || r.y > top)
         endCondition = ThrowEndOffScreen;
     
-    return (Throw){r, endCondition, t};
+    return (GThrow){r, endCondition, t};
 }
 
 

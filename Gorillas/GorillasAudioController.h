@@ -26,14 +26,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 
-@interface GorillasAudioController : NSObject <AVAudioPlayerDelegate> {
-    
-@private
-    AVAudioPlayer               *audioPlayer;
-    NSString                    *nextTrack;
-    
-    NSMutableDictionary         *effects;
-}
+@interface GorillasAudioController : NSObject <AVAudioPlayerDelegate>
 
 -(void) clickEffect;
 -(void) playTrack:(NSString *)track;

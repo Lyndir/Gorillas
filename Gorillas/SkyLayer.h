@@ -25,12 +25,6 @@
 #import "PearlResettable.h"
 
 
-@interface SkyLayer : CCParallaxNode <PearlResettable> {
-
-@private
-    ccColor4B               skyColor;
-
-    NSMutableArray          *stars;
-}
+@interface SkyLayer : CCParallaxNode <PearlResettable>
 
 @end
