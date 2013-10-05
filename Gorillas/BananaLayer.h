@@ -25,17 +25,16 @@
 #import "ThrowAction.h"
 #import "GorillaLayer.h"
 
-
 @interface BananaLayer : CCLayer
 
-@property (nonatomic, assign) BOOL                      clearedGorilla;
-@property (nonatomic, assign) GorillasProjectileModel   model;
-@property (nonatomic, assign) GorillasPlayerType        type;
-@property (nonatomic, strong) CCSprite                  *banana;
+@property(nonatomic, assign) BOOL clearedGorilla;
+@property(nonatomic, assign) GorillasProjectileModel model;
+@property(nonatomic, assign) GorillasPlayerType type;
+@property(nonatomic, strong) CCSprite *banana;
 
--(CCSprite *)bananaForThrowFrom:(GorillaLayer *)gorilla;
--(BOOL) throwing;
+- (CCSprite *)bananaForThrowFrom:(GorillaLayer *)gorilla;
+- (BOOL)throwing;
 
--(void) setModel:(GorillasProjectileModel)aModel type:(GorillasPlayerType)aType;
+- (void)setModel:(GorillasProjectileModel)aModel type:(GorillasPlayerType)aType;
 
 @end

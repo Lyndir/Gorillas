@@ -9,11 +9,10 @@
 #import <GameKit/GameKit.h>
 #import "NetMessage.h"
 
+@interface NetController : NSObject<GKMatchmakerViewControllerDelegate, GKMatchDelegate>
 
-@interface NetController : NSObject <GKMatchmakerViewControllerDelegate, GKMatchDelegate>
-
-@property (nonatomic, readonly, strong) GKMatch                 *match;
-@property (nonatomic, readonly, strong) NetMessageElectHost     *hostElection;
+@property(nonatomic, readonly, strong) GKMatch *match;
+@property(nonatomic, readonly, strong) NetMessageElectHost *hostElection;
 
 - (void)beginRequest:(GKMatchRequest *)aMatchRequest;
 - (void)beginInvite:(GKInvite *)anInvite;

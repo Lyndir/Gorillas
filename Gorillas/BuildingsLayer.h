@@ -25,29 +25,28 @@
 
 #import "PearlResettable.h"
 
-
 typedef struct Building {
-    CGFloat     x;
-    CGSize      size;
-    NSUInteger  windowCount;
-    ccColor4B   frontColor;
-    ccColor4B   topColor;
-    ccColor4B   backColor;
+    CGFloat x;
+    CGSize size;
+    NSUInteger windowCount;
+    ccColor4B frontColor;
+    ccColor4B topColor;
+    ccColor4B backColor;
 } Building;
 
 typedef struct BuildingVertex {
-    Vertex      front;
-    ccColor4B   backColor;
+    Vertex front;
+    ccColor4B backColor;
 } BuildingVertex;
 
-@interface BuildingsLayer : CCLayer <PearlResettable>
+@interface BuildingsLayer : CCLayer<PearlResettable>
 
-@property (nonatomic, readonly) Building            *buildings;
-@property (nonatomic, readonly) NSUInteger          buildingCount;
+@property(nonatomic, readonly) Building *buildings;
+@property(nonatomic, readonly) NSUInteger buildingCount;
 
-- (id) initWithWidthRatio:(CGFloat)w heightRatio:(float)h lightRatio:(float)lightRatio;
--(void) reset;
+- (id)initWithWidthRatio:(CGFloat)w heightRatio:(float)h lightRatio:(float)lightRatio;
+- (void)reset;
 
--(BOOL) hitsBuilding:(CGPoint)pos;
+- (BOOL)hitsBuilding:(CGPoint)pos;
 
 @end

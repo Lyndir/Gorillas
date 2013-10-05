@@ -24,11 +24,11 @@
 
 #import "PearlResettable.h"
 
-@interface StarLayer : CCLayer <PearlResettable>
+@interface StarLayer : CCLayer<PearlResettable>
 
 #pragma mark ###############################
 #pragma mark Lifecycle
 
--(id) initWidthDepth:(float)aDepth;
+- (id)initWidthDepth:(float)aDepth;
 
 @end

@@ -24,7 +24,6 @@
 
 #import "PearlResettable.h"
 
-
-@interface SkyLayer : CCParallaxNode <PearlResettable>
+@interface SkyLayer : CCParallaxNode<PearlResettable>
 
 @end

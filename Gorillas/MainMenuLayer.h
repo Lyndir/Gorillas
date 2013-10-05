@@ -27,9 +27,8 @@
 #import "GMenuLayer.h"
 #import <GameKit/GameKit.h>
 
+@interface MainMenuLayer : GMenuLayer<PearlResettable, PearlCCMenuDelegate, GKLeaderboardViewControllerDelegate>
 
-@interface MainMenuLayer : GMenuLayer <PearlResettable, PearlCCMenuDelegate, GKLeaderboardViewControllerDelegate>
-
-@property (nonatomic, strong, readwrite) NSArray    *playersToInvite;
+@property(nonatomic, strong, readwrite) NSArray *playersToInvite;
 
 @end

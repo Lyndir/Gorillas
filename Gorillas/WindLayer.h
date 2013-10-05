@@ -24,12 +24,11 @@
 
 #import "PearlResettable.h"
 
+@interface WindLayer : CCLayer<CCRGBAProtocol, PearlResettable>
 
-@interface WindLayer : CCLayer <CCRGBAProtocol, PearlResettable>
+- (void)registerSystem:(CCParticleSystem *)system affectAngle:(BOOL)affectAngle;
+- (void)unregisterSystem:(CCParticleSystem *)system;
 
--(void) registerSystem:(CCParticleSystem *)system affectAngle:(BOOL)affectAngle;
--(void) unregisterSystem:(CCParticleSystem *)system;
-
-@property (nonatomic, readonly) float wind;
+@property(nonatomic, readonly) float wind;
 
 @end

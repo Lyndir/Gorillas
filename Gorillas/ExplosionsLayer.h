@@ -24,10 +24,9 @@
 
 #import "GorillasAudioController.h"
 
-
 @interface ExplosionsLayer : CCLayer
 
--(void) addExplosionAtWorld:(CGPoint)pos hitsGorilla:(BOOL)gorillaHit;
-+(SystemSoundID) explosionEffect: (BOOL)heavy;
+- (void)addExplosionAtWorld:(CGPoint)pos hitsGorilla:(BOOL)gorillaHit;
++ (SystemSoundID)explosionEffect:(BOOL)heavy;
 
 @end

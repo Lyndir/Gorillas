@@ -24,15 +24,14 @@
 
 #import "ThrowController.h"
 
-
 @interface ThrowAction : CCActionInterval
 
-@property (nonatomic, assign) CGPoint           v;
-@property (nonatomic, assign) CGPoint           r0;
-@property (nonatomic, assign) BOOL              needsReplay;
-@property (nonatomic, strong) CCParticleSystem  *smoke;
+@property(nonatomic, assign) CGPoint v;
+@property(nonatomic, assign) CGPoint r0;
+@property(nonatomic, assign) BOOL needsReplay;
+@property(nonatomic, strong) CCParticleSystem *smoke;
 
-+(ThrowAction *) actionWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration needsReplay:(BOOL)aNeedsReplay;
--(ThrowAction *) initWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration needsReplay:(BOOL)aNeedsReplay;
++ (ThrowAction *)actionWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration needsReplay:(BOOL)aNeedsReplay;
+- (ThrowAction *)initWithVelocity:(CGPoint)velocity duration:(ccTime)aDuration needsReplay:(BOOL)aNeedsReplay;
 
 @end

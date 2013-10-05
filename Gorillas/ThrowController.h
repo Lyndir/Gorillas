@@ -24,7 +24,6 @@
 
 #import "GorillaLayer.h"
 
-
 typedef enum {
     ThrowNotEnded,
     ThrowEndHitBuilding,
@@ -32,27 +31,27 @@ typedef enum {
     ThrowEndOffScreen,
 } GThrowEnd;
 typedef struct {
-    CGPoint     endPoint;
+    CGPoint endPoint;
     GThrowEnd endCondition;
-    ccTime      duration;
+    ccTime duration;
 } GThrow;
 
 @interface ThrowController : NSObject
 
-@property (nonatomic, strong) GorillaLayer  *gorilla;
-@property (nonatomic, assign) GThrow         throw;
-@property (nonatomic, strong) CCSprite      *banana;
-@property (nonatomic, assign) CGPoint       velocity;
-@property (nonatomic, assign) ccTime        duration;
-@property (nonatomic, assign) BOOL          needReplay;
-@property (nonatomic, assign) BOOL          wasReplay;
+@property(nonatomic, strong) GorillaLayer *gorilla;
+@property(nonatomic, assign) GThrow throw;
+@property(nonatomic, strong) CCSprite *banana;
+@property(nonatomic, assign) CGPoint velocity;
+@property(nonatomic, assign) ccTime duration;
+@property(nonatomic, assign) BOOL needReplay;
+@property(nonatomic, assign) BOOL wasReplay;
 
--(void) nextTurn;
--(void) throwEnded;
+- (void)nextTurn;
+- (void)throwEnded;
 
 - (void)throwFrom:(GorillaLayer *)gorilla normalizedVelocity:(CGPoint)velocity;
 
 + (GThrow)calculateThrowFrom:(CGPoint)r0 withVelocity:(CGPoint)v afterTime:(ccTime)t;
-+ (ThrowController *) get;
++ (ThrowController *)get;
 
 @end

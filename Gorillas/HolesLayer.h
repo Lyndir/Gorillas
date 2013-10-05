@@ -26,7 +26,7 @@
 
 @interface HolesLayer : CCLayer
 
--(BOOL) isHoleAtWorld:(CGPoint)pos;
--(void) addHoleAtWorld:(CGPoint)pos;
+- (BOOL)isHoleAtWorld:(CGPoint)pos;
+- (void)addHoleAtWorld:(CGPoint)pos;
 
 @end

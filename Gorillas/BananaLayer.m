@@ -23,43 +23,39 @@
 //
 
 #import "BananaLayer.h"
-#import "GorillasAppDelegate.h"
 
+@interface BananaLayer(Private)
 
-@interface BananaLayer (Private)
-
--(NSString *) modelFile;
+- (NSString *)modelFile;
 
 @end
 
 @implementation BananaLayer
 
--(id) init {
-    
-    if(!(self = [super init]))
+- (id)init {
+
+    if (!(self = [super init]))
         return self;
-    
-    self.model          = GorillasProjectileModelBanana;
-    
-    self.banana         = [CCSprite spriteWithFile:[self modelFile]];
+
+    self.model = GorillasProjectileModelBanana;
+
+    self.banana = [CCSprite spriteWithFile:[self modelFile]];
     self.banana.visible = NO;
-    self.banana.tag     = GorillasTagBananaNotFlying;
-    
+    self.banana.tag = GorillasTagBananaNotFlying;
+
     return self;
 }
 
+- (void)setModel:(GorillasProjectileModel)aModel type:(GorillasPlayerType)aType {
 
--(void) setModel:(GorillasProjectileModel)aModel type:(GorillasPlayerType)aType {
-    
     self.model = aModel;
     self.type = aType;
-    
+
     [self.banana setTexture:[[CCTextureCache sharedTextureCache] addImage:[self modelFile]]];
 }
 
+- (CCSprite *)bananaForThrowFrom:(GorillaLayer *)gorilla {
 
--(CCSprite *)bananaForThrowFrom:(GorillaLayer *)gorilla {
-    
     [self setModel:gorilla.projectileModel type:gorilla.type];
     self.banana.position = gorilla.position;
     self.banana.scale = gorilla.scale;
@@ -67,32 +63,28 @@
     return self.banana;
 }
 
+- (void)onEnter {
 
--(void) onEnter {
-    
     [super onEnter];
-    
+
     [self addChild:self.banana];
     [self.banana runAction:[CCRepeatForever actionWithAction:[CCRotateBy actionWithDuration:1 angle:360]]];
 }
 
+- (void)onExit {
 
--(void) onExit {
-    
     [super onExit];
 
     [self.banana stopAllActions];
     [self removeChild:self.banana cleanup:YES];
 }
 
+- (BOOL)throwing {
 
--(BOOL) throwing {
-    
     return [self.banana tag] == GorillasTagBananaFlying;
 }
 
-
--(NSString *) modelFile {
+- (NSString *)modelFile {
 
     NSString *modelName, *typeName;
     switch (self.model) {
@@ -120,10 +112,8 @@
             err(@"Active gorilla model not implemented.");
             return nil;
     }
-    
+
     return [NSString stringWithFormat:@"%@-%@.png", modelName, typeName];
 }
-
-
 
 @end

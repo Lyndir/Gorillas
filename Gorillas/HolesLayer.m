@@ -38,16 +38,16 @@
     GLuint holeVertexObject;
 }
 
--(id) init {
-    
-    if(!(self = [super init]))
+- (id)init {
+
+    if (!(self = [super init]))
         return self;
-    
-    texture     = [[CCTextureCache sharedTextureCache] addImage: @"hole.png"];
-    holes       = calloc( sizeof(glPoint), 0 );
-    holeCount   = 0;
-    
-    self.scale  = GorillasModelScale(1.2f, texture.contentSize.width);
+
+    texture = [[CCTextureCache sharedTextureCache] addImage:@"hole.png"];
+    holes = calloc( sizeof(glPoint), 0 );
+    holeCount = 0;
+
+    self.scale = GorillasModelScale( 1.2f, texture.contentSize.width );
     self.shaderProgram = [PearlGLShaders pointSpriteShader];
 
     glGenVertexArrays( 1, &holeVertexObject );
@@ -71,33 +71,30 @@
     return self;
 }
 
+- (BOOL)isHoleAtWorld:(CGPoint)worldPos {
 
--(BOOL)isHoleAtWorld: (CGPoint)worldPos {
-    
     CGPoint posPx = [self convertToNodeSpace:worldPos]; //ccpMult([self convertToNodeSpace:worldPos], CC_CONTENT_SCALE_FACTOR());
-    CGFloat d = powf(texture.contentSize.width / 4, 2);
-    for(NSUInteger h = 0; h < holeCount; ++h) {
+    CGFloat d = powf( texture.contentSize.width / 4, 2 );
+    for (NSUInteger h = 0; h < holeCount; ++h) {
         CGFloat x = holes[h].p.x - posPx.x, y = holes[h].p.y - posPx.y;
-        if ((powf(x, 2) + powf(y, 2)) < d)
+        if ((powf( x, 2 ) + powf( y, 2 )) < d)
             return YES;
     }
-    
+
     return NO;
-} 
+}
 
+- (void)addHoleAtWorld:(CGPoint)worldPos {
 
--(void) addHoleAtWorld:(CGPoint)worldPos {
-    
-    holes = realloc(holes, sizeof(glPoint) * ++holeCount);
+    holes = realloc( holes, sizeof(glPoint) * ++holeCount );
     holes[holeCount - 1].p = [self convertToNodeSpace:worldPos]; //ccpMult([self convertToNodeSpace:worldPos], CC_CONTENT_SCALE_FACTOR());
-    holes[holeCount - 1].c = ccc4l(0xffffffffUL);
+    holes[holeCount - 1].c = ccc4l( 0xffffffffUL );
     holes[holeCount - 1].s = texture.contentSize.width * self.scale * CC_CONTENT_SCALE_FACTOR(); // Scale seems to not affect pointsize.
 
     self.dirty = YES;
 }
 
-
--(void) draw {
+- (void)draw {
 
     if (!holeCount)
         return;
@@ -115,26 +112,23 @@
     CC_NODE_DRAW_SETUP();
 
     // Blend our transparent white with DST.  If SRC, make DST transparent, hide original DST.
-    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE);
-    ccGLBlendFunc(GL_ZERO, GL_SRC_ALPHA);
-    ccGLBindTexture2D(texture.name);
+    glColorMask( GL_FALSE, GL_FALSE, GL_FALSE, GL_TRUE );
+    ccGLBlendFunc( GL_ZERO, GL_SRC_ALPHA );
+    ccGLBindTexture2D( texture.name );
     ccGLBindVAO( holeVertexObject );
-    glDrawArrays(GL_POINTS, 0, (GLsizei)holeCount);
-    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+    glDrawArrays( GL_POINTS, 0, (GLsizei)holeCount );
+    glColorMask( GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE );
 
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
     CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"HolesLayer - draw");
 }
 
+- (void)dealloc {
 
--(void) dealloc {
-    
     glDeleteVertexArrays( 1, &holeVertexObject );
-    glDeleteBuffers(1, &holeVertexBuffer);
+    glDeleteBuffers( 1, &holeVertexBuffer );
     CHECK_GL_ERROR_DEBUG();
-    
 }
-
 
 @end

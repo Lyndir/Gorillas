@@ -8,7 +8,6 @@
 
 #import "PearlCCMenuLayer.h"
 
-
 @interface GMenuLayer : PearlCCMenuLayer
 
 @end

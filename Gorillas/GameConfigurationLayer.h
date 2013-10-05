@@ -24,9 +24,8 @@
 
 #import "GConfigMenuLayer.h"
 
+@interface GameConfigurationLayer : GConfigMenuLayer<PearlCCMenuDelegate, PearlCCConfigMenuDelegate> {
 
-@interface GameConfigurationLayer : GConfigMenuLayer <PearlCCMenuDelegate, PearlCCConfigMenuDelegate> {
-    
 @private
 }
 

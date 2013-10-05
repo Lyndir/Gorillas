@@ -25,9 +25,7 @@
 #import "PearlResettable.h"
 #import "GMenuLayer.h"
 
-
-@interface ConfigurationSectionLayer : GMenuLayer <PearlResettable, PearlCCMenuDelegate> {
-
+@interface ConfigurationSectionLayer : GMenuLayer<PearlResettable, PearlCCMenuDelegate> {
 }
 
 @end

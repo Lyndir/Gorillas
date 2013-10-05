@@ -26,45 +26,44 @@
 #import <GameKit/GameKit.h>
 #import "PearlResettable.h"
 
+@interface GorillaLayer : CCSprite<PearlResettable>
 
-@interface GorillaLayer : CCSprite <PearlResettable>
+@property(nonatomic, readonly, copy) NSString *name;
+@property(nonatomic, readonly, assign) NSUInteger teamIndex;
+@property(nonatomic, readonly, assign) NSUInteger globalIndex;
 
-@property (nonatomic, readonly, copy) NSString                      *name;
-@property (nonatomic, readonly, assign) NSUInteger                  teamIndex;
-@property (nonatomic, readonly, assign) NSUInteger                  globalIndex;
+@property(nonatomic, readonly, copy) NSString *playerID;
+@property(nonatomic, readwrite, strong) GKPlayer *player;
+@property(nonatomic, readwrite, assign) GKPlayerConnectionState connectionState;
 
-@property (nonatomic, readonly, copy) NSString                      *playerID;
-@property (nonatomic, readwrite, strong) GKPlayer                   *player;
-@property (nonatomic, readwrite, assign) GKPlayerConnectionState    connectionState;
+@property(nonatomic, readonly, assign) int initialLives;
+@property(nonatomic, readonly, assign) int lives;
+@property(nonatomic, readwrite, assign) BOOL active;
+@property(nonatomic, readwrite, assign) BOOL ready;
+@property(nonatomic, readwrite, assign) NSUInteger turns;
+@property(nonatomic, readwrite, assign) float zoom;
 
-@property (nonatomic, readonly, assign) int                         initialLives;
-@property (nonatomic, readonly, assign) int                         lives;
-@property (nonatomic, readwrite, assign) BOOL                       active;
-@property (nonatomic, readwrite, assign) BOOL                       ready;
-@property (nonatomic, readwrite, assign) NSUInteger                 turns;
-@property (nonatomic, readwrite, assign) float                      zoom;
+@property(nonatomic, readonly, strong) CCSprite *bobber;
+@property(nonatomic, readwrite, assign) GorillasPlayerModel model;
+@property(nonatomic, readwrite, assign) GorillasPlayerType type;
 
-@property (nonatomic, readonly, strong) CCSprite                    *bobber;
-@property (nonatomic, readwrite, assign) GorillasPlayerModel        model;
-@property (nonatomic, readwrite, assign) GorillasPlayerType         type;
-
-@property (nonatomic, readonly, assign) GorillasProjectileModel     projectileModel;
-@property (nonatomic, readonly, assign) BOOL                        alive;
+@property(nonatomic, readonly, assign) GorillasProjectileModel projectileModel;
+@property(nonatomic, readonly, assign) BOOL alive;
 
 + (void)prepareCreation;
 + (GorillaLayer *)gorillaWithType:(GorillasPlayerType)aType playerID:(NSString *)aPlayerId;
 - (id)initWithType:(GorillasPlayerType)aType playerID:(NSString *)aPlayerId;
 
--(BOOL) human;
--(BOOL) local;
--(BOOL) hitsGorilla: (CGPoint)pos;
--(void) danceHit;
--(void) danceKill;
--(void) danceVictory;
--(void) threw:(CGPoint)v;
--(void) applyZoom;
--(void) kill;
--(void) killDead;
--(void) revive;
+- (BOOL)human;
+- (BOOL)local;
+- (BOOL)hitsGorilla:(CGPoint)pos;
+- (void)danceHit;
+- (void)danceKill;
+- (void)danceVictory;
+- (void)threw:(CGPoint)v;
+- (void)applyZoom;
+- (void)kill;
+- (void)killDead;
+- (void)revive;
 
 @end

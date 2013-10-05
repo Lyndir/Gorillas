@@ -18,7 +18,6 @@
 
 #import "cocos2d.h"
 
-
 @interface MenuItemDescription : CCMenuItemLabel
 
 + (instancetype)itemWithString:(NSString *)title;

@@ -36,26 +36,25 @@ static NSString *const GORILLAS_PLUS = @"com.lyndir.lhunath.Gorillas.plus";
 
 @interface GorillasAppDelegate : PearlCocos2DAppDelegate
 
-@property (nonatomic, readonly, strong) GameLayer                   *gameLayer;
-@property (nonatomic, readonly, strong) MainMenuLayer               *mainMenuLayer;
-@property (nonatomic, readonly, strong) BuyPlusLayer               *buyPlusLayer;
-@property (nonatomic, readonly, strong) ConfigurationSectionLayer   *configLayer;
-@property (nonatomic, readonly, strong) GameConfigurationLayer      *gameConfigLayer;
-@property (nonatomic, readonly, strong) AVConfigurationLayer        *avConfigLayer;
-@property (nonatomic, readonly, strong) GHUDLayer                   *hudLayer;
-@property (nonatomic, readonly, strong) NetController               *netController;
-@property (nonatomic, readonly, strong) NSDictionary *products;
-@property (nonatomic) BOOL plusAvailable;
+@property(nonatomic, readonly, strong) GameLayer *gameLayer;
+@property(nonatomic, readonly, strong) MainMenuLayer *mainMenuLayer;
+@property(nonatomic, readonly, strong) BuyPlusLayer *buyPlusLayer;
+@property(nonatomic, readonly, strong) ConfigurationSectionLayer *configLayer;
+@property(nonatomic, readonly, strong) GameConfigurationLayer *gameConfigLayer;
+@property(nonatomic, readonly, strong) AVConfigurationLayer *avConfigLayer;
+@property(nonatomic, readonly, strong) GHUDLayer *hudLayer;
+@property(nonatomic, readonly, strong) NetController *netController;
+@property(nonatomic, readonly, strong) NSDictionary *products;
+@property(nonatomic) BOOL plusAvailable;
 
--(void) showMainMenu;
--(void) showMainMenuForPlayers:(NSArray *)aPlayersToInvite;
--(void) showUpgrade;
--(void) showConfiguration;
--(void) showGameConfiguration;
--(void) showAVConfiguration;
+- (void)showMainMenu;
+- (void)showMainMenuForPlayers:(NSArray *)aPlayersToInvite;
+- (void)showUpgrade;
+- (void)showConfiguration;
+- (void)showGameConfiguration;
+- (void)showAVConfiguration;
 
-+(GorillasAppDelegate *) get;
-
++ (GorillasAppDelegate *)get;
 
 @end
 

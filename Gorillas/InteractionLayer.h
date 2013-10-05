@@ -26,8 +26,8 @@
 
 @interface InteractionLayer : CCLayer
 
-@property (nonatomic, readwrite) CGPoint aim;
+@property(nonatomic, readwrite) CGPoint aim;
 
--(BOOL) mayThrow;
+- (BOOL)mayThrow;
 
 @end

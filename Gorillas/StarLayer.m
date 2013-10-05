@@ -23,7 +23,6 @@
 //
 
 #import "StarLayer.h"
-#import "GorillasAppDelegate.h"
 #import "PearlGLShaders.h"
 #define maxStarSize 2
 
@@ -40,61 +39,59 @@
     GLuint starVertexObject;
 }
 
--(id) initWidthDepth:(float)aDepth {
+- (id)initWidthDepth:(float)aDepth {
 
     if (!(self = [super init]))
         return self;
-    
-    starVertexObject    = 0;
-    starVertexBuffer    = 0;
-    starCount           = -1;
-    depth               = aDepth;
-    self.shaderProgram  = [PearlGLShaders pointSizeShader];
-    
+
+    starVertexObject = 0;
+    starVertexBuffer = 0;
+    starCount = -1;
+    depth = aDepth;
+    self.shaderProgram = [PearlGLShaders pointSizeShader];
+
     return self;
 }
 
-
 - (void)onEnter {
-    
+
     [self reset];
-    
+
     [self schedule:@selector(update:)];
 
     [super onEnter];
 }
 
+- (void)reset {
 
--(void) reset {
-    
     if (starCount == [[GorillasConfig get].starAmount intValue])
         return;
 
-    starCount           = [[GorillasConfig get].starAmount intValue];
-    ccColor4B starColor = ccc4l([[GorillasConfig get].starColor unsignedLongValue]);
-    starColor.r         *= depth;
-    starColor.g         *= depth;
-    starColor.b         *= depth;
-    CGFloat starSize    = fmaxf(1.0f, maxStarSize * depth);
-    
-    free(starVertices);
-    starVertices = calloc((unsigned)starCount, sizeof(glPoint));
-    
-    CGSize winSize      = [CCDirector sharedDirector].winSize;
+    starCount = [[GorillasConfig get].starAmount intValue];
+    ccColor4B starColor = ccc4l( [[GorillasConfig get].starColor unsignedLongValue] );
+    starColor.r *= depth;
+    starColor.g *= depth;
+    starColor.b *= depth;
+    CGFloat starSize = fmaxf( 1.0f, maxStarSize * depth );
+
+    free( starVertices );
+    starVertices = calloc( (unsigned)starCount, sizeof(glPoint) );
+
+    CGSize winSize = [CCDirector sharedDirector].winSize;
     for (NSInteger s = 0; s < starCount; ++s) {
-        starVertices[s].p   = ccp(PearlGameRandomFor(GorillasGameRandomStars) % (int)winSize.width,
-                                  PearlGameRandomFor(GorillasGameRandomStars) % (int)winSize.height);
-        starVertices[s].c   = starColor;
-        starVertices[s].s   = starSize;
+        starVertices[s].p = ccp( PearlGameRandomFor(GorillasGameRandomStars) % (int)winSize.width,
+                PearlGameRandomFor(GorillasGameRandomStars) % (int)winSize.height );
+        starVertices[s].c = starColor;
+        starVertices[s].s = starSize;
     }
 
     glDeleteVertexArrays( 1, &starVertexObject );
     glGenVertexArrays( 1, &starVertexObject );
     ccGLBindVAO( starVertexObject );
-    glDeleteBuffers(1, &starVertexBuffer);
-    glGenBuffers(1, &starVertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, starVertexBuffer);
-    glBufferData(GL_ARRAY_BUFFER, (signed)sizeof(glPoint) * starCount, starVertices, GL_DYNAMIC_DRAW);
+    glDeleteBuffers( 1, &starVertexBuffer );
+    glGenBuffers( 1, &starVertexBuffer );
+    glBindBuffer( GL_ARRAY_BUFFER, starVertexBuffer );
+    glBufferData( GL_ARRAY_BUFFER, (signed)sizeof(glPoint) * starCount, starVertices, GL_DYNAMIC_DRAW );
     glEnableVertexAttribArray( kCCVertexAttrib_Position );
     glVertexAttribPointer( kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(glPoint), (GLvoid *)offsetof(glPoint, p));
     glEnableVertexAttribArray( kPearlGLVertexAttrib_Size );
@@ -102,29 +99,27 @@
     glEnableVertexAttribArray( kCCVertexAttrib_Color );
     glVertexAttribPointer( kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(glPoint), (GLvoid *)offsetof(glPoint, c));
     ccGLBindVAO( 0 );
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer( GL_ARRAY_BUFFER, 0 );
     glDisableVertexAttribArray( kPearlGLVertexAttrib_Size );
     CHECK_GL_ERROR_DEBUG();
 }
 
+- (void)update:(ccTime)dt {
 
--(void) update:(ccTime)dt {
+    CGSize winSize = [CCDirector sharedDirector].winSize;
+    NSInteger speed = [[GorillasConfig get].starSpeed integerValue];
 
-    CGSize winSize      = [CCDirector sharedDirector].winSize;
-    NSInteger speed     = [[GorillasConfig get].starSpeed integerValue];
-    
     for (NSInteger s = 0; s < starCount; ++s) {
         starVertices[s].p.x -= dt * speed;
-        
+
         if (starVertices[s].p.x < 0)
             starVertices[s].p.x = winSize.width + PearlGameRandomFor(GorillasGameRandomStars) % (int)winSize.width / 7;
     }
-    
+
     self.dirty = YES;
 }
 
-
--(void) draw {
+- (void)draw {
 
     [super draw];
 
@@ -138,25 +133,22 @@
 
     CC_NODE_DRAW_SETUP();
     ccGLBindVAO( starVertexObject );
-    glDrawArrays(GL_POINTS, 0, starCount);
+    glDrawArrays( GL_POINTS, 0, starCount );
 
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
     CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"StarLayer - draw");
 }
 
-
--(void) dealloc {
+- (void)dealloc {
 
     glDeleteVertexArrays( 1, &starVertexObject );
-    glDeleteBuffers(1, &starVertexBuffer);
+    glDeleteBuffers( 1, &starVertexBuffer );
     starVertexBuffer = 0;
     CHECK_GL_ERROR_DEBUG();
-    
-    free(starVertices);
+
+    free( starVertices );
     starVertices = nil;
-
 }
-
 
 @end

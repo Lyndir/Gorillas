@@ -29,8 +29,7 @@
 
 @implementation BuyPlusLayer
 
-
--(id) init {
+- (id)init {
 
     SKProduct *product = (SKProduct *)([GorillasAppDelegate get].products)[GORILLAS_PLUS];
     NSNumberFormatter *priceFormatter = [NSNumberFormatter new];
@@ -53,26 +52,23 @@
 
     [[NSNotificationCenter defaultCenter] addObserverForName:NSUserDefaultsDidChangeNotification object:nil queue:nil
                                                   usingBlock:^(NSNotification *note) {
-                                                      if ([[GorillasConfig get].plusEnabled boolValue])
-                                                          if ([[GorillasAppDelegate get] isLayerShowing:self])
-                                                              [[GorillasAppDelegate get] popLayer];
+                                                      if ([[GorillasConfig get].plusEnabled boolValue]) if ([[GorillasAppDelegate get]
+                                                              isLayerShowing:self])
+                                                          [[GorillasAppDelegate get] popLayer];
                                                   }];
 
     return self;
 }
 
--(void) buy: (id) sender {
+- (void)buy:(id)sender {
 
     [[SKPaymentQueue defaultQueue] addPayment:
             [SKPayment paymentWithProduct:([GorillasAppDelegate get].products)[GORILLAS_PLUS]]];
 }
 
--(void) back: (id) sender {
+- (void)back:(id)sender {
 
     [[GorillasAppDelegate get] popLayer];
 }
-
-
-
 
 @end

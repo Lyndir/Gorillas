@@ -24,64 +24,65 @@
 
 #import "GHUDLayer.h"
 #import "GorillasAppDelegate.h"
-#import "ShadeTo.h"
 
-@interface GHUDLayer ()
+@interface GHUDLayer()
 
-@property (nonatomic, readwrite, strong) CCLabelAtlas   *skillSprite;
-@property (nonatomic, readwrite, strong) CCLabelAtlas   *skillCount;
-@property (nonatomic, readwrite, strong) CCLayer        *livesLayer;
-@property (nonatomic, readwrite, strong) CCSprite       *infiniteLives;
+@property(nonatomic, readwrite, strong) CCLabelAtlas *skillSprite;
+@property(nonatomic, readwrite, strong) CCLabelAtlas *skillCount;
+@property(nonatomic, readwrite, strong) CCLayer *livesLayer;
+@property(nonatomic, readwrite, strong) CCSprite *infiniteLives;
 
 @end
 
-
 @implementation GHUDLayer
 
--(id) init {
-    
-    if(!(self = [super init]))
+- (id)init {
+
+    if (!(self = [super init]))
         return self;
 
     // Score.
     self.skillSprite = [CCLabelTTF labelWithString:@"Skill:" fontName:@"Bonk" fontSize:[[PearlConfig get].smallFontSize floatValue]];
     self.skillCount = [CCLabelTTF labelWithString:@"00%" fontName:@"Bonk" fontSize:[[PearlConfig get].smallFontSize floatValue]];
-    [self.skillSprite setPosition:ccp(5 + self.scoreSprite.contentSize.width + 5 + self.scoreCount.contentSize.width + 15 + self.skillSprite.contentSize.width / 2, self.contentSize.height / 2)];
-    [self.skillCount setPosition:ccp(5 + self.scoreSprite.contentSize.width + 5 + self.scoreCount.contentSize.width + 15 + self.skillSprite.contentSize.width + 5 + self.skillCount.contentSize.width / 2, self.contentSize.height / 2)];
+    [self.skillSprite setPosition:ccp(
+            5 + self.scoreSprite.contentSize.width + 5 + self.scoreCount.contentSize.width + 15 + self.skillSprite.contentSize.width / 2,
+            self.contentSize.height / 2 )];
+    [self.skillCount setPosition:ccp(
+            5 + self.scoreSprite.contentSize.width + 5 + self.scoreCount.contentSize.width + 15 + self.skillSprite.contentSize.width + 5 + self.skillCount.contentSize.width / 2,
+            self.contentSize.height / 2 )];
     [self addChild:self.skillSprite];
     [self addChild:self.skillCount];
-    
+
     // Lives.
     self.livesLayer = [CCLayer node];
     [self.livesLayer setVisible:NO];
     self.infiniteLives = [CCSprite spriteWithFile:@"infinite-shape.png"];
-    [self.infiniteLives setPosition:ccp([self.infiniteLives contentSize].width / 2, self.contentSize.height / 2)];
+    [self.infiniteLives setPosition:ccp( [self.infiniteLives contentSize].width / 2, self.contentSize.height / 2 )];
     [self.infiniteLives setVisible:NO];
-    [self.livesLayer setPosition:ccp(20, 0)];
+    [self.livesLayer setPosition:ccp( 20, 0 )];
     [self addChild:self.livesLayer];
     [self.livesLayer addChild:self.infiniteLives];
-    
+
     return self;
 }
 
-
 - (void)reset {
-    
+
     [super reset];
-    
+
     int lives = [GorillasAppDelegate get].gameLayer.activeGorilla.lives;
-    
+
     // Make sure there are enough life sprites on the livesLayer.
     NSUInteger l = [[self.livesLayer children] count] - 1;
-    while((int)[[self.livesLayer children] count] - 1 < lives) {
+    while ((int)[[self.livesLayer children] count] - 1 < lives) {
         CCSprite *life = [CCSprite spriteWithFile:@"gorilla-shape.png"];
-        [life setPosition:ccp(l++ * [life contentSize].width + [life contentSize].width / 2, self.contentSize.height / 2)];
-        
+        [life setPosition:ccp( l++ * [life contentSize].width + [life contentSize].width / 2, self.contentSize.height / 2 )];
+
         [self.livesLayer addChild:life];
     }
-    
+
     // Toggle the visibility of the lives depending on how many are left.
-    for(NSUInteger l = 1; l < [[self.livesLayer children] count]; ++l)
+    for (NSUInteger l = 1; l < [[self.livesLayer children] count]; ++l)
         [[[self.livesLayer children] objectAtIndex:l] setVisible:(int)l - 1 < lives];
     [self.infiniteLives setVisible:lives < 0];
 
@@ -89,7 +90,8 @@
     if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureScore]) {
         [self.scoreCount setVisible:YES];
         [self.scoreSprite setVisible:YES];
-    } else {
+    }
+    else {
         [self.scoreCount setVisible:NO];
         [self.scoreSprite setVisible:NO];
     }
@@ -99,26 +101,28 @@
         float skill = [[GorillasConfig get].skill floatValue];
         if (self.throwSkill)
             skill = skill / 2 + self.throwSkill;
-        
+
         NSString *prefix = @"", *suffix = @"%";
-        if ([PearlLocalize(@"menu.config.direction") isEqualToString:@"rtl"]) {
+        if ([PearlLocalize( @"menu.config.direction" ) isEqualToString:@"rtl"]) {
             prefix = @"%";
             suffix = @"";
         }
-        [self.skillCount setString:[NSString stringWithFormat:@"%@%02d%@", prefix, (int) (fminf(0.99f, skill) * 100), suffix]];
+        [self.skillCount setString:[NSString stringWithFormat:@"%@%02d%@", prefix, (int)(fminf( 0.99f, skill ) * 100), suffix]];
         [self.skillCount setVisible:YES];
         [self.skillSprite setVisible:YES];
-    } else {
+    }
+    else {
         [self.skillCount setVisible:NO];
         [self.skillSprite setVisible:NO];
     }
-    
+
     // Put lives on HUD.
     if ([[GorillasAppDelegate get].gameLayer isEnabled:GorillasFeatureLivesPl]
         && [GorillasAppDelegate get].gameLayer.activeGorilla.lives
         && [[GorillasAppDelegate get].gameLayer checkGameStillOn]) {
         [self.livesLayer setVisible:YES];
-    } else
+    }
+    else
         [self.livesLayer setVisible:NO];
 }
 
@@ -128,11 +132,9 @@
 }
 
 - (void)setThrowSkill:(float)throwSkill {
-    
+
     _throwSkill = throwSkill;
     [self reset];
 }
-
-
 
 @end

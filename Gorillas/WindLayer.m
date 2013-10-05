@@ -23,12 +23,10 @@
 //
 
 #import "WindLayer.h"
-#import "GorillasAppDelegate.h"
 
+@interface WindLayer(Private)
 
-@interface WindLayer (Private)
-
--(void) updateSystems;
+- (void)updateSystems;
 
 @end
 
@@ -41,15 +39,14 @@
     CCSprite *head, *body, *tail;
 }
 
+- (id)init {
 
-- (id) init {
-    
     if (!(self = [super init]))
         return self;
-    
+
     systems = [[NSMutableArray alloc] init];
     affectAngles = [[NSMutableArray alloc] init];
-    
+
     head = [[CCSprite alloc] initWithFile:@"arrow.head.png"];
     body = [[CCSprite alloc] initWithFile:@"arrow.body.png"];
     //tail = [[CCSprite alloc] initWithFile:@"arrow.tail.png"];
@@ -57,93 +54,86 @@
     [self addChild:head z:1];
     [self addChild:body z:0];
     //[self addChild:tail z:1];
-    
+
     // Dynamic wind.
     // Disabled for now, it makes the banana's course fluxuate too much.
     // Would need to revise banana course calculation; it currently assumes
     // the active wind has been applied to the banana the whole time it's
     // been flying already (assumes constant wind).
     incrementDuration = 0.5f;
-    
+
     return self;
 }
 
+- (void)onEnter {
 
--(void) onEnter {
-    
     [self reset];
-    
+
     [super onEnter];
 }
 
-
--(void) reset {
+- (void)reset {
 
     _wind = (PearlGameRandom() % 100) / 100.0f - 0.5f;
 
     [self updateSystems];
 }
 
+- (void)updateSystems {
 
--(void) updateSystems {
-    
     float windRange = (3.0f * [[GorillasConfig get].windModifier floatValue]);
-    head.position   = ccp( _wind * windRange, 0);
-    body.position   = ccp(0, 0);
-    tail.position   = ccp(-_wind * windRange, 0);
-    body.scaleX     = _wind * windRange * 2 / body.contentSize.width;
-    head.rotation   = _wind < 0? 180: 0;
-    
-    @synchronized(self) {
-        for(NSUInteger i = 0; i < [systems count]; ++i) {
+    head.position = ccp( _wind * windRange, 0 );
+    body.position = ccp( 0, 0 );
+    tail.position = ccp( -_wind * windRange, 0 );
+    body.scaleX = _wind * windRange * 2 / body.contentSize.width;
+    head.rotation = _wind < 0? 180: 0;
+
+    @synchronized (self) {
+        for (NSUInteger i = 0; i < [systems count]; ++i) {
             CCParticleSystem *system = systems[i];
-            
-            if([affectAngles[i] boolValue])
+
+            if ([affectAngles[i] boolValue])
                 [system setAngle:270 + 45 * _wind];
-            
-            [system setGravity:ccp( _wind * 100 / [system life], [system gravity].y)];
+
+            [system setGravity:ccp( _wind * 100 / [system life], [system gravity].y )];
         }
     }
 }
 
+- (void)registerSystem:(CCParticleSystem *)system affectAngle:(BOOL)affectAngle {
 
--(void) registerSystem:(CCParticleSystem *)system affectAngle:(BOOL)affectAngle {
-    
-    @synchronized(self) {
-        if(!system || [systems containsObject:system])
+    @synchronized (self) {
+        if (!system || [systems containsObject:system])
             return;
-    
+
         [systems addObject:system];
         [affectAngles addObject:@(affectAngle)];
     }
-    
-    if(affectAngle)
+
+    if (affectAngle)
         [system setAngle:270 + 45 * _wind];
-    [system setGravity:ccp( _wind * 100 / [system life], [system gravity].y)];
+    [system setGravity:ccp( _wind * 100 / [system life], [system gravity].y )];
 }
 
+- (void)unregisterSystem:(CCParticleSystem *)system {
 
--(void) unregisterSystem:(CCParticleSystem *)system {
-    
-    if(!system)
+    if (!system)
         return;
-    
-    @synchronized(self) {
+
+    @synchronized (self) {
         [systems removeObject:system];
     }
 }
 
-
 - (ccColor3B)color {
-    
+
     return head.color;
 }
 
 - (GLubyte)opacity {
-    
+
     return head.opacity;
 }
-
 
 - (void)setColor:(ccColor3B)aColor {
 
@@ -152,8 +142,7 @@
     tail.color = aColor;
 }
 
-
-- (void)setOpacity: (GLubyte)anOpacity {
+- (void)setOpacity:(GLubyte)anOpacity {
 
     head.opacity = anOpacity;
     body.opacity = anOpacity;
@@ -219,21 +208,19 @@
 }*/
 
 
--(void) dealloc {
-    
+- (void)dealloc {
+
     head = nil;
-    
+
     body = nil;
-    
+
     tail = nil;
 
-    @synchronized(self) {
+    @synchronized (self) {
         systems = nil;
-        
+
         affectAngles = nil;
     }
-    
 }
-
 
 @end

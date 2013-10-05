@@ -26,58 +26,58 @@
 
 @interface CityTheme : NSObject
 
-@property (nonatomic, readonly) NSUInteger          varFloors;
-@property (nonatomic, readonly) NSUInteger          fixedFloors;
-@property (nonatomic, readonly) NSUInteger          buildingAmount;
-@property (nonatomic, readonly) NSArray     *buildingColors;
+@property(nonatomic, readonly) NSUInteger varFloors;
+@property(nonatomic, readonly) NSUInteger fixedFloors;
+@property(nonatomic, readonly) NSUInteger buildingAmount;
+@property(nonatomic, readonly) NSArray *buildingColors;
 
-@property (nonatomic, readonly) NSUInteger          windowAmount;
-@property (nonatomic, readonly) unsigned long       windowColorOn;
-@property (nonatomic, readonly) unsigned long       windowColorOff;
+@property(nonatomic, readonly) NSUInteger windowAmount;
+@property(nonatomic, readonly) unsigned long windowColorOn;
+@property(nonatomic, readonly) unsigned long windowColorOff;
 
-@property (nonatomic, readonly) unsigned long       skyColor;
-@property (nonatomic, readonly) unsigned long       starColor;
-@property (nonatomic, readonly) NSUInteger          starAmount;
+@property(nonatomic, readonly) unsigned long skyColor;
+@property(nonatomic, readonly) unsigned long starColor;
+@property(nonatomic, readonly) NSUInteger starAmount;
 
-@property (nonatomic, readonly) float               windModifier;
-@property (nonatomic, readonly) NSUInteger          gravity;
+@property(nonatomic, readonly) float windModifier;
+@property(nonatomic, readonly) NSUInteger gravity;
 
--(void) apply;
+- (void)apply;
 
-+(CityTheme *) themeWithVarFloors:(NSUInteger) nVarFloors
-                      fixedFloors:(NSUInteger) nFixedFloors
-                   buildingAmount:(NSUInteger) nBuildingAmount
-                   buildingColors:(NSArray *) nBuildingColors
++ (CityTheme *)themeWithVarFloors:(NSUInteger)nVarFloors
+                      fixedFloors:(NSUInteger)nFixedFloors
+                   buildingAmount:(NSUInteger)nBuildingAmount
+                   buildingColors:(NSArray *)nBuildingColors
 
-                     windowAmount:(NSUInteger) nWindowAmount
-                    windowColorOn:(unsigned long) nWindowColorOn
-                   windowColorOff:(unsigned long) nWindowColorOff
+                     windowAmount:(NSUInteger)nWindowAmount
+                    windowColorOn:(unsigned long)nWindowColorOn
+                   windowColorOff:(unsigned long)nWindowColorOff
 
-                         skyColor:(unsigned long) nSkyColor
-                        starColor:(unsigned long) nStarColor
-                       starAmount:(NSUInteger) nStarAmount
+                         skyColor:(unsigned long)nSkyColor
+                        starColor:(unsigned long)nStarColor
+                       starAmount:(NSUInteger)nStarAmount
 
-                     windModifier:(float) nWindModifier
-                          gravity:(NSUInteger) nGravity;
--(id) initWithVarFloors:(NSUInteger) nVarFloors
-            fixedFloors:(NSUInteger) nFixedFloors
-         buildingAmount:(NSUInteger) nBuildingAmount
-         buildingColors:(NSArray *) nBuildingColors
+                     windModifier:(float)nWindModifier
+                          gravity:(NSUInteger)nGravity;
+- (id)initWithVarFloors:(NSUInteger)nVarFloors
+            fixedFloors:(NSUInteger)nFixedFloors
+         buildingAmount:(NSUInteger)nBuildingAmount
+         buildingColors:(NSArray *)nBuildingColors
 
-           windowAmount:(NSUInteger) nWindowAmount
-          windowColorOn:(unsigned long) nWindowColorOn
-         windowColorOff:(unsigned long) nWindowColorOff
+           windowAmount:(NSUInteger)nWindowAmount
+          windowColorOn:(unsigned long)nWindowColorOn
+         windowColorOff:(unsigned long)nWindowColorOff
 
-               skyColor:(unsigned long) nSkyColor
-              starColor:(unsigned long) nStarColor
-             starAmount:(NSUInteger) nStarAmount
+               skyColor:(unsigned long)nSkyColor
+              starColor:(unsigned long)nStarColor
+             starAmount:(NSUInteger)nStarAmount
 
-           windModifier:(float) nWindModifier
-                gravity:(NSUInteger) nGravity;
+           windModifier:(float)nWindModifier
+                gravity:(NSUInteger)nGravity;
 
-+(NSDictionary *)                       getThemes;
-+(NSArray *)                            getThemeNames;
-+ (void)                                forgetThemes;
-+(NSString *)                           defaultThemeName;
++ (NSDictionary *)getThemes;
++ (NSArray *)getThemeNames;
++ (void)forgetThemes;
++ (NSString *)defaultThemeName;
 
 @end

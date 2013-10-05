@@ -8,19 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-
-@interface NetMessage : NSObject <NSCoding>
+@interface NetMessage : NSObject<NSCoding>
 
 @end
 
 @interface NetMessageElectHost : NetMessage
 
-@property (nonatomic, assign) NSUInteger            vote;
+@property(nonatomic, assign) NSUInteger vote;
 
-@property (nonatomic, strong) NSMutableDictionary   *playerVotes;
-@property (nonatomic, strong) NetMessageElectHost   *host;
-@property (nonatomic, strong) NSString              *hostID;
-@property (nonatomic, strong) NSArray               *orderedPlayerIDs;
+@property(nonatomic, strong) NSMutableDictionary *playerVotes;
+@property(nonatomic, strong) NetMessageElectHost *host;
+@property(nonatomic, strong) NSString *hostID;
+@property(nonatomic, strong) NSArray *orderedPlayerIDs;
 
 + (NetMessageElectHost *)electHostWithPlayerIDs:(NSArray *)aPlayerIDs;
 
@@ -53,7 +52,7 @@
 
 @interface NetMessageThrow : NetMessage
 
-@property (nonatomic, assign) CGPoint               normalizedVelocity;
+@property(nonatomic, assign) CGPoint normalizedVelocity;
 
 + (NetMessageThrow *)throwWithNormalizedVelocity:(CGPoint)aNormalizedVelocity;
 

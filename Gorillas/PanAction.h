@@ -26,8 +26,8 @@
 
 @interface PanAction : CCMoveBy
 
-+(PanAction *) actionWithSubNodes: (NSMutableArray *)nSubNodes duration: (ccTime)nDuration padding: (int) nPadding;
--(PanAction *) initWithSubNodes: (NSMutableArray *)nSubNodes duration: (ccTime)nDuration padding: (int)nPadding;
--(void) cancel;
++ (PanAction *)actionWithSubNodes:(NSMutableArray *)nSubNodes duration:(ccTime)nDuration padding:(int)nPadding;
+- (PanAction *)initWithSubNodes:(NSMutableArray *)nSubNodes duration:(ccTime)nDuration padding:(int)nPadding;
+- (void)cancel;
 
 @end

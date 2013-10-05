@@ -26,12 +26,12 @@
 
 @interface GameConfiguration : NSObject
 
-@property (nonatomic, copy, readonly) NSString          *name;
-@property (nonatomic, copy, readonly) NSString          *description;
-@property (nonatomic, assign, readonly) GorillasMode    mode;
-@property (nonatomic, assign, readonly) NSUInteger      singleplayerAICount;
-@property (nonatomic, assign, readonly) NSUInteger      multiplayerAICount;
-@property (nonatomic, assign, readonly) NSUInteger      multiplayerHumanCount;
+@property(nonatomic, copy, readonly) NSString *name;
+@property(nonatomic, copy, readonly) NSString *description;
+@property(nonatomic, assign, readonly) GorillasMode mode;
+@property(nonatomic, assign, readonly) NSUInteger singleplayerAICount;
+@property(nonatomic, assign, readonly) NSUInteger multiplayerAICount;
+@property(nonatomic, assign, readonly) NSUInteger multiplayerHumanCount;
 
 + (GameConfiguration *)configurationWithName:(NSString *)aName description:(NSString *)aDescription mode:(GorillasMode)aMode
                          singleplayerAICount:(NSUInteger)aSingleplayerAICount

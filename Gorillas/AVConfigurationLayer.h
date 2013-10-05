@@ -25,8 +25,7 @@
 #import "PearlCCShadeLayer.h"
 #import "PearlResettable.h"
 
-
-@interface AVConfigurationLayer : GConfigMenuLayer <PearlCCMenuDelegate, PearlCCConfigMenuDelegate> {
+@interface AVConfigurationLayer : GConfigMenuLayer<PearlCCMenuDelegate, PearlCCConfigMenuDelegate> {
 
 @private
 }

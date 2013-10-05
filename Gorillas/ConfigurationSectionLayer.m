@@ -25,8 +25,7 @@
 #import "ConfigurationSectionLayer.h"
 #import "GorillasAppDelegate.h"
 
-
-@interface ConfigurationSectionLayer ()
+@interface ConfigurationSectionLayer()
 
 - (void)game:(id)sender;
 - (void)av:(id)sender;
@@ -36,51 +35,42 @@
 
 @implementation ConfigurationSectionLayer
 
-
--(id) init {
+- (id)init {
 
     if (!(self = [super initWithDelegate:self logo:nil items:
-                  [CCMenuItemFont itemWithString:PearlLocalize(@"menu.gameplay")
-                                          target:self selector:@selector(game:)],
-                  [CCMenuItemFont itemWithString:PearlLocalize(@"menu.av")
-                                          target:self selector:@selector(av:)],
-                  nil]))
+            [CCMenuItemFont itemWithString:PearlLocalize( @"menu.gameplay" )
+                                    target:self selector:@selector(game:)],
+            [CCMenuItemFont itemWithString:PearlLocalize( @"menu.av" )
+                                    target:self selector:@selector(av:)],
+            nil]))
         return nil;
 
     return self;
 }
 
-
 - (void)reset {
 }
 
-
--(void) onEnter {
+- (void)onEnter {
 
     [self reset];
 
     [super onEnter];
 }
 
-
--(void) game: (id) sender {
+- (void)game:(id)sender {
 
     [[GorillasAppDelegate get] showGameConfiguration];
 }
 
-
--(void) av: (id) sender {
+- (void)av:(id)sender {
 
     [[GorillasAppDelegate get] showAVConfiguration];
 }
 
-
--(void) back: (id) sender {
+- (void)back:(id)sender {
 
     [[GorillasAppDelegate get] popLayer];
 }
-
-
-
 
 @end

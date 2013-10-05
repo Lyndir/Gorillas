@@ -33,24 +33,24 @@
 
 #define DEBUG_COLLISION 0
 
-@interface CityLayer : CCParallaxNode <PearlResettable>
+@interface CityLayer : CCParallaxNode<PearlResettable>
 
-@property (nonatomic, readonly) BananaLayer *bananaLayer;
-@property (nonatomic, readonly) GorillaLayer *hitGorilla;
+@property(nonatomic, readonly) BananaLayer *bananaLayer;
+@property(nonatomic, readonly) GorillaLayer *hitGorilla;
 
--(void) beginGame;
--(void) endGame;
+- (void)beginGame;
+- (void)endGame;
 
--(BOOL) hitsGorilla: (CGPoint)pos;
--(BOOL) hitsBuilding: (CGPoint)pos;
--(void) explodeAt: (CGPoint)point isGorilla:(BOOL)isGorilla;
--(void) throwFrom:(GorillaLayer *)gorilla withVelocity:(CGPoint)v;
--(void) nextGorilla;
+- (BOOL)hitsGorilla:(CGPoint)pos;
+- (BOOL)hitsBuilding:(CGPoint)pos;
+- (void)explodeAt:(CGPoint)point isGorilla:(BOOL)isGorilla;
+- (void)throwFrom:(GorillaLayer *)gorilla withVelocity:(CGPoint)v;
+- (void)nextGorilla;
 
--(void) message: (NSString *)msg on: (CCNode *)node;
--(CGPoint) calculateThrowFrom:(CGPoint)r0 to:(CGPoint)rt errorLevel:(CGFloat)l;
+- (void)message:(NSString *)msg on:(CCNode *)node;
+- (CGPoint)calculateThrowFrom:(CGPoint)r0 to:(CGPoint)rt errorLevel:(CGFloat)l;
 
 - (BuildingsLayer *)buildingsLayer;
--(CGRect) fieldInSpaceOf:(CCNode *)node;
+- (CGRect)fieldInSpaceOf:(CCNode *)node;
 
 @end

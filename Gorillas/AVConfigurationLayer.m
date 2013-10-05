@@ -24,54 +24,49 @@
 
 #import "GameConfigurationLayer.h"
 #import "GorillasAppDelegate.h"
-#import "CityTheme.h"
-
 
 @implementation AVConfigurationLayer
 
+- (id)init {
 
--(id) init {
-    
-    if(!(self = [super initWithDelegate:self logo:nil settings:
-                 @selector(music),
-                 @selector(soundFx),
-                 @selector(voice),
-                 @selector(vibration),
-                 nil]))
+    if (!(self = [super initWithDelegate:self logo:nil settings:
+            @selector(music),
+            @selector(soundFx),
+            @selector(voice),
+            @selector(vibration),
+            nil]))
         return self;
-        
+
     self.layout = PearlCCMenuLayoutColumns;
-    
+
     return self;
 }
 
--(void) onEnter {
-    
-    [[self itemForConfig:@selector(vibration)] setSelectedIndex:([[GorillasConfig get].vibration boolValue] && [PearlDeviceUtils isIPhone])? 1: 0];
-    
+- (void)onEnter {
+
+    [[self itemForConfig:@selector(vibration)]
+            setSelectedIndex:([[GorillasConfig get].vibration boolValue] && [PearlDeviceUtils isIPhone])? 1: 0];
+
     [super onEnter];
 }
 
 - (NSString *)labelForSetting:(SEL)setting {
 
     if (setting == @selector(music))
-        return PearlLocalize(@"menu.choose.fx.music");
+        return PearlLocalize( @"menu.choose.fx.music" );
     if (setting == @selector(soundFx))
-        return PearlLocalize(@"menu.choose.fx.sound");
+        return PearlLocalize( @"menu.choose.fx.sound" );
     if (setting == @selector(voice))
-        return PearlLocalize(@"menu.choose.fx.voice");
+        return PearlLocalize( @"menu.choose.fx.voice" );
     if (setting == @selector(vibration))
-        return PearlLocalize(@"menu.choose.fx.vibration");
-    
+        return PearlLocalize( @"menu.choose.fx.vibration" );
+
     return nil;
 }
 
--(void) back: (id) sender {
-    
+- (void)back:(id)sender {
+
     [[GorillasAppDelegate get] popLayer];
 }
-
-
-
 
 @end

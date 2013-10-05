@@ -22,16 +22,12 @@
 //  Copyright 2008-2009, lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import <CoreGraphics/CoreGraphics.h>
-#import <StoreKit/StoreKit.h>
 #import "MainMenuLayer.h"
 #import "GorillasAppDelegate.h"
-#import "PearlCCMenuItemSpacer.h"
-#import "PearlCCMenuItemTitle.h"
 
+@interface MainMenuLayer()
 
-@interface MainMenuLayer ()
-@property (nonatomic, strong) CCMenu *appMenu;
+@property(nonatomic, strong) CCMenu *appMenu;
 
 @end
 
@@ -41,8 +37,7 @@
     CCMenuItem *multiPlayerI, *singlePlayerI, *hotSeatI, *upgradeI;
 }
 
-
-- (id) init {
+- (id)init {
 
     if (!(self = [super initWithDelegate:self logo:nil items:nil]))
         return self;
@@ -64,11 +59,11 @@
         self.items = @[
                 [PearlCCMenuItemSpacer spacerSmall],
                 multiPlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
-                                                          selector:@selector(startMulti:)],
+                                                         selector:@selector(startMulti:)],
                 singlePlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
-                                                           selector:@selector(startSingle:)],
+                                                          selector:@selector(startSingle:)],
                 hotSeatI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
-                                                      selector:@selector(startHotSeat:)],
+                                                     selector:@selector(startHotSeat:)],
                 configurationI = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)],
                 descriptionT = [PearlCCMenuItemTitle itemWithString:@"description"],
                 [PearlCCMenuItemSpacer spacerNormal],
@@ -89,11 +84,12 @@
         self.items = @[
                 [PearlCCMenuItemSpacer spacerSmall],
                 singlePlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
-                                                           selector:@selector(startSingle:)],
+                                                          selector:@selector(startSingle:)],
                 configurationI = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)],
                 descriptionT = [PearlCCMenuItemTitle itemWithString:@"description"],
                 [PearlCCMenuItemSpacer spacerNormal],
-                upgradeI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(upgrade:)],
+                upgradeI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self
+                                                     selector:@selector(upgrade:)],
                 [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(scores:
                 )],
         ];
@@ -123,7 +119,7 @@
     [super doLoad];
 }
 
--(void)reset {
+- (void)reset {
 
     [super reset];
 
@@ -148,8 +144,7 @@
     hotSeatI.isEnabled = gameConfiguration.multiplayerHumanCount > 0;
 }
 
-
--(void) onEnter {
+- (void)onEnter {
 
     [self reset];
 
@@ -166,8 +161,7 @@
     [self.appMenu removeFromParentAndCleanup:NO];
 }
 
-
--(void) startSingle: (id) sender {
+- (void)startSingle:(id)sender {
 
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
     GameConfiguration *gameConfiguration = ([GorillasConfig get].gameConfigurations)[gameConfigurationIndex];
@@ -177,14 +171,13 @@
     [[GorillasAppDelegate get].gameLayer startGame];
 }
 
-
--(void) startMulti: (id) sender {
+- (void)startMulti:(id)sender {
 
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
     GameConfiguration *gameConfiguration = ([GorillasConfig get].gameConfigurations)[gameConfigurationIndex];
 
     if (!gameConfiguration.multiplayerHumanCount || ![GKLocalPlayer localPlayer].authenticated)
-        // Multiplayer is not supported or game center is unavailable.
+            // Multiplayer is not supported or game center is unavailable.
         return;
 
     GKMatchRequest *matchRequest = [GKMatchRequest new];
@@ -196,8 +189,7 @@
     [[GorillasAppDelegate get].netController beginRequest:matchRequest];
 }
 
-
--(void) startHotSeat: (id) sender {
+- (void)startHotSeat:(id)sender {
 
     NSUInteger gameConfigurationIndex = [[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue];
     GameConfiguration *gameConfiguration = ([GorillasConfig get].gameConfigurations)[gameConfigurationIndex];
@@ -207,19 +199,16 @@
     [[GorillasAppDelegate get].gameLayer startGame];
 }
 
-
 - (void)gameConfiguration:(id)sender {
 
     [GorillasConfig get].activeGameConfigurationIndex = @(([[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue] + 1)
-                                                         % [[GorillasConfig get].gameConfigurations count]);
+                                                          % [[GorillasConfig get].gameConfigurations count]);
 }
-
 
 - (void)upgrade:(id)sender {
 
     [[GorillasAppDelegate get] showUpgrade];
 }
-
 
 - (void)settings:(id)sender {
 
@@ -242,27 +231,21 @@
     [[CCDirector sharedDirector] resume];
 }
 
-
-- (void)back:(id) sender {
+- (void)back:(id)sender {
 
     [[GorillasAppDelegate get] popLayer];
 }
 
-
-- (void)appDeBlock:(id) sender {
-
-    [[UIApplication sharedApplication] openURL:
-     [NSURL URLWithString:@"http://itunes.apple.com/app/id325058485"]];
-}
-
-
-- (void)appMasterPassword:(id) sender {
+- (void)appDeBlock:(id)sender {
 
     [[UIApplication sharedApplication] openURL:
-     [NSURL URLWithString:@"http://itunes.apple.com/app/id510296984"]];
+            [NSURL URLWithString:@"http://itunes.apple.com/app/id325058485"]];
 }
 
+- (void)appMasterPassword:(id)sender {
 
-
+    [[UIApplication sharedApplication] openURL:
+            [NSURL URLWithString:@"http://itunes.apple.com/app/id510296984"]];
+}
 
 @end

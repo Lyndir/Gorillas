@@ -24,17 +24,13 @@
 
 #import "SkyLayer.h"
 #import "StarLayer.h"
-#import "PanAction.h"
-#import "GorillasAppDelegate.h"
-#import "PearlGLUtils.h"
-
 
 @implementation SkyLayer {
     ccColor4B skyColor;
     NSMutableArray *stars;
 }
 
--(id) init {
+- (id)init {
 
     if (!(self = [super init]))
         return self;
@@ -44,19 +40,17 @@
     for (NSUInteger j = 0; j < 3; ++j) {
         float depth = j / 9.0f + 0.3f;
 
-        StarLayer *starLayer =  [[StarLayer alloc] initWidthDepth:j / 4.0f + 0.5f];
-        [stars addObject: starLayer];
+        StarLayer *starLayer = [[StarLayer alloc] initWidthDepth:j / 4.0f + 0.5f];
+        [stars addObject:starLayer];
 
-        [self addChild:starLayer z:1 parallaxRatio:ccp(depth, depth) positionOffset:ccp(self.contentSize.width / 2,
-                                                                                        self.contentSize.height / 2)];
-
+        [self addChild:starLayer z:1 parallaxRatio:ccp( depth, depth ) positionOffset:ccp( self.contentSize.width / 2,
+                self.contentSize.height / 2 )];
     }
 
     self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
 
     return self;
 }
-
 
 - (void)onEnter {
 
@@ -65,18 +59,16 @@
     [super onEnter];
 }
 
+- (void)reset {
 
--(void) reset {
-
-    skyColor = ccc4l([[GorillasConfig get].skyColor unsignedLongValue]);
+    skyColor = ccc4l( [[GorillasConfig get].skyColor unsignedLongValue] );
 
     self.contentSize = [CCDirector sharedDirector].winSize;
-    for(StarLayer *starLayer in stars)
+    for (StarLayer *starLayer in stars)
         [starLayer reset];
 }
 
-
--(void) draw {
+- (void)draw {
 
     [super draw];
 
@@ -84,24 +76,21 @@
     CC_NODE_DRAW_SETUP();
 
     Vertex vertices[4] = {
-            { .p = { 0,                         0 },                        .c = skyColor },
-            { .p = { self.contentSize.width,    0 },                        .c = skyColor },
-            { .p = { 0,                         self.contentSize.height },  .c = ccc4(0x00, 0x00, 0x00, 0xff) },
-            { .p = { self.contentSize.width,    self.contentSize.height },  .c = ccc4(0x00, 0x00, 0x00, 0xff) },
+            { .p = { 0, 0 }, .c = skyColor },
+            { .p = { self.contentSize.width, 0 }, .c = skyColor },
+            { .p = { 0, self.contentSize.height }, .c = ccc4( 0x00, 0x00, 0x00, 0xff ) },
+            { .p = { self.contentSize.width, self.contentSize.height }, .c = ccc4( 0x00, 0x00, 0x00, 0xff ) },
     };
-    PearlGLDraw(GL_TRIANGLE_STRIP, vertices, 4);
+    PearlGLDraw( GL_TRIANGLE_STRIP, vertices, 4 );
 
     CHECK_GL_ERROR_DEBUG();
     CC_INCREMENT_GL_DRAWS(1);
     CC_PROFILER_STOP_CATEGORY(kCCProfilerCategorySprite, @"SkyLayer - draw");
 }
 
-
--(void) dealloc {
+- (void)dealloc {
 
     stars = nil;
-
 }
-
 
 @end

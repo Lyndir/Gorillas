@@ -26,7 +26,7 @@
 
 @interface ShadeTo : CCActionInterval
 
-+(ShadeTo *) actionWithDuration:(ccTime)_duration color:(ccColor4B)_color;
--(ShadeTo *) initWithDuration:(ccTime)_duration color:(ccColor4B)_color;
++ (ShadeTo *)actionWithDuration:(ccTime)_duration color:(ccColor4B)_color;
+- (ShadeTo *)initWithDuration:(ccTime)_duration color:(ccColor4B)_color;
 
 @end

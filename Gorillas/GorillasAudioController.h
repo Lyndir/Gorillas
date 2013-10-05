@@ -25,19 +25,18 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
+@interface GorillasAudioController : NSObject<AVAudioPlayerDelegate>
 
-@interface GorillasAudioController : NSObject <AVAudioPlayerDelegate>
-
--(void) clickEffect;
--(void) playTrack:(NSString *)track;
--(void) startNextTrack;
+- (void)clickEffect;
+- (void)playTrack:(NSString *)track;
+- (void)startNextTrack;
 - (void)playEffectNamed:(NSString *)bundleName;
 
-+(SystemSoundID) loadEffectWithName:(NSString *)bundleRef;
-+(void) vibrate;
-+(void) playEffect:(SystemSoundID)soundFileObject;
-+(void) disposeEffect:(SystemSoundID)soundFileObject;
++ (SystemSoundID)loadEffectWithName:(NSString *)bundleRef;
++ (void)vibrate;
++ (void)playEffect:(SystemSoundID)soundFileObject;
++ (void)disposeEffect:(SystemSoundID)soundFileObject;
 
-+(GorillasAudioController *) get;
++ (GorillasAudioController *)get;
 
 @end

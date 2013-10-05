@@ -24,7 +24,6 @@
 
 #import "PearlCCMenuLayer.h"
 
-
-@interface BuyPlusLayer : PearlCCMenuLayer <PearlCCMenuDelegate>
+@interface BuyPlusLayer : PearlCCMenuLayer<PearlCCMenuDelegate>
 
 @end

@@ -20,39 +20,37 @@
  */
 typedef enum {
     /** Banana is on the field.     */
-    GorillasTagBananaFlying,
-    
-    /** No banana is on the field.  */
-    GorillasTagBananaNotFlying,
-} GorillasTag;
+            GorillasTagBananaFlying,
 
+    /** No banana is on the field.  */
+            GorillasTagBananaNotFlying,
+} GorillasTag;
 
 /**
  * Gorillas Game Features.
  */
 typedef enum {
     /** Keep Player Score.          */
-    GorillasFeatureScore    = 2 << 0,
+            GorillasFeatureScore = 2 << 0,
 
     /** Keep Player Skill.          */
-    GorillasFeatureSkill    = 2 << 1,
-    
-    /** Adapt AI Difficulty.        */
-    GorillasFeatureLevel    = 2 << 2,
-    
-    /** Humans have multiple lives. */
-    GorillasFeatureLivesPl  = 2 << 3,
-    
-    /** AIs have multiple lives.    */
-    GorillasFeatureLivesAi  = 2 << 4,
-    
-    /** Humans and AIs are teamed.  */
-    GorillasFeatureTeam     = 2 << 5,
-    
-    /** Enable game cheats.         */
-    GorillasFeatureCheat    = 2 << 6,
-} GorillasFeature;
+            GorillasFeatureSkill = 2 << 1,
 
+    /** Adapt AI Difficulty.        */
+            GorillasFeatureLevel = 2 << 2,
+
+    /** Humans have multiple lives. */
+            GorillasFeatureLivesPl = 2 << 3,
+
+    /** AIs have multiple lives.    */
+            GorillasFeatureLivesAi = 2 << 4,
+
+    /** Humans and AIs are teamed.  */
+            GorillasFeatureTeam = 2 << 5,
+
+    /** Enable game cheats.         */
+            GorillasFeatureCheat = 2 << 6,
+} GorillasFeature;
 
 /**
  * Gorillas Game Modes.
@@ -61,65 +59,61 @@ typedef enum {
  */
 typedef enum {
     /** Boot Camp.                  */
-    GorillasModeBootCamp    = GorillasFeatureCheat,
-    
+            GorillasModeBootCamp = GorillasFeatureCheat,
+
     /** Classic Game.               */
-    GorillasModeClassic     = GorillasFeatureScore,
-    
+            GorillasModeClassic = GorillasFeatureScore,
+
     /** Dynamic Game.               */
-    GorillasModeDynamic     = GorillasFeatureSkill      | GorillasFeatureScore      | GorillasFeatureLevel,
-    
+            GorillasModeDynamic = GorillasFeatureSkill | GorillasFeatureScore | GorillasFeatureLevel,
+
     /** Team Game.                  */
-    GorillasModeTeam        = GorillasFeatureLivesPl    | GorillasFeatureLivesAi    | GorillasFeatureTeam,
-    
+            GorillasModeTeam = GorillasFeatureLivesPl | GorillasFeatureLivesAi | GorillasFeatureTeam,
+
     /** Last Man Standing.          */
-    GorillasModeLMS         = GorillasFeatureLivesPl    | GorillasFeatureLivesAi,
-    
+            GorillasModeLMS = GorillasFeatureLivesPl | GorillasFeatureLivesAi,
+
     GorillasModeCount,
 } GorillasMode;
-
 
 /**
  * Gorilla Models.
  */
 typedef enum {
     /** A Gorilla.          */
-    GorillasPlayerModelGorilla,
-    
-    /** An Easter Bunny.    */
-    GorillasPlayerModelEasterBunny,
-    
-    /** An Banana.    */
-    GorillasPlayerModelBanana,
-} GorillasPlayerModel;
+            GorillasPlayerModelGorilla,
 
+    /** An Easter Bunny.    */
+            GorillasPlayerModelEasterBunny,
+
+    /** An Banana.    */
+            GorillasPlayerModelBanana,
+} GorillasPlayerModel;
 
 /**
  * Gorilla Types.
  */
 typedef enum {
     /** An AI.              */
-    GorillasPlayerTypeAI,
-    
-    /** A Human.            */
-    GorillasPlayerTypeHuman,
-} GorillasPlayerType;
+            GorillasPlayerTypeAI,
 
+    /** A Human.            */
+            GorillasPlayerTypeHuman,
+} GorillasPlayerType;
 
 /**
  * Projectile Models.
  */
 typedef enum {
     /** A Banana.           */
-    GorillasProjectileModelBanana,
-    
-    /** An Easter Egg.      */
-    GorillasProjectileModelEasterEgg,
-    
-    /** A Gorilla.      */
-    GorillasProjectileModelGorilla,
-} GorillasProjectileModel;
+            GorillasProjectileModelBanana,
 
+    /** An Easter Egg.      */
+            GorillasProjectileModelEasterEgg,
+
+    /** A Gorilla.      */
+            GorillasProjectileModelGorilla,
+} GorillasProjectileModel;
 
 /**
  * Game Random Scopes.
@@ -141,18 +135,18 @@ typedef enum {
  * Global Dependencies.
  */
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import "cocos2d.h"
-    #import "GorillasConfig.h"
+#import <UIKit/UIKit.h>
+#import "cocos2d.h"
+#import "GorillasConfig.h"
 
-    /**
-    * GL types
-    */
-    typedef struct _glPoint {
-        CGPoint p;
-        GLfloat s;
-        ccColor4B c;
-    } glPoint;
+/**
+* GL types
+*/
+typedef struct _glPoint {
+    CGPoint p;
+    GLfloat s;
+    ccColor4B c;
+} glPoint;
 //*/
 
 #endif

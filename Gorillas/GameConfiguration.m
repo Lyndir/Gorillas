@@ -22,17 +22,14 @@
 //  Copyright 2009 lhunath (Maarten Billemont). All rights reserved.
 //
 
-#import "GameConfiguration.h"
+@interface GameConfiguration()
 
-
-@interface GameConfiguration ()
-
-@property (nonatomic, copy, readwrite) NSString         *name;
-@property (nonatomic, copy, readwrite) NSString         *description;
-@property (nonatomic, assign, readwrite) GorillasMode   mode;
-@property (nonatomic, assign, readwrite) NSUInteger     singleplayerAICount;
-@property (nonatomic, assign, readwrite) NSUInteger     multiplayerAICount;
-@property (nonatomic, assign, readwrite) NSUInteger     multiplayerHumanCount;
+@property(nonatomic, copy, readwrite) NSString *name;
+@property(nonatomic, copy, readwrite) NSString *description;
+@property(nonatomic, assign, readwrite) GorillasMode mode;
+@property(nonatomic, assign, readwrite) NSUInteger singleplayerAICount;
+@property(nonatomic, assign, readwrite) NSUInteger multiplayerAICount;
+@property(nonatomic, assign, readwrite) NSUInteger multiplayerHumanCount;
 
 @end
 
@@ -41,31 +38,27 @@
 + (GameConfiguration *)configurationWithName:(NSString *)aName description:(NSString *)aDescription mode:(GorillasMode)aMode
                          singleplayerAICount:(NSUInteger)aSingleplayerAICount
                           multiplayerAICount:(NSUInteger)aMultiplayerAICount multiplayerHumanCount:(NSUInteger)aMultiplayerHumanCount {
-    
-    return [[GameConfiguration alloc] initWithName:aName description:aDescription mode:aMode
-                                singleplayerAICount:aSingleplayerAICount
-                                 multiplayerAICount:aMultiplayerAICount multiplayerHumanCount:aMultiplayerHumanCount];
-}
 
+    return [[GameConfiguration alloc] initWithName:aName description:aDescription mode:aMode
+                               singleplayerAICount:aSingleplayerAICount
+                                multiplayerAICount:aMultiplayerAICount multiplayerHumanCount:aMultiplayerHumanCount];
+}
 
 - (GameConfiguration *)initWithName:(NSString *)aName description:(NSString *)aDescription mode:(GorillasMode)aMode
                 singleplayerAICount:(NSUInteger)aSingleplayerAICount
                  multiplayerAICount:(NSUInteger)aMultiplayerAICount multiplayerHumanCount:(NSUInteger)aMultiplayerHumanCount {
 
-    if(!(self = [super init]))
+    if (!(self = [super init]))
         return self;
-    
-    self.name                   = aName;
-    self.description            = aDescription;
-    self.mode                   = aMode;
-    self.singleplayerAICount    = aSingleplayerAICount;
-    self.multiplayerAICount     = aMultiplayerAICount;
-    self.multiplayerHumanCount  = aMultiplayerHumanCount;
-    
+
+    self.name = aName;
+    self.description = aDescription;
+    self.mode = aMode;
+    self.singleplayerAICount = aSingleplayerAICount;
+    self.multiplayerAICount = aMultiplayerAICount;
+    self.multiplayerHumanCount = aMultiplayerHumanCount;
+
     return self;
 }
-
-
-
 
 @end

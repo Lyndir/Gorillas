@@ -24,8 +24,7 @@
 
 #import "PearlResettable.h"
 
-
-@interface PanningLayer : CCLayer <PearlResettable> {
+@interface PanningLayer : CCLayer<PearlResettable> {
 
 @private
     CGFloat initialScale;
@@ -34,8 +33,8 @@
     CGFloat targetScale;
 }
 
--(void) scaleTo:(CGFloat)newScale;
--(void) scaleTo:(CGFloat)newScale limited:(BOOL)limited;
--(void) scrollToCenter:(CGPoint)r horizontal:(BOOL)horizontal;
+- (void)scaleTo:(CGFloat)newScale;
+- (void)scaleTo:(CGFloat)newScale limited:(BOOL)limited;
+- (void)scrollToCenter:(CGPoint)r horizontal:(BOOL)horizontal;
 
 @end
