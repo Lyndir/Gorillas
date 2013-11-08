@@ -124,8 +124,8 @@
 
     if (!loveButton.superview)
         [[CCDirector sharedDirector].view addSubview:loveButton];
-    [loveButton setFrameFromCurrentSizeAndParentPaddingTop:CGFLOAT_MAX right:CGFLOAT_MAX bottom:20 left:CGFLOAT_MAX];
-    [UIView animateWithDuration:1 animations:^{
+    [loveButton setFrameFromCurrentSizeAndParentPaddingTop:CGFLOAT_MAX right:CGFLOAT_MAX bottom:30 left:CGFLOAT_MAX];
+    [UIView animateWithDuration:0.2 animations:^{
         loveButton.alpha = 1;
     }];
 }
@@ -136,7 +136,7 @@
 
     [self.appMenu removeFromParentAndCleanup:NO];
 
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:0.2 animations:^{
         loveButton.alpha = 0;
     } completion:^(BOOL finished) {
         if (finished)
@@ -198,32 +198,21 @@
     GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];
     if (leaderboardController != nil) {
         leaderboardController.leaderboardDelegate = self;
-        [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:leaderboardController animated:YES];
+        [[[UIApplication sharedApplication] keyWindow].rootViewController presentViewController:leaderboardController
+                                                                                       animated:YES completion:nil];
         [[CCDirector sharedDirector] pause];
     }
 }
 
 - (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController {
 
-    [[[UIApplication sharedApplication] keyWindow].rootViewController dismissModalViewControllerAnimated:YES];
+    [[[UIApplication sharedApplication] keyWindow].rootViewController dismissViewControllerAnimated:YES completion:nil];
     [[CCDirector sharedDirector] resume];
 }
 
 - (void)back:(id)sender {
 
     [[GorillasAppDelegate get] popLayer];
-}
-
-- (void)appDeBlock:(id)sender {
-
-    [[UIApplication sharedApplication] openURL:
-            [NSURL URLWithString:@"http://itunes.apple.com/app/id325058485"]];
-}
-
-- (void)appMasterPassword:(id)sender {
-
-    [[UIApplication sharedApplication] openURL:
-            [NSURL URLWithString:@"http://itunes.apple.com/app/id510296984"]];
 }
 
 @end

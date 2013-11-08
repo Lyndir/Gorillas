@@ -151,7 +151,7 @@
     [[CCDirector sharedDirector] pushScene:splashScene];
 
     // Game Center setup.
-    [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError *error) {
+    [GKLocalPlayer localPlayer].authenticateHandler = ^(UIViewController *viewController, NSError *error) {
         if (error)
         wrn(@"Game Center unavailable: %@", error);
 
@@ -161,7 +161,7 @@
         dispatch_async( dispatch_get_main_queue(), ^{
             [self.mainMenuLayer reset];
         } );
-    }];
+    };
 
     self.netController = [NetController new];
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {

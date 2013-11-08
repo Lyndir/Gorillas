@@ -34,7 +34,7 @@
     GKMatchmakerViewController *matchVC = [[GKMatchmakerViewController alloc] initWithMatchRequest:aMatchRequest];
     if (matchVC != nil) {
         matchVC.matchmakerDelegate = self;
-        [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:matchVC animated:YES];
+        [[[UIApplication sharedApplication] keyWindow].rootViewController presentViewController:matchVC animated:YES completion:nil];
         [[CCDirector sharedDirector] pause];
     }
 }
@@ -48,7 +48,7 @@
     GKMatchmakerViewController *matchVC = [[GKMatchmakerViewController alloc] initWithInvite:anInvite];
     if (matchVC != nil) {
         matchVC.matchmakerDelegate = self;
-        [[[UIApplication sharedApplication] keyWindow].rootViewController presentModalViewController:matchVC animated:YES];
+        [[[UIApplication sharedApplication] keyWindow].rootViewController presentViewController:matchVC animated:YES completion:nil];
         [[CCDirector sharedDirector] pause];
     }
 }
@@ -101,7 +101,7 @@
 
     [self endMatchForced:YES];
 
-    [[[UIApplication sharedApplication] keyWindow].rootViewController dismissModalViewControllerAnimated:YES];
+    [[[UIApplication sharedApplication] keyWindow].rootViewController dismissViewControllerAnimated:YES completion:nil];
     [[CCDirector sharedDirector] resume];
 }
 
@@ -111,7 +111,7 @@
     err(@"Matchmaker failed: %@", error);
     [self endMatchForced:YES];
 
-    [[[UIApplication sharedApplication] keyWindow].rootViewController dismissModalViewControllerAnimated:YES];
+    [[[UIApplication sharedApplication] keyWindow].rootViewController dismissViewControllerAnimated:YES completion:nil];
     [[CCDirector sharedDirector] resume];
 }
 
@@ -135,7 +135,7 @@
 
         if (!started && self.hostElection.host) {
             // Beginning of the game, host determined.  Start the game.
-            [[[UIApplication sharedApplication] keyWindow].rootViewController dismissModalViewControllerAnimated:YES];
+            [[[UIApplication sharedApplication] keyWindow].rootViewController dismissViewControllerAnimated:YES completion:nil];
             [[CCDirector sharedDirector] resume];
 
             // Use the host's seed for the game random.
@@ -205,10 +205,14 @@
 
 // Called when the match failed to connect to a player.
 - (void)match:(GKMatch *)match connectionWithPlayerFailed:(NSString *)playerID withError:(NSError *)error {
+
+    wrn(@"Failed to connect to player: %@, %@", playerID, error);
 }
 
 // Called when the match could not connect to any other players.
 - (void)match:(GKMatch *)match didFailWithError:(NSError *)error {
+
+    wrn(@"Failed to set up match: %@", error);
 }
 
 - (GorillaLayer *)findGorillaWithPlayerID:(NSString *)playerID {

@@ -3849,7 +3849,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "External/Pearl/External/cocos2d-iphone/external/kazmath/include";
 				INFOPLIST_FILE = "${TARGET_NAME}/${TARGET_NAME}-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LINKER_DISPLAYS_MANGLED_NAMES = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -3918,7 +3918,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "External/Pearl/External/cocos2d-iphone/external/kazmath/include";
 				INFOPLIST_FILE = "${TARGET_NAME}/${TARGET_NAME}-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = iphoneos;
@@ -4098,7 +4098,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "External/Pearl/External/cocos2d-iphone/external/kazmath/include";
 				INFOPLIST_FILE = "${TARGET_NAME}/${TARGET_NAME}-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = iphoneos;
@@ -4212,7 +4212,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "External/Pearl/External/cocos2d-iphone/external/kazmath/include";
 				INFOPLIST_FILE = "${TARGET_NAME}/${TARGET_NAME}-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = iphoneos;
