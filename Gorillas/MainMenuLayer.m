@@ -35,7 +35,7 @@
 @implementation MainMenuLayer {
     CCMenuItemToggle *configurationI;
     CCMenuItemLabel *descriptionT;
-    CCMenuItem *multiPlayerI, *singlePlayerI, *hotSeatI, *upgradeI;
+    CCMenuItem *multiPlayerI, *singlePlayerI, *hotSeatI;
     LLButtonView *loveButton;
 }
 
@@ -186,11 +186,6 @@
 
     [GorillasConfig get].activeGameConfigurationIndex = @(([[GorillasConfig get].activeGameConfigurationIndex unsignedIntValue] + 1)
                                                           % [[GorillasConfig get].gameConfigurations count]);
-}
-
-- (void)upgrade:(id)sender {
-
-    [[GorillasAppDelegate get] showUpgrade];
 }
 
 - (void)settings:(id)sender {

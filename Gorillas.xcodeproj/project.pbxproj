@@ -26,10 +26,6 @@
 		DA16EC8713CE378400F5D800 /* Pearl-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = DA16EC8613CE378400F5D800 /* Pearl-Prefix.pch */; };
 		DA1816260F0E227C0064F470 /* ConfigurationSectionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816250F0E227C0064F470 /* ConfigurationSectionLayer.m */; };
 		DA1816470F0E24D80064F470 /* AVConfigurationLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA1816460F0E24D80064F470 /* AVConfigurationLayer.m */; };
-		DA2996AA17FA69100021614D /* buy-plus.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2996A617FA69100021614D /* buy-plus.png */; };
-		DA2996AB17FA69100021614D /* buy-plus-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2996A717FA69100021614D /* buy-plus-hd.png */; };
-		DA2996AC17FA69100021614D /* buy-plus-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2996A817FA69100021614D /* buy-plus-ipad.png */; };
-		DA2996AD17FA69100021614D /* buy-plus-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA2996A917FA69100021614D /* buy-plus-ipadhd.png */; };
 		DA2996B017FA6D7B0021614D /* PearlCCMenuItemTitle.h in Headers */ = {isa = PBXBuildFile; fileRef = DA2996AE17FA6D7B0021614D /* PearlCCMenuItemTitle.h */; };
 		DA2996B117FA6D7B0021614D /* PearlCCMenuItemTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = DA2996AF17FA6D7B0021614D /* PearlCCMenuItemTitle.m */; };
 		DA31251D0F10F74C00F1032D /* HolesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA31251C0F10F74C00F1032D /* HolesLayer.m */; };
@@ -264,10 +260,6 @@
 		DA7ABFE412823377006A2E71 /* Apple Symbols.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA7ABFDB12823377006A2E71 /* Apple Symbols.ttf */; };
 		DA7DF6CE17F9226F00F84D63 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7DF6CD17F9226F00F84D63 /* Default-568h@2x.png */; };
 		DA7DF6D117FA2EF900F84D63 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA7DF6D017FA2EF900F84D63 /* StoreKit.framework */; };
-		DA7DF6D617FA51C800F84D63 /* menu-main-plus-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7DF6D217FA51C800F84D63 /* menu-main-plus-ipadhd.png */; };
-		DA7DF6D717FA51C800F84D63 /* menu-main-plus.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7DF6D317FA51C800F84D63 /* menu-main-plus.png */; };
-		DA7DF6D817FA51C800F84D63 /* menu-main-plus-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7DF6D417FA51C800F84D63 /* menu-main-plus-hd.png */; };
-		DA7DF6D917FA51C800F84D63 /* menu-main-plus-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7DF6D517FA51C800F84D63 /* menu-main-plus-ipad.png */; };
 		DA83F0BB0F00527B00305C9F /* WindLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83F0BA0F00527B00305C9F /* WindLayer.m */; };
 		DA859C500EC4F3950036B7C0 /* GorillaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859C4F0EC4F3950036B7C0 /* GorillaLayer.m */; };
 		DA859E700EC598E10036B7C0 /* BananaLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA859E6F0EC598E10036B7C0 /* BananaLayer.m */; };
@@ -365,6 +357,19 @@
 		DAB9586B182D0D3A00EA277B /* love-lyndir.heart.red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB95858182D0D1600EA277B /* love-lyndir.heart.red@2x.png */; };
 		DAB9586C182D0D3A00EA277B /* love-lyndir.picker.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB95859182D0D1600EA277B /* love-lyndir.picker.png */; };
 		DAB9586D182D0D3A00EA277B /* love-lyndir.picker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB9585A182D0D1600EA277B /* love-lyndir.picker@2x.png */; };
+		DAB9586E182D123600EA277B /* libLoveLyndir.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAB9580E182D0CDB00EA277B /* libLoveLyndir.a */; };
+		DAB95875182D12D300EA277B /* NSArray+Indexing.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB9586F182D12D300EA277B /* NSArray+Indexing.h */; };
+		DAB95876182D12D300EA277B /* NSArray+Indexing.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB95870182D12D300EA277B /* NSArray+Indexing.m */; };
+		DAB95877182D12D300EA277B /* NSDictionary+Indexing.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB95871182D12D300EA277B /* NSDictionary+Indexing.h */; };
+		DAB95878182D12D300EA277B /* NSDictionary+Indexing.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB95872182D12D300EA277B /* NSDictionary+Indexing.m */; };
+		DAB95879182D12D300EA277B /* NSTimer+PearlBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB95873182D12D300EA277B /* NSTimer+PearlBlock.h */; };
+		DAB9587A182D12D300EA277B /* NSTimer+PearlBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB95874182D12D300EA277B /* NSTimer+PearlBlock.m */; };
+		DAB95881182D132B00EA277B /* PearlOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB9587B182D132B00EA277B /* PearlOverlay.m */; };
+		DAB95882182D132B00EA277B /* PearlEMail.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB9587C182D132B00EA277B /* PearlEMail.m */; };
+		DAB95883182D132B00EA277B /* PearlEMail.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB9587D182D132B00EA277B /* PearlEMail.h */; };
+		DAB95884182D132B00EA277B /* PearlNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB9587E182D132B00EA277B /* PearlNavigationController.h */; };
+		DAB95885182D132B00EA277B /* PearlNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB9587F182D132B00EA277B /* PearlNavigationController.m */; };
+		DAB95886182D132B00EA277B /* PearlOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB95880182D132B00EA277B /* PearlOverlay.h */; };
 		DABA30BE152DFF6B00BE0D2A /* aim.body.00-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA306B152DFF6A00BE0D2A /* aim.body.00-hd.png */; };
 		DABA30C0152DFF6B00BE0D2A /* aim.body.00.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA306C152DFF6A00BE0D2A /* aim.body.00.png */; };
 		DABA30C2152DFF6B00BE0D2A /* aim.body.01-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA306D152DFF6A00BE0D2A /* aim.body.01-hd.png */; };
@@ -453,7 +458,6 @@
 		DAC10D7D13CE3DBB00A546E4 /* Level_Down.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D7513CE3DBB00A546E4 /* Level_Down.caf */; };
 		DAC10D7F13CE3DBB00A546E4 /* Level_Up.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D7713CE3DBB00A546E4 /* Level_Up.caf */; };
 		DAC10D8113CE3DBB00A546E4 /* Next_Player.caf in Resources */ = {isa = PBXBuildFile; fileRef = DAC10D7913CE3DBB00A546E4 /* Next_Player.caf */; };
-		DAC9228217FA632600AC7FFF /* BuyPlusLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC9228017FA632600AC7FFF /* BuyPlusLayer.m */; };
 		DACA4E6E0EB3AEA40096F970 /* BuildingsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E6D0EB3AEA40096F970 /* BuildingsLayer.m */; };
 		DACA4E8D0EB3B0E10096F970 /* GorillasConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DACA4E8C0EB3B0E10096F970 /* GorillasConfig.m */; };
 		DACFEC210EE96AA300A0D08E /* CityTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = DACFEC200EE96AA300A0D08E /* CityTheme.m */; };
@@ -731,10 +735,6 @@
 		DA1816250F0E227C0064F470 /* ConfigurationSectionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationSectionLayer.m; sourceTree = "<group>"; };
 		DA1816450F0E24D80064F470 /* AVConfigurationLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVConfigurationLayer.h; sourceTree = "<group>"; };
 		DA1816460F0E24D80064F470 /* AVConfigurationLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVConfigurationLayer.m; sourceTree = "<group>"; };
-		DA2996A617FA69100021614D /* buy-plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy-plus.png"; sourceTree = "<group>"; };
-		DA2996A717FA69100021614D /* buy-plus-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy-plus-hd.png"; sourceTree = "<group>"; };
-		DA2996A817FA69100021614D /* buy-plus-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy-plus-ipad.png"; sourceTree = "<group>"; };
-		DA2996A917FA69100021614D /* buy-plus-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy-plus-ipadhd.png"; sourceTree = "<group>"; };
 		DA2996AE17FA6D7B0021614D /* PearlCCMenuItemTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearlCCMenuItemTitle.h; sourceTree = "<group>"; };
 		DA2996AF17FA6D7B0021614D /* PearlCCMenuItemTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PearlCCMenuItemTitle.m; sourceTree = "<group>"; };
 		DA31251B0F10F74C00F1032D /* HolesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HolesLayer.h; sourceTree = "<group>"; };
@@ -994,10 +994,6 @@
 		DA7ABFDB12823377006A2E71 /* Apple Symbols.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple Symbols.ttf"; sourceTree = "<group>"; };
 		DA7DF6CD17F9226F00F84D63 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		DA7DF6D017FA2EF900F84D63 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		DA7DF6D217FA51C800F84D63 /* menu-main-plus-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-main-plus-ipadhd.png"; sourceTree = "<group>"; };
-		DA7DF6D317FA51C800F84D63 /* menu-main-plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-main-plus.png"; sourceTree = "<group>"; };
-		DA7DF6D417FA51C800F84D63 /* menu-main-plus-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-main-plus-hd.png"; sourceTree = "<group>"; };
-		DA7DF6D517FA51C800F84D63 /* menu-main-plus-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-main-plus-ipad.png"; sourceTree = "<group>"; };
 		DA83F0B90F00527B00305C9F /* WindLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindLayer.h; sourceTree = "<group>"; };
 		DA83F0BA0F00527B00305C9F /* WindLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindLayer.m; sourceTree = "<group>"; };
 		DA859C4E0EC4F3950036B7C0 /* GorillaLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillaLayer.h; sourceTree = "<group>"; };
@@ -1107,6 +1103,18 @@
 		DAB95858182D0D1600EA277B /* love-lyndir.heart.red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.heart.red@2x.png"; sourceTree = "<group>"; };
 		DAB95859182D0D1600EA277B /* love-lyndir.picker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.picker.png"; sourceTree = "<group>"; };
 		DAB9585A182D0D1600EA277B /* love-lyndir.picker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.picker@2x.png"; sourceTree = "<group>"; };
+		DAB9586F182D12D300EA277B /* NSArray+Indexing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Indexing.h"; sourceTree = "<group>"; };
+		DAB95870182D12D300EA277B /* NSArray+Indexing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Indexing.m"; sourceTree = "<group>"; };
+		DAB95871182D12D300EA277B /* NSDictionary+Indexing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Indexing.h"; sourceTree = "<group>"; };
+		DAB95872182D12D300EA277B /* NSDictionary+Indexing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Indexing.m"; sourceTree = "<group>"; };
+		DAB95873182D12D300EA277B /* NSTimer+PearlBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+PearlBlock.h"; sourceTree = "<group>"; };
+		DAB95874182D12D300EA277B /* NSTimer+PearlBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+PearlBlock.m"; sourceTree = "<group>"; };
+		DAB9587B182D132B00EA277B /* PearlOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PearlOverlay.m; sourceTree = "<group>"; };
+		DAB9587C182D132B00EA277B /* PearlEMail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PearlEMail.m; sourceTree = "<group>"; };
+		DAB9587D182D132B00EA277B /* PearlEMail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearlEMail.h; sourceTree = "<group>"; };
+		DAB9587E182D132B00EA277B /* PearlNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearlNavigationController.h; sourceTree = "<group>"; };
+		DAB9587F182D132B00EA277B /* PearlNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PearlNavigationController.m; sourceTree = "<group>"; };
+		DAB95880182D132B00EA277B /* PearlOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearlOverlay.h; sourceTree = "<group>"; };
 		DABA306B152DFF6A00BE0D2A /* aim.body.00-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aim.body.00-hd.png"; sourceTree = "<group>"; };
 		DABA306C152DFF6A00BE0D2A /* aim.body.00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aim.body.00.png; sourceTree = "<group>"; };
 		DABA306D152DFF6A00BE0D2A /* aim.body.01-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aim.body.01-hd.png"; sourceTree = "<group>"; };
@@ -1195,8 +1203,6 @@
 		DAC10D7613CE3DBB00A546E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Gorillas/Resources/en.lproj/Level_Down.caf; sourceTree = SOURCE_ROOT; };
 		DAC10D7813CE3DBB00A546E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Gorillas/Resources/en.lproj/Level_Up.caf; sourceTree = SOURCE_ROOT; };
 		DAC10D7A13CE3DBB00A546E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Gorillas/Resources/en.lproj/Next_Player.caf; sourceTree = SOURCE_ROOT; };
-		DAC9228017FA632600AC7FFF /* BuyPlusLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyPlusLayer.m; sourceTree = "<group>"; };
-		DAC9228117FA632600AC7FFF /* BuyPlusLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyPlusLayer.h; sourceTree = "<group>"; };
 		DACA4E6C0EB3AEA40096F970 /* BuildingsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildingsLayer.h; sourceTree = "<group>"; };
 		DACA4E6D0EB3AEA40096F970 /* BuildingsLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildingsLayer.m; sourceTree = "<group>"; };
 		DACA4E8B0EB3B0E10096F970 /* GorillasConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillasConfig.h; sourceTree = "<group>"; };
@@ -1435,6 +1441,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAB9586E182D123600EA277B /* libLoveLyndir.a in Frameworks */,
 				DA7DF6D117FA2EF900F84D63 /* StoreKit.framework in Frameworks */,
 				DAFFC7EA17F13EB6007BB020 /* CoreText.framework in Frameworks */,
 				DA571E2113F3378800D50DF2 /* libLocalytics.a in Frameworks */,
@@ -1610,8 +1617,6 @@
 				DA75D04E12A14A150051EF09 /* GConfigMenuLayer.m */,
 				DA79D73A0F59425500D36C7C /* MainMenuLayer.h */,
 				DA79D73B0F59425500D36C7C /* MainMenuLayer.m */,
-				DAC9228117FA632600AC7FFF /* BuyPlusLayer.h */,
-				DAC9228017FA632600AC7FFF /* BuyPlusLayer.m */,
 				93D3941E5DCA97BD1216015D /* MenuItemDescription.h */,
 				93D39DAB9EF5E15F994EB0CE /* MenuItemDescription.m */,
 				DA1816490F0E251B0064F470 /* Configuration */,
@@ -1724,6 +1729,12 @@
 		DA5795A5152C7592001BEF40 /* Pearl */ = {
 			isa = PBXGroup;
 			children = (
+				DAB9586F182D12D300EA277B /* NSArray+Indexing.h */,
+				DAB95870182D12D300EA277B /* NSArray+Indexing.m */,
+				DAB95871182D12D300EA277B /* NSDictionary+Indexing.h */,
+				DAB95872182D12D300EA277B /* NSDictionary+Indexing.m */,
+				DAB95873182D12D300EA277B /* NSTimer+PearlBlock.h */,
+				DAB95874182D12D300EA277B /* NSTimer+PearlBlock.m */,
 				DAB41E76158F1E5900D509CC /* NSBundle+PearlMutableInfo.h */,
 				DAB41E77158F1E5900D509CC /* NSBundle+PearlMutableInfo.m */,
 				DAB41E78158F1E5900D509CC /* NSDateFormatter+RFC3339.h */,
@@ -1899,6 +1910,12 @@
 		DA579633152C7592001BEF40 /* Pearl-UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				DAB9587B182D132B00EA277B /* PearlOverlay.m */,
+				DAB9587C182D132B00EA277B /* PearlEMail.m */,
+				DAB9587D182D132B00EA277B /* PearlEMail.h */,
+				DAB9587E182D132B00EA277B /* PearlNavigationController.h */,
+				DAB9587F182D132B00EA277B /* PearlNavigationController.m */,
+				DAB95880182D132B00EA277B /* PearlOverlay.h */,
 				DAB41E66158F1E3300D509CC /* UIControl+PearlBlocks.h */,
 				DAB41E67158F1E3300D509CC /* UIControl+PearlBlocks.m */,
 				DAB41E68158F1E3300D509CC /* UIControl+PearlSelect.h */,
@@ -1971,14 +1988,6 @@
 		DA5F1BD30EE74CE80041691E /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				DA2996A617FA69100021614D /* buy-plus.png */,
-				DA2996A717FA69100021614D /* buy-plus-hd.png */,
-				DA2996A817FA69100021614D /* buy-plus-ipad.png */,
-				DA2996A917FA69100021614D /* buy-plus-ipadhd.png */,
-				DA7DF6D217FA51C800F84D63 /* menu-main-plus-ipadhd.png */,
-				DA7DF6D317FA51C800F84D63 /* menu-main-plus.png */,
-				DA7DF6D417FA51C800F84D63 /* menu-main-plus-hd.png */,
-				DA7DF6D517FA51C800F84D63 /* menu-main-plus-ipad.png */,
 				DAD4ACE415CF1D4E00047FEC /* Icon-72@2x.png */,
 				DAD4ACE515CF1D4E00047FEC /* Icon-Small-50@2x.png */,
 				DAD4ACDA15CF1C3600047FEC /* Default-Portrait@2x~ipad.png */,
@@ -2701,12 +2710,14 @@
 				DA579A59152C7599001BEF40 /* PearlStrings.h in Headers */,
 				DA579A5B152C7599001BEF40 /* PearlStringUtils.h in Headers */,
 				DA579A5F152C7599001BEF40 /* PearlCCAutoTween.h in Headers */,
+				DAB95877182D12D300EA277B /* NSDictionary+Indexing.h in Headers */,
 				DA579A61152C7599001BEF40 /* PearlCCRemove.h in Headers */,
 				DA579A63152C7599001BEF40 /* Pearl-Cocos2D-Dependencies.h in Headers */,
 				DA579A64152C7599001BEF40 /* Pearl-Cocos2D.h in Headers */,
 				DA579A65152C7599001BEF40 /* PearlCCDebug.h in Headers */,
 				DA579A67152C7599001BEF40 /* PearlCocos2DAppDelegate.h in Headers */,
 				DA579A69152C7599001BEF40 /* PearlCocos2DStrings.h in Headers */,
+				DAB95879182D12D300EA277B /* NSTimer+PearlBlock.h in Headers */,
 				DA579A6B152C7599001BEF40 /* PearlCCConfigMenuLayer.h in Headers */,
 				DA579A6D152C7599001BEF40 /* PearlCCMenuItemBlock.h in Headers */,
 				DA579A6F152C7599001BEF40 /* PearlCCMenuItemSpacer.h in Headers */,
@@ -2737,6 +2748,7 @@
 				DA579A9E152C7599001BEF40 /* PearlBoxView.h in Headers */,
 				DA579AA0152C7599001BEF40 /* PearlGradientView.h in Headers */,
 				DA579AA2152C7599001BEF40 /* PearlLayout.h in Headers */,
+				DAB95875182D12D300EA277B /* NSArray+Indexing.h in Headers */,
 				DA579AA4152C7599001BEF40 /* PearlLayoutView.h in Headers */,
 				DA579AA6152C7599001BEF40 /* PearlMessageView.h in Headers */,
 				DA579AA8152C7599001BEF40 /* PearlRootViewController.h in Headers */,
@@ -2746,12 +2758,15 @@
 				DA579AB0152C7599001BEF40 /* PearlValidatingTextField.h in Headers */,
 				DA579AB2152C7599001BEF40 /* PearlWebViewController.h in Headers */,
 				DAFEF9730ED847D40019F7E9 /* PearlGLShaders.h in Headers */,
+				DAB95886182D132B00EA277B /* PearlOverlay.h in Headers */,
+				DAB95884182D132B00EA277B /* PearlNavigationController.h in Headers */,
 				DA9ECAE81533090F00F38A88 /* PearlGLShaderPointSize_frag.h in Headers */,
 				DA9ECAE91533090F00F38A88 /* PearlGLShaderPointSize_vert.h in Headers */,
 				DA9ECAEA1533090F00F38A88 /* PearlGLShaderPointSprite_frag.h in Headers */,
 				DA9ECAEB1533090F00F38A88 /* PearlGLShaderPointSprite_vert.h in Headers */,
 				DAB41E6E158F1E3300D509CC /* UIControl+PearlBlocks.h in Headers */,
 				DAB41E70158F1E3300D509CC /* UIControl+PearlSelect.h in Headers */,
+				DAB95883182D132B00EA277B /* PearlEMail.h in Headers */,
 				DAB41E72158F1E3300D509CC /* UIImage+PearlScaling.h in Headers */,
 				DAB41E74158F1E3300D509CC /* UIScrollView+PearlFlashingIndicators.h in Headers */,
 				DAB41E89158F1E5900D509CC /* NSBundle+PearlMutableInfo.h in Headers */,
@@ -3152,7 +3167,6 @@
 				DABA30C6152DFF6B00BE0D2A /* aim.body.02-hd.png in Resources */,
 				DABA30C8152DFF6B00BE0D2A /* aim.body.02.png in Resources */,
 				DABA30CA152DFF6B00BE0D2A /* aim.body.03-hd.png in Resources */,
-				DA7DF6D617FA51C800F84D63 /* menu-main-plus-ipadhd.png in Resources */,
 				DABA30CC152DFF6B00BE0D2A /* aim.body.03.png in Resources */,
 				DABA30CE152DFF6B00BE0D2A /* aim.body.04-hd.png in Resources */,
 				DABA30D0152DFF6B00BE0D2A /* aim.body.04.png in Resources */,
@@ -3184,7 +3198,6 @@
 				DABA30FE152DFF6B00BE0D2A /* aim.head-hd.png in Resources */,
 				DAB9586D182D0D3A00EA277B /* love-lyndir.picker@2x.png in Resources */,
 				DABA3100152DFF6B00BE0D2A /* aim.head.png in Resources */,
-				DA7DF6D817FA51C800F84D63 /* menu-main-plus-hd.png in Resources */,
 				DABA3102152DFF6B00BE0D2A /* aim.tail-hd.png in Resources */,
 				DABA3104152DFF6B00BE0D2A /* aim.tail.png in Resources */,
 				DABA3106152DFF6B00BE0D2A /* arrow.body-hd.png in Resources */,
@@ -3216,7 +3229,6 @@
 				DABA313A152DFF6B00BE0D2A /* gorilla-human-UU-hd.png in Resources */,
 				DABA313C152DFF6B00BE0D2A /* gorilla-human-UU.png in Resources */,
 				DABA313E152DFF6B00BE0D2A /* gorilla-shape-hd.png in Resources */,
-				DA7DF6D917FA51C800F84D63 /* menu-main-plus-ipad.png in Resources */,
 				DABA3140152DFF6B00BE0D2A /* gorilla-shape.png in Resources */,
 				DABA3144152DFF6B00BE0D2A /* hole-hd.png in Resources */,
 				DABA3146152DFF6B00BE0D2A /* hole.png in Resources */,
@@ -3231,15 +3243,12 @@
 				DABA3156152DFF6B00BE0D2A /* infinite-shape.png in Resources */,
 				DABA315A152DFF6B00BE0D2A /* iTunesArtwork.png in Resources */,
 				DABA315C152DFF6B00BE0D2A /* menu-back-hd.png in Resources */,
-				DA7DF6D717FA51C800F84D63 /* menu-main-plus.png in Resources */,
 				DABA315E152DFF6B00BE0D2A /* menu-back.png in Resources */,
 				DABA3160152DFF6B00BE0D2A /* menu-main-hd.png in Resources */,
-				DA2996AD17FA69100021614D /* buy-plus-ipadhd.png in Resources */,
 				DABA3162152DFF6B00BE0D2A /* menu-main.png in Resources */,
 				DA59654515320E3700EA071C /* fire.png in Resources */,
 				DA59654715320E3700EA071C /* fps_images-hd.png in Resources */,
 				DA59654915320E3700EA071C /* fps_images-ipadhd.png in Resources */,
-				DA2996AC17FA69100021614D /* buy-plus-ipad.png in Resources */,
 				DA59654B15320E3700EA071C /* fps_images.png in Resources */,
 				DA5934601534F4DE0060D09A /* menu-main-ipad.png in Resources */,
 				DA5934621534F4DE0060D09A /* menu-main-ipadhd.png in Resources */,
@@ -3247,7 +3256,6 @@
 				DAB9586C182D0D3A00EA277B /* love-lyndir.picker.png in Resources */,
 				DA0EC382153AEBC3001A2576 /* menu-back-ipad.png in Resources */,
 				DA0EC384153AEBC3001A2576 /* menu-back-ipadhd.png in Resources */,
-				DA2996AB17FA69100021614D /* buy-plus-hd.png in Resources */,
 				DAE2A3841547EC8D00589827 /* Crashlytics.plist in Resources */,
 				DAE2A38F1547ECE700589827 /* TestFlight.plist in Resources */,
 				DA9F361E154D5056005ACACC /* gorilla-ai-DD-ipad.png in Resources */,
@@ -3314,7 +3322,6 @@
 				DA58B79A1550A6E40008CBA6 /* aim.body.05-ipadhd.png in Resources */,
 				DA58B79C1550A6E40008CBA6 /* aim.body.06-ipadhd.png in Resources */,
 				DA58B79E1550A6E40008CBA6 /* aim.body.07-ipadhd.png in Resources */,
-				DA2996AA17FA69100021614D /* buy-plus.png in Resources */,
 				DA58B7A01550A6E40008CBA6 /* aim.body.08-ipadhd.png in Resources */,
 				DA58B7A21550A6E40008CBA6 /* aim.body.09-ipadhd.png in Resources */,
 				DA58B7A41550A6E40008CBA6 /* aim.body.10-ipadhd.png in Resources */,
@@ -3400,7 +3407,6 @@
 				DA859E700EC598E10036B7C0 /* BananaLayer.m in Sources */,
 				DAFEF9730ED847D40019F7E5 /* ThrowAction.m in Sources */,
 				DACFEC210EE96AA300A0D08E /* CityTheme.m in Sources */,
-				DAC9228217FA632600AC7FFF /* BuyPlusLayer.m in Sources */,
 				DA16C5190EEC856200E46246 /* ShadeTo.m in Sources */,
 				DA83F0BB0F00527B00305C9F /* WindLayer.m in Sources */,
 				DA1816260F0E227C0064F470 /* ConfigurationSectionLayer.m in Sources */,
@@ -3435,6 +3441,7 @@
 				DA579A57152C7599001BEF40 /* PearlObjectUtils.m in Sources */,
 				DA579A5A152C7599001BEF40 /* PearlStrings.m in Sources */,
 				DA579A5C152C7599001BEF40 /* PearlStringUtils.m in Sources */,
+				DAB9587A182D12D300EA277B /* NSTimer+PearlBlock.m in Sources */,
 				DA579A60152C7599001BEF40 /* PearlCCAutoTween.m in Sources */,
 				DA579A62152C7599001BEF40 /* PearlCCRemove.m in Sources */,
 				DA579A66152C7599001BEF40 /* PearlCCDebug.m in Sources */,
@@ -3442,6 +3449,7 @@
 				DA579A6A152C7599001BEF40 /* PearlCocos2DStrings.m in Sources */,
 				DA579A6C152C7599001BEF40 /* PearlCCConfigMenuLayer.m in Sources */,
 				DA579A6E152C7599001BEF40 /* PearlCCMenuItemBlock.m in Sources */,
+				DAB95885182D132B00EA277B /* PearlNavigationController.m in Sources */,
 				DA579A70152C7599001BEF40 /* PearlCCMenuItemSpacer.m in Sources */,
 				DA579A72152C7599001BEF40 /* PearlCCMenuItemSymbolic.m in Sources */,
 				DA579A76152C7599001BEF40 /* PearlCCMenuLayer.m in Sources */,
@@ -3459,13 +3467,16 @@
 				DA579A8E152C7599001BEF40 /* PearlCCSwipeLayer.m in Sources */,
 				DA579A90152C7599001BEF40 /* PearlCCUILayer.m in Sources */,
 				DA579A92152C7599001BEF40 /* PearlGLUtils.m in Sources */,
+				DAB95881182D132B00EA277B /* PearlOverlay.m in Sources */,
 				DA579A95152C7599001BEF40 /* PearlAudioController.m in Sources */,
 				DA579A99152C7599001BEF40 /* PearlAlert.m in Sources */,
 				DA579A9B152C7599001BEF40 /* PearlAppDelegate.m in Sources */,
 				DA579A9D152C7599001BEF40 /* PearlArrayTVC.m in Sources */,
 				DA579A9F152C7599001BEF40 /* PearlBoxView.m in Sources */,
+				DAB95876182D12D300EA277B /* NSArray+Indexing.m in Sources */,
 				DA579AA1152C7599001BEF40 /* PearlGradientView.m in Sources */,
 				DA579AA3152C7599001BEF40 /* PearlLayout.m in Sources */,
+				DAB95878182D12D300EA277B /* NSDictionary+Indexing.m in Sources */,
 				DA579AA5152C7599001BEF40 /* PearlLayoutView.m in Sources */,
 				DA579AA7152C7599001BEF40 /* PearlMessageView.m in Sources */,
 				DA579AA9152C7599001BEF40 /* PearlRootViewController.m in Sources */,
@@ -3477,6 +3488,7 @@
 				DAFEF9730ED847D40019F7E7 /* PearlGLShaders.m in Sources */,
 				DA4DA1531562888A00F6F596 /* Pearl.m in Sources */,
 				DA4DA1551562889E00F6F596 /* Pearl-Cocos2D.m in Sources */,
+				DAB95882182D132B00EA277B /* PearlEMail.m in Sources */,
 				DA4DA157156288AA00F6F596 /* Pearl-Media.m in Sources */,
 				DA4DA159156288B400F6F596 /* Pearl-UIKit.m in Sources */,
 				DAB41E6F158F1E3300D509CC /* UIControl+PearlBlocks.m in Sources */,
@@ -4275,113 +4287,28 @@
 		DAB9582B182D0CDC00EA277B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				DSTROOT = /tmp/LoveLyndir.dst;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LoveLyndir/LoveLyndir-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
 		DAB9582C182D0CDC00EA277B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/LoveLyndir.dst;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LoveLyndir/LoveLyndir-Prefix.pch";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
 		DAB9582D182D0CDC00EA277B /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/LoveLyndir.dst;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LoveLyndir/LoveLyndir-Prefix.pch";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 			};
 			name = "App Store";
 		};
 		DAB9582E182D0CDC00EA277B /* Profile */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				COPY_PHASE_STRIP = YES;
-				DSTROOT = /tmp/LoveLyndir.dst;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LoveLyndir/LoveLyndir-Prefix.pch";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 			};
 			name = Profile;
 		};
