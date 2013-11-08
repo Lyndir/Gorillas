@@ -30,7 +30,6 @@
 
 @interface GorillasConfig : PearlConfig
 
-@property(nonatomic, readwrite, strong) NSNumber *plusEnabled;
 @property(nonatomic, readwrite, strong) NSString *cityTheme;
 
 @property(nonatomic, readwrite, strong) NSNumber *varFloors;

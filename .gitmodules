@@ -1,3 +1,6 @@
 [submodule "External/Pearl"]
 	path = External/Pearl
 	url = git://github.com/Lyndir/Pearl.git
+[submodule "External/LoveLyndir"]
+	path = External/LoveLyndir
+	url = git://github.com/Lyndir/love-lyndir.client.git

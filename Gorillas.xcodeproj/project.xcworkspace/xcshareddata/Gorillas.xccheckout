@@ -16,6 +16,8 @@
 		<string>ssh://github.com/Lyndir/Gorillas.git</string>
 		<key>44878AE0-5287-4A6F-BE6C-EDBDA661D075</key>
 		<string>ssh://github.com/lhunath/cocos2d-iphone.git</string>
+		<key>8E6836C0-26B3-40AF-BB21-17E9CF05D451</key>
+		<string>git://github.com/Lyndir/love-lyndir.client.git</string>
 		<key>BAC90A0A-F158-4AF8-AB5F-299A465459A7</key>
 		<string>ssh://github.com/Lyndir/Pearl.git</string>
 		<key>BD484110-A1A8-4B82-BF0E-89FD2F153B62</key>
@@ -31,6 +33,8 @@
 		<string>../..</string>
 		<key>44878AE0-5287-4A6F-BE6C-EDBDA661D075</key>
 		<string>../../External/Pearl/External/cocos2d-iphone</string>
+		<key>8E6836C0-26B3-40AF-BB21-17E9CF05D451</key>
+		<string>../../External/LoveLyndir</string>
 		<key>BAC90A0A-F158-4AF8-AB5F-299A465459A7</key>
 		<string>../../External/Pearl</string>
 		<key>BD484110-A1A8-4B82-BF0E-89FD2F153B62</key>
@@ -67,6 +71,14 @@
 			<string>BD484110-A1A8-4B82-BF0E-89FD2F153B62</string>
 			<key>IDESourceControlWCCName</key>
 			<string>jrswizzle</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8E6836C0-26B3-40AF-BB21-17E9CF05D451</string>
+			<key>IDESourceControlWCCName</key>
+			<string>LoveLyndir</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>

@@ -24,6 +24,7 @@
 
 #import "MainMenuLayer.h"
 #import "GorillasAppDelegate.h"
+#import "LLButtonView.h"
 
 @interface MainMenuLayer()
 
@@ -35,6 +36,7 @@
     CCMenuItemToggle *configurationI;
     CCMenuItemLabel *descriptionT;
     CCMenuItem *multiPlayerI, *singlePlayerI, *hotSeatI, *upgradeI;
+    LLButtonView *loveButton;
 }
 
 - (id)init {
@@ -44,69 +46,36 @@
 
     self.layout = PearlCCMenuLayoutCustomColumns;
 
-    [[GorillasAppDelegate get] addObserverBlock:^(NSString *keyPath, id object, NSDictionary *change, void *context) {
-        upgradeI.isEnabled = [GorillasAppDelegate get].plusAvailable;
-    }                                forKeyPath:@"plusAvailable" options:0 context:nil];
+    loveButton = [LLButtonView new];
+    loveButton.alpha = 0;
 
     return self;
 }
 
 - (void)doLoad {
 
-    if ([[GorillasConfig get].plusEnabled boolValue]) {
-        self.background = [CCSprite spriteWithFile:@"menu-main-plus.png"];
-        self.itemCounts = @[ @1, @3, @1, @1, @1, @2 ];
-        self.items = @[
-                [PearlCCMenuItemSpacer spacerSmall],
-                multiPlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
-                                                         selector:@selector(startMulti:)],
-                singlePlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
-                                                          selector:@selector(startSingle:)],
-                hotSeatI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
-                                                     selector:@selector(startHotSeat:)],
-                configurationI = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)],
-                descriptionT = [PearlCCMenuItemTitle itemWithString:@"description"],
-                [PearlCCMenuItemSpacer spacerNormal],
-                [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self
-                                          selector:@selector(settings:)],
-                [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self
-                                          selector:@selector(scores:)],
-        ];
+    self.background = [CCSprite spriteWithFile:@"menu-main.png"];
+    self.itemCounts = @[ @1, @3, @1, @1, @1, @2 ];
+    self.items = @[
+            [PearlCCMenuItemSpacer spacerSmall],
+            multiPlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
+                                                     selector:@selector(startMulti:)],
+            singlePlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
+                                                      selector:@selector(startSingle:)],
+            hotSeatI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
+                                                 selector:@selector(startHotSeat:)],
+            configurationI = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)],
+            descriptionT = [PearlCCMenuItemTitle itemWithString:@"description"],
+            [PearlCCMenuItemSpacer spacerNormal],
+            [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self
+                                      selector:@selector(settings:)],
+            [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self
+                                      selector:@selector(scores:)],
+    ];
 
-        if (self.appMenu) {
-            [self.appMenu removeAllChildrenWithCleanup:YES];
-            self.appMenu = nil;
-        }
-    }
-    else {
-        self.background = [CCSprite spriteWithFile:@"menu-main.png"];
-        self.itemCounts = @[ @1, @1, @1, @1, @1, @2 ];
-        self.items = @[
-                [PearlCCMenuItemSpacer spacerSmall],
-                singlePlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(100.0f * [PearlDeviceUtils uiScale]) target:self
-                                                          selector:@selector(startSingle:)],
-                configurationI = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)],
-                descriptionT = [PearlCCMenuItemTitle itemWithString:@"description"],
-                [PearlCCMenuItemSpacer spacerNormal],
-                upgradeI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self
-                                                     selector:@selector(upgrade:)],
-                [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(50.0f * [PearlDeviceUtils uiScale]) target:self selector:@selector(scores:
-                )],
-        ];
-        upgradeI.isEnabled = [GorillasAppDelegate get].plusAvailable;
-
-        if (!self.appMenu) {
-            self.appMenu = [CCMenu menuWithItems:
-                    [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(35.0f * [PearlDeviceUtils uiScale])
-                                                target:self selector:@selector(appDeBlock:)],
-                    [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(35.0f * [PearlDeviceUtils uiScale])
-                                                target:self selector:@selector(appMasterPassword:)],
-                    nil];
-            [self.appMenu alignItemsVerticallyWithPadding:15 * [PearlDeviceUtils uiScale]];
-            [self.appMenu setPosition:CGPointMake( [CCDirector sharedDirector].winSize.width / 2 + 195.0f * [PearlDeviceUtils uiScale],
-                    [CCDirector sharedDirector].winSize.height / 2 - 85.0f * [PearlDeviceUtils uiScale] )];
-            [self.parent addChild:self.appMenu];
-        }
+    if (self.appMenu) {
+        [self.appMenu removeAllChildrenWithCleanup:YES];
+        self.appMenu = nil;
     }
 
     // Game Configuration.
@@ -152,6 +121,13 @@
 
     if (self.appMenu && !self.appMenu.parent)
         [self.parent addChild:self.appMenu];
+
+    if (!loveButton.superview)
+        [[CCDirector sharedDirector].view addSubview:loveButton];
+    [loveButton setFrameFromCurrentSizeAndParentPaddingTop:CGFLOAT_MAX right:CGFLOAT_MAX bottom:20 left:CGFLOAT_MAX];
+    [UIView animateWithDuration:1 animations:^{
+        loveButton.alpha = 1;
+    }];
 }
 
 - (void)onExit {
@@ -159,6 +135,13 @@
     [super onExit];
 
     [self.appMenu removeFromParentAndCleanup:NO];
+
+    [UIView animateWithDuration:1 animations:^{
+        loveButton.alpha = 0;
+    } completion:^(BOOL finished) {
+        if (finished)
+            [loveButton removeFromSuperview];
+    }];
 }
 
 - (void)startSingle:(id)sender {

@@ -345,6 +345,26 @@
 		DAB41E97158F1E5900D509CC /* PearlQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB41E84158F1E5900D509CC /* PearlQueue.h */; };
 		DAB41E98158F1E5900D509CC /* PearlQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB41E85158F1E5900D509CC /* PearlQueue.m */; };
 		DAB896DF0F480411005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
+		DAB9580F182D0CDB00EA277B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6620F95368600E5607E /* Foundation.framework */; };
+		DAB9585B182D0D1600EA277B /* LLAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB95842182D0D1600EA277B /* LLAboutViewController.m */; };
+		DAB9585C182D0D1600EA277B /* LLButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB95844182D0D1600EA277B /* LLButtonView.m */; };
+		DAB9585D182D0D1600EA277B /* LLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB95847182D0D1600EA277B /* LLModel.m */; };
+		DAB9585E182D0D1600EA277B /* LLToggleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB95849182D0D1600EA277B /* LLToggleViewController.m */; };
+		DAB9585F182D0D3A00EA277B /* LoveLyndir.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAB9584A182D0D1600EA277B /* LoveLyndir.storyboard */; };
+		DAB95860182D0D3A00EA277B /* love-lyndir.button.green.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB9584D182D0D1600EA277B /* love-lyndir.button.green.png */; };
+		DAB95861182D0D3A00EA277B /* love-lyndir.button.green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB9584E182D0D1600EA277B /* love-lyndir.button.green@2x.png */; };
+		DAB95862182D0D3A00EA277B /* love-lyndir.button.grey.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB9584F182D0D1600EA277B /* love-lyndir.button.grey.png */; };
+		DAB95863182D0D3A00EA277B /* love-lyndir.button.grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB95850182D0D1600EA277B /* love-lyndir.button.grey@2x.png */; };
+		DAB95864182D0D3A00EA277B /* love-lyndir.button.red.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB95851182D0D1600EA277B /* love-lyndir.button.red.png */; };
+		DAB95865182D0D3A00EA277B /* love-lyndir.button.red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB95852182D0D1600EA277B /* love-lyndir.button.red@2x.png */; };
+		DAB95866182D0D3A00EA277B /* love-lyndir.heart.green.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB95853182D0D1600EA277B /* love-lyndir.heart.green.png */; };
+		DAB95867182D0D3A00EA277B /* love-lyndir.heart.green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB95854182D0D1600EA277B /* love-lyndir.heart.green@2x.png */; };
+		DAB95868182D0D3A00EA277B /* love-lyndir.heart.grey.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB95855182D0D1600EA277B /* love-lyndir.heart.grey.png */; };
+		DAB95869182D0D3A00EA277B /* love-lyndir.heart.grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB95856182D0D1600EA277B /* love-lyndir.heart.grey@2x.png */; };
+		DAB9586A182D0D3A00EA277B /* love-lyndir.heart.red.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB95857182D0D1600EA277B /* love-lyndir.heart.red.png */; };
+		DAB9586B182D0D3A00EA277B /* love-lyndir.heart.red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB95858182D0D1600EA277B /* love-lyndir.heart.red@2x.png */; };
+		DAB9586C182D0D3A00EA277B /* love-lyndir.picker.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB95859182D0D1600EA277B /* love-lyndir.picker.png */; };
+		DAB9586D182D0D3A00EA277B /* love-lyndir.picker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DAB9585A182D0D1600EA277B /* love-lyndir.picker@2x.png */; };
 		DABA30BE152DFF6B00BE0D2A /* aim.body.00-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA306B152DFF6A00BE0D2A /* aim.body.00-hd.png */; };
 		DABA30C0152DFF6B00BE0D2A /* aim.body.00.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA306C152DFF6A00BE0D2A /* aim.body.00.png */; };
 		DABA30C2152DFF6B00BE0D2A /* aim.body.01-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA306D152DFF6A00BE0D2A /* aim.body.01-hd.png */; };
@@ -672,6 +692,18 @@
 			remoteInfo = "uicolor-utilities";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DAB9580C182D0CDB00EA277B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1D3623240D0F684500981E51 /* GorillasAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillasAppDelegate.h; sourceTree = "<group>"; };
@@ -1049,6 +1081,32 @@
 		DAB41E88158F1E5900D509CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Pearl.strings; sourceTree = "<group>"; };
 		DAB896DB0F480411005C1D06 /* PanningLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanningLayer.h; sourceTree = "<group>"; };
 		DAB896DC0F480411005C1D06 /* PanningLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanningLayer.m; sourceTree = "<group>"; };
+		DAB9580E182D0CDB00EA277B /* libLoveLyndir.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLoveLyndir.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAB9581C182D0CDB00EA277B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		DAB95841182D0D1600EA277B /* LLAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAboutViewController.h; sourceTree = "<group>"; };
+		DAB95842182D0D1600EA277B /* LLAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAboutViewController.m; sourceTree = "<group>"; };
+		DAB95843182D0D1600EA277B /* LLButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLButtonView.h; sourceTree = "<group>"; };
+		DAB95844182D0D1600EA277B /* LLButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLButtonView.m; sourceTree = "<group>"; };
+		DAB95845182D0D1600EA277B /* LLConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLConfig.h; sourceTree = "<group>"; };
+		DAB95846182D0D1600EA277B /* LLModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLModel.h; sourceTree = "<group>"; };
+		DAB95847182D0D1600EA277B /* LLModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLModel.m; sourceTree = "<group>"; };
+		DAB95848182D0D1600EA277B /* LLToggleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLToggleViewController.h; sourceTree = "<group>"; };
+		DAB95849182D0D1600EA277B /* LLToggleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLToggleViewController.m; sourceTree = "<group>"; };
+		DAB9584A182D0D1600EA277B /* LoveLyndir.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoveLyndir.storyboard; sourceTree = "<group>"; };
+		DAB9584D182D0D1600EA277B /* love-lyndir.button.green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.button.green.png"; sourceTree = "<group>"; };
+		DAB9584E182D0D1600EA277B /* love-lyndir.button.green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.button.green@2x.png"; sourceTree = "<group>"; };
+		DAB9584F182D0D1600EA277B /* love-lyndir.button.grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.button.grey.png"; sourceTree = "<group>"; };
+		DAB95850182D0D1600EA277B /* love-lyndir.button.grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.button.grey@2x.png"; sourceTree = "<group>"; };
+		DAB95851182D0D1600EA277B /* love-lyndir.button.red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.button.red.png"; sourceTree = "<group>"; };
+		DAB95852182D0D1600EA277B /* love-lyndir.button.red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.button.red@2x.png"; sourceTree = "<group>"; };
+		DAB95853182D0D1600EA277B /* love-lyndir.heart.green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.heart.green.png"; sourceTree = "<group>"; };
+		DAB95854182D0D1600EA277B /* love-lyndir.heart.green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.heart.green@2x.png"; sourceTree = "<group>"; };
+		DAB95855182D0D1600EA277B /* love-lyndir.heart.grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.heart.grey.png"; sourceTree = "<group>"; };
+		DAB95856182D0D1600EA277B /* love-lyndir.heart.grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.heart.grey@2x.png"; sourceTree = "<group>"; };
+		DAB95857182D0D1600EA277B /* love-lyndir.heart.red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.heart.red.png"; sourceTree = "<group>"; };
+		DAB95858182D0D1600EA277B /* love-lyndir.heart.red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.heart.red@2x.png"; sourceTree = "<group>"; };
+		DAB95859182D0D1600EA277B /* love-lyndir.picker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.picker.png"; sourceTree = "<group>"; };
+		DAB9585A182D0D1600EA277B /* love-lyndir.picker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "love-lyndir.picker@2x.png"; sourceTree = "<group>"; };
 		DABA306B152DFF6A00BE0D2A /* aim.body.00-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aim.body.00-hd.png"; sourceTree = "<group>"; };
 		DABA306C152DFF6A00BE0D2A /* aim.body.00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aim.body.00.png; sourceTree = "<group>"; };
 		DABA306D152DFF6A00BE0D2A /* aim.body.01-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aim.body.01-hd.png"; sourceTree = "<group>"; };
@@ -1441,6 +1499,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DAB9580B182D0CDB00EA277B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAB9580F182D0CDB00EA277B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -1465,6 +1531,7 @@
 				DA571E0213F3332200D50DF2 /* libLocalytics.a */,
 				DA9BF1801538C58B00EEAAF8 /* libcocos2d.a */,
 				DA9BF3071538C5E400EEAAF8 /* libkazmath.a */,
+				DAB9580E182D0CDB00EA277B /* libLoveLyndir.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1517,6 +1584,7 @@
 				DA0DD6620F95368600E5607E /* Foundation.framework */,
 				DA0DD6630F95368600E5607E /* CoreGraphics.framework */,
 				DA9BD563128B465E00B854A7 /* GameKit.framework */,
+				DAB9581C182D0CDB00EA277B /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2419,9 +2487,57 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		DAB95835182D0D1600EA277B /* LoveLyndir */ = {
+			isa = PBXGroup;
+			children = (
+				DAB95840182D0D1600EA277B /* ObjC */,
+				DAB9584C182D0D1600EA277B /* Resources */,
+			);
+			path = LoveLyndir;
+			sourceTree = "<group>";
+		};
+		DAB95840182D0D1600EA277B /* ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				DAB95841182D0D1600EA277B /* LLAboutViewController.h */,
+				DAB95842182D0D1600EA277B /* LLAboutViewController.m */,
+				DAB95843182D0D1600EA277B /* LLButtonView.h */,
+				DAB95844182D0D1600EA277B /* LLButtonView.m */,
+				DAB95845182D0D1600EA277B /* LLConfig.h */,
+				DAB95846182D0D1600EA277B /* LLModel.h */,
+				DAB95847182D0D1600EA277B /* LLModel.m */,
+				DAB95848182D0D1600EA277B /* LLToggleViewController.h */,
+				DAB95849182D0D1600EA277B /* LLToggleViewController.m */,
+				DAB9584A182D0D1600EA277B /* LoveLyndir.storyboard */,
+			);
+			path = ObjC;
+			sourceTree = "<group>";
+		};
+		DAB9584C182D0D1600EA277B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DAB9584D182D0D1600EA277B /* love-lyndir.button.green.png */,
+				DAB9584E182D0D1600EA277B /* love-lyndir.button.green@2x.png */,
+				DAB9584F182D0D1600EA277B /* love-lyndir.button.grey.png */,
+				DAB95850182D0D1600EA277B /* love-lyndir.button.grey@2x.png */,
+				DAB95851182D0D1600EA277B /* love-lyndir.button.red.png */,
+				DAB95852182D0D1600EA277B /* love-lyndir.button.red@2x.png */,
+				DAB95853182D0D1600EA277B /* love-lyndir.heart.green.png */,
+				DAB95854182D0D1600EA277B /* love-lyndir.heart.green@2x.png */,
+				DAB95855182D0D1600EA277B /* love-lyndir.heart.grey.png */,
+				DAB95856182D0D1600EA277B /* love-lyndir.heart.grey@2x.png */,
+				DAB95857182D0D1600EA277B /* love-lyndir.heart.red.png */,
+				DAB95858182D0D1600EA277B /* love-lyndir.heart.red@2x.png */,
+				DAB95859182D0D1600EA277B /* love-lyndir.picker.png */,
+				DAB9585A182D0D1600EA277B /* love-lyndir.picker@2x.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		DABF1FF40EB2703B002C32BF /* External */ = {
 			isa = PBXGroup;
 			children = (
+				DAB95835182D0D1600EA277B /* LoveLyndir */,
 				DA9BF3131538C5FA00EEAAF8 /* kazmath */,
 				DA9BF18C1538C5D700EEAAF8 /* cocos2d */,
 				DA8B8B9713CF9972003B0CC2 /* uicolor-utilities */,
@@ -2918,6 +3034,23 @@
 			productReference = DA9BF3071538C5E400EEAAF8 /* libkazmath.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		DAB9580D182D0CDB00EA277B /* LoveLyndir */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAB95833182D0CDC00EA277B /* Build configuration list for PBXNativeTarget "LoveLyndir" */;
+			buildPhases = (
+				DAB9580A182D0CDB00EA277B /* Sources */,
+				DAB9580B182D0CDB00EA277B /* Frameworks */,
+				DAB9580C182D0CDB00EA277B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LoveLyndir;
+			productName = LoveLyndir;
+			productReference = DAB9580E182D0CDB00EA277B /* libLoveLyndir.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2970,6 +3103,7 @@
 				DA571E0113F3332200D50DF2 /* Localytics */,
 				DA9BF17F1538C58B00EEAAF8 /* cocos2d */,
 				DA9BF3061538C5E400EEAAF8 /* kazmath */,
+				DAB9580D182D0CDB00EA277B /* LoveLyndir */,
 			);
 		};
 /* End PBXProject section */
@@ -3008,11 +3142,13 @@
 				DA579B1D152DF884001BEF40 /* bar.png in Resources */,
 				DA579B33152DF884001BEF40 /* Pearl-Cocos2D.strings in Resources */,
 				DA579B39152DF884001BEF40 /* snapclick.caf in Resources */,
+				DAB95869182D0D3A00EA277B /* love-lyndir.heart.grey@2x.png in Resources */,
 				DA579B3B152DF884001BEF40 /* wheel.png in Resources */,
 				DABA30BE152DFF6B00BE0D2A /* aim.body.00-hd.png in Resources */,
 				DABA30C0152DFF6B00BE0D2A /* aim.body.00.png in Resources */,
 				DABA30C2152DFF6B00BE0D2A /* aim.body.01-hd.png in Resources */,
 				DABA30C4152DFF6B00BE0D2A /* aim.body.01.png in Resources */,
+				DAB9585F182D0D3A00EA277B /* LoveLyndir.storyboard in Resources */,
 				DABA30C6152DFF6B00BE0D2A /* aim.body.02-hd.png in Resources */,
 				DABA30C8152DFF6B00BE0D2A /* aim.body.02.png in Resources */,
 				DABA30CA152DFF6B00BE0D2A /* aim.body.03-hd.png in Resources */,
@@ -3031,18 +3167,22 @@
 				DABA30E2152DFF6B00BE0D2A /* aim.body.09-hd.png in Resources */,
 				DABA30E4152DFF6B00BE0D2A /* aim.body.09.png in Resources */,
 				DABA30E6152DFF6B00BE0D2A /* aim.body.10-hd.png in Resources */,
+				DAB95867182D0D3A00EA277B /* love-lyndir.heart.green@2x.png in Resources */,
 				DABA30E8152DFF6B00BE0D2A /* aim.body.10.png in Resources */,
 				DABA30EA152DFF6B00BE0D2A /* aim.body.11-hd.png in Resources */,
 				DABA30EC152DFF6B00BE0D2A /* aim.body.11.png in Resources */,
 				DABA30EE152DFF6B00BE0D2A /* aim.body.12-hd.png in Resources */,
 				DABA30F0152DFF6B00BE0D2A /* aim.body.12.png in Resources */,
+				DAB9586B182D0D3A00EA277B /* love-lyndir.heart.red@2x.png in Resources */,
 				DABA30F2152DFF6B00BE0D2A /* aim.body.13-hd.png in Resources */,
 				DABA30F4152DFF6B00BE0D2A /* aim.body.13.png in Resources */,
 				DABA30F6152DFF6B00BE0D2A /* aim.body.14-hd.png in Resources */,
 				DABA30F8152DFF6B00BE0D2A /* aim.body.14.png in Resources */,
+				DAB95865182D0D3A00EA277B /* love-lyndir.button.red@2x.png in Resources */,
 				DABA30FA152DFF6B00BE0D2A /* aim.body.15-hd.png in Resources */,
 				DABA30FC152DFF6B00BE0D2A /* aim.body.15.png in Resources */,
 				DABA30FE152DFF6B00BE0D2A /* aim.head-hd.png in Resources */,
+				DAB9586D182D0D3A00EA277B /* love-lyndir.picker@2x.png in Resources */,
 				DABA3100152DFF6B00BE0D2A /* aim.head.png in Resources */,
 				DA7DF6D817FA51C800F84D63 /* menu-main-plus-hd.png in Resources */,
 				DABA3102152DFF6B00BE0D2A /* aim.tail-hd.png in Resources */,
@@ -3083,6 +3223,7 @@
 				DABA3148152DFF6B00BE0D2A /* Icon-72.png in Resources */,
 				DABA314A152DFF6B00BE0D2A /* Icon-Small-50.png in Resources */,
 				DABA314C152DFF6B00BE0D2A /* Icon-Small.png in Resources */,
+				DAB95863182D0D3A00EA277B /* love-lyndir.button.grey@2x.png in Resources */,
 				DABA314E152DFF6B00BE0D2A /* Icon-Small@2x.png in Resources */,
 				DABA3150152DFF6B00BE0D2A /* Icon.png in Resources */,
 				DABA3152152DFF6B00BE0D2A /* Icon@2x.png in Resources */,
@@ -3103,6 +3244,7 @@
 				DA5934601534F4DE0060D09A /* menu-main-ipad.png in Resources */,
 				DA5934621534F4DE0060D09A /* menu-main-ipadhd.png in Resources */,
 				DA0EC380153AEBC3001A2576 /* fps_images-ipad.png in Resources */,
+				DAB9586C182D0D3A00EA277B /* love-lyndir.picker.png in Resources */,
 				DA0EC382153AEBC3001A2576 /* menu-back-ipad.png in Resources */,
 				DA0EC384153AEBC3001A2576 /* menu-back-ipadhd.png in Resources */,
 				DA2996AB17FA69100021614D /* buy-plus-hd.png in Resources */,
@@ -3110,6 +3252,7 @@
 				DAE2A38F1547ECE700589827 /* TestFlight.plist in Resources */,
 				DA9F361E154D5056005ACACC /* gorilla-ai-DD-ipad.png in Resources */,
 				DA9F3620154D5056005ACACC /* gorilla-ai-DU-ipad.png in Resources */,
+				DAB95862182D0D3A00EA277B /* love-lyndir.button.grey.png in Resources */,
 				DA9F3622154D5056005ACACC /* gorilla-ai-UD-ipad.png in Resources */,
 				DA9F3624154D5056005ACACC /* gorilla-ai-UU-ipad.png in Resources */,
 				DA9F3626154D5056005ACACC /* gorilla-human-DD-ipad.png in Resources */,
@@ -3118,12 +3261,14 @@
 				DA9F362C154D5056005ACACC /* gorilla-human-UU-ipad.png in Resources */,
 				DA9F362E154D5056005ACACC /* gorilla-shape-ipad.png in Resources */,
 				DA58B6FD154F3D9B0008CBA6 /* bobber-ipad.png in Resources */,
+				DAB95861182D0D3A00EA277B /* love-lyndir.button.green@2x.png in Resources */,
 				DA58B701154F4A9C0008CBA6 /* banana-ai-ipad.png in Resources */,
 				DA58B703154F4A9C0008CBA6 /* banana-human-ipad.png in Resources */,
 				DA58B706154F4FA10008CBA6 /* hole-ipad.png in Resources */,
 				DA58B70B154F50100008CBA6 /* arrow.body-ipad.png in Resources */,
 				DA58B70D154F50100008CBA6 /* arrow.head-ipad.png in Resources */,
 				DA58B70F154F50100008CBA6 /* frame-ipad.png in Resources */,
+				DAB95864182D0D3A00EA277B /* love-lyndir.button.red.png in Resources */,
 				DA58B712154F50210008CBA6 /* infinite-shape-ipad.png in Resources */,
 				DA58B71D154F59240008CBA6 /* bobber-ipadhd.png in Resources */,
 				DA58B71F154F59240008CBA6 /* gorilla-ai-DD-ipadhd.png in Resources */,
@@ -3135,11 +3280,13 @@
 				DA58B72B154F59240008CBA6 /* gorilla-human-UD-ipadhd.png in Resources */,
 				DA58B72D154F59240008CBA6 /* gorilla-human-UU-ipadhd.png in Resources */,
 				DA58B731154F5A860008CBA6 /* banana-ai-ipadhd.png in Resources */,
+				DAB95860182D0D3A00EA277B /* love-lyndir.button.green.png in Resources */,
 				DA58B733154F5A860008CBA6 /* banana-human-ipadhd.png in Resources */,
 				DA58B74A15508BF60008CBA6 /* aim.body.00-ipad.png in Resources */,
 				DA58B74C15508BF60008CBA6 /* aim.body.01-ipad.png in Resources */,
 				DA58B74E15508BF60008CBA6 /* aim.body.02-ipad.png in Resources */,
 				DA58B75015508BF60008CBA6 /* aim.body.03-ipad.png in Resources */,
+				DAB9586A182D0D3A00EA277B /* love-lyndir.heart.red.png in Resources */,
 				DA58B75215508BF60008CBA6 /* aim.body.04-ipad.png in Resources */,
 				DA58B75415508BF60008CBA6 /* aim.body.05-ipad.png in Resources */,
 				DA58B75615508BF60008CBA6 /* aim.body.06-ipad.png in Resources */,
@@ -3172,6 +3319,7 @@
 				DA58B7A21550A6E40008CBA6 /* aim.body.09-ipadhd.png in Resources */,
 				DA58B7A41550A6E40008CBA6 /* aim.body.10-ipadhd.png in Resources */,
 				DA58B7A61550A6E40008CBA6 /* aim.body.11-ipadhd.png in Resources */,
+				DAB95868182D0D3A00EA277B /* love-lyndir.heart.grey.png in Resources */,
 				DA58B7A81550A6E40008CBA6 /* aim.body.12-ipadhd.png in Resources */,
 				DA58B7AA1550A6E40008CBA6 /* aim.body.13-ipadhd.png in Resources */,
 				DA58B7AC1550A6E40008CBA6 /* aim.body.14-ipadhd.png in Resources */,
@@ -3182,6 +3330,7 @@
 				DA58B7B71550A84F0008CBA6 /* Bonk.ttf in Resources */,
 				DA58B7C0155181340008CBA6 /* Default.png in Resources */,
 				DA58B7C2155181340008CBA6 /* Default@2x.png in Resources */,
+				DAB95866182D0D3A00EA277B /* love-lyndir.heart.green.png in Resources */,
 				DA58B7C6155181340008CBA6 /* splash-hd.png in Resources */,
 				DA58B7C8155181340008CBA6 /* splash-ipad.png in Resources */,
 				DA58B7CA155181340008CBA6 /* splash-ipadhd.png in Resources */,
@@ -3476,6 +3625,17 @@
 				DA9BF34E1538C5FA00EEAAF8 /* vec2.c in Sources */,
 				DA9BF34F1538C5FA00EEAAF8 /* vec3.c in Sources */,
 				DA9BF3501538C5FA00EEAAF8 /* vec4.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAB9580A182D0CDB00EA277B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAB9585E182D0D1600EA277B /* LLToggleViewController.m in Sources */,
+				DAB9585C182D0D1600EA277B /* LLButtonView.m in Sources */,
+				DAB9585D182D0D1600EA277B /* LLModel.m in Sources */,
+				DAB9585B182D0D1600EA277B /* LLAboutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4112,6 +4272,119 @@
 			};
 			name = "App Store";
 		};
+		DAB9582B182D0CDC00EA277B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				DSTROOT = /tmp/LoveLyndir.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoveLyndir/LoveLyndir-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DAB9582C182D0CDC00EA277B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/LoveLyndir.dst;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoveLyndir/LoveLyndir-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		DAB9582D182D0CDC00EA277B /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/LoveLyndir.dst;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoveLyndir/LoveLyndir-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = "App Store";
+		};
+		DAB9582E182D0CDC00EA277B /* Profile */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/LoveLyndir.dst;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoveLyndir/LoveLyndir-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Profile;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4191,6 +4464,16 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		DAB95833182D0CDC00EA277B /* Build configuration list for PBXNativeTarget "LoveLyndir" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAB9582B182D0CDC00EA277B /* Debug */,
+				DAB9582C182D0CDC00EA277B /* Release */,
+				DAB9582D182D0CDC00EA277B /* App Store */,
+				DAB9582E182D0CDC00EA277B /* Profile */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

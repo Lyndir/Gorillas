@@ -28,20 +28,16 @@
 #import "LocalyticsSession.h"
 #import "TestFlight.h"
 #import <Crashlytics/Crashlytics.h>
-#import <StoreKit/StoreKit.h>
 
-@interface GorillasAppDelegate()<SKProductsRequestDelegate, SKPaymentTransactionObserver>
+@interface GorillasAppDelegate()
 
 @property(nonatomic, readwrite, strong) GameLayer *gameLayer;
 @property(nonatomic, readwrite, strong) MainMenuLayer *mainMenuLayer;
-@property(nonatomic, readwrite, strong) BuyPlusLayer *buyPlusLayer;
 @property(nonatomic, readwrite, strong) ConfigurationSectionLayer *configLayer;
 @property(nonatomic, readwrite, strong) GameConfigurationLayer *gameConfigLayer;
 @property(nonatomic, readwrite, strong) AVConfigurationLayer *avConfigLayer;
 @property(nonatomic, readwrite, strong) NetController *netController;
-@property(nonatomic, readwrite, strong) NSDictionary *products;
 
-@property(nonatomic, strong) PearlAlert *purchasingActivity;
 - (NSDictionary *)testFlightInfo;
 - (NSString *)testFlightToken;
 
@@ -167,12 +163,6 @@
         } );
     }];
 
-    // StoreKit setup.
-    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-    SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithArray:@[ GORILLAS_PLUS ]]];
-    productsRequest.delegate = self;
-    [productsRequest start];
-
     self.netController = [NetController new];
     [GKMatchmaker sharedMatchmaker].inviteHandler = ^(GKInvite *acceptedInvite, NSArray *playersToInvite) {
 
@@ -219,14 +209,6 @@
     self.mainMenuLayer.playersToInvite = aPlayersToInvite;
 
     [self pushLayer:self.mainMenuLayer];
-}
-
-- (void)showUpgrade {
-
-    if (!self.buyPlusLayer)
-        self.buyPlusLayer = [BuyPlusLayer node];
-
-    [self pushLayer:self.buyPlusLayer];
 }
 
 - (void)showConfiguration {
@@ -283,57 +265,6 @@
         self.gameLayer.paused = NO;
 
     [super didPopLayer:layer anyLeft:anyLeft];
-}
-
-
-#pragma mark - SKProductsRequestDelegate
-
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
-
-    BOOL plusAvailable = NO;
-    NSMutableDictionary *products = [NSMutableDictionary dictionaryWithCapacity:[response.products count]];
-    for (SKProduct *product in response.products) {
-        products[product.productIdentifier] = product;
-        if ([product.productIdentifier isEqualToString:GORILLAS_PLUS])
-            plusAvailable = YES;
-    }
-
-    self.products = products;
-    self.plusAvailable = plusAvailable;
-}
-
-
-#pragma mark - SKPaymentTransactionObserver
-
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions {
-
-    for (SKPaymentTransaction *transaction in transactions)
-        switch (transaction.transactionState) {
-            case SKPaymentTransactionStatePurchasing:
-                self.purchasingActivity = [PearlAlert showActivityWithTitle:PearlString( @"Purchasing %@",
-                        ((SKProduct *)(self.products)[transaction.payment.productIdentifier]).localizedTitle )];
-                break;
-            case SKPaymentTransactionStateFailed:
-                err(@"In-App Purchase failed: %@", transaction.error);
-                [self.purchasingActivity cancelAlertAnimated:YES];
-                if ([transaction.payment.productIdentifier isEqualToString:GORILLAS_PLUS])
-                    [GorillasConfig get].plusEnabled = @NO;
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-                break;
-            case SKPaymentTransactionStatePurchased:
-                [self.purchasingActivity cancelAlertAnimated:YES];
-                if ([transaction.payment.productIdentifier isEqualToString:GORILLAS_PLUS])
-                    [GorillasConfig get].plusEnabled = @YES;
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-                break;
-            case SKPaymentTransactionStateRestored:
-                [self.purchasingActivity cancelAlertAnimated:YES];
-                if ([transaction.originalTransaction.payment.productIdentifier isEqualToString:GORILLAS_PLUS])
-                    [GorillasConfig get].plusEnabled = @YES;
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-                break;
-        }
-    [GorillasConfig flush];
 }
 
 
@@ -434,10 +365,6 @@
     if (self.mainMenuLayer && ![self.mainMenuLayer parent]) {
         [self.mainMenuLayer stopAllActions];
         self.mainMenuLayer = nil;
-    }
-    if (self.buyPlusLayer && ![self.buyPlusLayer parent]) {
-        [self.buyPlusLayer stopAllActions];
-        self.buyPlusLayer = nil;
     }
     if (self.configLayer && ![self.configLayer parent]) {
         [self.configLayer stopAllActions];
