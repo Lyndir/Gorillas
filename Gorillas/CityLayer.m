@@ -133,7 +133,7 @@
 
         BuildingsLayer *building = [[BuildingsLayer alloc] initWithWidthRatio:(5 - b) / 5.0f heightRatio:1 + (b / 2.0f)
                                                                    lightRatio:lightRatio];
-        [buildingsBuilder addObject:building];
+        [buildingsBuilder insertObject:building atIndex:0];
 
         if (b)
             [self addChild:building z:-2 - (NSInteger)b parallaxRatio:ccp( (5 - b) / 5.0f, (10 - b) / 10.0f ) positionOffset:CGPointZero];
@@ -529,18 +529,13 @@
     }
     // Find indexB: The right boundary of allowed gorilla indexes.
     NSUInteger indexB = indexA + [[GorillasConfig get].buildingAmount unsignedIntValue] - 1;
-    // Less than or 3 gorillas, leave one building padding on the sides.
-    if ([gorillas count] <= 3) {
-        indexA += 1;
-        indexB -= 1;
-    }
+
     // Distribute gorillas.
-    NSUInteger delta = indexB - indexA;
+    NSUInteger delta = indexB - indexA + 1;
     if ([gorillas count] > delta) {
         err(@"Tried to start a game with more gorillas than there's room in the field.");
         return;
     }
-
     NSUInteger minSpace = ((delta / [gorillas count]) /* share per gorilla */ - 1) /* gorilla's building */ / 2 /* padding on each side */;
     NSMutableArray *gorillasQueue = [gorillas mutableCopy];
     NSMutableArray *gorillaIndexes = [[NSMutableArray alloc] initWithCapacity:[gorillas count]];
@@ -554,15 +549,16 @@
 
         // Make sure gorillas aren't too close together.
         for (NSNumber *gorillasIndex in gorillaIndexes)
-            if (ABS([gorillasIndex unsignedIntegerValue] - index) <= minSpace) {
+            if ((unsigned)ABS((signed)[gorillasIndex unsignedIntegerValue] - (signed)index) <= minSpace) {
                 validIndex = NO;
                 break;
             }
 
-        if (validIndex) {
-            [gorillaIndexes addObject:@(index)];
-            [gorillasQueue removeLastObject];
-        }
+        if (!validIndex)
+            continue;
+        
+        [gorillaIndexes addObject:@(index)];
+        [gorillasQueue removeLastObject];
     }
     for (NSUInteger i = 0; i < [gorillas count]; ++i) {
         Building building = firstBuildings.buildings[[(NSNumber *)gorillaIndexes[i] unsignedIntegerValue]];
@@ -620,8 +616,6 @@
 }
 
 - (void)explodeAt:(CGPoint)point isGorilla:(BOOL)isGorilla {
-
-    dbg(@"Explosion at: %@", NSStringFromCGPoint( point ));
 
     CGPoint worldPoint = [self convertToWorldSpace:point];
     [holes addHoleAtWorld:worldPoint];
