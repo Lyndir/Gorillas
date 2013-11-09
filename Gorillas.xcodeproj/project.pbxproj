@@ -46,9 +46,6 @@
 		DA571E1513F3339E00D50DF2 /* LocalyticsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = DA571E0E13F3339E00D50DF2 /* LocalyticsDatabase.m */; };
 		DA571E1613F3339E00D50DF2 /* LocalyticsSession.h in Headers */ = {isa = PBXBuildFile; fileRef = DA571E0F13F3339E00D50DF2 /* LocalyticsSession.h */; };
 		DA571E1713F3339E00D50DF2 /* LocalyticsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = DA571E1013F3339E00D50DF2 /* LocalyticsSession.m */; };
-		DA571E1813F3339E00D50DF2 /* UploaderThread.h in Headers */ = {isa = PBXBuildFile; fileRef = DA571E1113F3339E00D50DF2 /* UploaderThread.h */; };
-		DA571E1913F3339E00D50DF2 /* UploaderThread.m in Sources */ = {isa = PBXBuildFile; fileRef = DA571E1213F3339E00D50DF2 /* UploaderThread.m */; };
-		DA571E1A13F3339E00D50DF2 /* WebserviceConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = DA571E1313F3339E00D50DF2 /* WebserviceConstants.h */; };
 		DA571E1C13F3376000D50DF2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DA571E1B13F3376000D50DF2 /* libsqlite3.dylib */; };
 		DA571E2113F3378800D50DF2 /* libLocalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA571E0213F3332200D50DF2 /* libLocalytics.a */; };
 		DA571E2913F3427100D50DF2 /* Localytics.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA571E2813F3426700D50DF2 /* Localytics.plist */; };
@@ -370,6 +367,12 @@
 		DAB95884182D132B00EA277B /* PearlNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB9587E182D132B00EA277B /* PearlNavigationController.h */; };
 		DAB95885182D132B00EA277B /* PearlNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB9587F182D132B00EA277B /* PearlNavigationController.m */; };
 		DAB95886182D132B00EA277B /* PearlOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB95880182D132B00EA277B /* PearlOverlay.h */; };
+		DAB9588D182ED81B00EA277B /* LocalyticsConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB95887182ED81B00EA277B /* LocalyticsConstants.h */; };
+		DAB9588E182ED81B00EA277B /* LocalyticsDatapointHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB95888182ED81B00EA277B /* LocalyticsDatapointHelper.h */; };
+		DAB9588F182ED81B00EA277B /* LocalyticsDatapointHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB95889182ED81B00EA277B /* LocalyticsDatapointHelper.m */; };
+		DAB95890182ED81B00EA277B /* LocalyticsSession+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB9588A182ED81B00EA277B /* LocalyticsSession+Private.h */; };
+		DAB95891182ED81B00EA277B /* LocalyticsUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = DAB9588B182ED81B00EA277B /* LocalyticsUtil.h */; };
+		DAB95892182ED81B00EA277B /* LocalyticsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB9588C182ED81B00EA277B /* LocalyticsUtil.m */; };
 		DABA30BE152DFF6B00BE0D2A /* aim.body.00-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA306B152DFF6A00BE0D2A /* aim.body.00-hd.png */; };
 		DABA30C0152DFF6B00BE0D2A /* aim.body.00.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA306C152DFF6A00BE0D2A /* aim.body.00.png */; };
 		DABA30C2152DFF6B00BE0D2A /* aim.body.01-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DABA306D152DFF6A00BE0D2A /* aim.body.01-hd.png */; };
@@ -764,9 +767,6 @@
 		DA571E0E13F3339E00D50DF2 /* LocalyticsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsDatabase.m; sourceTree = "<group>"; };
 		DA571E0F13F3339E00D50DF2 /* LocalyticsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsSession.h; sourceTree = "<group>"; };
 		DA571E1013F3339E00D50DF2 /* LocalyticsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsSession.m; sourceTree = "<group>"; };
-		DA571E1113F3339E00D50DF2 /* UploaderThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploaderThread.h; sourceTree = "<group>"; };
-		DA571E1213F3339E00D50DF2 /* UploaderThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploaderThread.m; sourceTree = "<group>"; };
-		DA571E1313F3339E00D50DF2 /* WebserviceConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebserviceConstants.h; sourceTree = "<group>"; };
 		DA571E1B13F3376000D50DF2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		DA571E1D13F3377100D50DF2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		DA571E2213F337B100D50DF2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1115,6 +1115,14 @@
 		DAB9587E182D132B00EA277B /* PearlNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearlNavigationController.h; sourceTree = "<group>"; };
 		DAB9587F182D132B00EA277B /* PearlNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PearlNavigationController.m; sourceTree = "<group>"; };
 		DAB95880182D132B00EA277B /* PearlOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearlOverlay.h; sourceTree = "<group>"; };
+		DAB95887182ED81B00EA277B /* LocalyticsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsConstants.h; sourceTree = "<group>"; };
+		DAB95888182ED81B00EA277B /* LocalyticsDatapointHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsDatapointHelper.h; sourceTree = "<group>"; };
+		DAB95889182ED81B00EA277B /* LocalyticsDatapointHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsDatapointHelper.m; sourceTree = "<group>"; };
+		DAB9588A182ED81B00EA277B /* LocalyticsSession+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LocalyticsSession+Private.h"; sourceTree = "<group>"; };
+		DAB9588B182ED81B00EA277B /* LocalyticsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalyticsUtil.h; sourceTree = "<group>"; };
+		DAB9588C182ED81B00EA277B /* LocalyticsUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalyticsUtil.m; sourceTree = "<group>"; };
+		DAB95893182ED83400EA277B /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		DAB95894182ED83400EA277B /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		DABA306B152DFF6A00BE0D2A /* aim.body.00-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aim.body.00-hd.png"; sourceTree = "<group>"; };
 		DABA306C152DFF6A00BE0D2A /* aim.body.00.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aim.body.00.png; sourceTree = "<group>"; };
 		DABA306D152DFF6A00BE0D2A /* aim.body.01-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aim.body.01-hd.png"; sourceTree = "<group>"; };
@@ -1712,6 +1720,12 @@
 		DA571E0413F3332200D50DF2 /* Localytics */ = {
 			isa = PBXGroup;
 			children = (
+				DAB95887182ED81B00EA277B /* LocalyticsConstants.h */,
+				DAB95888182ED81B00EA277B /* LocalyticsDatapointHelper.h */,
+				DAB95889182ED81B00EA277B /* LocalyticsDatapointHelper.m */,
+				DAB9588A182ED81B00EA277B /* LocalyticsSession+Private.h */,
+				DAB9588B182ED81B00EA277B /* LocalyticsUtil.h */,
+				DAB9588C182ED81B00EA277B /* LocalyticsUtil.m */,
 				DA571E2813F3426700D50DF2 /* Localytics.plist */,
 				DA571E0D13F3339E00D50DF2 /* LocalyticsDatabase.h */,
 				DA571E0E13F3339E00D50DF2 /* LocalyticsDatabase.m */,
@@ -1719,9 +1733,6 @@
 				DA571E1013F3339E00D50DF2 /* LocalyticsSession.m */,
 				DA579AFF152CE201001BEF40 /* LocalyticsUploader.h */,
 				DA579B00152CE201001BEF40 /* LocalyticsUploader.m */,
-				DA571E1113F3339E00D50DF2 /* UploaderThread.h */,
-				DA571E1213F3339E00D50DF2 /* UploaderThread.m */,
-				DA571E1313F3339E00D50DF2 /* WebserviceConstants.h */,
 			);
 			path = Localytics;
 			sourceTree = "<group>";
@@ -2166,6 +2177,8 @@
 		DA721A1314895E5100C2BAAD /* TestFlight */ = {
 			isa = PBXGroup;
 			children = (
+				DAB95893182ED83400EA277B /* TestFlight+AsyncLogging.h */,
+				DAB95894182ED83400EA277B /* TestFlight+ManualSessions.h */,
 				DAE2A38A1547ECE700589827 /* libTestFlight.a */,
 				DAE2A38B1547ECE700589827 /* TestFlight.h */,
 				DAE2A38C1547ECE700589827 /* TestFlight.plist */,
@@ -2785,11 +2798,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAB95890182ED81B00EA277B /* LocalyticsSession+Private.h in Headers */,
 				DA571E1413F3339E00D50DF2 /* LocalyticsDatabase.h in Headers */,
+				DAB95891182ED81B00EA277B /* LocalyticsUtil.h in Headers */,
 				DA571E1613F3339E00D50DF2 /* LocalyticsSession.h in Headers */,
-				DA571E1813F3339E00D50DF2 /* UploaderThread.h in Headers */,
-				DA571E1A13F3339E00D50DF2 /* WebserviceConstants.h in Headers */,
 				DA579B01152CE201001BEF40 /* LocalyticsUploader.h in Headers */,
+				DAB9588D182ED81B00EA277B /* LocalyticsConstants.h in Headers */,
+				DAB9588E182ED81B00EA277B /* LocalyticsDatapointHelper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3513,9 +3528,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA571E1513F3339E00D50DF2 /* LocalyticsDatabase.m in Sources */,
+				DAB9588F182ED81B00EA277B /* LocalyticsDatapointHelper.m in Sources */,
 				DA571E1713F3339E00D50DF2 /* LocalyticsSession.m in Sources */,
-				DA571E1913F3339E00D50DF2 /* UploaderThread.m in Sources */,
 				DA579B02152CE201001BEF40 /* LocalyticsUploader.m in Sources */,
+				DAB95892182ED81B00EA277B /* LocalyticsUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

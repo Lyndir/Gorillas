@@ -28,6 +28,8 @@
 #import "PearlCCRemove.h"
 #import "CityTheme.h"
 #import "InteractionLayer.h"
+#import "TestFlight.h"
+#import "LocalyticsSession.h"
 
 @interface GameLayer()
 
@@ -123,7 +125,7 @@
 #ifndef DEBUG
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         @try {
-            [TestFlight passCheckpoint:PearlString(@"GorillasNewGame_%@", [GorillasConfig nameForMode:mode])];
+            [TestFlight passCheckpoint:PearlString(@"GorillasNewGame_%@", [GorillasConfig nameForMode:_mode])];
         }
         @catch (NSException *exception) {
             err(@"TestFlight: %@", exception);
@@ -131,7 +133,7 @@
         @try {
             [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"New Game" attributes:
              [NSDictionary dictionaryWithObjectsAndKeys:
-              [GorillasConfig nameForMode:mode],
+              [GorillasConfig nameForMode:_mode],
               @"mode",
               [NSNumber numberWithUnsignedInt:localHumans],
               @"localHumans",

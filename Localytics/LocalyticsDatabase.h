@@ -1,10 +1,12 @@
 //
 //  LocalyticsDatabase.h
-//  LocalyticsDemo
+//  Copyright (C) 2013 Char Software Inc., DBA Localytics
 //
-//  Created by jkaufman on 5/26/11.
-//  Copyright 2011 Localytics. All rights reserved.
+//  This code is provided under the Localytics Modified BSD License.
+//  A copy of this license has been distributed in a file called LICENSE
+//  with this source code.
 //
+// Please visit www.localytics.com for more information.
 
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
@@ -16,9 +18,9 @@
     sqlite3 *_databaseConnection;
 }
 
-+ (LocalyticsDatabase *)sharedLocalyticsDatabase;
+@property (nonatomic, assign, readonly) BOOL firstRun;
 
-- (NSUInteger)databaseSize;
+- (unsigned long long)databaseSize;
 - (int)eventCount;
 - (NSTimeInterval)createdTimestamp;
 
@@ -31,6 +33,8 @@
 
 - (BOOL)addEventWithBlobString:(NSString *)blob;
 - (BOOL)addCloseEventWithBlobString:(NSString *)blob;
+- (BOOL)queueCloseEventWithBlobString:(NSString *)blob;
+- (NSString *)dequeueCloseEventBlobString;
 - (BOOL)addFlowEventWithBlobString:(NSString *)blob;
 - (BOOL)removeLastCloseAndFlowEvents;
 
@@ -44,14 +48,36 @@
 - (BOOL)vacuumIfRequired;
 
 - (NSTimeInterval)lastSessionStartTimestamp;
-- (BOOL)setLastsessionStartTimestamp:(NSTimeInterval)timestamp;
+- (BOOL)setLastSessionStartTimestamp:(NSTimeInterval)timestamp;
 
 - (BOOL)isOptedOut;
 - (BOOL)setOptedOut:(BOOL)optOut;
+- (NSString *)appVersion;
+- (BOOL)updateAppVersion:(NSString *)appVersion;
+- (BOOL)isPushTokenNull;
+- (NSString *)pushToken;
+- (BOOL)updatePushToken:(NSString *)pushToken;
+- (BOOL)isDevPushTokenNull;
+- (NSString *)devPushToken;
+- (BOOL)updateDevPushToken:(NSString *)devPushToken;
+- (BOOL)isFirstAdidNull;
+- (BOOL)updateFirstAdid:(NSString *)firstAdid;
+- (NSString *)firstAdid;
 - (NSString *)installId;
 - (NSString *)appKey; // Most recent app key-- may not be that used to open the session.
 
 - (NSString *)customDimension:(int)dimension;
 - (BOOL)setCustomDimension:(int)dimension value:(NSString *)value;
+
+- (BOOL)setValueForIdentifier:(NSString *)identifierName value:(NSString *)value;
+- (NSString *)valueForIdentifier:(NSString *)identifierName;
+- (BOOL)deleteIdentifer:(NSString *)identifierName;
+- (NSDictionary *)identifiers;
+
+- (NSInteger)safeIntegerValueFromDictionary:(NSDictionary *)dict forKey:(NSString *)key;
+- (NSString *)safeStringValueFromDictionary:(NSDictionary *)dict forKey:(NSString *)key;
+- (NSDictionary *)safeDictionaryFromDictionary:(NSDictionary *)dict forKey:(NSString *)key;
+- (NSArray *)safeListFromDictionary:(NSDictionary *)dict forKey:(NSString *)key;
+
 
 @end
