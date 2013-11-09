@@ -84,6 +84,7 @@
 
     [self.defaults
             registerDefaults:@{
+                    NSStringFromSelector( @selector(iTunesID) )                     : @"302275459",
                     NSStringFromSelector( @selector(askForReviews) )                : @YES,
 
                     NSStringFromSelector( @selector(cityTheme) )                    : [CityTheme defaultThemeName],
