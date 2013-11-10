@@ -332,7 +332,6 @@
 		DAB41E98158F1E5900D509CC /* PearlQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB41E85158F1E5900D509CC /* PearlQueue.m */; };
 		DAB896DF0F480411005C1D06 /* PanningLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB896DC0F480411005C1D06 /* PanningLayer.m */; };
 		DAB9580F182D0CDB00EA277B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6620F95368600E5607E /* Foundation.framework */; };
-		DAB9585B182D0D1600EA277B /* LLAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB95842182D0D1600EA277B /* LLAboutViewController.m */; };
 		DAB9585C182D0D1600EA277B /* LLButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB95844182D0D1600EA277B /* LLButtonView.m */; };
 		DAB9585D182D0D1600EA277B /* LLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB95847182D0D1600EA277B /* LLModel.m */; };
 		DAB9585E182D0D1600EA277B /* LLToggleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB95849182D0D1600EA277B /* LLToggleViewController.m */; };
@@ -974,7 +973,6 @@
 		DA79D79F0F59531100D36C7C /* GameConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameConfiguration.m; sourceTree = "<group>"; };
 		DA7ABCE11282308A006A2E71 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DA7ABCE41282308A006A2E71 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DA7ABFB612823135006A2E71 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DA7ABFDB12823377006A2E71 /* Apple Symbols.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple Symbols.ttf"; sourceTree = "<group>"; };
 		DA7DF6D017FA2EF900F84D63 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		DA83F0B90F00527B00305C9F /* WindLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindLayer.h; sourceTree = "<group>"; };
@@ -1062,8 +1060,6 @@
 		DAB896DC0F480411005C1D06 /* PanningLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanningLayer.m; sourceTree = "<group>"; };
 		DAB9580E182D0CDB00EA277B /* libLoveLyndir.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLoveLyndir.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAB9581C182D0CDB00EA277B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		DAB95841182D0D1600EA277B /* LLAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAboutViewController.h; sourceTree = "<group>"; };
-		DAB95842182D0D1600EA277B /* LLAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAboutViewController.m; sourceTree = "<group>"; };
 		DAB95843182D0D1600EA277B /* LLButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLButtonView.h; sourceTree = "<group>"; };
 		DAB95844182D0D1600EA277B /* LLButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLButtonView.m; sourceTree = "<group>"; };
 		DAB95845182D0D1600EA277B /* LLConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLConfig.h; sourceTree = "<group>"; };
@@ -1184,7 +1180,6 @@
 		DABA30BD152DFF6B00BE0D2A /* menu-main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-main.png"; sourceTree = "<group>"; };
 		DAC0377C13CE2EFE003FAE6D /* Gorillas-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Gorillas-Prefix.pch"; sourceTree = "<group>"; };
 		DAC0378E13CE308A003FAE6D /* Gorillas-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Gorillas-Info.plist"; sourceTree = "<group>"; };
-		DAC0378F13CE308A003FAE6D /* GorillasLite-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GorillasLite-Info.plist"; sourceTree = "<group>"; };
 		DAC10D7413CE3DBB00A546E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Gorillas/Resources/en.lproj/Go.caf; sourceTree = SOURCE_ROOT; };
 		DAC10D7613CE3DBB00A546E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Gorillas/Resources/en.lproj/Level_Down.caf; sourceTree = SOURCE_ROOT; };
 		DAC10D7813CE3DBB00A546E4 /* English */ = {isa = PBXFileReference; lastKnownFileType = file; name = English; path = Gorillas/Resources/en.lproj/Level_Up.caf; sourceTree = SOURCE_ROOT; };
@@ -2154,14 +2149,6 @@
 			path = Pearl/External/jrswizzle;
 			sourceTree = "<group>";
 		};
-		DA7ABFB212823135006A2E71 /* lite */ = {
-			isa = PBXGroup;
-			children = (
-				DA7ABFB312823135006A2E71 /* InfoPlist.strings */,
-			);
-			path = lite;
-			sourceTree = "<group>";
-		};
 		DA7ABFD912823377006A2E71 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -2175,7 +2162,6 @@
 		DA83EBE90EFEE5E300305C9F /* Text */ = {
 			isa = PBXGroup;
 			children = (
-				DA7ABFB212823135006A2E71 /* lite */,
 				DA7ABCAA1282308A006A2E71 /* InfoPlist.strings */,
 				DA7ABCB11282308A006A2E71 /* Localizable.strings */,
 			);
@@ -2479,8 +2465,6 @@
 		DAB95840182D0D1600EA277B /* ObjC */ = {
 			isa = PBXGroup;
 			children = (
-				DAB95841182D0D1600EA277B /* LLAboutViewController.h */,
-				DAB95842182D0D1600EA277B /* LLAboutViewController.m */,
 				DAB95843182D0D1600EA277B /* LLButtonView.h */,
 				DAB95844182D0D1600EA277B /* LLButtonView.m */,
 				DAB95845182D0D1600EA277B /* LLConfig.h */,
@@ -2530,7 +2514,6 @@
 			isa = PBXGroup;
 			children = (
 				DAC0378E13CE308A003FAE6D /* Gorillas-Info.plist */,
-				DAC0378F13CE308A003FAE6D /* GorillasLite-Info.plist */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 				DAC0377C13CE2EFE003FAE6D /* Gorillas-Prefix.pch */,
 			);
@@ -3607,7 +3590,6 @@
 				DAB9585E182D0D1600EA277B /* LLToggleViewController.m in Sources */,
 				DAB9585C182D0D1600EA277B /* LLButtonView.m in Sources */,
 				DAB9585D182D0D1600EA277B /* LLModel.m in Sources */,
-				DAB9585B182D0D1600EA277B /* LLAboutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3652,14 +3634,6 @@
 				DA7ABCE41282308A006A2E71 /* English */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		DA7ABFB312823135006A2E71 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DA7ABFB612823135006A2E71 /* English */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		DAB41E87158F1E5900D509CC /* Pearl.strings */ = {
@@ -4373,6 +4347,7 @@
 				DAB9582E182D0CDC00EA277B /* Profile */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
