@@ -531,7 +531,7 @@
     NSUInteger indexB = indexA + [[GorillasConfig get].buildingAmount unsignedIntValue] - 1;
 
     // Distribute gorillas.
-    NSUInteger delta = indexB - indexA + 1;
+    NSUInteger delta = indexB - indexA;
     if ([gorillas count] > delta) {
         err(@"Tried to start a game with more gorillas than there's room in the field.");
         return;
