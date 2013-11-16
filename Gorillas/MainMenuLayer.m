@@ -47,6 +47,7 @@
     self.layout = PearlCCMenuLayoutCustomColumns;
 
     loveButton = [LLButtonView new];
+    loveButton.kidsMode = YES;
     loveButton.alpha = 0;
 
     return self;

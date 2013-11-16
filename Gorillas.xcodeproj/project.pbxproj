@@ -238,6 +238,7 @@
 		DA59654715320E3700EA071C /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA59654215320E3700EA071C /* fps_images-hd.png */; };
 		DA59654915320E3700EA071C /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = DA59654315320E3700EA071C /* fps_images-ipadhd.png */; };
 		DA59654B15320E3700EA071C /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = DA59654415320E3700EA071C /* fps_images.png */; };
+		DA605DF518380DDA00B43AEF /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA605DF418380DDA00B43AEF /* AdSupport.framework */; };
 		DA61451613299376009DBC56 /* Bilbao-Poster-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA61451513299376009DBC56 /* Bilbao-Poster-Black.ttf */; };
 		DA61451F13299590009DBC56 /* AppleGothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA61451E13299590009DBC56 /* AppleGothic.ttf */; };
 		DA6C17CE0EC0F698006D43BD /* ExplosionsLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C17CD0EC0F698006D43BD /* ExplosionsLayer.m */; };
@@ -952,6 +953,7 @@
 		DA59654215320E3700EA071C /* fps_images-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-hd.png"; path = "External/Pearl/External/cocos2d-iphone/Resources/Fonts/fps_images-hd.png"; sourceTree = SOURCE_ROOT; };
 		DA59654315320E3700EA071C /* fps_images-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-ipadhd.png"; path = "External/Pearl/External/cocos2d-iphone/Resources/Fonts/fps_images-ipadhd.png"; sourceTree = SOURCE_ROOT; };
 		DA59654415320E3700EA071C /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = "External/Pearl/External/cocos2d-iphone/Resources/Fonts/fps_images.png"; sourceTree = SOURCE_ROOT; };
+		DA605DF418380DDA00B43AEF /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		DA61451513299376009DBC56 /* Bilbao-Poster-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Bilbao-Poster-Black.ttf"; sourceTree = "<group>"; };
 		DA61451E13299590009DBC56 /* AppleGothic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleGothic.ttf; sourceTree = "<group>"; };
 		DA6C17CC0EC0F698006D43BD /* ExplosionsLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplosionsLayer.h; sourceTree = "<group>"; };
@@ -1416,6 +1418,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA605DF518380DDA00B43AEF /* AdSupport.framework in Frameworks */,
 				DAB9586E182D123600EA277B /* libLoveLyndir.a in Frameworks */,
 				DA7DF6D117FA2EF900F84D63 /* StoreKit.framework in Frameworks */,
 				DAFFC7EA17F13EB6007BB020 /* CoreText.framework in Frameworks */,
@@ -1547,6 +1550,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DA605DF418380DDA00B43AEF /* AdSupport.framework */,
 				DA7DF6D017FA2EF900F84D63 /* StoreKit.framework */,
 				DAFFC7E917F13EB6007BB020 /* CoreText.framework */,
 				DA571E2613F337DC00D50DF2 /* Security.framework */,
