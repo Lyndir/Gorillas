@@ -7,7 +7,7 @@ shopt -s extglob
 ## Gorillas
 #
 ## Submodules that need to be checked out.
-dependencies=( External/Pearl External/Pearl:External/{cocos2d-iphone,uicolor-utilities,jrswizzle} )
+dependencies=( External/LoveLyndir External/Pearl External/Pearl:External/{cocos2d-iphone,uicolor-utilities,jrswizzle} )
 
 
 ################################################################################
