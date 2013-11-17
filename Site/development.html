@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+    <head>
+        <title>Gorillas</title>
+
+        <link rel="icon" href="images/resources/favicon.png" type="image/x-png" />
+        <link rel="shortcut icon" href="images/resources/favicon.png" type="image/x-png" />
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+
+        <link rel="stylesheet" type="text/css" href="css/screen.css" />
+
+        <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+        <script type="text/javascript" src="js/swfobject/swfobject.js"></script>
+        <script type="text/javascript" src="js/flowplayer/flowplayer-3.1.1.min.js"></script>
+        <script type="text/javascript" src="js/shadowbox-3.0/shadowbox.js"></script>
+        <link rel="stylesheet" type="text/css" href="js/shadowbox-3.0/shadowbox.css">
+        <link rel="stylesheet" type="text/css" href="css/apps.css"/>
+        <link rel="stylesheet" type="text/css" href="css/iphone.css" media="only screen and (max-device-width: 480px)"/>
+        <link rel="stylesheet" type="text/css" href="css/gorillas.css"/>
+        <script type="text/javascript" id="com-lyndir-lhunath-portal-apps-page-DemoPage-0">
+            // Shadowbox
+            Shadowbox.init({
+                players:        ["img","flv"]
+            });
+            </script>
+        <script type="text/javascript"><!--/*--><![CDATA[/*><!--*/
+            var _gaq = _gaq || [];
+            _gaq.push(['app._setAccount', 'UA-90535-5']);
+            _gaq.push(['app._trackPageview', '/DemoPage']);
+            (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+            })();
+
+        /*-->]]>*/</script>
+
+        <script type="text/javascript"><!--/*--><![CDATA[/*><!--*/
+            function showMovie(container) {
+                var flashvars = {
+                    config: "{'clip':{'url': 'movies/Gorillas-150.flv'}}"
+                };
+                var params = {}
+                var swfElement = document.getElementById("swf");
+                if (swfElement) {
+                    swfobject.removeSWF("swf");
+                } else {
+                    swfElement = document.createElement("div");
+                    swfElement.setAttribute("id", "swf");
+                    container.appendChild(swfElement);
+                    swfobject.embedSWF( "js/flowplayer/flowplayer-3.1.1.swf", "swf", "482", "322",
+                    "9.0.0", "js/swfobject/expressInstall.swf", flashvars, params, {id: "swf"} );
+                    pageTracker._trackPageview('/movie/Gorillas-150.flv');
+                }
+                return false;
+            }
+            $(document).ready(function() {
+                if (navigator.appVersion.indexOf('iPhone') == -1) {
+                    var element = document.getElementById('preview');
+                    if (element) {
+                        element.onclick = function() { return showMovie(this); };
+                        if (element.captureEvents)
+                            element.captureEvents(Event.CLICK);
+                    }
+                }
+            });
+
+        /*-->]]>*/</script>
+    </head>
+
+    <body>
+        <div id="page">
+            <div id="head">
+                <ul id="strip">
+                    <li class="item" style="background-image: url('images/icon.lyndir.png')">
+                        <div class="caption">
+                            <span>Lyndir</span>
+
+                            <p>Modern design and development</p>
+                        </div>
+                        <div class="closed"></div>
+                        <a class="link" href="http://www.lyndir.com"></a>
+                    </li><li class="item active" style="background-image: url('images/icon.gorillas.png')">
+                        <div class="caption">
+                            <span>Gorillas</span>
+
+                            <p>Gorillas is a resurrection of the classic QBasic game shipped with MS-DOS 5.</p>
+                        </div>
+                        <div class="closed"></div>
+                        <a class="link" href="http://gorillas.lyndir.com"></a>
+                    </li><li class="item" style="background-image: url('images/icon.deblock.png')">
+                        <div class="caption">
+                            <span>DeBlock</span>
+
+                            <p>DeBlock is a block destruction game in the style of Bejeweled or Destruct-o-Block, but unique altogether.</p>
+                        </div>
+                        <div class="closed"></div>
+                        <a class="link" href="http://deblock.lyndir.com"></a>
+                    </li><li class="item" style="background-image: url('images/icon.masterpassword.png')">
+                        <div class="caption">
+                            <span>Master Password</span>
+
+                            <p>Indestructible passwords.</p>
+                        </div>
+                        <div class="closed"></div>
+                        <a class="link" href="http://masterpasswordapp.com"></a>
+                    </li><li class="item" style="background-image: url('images/icon.pearl.png')">
+                        <div class="caption">
+                            <span>Pearl</span>
+
+                            <p>Modular collection of iOS libraries for things like UI, gaming, web services and crypto.</p>
+                        </div>
+                        <div class="closed"></div>
+                        <a class="link" href="https://github.com/Lyndir/Pearl"></a>
+                    </li>
+                </ul>
+                <div id="logo">
+                    <div style="background-image: url('images/logo.png')"></div>
+                </div>
+                <div class="separator"></div>
+                <div id="menu">
+                    <ul>
+                        <li class="item">
+                            <a class="link" href="./">
+                                <span class="icon">♕</span>
+                                <h4 class="name">Demo</h4>
+                            </a>
+                        </li>
+                        <li class="item active">
+                            <a class="link" href="about.html">
+                                <span class="icon">♔</span>
+                                <h4 class="name">About</h4>
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a class="link" href="development.html">
+                                <span class="icon">♖</span>
+                                <h4 class="name">Development</h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="content">
+                <a class="appstore" href="http://itunes.apple.com/app/lyndir/gorillas/id302275459?mt=8"><img src="images/resource/appstore.png"/></a>
+            
+                <div class="text">
+                    <p>
+                        This is an Open Source project.  All code history, bugs, progress and planning is tracked and publicly available.
+                    </p>
+                    <p>
+                        Project planning and issues are tracked by
+                        <a href="http://youtrack.lyndir.com/issues/GOR">YouTrack</a>.
+                    </p>
+                    <p>
+                        The project's source code is available at
+                        <a href="http://wiki.github.com/Lyndir/Gorillas">GitHub</a>.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        <div id="foot">© 2011-2012, <a href="http://www.lhunath.com">Maarten Billemont</a>, <a href="http://www.lyndir.com">Lyndir</a></div>
+    </body>
+
+</html>

@@ -1,0 +1,441 @@
+/**************** Copyright 2009, Lhunath (Maarten Billemont) *****************/
+
+
+/* Theme: Men in business
+ *  - #202426
+ *  - #454E59
+ *  - #918D84
+ *  - #B9B391
+ *  - #DAD5C5
+ */
+
+
+/*******************************************************************************
+ * GLOBAL PROPERTIES *
+ */
+h1 sup, h2 sup, h3 sup {
+    display:            block;
+    margin-left:        2em;
+
+    font-size:          60%;
+}
+code {
+    font-size:          inherit;
+}
+
+
+/*******************************************************************************
+ * UTILITY CLASSES *
+ */
+.preload {
+    width:              0;
+    height:             1px;
+}
+.text {
+    background:         rgba(90%, 90%, 90%, .3);
+    border:             1px solid #DDD;
+    border-radius:      5px;
+    box-shadow:         inset 0 0 15px #FAFAFA, 1px 1px 5px rgba(220, 220, 220, 0.5);
+
+    margin:             1em auto;
+    padding:            1em;
+
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition:    all 0.2s ease-in-out;
+    -o-transition:      all 0.2s ease-in-out;
+    -ms-transition:     all 0.2s ease-in-out;
+    transition:         all 0.2s ease-in-out;
+}
+.text:hover {
+    background:         rgba(90%, 90%, 90%, .5);
+}
+.error {
+    background:         rgba(100%, 70%, 70%, .3);
+    border:             1px solid #F99;
+}
+.note {
+    width:              auto;
+
+    margin:             2em 1em;
+    margin-left:        5em;
+    padding:            1em 2em 1em 3em;
+}
+.note:hover {
+    border-color:       #DDD;
+}
+.note h3 {
+    margin:             0 0 0 -1em;
+}
+.appstore {
+    position:           absolute;
+    display:            block;
+    top:                1em;
+
+    text-align:         center;
+}
+.twitter {
+    position:           fixed;
+    bottom:             2em;
+    left:               1em;
+}
+
+/*******************************************************************************
+ * GLOBAL PROPERTIES *
+ */
+/*
+#head {
+    position:           fixed;
+    z-index:            90;
+
+    top:                0;
+    left:               0;
+    width:              100%;
+    height:             26px;
+
+    background:         url("../images/layout/head.tile.png") repeat-x;
+
+    text-align:         left;
+}
+    #head a {
+        color:          #333;
+        border:         none;
+    }
+    #head a:hover {
+        color:          #000;
+        border:         none;
+    }
+    #head ul.tabs {
+        margin:         0;
+
+        list-style:     none;
+    }
+    #head ul.tabs li {
+        float:          left;
+
+        margin:         0 5px;
+    }
+    #head ul.tabs li a {
+        display:        block;
+        position:       relative;
+
+        height:         22px;
+        padding:        3px 1ex 0;
+
+        background:     url("../images/layout/head.tile.png");
+        border:         1px solid transparent;
+        border-style:   none solid;
+    }
+    #head ul.tabs li .hoveron {
+        display:        none;
+    }
+    #head ul.tabs li:hover .hoveron {
+        display:        block;
+    }
+    #head ul.tabs li:hover span.hoveron {
+        display:        inline;
+    }
+    #head ul.tabs li:hover .hoveroff {
+        display:        none;
+    }
+    #head ul.tabs li .hoveronhide {
+        visibility:     hidden;
+    }
+    #head ul.tabs li:hover .hoveronhide {
+        visibility:     visible;
+    }
+    #head ul.tabs li:hover .hoveroffhide {
+        visibility:     hidden;
+    }
+    #head ul.tabs li:hover .abs {
+        position:           absolute;
+    }
+    #head ul.tabs li:hover .abs.left {
+        left:              1em;
+    }
+    #head ul.tabs li:hover .abs.right {
+        right:              1em;
+    }
+    #head ul.tabs li.active a {
+        color:          white;
+        background:     #DBDBDB;
+        border-color:   white;
+
+        font-weight:    bold;
+    }
+    #head ul.tabs li a:hover {
+        color:          white;
+        background:     #DBDBDB;
+        border-color:   white;
+    }
+    #head ul.tabs li img {
+        float:          left;
+
+        height:         1em;
+        margin:         0 1ex 0 0;
+    }
+    #head li.right {
+        float:          right;
+    }
+#about {
+    position:           absolute;
+
+    top:                50px;
+    right:              200px;
+    width:              300px;
+
+    color:              #DDD;
+
+    text-align:         center;
+    font-size:          1.5em;
+}
+    */
+#content .foot {
+    position:           fixed;
+    bottom:             0;
+    left:               0;
+    width:              100%;
+    height:             1.5em;
+    padding:            0.5em 0 0;
+}
+.version {
+    padding:            0.5em 1em;
+    margin-top:         1em;
+
+    border-top:         1px solid #999;
+
+    list-style:         none;
+    text-align:         right;
+    font-size:          0.5em;
+}
+.version span {
+    float:              right;
+}
+#head .button {
+    display:            block;
+
+    width:              0.7em           !important;
+    height:             0.7em           !important;
+    padding:            0               !important;
+    margin:             0.3em           !important;
+
+    border:             1px solid black !important;
+}
+.button.gray {
+    background:         #DDD            !important;
+    border:             1px solid #999  !important;
+}
+.button.gray:hover {
+    background:         #999            !important;
+    border:             1px solid #DDD  !important;
+}
+.button.blue {
+    background:         #CDD            !important;
+    border:             1px solid #499  !important;
+}
+.button.blue:hover {
+    background:         #499            !important;
+    border:             1px solid #CDD  !important;
+}
+.button.green {
+    background:         #CDC            !important;
+    border:             1px solid #596  !important;
+}
+.button.green:hover {
+    background:         #596            !important;
+    border:             1px solid #CDC  !important;
+}
+.floatstop {
+    clear:              both;
+}
+.entry {
+    padding:            1em 2em;
+    margin:             2em auto;
+    width:              75%;
+}
+.entry img {
+    float:              right;
+
+    width:              45%;
+}
+.entry ul.buttons {
+    margin:             0;
+
+    list-style:         none;
+}
+.entry ul.buttons li {
+    display:            block;
+
+    padding:            0;
+    margin:             0 1em 1em;
+}
+.entry ul.buttons li .button {
+    background:         rgba(200, 200, 200, 0.3);
+    border:             1px solid #FFF;
+    border-radius:      5px;
+    box-shadow:         inset 0 0 15px #FAFAFA, 1px 1px 4px #CCC;
+
+    display:            block;
+
+    padding:            1ex 1em;
+    margin:             0;
+
+    text-decoration:    none;
+    font-size:          larger;
+    white-space:        nowrap;
+    cursor:             pointer;
+
+    -webkit-transition:         all 0.2s ease-in-out;
+    -moz-transition:            all 0.2s ease-in-out;
+    -o-transition:              all 0.2s ease-in-out;
+    -ms-transition:             all 0.2s ease-in-out;
+    transition:                 all 0.2s ease-in-out;
+}
+.entry ul.buttons li .button:hover {
+    background:         rgba(240, 240, 240, 0.3);
+}
+.entry ul.buttons li .button:hover .link {
+    text-decoration:    none;
+}
+.options {
+    display:            inline-block;
+}
+.button:hover .option.default, .options .option:hover {
+    background-color:   rgba(0, 0, 0, 0.1);
+    border-color:       rgba(0, 0, 0, 0.2);
+}
+.options:hover .option.default:not(:hover) {
+    background-color:   transparent;
+    border-color:       transparent;
+}
+.button .option {
+    opacity:            0;
+    margin-top:         -0.5ex;
+    padding-left:       0;
+    border:             1px solid transparent;
+    border-radius:      5px;
+
+    -webkit-transition:         all 0.2s ease-in-out;
+    -moz-transition:            all 0.2s ease-in-out;
+    -o-transition:              all 0.2s ease-in-out;
+    -ms-transition:             all 0.2s ease-in-out;
+    transition:                 all 0.2s ease-in-out;
+}
+.button:hover .option {
+    opacity:            1;
+    padding-left:       28px;
+}
+.button .options {
+    float:              right;
+}
+.tip {
+    position:           absolute;
+    display:            none;
+
+    top:                60px;
+    left:               50%;
+    width:              400px;
+    margin-left:        -200px;
+    padding:            0.5ex;
+
+    background:         #2D3F80;
+    border:             1px solid #5F6CA0;
+    color:              #C1C7DB;
+
+    font-size:          smaller;
+}
+    div:hover>.tip {
+        display:        block;
+    }
+.tip a, .tip a:link {
+    color:              white;
+    text-decoration:    none;
+}
+    .tip a:hover {
+        text-decoration:underline;
+    }
+object {
+    border:             none;
+    background:         black;
+    position:           relative;
+    z-index:            79;
+}
+#previewinfo {
+    margin:             -1em auto 1ex;
+
+    font-size:          smaller;
+    text-align:         center;
+}
+#preview {
+    background:         url("../images/game/preview.png") no-repeat;
+
+    position:           relative;
+    width:              720px;
+    height:             515px;
+    margin:             0 auto;
+}
+#preview .description, #preview #swf {
+    color:              white;
+
+    position:           absolute;
+    top:                34px;
+    left:               50%;
+    margin-left:        -240px;
+    width:              480px;
+    height:             320px;
+}
+#preview .description div {
+    position:           absolute;
+    top:                0;
+    left:               0;
+    height:             100%;
+}
+#preview .description p {
+    display:            none;
+    padding:            1ex;
+
+    text-align:         center;
+}
+#preview .description:hover div {
+    background:         rgba(0, 0, 0, 0.7);
+}
+#preview .description p.short {
+    background:         rgba(0, 0, 0, 0.7);
+    display:            block;
+
+    font-weight:        bold;
+}
+#preview .description:hover p {
+    background:         transparent;
+    display:            block;
+}
+#game {
+    position:           relative;
+
+    width:              640px;
+    height:             350px;
+    margin:             0 auto;
+    padding:            20px;
+
+    background:         #CCC url("../images/game/original.png") no-repeat center center;
+    border:             1px solid #999;
+}
+#game[id] {
+    opacity:            0.7;
+}
+#game[id]>* {
+    opacity:            1;
+}
+.iphone {
+    display:            none;
+
+    position:           absolute;
+
+    top:                0;
+    left:               0;
+    width:              100%;
+    height:             100%;
+}
+#screenshots img {
+    margin:             1em 0;
+}
+

@@ -1,0 +1,7 @@
+#preview {
+    width:              749px;
+    height:             486px;
+}
+#preview .description, #preview #swf {
+    top:                29px;
+}
