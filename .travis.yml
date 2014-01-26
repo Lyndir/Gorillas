@@ -1,0 +1,7 @@
+language: objective-c
+xcode_project: Gorillas.xcodeproj
+xcode_scheme: Gorillas
+xcode_sdk: iphonesimulator
+git:
+  submodules: false
+before_install: ./Scripts/updateDependencies
