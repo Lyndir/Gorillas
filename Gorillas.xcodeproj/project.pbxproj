@@ -3328,7 +3328,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = "/bin/bash -e";
-			shellScript = "Crashlytics/Crashlytics.framework/run \"$(/usr/libexec/PlistBuddy -c \"Print :'API Key'\" Crashlytics/Crashlytics.plist)\"";
+			shellScript = "Crashlytics/Crashlytics.framework/run \"$(/usr/libexec/PlistBuddy -c \"Print :'API Key'\" Crashlytics/Crashlytics.plist)\"  || [[ $DEPLOYMENT_LOCATION != YES ]]";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
