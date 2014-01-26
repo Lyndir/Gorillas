@@ -25,6 +25,7 @@
 #import "MainMenuLayer.h"
 #import "GorillasAppDelegate.h"
 #import "LLButtonView.h"
+#import "LLGitTip.h"
 
 @interface MainMenuLayer()
 
@@ -36,7 +37,7 @@
     CCMenuItemToggle *configurationI;
     CCMenuItemLabel *descriptionT;
     CCMenuItem *multiPlayerI, *singlePlayerI, *hotSeatI;
-    LLButtonView *loveButton;
+    LLGitTip *tipButton;
 }
 
 - (id)init {
@@ -46,9 +47,9 @@
 
     self.layout = PearlCCMenuLayoutCustomColumns;
 
-    loveButton = [LLButtonView new];
-    loveButton.kidsMode = YES;
-    loveButton.alpha = 0;
+    tipButton = [LLGitTip new];
+    tipButton.kidsMode = YES;
+    tipButton.alpha = 0;
 
     return self;
 }
@@ -127,11 +128,11 @@
     if (self.appMenu && !self.appMenu.parent)
         [self.parent addChild:self.appMenu];
 
-    if (!loveButton.superview)
-        [[CCDirector sharedDirector].view addSubview:loveButton];
-    [loveButton setFrameFromCurrentSizeAndParentPaddingTop:CGFLOAT_MAX right:CGFLOAT_MAX bottom:30 left:CGFLOAT_MAX];
+    if (!tipButton.superview)
+        [[CCDirector sharedDirector].view addSubview:tipButton];
+    [tipButton setFrameFromCurrentSizeAndParentPaddingTop:CGFLOAT_MAX right:CGFLOAT_MAX bottom:30 left:CGFLOAT_MAX];
     [UIView animateWithDuration:0.2 animations:^{
-        loveButton.alpha = 1;
+        tipButton.alpha = 1;
     }];
 }
 
@@ -142,10 +143,10 @@
     [self.appMenu removeFromParentAndCleanup:NO];
 
     [UIView animateWithDuration:0.2 animations:^{
-        loveButton.alpha = 0;
+        tipButton.alpha = 0;
     } completion:^(BOOL finished) {
         if (finished)
-            [loveButton removeFromSuperview];
+            [tipButton removeFromSuperview];
     }];
 }
 

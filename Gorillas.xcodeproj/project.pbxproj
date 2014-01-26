@@ -11,6 +11,7 @@
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		93D391DAA895FC9A43CB972C /* MenuItemDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D39DAB9EF5E15F994EB0CE /* MenuItemDescription.m */; };
 		93D395AA1D76D93081A13FC8 /* MenuItemDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 93D3941E5DCA97BD1216015D /* MenuItemDescription.h */; };
+		93D39AB115B44AC238638D4E /* LLGitTip.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D3903931FC761CB7F6A9A5 /* LLGitTip.m */; };
 		DA021E460F84A0F0007CED57 /* ThrowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA021E430F84A0F0007CED57 /* ThrowController.m */; };
 		DA0AA57613B290F6005759F8 /* GMenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0AA57513B290F6005759F8 /* GMenuLayer.m */; };
 		DA0DD66A0F95368600E5607E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6610F95368600E5607E /* UIKit.framework */; };
@@ -261,6 +262,7 @@
 		DA8B8B8913CF994B003B0CC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6620F95368600E5607E /* Foundation.framework */; };
 		DA8EB0E013D0DBBB00BD4C00 /* InteractionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA8EB0DF13D0DBBB00BD4C00 /* InteractionLayer.m */; };
 		DA925266132EDA6400488108 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA925265132EDA6400488108 /* Security.framework */; };
+		DA9B51521895BBFB009D2A0B /* gittip.png in Resources */ = {isa = PBXBuildFile; fileRef = DA9B51511895BBFB009D2A0B /* gittip.png */; };
 		DA9BD564128B465E00B854A7 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA9BD563128B465E00B854A7 /* GameKit.framework */; };
 		DA9BF1811538C58B00EEAAF8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6620F95368600E5607E /* Foundation.framework */; };
 		DA9BF3081538C5E400EEAAF8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0DD6620F95368600E5607E /* Foundation.framework */; };
@@ -702,7 +704,9 @@
 		1D3623240D0F684500981E51 /* GorillasAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GorillasAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* GorillasAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GorillasAppDelegate.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../main.m; sourceTree = "<group>"; };
+		93D3903931FC761CB7F6A9A5 /* LLGitTip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLGitTip.m; sourceTree = "<group>"; };
 		93D3941E5DCA97BD1216015D /* MenuItemDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItemDescription.h; sourceTree = "<group>"; };
+		93D39B3E51B79987298612E6 /* LLGitTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLGitTip.h; sourceTree = "<group>"; };
 		93D39DAB9EF5E15F994EB0CE /* MenuItemDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItemDescription.m; sourceTree = "<group>"; };
 		DA021E420F84A0F0007CED57 /* ThrowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThrowController.h; sourceTree = "<group>"; };
 		DA021E430F84A0F0007CED57 /* ThrowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThrowController.m; sourceTree = "<group>"; };
@@ -987,6 +991,7 @@
 		DA8EB0DE13D0DBBB00BD4C00 /* InteractionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractionLayer.h; sourceTree = "<group>"; };
 		DA8EB0DF13D0DBBB00BD4C00 /* InteractionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractionLayer.m; sourceTree = "<group>"; };
 		DA925265132EDA6400488108 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		DA9B51511895BBFB009D2A0B /* gittip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gittip.png; sourceTree = "<group>"; };
 		DA9BD563128B465E00B854A7 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		DA9BF1801538C58B00EEAAF8 /* libcocos2d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcocos2d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA9BF3071538C5E400EEAAF8 /* libkazmath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libkazmath.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2477,6 +2482,8 @@
 				DAB95848182D0D1600EA277B /* LLToggleViewController.h */,
 				DAB95849182D0D1600EA277B /* LLToggleViewController.m */,
 				DAB9584A182D0D1600EA277B /* LoveLyndir.storyboard */,
+				93D3903931FC761CB7F6A9A5 /* LLGitTip.m */,
+				93D39B3E51B79987298612E6 /* LLGitTip.h */,
 			);
 			path = ObjC;
 			sourceTree = "<group>";
@@ -2484,6 +2491,7 @@
 		DAB9584C182D0D1600EA277B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DA9B51511895BBFB009D2A0B /* gittip.png */,
 				DAB9584D182D0D1600EA277B /* love-lyndir.button.green.png */,
 				DAB9584E182D0D1600EA277B /* love-lyndir.button.green@2x.png */,
 				DAB9584F182D0D1600EA277B /* love-lyndir.button.grey.png */,
@@ -3230,6 +3238,7 @@
 				DA58B706154F4FA10008CBA6 /* hole-ipad.png in Resources */,
 				DA58B70B154F50100008CBA6 /* arrow.body-ipad.png in Resources */,
 				DA58B70D154F50100008CBA6 /* arrow.head-ipad.png in Resources */,
+				DA9B51521895BBFB009D2A0B /* gittip.png in Resources */,
 				DA58B70F154F50100008CBA6 /* frame-ipad.png in Resources */,
 				DAB95864182D0D3A00EA277B /* love-lyndir.button.red.png in Resources */,
 				DA58B712154F50210008CBA6 /* infinite-shape-ipad.png in Resources */,
@@ -3594,6 +3603,7 @@
 				DAB9585E182D0D1600EA277B /* LLToggleViewController.m in Sources */,
 				DAB9585C182D0D1600EA277B /* LLButtonView.m in Sources */,
 				DAB9585D182D0D1600EA277B /* LLModel.m in Sources */,
+				93D39AB115B44AC238638D4E /* LLGitTip.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

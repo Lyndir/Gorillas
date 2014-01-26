@@ -12,7 +12,7 @@ These instructions will help you get it up and running on your system and device
 Dependencies
 ------------
 
-Gorillas has only two direct dependencies: Pearl and PlayHaven's SDK.  Indirectly (via Pearl) it depends on things such as cocos2d-iphone.
+Gorillas depends only on Pearl.  Indirectly (via Pearl) it depends on things such as cocos2d-iphone.
 
 To get all the dependencies needed to build the code, or update them at a later time, a script was created to deal with the submodules easily.  Just navigate to the Gorillas directory from a console and enter the following command:
 
