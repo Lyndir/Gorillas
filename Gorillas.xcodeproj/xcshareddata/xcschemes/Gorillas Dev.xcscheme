@@ -28,16 +28,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DAB9581A182D0CDB00EA277B"
-               BuildableName = "LoveLyndirTests.xctest"
-               BlueprintName = "LoveLyndirTests"
-               ReferencedContainer = "container:Gorillas.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
