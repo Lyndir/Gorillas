@@ -1,6 +1,6 @@
 language: objective-c
 xcode_project: Gorillas.xcodeproj
-xcode_scheme: Gorillas
+xcode_scheme: Gorillas Dev
 xcode_sdk: iphonesimulator
 git:
   submodules: false
