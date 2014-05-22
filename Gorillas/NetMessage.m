@@ -53,7 +53,7 @@
     if (!(self = [self init]))
         return self;
 
-    self.vote = [aDecoder decodeIntegerForKey:@"vote"];
+    self.vote = (NSUInteger)[aDecoder decodeIntegerForKey:@"vote"];
 
     return self;
 }

@@ -135,11 +135,11 @@
              [NSDictionary dictionaryWithObjectsAndKeys:
               [GorillasConfig nameForMode:_mode],
               @"mode",
-              [NSNumber numberWithUnsignedInt:localHumans],
+              [NSNumber numberWithUnsignedInteger:localHumans],
               @"localHumans",
-              [NSNumber numberWithUnsignedInt:[playerIDs count]],
+              [NSNumber numberWithUnsignedInteger:[playerIDs count]],
               @"remoteHumans",
-              [NSNumber numberWithUnsignedInt:ais],
+              [NSNumber numberWithUnsignedInteger:ais],
               @"ais",
               nil]];
         }
@@ -226,7 +226,7 @@
     }
 
     if (_randomCity)
-        [GorillasConfig get].cityTheme = [CityTheme getThemeNames][PearlGameRandom() % [[CityTheme getThemeNames] count]];
+        [GorillasConfig get].cityTheme = [CityTheme getThemeNames][(NSUInteger)PearlGameRandom() % [[CityTheme getThemeNames] count]];
     else
         [self reset];
 

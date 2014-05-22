@@ -24,8 +24,6 @@
 
 #import "MainMenuLayer.h"
 #import "GorillasAppDelegate.h"
-#import "LLButtonView.h"
-#import "LLGitTip.h"
 
 @interface MainMenuLayer()
 
@@ -37,7 +35,7 @@
     CCMenuItemToggle *configurationI;
     CCMenuItemLabel *descriptionT;
     CCMenuItem *multiPlayerI, *singlePlayerI, *hotSeatI;
-    LLGitTip *tipButton;
+    UIButton *thanksButton;
 }
 
 - (id)init {
@@ -47,9 +45,12 @@
 
     self.layout = PearlCCMenuLayoutCustomColumns;
 
-    tipButton = [LLGitTip new];
-    tipButton.kidsMode = YES;
-    tipButton.alpha = 0;
+    thanksButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    thanksButton.alpha = 0;
+    thanksButton.tintColor = [UIColor lightTextColor];
+    [thanksButton.titleLabel setFont:[thanksButton.titleLabel.font fontWithSize:11]];
+    [thanksButton setTitle:@"Thanks, Lhunath ➚" forState:UIControlStateNormal];
+    [thanksButton addTarget:self action:@selector( thanks: ) forControlEvents:UIControlEventTouchUpInside];
 
     return self;
 }
@@ -128,11 +129,11 @@
     if (self.appMenu && !self.appMenu.parent)
         [self.parent addChild:self.appMenu];
 
-    if (!tipButton.superview)
-        [[CCDirector sharedDirector].view addSubview:tipButton];
-    [tipButton setFrameFromCurrentSizeAndParentPaddingTop:CGFLOAT_MAX right:CGFLOAT_MAX bottom:30 left:CGFLOAT_MAX];
+    [[CCDirector sharedDirector].view addSubview:thanksButton];
+    [thanksButton setFrameFromSize:CGSizeMake( CGFLOAT_MIN, CGFLOAT_MIN )
+               andParentPaddingTop:CGFLOAT_MAX right:CGFLOAT_MAX bottom:15 left:CGFLOAT_MAX];
     [UIView animateWithDuration:0.2 animations:^{
-        tipButton.alpha = 1;
+        thanksButton.alpha = 1;
     }];
 }
 
@@ -143,10 +144,20 @@
     [self.appMenu removeFromParentAndCleanup:NO];
 
     [UIView animateWithDuration:0.2 animations:^{
-        tipButton.alpha = 0;
+        thanksButton.alpha = 0;
     } completion:^(BOOL finished) {
         if (finished)
-            [tipButton removeFromSuperview];
+            [thanksButton removeFromSuperview];
+    }];
+}
+
+- (void)thanks:(id)sender {
+
+    [PearlAlert showParentalGate:^(BOOL continuing) {
+        if (!continuing)
+            return;
+
+        [UIApp openURL:[NSURL URLWithString:@"http://thanks.lhunath.com"]];
     }];
 }
 
