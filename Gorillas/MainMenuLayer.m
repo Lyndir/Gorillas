@@ -58,26 +58,26 @@
 - (void)doLoad {
 
     self.background = [CCSprite spriteWithFile:@"menu-main.png"];
-    self.itemCounts = @[ @1, @3, @1, @1, @1, @3 ];
+    self.itemCounts = @[ @1, @1, @1, @1, @1, @1 ];
     self.items = @[
             // Row 1
             [PearlCCMenuItemSpacer spacerSmall],
-            multiPlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(80.0f * [PearlDeviceUtils uiScale]) target:self
-                                                     selector:@selector(startMulti:)],
+//            multiPlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(80.0f * [PearlDeviceUtils uiScale]) target:self
+//                                                     selector:@selector(startMulti:)],
             singlePlayerI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(80.0f * [PearlDeviceUtils uiScale]) target:self
                                                       selector:@selector(startSingle:)],
-            hotSeatI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(80.0f * [PearlDeviceUtils uiScale]) target:self
-                                                 selector:@selector(startHotSeat:)],
+//            hotSeatI = [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(80.0f * [PearlDeviceUtils uiScale]) target:self
+//                                                 selector:@selector(startHotSeat:)],
             // Row 2
             configurationI = [CCMenuItemToggle itemWithTarget:self selector:@selector(gameConfiguration:)],
             descriptionT = [PearlCCMenuItemTitle itemWithString:@"description"],
             [PearlCCMenuItemSpacer spacerNormal],
             // Row 3
-            [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(40.0f * [PearlDeviceUtils uiScale]) target:self
-                                      selector:@selector(settings:)],
+//            [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(40.0f * [PearlDeviceUtils uiScale]) target:self
+//                                      selector:@selector(settings:)],
             [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(40.0f * [PearlDeviceUtils uiScale])],
-            [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(40.0f * [PearlDeviceUtils uiScale]) target:self
-                                      selector:@selector(scores:)],
+//            [PearlCCMenuItemBlock itemWithSize:(NSUInteger)(40.0f * [PearlDeviceUtils uiScale]) target:self
+//                                      selector:@selector(scores:)],
     ];
 
     if (self.appMenu) {

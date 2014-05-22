@@ -152,6 +152,18 @@
                 [self showMainMenuForPlayers:playersToInvite];
             } );
     };
+
+    [PearlAlert showAlertWithTitle:@"Upgrade For Free"
+                           message:@"The full version of Gorillas is now FREE.\n"
+            @"Gorillas Lite will not be updated anymore.  You should upgrade and delete this app."
+                         viewStyle:UIAlertViewStyleDefault initAlert:nil
+                 tappedButtonBlock:^(UIAlertView *alert, NSInteger buttonIndex) {
+        if (buttonIndex == alert.cancelButtonIndex)
+            return;
+        
+        [UIApp openURL:[NSURL URLWithString:@"http://itunes.apple.com/app/id302275459"]];
+    }
+                       cancelTitle:@"Cancel" otherTitles:@"Upgrade!", nil];
 }
 
 - (GHUDLayer *)hudLayer {
