@@ -25,7 +25,6 @@
 #import "GorillasAppDelegate.h"
 #import "CityTheme.h"
 #import "ccMacros.h"
-#import "LocalyticsSession.h"
 #import "TestFlight.h"
 #import <Crashlytics/Crashlytics.h>
 
@@ -43,9 +42,6 @@
 
 - (NSDictionary *)crashlyticsInfo;
 - (NSString *)crashlyticsAPIKey;
-
-- (NSDictionary *)localyticsInfo;
-- (NSString *)localyticsKey;
 
 @end
 
@@ -111,26 +107,6 @@
     }
     @catch (id exception) {
         err(@"TestFlight: %@", exception);
-    }
-    @try {
-        NSString *key = [self localyticsKey];
-        if ([key length]) {
-            dbg(@"Initializing Localytics");
-            [[LocalyticsSession sharedLocalyticsSession] startSession:key];
-            [[PearlLogger get] registerListener:^BOOL(PearlLogMessage *message) {
-                if (message.level >= PearlLogLevelError)
-                    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Problem" attributes:
-                            @{
-                                    @"level"   : [[NSString alloc] initWithUTF8String:PearlLogLevelStr( message.level )],
-                                    @"message" : message.message
-                            }];
-
-                return YES;
-            }];
-        }
-    }
-    @catch (id exception) {
-        err(@"Localytics exception: %@", exception);
     }
 
     [super preSetup];
@@ -301,53 +277,6 @@
 - (NSString *)crashlyticsAPIKey {
 
     return NSNullToNil([self crashlyticsInfo][@"API Key"]);
-}
-
-
-
-#pragma mark - Localytics
-
-- (NSDictionary *)localyticsInfo {
-
-    static NSDictionary *localyticsInfo = nil;
-    if (localyticsInfo == nil)
-        localyticsInfo = [[NSDictionary alloc] initWithContentsOfURL:
-                [[NSBundle mainBundle] URLForResource:@"Localytics" withExtension:@"plist"]];
-
-    return localyticsInfo;
-}
-
-- (NSString *)localyticsKey {
-
-#ifdef DEBUG
-    return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.development"]);
-#else
-    return NSNullToNil([[self localyticsInfo] valueForKeyPath:@"Key.distribution"]);
-#endif
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-
-    [[LocalyticsSession sharedLocalyticsSession] close];
-    [[LocalyticsSession sharedLocalyticsSession] upload];
-
-    [super applicationDidEnterBackground:application];
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-
-    [[LocalyticsSession sharedLocalyticsSession] resume];
-    [[LocalyticsSession sharedLocalyticsSession] upload];
-
-    [super applicationWillEnterForeground:application];
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-
-    [[LocalyticsSession sharedLocalyticsSession] close];
-    [[LocalyticsSession sharedLocalyticsSession] upload];
-
-    [super applicationWillTerminate:application];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

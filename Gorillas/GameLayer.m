@@ -29,7 +29,6 @@
 #import "CityTheme.h"
 #import "InteractionLayer.h"
 #import "TestFlight.h"
-#import "LocalyticsSession.h"
 
 @interface GameLayer()
 
@@ -121,33 +120,6 @@
     _randomCity = aRandomCity;
     _humans = localHumans + [playerIDs count];
     _ais = ais;
-
-#ifndef DEBUG
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        @try {
-            [TestFlight passCheckpoint:PearlString(@"GorillasNewGame_%@", [GorillasConfig nameForMode:_mode])];
-        }
-        @catch (NSException *exception) {
-            err(@"TestFlight: %@", exception);
-        }
-        @try {
-            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"New Game" attributes:
-             [NSDictionary dictionaryWithObjectsAndKeys:
-              [GorillasConfig nameForMode:_mode],
-              @"mode",
-              [NSNumber numberWithUnsignedInteger:localHumans],
-              @"localHumans",
-              [NSNumber numberWithUnsignedInteger:[playerIDs count]],
-              @"remoteHumans",
-              [NSNumber numberWithUnsignedInteger:ais],
-              @"ais",
-              nil]];
-        }
-        @catch (NSException *exception) {
-            err(@"Localytics: %@", exception);
-        }
-    });
-#endif
 
     [[GorillasAppDelegate get].hudLayer reset];
 
